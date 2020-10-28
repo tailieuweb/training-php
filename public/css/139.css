@@ -1,0 +1,199 @@
+.type-139 {
+  overflow: hidden;
+}
+.type-139 .sidebar {
+  padding: 0;
+}
+.type-139 .news a {
+  color: #fff;
+}
+.type-139 a:hover,
+.type-139 a:focus {
+  text-decoration: none;
+}
+.type-139 .panel {
+  background: none;
+  box-shadow: none;
+}
+.type-139 .panel-default {
+  border: none;
+}
+.type-139 .panel-heading {
+  border: none !important;
+  background: none !important;
+  padding: 2rem 0 0;
+}
+.type-139 .panel-heading h2 {
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+.type-139 .panel-heading h2 span {
+  font-weight: normal;
+  font-size: 2.5rem;
+}
+.type-139 .news {
+  background: none;
+  padding: 0;
+  color: #fff;
+}
+.type-139 .news .topnews {
+  background: #4bb4b6;
+  padding: 3rem .5rem 3rem .5rem;
+}
+.type-139 .news .topnews .row .row {
+  margin: 0 !important;
+}
+.type-139 .news .topnews .row .row .col-md-6:first-child {
+  padding-right: 0;
+  border-right: 0.1rem solid #86d8da;
+  padding-left: 0;
+}
+.type-139 .news .topnews .img a {
+  -webkit-mask: url(../images/hinh1.jpg) center center;
+  display: inline-block;
+}
+.type-139 .news .topnews .img a:after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  top: -110%;
+  left: -400%;
+  width: 150%;
+  height: 150%;
+  opacity: 0;
+  background: linear-gradient(to right,rgba(255,255,255,0.13) 0%,rgba(255,255,255,0.13) 77%,rgba(255,255,255,0.5) 92%,rgba(255,255,255,0) 100%);
+}
+.type-139 .news .topnews .img a:hover:after {
+  opacity: 1;
+  top: -20%;
+  left: -30%;
+  transition-property: left, top, opacity;
+  transition-duration: .8s, .8s, .15s;
+  transition-timing-function: ease;
+}
+.type-139 .news .topnews .img a .topnewsthumb img {
+  width: 100%;
+  max-width: 100%;
+}
+.type-139 .news .topnews h4 {
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.type-139 .news .topnews h4 a {
+  color: #fff;
+}
+.type-139 .news .topnews h4 a:hover {
+  color: #f5ce31;
+  transition: all 0.5s ease;
+  text-decoration: none;
+}
+.type-139 .news .topnews .topnewsdesc a:hover {
+  color: #f5ce31;
+  transition: all 0.5s ease;
+  text-decoration: none;
+}
+.type-139 .news .topnewstime {
+  text-align: center;
+}
+.type-139 .news .topnewstime .topnewsdate {
+  font-family: 'Prata', serif;
+  font-size: 4rem;
+  line-height: 2.5rem;
+  margin-left: 1.25rem;
+}
+.type-139 .news .topnewstime .topnewsmonth {
+  text-transform: uppercase;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+.type-139 .headlines {
+  background: #56bdbf;
+  overflow: hidden;
+  padding: 2rem 3rem;
+}
+.type-139 .headlines ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.type-139 .headlines ul li {
+  overflow: hidden;
+  display: table;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+.type-139 .headlines ul li .headlinestitle {
+  display: table-cell;
+  vertical-align: middle;
+  width: 85%;
+}
+.type-139 .headlines ul li .headlinestitle a:hover {
+  color: #f5ce31;
+  transition: all 0.5s ease;
+  text-decoration: none;
+}
+.type-139 .headlines .headlinesdate {
+  font-size: 1.5rem;
+  width: 15%;
+  min-width: 5.5rem;
+  display: table-cell;
+  vertical-align: middle;
+}
+.type-139 .headlines .headlinesdate .headlinesday {
+  border-bottom: 0.1rem solid #fff;
+}
+.type-139 .headlines .headlinesdate .headlinesyear {
+  line-height: 4.75rem;
+  float: left;
+  margin-left: 0.3rem;
+}
+.type-139 .headlinesdate 
+    .headlinesdm,
+.type-139 .news 
+    .headlines 
+    .headlinesdate,
+.type-139 .headlinesdate {
+  float: left;
+  font-family: 'Prata', serif;
+}
+.type-139 .headlinesdate
+    .headlinesday,
+.type-139 .news
+    .headlines
+    .headlinesmonth {
+  line-height: 2rem;
+}
+.type-139 .newsall {
+  display: block;
+  padding: 1rem;
+  text-align: center;
+  background: #62c6c8;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.type-139 a:hover {
+  color: #f5ce31;
+  transition: all 0.5s ease;
+  text-decoration: none;
+}
+@media (min-width: 992px) {
+  .type-139 .sidebar {
+    padding: 0;
+  }
+}
+@media (min-width: 768px) {
+  .type-139 .sidebar {
+    width: 96rem;
+  }
+}
+@media (max-width: 992px) {
+  .type-139 .bottom {
+    margin-bottom: 1.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .type-139 .sidebar {
+    padding: 0;
+  }
+}
