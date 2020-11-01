@@ -11,6 +11,7 @@ if (isset($_POST['register_btn'])) {
 	register();
 }
 
+
 function register(){
 
 	global $conn, $errors, $username,$fullname, $email;
@@ -75,7 +76,7 @@ function edit() {
 		setcookie("user", '', time() - 3600);
 		setcookie("pass", '', time() - 3600);
     }
-	header('location: home.php');
+	header('location: list.php');
 	
 }
 
@@ -194,7 +195,6 @@ function login(){
 		}
 	}
 }
-
 function isAdmin()
 {
 	if (isset($_SESSION['user']) && $_SESSION['user']['user_type'] == 'admin' ) {
@@ -202,5 +202,17 @@ function isAdmin()
 	}else{
 		return false;
     }
+}
+//them:
+function add_account($username,$fullname,$email,$user_type,$password_1,$password_2)
+{
+	global $conn, $errors, $username,$fullname, $email,$user_type,$password_1,$password_2;
+	$username    =  escape($_POST['username']);
+    $fullname    =  escape($_POST['fullname']);
+	$email       =  escape($_POST['email']);
+	$password_1  =  escape($_POST['password_1']);
+	$password_2  =  escape($_POST['password_2']);
+	$sql="insert into users(username,fullname,email,user_type,password_1,password_2) value ('$username','$fullname','$email','$user_type','$password_1','$password_2')";
+	$conn->exec($sql) or die('Loi truy van');
 }
 

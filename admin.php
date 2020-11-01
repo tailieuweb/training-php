@@ -5,7 +5,33 @@ include('functions.php');
 if (!isAdmin()) {
 	$_SESSION['msg'] = "You must log in first";
 	header('location: login.php');
-}?>
+};
+if(!empty($_POST))
+{
+$username = $fullname = $email = $user_type = $password_1 = $password_2 = '';
+if(isset($_POST['username']))
+{
+	$username=$_POST['username'];
+}
+if(isset($_POST['fullname']))
+{
+	$fullname=$_POST['fullname'];
+}
+if(isset($_POST['user_type']))
+{
+	$user_type=$_POST['user_type'];
+}
+if(isset($_POST['password_1']))
+{
+	$password_1=$_POST['password_1'];
+}
+if(isset($_POST['password_2']))
+{
+	$password_2=$_POST['password_2'];
+}
+
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +51,7 @@ if (!isAdmin()) {
 		<h2>Admin - Create User</h2>
 	</div>
 	
-	<form method="post" action="admin.php">
+	<form method="post" action="admin.php" onsubmit="return checkBeforeSubmit()">
 
 		<?php echo display_error(); ?>
 
@@ -58,11 +84,28 @@ if (!isAdmin()) {
 			<input type="password" name="password_2">
 		</div>
 		<div class="input-group">
-			<button type="submit" class="btn" name="register_btn"> Create User</button>
+			<button type="submit" class="btn" name="register_btn" > Create User</button>
 		</div>
 
 		<p>
 		<a href="http://localhost/newlogin/home.php">HOME</a></p>
 	</form>
+	<script language="javascript">
+
+	var check = true;
+	function checkBeforeSubmit()
+	{
+		check = confirm('Bạn có muốn thêm thông tin nhân viên không:')
+		if(!check)
+		{
+			check = false;
+			
+			return check;
+		}else{
+			return true;
+		}
+		
+	}
+	</script>
 </body>
 </html>

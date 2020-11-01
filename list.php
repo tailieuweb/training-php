@@ -1,17 +1,31 @@
 <?php
-session_start();
+    session_start();
 
 include('functions.php');
-
 $results = [];
-
-if (isset($_GET['list'])) {
+$item_per_page = 3; 
+$current_page = !empty($_GET['page']) ?$_GET['page']:1;
+$offset = ($current_page -1) * $item_per_page;
+//Phân trang
     if (isAdmin()) {
-        $query = "SELECT * FROM users";
+        $query = "SELECT * FROM users LIMIT $item_per_page OFFSET $offset";
         $results = mysqli_query($conn, $query);
+        $allUser = "SELECT * FROM users";
+        $totalRecord = mysqli_query($conn, $allUser);
+        $totalRecord = $totalRecord->num_rows;
+        $totalPage = ceil($totalRecord / $item_per_page);
     }
+//tim kiem
+if(isset($_POST['id']))
+{
+    $id= $_POST['id'];
+    $sql = "DELETE FROM users WHERE id=".$id;
+    $results = mysqli_query($conn, $query);
 }
+//chi tiet
+
 ?>
+
 
 <html>
     <head>
@@ -25,6 +39,14 @@ if (isset($_GET['list'])) {
 		<div class="container">
         <div class="header">
             <h2>List User</h2>
+            <form method="get">
+            <select id="search" name="search" onchange="location=options[selectedIndex].value;">
+                <option hidden="">--Chọn--</option>
+                <option value="search_ten.php">theo tên</option>
+                <option value="search_fullname.php">theo fullname</option>
+                <option value="search_email.php">theo email</option>
+            </select>
+            </form>
         </div>
         <form >
             <?php echo display_error(); ?>	
@@ -32,7 +54,6 @@ if (isset($_GET['list'])) {
             <table class="table">
                 <thead>
 					<tr>
-						<th scope="col">ID</th>
 						<th scope="col">Username</th>
 						<th scope="col">Full name</th>
 						<th scope="col">Email</th>
@@ -41,29 +62,36 @@ if (isset($_GET['list'])) {
                 </thead>
                 <tbody>
                     <?php foreach ($results as $result): ?>
-                    <tr scope="row">
-                        <td><?php echo $result['id']; ?></td>   
+                    <tr scope="row">  
                         <td><?php echo $result['username']; ?></td>   
                         <td><?php echo $result['fullname']; ?></td>   
                         <td><?php echo $result['email']; ?></td> 
-						<td>
-							<a><i class="fa fa-eye" aria-hidden="true"></i></a>
 						
-							<a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-							
-							<a><i class="fa fa-times" aria-hidden="true"></i></a>
-							
+                        <td> <a class="btn btn-cancel" href="list.php?list=<?php echo $result['id'];?>" onclick="return confirm('Bạn có muốn xóa thông tin thành viên này không')">Xóa</a>
+						</td>
+                        <td> 
+                        <a class="btn btn-primary" href="edit.php?edit=<?php echo base64_encode(base64_encode(base64_encode($result['id'])));?>">Sửa</a>
+						</td>
+                        <td> <a class="btn btn-primary" href="details.php?id=<?php echo base64_encode(base64_encode(base64_encode($result['id'])))?>">Chi tiết</a>
 						</td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
             </table>
-
+            
+            <?php 
+            if(isset($_GET['search'])&& $_GET['search']!="")
+            {
+            }else{
+                include('pagination.php');   
+            }
+                              
+            ?>
         </form>
         <div class="back" style="text-align: center">
 		<button type="button" class="btn btn-info" onClick="javascript:history.go(-1)">Back</button>
-          
         </div>
         </div>
+                        
     </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include('functions.php');
+include 'functions.php';
 
 if (!isAdmin()) {
 	$_SESSION['msg'] = "You must log in first";
@@ -13,6 +13,9 @@ if (isset($_GET['logout'])) {
 	unset($_SESSION['user']);
 	header("location: login.php");
 }
+
+$query=mysqli_query($conn,"SELECT * from users Where id ");
+$result=mysqli_fetch_assoc($query);
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,7 +60,7 @@ if (isset($_GET['logout'])) {
 						<br>
 						<?php echo $_SESSION['user']['fullname']; ?><br>
                         <?php echo $_SESSION['user']['email']; ?><br>
-                        <a href="admin.php">Add User</a> &nbsp; <a href="list.php?list='1'">List User</a> &nbsp; <a href="edit.php?edit='1">Edit Information</a><br>
+                        <a href="admin.php">Add User</a> &nbsp; <a href="list.php">List User</a> &nbsp; <a href="edit.php?edit=<?php echo base64_encode(base64_encode(base64_encode($result['id']))) ?>">Edit Information</a><br>
                         <a href="home.php?logout='1'" style="color: red;">Logout</a>
 					</small>
 				<?php endif ?>
