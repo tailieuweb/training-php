@@ -4,8 +4,9 @@ session_start();
 include('functions.php');
 if (!isLoggedIn()) {
 	$_SESSION['msg'] = "You must log in first";
-	header('location: login.php');
+	header('location: login.php');;
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,21 +34,27 @@ if (!isLoggedIn()) {
 		<?php endif ?>
 		<!-- logged in user information -->
 		<div class="profile_info">
-			<img src="public/images/user_profile.png"  >
-
+			<img src="public/images/user_profile.png">
+			
 			<div>
+			
 				<?php  if (isset($_SESSION['user'])) : ?>
-					<strong><?php echo $_SESSION['user']['username']; ?></strong>
+					<br><strong>Username: <?php echo $_SESSION['user']['username']; ?><i  style="color: #888;">(<?php echo ucfirst($_SESSION['user']['user_type']); ?>)</i></strong>
 
 					<small>
-						<i  style="color: #888;">(<?php echo ucfirst($_SESSION['user']['user_type']); ?>)</i> 
-						<br>
-						<?php echo $_SESSION['user']['fullname']; ?><br>
-						<?php echo $_SESSION['user']['email']; ?><br>
-						<a href="edit.php?edit='1">Edit Information</a><br>
-						<a href="index.php?logout='1'" style="color: red;">Logout</a>
-					</small>
-
+						<br><strong>Fullname: </strong> <?php echo $_SESSION['user']['fullname']; ?>
+						<br><strong>Email: </strong> <?php echo $_SESSION['user']['email']; ?><br>
+						<div class="input-group">
+							<?php $demo =  $_SESSION['user']['id'];?>
+							<button class="btn" name="login_btn"><a href="edituserus.php?id='<?php echo md5($demo) ?>" style="color: #FFFFFF;">Edit Information</a><br></button>
+						</div>
+						<div class="input-group">
+							<button class="btn" name="doipassword_btn"><a href="password.php?id='<?php echo md5($_SESSION['user']['id']); ?>" style="color: #FFFFFF;">Update Pasword</a><br></button>
+						</div>
+						<div class="input-group">
+							<button class="btn" name="login_btn"><a href="index.php?logout='1'" style="color: #FFFFFF;">Logout</a></button>
+						</div>
+					</small>		
 				<?php endif ?>
 			</div>
 		</div>

@@ -184,6 +184,7 @@ form, .content {
 	background: #5F9EA0;
 	border: none;
 	border-radius: 5px;
+	cursor: pointer;
 }
 .error {
 	width: 92%; 
@@ -203,8 +204,8 @@ form, .content {
 }
 .profile_info img {
 	display: inline-block; 
-	width: 50px; 
-	height: 50px; 
+	width: 100px; 
+	height: 100px; 
 	margin: 5px;
 	float: left;
 }
@@ -218,4 +219,22 @@ form, .content {
 	clear: both;
 }
 
-            /* End Register */
+/* End Register */
+
+/* list.php */
+.fix_overtext {
+	word-break: break-all;
+	max-width: 150px;
+}
+
+/* index.php */
+.fix_overtext2 {
+	word-break: break-all;
+	max-width: 300px;
+	display: block;
+}
+
+/* register.php, login.php */
+.btn_register {
+	cursor: pointer;
+}
