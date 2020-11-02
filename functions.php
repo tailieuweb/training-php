@@ -1,5 +1,5 @@
 <?php 
-$conn = mysqli_connect('localhost', 'root', '', 'userlogin');
+$conn = mysqli_connect('localhost', 'root', '', 'user');
 
 $username = "";
 $fullname = "";
@@ -10,16 +10,17 @@ $errors   = array();
 if (isset($_POST['register_btn'])) {
 	register();
 }
-
 function register(){
 
-	global $conn, $errors, $username,$fullname, $email;
+	global $conn, $errors, $username,$fullname, $email,$fileName,$addfile;
+	
 
     $username    =  escape($_POST['username']);
     $fullname    =  escape($_POST['fullname']);
 	$email       =  escape($_POST['email']);
 	$password_1  =  escape($_POST['password_1']);
 	$password_2  =  escape($_POST['password_2']);
+	
 
 	if (empty($username)) { 
 		array_push($errors, "Username is required"); 
@@ -36,14 +37,58 @@ function register(){
 	if ($password_1 != $password_2) {
 		array_push($errors, "The two passwords do not match");
 	}
+	//kiểm tra xem trong form có file ?
+	$path='./public/uploads/';
+	$styleMe='./public/file/';
+if(isset($_FILES['avata']))
+{
+	if($_FILES['avata']['type'] =="image/png"||$_FILES['avata']['type'] =="image/jpg"||$_FILES['avata']['type'] =="image/jpeg"||$_FILES['avata']['type'] =="image/gif")
+	{
+		if($_FILES['avata']['size']<800000)
+		{
+			if($_FILES['avata']['error']==0)
+			{
+				$fileName = $_FILES['avata']['name'];
+				move_uploaded_file($fileName,$path.$_FILES['avata']['name']);
+			}
+			else{
+				echo "Lỗi file:";
+			}
+
+		}else{
+			echo "Phải quá lớn:";
+		}
+	}
+	else{
+		echo "file không đúng định dạng";
+	}
+	// print_r($_FILES);
+}
+if($_FILES['addfile'])
+{
+	if($_FILES['addfile']['size']<999999)
+	{
+		if($_FILES['addfile']['error']==0)
+		{
+			$addfile = $_FILES['addfile']['name'];
+			move_uploaded_file($addfile,$styleMe.$_FILES['addfile']['name']);
+		}
+		else{
+			echo "Lỗi file";
+		}
+	}else{
+		echo "kích thước lớn hơn cho phép";
+	}
+}
+	
 
 	if (count($errors) == 0) {
 		$password = md5($password_1);
-
+		
 		if (isset($_POST['user_type'])) {
 			$user_type = escape($_POST['user_type']);
-			$query = "INSERT INTO users (username,fullname, email, user_type, password) 
-					  VALUES('$username', '$fullname', '$email', '$user_type', '$password')";
+			$query = "INSERT INTO users (username,fullname, email, user_type,password,avata,file) 
+					  VALUES('$username', '$fullname', '$email', '$user_type', '$password','$fileName','$addfile')";
 			mysqli_query($conn, $query);
 			$_SESSION['success']  = "New user successfully created!!";
 			header('location: home.php');
@@ -79,9 +124,12 @@ function edit() {
 	
 }
 
+
+
 if (isset($_POST['save_btn'])) {
 	edit();
 }
+
 
 function getUserById($id){
 	global $conn;
@@ -194,7 +242,6 @@ function login(){
 		}
 	}
 }
-
 function isAdmin()
 {
 	if (isset($_SESSION['user']) && $_SESSION['user']['user_type'] == 'admin' ) {
@@ -203,4 +250,17 @@ function isAdmin()
 		return false;
     }
 }
+//them:
+function add_account($username,$fullname,$email,$user_type,$password_1,$password_2)
+{
+	global $conn, $errors, $username,$fullname, $email,$user_type,$password_1,$password_2;
+	$username    =  escape($_POST['username']);
+    $fullname    =  escape($_POST['fullname']);
+	$email       =  escape($_POST['email']);
+	$password_1  =  escape($_POST['password_1']);
+	$password_2  =  escape($_POST['password_2']);
+	$query = "INSERT INTO `users` ( `username`, `fullname`, `email`, `user_type`, `password_1`, `password_2`) VALUES ( '$username','$fullname', '$email', '$user_type', '$password_1','$password_2');";
+	$results = mysqli_query($conn, $query);
+}
+
 
