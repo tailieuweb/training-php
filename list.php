@@ -8,14 +8,25 @@ $item_per_page = 3;
 $current_page = !empty($_GET['page']) ?$_GET['page']:1;
 $offset = ($current_page -1) * $item_per_page;
 //Phân trang
-    if (isAdmin()) {
-        $query = "SELECT * FROM users LIMIT $item_per_page OFFSET $offset";
+
+if(isset($_GET['search'])&& $_GET['search']!="")
+	{
+        $query='SELECT * from users where  
+        username like "%'.$_GET['search'].'%" 
+        or fullname like "%'.$_GET['search'].'%" 
+        or email like "%'.$_GET['search'].'%"';
         $results = mysqli_query($conn, $query);
-        $allUser = "SELECT * FROM users";
-        $totalRecord = mysqli_query($conn, $allUser);
-        $totalRecord = $totalRecord->num_rows;
-        $totalPage = ceil($totalRecord / $item_per_page);
-    }
+	}
+	else{
+        if (isAdmin()) {
+            $query = "SELECT * FROM users LIMIT $item_per_page OFFSET $offset";
+            $results = mysqli_query($conn, $query);
+            $allUser = "SELECT * FROM users";
+            $totalRecord = mysqli_query($conn, $allUser);
+            $totalRecord = $totalRecord->num_rows;
+            $totalPage = ceil($totalRecord / $item_per_page);
+        }
+}
     //ma hoa + xóa:
     if (isset($_GET['list']))
  {
@@ -45,12 +56,7 @@ $offset = ($current_page -1) * $item_per_page;
         <div class="header">
             <h2>List User</h2>
             <form method="get">
-            <select id="search" name="search" onchange="location=options[selectedIndex].value;">
-                <option hidden="">--Chọn--</option>
-                <option value="search_ten.php">theo tên</option>
-                <option value="search_fullname.php">theo fullname</option>
-                <option value="search_email.php">theo email</option>
-            </select>
+            <input type="text" name="search" class="form-control" placeholder="Search...">
             </form>
         </div>
         <form >
@@ -63,7 +69,6 @@ $offset = ($current_page -1) * $item_per_page;
                 ?>
                 <thead>
 					<tr>
-                        <th scope="col">File</th>
                         <th scope="col">Avata</th>
                         <th scope="col">ID</th>
 						<th scope="col">Username
@@ -77,7 +82,6 @@ $offset = ($current_page -1) * $item_per_page;
                 <tbody>
                     <?php foreach ($results as $result):?>
                     <tr scope="row">  
-                        <td><a href="./public/file/<?php echo $result['file'] ;?>"></a></td> 
                         <td><img src="./public/uploads/<?php echo $result['avata'] ;?>" alt="" style="width:60px;height:60px"></td>  
                         <td><?php echo $result['id']; ?></td>   
                         <td><?php echo $result['username']; ?></td>   
@@ -88,9 +92,9 @@ $offset = ($current_page -1) * $item_per_page;
                         <td> <a class="btn btn-cancel" href="list.php?list=<?php echo base64_encode(base64_encode(base64_encode($result['id'])))?>" onclick="return confirm('Bạn có muốn xóa thông tin thành viên này không')">Xóa</a>
 						</td>
                         <td> 
-                        <a class="btn btn-primary" href="edit.php?edit=<?php echo ($result['id'])?>">Sửa</a>
+                        <a class="btn btn-primary" href="edit.php?edit=<?php echo base64_encode(base64_encode(base64_encode($result['id'])));?>">Sửa</a>
 						</td>
-                        <td> <a class="btn btn-primary" href="details.php?id=<?php ($result['id'])?>">Chi tiết</a>
+                        <td> <a class="btn btn-primary" href="details.php?id=<?php echo base64_encode(base64_encode(base64_encode($result['id'])))?>">Chi tiết</a>
 						</td>
                     </tr>
                 <?php endforeach; ?>

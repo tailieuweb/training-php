@@ -44,7 +44,7 @@ if (!isLoggedIn()) {
 						<br>
 						<?php echo $_SESSION['user']['fullname']; ?><br>
 						<?php echo $_SESSION['user']['email']; ?><br>
-						<a href="edit.php?edit='1">Edit Information</a><br>
+						<a href="edit.php?edit=<?php echo base64_encode(base64_encode(base64_encode($result['id']))) ?>">Edit Information</a><br>
 						<a href="index.php?logout='1'" style="color: red;">Logout</a>
 					</small>
 
