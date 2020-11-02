@@ -72,6 +72,7 @@ if(isset($_GET['search'])&& $_GET['search']!="")
                         <th scope="col">Avata</th>
                         <th scope="col">ID</th>
 						<th scope="col">Username
+                        
                         </th>
 						<th scope="col">Full name
                        </th>
