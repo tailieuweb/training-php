@@ -1,0 +1,232 @@
+/* Made with love by Mutiullah Samim*/
+
+/* Login */
+
+@import url("https://fonts.googleapis.com/css?family=Numans");
+
+// color
+$main-color-white: #fff;
+$color-orange: #ffc312;
+$color-black: #000;
+$color-red: #ff0000;
+$color-green: #5f9ea0;
+$success-color: #3c763d;
+$block-inline: inline-block;
+$center: center;
+//end color
+
+// font
+$weight-of-font: bold;
+//end font
+html,
+body {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  font-family: "Numans", sans-serif;
+}
+.form-group {
+  margin-bottom: 10px;
+}
+a {
+  text-decoration: none;
+}
+.container {
+  height: 100%;
+  align-content: $center;
+}
+
+.card {
+  height: 370px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 400px;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.social_icon {
+  span {
+    font-size: 60px;
+    margin-left: 10px;
+    color: $color-orange;
+  }
+  span:hover {
+    color: $main-color-white;
+    cursor: pointer;
+  }
+}
+
+.card-header h3 {
+  color: $main-color-white;
+}
+
+.social_icon {
+  position: absolute;
+  right: 20px;
+  top: -45px;
+}
+
+.input-group-prepend span {
+  width: 50px;
+  background-color: $color-orange;
+  color: $color-black;
+  border: 0 !important;
+}
+
+input:focus {
+  outline: 0 0 0 0 !important;
+  box-shadow: 0 0 0 0 !important;
+}
+
+.remember {
+  color: $color-black;
+  input {
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    margin-right: 5px;
+  }
+}
+
+.login_btn {
+  color: $color-black;
+  background-color: $color-orange;
+  width: 100px;
+}
+
+.login_btn:hover {
+  color: $color-black;
+  background-color: $main-color-white;
+}
+
+.links {
+  color: $main-color-white;
+  a {
+    margin-left: 4px;
+  }
+}
+
+.loginsuccess {
+  padding-top: 50px;
+  text-align: $center;
+  color: $color-orange;
+  font-weight: $weight-of-font;
+}
+
+.hellousername {
+  text-align: $center;
+  color: $main-color-white;
+}
+
+.parentElement {
+  text-align: $center;
+  a {
+    text-decoration: none;
+  }
+}
+
+.btn-work {
+  font-weight: $weight-of-font;
+  background: $main-color-white;
+  width: 100px;
+  height: 50px;
+  margin: 0 auto;
+  padding: 0;
+  display: $block-inline;
+  line-height: 50px;
+  text-align: $center;
+  color: $color-red;
+}
+.notification {
+  color: $color-black;
+}
+/*  End Login */
+
+/* Register */
+.header {
+  margin: 50px auto 0px;
+  color: $main-color-white;
+  background: $color-green;
+  text-align: $center;
+  border: 1px solid #b0c4de;
+  border-bottom: none;
+  border-radius: 10px 10px 0px 0px;
+  padding: 20px;
+}
+form,
+.content {
+  margin: 0px auto;
+  padding: 20px;
+  border: 1px solid #b0c4de;
+  background: $main-color-white;
+  border-radius: 0px 0px 10px 10px;
+}
+.input-group {
+  margin: 10px 0px 10px 0px;
+  label {
+    display: block;
+    text-align: left;
+    margin: 3px;
+  }
+  input {
+    height: 30px;
+    width: 100%;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid gray;
+  }
+}
+#user_type {
+  height: 40px;
+  width: 98%;
+  padding: 5px 10px;
+  background: $main-color-white;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+.btn {
+  padding: 10px;
+  font-size: 15px;
+  color: $main-color-white;
+  background: $color-green;
+  border: none;
+  border-radius: 5px;
+}
+.error {
+  width: 92%;
+  margin: 0px auto;
+  padding: 10px;
+  border: 1px solid #a94442;
+  color: #a94442;
+  background: #f2dede;
+  border-radius: 5px;
+  text-align: left;
+}
+.success {
+  color: $success-color;
+  background: #dff0d8;
+  border: 1px solid $success-color;
+  margin-bottom: 20px;
+}
+.profile_info {
+  img {
+    display: $block-inline;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    float: left;
+  }
+  div {
+    display: $block-inline;
+    margin: 5px;
+  }
+}
+.profile_info:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* End Register */

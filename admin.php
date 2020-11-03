@@ -1,13 +1,14 @@
-<?php 
+<?php
 session_start();
 
 include('functions.php');
 if (!isAdmin()) {
 	$_SESSION['msg'] = "You must log in first";
 	header('location: login.php');
-}?>
+} ?>
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Create user</title>
 	<link rel="stylesheet" type="text/css" href="public/css/styles.css">
@@ -20,11 +21,12 @@ if (!isAdmin()) {
 		}
 	</style> -->
 </head>
+
 <body>
 	<div class="header">
 		<h2>Admin - Create User</h2>
 	</div>
-	
+
 	<form method="post" action="admin.php">
 
 		<?php echo display_error(); ?>
@@ -43,7 +45,7 @@ if (!isAdmin()) {
 		</div>
 		<div class="input-group">
 			<label>User type</label>
-			<select required name="user_type" id="user_type" >
+			<select required name="user_type" id="user_type">
 				<option value=""></option>
 				<option value="admin">Admin</option>
 				<option value="user">User</option>
@@ -62,7 +64,8 @@ if (!isAdmin()) {
 		</div>
 
 		<p>
-		<a class="btn" href="home.php">HOME</a></p>
+			<a class="btn" href="home.php">HOME</a></p>
 	</form>
 </body>
+
 </html>
