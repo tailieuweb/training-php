@@ -25,7 +25,7 @@ if (isset($_GET['logout'])) {
 </head>
 <body>
 	<div class="header">
-		<h2>Admin - Home Page</h2>
+		<h2>Admin - Trang chủ</h2>
 	</div>
 	<div class="content">
 		<!-- notification message -->
