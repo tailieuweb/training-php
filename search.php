@@ -24,7 +24,7 @@ $results = mysqli_query($conn,$query);
         </div>
         <form action="search.php" method="GET"> 
     <input type="text" name="username" placeholder="Nhập thông tin cần tìm" /> 
-    <input type="submit" value="Search"></input> 
+    <input type="submit" value="Search">
     </form>
         <form >
             <?php echo display_error(); ?>	

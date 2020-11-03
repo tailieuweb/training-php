@@ -74,6 +74,8 @@ $pagination = pagination_admin($url, $page, $total);
         <link rel="stylesheet" href="public/css/bootstrap.min.css">
         <link rel="stylesheet" href="public/css/font-awesome.min.css">
 		<link rel="stylesheet" href="public/css/styles.css">
+        <link rel="stylesheet/less" type="text/css" href="public/css/style.less" />
+    <script  type="text/javascript" src="public/js/less.min.js"></script>
     </head>
     <body>
 		<div class="container">

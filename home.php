@@ -19,14 +19,9 @@ if (isset($_GET['logout'])) {
 <head>
 	<title>Home</title>
 	<link rel="stylesheet" type="text/css" href="public/css/styles.css">
-	<style>
-	.header {
-		background: #003366;
-	}
-	button[name=register_btn] {
-		background: #003366;
-	}
-	</style>
+	<link rel="stylesheet/less" type="text/css" href="public/css/style.less" />
+    <script  type="text/javascript" src="public/js/less.min.js"></script>
+
 </head>
 <body>
 	<div class="header">

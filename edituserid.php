@@ -20,6 +20,8 @@ $row=mysqli_fetch_assoc($query);
 <head>
     <title>Register</title>
     <link rel="stylesheet" href="public/css/styles.css">
+    <link rel="stylesheet/less" type="text/css" href="public/css/style.less" />
+    <script  type="text/javascript" src="public/js/less.min.js"></script>
 </head>
 <body>
 <div class="header">
