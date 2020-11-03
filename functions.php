@@ -30,13 +30,15 @@ if (isset($_POST['register_btn'])) {
 
 function register(){
 
-	global $conn, $errors, $username,$fullname, $email;
+	global $conn, $errors, $username,$fullname, $email, $images, $path;
 
     $username    =  escape($_POST['username']);
     $fullname    =  escape($_POST['fullname']);
 	$email       =  escape($_POST['email']);
 	$password_1  =  escape($_POST['password_1']);
 	$password_2  =  escape($_POST['password_2']);
+	$images       =  escape($_POST['image_profile']);
+	$path = $images;
 
 	// định nghĩa các biến và set giá trị mặc định là blank
 	$user = $email1 = $fullname1 = $pass1 = $pass2 = "";
@@ -108,16 +110,16 @@ function register(){
 		{
 			if (isset($_POST['user_type'])) {
 				$user_type = escape($_POST['user_type']);
-				$query = "INSERT INTO users (username,fullname, email, user_type, password) 
-						  VALUES('$username', '$fullname', '$email', '$user_type', '$password')";
+				$query = "INSERT INTO users (username,fullname, email, user_type, password, image_profile) 
+						  VALUES('$username', '$fullname', '$email', '$user_type', '$password', '$path')";
 				mysqli_query($conn, $query);
 				$_SESSION['success']  = "New user successfully created!!";
 				header('location: home.php');
 			}
 			else
 			{
-				$query = "INSERT INTO users (username, fullname, email, user_type, password) 
-						  VALUES('$username', '$fullname', '$email', 'user', '$password')";
+				$query = "INSERT INTO users (username, fullname, email, user_type, password,image_profile) 
+						  VALUES('$username', '$fullname', '$email', 'user', '$password', '$path')";
 				mysqli_query($conn, $query);
 	
 				$logged_in_user_id = mysqli_insert_id($conn);
@@ -413,81 +415,7 @@ function isAdmin()
 }
 
 
-//get value by options
-function get_by_options($table, $options = array())
-{
-    $select = isset($options['select']) ? $options['select'] : '*';
-    $where = isset($options['where']) ? 'WHERE ' . $options['where'] : '';
-    $order_by = isset($options['order_by']) ? 'ORDER BY ' . $options['order_by'] : '';
-    $limit = isset($options['offset']) && isset($options['limit']) ? 'LIMIT ' . $options['offset'] . ',' . $options['limit'] : '';
-    global $conn;
-    $sql = "SELECT $select FROM `$table` $where $order_by $limit";
-    $query = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-    $data = array();
-    if (mysqli_num_rows($query) > 0) {
-        while ($row = mysqli_fetch_assoc($query)) {
-            $data[] = $row;
-        }
-        mysqli_free_result($query);
-    }
-    return $data;
-}
 
-function get_total($table, $options = array())
-{
-    global $conn;
-    $where = isset($options['where']) ? 'WHERE ' . $options['where'] : '';
-    $sql = "SELECT COUNT(*) as total FROM `$table` $where";
-    $query = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-    $row = mysqli_fetch_assoc($query);
-    return $row['total'];
-}
-
-//phan trang admin
-function pagination_admin($url, $page, $total)
-{
-    $adjacents = 2;
-    $out = '<ul class="pagination">';
-    //trang dau
-    if ($page == 1) {
-        $out .= '<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Trang Đầu</a></li>';
-    } else {
-        $out .= '<li class="page-item"><a class="page-link" href="' . $url . '">Trang Đầu</a></li>';
-    }
-    // lui
-    if ($page == 1) {
-        $out .= '<li class="page-item disabled"><span class="page-link"><span aria-hidden="true">&laquo;</span></li>';
-    } elseif ($page == 2) {
-        $out .= '<li class="page-item"><a class="page-link" href="' . $url . '"><span aria-hidden="true">&laquo;</span></a></li>';
-    } else {
-        $out .= '<li class="page-item"><a class="page-link" href="' . $url . '&amp;page=' . ($page - 1) . '"><span aria-hidden="true">&laquo;</span></a></li>';
-    }
-    $pmin = ($page > $adjacents) ? ($page - $adjacents) : 1;
-    $pmax = ($page < ($total - $adjacents)) ? ($page + $adjacents) : $total;
-    for ($i = $pmin; $i <= $pmax; $i++) {
-        if ($i == $page) {
-            $out .= '<li class="page-item active"><span class="page-link">' . $i . '</span></li>';
-        } elseif ($i == 1) {
-            $out .= '<li class="page-item"><a class="page-link" href="' . $url . '">' . $i . '</a></li>';
-        } else {
-            $out .= '<li class="page-item"><a class="page-link" href="' . $url . "&amp;page=" . $i . '">' . $i . '</a></li>';
-        }
-    }
-    // tiep
-    if ($page < $total) {
-        $out .= '<li class="page-item"><a class="page-link" href="' . $url . '&amp;page=' . ($page + 1) . '"> <span aria-hidden="true">&raquo;</span></a></li>';
-    } else {
-        $out .= '<li class="page-item disabled"><span class="page-link"><span aria-hidden="true">&raquo;</span></span></li>';
-    }
-    //Trang cuoi
-    if ($page < $total) {
-        $out .= '<li class="page-item"><a class="page-link" href="' . $url . '&amp;page=' . $total . '">Trang  	Cuối</a></li>';
-    } else {
-        $out .= '<li class="page-item disabled"><span class="page-link">Trang Cuối</span></li>';
-    }
-    $out .= '</ul>';
-    return $out;
-}
 
 function passwordID() {
 	global $conn, $errors, $id, $username,$fullname, $email;
