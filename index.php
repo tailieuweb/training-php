@@ -6,6 +6,12 @@ if (!isLoggedIn()) {
 	$_SESSION['msg'] = "You must log in first";
 	header('location: login.php');
 }
+
+if (isset($_GET['logout'])) {
+	session_destroy();
+	unset($_SESSION['user']);
+	header("location: login.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,8 +50,8 @@ if (!isLoggedIn()) {
 						<br>
 						<?php echo $_SESSION['user']['fullname']; ?><br>
 						<?php echo $_SESSION['user']['email']; ?><br>
-						<a href="edit.php?edit='1">Edit Information</a><br>
-						<a href="index.php?logout='1'" style="color: red;">Logout</a>
+						<a href="edit.php?edit=<?php echo $_SESSION['user']['id']; ?>">Edit Information</a><br>
+						<a href="index.php?logout='<?php echo $_SESSION['user']['id']; ?>'" style="color: red;">Logout</a>
 					</small>
 
 				<?php endif ?>
