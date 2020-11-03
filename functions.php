@@ -4,6 +4,7 @@ $conn = mysqli_connect('localhost', 'root', '', 'users');
 $username = "";
 $fullname = "";
 $email    = "";
+$images ="";
 $errors   = array(); 
 
 
@@ -140,15 +141,17 @@ function test_input($data) {
 
 
 function edit($user_id) {
-	global $conn, $errors, $username,$fullname, $email;
+	global $conn, $errors, $username,$fullname, $email,$images;
 	$username    =  escape($_POST['username1']);
     $fullname    =  escape($_POST['fullname1']);
 	$email       =  escape($_POST['email1']);
+	$images       =  escape($_POST['image_profile1']);
+
 
 	// định nghĩa các biến và set giá trị mặc định là blank
 	//$user2 = $email2 = $fullname2 = $pass2 = $pass3 = "";
 
-	mysqli_query($conn, "UPDATE `users` SET `username` = '$username', `fullname` = '$fullname', `email`='$email' WHERE `id` = '$user_id'");
+	mysqli_query($conn, "UPDATE `users` SET `username` = '$username', `fullname` = '$fullname', `email`='$email', `image_profile`='$images'  WHERE `id` = '$user_id'");
 	
 	$_SESSION['success']  = "Change successfully";
 	// // header("Refresh:2; url=page2.php");
@@ -179,11 +182,13 @@ if (isset($_POST['save_btn'])) {
 	$username    =  escape($_POST['username1']);
     $fullname    =  escape($_POST['fullname1']);
 	$email       =  escape($_POST['email1']);
+	$images       =  escape($_POST['image_profile']);
 
-	$user2 = $email2 = $fullname2 = "";
+	$user2 = $email2 = $fullname2 =$images2= "";
 	$user2 = test_input($_POST["username1"]);
 	$email2 = test_input($_POST["email1"]);
 	$fullname2 = test_input($_POST["fullname1"]);
+	$images1       =  test_input($_POST['image_profile1']);
 	if(isAdmin() == true && !empty($username) && !empty($fullname) && !empty($email))
 	{
 		if(!preg_match("/^[a-z0-9_-]{3,16}$/",$user2))
@@ -239,13 +244,13 @@ if (isset($_POST['save_btn'])) {
 }
 
 function edituserID() {
-	global $conn, $errors, $id, $username,$fullname, $email;
+	global $conn, $errors, $id, $username,$fullname, $email,$images;
 	$id    		 =  escape($_POST['id1']);
-	$username    = escape($_POST['username1']);
+	$username    =  escape($_POST['username1']);
     $fullname    =  escape($_POST['fullname1']);
 	$email       =  escape($_POST['email1']);
-
-	mysqli_query($conn, "UPDATE `users` SET `id` = '$id', `username` = '$username', `fullname` = '$fullname', `email`='$email' WHERE `id` = '$id'");
+	$images		 =  escape($_POST['image_profile1']);
+	mysqli_query($conn, "UPDATE `users` SET `id` = '$id', `username` = '$username', `fullname` = '$fullname', `email`='$email' ,`image_profile`='$images' WHERE `id` = '$id'");
 	
 	$_SESSION['success']  = "Change successfully";
 	// // header("Refresh:2; url=page2.php");
@@ -262,13 +267,14 @@ if (isset($_POST['saveuserid_btn'])) {
 }
 
 function edittuserID() {
-	global $conn, $errors, $id, $username,$fullname, $email;
+	global $conn, $errors, $id, $username,$fullname, $email,$images;
 	$id    		 =   $_SESSION['user']['id'];
 	$username    = escape($_POST['username1']);
     $fullname    =  escape($_POST['fullname1']);
 	$email       =  escape($_POST['email1']);
+	$images 	 =	 escape($_POST['image_profile1']);
 
-	mysqli_query($conn, "UPDATE `users` SET `id` = '$id', `username` = '$username', `fullname` = '$fullname', `email`='$email' WHERE `id` = '$id'");
+	mysqli_query($conn, "UPDATE `users` SET `id` = '$id', `username` = '$username', `fullname` = '$fullname', `email`='$email', `image_profile`='$images' WHERE `id` = '$id'");
 	
 	$_SESSION['success']  = "Change successfully";
 	// // header("Refresh:2; url=page2.php");

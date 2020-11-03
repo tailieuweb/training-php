@@ -46,6 +46,10 @@ $row=mysqli_fetch_assoc($query);
             <input type="email" value="<?php echo $row['email']; ?>" name="email1">
         </div>
         <div class="input-group">
+            <label>images</label>
+            <input type="file"  name="image_profile1" class="form-control">
+        </div>
+        <div class="input-group">
             <button type="submit" class="btn" name="saveuserid_btn">Save</button>
         </div>
 

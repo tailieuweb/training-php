@@ -106,7 +106,8 @@ $pagination = pagination_admin($url, $page, $total);
             <table class="table">
                 <thead>
 					<tr>
-						<th scope="col">ID</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Images</th>
 						<th scope="col">Username</th>
 						<th scope="col">Full name</th>
 						<th scope="col">Email</th>
@@ -123,6 +124,7 @@ $pagination = pagination_admin($url, $page, $total);
                             while ($result = mysqli_fetch_assoc($sql)) { ?>
                                 <tr scope="row">
                                     <td><?php echo $result['id']; ?></td>
+                                    <td><img src="./public/images/<?php echo $result['image_profile'] ?> " height="30" width="30" alt=""></td>
                                     <td><?php echo $result['username']; ?></td>
                                     <td><?php echo $result['fullname']; ?></td>
                                     <td><?php echo $result['email']; ?></td>
@@ -142,6 +144,7 @@ $pagination = pagination_admin($url, $page, $total);
                         foreach ($_SESSION['results_user'] as $result) : ?>
                             <tr scope="row">
                                 <td><?php echo $result['id']; ?></td>
+                                <td class="fix_overtext" ><img src="./public/images/<?php echo $result['image_profile']?>"  height="30" width="30"  alt=""></td>
                                 <td class="fix_overtext"><?php echo $result['username']; ?></td>
                                 <td  class="fix_overtext"><?php echo $result['fullname']; ?></td>
                                 <td  class="fix_overtext"><?php echo $result['email']; ?></td>

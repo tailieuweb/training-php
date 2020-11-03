@@ -41,6 +41,7 @@ $results = mysqli_query($conn,$query);
                     <?php foreach ($results as $result): ?>
                     <tr scope="row">
                         <td><?php echo $result['id']; ?></td>   
+                        <td><img src="./public/images/<?php echo $result['image_profile'] ?> " height="30" width="30" alt=""></td>
                         <td><?php echo $result['username']; ?></td>   
                         <td><?php echo $result['fullname']; ?></td>   
                         <td><?php echo $result['email']; ?></td> 
