@@ -1,8 +1,20 @@
 <?php 
 session_start();
 
-	include('functions.php') 
+	include('functions.php'); 
+	if(isLoggedIn() == true && isAdmin() == true) 
+	{
+		header("Location: home.php");
+		header("!Location:index.php");
+
+	}
+	if(isLoggedIn() == true && isAdmin() == false)
+	{
+		header("Location: index.php");
+	}
 ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
