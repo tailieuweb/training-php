@@ -52,6 +52,11 @@ if (!isAdmin()) {
 			<label>Confirm password</label>
 			<input type="password" name="password_2">
 		</div>
+
+		<div class="input-group">
+			<label>images</label>
+			<input type="file"  name="image_profile" class="form-control">
+    	</div>
 		<div class="input-group">
 		
 			<td >
