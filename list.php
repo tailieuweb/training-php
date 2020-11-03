@@ -69,7 +69,7 @@ $pagination = pagination_admin($url, $page, $total);
 
 <html>
     <head>
-        <title>Register</title>
+        <title>Danh sách Account</title>
         
         <link rel="stylesheet" href="public/css/bootstrap.min.css">
         <link rel="stylesheet" href="public/css/font-awesome.min.css">

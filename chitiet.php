@@ -12,7 +12,7 @@ $results = mysqli_query($conn,$query);
 
 <html>
     <head>
-        <title>Register</title>
+        <title>Chi tiết</title>
         
         <link rel="stylesheet" href="public/css/bootstrap.min.css">
         <link rel="stylesheet" href="public/css/font-awesome.min.css">
