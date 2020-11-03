@@ -1,0 +1,9 @@
+body td img {
+  width: 50px;
+}
+
+body .main {
+  max-height: 500px !important;
+  overflow-y: auto;
+}
+/*# sourceMappingURL=header.css.map */
