@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th10 04, 2019 lúc 03:50 PM
--- Phiên bản máy phục vụ: 5.7.21
--- Phiên bản PHP: 5.6.35
+-- Thời gian đã tạo: Th10 26, 2020 lúc 03:55 PM
+-- Phiên bản máy phục vụ: 10.4.10-MariaDB
+-- Phiên bản PHP: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -34,18 +34,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(100) NOT NULL,
   `fullname` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `user_type` varchar(100) NOT NULL,
+  `user_type` varchar(100) NOT NULL DEFAULT 'user',
   `password` varchar(100) NOT NULL,
+  `verificationCode` varchar(500) DEFAULT NULL,
+  `status` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `fullname`, `email`, `user_type`, `password`) VALUES
-(1, 'admin', 'Admin', 'admin1@gmail.com', 'admin', 'c4ca4238a0b923820dcc509a6f75849b'),
-(2, 'user', 'User', 'user1@gmail.com', 'user', '202cb962ac59075b964b07152d234b70');
+INSERT INTO `users` (`id`, `username`, `fullname`, `email`, `user_type`, `password`, `verificationCode`, `status`) VALUES
+(1, 'tanhong', 'Nguyen Tan', 'phuongtan12357nguyen@gmail.com', 'admin', '0ab44bd43d6b18fcd5cd928d6faab1b8', NULL, 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
