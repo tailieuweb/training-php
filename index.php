@@ -20,7 +20,7 @@ if (!isLoggedIn()) {
 </head>
 <body>
 	<div class="header">
-		<h2>Home Page</h2>
+		<h2>Home Page- Trang chủ</h2>
 	</div>
 	<div class="content">
 		<!-- notification message -->
