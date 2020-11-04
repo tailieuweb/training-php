@@ -4,11 +4,18 @@ session_start();
 include('functions.php');
 if (!isLoggedIn()) {
 	$_SESSION['msg'] = "You must log in first";
-	header('location: login.php');;
+	header('location: login.php');
 }
 
-?>
-<!DOCTYPE html>
+if(isAdmin() == true && isloggedIn() == true)
+{
+	header('location: home.php');
+}
+
+else
+{
+	?>
+	<!DOCTYPE html>
 <html>
 <head>
 	<title>Home</title>
@@ -67,3 +74,7 @@ if (!isLoggedIn()) {
 	</div>
 </body>
 </html>
+	<?php
+}
+?>
+

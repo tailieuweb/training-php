@@ -13,8 +13,11 @@ if (isset($_GET['logout'])) {
 	unset($_SESSION['user']);
 	header("location: login.php");
 }
-?>
-<!DOCTYPE html>
+
+if(isAdmin() == true && isloggedIn() == true)
+{
+	?>
+	<!DOCTYPE html>
 <html>
 <head>
 	<title>Home</title>
@@ -61,3 +64,6 @@ if (isset($_GET['logout'])) {
 	</div>
 </body>
 </html>
+<?php
+}
+?>
