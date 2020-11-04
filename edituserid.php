@@ -11,8 +11,9 @@ include('functions.php');
 //     }
 // }
 $id=$_GET['id'];
-$query=mysqli_query($conn,"select * from `users` where id='$id'");
+$query=mysqli_query($conn,"select * from `users` where id_encode='$id'");
 $row=mysqli_fetch_assoc($query);
+$results = [];
 
 ?>
 

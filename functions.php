@@ -269,22 +269,70 @@ if (isset($_POST['saveuserid_btn'])) {
 }
 
 function edittuserID() {
+<<<<<<< Updated upstream
 	global $conn, $errors, $id, $username,$fullname, $email,$images;
 	$id    		 =   $_SESSION['user']['id'];
 	$username    = escape($_POST['username1']);
     $fullname    =  escape($_POST['fullname1']);
 	$email       =  escape($_POST['email1']);
 	$images 	 =	 escape($_POST['image_profile1']);
+=======
+	global $conn, $errors, $id, $username, $fullname, $email, $version, $id_encode;
+	$id    		 =   $_SESSION['user']['id'];
+	$id_encode   =   $_SESSION['user']['id_encode'];
+	$username    =   escape($_POST['username1']);
+    $fullname    =   escape($_POST['fullname1']);
+	$email       =   escape($_POST['email1']);
+	$version1    =   $_SESSION['user']['version'];
+	$version2    =   $version1 + 1;
 
-	mysqli_query($conn, "UPDATE `users` SET `id` = '$id', `username` = '$username', `fullname` = '$fullname', `email`='$email', `image_profile`='$images' WHERE `id` = '$id'");
+	if(!empty($fullname) || !empty($email) || !empty($username))
+	{
+		if(!preg_match("/^[a-z0-9_-]{3,16}$/",$username))
+		{
+			array_push($errors, "only Number,letter and minium 3 characters!"); 
+		}
+
+
+		if (!preg_match("/^[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})$/", $email)) 
+		{
+			array_push($errors, "Wrong  Email format!"); 
+		}
+
+		if (!preg_match("/^[a-zA-Z]{2,20}(\s[a-zA-Z]+)+$/",$fullname))
+		{
+			array_push($errors, "Only letters and whitespace allowed");
+		}
+	}
+
+
+    if (empty($fullname)) { 
+		array_push($errors, "Fullname is required"); 
+	}
+
+	if (empty($email)) { 
+		array_push($errors, "Email is required"); 
+	}
+	if (empty($username)) { 
+		array_push($errors, "User is required"); 
+	}
+
+	if (count($errors) == 0) {
+		mysqli_query($conn, " UPDATE `users` SET `username` = '$username', `fullname` = '$fullname', 
+		`email`='$email', `version` = '$version2' WHERE `id_encode` = '$id_encode' and `version` = '$version1' ");
 	
-	$_SESSION['success']  = "Change successfully";
-	// // header("Refresh:2; url=page2.php");
-	if (isset($_COOKIE["user"]) AND isset($_COOKIE["pass"])){
-		setcookie("user", '', time() - 3600);
-		setcookie("pass", '', time() - 3600);
-    }
-	header('location: home.php');
+		$_SESSION['success']  = "Change successfully";
+		// // header("Refresh:2; url=page2.php");
+		if (isset($_COOKIE["user"]) AND isset($_COOKIE["pass"])){
+			setcookie("user", '', time() - 3600);
+			setcookie("pass", '', time() - 3600);
+		}
+	
+		header('location: index.php');		
+	}
+>>>>>>> Stashed changes
+
+	
 	
 }
 
@@ -473,6 +521,10 @@ function passwordID() {
 
 if (isset($_POST['password_btn'])) {
 	passwordID();
+<<<<<<< Updated upstream
 }
 
 
+=======
+}
+>>>>>>> Stashed changes
