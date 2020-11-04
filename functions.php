@@ -375,6 +375,7 @@ function getLink($id)
 	return "$random";
 }
 
+//lay du lieu tư db theo id
 function get_a_record($table, $id, $select = '*')
 {
 	$id = intval($id);

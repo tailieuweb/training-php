@@ -51,7 +51,16 @@ if (!isAdmin()) {
 					</h3>
 				</div>
 			<?php endif ?>
-
+			<?php if (isset($_SESSION['mess_version'])) : ?>
+				<div class="error danger">
+					<h3>
+						<?php
+						echo $_SESSION['mess_version'];
+						unset($_SESSION['mess_version']);
+						?>
+					</h3>
+				</div>
+			<?php endif ?>
 			<!-- logged in user information -->
 			<div class="profile_info">
 				<img src="public/images/admin_profile.png">

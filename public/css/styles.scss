@@ -10,7 +10,12 @@ $color-orange: #ffc312;
 $color-black: #000;
 $color-red: #ff0000;
 $color-green: #5f9ea0;
+$color-grey: #b0c4de;
+$color-gray: #808080;
+$error-color: #a94442;
+$error-background-color: #f2dede;
 $success-color: #3c763d;
+$success-background-color: #dff0d8;
 $block-inline: inline-block;
 $center: center;
 //end color
@@ -18,28 +23,42 @@ $center: center;
 // font
 $weight-of-font: bold;
 //end font
+
+//border
+$border-form: 1px solid;
+//end border
+
+//orther
+$align-left: left;
+$radius-pixel: 5px;
+$scale: 100%;
+$margin-padding-auto: auto;
+$properties: none;
+$display-block: block;
+//end orther
+
 html,
 body {
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100%;
+  height: $scale;
   font-family: "Numans", sans-serif;
 }
 .form-group {
   margin-bottom: 10px;
 }
 a {
-  text-decoration: none;
+  text-decoration: $properties;
 }
 .container {
-  height: 100%;
+  height: $scale;
   align-content: $center;
 }
 
 .card {
   height: 370px;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-top: $margin-padding-auto;
+  margin-bottom: $margin-padding-auto;
   width: 400px;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
@@ -66,16 +85,18 @@ a {
   top: -45px;
 }
 
-.input-group-prepend span {
-  width: 50px;
-  background-color: $color-orange;
-  color: $color-black;
-  border: 0 !important;
-}
+.input-group-prepend {
+  &:focus {
+    outline: 0 0 0 0 !important;
+    box-shadow: 0 0 0 0 !important;
+  }
 
-input:focus {
-  outline: 0 0 0 0 !important;
-  box-shadow: 0 0 0 0 !important;
+  span {
+    width: 50px;
+    background-color: $color-orange;
+    color: $color-black;
+    border: 0 !important;
+  }
 }
 
 .remember {
@@ -92,11 +113,10 @@ input:focus {
   color: $color-black;
   background-color: $color-orange;
   width: 100px;
-}
-
-.login_btn:hover {
-  color: $color-black;
-  background-color: $main-color-white;
+  &:hover {
+    color: $color-black;
+    background-color: $main-color-white;
+  }
 }
 
 .links {
@@ -121,7 +141,7 @@ input:focus {
 .parentElement {
   text-align: $center;
   a {
-    text-decoration: none;
+    text-decoration: $properties;
   }
 }
 
@@ -130,7 +150,7 @@ input:focus {
   background: $main-color-white;
   width: 100px;
   height: 50px;
-  margin: 0 auto;
+  margin: 0 $margin-padding-auto;
   padding: 0;
   display: $block-inline;
   line-height: 50px;
@@ -144,37 +164,37 @@ input:focus {
 
 /* Register */
 .header {
-  margin: 50px auto 0px;
+  margin: 50px $margin-padding-auto 0px;
   color: $main-color-white;
   background: $color-green;
   text-align: $center;
-  border: 1px solid #b0c4de;
-  border-bottom: none;
+  border: $border-form $color-grey;
+  border-bottom: $properties;
   border-radius: 10px 10px 0px 0px;
   padding: 20px;
 }
 form,
 .content {
-  margin: 0px auto;
+  margin: 0px $margin-padding-auto;
   padding: 20px;
-  border: 1px solid #b0c4de;
+  border: $border-form $color-grey;
   background: $main-color-white;
   border-radius: 0px 0px 10px 10px;
 }
 .input-group {
   margin: 10px 0px 10px 0px;
   label {
-    display: block;
-    text-align: left;
+    display: $display-block;
+    text-align: $align-left;
     margin: 3px;
   }
   input {
     height: 30px;
-    width: 100%;
+    width: $scale;
     padding: 5px 10px;
     font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid gray;
+    border-radius: $radius-pixel;
+    border: $border-form $color-gray;
   }
 }
 #user_type {
@@ -183,31 +203,31 @@ form,
   padding: 5px 10px;
   background: $main-color-white;
   font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid gray;
+  border-radius: $radius-pixel;
+  border: $border-form $color-gray;
 }
 .btn {
   padding: 10px;
   font-size: 15px;
   color: $main-color-white;
   background: $color-green;
-  border: none;
-  border-radius: 5px;
+  border: $properties;
+  border-radius: $radius-pixel;
 }
 .error {
   width: 92%;
-  margin: 0px auto;
+  margin: 0px $margin-padding-auto;
   padding: 10px;
-  border: 1px solid #a94442;
-  color: #a94442;
-  background: #f2dede;
-  border-radius: 5px;
-  text-align: left;
+  border: $border-form $error-color;
+  color: $error-color;
+  background: $error-background-color;
+  border-radius: $radius-pixel;
+  text-align: $align-left;
 }
 .success {
   color: $success-color;
-  background: #dff0d8;
-  border: 1px solid $success-color;
+  background: $success-background-color;
+  border: $border-form $success-color;
   margin-bottom: 20px;
 }
 .profile_info {
@@ -216,17 +236,17 @@ form,
     width: 50px;
     height: 50px;
     margin: 5px;
-    float: left;
+    float: $align-left;
   }
   div {
     display: $block-inline;
     margin: 5px;
   }
-}
-.profile_info:after {
-  content: "";
-  display: block;
-  clear: both;
+  &:after {
+    content: "";
+    display: $display-block;
+    clear: both;
+  }
 }
 
 /* End Register */

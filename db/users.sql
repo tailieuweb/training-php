@@ -38,15 +38,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(100) NOT NULL,
   `verificationCode` varchar(500) DEFAULT NULL,
   `status` int(11) DEFAULT 0,
+  `version` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `fullname`, `email`, `user_type`, `password`, `verificationCode`, `status`) VALUES
-(1, 'tanhong', 'Nguyen Tan', 'phuongtan12357nguyen@gmail.com', 'admin', '0ab44bd43d6b18fcd5cd928d6faab1b8', NULL, 0);
+INSERT INTO `users` (`id`, `username`, `fullname`, `email`, `user_type`, `password`, `verificationCode`, `status`, `version`) VALUES
+(1, 'admin', 'Admin', 'admin@gmail.com', 'admin', '25f9e794323b453885f5181f1b624d0b', NULL, 1, 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

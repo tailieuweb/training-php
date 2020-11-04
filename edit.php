@@ -3,11 +3,12 @@ session_start();
 
 if (isset($_GET['edit'])) {
     $link_edit = $_GET['edit'];
-    $encode_link = $_SESSION['links_edit'][$link_edit];
+    $encode_link = $_SESSION['links_edit'][$link_edit]; //lay gia tri value tu key là $link_edit
     $_SESSION['result_link'] = $link_edit;
 } else header('location: home.php');
 
 $user_id = intval($encode_link);
+
 
 if ($_SESSION['user']['id'] != $user_id && $_SESSION['user']['user_type'] != 'admin') {
     $_SESSION['msg'] = "You must log in first";
@@ -27,11 +28,16 @@ if (isset($_GET['edit'])) {
         $data = mysqli_fetch_assoc($result);
     }
 }
+
+//đặt sesion cho đổi mật khẩu với ngườI dùng là user
 $_SESSION['user_change'] = getLink($data['id']);
 $_SESSION['user_change_id'][$_SESSION['user_change']] = $data['id'];
+
+//đặt sesion cho đổi mật khẩu với ngườI dùng là admin
 $_SESSION['admin_change'] = getLink($data['id']);
 $_SESSION['admin_change_id'][$_SESSION['admin_change']] = $data['id'];
 
+//đặt session kiểm tra version cho chức năng chỉnh sửa thông tin
 $_SESSION['version_update'] = $data['version'];
 ?>
 

@@ -41,15 +41,14 @@ a {
   right: 20px;
   top: -45px; }
 
+.input-group-prepend:focus {
+  outline: 0 0 0 0 !important;
+  box-shadow: 0 0 0 0 !important; }
 .input-group-prepend span {
   width: 50px;
   background-color: #ffc312;
   color: #000;
   border: 0 !important; }
-
-input:focus {
-  outline: 0 0 0 0 !important;
-  box-shadow: 0 0 0 0 !important; }
 
 .remember {
   color: #000; }
@@ -63,10 +62,9 @@ input:focus {
   color: #000;
   background-color: #ffc312;
   width: 100px; }
-
-.login_btn:hover {
-  color: #000;
-  background-color: #fff; }
+  .login_btn:hover {
+    color: #000;
+    background-color: #fff; }
 
 .links {
   color: #fff; }
@@ -135,7 +133,7 @@ form,
     padding: 5px 10px;
     font-size: 16px;
     border-radius: 5px;
-    border: 1px solid gray; }
+    border: 1px solid #808080; }
 
 #user_type {
   height: 40px;
@@ -144,7 +142,7 @@ form,
   background: #fff;
   font-size: 16px;
   border-radius: 5px;
-  border: 1px solid gray; }
+  border: 1px solid #808080; }
 
 .btn {
   padding: 10px;
@@ -179,7 +177,6 @@ form,
 .profile_info div {
   display: inline-block;
   margin: 5px; }
-
 .profile_info:after {
   content: "";
   display: block;
