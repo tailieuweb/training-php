@@ -1,0 +1,63 @@
+* {
+  outline: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #1d1d1b;
+  color: white;
+}
+
+body form {
+  border: 1px solid #ec4d37;
+  padding: 20px;
+}
+
+body form .title-login {
+  background: #ec4d37;
+  text-transform: uppercase;
+}
+
+body form .form-group {
+  padding: 0px !important;
+}
+
+body form .form-group input {
+  background: transparent;
+  color: white;
+  border: none;
+}
+
+body form .form-group input[type=text], body form .form-group input[type=password], body form .form-group input[type=email] {
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid white;
+}
+
+body form .form-group input[type=text]:focus, body form .form-group input[type=password]:focus, body form .form-group input[type=email]:focus {
+  -webkit-transition: .5s;
+  transition: .5s;
+  border-bottom: 1px solid #ec4d37;
+}
+
+body form .form-group input[type=submit] {
+  background-color: #ec4d37;
+  border: 1px solid #1d1d1b;
+  color: white !important;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+body form .form-group input[type=submit]:hover {
+  background-color: #1d1d1b;
+  border: 1px solid #ec4d37;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+/*# sourceMappingURL=register.css.map */
