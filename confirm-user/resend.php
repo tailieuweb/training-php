@@ -11,7 +11,7 @@ if (!isLoggedIn() || $_SESSION['user']['status'] != 0) {
     header('location: index.php');
 }
 
-//send mail
+//send mail & config
 include '../lib/config.php';
 require '../vendor/autoload.php';
 include '../lib/setting.php';
@@ -28,6 +28,7 @@ try {
             $verification_Code = $user['verificationCode'];
         }
     }
+    // dùng session lưu lại giá trị verifi code resend
     $_SESSION['resend_confirm_user'] = $verification_Code;
     //content
     $htmlStr = "";

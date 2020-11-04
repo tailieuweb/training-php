@@ -9,7 +9,7 @@ $fullname = "";
 $email    = "";
 $errors   = array();
 
-
+// validate input value & regular expression for password
 if (isset($_POST['register_btn'])) {
 	global $conn, $errors, $username, $fullname, $email;
 	$username    =  escape($_POST['username']);
@@ -24,9 +24,9 @@ if (isset($_POST['register_btn'])) {
 	} else register();
 }
 
+//register user & validate input value
 function register()
 {
-
 	global $conn, $errors, $username, $fullname, $email;
 	$username    =  escape($_POST['username']);
 	$fullname    =  escape($_POST['fullname']);
@@ -87,7 +87,7 @@ function register()
 			header('location: index.php');
 		}
 	}
-	//send mail
+	//send mail& config
 	include 'lib/config.php';
 	require 'vendor/autoload.php';
 	include 'lib/setting.php';
@@ -95,9 +95,10 @@ function register()
 	try {
 		$verificationCode_iduser = md5(uniqid("Email của bạn chưa active. Nhấn vào đây để active nhé!", true));
 		$verificationCode = PATH_URL . "confirm-user/active.php?code=" . $verificationCode_iduser;
-		//content
+		//lưu chuỗi mã hóa kiểm tra active vào session
 		$_SESSION['activeCode'] = $verificationCode_iduser;
 
+		// lưu liên kết active vào session tránh tình trạng liên kết active tồn tại vĩnh viễn
 		$_SESSION['verificationLink'] = $verificationCode;
 		$htmlStr = "";
 		$htmlStr .= "Xin chào " . $username . ' (' . $email . "),<br /><br />";
@@ -130,13 +131,17 @@ function register()
 	} catch (Exception $e) {
 		echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
 	}
+	// lưu verificode lên database xác nhận việc active
 	$verificationCode_add = array(
 		'id' => $user_id,
 		'verificationCode' => $verificationCode_iduser
 	);
+	//upload to database
 	save('users', $verificationCode_add);
 }
+//end register
 
+//edit user information
 function edit($user_id)
 {
 	global $conn, $errors, $username, $fullname, $email;
@@ -147,15 +152,15 @@ function edit($user_id)
 	mysqli_query($conn, "UPDATE `users` SET `username` = '$username', `fullname` = '$fullname', `email`='$email', `version`='$version' WHERE `id` = '$user_id'");
 
 	$_SESSION['success']  = "Change successfully";
-	// // header("Refresh:2; url=page2.php");
 	if (isset($_COOKIE["user"]) and isset($_COOKIE["pass"])) {
 		setcookie("user", '', time() - 3600);
 		setcookie("pass", '', time() - 3600);
 	}
 
-	unset($_SESSION['version_update']);
+	unset($_SESSION['version_update']); // update version edit 
 	header('location: list.php');
 }
+//end edit
 
 function getUserById($id)
 {

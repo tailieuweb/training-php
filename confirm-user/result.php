@@ -1,12 +1,10 @@
-<?php
-
-?>
 <html>
 
 <head>
     <title>Confirm Account</title>
     <link rel="stylesheet" href="../public/css/styles.css">
 </head>
+
 <body>
     <div class="container">
         <!-- notification message -->
@@ -30,4 +28,5 @@
         <?php endif ?>
     </div>
 </body>
+
 </html>

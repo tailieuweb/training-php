@@ -3,10 +3,13 @@ session_start();
 
 include('functions.php');
 
+// trả về trang chủ nếu không giá trị $link_edit từ file edit truyền vào
 empty($_GET['update']) ? header('location: home.php') : '';
 
+// chống IDOR
 if ($_SESSION['result_link'] != $_GET['update']) header('location: home.php');
 
+// gọi ra ID là giá trị của session result_link thông qua hàm getLink
 $encode_link = $_SESSION['links_edit'][$_GET['update']];
 
 if (isset($_POST['save_btn'])) {
