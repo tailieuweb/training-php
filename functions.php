@@ -9,11 +9,7 @@ $fullname = "";
 $email    = "";
 $errors   = array();
 
-<<<<<<< HEAD
-//kiểm tra điều kiện
-=======
 // validate input value & regular expression for password
->>>>>>> f7746c517d4ea2dbb0fcf0667962630a7526ec73
 if (isset($_POST['register_btn'])) {
 	global $conn, $errors, $username, $fullname, $email;
 	$username    =  escape($_POST['username']);
