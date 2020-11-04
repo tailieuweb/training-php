@@ -1,6 +1,23 @@
+
+<?php
+$url_host = 'http://' . $_SERVER['HTTP_HOST'];
+$pattern_document_root = addcslashes(realpath($_SERVER['DOCUMENT_ROOT']), '\\');
+$pattern_uri = '/' . $pattern_document_root . '(.*)$/';
+
+preg_match_all($pattern_uri, __DIR__, $matches);
+$url_path = $url_host . $matches[1][0];
+$url_path = str_replace('\\', '/', $url_path);
+
+if (!class_exists('lessc')) {
+    $dir_block = dirname($_SERVER['SCRIPT_FILENAME']);
+    require_once($dir_block . '/libs/lessc.inc.php');
+}
+
+$less = new lessc;
+$less->compileFile('less/home.less', 'public/css/home.css');
+?>
 <?php
 session_start();
-
 include('functions.php');
 
 if (!isAdmin()) {
@@ -15,54 +32,23 @@ if (isset($_GET['logout'])) {
 }
 ?>
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Home</title>
-	<link rel="stylesheet" type="text/css" href="public/css/styles.css">
-	<style>
-	.header {
-		background: #003366;
-	}
-	button[name=register_btn] {
-		background: #003366;
-	}
-	</style>
-</head>
-<body>
-	<div class="header">
-		<h2>Admin - Home Page</h2>
-	</div>
-	<div class="content">
-		<!-- notification message -->
-		<?php if (isset($_SESSION['success'])) : ?>
-			<div class="error success" >
-				<h3>
-					<?php 
-						echo $_SESSION['success']; 
-						unset($_SESSION['success']);
-					?>
-				</h3>
-			</div>
-		<?php endif ?>
-
-		<!-- logged in user information -->
-		<div class="profile_info">
-			<img src="public/images/admin_profile.png"  >
-
-			<div>
-                <?php  if (isset($_SESSION['user'])) : ?>
-                    <strong><?php echo $_SESSION['user']['username']; ?></strong>
-					<small>
-						<i  style="color: #888;">(<?php echo ucfirst($_SESSION['user']['user_type']); ?>)</i> 
-						<br>
-						<?php echo $_SESSION['user']['fullname']; ?><br>
-                        <?php echo $_SESSION['user']['email']; ?><br>
-                        <a href="admin.php">Add User</a> &nbsp; <a href="list.php?list='1'">List User</a> &nbsp; <a href="edit.php?edit='1">Edit Information</a><br>
-                        <a href="home.php?logout='1'" style="color: red;">Logout</a>
-					</small>
-				<?php endif ?>
-			</div>
-		</div>
-	</div>
-</body>
+<html lang="en">
+    <head>
+        <title>Home</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="<?php echo $url_path ?>/public/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo $url_path ?>/public/css/home.css" rel="stylesheet" type="text/css" />
+        
+        <?php
+        if (!class_exists('lessc')) {
+            include ('./libs/lessc.inc.php');
+        }
+        $less = new lessc;
+        $less->compileFile('less/home.less', 'public/css/home.css');
+        ?>
+    </head>
+    <body >
+        <?php include '../php-traning-less/home-content.php'; ?>
+    </body>
 </html>

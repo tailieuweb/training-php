@@ -1,46 +1,43 @@
+<?php
+$url_host = 'http://' . $_SERVER['HTTP_HOST'];
+$pattern_document_root = addcslashes(realpath($_SERVER['DOCUMENT_ROOT']), '\\');
+$pattern_uri = '/' . $pattern_document_root . '(.*)$/';
+
+preg_match_all($pattern_uri, __DIR__, $matches);
+$url_path = $url_host . $matches[1][0];
+$url_path = str_replace('\\', '/', $url_path);
+
+if (!class_exists('lessc')) {
+    $dir_block = dirname($_SERVER['SCRIPT_FILENAME']);
+    require_once($dir_block . '/libs/lessc.inc.php');
+}
+
+$less = new lessc;
+$less->compileFile('less/register.less', 'public/css/register.css');
+?>
 <?php 
 session_start();
 
-include('functions.php') 
+	include('functions.php') 
 ?>
-
-<html>
-<head>
-    <title>Register</title>
-    <link rel="stylesheet" href="public/css/styles.css">
-</head>
-<body>
-<div class="header">
-	<h2>Register</h2>
-</div>
-<form method="post" action="register.php">
-	<?php echo display_error(); ?>	
-	<div class="input-group">
-		<label>Username</label>
-		<input type="text" name="username" value="<?php echo $username; ?>">
-    </div>
-    <div class="input-group">
-		<label>Full Name</label>
-		<input type="text" name="fullname" value="<?php echo $fullname; ?>">
-	</div>
-	<div class="input-group">
-		<label>Email</label>
-		<input type="email" name="email" value="<?php echo $email; ?>">
-	</div>
-	<div class="input-group">
-		<label>Password</label>
-		<input type="password" name="password_1">
-	</div>
-	<div class="input-group">
-		<label>Confirm password</label>
-		<input type="password" name="password_2">
-	</div>
-	<div class="input-group">
-		<button type="submit" class="btn" name="register_btn">Register</button>
-	</div>
-	<p>
-		Already a member? <a href="login.php">Sign in</a>
-	</p>
-</form>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="<?php echo $url_path ?>/public/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo $url_path ?>/public/css/register.css" rel="stylesheet" type="text/css" />
+        
+        <?php
+        if (!class_exists('lessc')) {
+            include ('./libs/lessc.inc.php');
+        }
+        $less = new lessc;
+        $less->compileFile('less/register.less', 'public/css/register.css');
+        ?>
+    </head>
+    <body >
+        <?php include '../php-traning-less/register-content.php'; ?>
+    </body>
 </html>

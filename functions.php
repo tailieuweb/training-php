@@ -7,6 +7,7 @@ $email    = "";
 $errors   = array(); 
 
 
+
 if (isset($_POST['register_btn'])) {
 	register();
 }
@@ -20,6 +21,7 @@ function register(){
 	$email       =  escape($_POST['email']);
 	$password_1  =  escape($_POST['password_1']);
 	$password_2  =  escape($_POST['password_2']);
+	
 
 	if (empty($username)) { 
 		array_push($errors, "Username is required"); 
@@ -61,6 +63,8 @@ function register(){
 	}
 }
 
+
+
 function edit() {
 	global $conn, $errors, $username,$fullname, $email;
 	$username    =  escape($_POST['username1']);
@@ -75,13 +79,15 @@ function edit() {
 		setcookie("user", '', time() - 3600);
 		setcookie("pass", '', time() - 3600);
     }
-	header('location: home.php');
+	header('location:home.php');
 	
 }
 
 if (isset($_POST['save_btn'])) {
 	edit();
 }
+
+
 
 function getUserById($id){
 	global $conn;
@@ -150,6 +156,11 @@ function login(){
 	if (empty($password)) {
 		array_push($errors, "Password is required");
 	}
+	// fix  sql injection
+	$username = strip_tags($username);
+	$username = addslashes($username);
+	$password = strip_tags($password);
+	$password = addslashes($password);
 
 	// attempt login if no errors on form
 	if (count($errors) == 0) {
@@ -203,4 +214,16 @@ function isAdmin()
 		return false;
     }
 }
+function delete($id){
+	global $conn;
+	$sql = "DELETE FROM `users` WHERE id = $id";
+	if($conn->query($sql) === true){
+		echo('Xóa thành công');
+	}
+	else{
+		echo('Xóa không thành công');
+	}
+	header("location: list.php?list=%271%27");
+}
+
 
