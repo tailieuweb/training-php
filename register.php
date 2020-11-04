@@ -14,13 +14,13 @@
 
     // chức năng add user
     if (isset($_POST['register'])) {
-        $username = $_POST['username'];
-        $fullname = $_POST['fullname'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $re_password = $_POST['re_password'];
+        $username = strip_tags($_POST['username']);
+        $fullname = strip_tags($_POST['fullname']);
+        $email = strip_tags($_POST['email']);
+        $password = strip_tags($_POST['password']);
+        $re_password = strip_tags($_POST['re_password']);
         if (isset($_POST['user_type'])) {
-            $user_type = $_POST['user_type'];
+            $user_type = strip_tags($_POST['user_type']);
         }else{
             $user_type = "user";
         }
@@ -37,8 +37,10 @@
             case 'image/png':
             case 'image/gif':
             case 'image/jpeg':
-            case 'text/plain':
-            case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+            case 'text/plain': //file .txt
+            case 'application/pdf': //file pdf
+            case 'application/vnd.openxmlformats-officedocument.presentationml.presentation': //file excel
+            case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document': //file word
                 if($size_img < 2000000){
                     move_uploaded_file($tmp_name_img,$path_img.$name_img_user);
                     $userModel = new UserModel();
@@ -68,23 +70,15 @@
     }  // include header
     require_once("./header.php");
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./public/css/login.css">
-</head>
-<body>
    
 <!-- Content -->
-    <div class="container vh-100 d-flex justify-content-center align-items-center">
+<link rel="stylesheet" href="./public/css/register.css">
+<div class="container vh-100 d-flex justify-content-center align-items-center">
         <div class="row w-100">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <form action="" method="post" class="border rounded bg-light shadow"  enctype="multipart/form-data">
-                    <div class="title-login bg-warning text-center text-white pt-2 pb-2 rounded-top "><h1><?php echo $title_heading ?></h1></div>
+                <form action="" method="post" class=" rounded  shadow"  enctype="multipart/form-data">
+                    <div class="title-login  text-center text-white pt-2 pb-2 rounded-top "><h1><?php echo $title_heading ?></h1></div>
                     <br>
                     <?php get_eroors($errors);get_success($success); ?>
                     <div class="form-group pl-3 pr-3">
@@ -93,15 +87,15 @@
                     </div>
                     <div class="form-group pl-3 pr-3">
                         <label><b>Username</b></label>
-                        <input pattern="[a-zA-Z0-9]{6,}" value="<?php if (isset($_POST["username"])){echo $_POST["username"];}?>" type="text" required name="username" class="form-control" placeholder="Nhập Username...">
+                        <input pattern="[a-zA-Z0-9]{6,}" value="<?php if (isset($_POST["username"])){echo $_POST["username"];}?>" type="text" required name="username" class="" placeholder="Nhập Username...">
                     </div>
                     <div class="form-group pl-3 pr-3">
                         <label><b>Full Name</b></label>
-                        <input value="<?php if (isset($_POST["fullname"])){echo $_POST["fullname"];}?>" type="text" required name="fullname" class="form-control" placeholder="Nhập FullName...">
+                        <input value="<?php if (isset($_POST["fullname"])){echo $_POST["fullname"];}?>" type="text" required name="fullname" class="" placeholder="Nhập FullName...">
                     </div>
                     <div class="form-group pl-3 pr-3">
                         <label><b>Email</b></label>
-                        <input value="<?php if (isset($_POST["email"])){echo $_POST["email"];}?>" type="email" required name="email" class="form-control" placeholder="Nhập Email...">
+                        <input value="<?php if (isset($_POST["email"])){echo $_POST["email"];}?>" type="email" required name="email" class="" placeholder="Nhập Email...">
                     </div>
                     <?php 
                     if ($title_heading != "Register") {
@@ -118,14 +112,14 @@
                     ?>
                     <div class="form-group pl-3 pr-3">
                         <label><b>Password</b></label>
-                        <input type="password" required name="password" class="form-control" placeholder="Nhập Password...">
+                        <input type="password" required name="password" class="" placeholder="Nhập Password...">
                     </div>
                     <div class="form-group pl-3 pr-3">
                         <label><b>Confirm Password</b></label>
-                        <input type="password" required name="re_password" class="form-control" placeholder="Nhập Lại Password...">
+                        <input type="password" required name="re_password" class="" placeholder="Nhập Lại Password...">
                     </div>
                     <div class="form-group text-center">
-                        <input type="submit" class="btn btn-success" name="register" value="<?php echo $title_heading ?>">
+                        <input type="submit" class="btn btn-block" name="register" value="<?php echo $title_heading ?>">
                         <?php 
                         if ($title_heading == "Register") {
                         ?>
@@ -135,7 +129,7 @@
                         <?php 
                         }else{
                         ?>
-                        <a href="index.php" class="btn btn-info">Back</a>
+                        <a href="index.php" class="btn btn-danger ">Back</a>
                         <?php
                         }
                         ?>

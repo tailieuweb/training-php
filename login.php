@@ -8,15 +8,15 @@
     
     // kiểm tra xem có phải vừa đăng ký xong hay không
     if (isset($_GET['register_user']) && isset($_GET['register_pass'])) {
-        $register_user = $_GET['register_user'];
-        $register_pass = $_GET['register_pass'];
+        $register_user = strip_tags($_GET['register_user']);
+        $register_pass = strip_tags($_GET['register_pass']);
         array_push($success, "Thêm User ".$register_user." Thành Công!!! Hãy Đăng Nhập Ngay!");
     }
 
     // Chức năng Login
     if (isset($_POST['post_login'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        $username = strip_tags($_POST['username']);
+        $password = strip_tags($_POST['password']);
         $userModel = new UserModel();
         $user = $userModel->getLogin($username,$password);
         if (count($user) > 0) {
@@ -36,16 +36,8 @@
     // include header
     require_once("./header.php");
 ?>
-<!-- Content -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./public/css/login.css">
-    <title>Document</title>
-</head>
-<body>
+<!-- Content -->
     <div class="container vh-100 d-flex justify-content-center align-items-center">
         <div class="row w-100 main">
             <div class="col-md-3"></div>

@@ -1,0 +1,62 @@
+* {
+  outline: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #1d1d1b;
+}
+
+body form {
+  border: 1px solid #ec4d37;
+  padding: 20px;
+  background-color: #1d1d1bad;
+  color: white;
+}
+
+body form .title-login {
+  background-color: #ec4d37;
+  text-transform: uppercase;
+}
+
+body form .row input[type=submit] {
+  background-color: #ec4d37;
+  color: white;
+  text-transform: uppercase;
+  border: 2px solid #1d1d1b;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+body form .row input[type=submit]:hover {
+  background-color: #1d1d1b;
+  border: 2px solid #ec4d37;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+body form .row input[type=file] {
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+body form .row a {
+  background-color: #ec4d37;
+  color: white;
+  text-transform: uppercase;
+  border: 2px solid #1d1d1b;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+body form .row a:hover {
+  background-color: #1d1d1b;
+  border: 2px solid #ec4d37;
+  -webkit-transition: .5s;
+  transition: .5s;
+  color: white;
+  transition: .5s;
+}
+/*# sourceMappingURL=index.css.map */

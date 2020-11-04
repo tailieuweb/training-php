@@ -1,0 +1,47 @@
+@import "_all.scss";
+body {
+    background-color: $bgColor;
+    color: $textColor;
+    form {
+        border: 1px solid $bgColoryl;
+        padding: 20px;
+        .title-login {
+            background: $bgColoryl;
+        }
+        .form-group {
+            input {
+                background: transparent;
+                color: $textColor;
+                border: none;
+                &[type=text],
+                &[type=password] {
+                    display: block;
+                    width: 100%;
+                    border-bottom: 1px solid $textColor;
+                }
+                &[type=text]:focus,
+                &[type=password]:focus {
+                    transition: .5s;
+                    border-bottom: 1px solid $bgColoryl;
+                }
+                &[type=submit] {
+                    background-color: $bgColoryl;
+                    border: 1px solid $bgColor;
+                    color: $textColor;
+                    box-sizing: border-box;
+                    transition: .5s;
+                }
+                &[type=submit]:hover {
+                    background-color: $bgColor;
+                    border: 1px solid $bgColoryl;
+                    box-sizing: border-box;
+                    transition: .5s;
+                }
+            }
+        }
+    }
+}
+
+* {
+    outline: none;
+}
