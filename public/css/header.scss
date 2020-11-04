@@ -1,0 +1,11 @@
+body {
+    td {
+        img {
+            width: 50px;
+        }
+    }
+    .main {
+        max-height: 500px !important;
+        overflow-y: auto;
+    }
+}
