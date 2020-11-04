@@ -4,7 +4,7 @@ include '../functions.php';
 
 if (!isset($_GET['code']) || empty($_GET['code']) || !isLoggedIn()) {
     header('location: ../index.php');
-}elseif(!isset($_SESSION['resend_confirm_user'])){
+} elseif (!isset($_SESSION['resend_confirm_user'])) {
     $mess_er = "<strong>Error!</strong> Liên kết đã quá hạn!! <a href='/resend.php'>Gửi lại yêu cầu</a>";
 }
 
@@ -19,12 +19,9 @@ if (isset($_SESSION['resend_confirm_user']) && $_SESSION['resend_confirm_user'] 
             $verifi_id_user = $user['id'];
         }
     }
-
     if (!isset($verifi_id_user)) {
         exit;
     }
-
-
     $user_edit = array(
         'id' => $verifi_id_user,
         'status' => 1

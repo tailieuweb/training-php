@@ -23,15 +23,6 @@ if (!isAdmin()) {
 	<link rel="stylesheet" type="text/css" href="public/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="public/css/font-awesome.min.css">
-	<style>
-		/* .header {
-			background: #003366;
-		}
-
-		button[name=register_btn] {
-			background: #003366;
-		} */
-	</style>
 </head>
 
 <body>

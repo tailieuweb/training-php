@@ -7,24 +7,20 @@ if (!isset($_GET['code']) || empty($_GET['code']) || !isLoggedIn()) {
 }elseif(!isset($_SESSION['activeCode'])){
     $mess_er = "<strong>Error!</strong> Liên kết đã quá hạn!! <a href='/resend.php'>Gửi lại yêu cầu</a>";
 }
-
+// kiểm tra session'activeCode' chứa giá trị
 if (isset($_SESSION['activeCode']) && $_SESSION['activeCode'] == $_GET['code']) {
     $select_user_option = array(
         'order_by' => 'id'
     );
     $user_need_activate = get_by_options('users', $select_user_option);
-
     foreach ($user_need_activate as $user) {
         if ($user['verificationCode'] == $_GET['code']) {
             $verifi_id_user = $user['id'];
         }
     }
-
     if (!isset($verifi_id_user)) {
         exit;
     }
-
-
     $user_edit = array(
         'id' => $verifi_id_user,
         'status' => 1
