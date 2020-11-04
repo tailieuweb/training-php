@@ -1,0 +1,64 @@
+$clbr :#e74c3c;
+$shadow :  #000000;
+$colorText : white;
+body{
+    background-image: url(../images/Ảnh-thiên-nhiên-buồn.jpg);;
+    
+    form{
+        border: 3px solid $clbr;
+        padding: 20px;
+        margin-top:100px ;
+        background-color: white;
+        box-shadow: 0px 0px 5px $shadow;
+        border-radius: 20px;
+        .header{
+            h2{
+                text-align: center;
+                text-transform: uppercase;
+            }
+        }
+        .input-group{
+            display: flex;
+            align-items: center;
+            label{
+                display: block;
+                width: 100%;
+            }
+            input[type=text],input[type=password]{
+                display: block;
+                width: 100%;
+                outline: none;   transition: .5s;
+                
+            }
+            input[type=text]:focus,input[type=password]:focus{
+                box-sizing: border-box;
+               border: 2px solid $clbr;
+               transition: .5s;
+                
+            }
+            button{
+                display: block;
+                width: 100%;
+                background: $clbr;
+                color: $colorText;
+                margin: 10px auto;
+                text-transform: uppercase;
+                transition: .5s;
+                &:hover{
+                    background: $colorText;
+                    border: 1px solid $clbr;transition: .5s;
+                }
+            }
+        }
+    }
+  
+}
+.flex{
+    display: flex;
+}
+.bw{
+    justify-content: center;
+}
+.al{
+    align-items: center;
+}

@@ -1,0 +1,21 @@
+body {
+  background: #3498db;
+}
+
+body .header {
+  position: relative;
+  text-align: center;
+  color: white;
+  padding: 15px 0;
+}
+
+body .header:hover .ani {
+  width: 100%;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+body .header:hover .ani .input-group {
+  background-color: tomato;
+}
+/*# sourceMappingURL=admin.css.map */

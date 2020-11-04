@@ -1,0 +1,86 @@
+@charset "UTF-8";
+body {
+  background-image: url(../images/Ảnh-thiên-nhiên-buồn.jpg);
+}
+
+body form {
+  border: 3px solid #e74c3c;
+  padding: 20px;
+  margin-top: 100px;
+  background-color: white;
+  -webkit-box-shadow: 0px 0px 5px #000000;
+          box-shadow: 0px 0px 5px #000000;
+  border-radius: 20px;
+}
+
+body form .header h2 {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+body form .input-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body form .input-group label {
+  display: block;
+  width: 100%;
+}
+
+body form .input-group input[type=text], body form .input-group input[type=password] {
+  display: block;
+  width: 100%;
+  outline: none;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+body form .input-group input[type=text]:focus, body form .input-group input[type=password]:focus {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 2px solid #e74c3c;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+body form .input-group button {
+  display: block;
+  width: 100%;
+  background: #e74c3c;
+  color: white;
+  margin: 10px auto;
+  text-transform: uppercase;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+body form .input-group button:hover {
+  background: white;
+  border: 1px solid #e74c3c;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.bw {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.al {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/*# sourceMappingURL=login.css.map */

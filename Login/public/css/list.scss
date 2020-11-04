@@ -1,0 +1,14 @@
+$colors : #3498db;
+body{
+    background: $colors;
+  
+    .header{
+        position: relative;
+        text-align: center;
+        color: white;
+        padding: 15px 0; &:hover .ani{
+            width: 100%;
+            transition: 1s;
+        }
+    }
+}
