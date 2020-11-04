@@ -2,7 +2,7 @@
 session_start();
 
 include('functions.php');
-
+//lấy giá trị id khi người dùng nhấn biểu tượng xem chi tiết từ file list. 
 empty($_GET['user_id']) ? header('location: list.php') : $encode_user_id = $_SESSION['info_user_id'][$_GET['user_id']];
 
 $user_id = intval($encode_user_id);

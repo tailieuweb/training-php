@@ -9,17 +9,22 @@ $fullname = "";
 $email    = "";
 $errors   = array();
 
-
+//kiểm tra điều kiện
 if (isset($_POST['register_btn'])) {
 	global $conn, $errors, $username, $fullname, $email;
 	$username    =  escape($_POST['username']);
 	$email       =  escape($_POST['email']);
 	$password_1  =  escape($_POST['password_1']);
+	//kiểm tra trùng username
 	if (mysqli_num_rows(mysqli_query($conn, "SELECT username FROM users WHERE username='$username'")) != 0) {
 		array_push($errors, "Username đã tồn tại. Vui lòng nhập Username khác");
-	} elseif (mysqli_num_rows(mysqli_query($conn, "SELECT email FROM users WHERE email='$email'"))) {
+	}
+	//kiem tra trùng email 
+	elseif (mysqli_num_rows(mysqli_query($conn, "SELECT email FROM users WHERE email='$email'"))) {
 		array_push($errors, "Email đã tồn tại. Vui lòng nhập Email khác");
-	} elseif (!preg_match("/([a-zA-Z0-9]([\w.!@#$%^&*()]+){8,})/", $password_1)) {
+	}
+	//kiểm tra định dạng chuổi password 
+	elseif (!preg_match("/([a-zA-Z0-9]([\w.!@#$%^&*()]+){8,})/", $password_1)) {
 		array_push($errors, "Pass phải từ 8 ký tự trở lên và phải có chứ số, chữ in hoa, chữ thường và có ký tự đặc biệt!!");
 	} else register();
 }
@@ -370,8 +375,10 @@ function pagination_admin($url, $page, $total)
 //encode id
 function getLink($id)
 {
+	//mã hóa md5 chuổi id 
 	$random = md5(uniqid($id));
 	$_SESSION['links_edit'][$random] = $_SESSION['info_user_id'][$random] = $id;
+	//dùng mảng 2 chiều $_SESSION
 	return "$random";
 }
 
