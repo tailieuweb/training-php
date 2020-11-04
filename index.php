@@ -7,6 +7,7 @@ if (!isLoggedIn()) {
 	header('location: login.php');;
 }
 
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,8 +16,6 @@ if (!isLoggedIn()) {
 	<link rel="stylesheet" type="text/css" href="public/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="public/css/font-awesome.min.css">
-	<link rel="stylesheet/less" type="text/css" href="public/css/style.less" />
-    <script  type="text/javascript" src="public/js/less.min.js"></script>
 </head>
 <body>
 	<div class="header">
@@ -46,12 +45,12 @@ if (!isLoggedIn()) {
 					<small>
 						<br><strong>Fullname: </strong> <?php echo $_SESSION['user']['fullname']; ?>
 						<br><strong>Email: </strong> <?php echo $_SESSION['user']['email']; ?><br>
+						<?php $id_encode = $_SESSION['user']['id']; ?>
 						<div class="input-group">
-							<?php $demo =  $_SESSION['user']['id'];?>
-							<button class="btn" name="login_btn"><a href="edituserus.php?id='<?php echo md5($demo) ?>" style="color: #FFFFFF;">Edit Information</a><br></button>
+							<button class="btn" name="login_btn"><a href="edituserid.php?id='<?php echo md5($id_encode); ?>" style="color: #FFFFFF;">Edit Information</a><br></button>
 						</div>
 						<div class="input-group">
-							<button class="btn" name="doipassword_btn"><a href="password.php?id='<?php echo md5($_SESSION['user']['id']); ?>" style="color: #FFFFFF;">Update Pasword</a><br></button>
+							<button class="btn" name="updatepassword_btn"><a href="password.php?id='<?php echo md5($id_encode); ?>" style="color: #FFFFFF;">Update Pasword</a><br></button>
 						</div>
 						<div class="input-group">
 							<button class="btn" name="login_btn"><a href="index.php?logout='1'" style="color: #FFFFFF;">Logout</a></button>

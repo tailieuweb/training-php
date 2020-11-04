@@ -5,8 +5,8 @@ include('functions.php');
 
 $results = [];
 
-$id=$_GET['id'];
-$query = "SELECT * FROM users WHERE id = '$id'";
+$id = $_GET['id'];
+$query = "SELECT * FROM users WHERE id_encode = '$id'";
 $results = mysqli_query($conn,$query);
 ?>
 
@@ -17,8 +17,6 @@ $results = mysqli_query($conn,$query);
         <link rel="stylesheet" href="public/css/bootstrap.min.css">
         <link rel="stylesheet" href="public/css/font-awesome.min.css">
 		<link rel="stylesheet" href="public/css/styles.css">
-        <link rel="stylesheet/less" type="text/css" href="public/css/style.less" />
-    <script  type="text/javascript" src="public/js/less.min.js"></script>
     </head>
     <body>
 		<div class="container">
@@ -43,7 +41,6 @@ $results = mysqli_query($conn,$query);
                     <?php foreach ($results as $result): ?>
                     <tr scope="row">
                         <td><?php echo $result['id']; ?></td>   
-                        <td><img src="./public/images/<?php echo $result['image_profile'] ?> " height="30" width="30" alt=""></td>
                         <td><?php echo $result['username']; ?></td>   
                         <td><?php echo $result['fullname']; ?></td>   
                         <td><?php echo $result['email']; ?></td> 

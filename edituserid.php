@@ -52,12 +52,18 @@ $row=mysqli_fetch_assoc($query);
             <input type="file"  name="image_profile1" class="form-control">
         </div>
         <div class="input-group">
-            <button type="submit" class="btn" name="saveuserid_btn">Save</button>
+            <button type="submit" class="btn" name="saveuserid_btn" onclick="return checkDelete()">Save</button>
         </div>
 
 <div class="back" style="text-align: center">
     <input type="button" value="Back" onClick="javascript:history.go(-2)" />
 </div>
+
+    <script language="JavaScript" type="text/javascript">
+        function checkDelete(){
+        return confirm('Are you update?');
+    }
+    </script>
 	
 
 
