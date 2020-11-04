@@ -40,7 +40,7 @@ if (isset($_GET['edit'])) {
 </head>
 <body>
 <div class="header">
-	<h2>Edit User</h2>
+	<h2>User Detail</h2>
 </div>
 </form>
 
@@ -48,20 +48,17 @@ if (isset($_GET['edit'])) {
         <?php echo display_error(); ?>
 
         <div class="input-group">
-            <label>Username</label>
-            <input type="text" name="username1" value="<?php echo $data['username']; ?>" placeholder="<?php echo $data['username']; ?>">
+            <label>Username: &emsp; <?php echo $data['username']; ?></label>
+            
         </div>
 
         <div class="input-group">
-            <label>Full Name</label>
-            <input type="text" name="fullname1" value="<?php echo $data['fullname']; ?>" placeholder="<?php echo $data['fullname']; ?>">
+            <label>Full Name: &emsp; <?php echo $data['fullname']; ?></label>
+            <!-- <input type="text" name="fullname1" value="<?php echo $data['fullname']; ?>" placeholder="<?php echo $data['fullname']; ?>"> -->
         </div>
         <div class="input-group">
-            <label>Email</label>
-            <input type="email" name="email1" value="<?php echo $data['email']; ?>" placeholder="<?php echo $data['email']; ?>">
-        </div>
-        <div class="input-group">
-            <button type="submit" class="btn" name="save_btn">Save</button>
+            <label>Email: &emsp; <?php echo $data['email']; ?></label>
+            <!-- <input type="email" name="email1" value="<?php echo $data['email']; ?>" placeholder="<?php echo $data['email']; ?>"> -->
         </div>
 
     </form>
