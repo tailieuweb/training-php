@@ -49,11 +49,12 @@ $results = mysqli_query($conn,$query);
                         <td><?php echo $result['fullname']; ?></td>   
                         <td><?php echo $result['email']; ?></td> 
                         <td>
-                        <a href="chitiet.php?id=<?php echo $result['id_encode']?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
+							<a href="chitiet.php?id=<?php echo $result['id']?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
 						
-                        <a href="edituserid.php?id=<?php echo $result['id_encode']?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+							<a href="edituserid.php?id=<?php echo $result['id']?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 
-                        <a href="delete.php?id=<?php echo$result['id_encode']?>" class="delete"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            <a href="delete.php?id=<?php echo $result['id']?>" class="delete"><i class="fa fa-times" aria-hidden="true"></i></a>
+							
 						</td>
                     </tr>
                 <?php endforeach; ?>

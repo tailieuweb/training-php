@@ -23,7 +23,6 @@ $num = mysqli_num_rows($sql);
 
 
 <html>
-<<<<<<< Updated upstream
 
 <head>
     <title>List User</title>
@@ -82,34 +81,12 @@ $num = mysqli_num_rows($sql);
             <input type="text" name="username" />
             <input type="submit" value="Search" />
         </form>
-=======
-    <head>
-        <title>Register</title>
-        
-        <link rel="stylesheet" href="public/css/bootstrap.min.css">
-        <link rel="stylesheet" href="public/css/font-awesome.min.css">
-		<link rel="stylesheet" href="public/css/styles.css">
-    </head>
-    <body>
-		<div class="container">
-        <div class="header">
-            <h2>List User</h2>
-        </div>
-        <form action="search.php" method="GET"  placeholder="Nhập thông tin cần tìm"> 
-    <input type="text" name="username" /> 
-    <input type="submit" value="Search" /> 
-</form>
-        
-        <form >
-            <?php echo display_error(); ?>	
->>>>>>> Stashed changes
 
 
         <?php echo display_error(); ?>
         <div>
             <table class="table">
                 <thead>
-<<<<<<< Updated upstream
                     <tr>
                         <th scope="col"><a href="<?php echo sortorder('id'); ?>">ID</a></th>
                         <th>Images</th>
@@ -118,15 +95,6 @@ $num = mysqli_num_rows($sql);
                         <th scope="col"><a href="<?php echo sortorder('email'); ?>">Email</a></th>
                         <th scope="col">Action</th>
                     </tr>
-=======
-					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Username</th>
-						<th scope="col">Full name</th>
-						<th scope="col">Email</th>
-						<th scope="col">Action</th>
-					</tr>
->>>>>>> Stashed changes
                 </thead>
 
                 <?php
@@ -153,6 +121,7 @@ $num = mysqli_num_rows($sql);
                             while ($result = mysqli_fetch_assoc($sql)) { ?>
                                 <tr scope="row">
                                     <td><?php echo $result['id']; ?></td>
+                                    <td><img src="./public/images/<?php echo $result['image_profile'] ?> " height="30" width="30" alt=""></td>
                                     <td><?php echo $result['username']; ?></td>
                                     <td><?php echo $result['fullname']; ?></td>
                                     <td><?php echo $result['email']; ?></td>
@@ -183,7 +152,6 @@ $num = mysqli_num_rows($sql);
 
 
                             <tr scope="row">
-<<<<<<< Updated upstream
                                 <td><?php echo $id; ?></td>
                                 <td><img src="./public/images/<?php echo $image ?> " height="30" width="30" alt=""></td>
                                 <td><?php echo $username; ?></td>
@@ -197,20 +165,6 @@ $num = mysqli_num_rows($sql);
                                     <a href="edituserid.php?id=<?php echo $id ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 
                                     <a href="delete.php?id=<?php echo $id ?>" class="delete"><i class="fa fa-times" aria-hidden="true"></i></a>
-=======
-                                <td><?php echo $result['id']; ?></td>
-                                <td class="fix_overtext"><?php echo $result['username']; ?></td>
-                                <td  class="fix_overtext"><?php echo $result['fullname']; ?></td>
-                                <td  class="fix_overtext"><?php echo $result['email']; ?></td>
-                                
-                                <td>
-                                    
-                                <a href="chitiet.php?id=<?php echo $result['id_encode']?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
-						
-                                <a href="edituserid.php?id=<?php echo $result['id_encode']?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-
-                                <a href="delete.php?id=<?php echo $result['id_encode']?>" class="delete"><i class="fa fa-times" aria-hidden="true"></i></a>
->>>>>>> Stashed changes
                                 </td>
                             </tr>
                     <?php
