@@ -81,19 +81,12 @@ if(isset($_FILES['avata']))
 <head>
 	<title>Create user</title>
 	<link rel="stylesheet" type="text/css" href="public/css/styles.css">
-	<link rel="stylesheet" type="text/css" href="public/css/admin.css">
 	<style>
 		.header {
 			background: #003366;
 		}
 		button[name=register_btn] {
 			background: #003366;
-		}
-		.btn-danger{
-			background-color: red;
-		}
-		a{
-			color: white;
 		}
 	</style>
 </head>
@@ -103,6 +96,7 @@ if(isset($_FILES['avata']))
 	</div>
 	
 	<form method="post" action="admin.php" enctype="multipart/form-data">
+
 		<?php echo display_error(); ?>
 
 		<div class="input-group">
@@ -153,7 +147,7 @@ if(isset($_FILES['avata']))
 		</div>
 
 		<p>
-		<button type="button" class="btn btn-danger"><a href="home.php">HOME</a></p></button>
+		<a href="http://localhost/newlogin/home.php">HOME</a></p>
 	</form>
 	<script language="javascript">
 

@@ -104,7 +104,6 @@ if(isset($_GET["$mahoacaulenh_id"]) && isset($_GET['xoa'])){
 	<link rel="stylesheet" type="" href="public/css/bootstrap.min.css">
     <link rel="stylesheet" type="" href="public/css/styles.css">
     <link rel="stylesheet" type="" href="public/css/editstyle.css">
-    <link rel="stylesheet" type="" href="public/css/list.css">
     <script src="./block.js"></script>
 </head>
 <style>
@@ -207,7 +206,7 @@ if(isset($_GET["$mahoacaulenh_id"]) && isset($_GET['xoa'])){
                                 echo $str_out;
                             ?>
                         </td>
-                 <td> <button onclick="btn_xoa()" class="btn-success btn_click click_edit"><a href="edit.php?edit=<?php echo $value['id'] ?> ">Sửa</a></button>
+                 <td> <button onclick="btn_xoa()" class="btn-success btn_click click_edit"><a href="edit.php?edit=<?php echo $value['id'] ?>">Sửa</a></button>
                 
              
                 <a href="list.php?id=<?php echo $value['id'] ?>&xem=aa"></a>
@@ -219,7 +218,7 @@ if(isset($_GET["$mahoacaulenh_id"]) && isset($_GET['xoa'])){
                  
                     <button class="btn-danger btn_click click_xoa" >
                     <a  href="list.php?<?php echo $mahoacaulenh_id?>=
-                    <?php echo base64_encode(base64_encode(base64_encode( base64_encode($value['id']))))?>&xoa=sss" onclick="return confirm('Bạn có muốn xóa không')">xóa</a></button>               
+                    <?php echo base64_encode(base64_encode(base64_encode( base64_encode($value['id']))))?>&xoa=sss" onclick="return confirm('Bạn có muốn xóa không!')">xóa</a></button>               
                 </td>
              </tr>
             <?php endforeach;}
@@ -239,13 +238,20 @@ if(isset($_GET["$mahoacaulenh_id"]) && isset($_GET['xoa'])){
                             ?>
                         </td>
                          
-                         <td> <button onclick="btn_xoa()" class="btn-success btn_click click_edit" ><a href="edit.php?edit=<?= $value['id'] ?>">Sửa</a></button>
-                        <a  style="text-decoration: none;
-                  color: #fff;" class="btn-warning btn_click click_xem"  href="list.php?id=<?php echo base64_encode($value['id'])?>&list=aaaa">Xem</a></button>
-                  
-                            <button class="btn-danger btn_click click_xoa" ><a href="list.php?id=<?php echo base64_encode($value['id']);?>&xoa=sss" onclick="return confirm('Bạn có muốn xóa không')">xóa</a></button>
-                          
-                        </td>
+                        <td> <button onclick="btn_xoa()" class="btn-success btn_click click_edit"><a href="edit.php?edit=<?php echo $value['id'] ?>">Sửa</a></button>
+                
+             
+                <a href="list.php?id=<?php echo $value['id'] ?>&xem=aa"></a>
+            
+                <a  style="text-decoration: none;
+                  color: #fff;" class="btn-warning btn_click click_xem"
+                   href="list.php?<?php echo $mahoacaulenh_id?>=
+                   <?php echo base64_encode(base64_encode(base64_encode( base64_encode($value['id']))))?>&xem=aaaa">Xem</a>
+                 
+                    <button class="btn-danger btn_click click_xoa" >
+                    <a  href="list.php?<?php echo $mahoacaulenh_id?>=
+                    <?php echo base64_encode(base64_encode(base64_encode( base64_encode($value['id']))))?>&xoa=sss" onclick="return confirm('Bạn có muốn xóa không!')">xóa</a></button>               
+                </td>
                      </tr>
                     <?php endforeach;
             }      
@@ -260,7 +266,7 @@ if(isset($_GET["$mahoacaulenh_id"]) && isset($_GET['xoa'])){
                 </div>
             <?php endif; ?>
                     <div class="back" style="text-align: center">
-                        <input  type="button" value="Back" onClick="javascript:history.go(-1)" />
+                        <input  style=" border-radius=5px; padding ; backgroud=red;" type="button" value="Back" onClick="javascript:history.go(-1)" />
                        
                     </div>
 

@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 04, 2020 lúc 05:41 AM
--- Phiên bản máy phục vụ: 10.4.14-MariaDB
--- Phiên bản PHP: 7.4.11
+-- Máy chủ: 127.0.0.1:3306
+-- Thời gian đã tạo: Th10 03, 2020 lúc 01:14 PM
+-- Phiên bản máy phục vụ: 5.7.26
+-- Phiên bản PHP: 7.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -27,16 +28,18 @@ SET time_zone = "+00:00";
 -- Cấu trúc bảng cho bảng `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(100) NOT NULL,
   `fullname` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `user_type` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `image` text DEFAULT NULL,
-  `file` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `image` text,
+  `file` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
@@ -46,29 +49,12 @@ INSERT INTO `users` (`id`, `username`, `fullname`, `email`, `user_type`, `passwo
 (1, 'admin', 'Admin', 'admin1@gmail.com', 'admin', 'c4ca4238a0b923820dcc509a6f75849b', NULL, ''),
 (10, 'dinhthi1211', 'dinhthi1211', 'dinhthi@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b', 'public/images/1-1510967806416 (1).jpg', ''),
 (11, 'dinhthi1211', 'dinhthi1211', 'dinhthi@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b', 'public/images/1-1510967806416 (1).jpg', ''),
+(22, 'dinhthi1211', 'dinhthi12112222222', 'dinhthi@gmail.com', 'user', '833344d5e1432da82ef02e1301477ce8', 'public/images/images.jpg', ''),
+(20, 'admin', 'dinhthi1211', 'dinhthi@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b', '', ''),
 (23, 'admin111', 'dinhthi12112222222', 'dinhthi@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b', 'public/images/images (1).png', ''),
-(29, 'admin', 'dinhthi1211', 'dinhthi@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b', 'public/images/1-1510967806416 (1).jpg', 'C:\\xampp\\htdocs\\Login/public/libs/'),
-(30, 'admin', 'dinhthi1211', 'dinhthi@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b', 'public/images/images (1).png', 'C:\\xampp\\htdocs\\Login/public/libs/');
-
---
--- Chỉ mục cho các bảng đã đổ
---
-
---
--- Chỉ mục cho bảng `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT cho các bảng đã đổ
---
-
---
--- AUTO_INCREMENT cho bảng `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+(24, 'adminaaaa111', 'huongni@', 'niphamhuong2207@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b', '', ''),
+(25, 'huongni123abc', 'phamhuongni', 'niphamhuong2207@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b', '', ''),
+(26, 'huongni', 'phn', 'niphamhuong2207@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b', '', '');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -6,39 +6,38 @@ session_start();
 <html>
 <head>
 	<title>Login</title>
-	<link rel="stylesheet" href="public/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="public/css/login.css">
+	<link rel="stylesheet" type="text/css" href="public/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="public/css/style_sass.css">
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3"></div>
-			<div class="col-md-6 flex bw al"><form method="post" action="login.php">
-		<div class="header">
-			<h2>Login</h2>
-		</div>
-		<?php echo display_error(); ?>
+	<div class="top_body">
 
-		<div class="input-group">
-			<label>Username</label>
-			<input type="text" value="<?php if (isset($_COOKIE["user"])){echo $_COOKIE["user"];}?>" name="username" >
+	
+<div class="top_container">
+	<div class="header">
+		<h2>Login</h2>
+	</div>
+	<form class="form_login" method="post" action="login.php">
+
+		<?php echo display_error(); ?>
+			
+			<input class="btn_login" id="input_user" type="text" value="<?php if (isset($_COOKIE["user"])){echo $_COOKIE["user"];}?>" name="username" placeholder="Nhập username...">
+	
+		
+			
+			<input class="btn_login" id="input_password" type="password" value="<?php if (isset($_COOKIE["pass"])){echo $_COOKIE["pass"];}?>" name="password" placeholder="Nhập password...">
+		
+			<button id="bnt_summit" class="btn_login" type="submit" class="btn" name="login_btn">Login</button>
+		
+		<div class="row align-items-center">
+			<input type="checkbox" name="remember">Remember Me
 		</div>
-		<div class="input-group">
-			<label>Password</label>
-			<input type="password" value="<?php if (isset($_COOKIE["pass"])){echo $_COOKIE["pass"];}?>" name="password">
-		</div>
-		<div class="input-group">
-			<input id="remember" type="checkbox" name="remember"><span for="remember">Remember Me</span>
-		</div>
-		<div class="input-group">
-			<button type="submit" class="btn btn-block" name="login_btn">Login</button>
-		</div>
+		
 		<p>
 			Not yet a member? <a href="register.php">Sign up</a>
 		</p>
-	</form></div>
-		</div>
-	</div>
-	
+	</form>
+</div>
+</div>
 </body>
 </html>

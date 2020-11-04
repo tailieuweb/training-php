@@ -23,11 +23,11 @@ if (isset($_GET['edit'])) {
     }
 }
 ?>
+
 <html>
 <head>
     <title>Register</title>
     <link rel="stylesheet" href="public/css/styles.css">
-    <link rel="stylesheet" href="public/css/edit.css">
 </head>
 <body>
 <div class="header">
@@ -54,23 +54,12 @@ if (isset($_GET['edit'])) {
             <input type="email" name="email1" value="<?php echo $data['email']; ?>" placeholder="<?php echo $data['email']; ?>">
         </div>
         <div class="input-group">
-            <label>Avata image</label>
-            <input type="file" name="upload_file" id="upload_file"/>
-            <?php
-                $str_out = '';
-                if( isset( $image ) ) {
-                    $str_out .= '<a style="background:url("'.$image.'") "></a>';
-                }
-                echo $str_out;
-            ?>
-        </div>
-        <div class="input-group">
             <button type="submit" class="btn" name="save_btn">Save</button>
         </div>
 
     </form>
     <div class="back" style="text-align: center; padding-top: 10px;">
-        <button type="button" class="btn btn-info" onClick="javascript:history.go(-1)">Back</button>
+        <button type="button" class="btn btn-info" onClick="javascript:history.go(-2)">Back</button>
     </div>
 </body>
 </html>

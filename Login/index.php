@@ -42,7 +42,6 @@ $_SESSION['success']  = "Change successfully";
 	<link rel="stylesheet" type="text/css" href="public/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="public/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="public/css/index.css">
 </head>
 <body>
 	<div class="header">
@@ -83,7 +82,7 @@ $_SESSION['success']  = "Change successfully";
 		</div>
 		<form method="post" class="form-edit" style="display: none;" class="needs-validation" novalidate>
 		
-		<div class="input-	">
+		<div class="input-group">
 			<label>Password mới</label>
 			<input type="password" name="password_1" id="password-1" required>
 			<small class="invalid-feedback">Enter new password</small>
@@ -100,21 +99,6 @@ $_SESSION['success']  = "Change successfully";
 		</div>
 
 	</form>
-	</div>
-	<div class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h2>Thông tin nhóm A</h2>
-				<ul>
-				 <li>Nguyễn Đình Thi</li>
-				 <li>Phan Thanh Nho</li>
-				 <li>Trần Nguyễn Nguyên Kỳ</li>
-				 <li>Phạm Hương Ni</li>
-			 </ul>
-				</div>
-			</div>
-		</div>
 	</div>
 	<script>
 		const new_pass = document.querySelector('#new-pass');

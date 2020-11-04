@@ -1,5 +1,5 @@
 <?php 
-$conn = mysqli_connect('localhost', 'root', '', 'userlogin1');
+$conn = mysqli_connect('localhost', 'root', '', 'userlogin');
 
 $username = "";
 $fullname = "";
@@ -180,7 +180,7 @@ function edit() {
 		setcookie("user", '', time() - 3600);
 		setcookie("pass", '', time() - 3600);
     }
-	header('location:edit.php?edit='.$id);
+	header('location:list.php?list=aa');
 	
 }
 
