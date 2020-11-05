@@ -8,6 +8,7 @@ if (!isset($_GET['code']) || empty($_GET['code']) || !isLoggedIn()) {
     $mess_er = "<strong>Error!</strong> Liên kết đã quá hạn!! <a href='/resend.php'>Gửi lại yêu cầu</a>";
 }
 
+// kiểm tra giá trị mã hóa resend user bằng với giá trị mã hóa trong liên kết mã resend trong mail
 if (isset($_SESSION['resend_confirm_user']) && $_SESSION['resend_confirm_user'] == $_GET['code']) {
     $select_user_option = array(
         'order_by' => 'id'
