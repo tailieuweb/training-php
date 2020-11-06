@@ -1,0 +1,46 @@
+@import "_all.scss";
+body {
+    background-color: $bgColor;
+    form {
+        border: 1px solid $bgColoryl;
+        padding: 20px;
+        background-color: #1d1d1bad;
+        color: $textColor;
+        .title-login {
+            background-color: $bgColoryl;
+            text-transform: uppercase;
+        }
+        .row {
+            input[type=submit] {
+                background-color: $bgColoryl;
+                color: $textColor;
+                text-transform: uppercase;
+                border: 2px solid $bgColor;
+                transition: .5s;
+                &:hover {
+                    background-color: $bgColor;
+                    border: 2px solid $bgColoryl;
+                    transition: .5s;
+                }
+            }
+            input[type=file] {
+                overflow: hidden;
+                margin-bottom: 10px;
+            }
+            a {
+                background-color: $bgColoryl;
+                color: $textColor;
+                text-transform: uppercase;
+                border: 2px solid $bgColor;
+                transition: .5s;
+                &:hover {
+                    background-color: $bgColor;
+                    border: 2px solid $bgColoryl;
+                    transition: .5s;
+                    color: $textColor;
+                    transition: .5s;
+                }
+            }
+        }
+    }
+}
