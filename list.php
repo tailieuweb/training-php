@@ -162,15 +162,9 @@ $num = mysqli_num_rows($sql);
 
                                     <a href="chitiet.php?id=<?php echo md5($id) ?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
-<<<<<<< Updated upstream
-                                    <a href="edituserid.php?id=<?php echo $id ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-
-                                    <a href="delete.php?id=<?php echo $id ?>" class="delete"><i class="fa fa-times" aria-hidden="true"></i></a>
-=======
                                     <a href="edituserid.php?id=<?php echo md5($id) ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 
                                     <a href="delete.php?id=<?php echo md5($id) ?>" class="delete"><i class="fa fa-times" aria-hidden="true"></i></a>
->>>>>>> Stashed changes
                                 </td>
                             </tr>
                     <?php

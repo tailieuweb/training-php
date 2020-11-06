@@ -6,7 +6,7 @@ include('functions.php');
 $results = [];
 
 $id=$_GET['id'];
-$query = "SELECT * FROM users WHERE id = '$id'";
+$query = "SELECT * FROM users WHERE id_encode = '$id'";
 $results = mysqli_query($conn,$query);
 ?>
 

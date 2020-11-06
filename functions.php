@@ -110,18 +110,19 @@ function register(){
 		{
 			if (isset($_POST['user_type'])) {
 				$user_type = escape($_POST['user_type']);
-				$query = "INSERT INTO users (username,fullname, email, user_type, password, image_profile) 
-						  VALUES('$username', '$fullname', '$email', '$user_type', '$password', '$path')";
+				$query = "INSERT INTO users (id_encode, username, fullname, email, user_type, password, image_profile, version) 
+						  VALUES('0','$username', '$fullname', '$email', '$user_type', '$password', '$path', '0')";
 				mysqli_query($conn, $query);
 				$_SESSION['success']  = "New user successfully created!!";
+				mysqli_query($conn, "UPDATE users SET id_encode = md5(id) ORDER BY id DESC LIMIT 1");
 				header('location: home.php');
 			}
 			else
 			{
-				$query = "INSERT INTO users (username, fullname, email, user_type, password,image_profile) 
-						  VALUES('$username', '$fullname', '$email', 'user', '$password', '$path')";
+				$query = "INSERT INTO users (username,id_encode, fullname, email, user_type, password, image_profile, version) 
+				VALUES('$username','', '$fullname', '$email', '$user_type', '$password', '$path', '')";
 				mysqli_query($conn, $query);
-	
+				mysqli_query($conn, " UPDATE `users` SET `id_encode` = '100' WHERE `id` = 'SELECT MAX(id)'");
 				$logged_in_user_id = mysqli_insert_id($conn);
 	
 				$_SESSION['user'] = getUserById($logged_in_user_id); // put logged in user in session
@@ -246,21 +247,61 @@ if (isset($_POST['save_btn'])) {
 }
 
 function edituserID() {
-	global $conn, $errors, $id, $username,$fullname, $email,$images;
-	$id    		 =  escape($_POST['id1']);
-	$username    =  escape($_POST['username1']);
-    $fullname    =  escape($_POST['fullname1']);
-	$email       =  escape($_POST['email1']);
-	$images		 =  escape($_POST['image_profile1']);
-	mysqli_query($conn, "UPDATE `users` SET `id` = '$id', `username` = '$username', `fullname` = '$fullname', `email`='$email' ,`image_profile`='$images' WHERE `id` = '$id'");
+	global $conn, $errors, $id, $username, $fullname, $email, $version, $id_encode;
+	$id    		 =   $_SESSION['user']['id'];
+	$id_encode   =   $_SESSION['user']['id_encode'];
+	$username    =   escape($_POST['username1']);
+    $fullname    =   escape($_POST['fullname1']);
+	$email       =   escape($_POST['email1']);
+	$version1    =   $_SESSION['user']['version'];
+	$version2    =   $version1 + 1;
+
+	if(!empty($fullname) || !empty($email) || !empty($username))
+	{
+		if(!preg_match("/^[a-z0-9_-]{3,16}$/",$username))
+		{
+			array_push($errors, "only Number,letter and minium 3 characters!"); 
+		}
+
+
+		if (!preg_match("/^[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})$/", $email)) 
+		{
+			array_push($errors, "Wrong  Email format!"); 
+		}
+
+		if (!preg_match("/^[a-zA-Z]{2,20}(\s[a-zA-Z]+)+$/",$fullname))
+		{
+			array_push($errors, "Only letters and whitespace allowed");
+		}
+	}
+
+
+    if (empty($fullname)) { 
+		array_push($errors, "Fullname is required"); 
+	}
+
+	if (empty($email)) { 
+		array_push($errors, "Email is required"); 
+	}
+	if (empty($user)) { 
+		array_push($errors, "User is required"); 
+	}
+
+	if (count($errors) == 0) {
+		mysqli_query($conn, " UPDATE `users` SET `username` = '$username', `fullname` = '$fullname', 
+		`email`='$email', `version` = '$version2' WHERE `id_encode` = '$id_encode' and `version` = '$version1' ");
 	
-	$_SESSION['success']  = "Change successfully";
-	// // header("Refresh:2; url=page2.php");
-	if (isset($_COOKIE["user"]) AND isset($_COOKIE["pass"])){
-		setcookie("user", '', time() - 3600);
-		setcookie("pass", '', time() - 3600);
-    }
-	header('location: home.php');
+		$_SESSION['success']  = "Change successfully";
+		// // header("Refresh:2; url=page2.php");
+		if (isset($_COOKIE["user"]) AND isset($_COOKIE["pass"])){
+			setcookie("user", '', time() - 3600);
+			setcookie("pass", '', time() - 3600);
+		}
+	
+		header('location: home.php');		
+	}
+
+	
 	
 }
 
@@ -269,14 +310,6 @@ if (isset($_POST['saveuserid_btn'])) {
 }
 
 function edittuserID() {
-<<<<<<< Updated upstream
-	global $conn, $errors, $id, $username,$fullname, $email,$images;
-	$id    		 =   $_SESSION['user']['id'];
-	$username    = escape($_POST['username1']);
-    $fullname    =  escape($_POST['fullname1']);
-	$email       =  escape($_POST['email1']);
-	$images 	 =	 escape($_POST['image_profile1']);
-=======
 	global $conn, $errors, $id, $username, $fullname, $email, $version, $id_encode;
 	$id    		 =   $_SESSION['user']['id'];
 	$id_encode   =   $_SESSION['user']['id_encode'];
@@ -330,7 +363,6 @@ function edittuserID() {
 	
 		header('location: index.php');		
 	}
->>>>>>> Stashed changes
 
 	
 	
@@ -486,6 +518,24 @@ function passwordID() {
 	if ($password_2 != $password_3) {
 		array_push($errors, "The two passwords do not match");
 	}
+
+	if(!empty($password_1) && !empty($password_2) && !empty($password_3))
+	{
+		if (!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$/", $password_1)) 
+		{
+			array_push($errors, "Password old: Minimum six characters, at least one letter and one number");
+		}
+		if (!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$/",$password_2)) 
+		{
+			array_push($errors, "Password new: Minimum six characters, at least one letter and one number");
+		}
+		if (!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$/",$password_3)) 
+		{
+			array_push($errors, "Re-enter new password: Minimum six characters, at least one letter and one number");
+		}
+	}
+
+
 	// attempt login if no errors on form
 	if (count($errors) == 0) {
 		$password_1  = md5($password_1 );
@@ -510,7 +560,7 @@ function passwordID() {
                     setcookie("user", $row['username'], time() + (86400 * 30)); 
                     setcookie("pass", $row['password'], time() + (86400 * 30)); 
                 }
-				mysqli_query($conn, "UPDATE `users` SET `password` = '$password_2' WHERE `id` = '$id'");	  
+				mysqli_query($conn, "UPDATE `users` SET `password` = '$password_2' WHERE `id` = '$id' AND `version` = '$version1'");	  
 				header('location: index.php');
 			}
 		}else {
@@ -521,10 +571,4 @@ function passwordID() {
 
 if (isset($_POST['password_btn'])) {
 	passwordID();
-<<<<<<< Updated upstream
 }
-
-
-=======
-}
->>>>>>> Stashed changes
