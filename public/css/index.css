@@ -6,33 +6,33 @@
 }
 
 body {
-  background-color: #1d1d1b;
+  background-color: #e7e7e7;
 }
 
 body form {
-  border: 1px solid #ec4d37;
+  border: 1px solid #a7a7a7;
   padding: 20px;
   background-color: #1d1d1bad;
-  color: white;
+  color: black;
 }
 
 body form .title-login {
-  background-color: #ec4d37;
+  background-color: #a7a7a7;
   text-transform: uppercase;
 }
 
 body form .row input[type=submit] {
-  background-color: #ec4d37;
-  color: white;
+  background-color: #a7a7a7;
+  color: black;
   text-transform: uppercase;
-  border: 2px solid #1d1d1b;
+  border: 2px solid #e7e7e7;
   -webkit-transition: .5s;
   transition: .5s;
 }
 
 body form .row input[type=submit]:hover {
-  background-color: #1d1d1b;
-  border: 2px solid #ec4d37;
+  background-color: #e7e7e7;
+  border: 2px solid #a7a7a7;
   -webkit-transition: .5s;
   transition: .5s;
 }
@@ -43,20 +43,20 @@ body form .row input[type=file] {
 }
 
 body form .row a {
-  background-color: #ec4d37;
-  color: white;
+  background-color: #a7a7a7;
+  color: black;
   text-transform: uppercase;
-  border: 2px solid #1d1d1b;
+  border: 2px solid #e7e7e7;
   -webkit-transition: .5s;
   transition: .5s;
 }
 
 body form .row a:hover {
-  background-color: #1d1d1b;
-  border: 2px solid #ec4d37;
+  background-color: #e7e7e7;
+  border: 2px solid #a7a7a7;
   -webkit-transition: .5s;
   transition: .5s;
-  color: white;
+  color: black;
   transition: .5s;
 }
 /*# sourceMappingURL=index.css.map */
