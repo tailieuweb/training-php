@@ -6,41 +6,41 @@
 }
 
 body {
-  background-color: #e7e7e7;
-  color: black;
+  background-color: #1d1d1b;
+  color: white;
 }
 
 body form {
-  border: 1px solid #a7a7a7;
+  border: 1px solid #ec4d37;
   padding: 20px;
 }
 
 body form .title-login {
-  background: #a7a7a7;
+  background: #ec4d37;
 }
 
 body form .form-group input {
   background: transparent;
-  color: black;
+  color: white;
   border: none;
 }
 
 body form .form-group input[type=text], body form .form-group input[type=password] {
   display: block;
   width: 100%;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid white;
 }
 
 body form .form-group input[type=text]:focus, body form .form-group input[type=password]:focus {
   -webkit-transition: .5s;
   transition: .5s;
-  border-bottom: 1px solid #a7a7a7;
+  border-bottom: 1px solid #ec4d37;
 }
 
 body form .form-group input[type=submit] {
-  background-color: #a7a7a7;
-  border: 1px solid #e7e7e7;
-  color: black;
+  background-color: #ec4d37;
+  border: 1px solid #1d1d1b;
+  color: white;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   -webkit-transition: .5s;
@@ -48,8 +48,8 @@ body form .form-group input[type=submit] {
 }
 
 body form .form-group input[type=submit]:hover {
-  background-color: #e7e7e7;
-  border: 1px solid #a7a7a7;
+  background-color: #1d1d1b;
+  border: 1px solid #ec4d37;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   -webkit-transition: .5s;

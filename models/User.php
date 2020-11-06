@@ -8,10 +8,10 @@ class UserModel extends Db
     }
 
     //lấy tất cả user
-    public function changPass($password,$id){
+    public function changPass($password,$custom_id){
         $password_md5 = md5($password);
-        $sql = self::$connection->prepare("UPDATE `users` SET `password`=? WHERE id=?");
-        $sql->bind_param('si',$password_md5,$id);
+        $sql = self::$connection->prepare("UPDATE `users` SET `password`=? WHERE custom_id=?");
+        $sql->bind_param('ss',$password_md5,$custom_id);
         $sql->execute();
         return true;
     }
@@ -45,18 +45,17 @@ class UserModel extends Db
         return $this->select($sql);
     }
 
-    //Đăng Kí User
-    public function addUser($username,$fullname,$email,$password,$user_type = NULL,$name_img_user = NULL)
+    //Đăng Kí User và thêm user của admin
+    public function addUser($username,$fullname,$email,$password,$user_type = NULL,$name_img_user)
     {
+        $custom_id = "custom_id";
         $pass_md5 = md5($password);
         if ($user_type == NULL) {
             $user_type = "user";
         }
-        $sql = self::$connection->prepare("INSERT INTO 
-        `users`(`username`, `fullname`, `email`, `user_type`, `password`,`image_profile`) 
-        VALUES (?,?,?,?,?,?)");
-        $sql->bind_param('ssssss',$username,$fullname,$email,$user_type,$pass_md5,$name_img_user);
-        $sql->execute();
+        $sql = self::$connection->prepare("INSERT INTO `users`(`username`, `fullname`, `email`, `user_type`, `password`, `image_profile`,`custom_id`) VALUES (?,?,?,?,?,?,?)");
+        $sql->bind_param('sssssss',$username,$fullname,$email,$user_type,$pass_md5,$name_img_user,$custom_id);
+        $user = $sql->execute();
         $sql = self::$connection->prepare("SELECT * FROM users WHERE username=?");
         $sql->bind_param('s',$username);
         return $this->select($sql);

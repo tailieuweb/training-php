@@ -4,11 +4,11 @@ if(isset($_SESSION['user_type'])){
     if ($_SESSION['user_type'] == "admin") {
         $custom_id = $_GET['delete'];
         $userModel = new UserModel();
+        $page = $_GET['page'];
         $user = $userModel->getUserByCustomId($custom_id);
         if (count($user) == 0) {
-            header("location: listUser.php");
+            header("location: listUser.php?page=$page&detete=true");
         }else{
-            $page = $_GET['page'];
             $userModel->deleteUserByCustomId($custom_id);
             header("location: listUser.php?page=$page&detete=true");
         }
