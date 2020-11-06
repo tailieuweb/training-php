@@ -61,8 +61,7 @@ if (!isAdmin()) {
 		
 			<td >
 			<button type="submit" class="btn" name="register_btn"> Create User</button>&nbsp;
-			
-			<button type="button" class="btn btn-info" onClick="javascript:history.go(-1)">Back</button>
+			<button type="button" class="btn " onClick="javascript:history.go(-1)">Back</button>
 			</td>
 			
 		</div>

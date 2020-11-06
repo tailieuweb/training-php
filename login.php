@@ -26,16 +26,7 @@ session_start();
     <link rel="stylesheet" href="public/css/font-awesome.min.css">
 
 </head>
-<style>
 
-	.btn, login{
-		color: white;
-		background-color:black;
-		padding: 10px 30px;
-	    text-align: center;
-	}
-
-</style>
 <body>
 <div class="container">
 
