@@ -32,7 +32,7 @@ include('functions.php')
 	<div class="input-group">
 			<label>User type</label>
 			<select name="user_type" id="user_type" >
-				<option value=""></option>
+				<option value="">Select User Type</option>
 				<option value="user" name="user">User</option>
 			</select>
 		</div>
