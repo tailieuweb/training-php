@@ -35,6 +35,9 @@ font-size: 60px;
 margin-left: 10px;
 color: #FFC312;
 }
+.btn{
+	color:red;
+}
 
 .social_icon span:hover{
 color: white;
@@ -77,13 +80,13 @@ margin-right: 5px;
 }
 
 .login_btn{
-color: black;
+color: red;
 background-color: #FFC312;
 width: 100px;
 }
 
 .login_btn:hover{
-color: black;
+color: white;
 background-color: white;
 }
 
@@ -186,6 +189,7 @@ form, .content {
 	border-radius: 5px;
 	cursor: pointer;
 }
+
 .error {
 	width: 92%; 
 	margin: 0px auto; 

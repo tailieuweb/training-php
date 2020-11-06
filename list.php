@@ -179,13 +179,13 @@ $num = mysqli_num_rows($sql);
                 <div id="div_pagination">
                     <input type="hidden" name="row" value="<?php echo $row; ?>">
                     <input type="hidden" name="allcount" value="<?php echo $allcount; ?>">
-                    <input type="submit" class="btn btn-info" name="but_prev" value="Previous">
-                    <input type="submit" class="btn btn-info" name="but_next" value="Next">
+                    <input type="submit" class="btn " name="but_prev" value="Previous">
+                    <input type="submit" class="btn " name="but_next" value="Next">
                 </div>
             </form>
         </div>
         <div class="back" style="text-align: center">
-            <button type="button" class="btn btn-info" onClick="javascript:history.go(-1)">Back</button>
+            <button type="button" class="btn " onClick="javascript:history.go(-1)">Back</button>
 
         </div>
     </div>

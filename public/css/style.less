@@ -2,13 +2,34 @@
 @color1: white;
 @color2: red;
 @border-radius: 0px 10px 0px 0px;
+@width: 100%;
+@height: 100%;
+@heightpx: 100px;
+@text: center;
+@colorblue: blue;
+@margin-buttom:100px;
+@margin: 10px;
+@pading: 30px;
+@font-size: 60px;
+@max-width: 300px;
+@align-content: center;
+@colorspan:#FFC312;
+@colorhover: white;
+
 .input-group{
     color: @color2;
 }
 .header{
     color: @color1;
     background: @color2;
-    
+    padding: @pading;
+    text-align: @text;
+    h2{
+        color: @color1;
+    }
+}
+.btn .login{
+color: red;
 }
 .btn{
  color: @color1;
@@ -17,3 +38,38 @@
 .btn:hover{
     color: @color2;
 }
+
+.form-group {
+    margin-bottom: @margin-buttom;
+}
+a{
+    text-decoration: none; 
+}
+.container{
+    height: @height;
+    align-content: center;
+    }
+    
+.card{
+    height: @heightpx + 270;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 400px;
+    background-color: rgba(238, 13, 13, 0.5) !important;
+}
+.social_icon span{
+    font-size: @font-size;
+    margin-left: 10px;
+    color: @colorspan;
+    &:hover{
+        color: @colorhover;
+        cursor: pointer;
+    }
+}
+.remember {
+    color: @colorblue;
+}
+
+
+
+
