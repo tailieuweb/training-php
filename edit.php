@@ -2,7 +2,8 @@
 session_start();
 
 include('functions.php');
-$id = base64_decode(isset($_GET['id']) ? $_GET['id'] : '') ;
+
+$id = isset($_GET['id']) ? $_GET['id'] : '';
 if (isset($_GET['edit'])) {
     if(isLoggedIn()){
         $query = "SELECT * FROM users WHERE id=" . $_SESSION['user']['id'];
@@ -10,6 +11,7 @@ if (isset($_GET['edit'])) {
         
     }
 }
+
 $result = getUserById($id);
 ?>
 
@@ -24,43 +26,28 @@ $result = getUserById($id);
 </div>
 </form>
 
-<form method="post" action="" enctype="multipart/form-data">
-	<?php echo display_error(); ?>
-    <?php if (isset($_SESSION['success'])) : ?>
-                <div class="error success">
-                    <h3>
-                        <?php
-                        echo $_SESSION['success'];
-                        unset($_SESSION['success']);
-                        ?>
-                    </h3>
-                </div>
-            <?php endif ?>	
+<form method="post" action="">
+	<?php echo display_error(); ?>	
         
         <div class="input-group">
             <label>Username</label>
-            <input type="text" name="username1" value="<?php echo $result['username'] ?>" disabled>
+            <input type="text" name="username1" value="<?php echo $result['username']; ?>">
         </div>
         <div class="input-group">
             <label>Full Name</label>
-            <input type="text" name="fullname1" value="<?php echo $result['fullname'] ?>">
+            <input type="text" name="fullname1" value="<?php echo $result['fullname']; ?>">
         </div>
         <div class="input-group">
             <label>Email</label>
-            <input type="email" name="email1" value="<?php echo $result['email'] ?>">
+            <input type="email" name="email1" value="<?php echo $result['email']; ?>">
         </div>
         <div class="input-group">
-			<label for="image">User Image</label>
-            <input type="file" name="image" id="image">
-		</div>
-        <div class="input-group">
-            <button  type="submit" class="btn" name="save_btn" onClick = "return confirm('Bạn có muốn sửa?')"> Save</button>
+            <button  type="submit" class="btn" name="save_btn"> Save</button>
         </div>
 
 </form>
-<div class="back" style="text-align: center">
-    <input type="button" value="Back" onClick="javascript:history.go(-2)" />
-</div>
+<p  class="back"  style="text-align: center">
+		<a href="http://localhost/php-training1/home.php">Back</a></p>
 	
 
 

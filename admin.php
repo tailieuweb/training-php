@@ -5,7 +5,9 @@ include('functions.php');
 if (!isAdmin()) {
 	$_SESSION['msg'] = "You must log in first";
 	header('location: login.php');
-}?>
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,19 +27,9 @@ if (!isAdmin()) {
 		<h2>Admin - Create User</h2>
 	</div>
 	
-	<form method="post" action="admin.php" enctype="multipart/form-data">
+	<form method="post" action="admin.php">
 
 		<?php echo display_error(); ?>
-		<?php if (isset($_SESSION['success'])) : ?>
-                <div class="error success">
-                    <h3>
-                        <?php
-                        echo $_SESSION['success'];
-                        unset($_SESSION['success']);
-                        ?>
-                    </h3>
-                </div>
-            <?php endif ?>
 
 		<div class="input-group">
 			<label>Username</label>
@@ -67,22 +59,14 @@ if (!isAdmin()) {
 			<label>Confirm password</label>
 			<input type="password" name="password_2">
 		</div>
-		<div class="input-group">
-			<label for="image">User Image</label>
-            <input type="file" name="image" id="image">
-		</div>
-		<div class="input-group">
-			<!-- <form action="./upload.php" method="post" enctype="multipart/form-data">
-					<input class="form-control" type="file" name="upload">
-					<input type="submit" class="btn btn-success" value="Upload" name="submit">
-			</form> -->
-			<button type="submit" class="btn" name="register_btn" onClick = "return confirm('Bạn có muốn thêm?')"> Create User</button>
-		</div>
 		
-		
-
+		<div class="input-group">
+			<button type="submit" class="btn" name="register_btn" onClick="return confirm('Nhấn oke để thêm.')"> Create User</button>
+		</div>
+	
 		<p>
-		<a href="home.php">HOME</a></p>
+		<p  class="back"  style="text-align: center">
+		<a href="http://localhost/php-training1/home.php">Back</a></p>
 	</form>
 </body>
 </html>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Oct 28, 2020 at 01:51 PM
--- Server version: 10.4.10-MariaDB
--- PHP Version: 7.4.0
+-- Máy chủ: 127.0.0.1:3306
+-- Thời gian đã tạo: Th10 04, 2019 lúc 03:50 PM
+-- Phiên bản máy phục vụ: 5.7.21
+-- Phiên bản PHP: 5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `userlogin`
+-- Cơ sở dữ liệu: `userlogin`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `users`
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -36,18 +36,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(100) NOT NULL,
   `user_type` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `image` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `fullname`, `email`, `user_type`, `password`, `image`) VALUES
-(1, 'admin', 'Admin', 'admin1@gmail.com', 'admin', 'c4ca4238a0b923820dcc509a6f75849b', 'admin_profile.png'),
-(2, 'user', 'User', 'user1@gmail.com', 'user', '202cb962ac59075b964b07152d234b70', 'user_profile.png'),
-(3, 'user2', 'User2', 'user2@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b', 'user_profile.png');
+INSERT INTO `users` (`id`, `username`, `fullname`, `email`, `user_type`, `password`) VALUES
+(1, 'admin', 'Admin', 'admin1@gmail.com', 'admin', 'c4ca4238a0b923820dcc509a6f75849b'),
+(2, 'user', 'User', 'user1@gmail.com', 'user', '202cb962ac59075b964b07152d234b70');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
