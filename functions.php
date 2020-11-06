@@ -220,26 +220,26 @@ if (isset($_GET['logout'])) {
 if (isset($_POST['login_btn'])) {
 	login();
 }
-//Demo SQLInjection
-function login1()
-{
-	global $conn; // chuỗi kết nối lên Server đã được định nghĩa
-	$usernameLogin = $_POST['username'];
-	$userpasswordLogin = $_POST['password'];
-	// username và password được lấy trực tiếp từ input người dùng
-	// không được xử lý trước khi đưa vào câu truy vấn
-	if (isset($_POST['login_btn'])) {
-		$sql = "SELECT * FROM users WHERE username='$usernameLogin' AND password='$userpasswordLogin' ";
-		$resultsSQL = mysqli_query($conn, $sql);
-		// kiểm tra kết quả truy vấn không rỗng
-		if (!empty($resultsSQL)) {
-			$logged_in_user = mysqli_fetch_assoc($resultsSQL);
-			$_SESSION['user'] = $logged_in_user;
-			$_SESSION['success']  = "You are now logged in";
-			header('location: home.php');
-		}
-	}
-}
+// //Demo SQLInjection
+// function login1()
+// {
+// 	global $conn; // chuỗi kết nối lên Server đã được định nghĩa
+// 	$usernameLogin = $_POST['username'];
+// 	$userpasswordLogin = $_POST['password'];
+// 	// username và password được lấy trực tiếp từ input người dùng
+// 	// không được xử lý trước khi đưa vào câu truy vấn
+// 	if (isset($_POST['login_btn'])) {
+// 		$sql = "SELECT * FROM users WHERE username='$usernameLogin' AND password='$userpasswordLogin' ";
+// 		$resultsSQL = mysqli_query($conn, $sql);
+// 		// kiểm tra kết quả truy vấn không rỗng
+// 		if (!empty($resultsSQL)) {
+// 			$logged_in_user = mysqli_fetch_assoc($resultsSQL);
+// 			$_SESSION['user'] = $logged_in_user;
+// 			$_SESSION['success']  = "You are now logged in";
+// 			header('location: home.php');
+// 		}
+// 	}
+// }
 
 // LOGIN USER fix bug SQLInjection
 function login()

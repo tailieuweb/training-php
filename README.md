@@ -30,4 +30,4 @@ Change the value of the constant **SMTP_UNAME** and **SMTP_PWORD** to match the 
 
 **Where SMTP_PWORD is the application password for your _gmail.com_ account.**
 
-Path: [`/lib/setting.php`](https://github.com/TanHongIT/php-training/tree/master/lib)
+Path: [`/lib/setting.php`](https://github.com/tailieuweb/training-php/tree/nhomd_chieu2/lib)
