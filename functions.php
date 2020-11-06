@@ -253,6 +253,7 @@ function edituserID() {
     $fullname    =  escape($_POST['fullname1']);
 	$email       =  escape($_POST['email1']);
 	$images		 =  escape($_POST['image_profile1']);
+<<<<<<< Updated upstream
 	mysqli_query($conn, "UPDATE `users` SET `id` = '$id', `username` = '$username', `fullname` = '$fullname', `email`='$email' ,`image_profile`='$images' WHERE `id` = '$id'");
 	
 	$_SESSION['success']  = "Change successfully";
@@ -262,6 +263,38 @@ function edituserID() {
 		setcookie("pass", '', time() - 3600);
     }
 	header('location: home.php');
+=======
+	if(!empty($fullname) || !empty($email) || !empty($username))
+	{
+		if(!preg_match("/^[a-z0-9_-]{3,16}$/",$username))
+		{
+			array_push($errors, "only Number,letter and minium 3 characters!"); 
+		}
+
+
+		if (!preg_match("/^[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})$/", $email)) 
+		{
+			array_push($errors, "Wrong  Email format!"); 
+		}
+
+		if (!preg_match("/^[a-zA-Z]{2,20}(\s[a-zA-Z]+)+$/",$fullname))
+		{
+			array_push($errors, "Only letters and whitespace allowed");
+		}
+	}
+
+	if (count($errors) == 0) {
+		mysqli_query($conn, "UPDATE `users` SET `id` = '$id', `username` = '$username', `fullname` = '$fullname', `email`='$email', `image_profile`='$images' WHERE `id` = '$id' and `version` = '$version1' ");
+	
+		$_SESSION['success']  = "Change successfully";
+		// // header("Refresh:2; url=page2.php");
+		if (isset($_COOKIE["user"]) AND isset($_COOKIE["pass"])){
+			setcookie("user", '', time() - 3600);
+			setcookie("pass", '', time() - 3600);
+    	}
+		header('location: home.php');		
+	}	
+>>>>>>> Stashed changes
 	
 }
 
@@ -277,6 +310,7 @@ function edittuserID() {
 	$email       =  escape($_POST['email1']);
 	$images 	 =	 escape($_POST['image_profile1']);
 
+<<<<<<< Updated upstream
 	mysqli_query($conn, "UPDATE `users` SET `id` = '$id', `username` = '$username', `fullname` = '$fullname', `email`='$email', `image_profile`='$images' WHERE `id` = '$id'");
 	
 	$_SESSION['success']  = "Change successfully";
@@ -287,6 +321,38 @@ function edittuserID() {
     }
 	header('location: home.php');
 	
+=======
+	if(!empty($fullname) || !empty($email) || !empty($username))
+	{
+		if(!preg_match("/^[a-z0-9_-]{3,16}$/",$username))
+		{
+			array_push($errors, "only Number,letter and minium 3 characters!"); 
+		}
+
+
+		if (!preg_match("/^[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})$/", $email)) 
+		{
+			array_push($errors, "Wrong  Email format!"); 
+		}
+
+		if (!preg_match("/^[a-zA-Z]{2,20}(\s[a-zA-Z]+)+$/",$fullname))
+		{
+			array_push($errors, "Only letters and whitespace allowed");
+		}
+	}
+
+	if (count($errors) == 0) {
+		mysqli_query($conn, "UPDATE `users` SET `id` = '$id', `username` = '$username', `fullname` = '$fullname', `email`='$email', `image_profile`='$images' WHERE `id` = '$id' and `version` = '$version1' ");
+	
+		$_SESSION['success']  = "Change successfully";
+		// // header("Refresh:2; url=page2.php");
+		if (isset($_COOKIE["user"]) AND isset($_COOKIE["pass"])){
+			setcookie("user", '', time() - 3600);
+			setcookie("pass", '', time() - 3600);
+    	}
+		header('location: login.php');		
+	}	
+>>>>>>> Stashed changes
 }
 
 if (isset($_POST['saveuserusid_btn'])) {
@@ -310,6 +376,15 @@ function display_error() {
 	}
 }
 
+//encode id
+function getLink($id)
+{
+	//mã hóa md5 chuổi id 
+	$random = md5(uniqid($id));
+	$_SESSION['links_edit'][$random] = $_SESSION['info_user_id'][$random] = $id;
+	//dùng mảng 2 chiều $_SESSION
+	return "$random";
+}
 
 function getUserById($id){
 	global $conn;
@@ -439,24 +514,6 @@ function passwordID() {
 	if ($password_2 != $password_3) {
 		array_push($errors, "The two passwords do not match");
 	}
-
-	if(!empty($password_1) && !empty($password_2) && !empty($password_3))
-	{
-		if (!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$/", $password_1)) 
-		{
-			array_push($errors, "Password old: Minimum six characters, at least one letter and one number");
-		}
-		if (!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$/",$password_2)) 
-		{
-			array_push($errors, "Password new: Minimum six characters, at least one letter and one number");
-		}
-		if (!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$/",$password_3)) 
-		{
-			array_push($errors, "Re-enter new password: Minimum six characters, at least one letter and one number");
-		}
-	}
-
-
 	// attempt login if no errors on form
 	if (count($errors) == 0) {
 		$password_1  = md5($password_1 );
@@ -481,7 +538,7 @@ function passwordID() {
                     setcookie("user", $row['username'], time() + (86400 * 30)); 
                     setcookie("pass", $row['password'], time() + (86400 * 30)); 
                 }
-				mysqli_query($conn, "UPDATE `users` SET `password` = '$password_2' WHERE `id` = '$id' AND `version` = '$version1'");	  
+				mysqli_query($conn, "UPDATE `users` SET `password` = '$password_2' WHERE `id` = '$id'");	  
 				header('location: index.php');
 			}
 		}else {
@@ -493,3 +550,6 @@ function passwordID() {
 if (isset($_POST['password_btn'])) {
 	passwordID();
 }
+
+
+

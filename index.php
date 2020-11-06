@@ -1,7 +1,7 @@
 <?php 
 session_start();
-
 include('functions.php');
+
 if (!isLoggedIn()) {
 	$_SESSION['msg'] = "You must log in first";
 	header('location: login.php');
@@ -43,7 +43,7 @@ else
 		<?php endif ?>
 		<!-- logged in user information -->
 		<div class="profile_info">
-			<img src="public/images/user_profile.png">
+			<img src="public/images/<?php echo $_SESSION['user']['image_profile']; ?>">
 			
 			<div>
 			
