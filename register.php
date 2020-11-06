@@ -30,6 +30,14 @@ include('functions.php')
 		<input type="email" name="email" value="<?php echo $email; ?>"  placeholder="ex:nguyenvana@gmail.com">
 	</div>
 	<div class="input-group">
+			<label>User type</label>
+			<select name="user_type" id="user_type" >
+				<option value=""></option>
+				<option value="user" name="user">User</option>
+			</select>
+		</div>
+	</div>
+	<div class="input-group">
 		<label>Password</label>
 		<input type="password" name="password_1">
 	</div>
@@ -42,7 +50,6 @@ include('functions.php')
         <label>images</label>
         <input type="file"  name="image_profile" class="form-control">
     </div>
-	<div class="input-group">
 		<button type="submit" class="btn" name="register_btn">Register</button>
 	</div>
 	<p>
