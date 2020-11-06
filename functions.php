@@ -18,12 +18,13 @@ if (isset($_POST['register_btn'])) {
 
 		else
 		{
-			$user_type = 'user';
+		// 	$user_type = 'user';
+		array_push($errors, "Please select User Type");
 		}
+
 	}
 
 	register();
-
 	
 }
 
@@ -85,7 +86,7 @@ function register(){
 		array_push($errors, "Password is required"); 
 	}
 	if ($password_1 != $password_2) {
-		array_push($errors, "The two passwords do not match");
+		array_push($errors, "The two passwords do not match");	
 	}
 
 
@@ -120,7 +121,7 @@ function register(){
 			else
 			{
 				$query = "INSERT INTO users (username,id_encode, fullname, email, user_type, password, image_profile, version) 
-				VALUES('$username','', '$fullname', '$email', '$user_type', '$password', '$path', '')";
+				VALUES('$username','', '$fullname', '$email', 'user', '$password', '$path', '')";
 				mysqli_query($conn, $query);
 				mysqli_query($conn, " UPDATE `users` SET `id_encode` = '100' WHERE `id` = 'SELECT MAX(id)'");
 				$logged_in_user_id = mysqli_insert_id($conn);
@@ -212,7 +213,7 @@ if (isset($_POST['save_btn'])) {
 		else
 		{
 			edit($user_id);
-			header('location: index.php');
+			header('location: home.php');
 		}
 	}
 	else if(isAdmin() == false && !empty($username) && !empty($fullname) && !empty($email))
