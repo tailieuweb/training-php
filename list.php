@@ -2,7 +2,7 @@
 session_start();
 
 include('functions.php');
-
+ 
 $results = [];
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 
@@ -37,9 +37,16 @@ $sort = '';
 $attr = '';
 $arrs = [];
 if(isset($_GET['sort']) && isset($_GET['attr'])){
-    $sort = $_GET['sort'];
-    $attr = $_GET['attr'];
-    $sql = "SELECT * FROM users ORDER BY $attr $sort limit $start,$limit";
+    $sort = escape($_GET['sort']);
+    $attr = escape($_GET['attr']);
+    if(($sort == 'desc' && ($attr == 'username' || $attr == 'fullname')) || ($sort == 'asc' && ($attr == 'username' || $attr == 'fullname')))
+    {
+        $sql = "SELECT * FROM users ORDER BY $attr $sort limit $start,$limit";
+    }  
+    else{
+        $sql = "SELECT * from users limit $start,$limit";
+    } 
+    
     
 }
 else{
@@ -47,6 +54,9 @@ else{
 }
 $arrs = mysqli_query($conn,$sql);
 
+if(isset($_POST['delete']) && isset($_POST['id']) && $_SESSION['token'] == $_POST['token']){
+    deleteUser(base64_decode($_POST['id']));
+}
 ?>
 
 <html>
@@ -59,6 +69,7 @@ $arrs = mysqli_query($conn,$sql);
 </head>
 
 <body>
+
     <div class="container">
         <div class="header">
         <div class="row">
@@ -93,33 +104,33 @@ $arrs = mysqli_query($conn,$sql);
                     <tr>
                         <th scope="col">AVT</th>
                         <th scope="col">ID</th>
+                        
                         <th scope="col">Username
                         <?php if($sort=='desc' && $attr=='username'){?>
-                   
-                        <a href="?sort=asc&attr=username" class="fa fa-sort-alpha-asc">
+                            <a href="?sort=asc&attr=username" class="fa fa-sort-alpha-asc">
                         <?php } else{?>
-
                             <a href="?sort=desc&attr=username" class="fa fa-sort-alpha-desc">
-
                         <?php }?>
                         </th>
-                        
+                
                         <th scope="col">Full name
                         <?php if($sort=='desc' && $attr=='fullname'){?>
-                     
                             <a href="?sort=asc&attr=fullname" class="fa fa-sort-alpha-asc">
                         <?php } else{?>
-
                             <a href="?sort=desc&attr=fullname" class="fa fa-sort-alpha-desc">
-
                         <?php }?></th>
 
                         <th scope="col">Email</th>
-                        <th scope="col">Action</th>
-                    </tr>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>   
                 </thead>
                 <tbody>
                     <?php foreach ($arrs as $arr) : ?>
+                   <?php if(isset($_SESSION['count' .$arr['id']])){
+                       unset($_SESSION['count' .$arr['id']]);
+                }
+                       ?>
                         <tr scope="row">
                             <td><img src="./public/images/<?php echo $arr['image'];?>" class="img-fluid" alt=""     style="width:50px; height:50px;"></td>
                             <td><?php echo $arr['id']; ?></td>
@@ -127,44 +138,58 @@ $arrs = mysqli_query($conn,$sql);
                             <td><?php echo $arr['fullname']; ?></td>
                             <td><?php echo $arr['email']; ?></td>
                             <td>
-                                <a href="./userdetail.php?id=<?php echo base64_encode($arr['id']) ;?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                <a href="./userdetail.php?id=<?php echo base64_encode($arr['id']) ?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
-                                <a href='./edit.php?id=<?php echo base64_encode($arr['id']) ; ?>'><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-
-                                <a href='delete_user.php?id=<?php echo base64_encode($arr['id']) ; ?>' name="delete_user"><i class="fa fa-times" aria-hidden="true" onClick="return confirm('Nhấn oke để xoá.')"></i></a>
+                                <a href='./edit.php?id=<?php echo base64_encode($arr['id']) ?>'><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>  
+                                <!-- <a href='delete_user.php?id=<?php echo base64_encode($arr['id']) ; ?>' name="delete_user"><i class="fa fa-times" aria-hidden="true" onClick="return confirm('Nhấn oke để xoá.')"></i></a>              -->
                             </td>
+                            <td>
+                                <form></form>
+                                <form action="" method="post">
+                                <input type="hidden" name="id" value="<?php echo base64_encode($arr['id'])?>">
+                                <?php 
+                                $token = md5(random(6));
+                                $_SESSION['token'] = $token;
+                                ?>
+                                <input type="hidden" name="token" value="<?php echo $token ?>">
+                                <button type="submit" name="delete" class="btn btn-primary" onClick="return confirm('Nhấn oke để xoá.')">Delete</button>
+                            </td>
+                        
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         </form>
-        <ul class="pagination">
-            <?php for ($i = 1; $i <= $total_page; $i++) { ?>
-                <li <?php if ($page == $i) echo "class='active'"; ?>>
+        <div style="text-align: center">
+            <ul class="pagination">
+                <?php for ($i = 1; $i <= $total_page; $i++) { ?>
+                    <li <?php if ($page == $i) echo "class='active'"; ?>>
 
-                <?php if($sort == 'desc' && $attr == 'username'){?>
+                    <?php if($sort == 'desc' && $attr == 'username'){?>
 
-                    <a href="?sort=desc&attr=username&list=<?php echo $i; ?>">
+                        <a href="?sort=desc&attr=username&list=<?php echo $i; ?>">
 
-                <?php }else if($sort == 'asc' && $attr == 'username') {?>
+                    <?php }else if($sort == 'asc' && $attr == 'username') {?>
 
-                    <a href="?sort=asc&attr=username&list=<?php echo $i; ?>">
+                        <a href="?sort=asc&attr=username&list=<?php echo $i; ?>">
 
-                <?php }else if($sort == 'desc' && $attr == 'fullname') {?>
+                    <?php }else if($sort == 'desc' && $attr == 'fullname') {?>
 
-                    <a href="?sort=desc&attr=fullname&list=<?php echo $i; ?>">
+                        <a href="?sort=desc&attr=fullname&list=<?php echo $i; ?>">
 
-                <?php }else if($sort == 'asc' && $attr == 'fullname') {?>
+                    <?php }else if($sort == 'asc' && $attr == 'fullname') {?>
 
-                    <a href="?sort=asc&attr=fullname&list=<?php echo $i; ?>">
-               
-                <?php }else{?>
-                    <a href="list.php?list=<?php echo $i; ?>">
-                <?php }?>
-        
-                <?php echo $i; ?></a></li>
-            <?php } ?>
-        </ul>
+                        <a href="?sort=asc&attr=fullname&list=<?php echo $i; ?>">
+                
+                    <?php }else{?>
+                        <a href="list.php?list=<?php echo $i; ?>">
+                    <?php }?>
+            
+                    <?php echo $i; ?></a></li>
+                <?php } ?>
+            </ul>
+        </div>
+       
         <div class="back" style="text-align: center">
             <button type="button" class="btn btn-info" onClick="javascript:history.go(-1)">Back</button>
             <a href="admin.php" class="btn btn-info">Add User ++</a>

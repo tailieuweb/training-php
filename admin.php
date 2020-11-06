@@ -5,7 +5,14 @@ include('functions.php');
 if (!isAdmin()) {
 	$_SESSION['msg'] = "You must log in first";
 	header('location: login.php');
-}?>
+}
+if (isset($_POST['register_btn']) && $_SESSION['token'] == $_POST['token']) {
+	register();
+}
+$token = md5(random(6));
+$_SESSION['token'] = $token;
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,16 +78,11 @@ if (!isAdmin()) {
 			<label for="image">User Image</label>
             <input type="file" name="image" id="image">
 		</div>
+		<input type="hidden" name="token" value="<?php echo $token?>">
 		<div class="input-group">
-			<!-- <form action="./upload.php" method="post" enctype="multipart/form-data">
-					<input class="form-control" type="file" name="upload">
-					<input type="submit" class="btn btn-success" value="Upload" name="submit">
-			</form> -->
 			<button type="submit" class="btn" name="register_btn" onClick = "return confirm('Bạn có muốn thêm?')"> Create User</button>
 		</div>
 		
-		
-
 		<p>
 		<a href="home.php">HOME</a></p>
 	</form>

@@ -2,9 +2,19 @@
 session_start();
 include('functions.php');
 
-$id = base64_decode(isset($_GET['id']) ? $_GET['id'] : ''); 
+$id = base64_decode(isset($_GET['id']) ? $_GET['id'] : '');
 
-$result = getUserById($id);
+if($id == ''){
+    header("location: list.php");
+}
+else{
+    $result = getUserById($id);
+    if($result == []){
+        header("location: list.php");
+    }
+}
+
+
 
 ?>
 <!DOCTYPE html>

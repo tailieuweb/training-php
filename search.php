@@ -9,7 +9,7 @@ include('functions.php');
 
 $keyword = '';
 if (isset($_GET['keyword'])) {
-    $keyword = $_GET['keyword'];
+    $keyword = escape($_GET['keyword']);
 }
 $listsearch = searchUser($keyword);
 

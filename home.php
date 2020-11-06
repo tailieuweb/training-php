@@ -29,6 +29,7 @@ if (isset($_GET['logout'])) {
 	</style>
 </head>
 <body>
+
 	<div class="header">
 		<h2>Admin - Home Page</h2>
 	</div>

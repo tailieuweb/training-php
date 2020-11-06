@@ -7,43 +7,15 @@ $fullname = "";
 $email    = "";
 $errors   = array();
 
-function searchByUsername($keyword)
-{
-	global $conn;
-	$query = ("SELECT * FROM users WHERE username LIKE '%$keyword%'");
-	$result = mysqli_query($conn, $query);
-	return $result;
-}
 
 function searchUser($keyword)
 {
 	global $conn;
-	$query = '';
-	$result = [];
 	$query = ("SELECT * FROM users WHERE username LIKE '%$keyword%' or fullname LIKE '%$keyword%' or email LIKE '%$keyword%'");
 	$result = mysqli_query($conn, $query);
 	return $result;
 }
 
-// function searchByFullname($keyword)
-// {
-// 	global $conn;
-// 	$query = ("SELECT * FROM users WHERE fullname LIKE '%$keyword%'");
-// 	$result = mysqli_query($conn, $query);
-// 	return $result;
-// }
-
-// function searchByEmail($keyword)
-// {
-// 	global $conn;
-// 	$query = ("SELECT * FROM users WHERE email = '$keyword'");
-// 	$result = mysqli_query($conn, $query);
-// 	return $result;
-// }
-
-if (isset($_POST['register_btn'])) {
-	register();
-}
 
 function register()
 {
@@ -58,6 +30,9 @@ function register()
 
 	if (empty($username)) {
 		array_push($errors, "Username is required");
+	}
+	else{
+		checkUsername($username);
 	}
 	if (empty($fullname)) {
 		array_push($errors, "Fullname is required");
@@ -75,9 +50,9 @@ function register()
 	if (count($errors) == 0) {
 		$password = md5($password_1);
 
-		if (isset($_POST['user_type'])) {
+		if (isset($_POST['user_type']) && $_POST['user_type'] != '') {
 			if (!empty($_FILES['image']['name'])) {
-				$user_type = escape($_POST['user_type']);
+				$user_type = escape($_POST['user_type']); 
 				$image = 'public/images/' . basename($_FILES['image']['name']);
 				$imageType = pathinfo($image, PATHINFO_EXTENSION);
 				$allowType = array('jpg', 'png');
@@ -87,8 +62,10 @@ function register()
 						$query = "INSERT INTO users (username,fullname, email, user_type, password, image) 
 							  VALUES('$username', '$fullname', '$email', '$user_type', '$password', '$images')";
 						mysqli_query($conn, $query);
+						
 						$_SESSION['success']  = "New user successfully created!!";
-						header('location: home.php');
+						header('location: list.php');
+						
 					}
 				}
 				else{
@@ -113,30 +90,30 @@ function register()
 	}
 }
 
-function edit()
-{
-	global $conn, $errors, $username, $fullname, $email;
-	$username    =  escape($_POST['username1']);
-	$fullname    =  escape($_POST['fullname1']);
-	$email       =  escape($_POST['email1']);
 
-	mysqli_query($conn, "UPDATE `users` SET `username` = '$username', `fullname` = '$fullname', `email`='$email' WHERE `username` = '$username'");
+// function edit()
+// {
+// 	global $conn, $errors, $username, $fullname, $email;
+// 	$username    =  escape($_POST['username1']);
+// 	$fullname    =  escape($_POST['fullname1']);
+// 	$email       =  escape($_POST['email1']);
 
-	$_SESSION['success']  = "Change successfully";
-	// // header("Refresh:2; url=page2.php");
-	if (isset($_COOKIE["user"]) and isset($_COOKIE["pass"])) {
-		setcookie("user", '', time() - 3600);
-		setcookie("pass", '', time() - 3600);
-	}
-	header('location: home.php');
-}
+// 	mysqli_query($conn, "UPDATE `users` SET `username` = '$username', `fullname` = '$fullname', `email`='$email' WHERE `username` = '$username'");
+
+// 	$_SESSION['success']  = "Change successfully";
+// 	// // header("Refresh:2; url=page2.php");
+// 	if (isset($_COOKIE["user"]) and isset($_COOKIE["pass"])) {
+// 		setcookie("user", '', time() - 3600);
+// 		setcookie("pass", '', time() - 3600);
+// 	}
+// 	header('location: home.php');
+// }
 
 
 
 function editId($id)
 {
 	global $conn, $id, $errors, $username, $fullname, $email;
-	$id1 = base64_decode($id);
 	// $username    =  escape($_POST['username1']);
 	$fullname    =  escape($_POST['fullname1']);
 	$email       =  escape($_POST['email1']);
@@ -150,7 +127,7 @@ function editId($id)
 				if (is_uploaded_file($_FILES['image']['tmp_name']) && move_uploaded_file($_FILES['image']['tmp_name'], $image)) 
 			{
 				$images = basename($image);
-				mysqli_query($conn, "UPDATE `users` SET `fullname` = '$fullname', `email`='$email', `image` = '$images' WHERE `id` = '$id1'");
+				mysqli_query($conn, "UPDATE `users` SET `fullname` = '$fullname', `email`='$email', `image` = '$images' WHERE `id` = '$id'");
 
 				$_SESSION['success']  = "Change successfully";
 				// // header("Refresh:2; url=page2.php");
@@ -159,7 +136,7 @@ function editId($id)
 					setcookie("pass", '', time() - 3600);
 				}
 				
-				header("location: list.php?list='1'");
+				header("location: list.php");
 			}
 			}
 			else{
@@ -168,7 +145,7 @@ function editId($id)
 			}
 			
 	else{
-		mysqli_query($conn, "UPDATE `users` SET `fullname` = '$fullname', `email`='$email' WHERE `id` = '$id1'");
+		mysqli_query($conn, "UPDATE `users` SET `fullname` = '$fullname', `email`='$email' WHERE `id` = '$id'");
 
 			$_SESSION['success']  = "Change successfully";
 			// // header("Refresh:2; url=page2.php");
@@ -176,23 +153,43 @@ function editId($id)
 				setcookie("user", '', time() - 3600);
 				setcookie("pass", '', time() - 3600);
 			}
-			header("location: list.php?list='1'");
+			header("location: list.php");
 	}
 	
 	
 }
 
-if (isset($_POST['save_btn'])) {
-	editId($id);
+function deleteUser($id){
+	global $conn;
+	$query = "DELETE FROM users WHERE id = '$id'";
+	mysqli_query($conn,$query);
+	header("location: list.php");
 }
 
-// function searchUser($keyword)
-// {
-// 	global $conn;
-// 	$sql = "SELECT * FROM users WHERE username  LIKE '%$keyword%'";
-// 	$result = mysqli_query($conn, $sql);
-// 	return $result;
+function getUsername(){
+	global $conn;
+	$query = "SELECT username FROM users";
+	$results = mysqli_query($conn,$query);
+	return $results;
+}
+
+function checkUsername($username){
+	global $conn, $errors;
+	$results = getUsername();
+	$flag = false;
+	foreach($results as $result){
+		if($result['username'] == $username){
+			$flag = true;
+		}
+	}
+	if($flag == true){
+		array_push($errors, 'Username is already exists');
+	}
+}
+// if (isset($_POST['save_btn'])) {
+// 	editId($id);
 // }
+
 
 function getUserById($id)
 {
@@ -286,11 +283,9 @@ function login()
 
 				if (isset($_POST['remember'])) {
 					//thiết lập cookie username và password
-					setcookie("user", $row['username'], time() + (86400 * 30));
-					setcookie("pass", $row['password'], time() + (86400 * 30));
+					setcookie("user", $row['username'], time() + (86400 * 30), "", "", false, false);
+					setcookie("pass", $row['password'], time() + (86400 * 30), "", "", false, false);
 				}
-
-
 				header('location: home.php');
 			} else {
 				$_SESSION['user'] = $logged_in_user;
@@ -298,10 +293,9 @@ function login()
 
 				if (isset($_POST['remember'])) {
 					//thiết lập cookie username và password
-					setcookie("user", $row['username'], time() + (86400 * 30));
-					setcookie("pass", $row['password'], time() + (86400 * 30));
+					setcookie("user", $row['username'], time() + (86400 * 30), "", "", false, true);
+					setcookie("pass", $row['password'], time() + (86400 * 30), "", "", false, true);
 				}
-
 				header('location: index.php');
 			}
 		} else {
@@ -319,3 +313,23 @@ function isAdmin()
 	}
 }
 
+// function destroy($id)
+// {
+// 	global $conn, $id;
+// 	$query = "DELETE  FROM users WHERE id=" . $id;
+// 	mysqli_query($conn, $query);
+// 	header('Location: list.php');
+// }
+
+// if (isset($_GET['delete_user'])) {
+// 	destroy($id);
+// }
+
+function random($soKiTu){
+	$mang = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',0, 1, 2, 3, 4, 6, 7, 8, 9);
+	$kq = '';
+	for($i =1; $i <= $soKiTu; $i++){
+		$kq = $kq . $mang[rand(0, count($mang) -1)];
+	}
+	return $kq;
+}
