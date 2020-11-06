@@ -18,7 +18,6 @@ if (isset($_POST['register_btn'])) {
 
 		else
 		{
-		// 	$user_type = 'user';
 		array_push($errors, "Please select User Type");
 		}
 
