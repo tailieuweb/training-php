@@ -9,6 +9,12 @@ if (isLoggedIn()) header('location: home.php');
 <head>
 	<title>Login</title>
 	<link rel="stylesheet" type="text/css" href="public/css/styles.css">
+	<style>
+		/* Hide page by default */
+		html {
+			display: none;
+		}
+	</style>
 </head>
 
 <body>
@@ -27,9 +33,9 @@ if (isLoggedIn()) header('location: home.php');
 		</div>
 		<div class="input-group">
 			<label>Password</label>
-			<input required type="text" value="<?php if (isset($_COOKIE["pass"])) {
-													echo $_COOKIE["pass"];
-												} ?>" name="password">
+			<input required type="password" value="<?php if (isset($_COOKIE["pass"])) {
+														echo $_COOKIE["pass"];
+													} ?>" name="password">
 		</div>
 		<div class="row align-items-center">
 			<input type="checkbox" name="remember">Remember Me
@@ -44,6 +50,15 @@ if (isLoggedIn()) header('location: home.php');
 			Not yet a member? <a href="register.php">Sign up</a>
 		</p>
 	</form>
+	<script>
+		if (self == top) {
+			// Everything checks out, show the page.
+			document.documentElement.style.display = 'block';
+		} else {
+			// Break out of the frame.
+			top.location = self.location;
+		}
+	</script>
 </body>
 
 
