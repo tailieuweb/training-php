@@ -11,7 +11,7 @@ $results = mysqli_query($conn,$query);
 
 <html>
     <head>
-        <title>Register</title>
+        <title>Trang tìm kiếm</title>
         
         <link rel="stylesheet" href="public/css/bootstrap.min.css">
         <link rel="stylesheet" href="public/css/font-awesome.min.css">
@@ -34,7 +34,8 @@ $results = mysqli_query($conn,$query);
             <table class="table">
                 <thead>
 					<tr>
-						<th scope="col">ID</th>
+                    <th scope="col">ID</th>
+                        <th scope="col">Image</th>
 						<th scope="col">Username</th>
 						<th scope="col">Full name</th>
 						<th scope="col">Email</th>
