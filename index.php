@@ -6,12 +6,6 @@ if (!isLoggedIn()) {
 	$_SESSION['msg'] = "You must log in first";
 	header('location: login.php');
 }
-
-if (isset($_GET['logout'])) {
-	session_destroy();
-	unset($_SESSION['user']);
-	header("location: login.php");
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,6 +14,8 @@ if (isset($_GET['logout'])) {
 	<link rel="stylesheet" type="text/css" href="public/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="public/css/font-awesome.min.css">
+	<link rel="stylesheet" href="public/css/common.css">
+
 </head>
 <body>
 	<div class="header">
@@ -51,7 +47,7 @@ if (isset($_GET['logout'])) {
 						<?php echo $_SESSION['user']['fullname']; ?><br>
 						<?php echo $_SESSION['user']['email']; ?><br>
 						<a href="edit.php?edit=<?php echo $_SESSION['user']['id']; ?>">Edit Information</a><br>
-						<a href="index.php?logout='<?php echo $_SESSION['user']['id']; ?>'" style="color: red;">Logout</a>
+						<a href="index.php?logout=<?php echo $_SESSION['user']['id']; ?>" style="color: red;">Logout</a>
 					</small>
 
 				<?php endif ?>

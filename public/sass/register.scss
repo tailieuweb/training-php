@@ -1,0 +1,93 @@
+$size-height: 100%;
+$font-family: "Numans",
+sans-serif;
+$text-align: center;
+$font-weight: bold;
+$text-direction: none;
+@mixin display($display) {
+    display: $display;
+}
+
+@mixin margin ($size-m-top, $size-m-right, $size-m-bottom, $size-m-left) {
+    margin: $size-m-top $size-m-right $size-m-bottom $size-m-left;
+}
+
+@mixin padding ($size-p-top, $size-p-right, $size-p-bottom, $size-p-left) {
+    padding: $size-p-top $size-p-right $size-p-bottom $size-p-left;
+}
+
+@mixin size-custom ($size-w-custom, $size-h-custom) {
+    width: $size-w-custom;
+    height: $size-h-custom;
+}
+
+@mixin bg-color($color) {
+    background-color: $color;
+}
+
+@mixin font-size($fsize) {
+    font-size: $fsize;
+}
+
+@mixin color($txt-color) {
+    color: $txt-color;
+}
+
+@mixin top-right($size-top, $size-right) {
+    top: $size-top;
+    right: $size-right;
+}
+
+@mixin border ($size-border) {
+    border: $size-border;
+}
+
+.header {
+    @include size-custom(500px, auto);
+}
+
+
+/*Authencation Pass*/
+
+form {
+    @include display(flex);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    @include size-custom(500px, auto);
+    p.hint {
+        @include font-size(13px);
+        font-style: italic;
+        line-height: 26px;
+    }
+    #pass-strength-result {
+        @include border(1px solid #ddd);
+        text-align: $text-align;
+        @include margin(10px, 0px, 10px, 0px);
+        @include padding(5px, 20px, 5px, 20px);
+        @include size-custom(200px, auto);
+        @include font-size(14px);
+        @include bg-color(#f7f7f7);
+        @include display(block);
+        &.bad {
+            @include bg-color(#ffb78c);
+            font-weight: $font-weight;
+            border-color: #ff853c !important;
+        }
+        &.good {
+            @include bg-color(#ffec8b);
+            font-weight: $font-weight;
+            border-color: #ffcc00 !important;
+        }
+        &.short {
+            @include bg-color(#ffa0a0);
+            font-weight: $font-weight;
+            border-color: #f04040 !important;
+        }
+        &.strong {
+            @include bg-color(#c3ff88);
+            font-weight: $font-weight;
+            border-color: #8dff1c !important;
+        }
+    }
+}

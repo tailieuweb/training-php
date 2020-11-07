@@ -1,0 +1,267 @@
+$size-height: 100%;
+$font-family: "Numans",
+sans-serif;
+$text-align: center;
+$font-weight: bold;
+$text-direction: none;
+$display-inline-block: inline-block;
+@mixin margin ($size-m-top, $size-m-right, $size-m-bottom, $size-m-left) {
+    margin: $size-m-top $size-m-right $size-m-bottom $size-m-left;
+}
+
+@mixin padding ($size-p-top, $size-p-right, $size-p-bottom, $size-p-left) {
+    padding: $size-p-top $size-p-right $size-p-bottom $size-p-left;
+}
+
+@mixin size-custom ($size-w-custom, $size-h-custom) {
+    width: $size-w-custom;
+    height: $size-h-custom;
+}
+
+@mixin bg-color($color) {
+    background-color: $color;
+}
+
+@mixin font-size($fsize) {
+    font-size: $fsize;
+}
+
+@mixin color($txt-color) {
+    color: $txt-color;
+}
+
+@mixin top-right($size-top, $size-right) {
+    top: $size-top;
+    right: $size-right;
+}
+
+@mixin border ($size-border) {
+    border: $size-border;
+}
+
+.type-139 {
+    overflow: hidden;
+    .sidebar {
+        @include padding(0, 0, 0, 0);
+    }
+    .news {
+        a {
+            @include color(#fff);
+        }
+    }
+    a {
+        &:hover,
+        &:focus {
+            text-decoration: $text-direction;
+        }
+    }
+    .panel {
+        @include bg-color(none);
+        box-shadow: none;
+    }
+    .panel-default {
+        @include border(none);
+    }
+    .panel-heading {
+        @include border(none !important);
+        @include bg-color(none !important);
+        @include padding(2rem, 0, 0, 0);
+        h2 {
+            font-weight: $font-weight;
+            @include font-size(2.5rem);
+            span {
+                font-weight: normal;
+                @include font-size(2.5rem);
+            }
+        }
+    }
+    .news {
+        @include bg-color(none);
+        @include padding(0, 0, 0, 0);
+        @include color(#fff);
+        .topnews {
+            @include bg-color(#4bb4b6);
+            @include padding(3rem, 0.5rem, 3rem, 0.5rem);
+            .row {
+                .row {
+                    @include margin(0, 0, 0, 0 !important);
+                    .col-md-6 {
+                        &:first-child {
+                            @include padding(auto, 0, auto, 0);
+                            border-right: 0.1rem solid #86d8da;
+                        }
+                    }
+                }
+            }
+            img {
+                a {
+                    -webkit-mask: url(../images/hinh1.jpg) center center;
+                    display: $display-inline-block;
+                    &:hover {
+                        &:after {
+                            opacity: 1;
+                            top: -20%;
+                            left: -30%;
+                            transition-property: left, top, opacity;
+                            transition-duration: .8s, .8s, .15s;
+                            transition-timing-function: ease;
+                        }
+                    }
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        pointer-events: none;
+                        top: -110%;
+                        left: -400%;
+                        @include size-custom(150%, 150%);
+                        opacity: 0;
+                        background: linear-gradient(to right, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.13) 77%, rgba(255, 255, 255, 0.5) 92%, rgba(255, 255, 255, 0) 100%);
+                    }
+                    .topnewsthumb {
+                        img {
+                            max-width: 100%;
+                        }
+                    }
+                }
+            }
+            h4 {
+                font-weight: $font-weight;
+                @include font-size(1.5rem);
+                line-height: 2rem;
+                a {
+                    @include color(#fff);
+                    &:hover {
+                        @include color(#f5ce31);
+                        transition: all 0.5s ease;
+                        text-decoration: $text-direction;
+                    }
+                }
+            }
+            .topnewsdesc {
+                a {
+                    &:hover {
+                        @include color(#f5ce31);
+                        transition: all 0.5s ease;
+                        text-decoration: $text-direction;
+                    }
+                }
+            }
+        }
+        .topnewstime {
+            text-align: $text-align;
+            .topnewsdate {
+                font-family: 'Prata', serif;
+                @include font-size(4rem);
+                line-height: 2.5rem;
+                @include margin(0, 0, 0, 1.25rem);
+            }
+            .topnewsmonth {
+                text-transform: uppercase;
+                @include font-size(1rem);
+                @include margin(0, 0, 0, 1rem);
+            }
+        }
+    }
+    .headlines {
+        @include bg-color(#56bdbf);
+        overflow: hidden;
+        @include padding(2rem, 3rem, 2rem, 3rem);
+        ul {
+            list-style: none;
+            @include margin(0, 0, 0, 0);
+            @include padding(0, 0, 0, 0);
+            li {
+                overflow: hidden;
+                display: table;
+                @include margin(0, 0, 0.5rem, 0);
+                @include size-custom(100%, auto);
+                .headlinestitle {
+                    display: table-cell;
+                    vertical-align: middle;
+                    @include size-custom(85%, auto);
+                    a {
+                        &:hover {
+                            @include color(#f5ce31);
+                            transition: all 0.5s ease;
+                            text-decoration: $text-direction;
+                        }
+                    }
+                }
+            }
+        }
+        .headlinesdate {
+            @include font-size(1.5rem);
+            @include size-custom(15%, auto);
+            min-width: 5.5rem;
+            display: table-cell;
+            vertical-align: middle;
+            .headlinesday {
+                border-bottom: 0.1rem solid #fff;
+            }
+            .headlinesyear {
+                line-height: 4.75rem;
+                float: left;
+                @include margin(0, 0, 0, 0.3rem);
+            }
+        }
+    }
+    .newsall {
+        display: block;
+        @include padding(1rem, 1rem, 1rem, 1rem);
+        text-align: $text-align;
+        @include bg-color(#62c6c8);
+        text-transform: uppercase;
+        font-weight: $font-weight;
+    }
+    a {
+        &:hover {
+            @include color(#f5ce31);
+            transition: all 0.5s ease;
+            text-decoration: $text-direction;
+        }
+    }
+}
+
+.type-139 .headlinesdate .headlinesdm,
+.type-139 .news .headlines .headlinesdate,
+.type-139 .headlinesdate {
+    float: left;
+    font-family: 'Prata', serif;
+}
+
+.type-139 .headlinesdate .headlinesday,
+.type-139 .news .headlines .headlinesmonth {
+    line-height: 2rem;
+}
+
+@media (min-width: 992px) {
+    .type-139 {
+        .sidebar {
+            @include padding(0, 0, 0, 0);
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .type-139 {
+        .sidebar {
+            @include size-custom(96rem, auto);
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .type-139 {
+        .bottom {
+            @include margin(0, 0, 1.5rem, 0);
+        }
+    }
+}
+
+@media (min-width: 480px) {
+    .type-139 {
+        .sidebar {
+            @include padding(0, 0, 0, 0);
+        }
+    }
+}

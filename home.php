@@ -2,9 +2,15 @@
 session_start();
 
 include('functions.php');
- $id = ''; 
 
-if (!isAdmin()) {
+// Require https
+// if ($_SERVER['HTTPS'] != "on") {
+//     $url = "https://". $_SERVER['localhost'] . $_SERVER['localhost'];
+//     header("location: register.php");
+//     EXIT;
+// }
+
+if (!isAdmin()) {	
 	$_SESSION['msg'] = "You must log in first";
 	header('location: login.php');
 }
@@ -20,6 +26,7 @@ if (isset($_GET['logout'])) {
 <head>
 	<title>Home</title>
 	<link rel="stylesheet" type="text/css" href="public/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="public/css/common.css">
 	<style>
 	.header {
 		background: #003366;
@@ -58,9 +65,8 @@ if (isset($_GET['logout'])) {
 						<br>
 						<?php echo $_SESSION['user']['fullname']; ?><br>
                         <?php echo $_SESSION['user']['email']; ?><br>
-						<a href="admin.php">Add User</a> &nbsp; <a href="list.php?page=1">List User</a> &nbsp;
-						<a href="edit.php?edit=<?php echo $_SESSION['user']['id']; ?>">Edit Information</a><br>
-                        <a href="home.php?logout='<?php echo $_SESSION['user']['id']; ?>'" style="color: red;">Logout</a>
+                        <a href="admin.php">Add User</a> &nbsp; <a href="list.php?page=<?php echo $_SESSION['user']['id'];?>">List User</a> &nbsp; <a href="edit.php?edit=<?php echo $_SESSION['user']['id'];?>">Edit Information</a><br>
+                        <a href="home.php?logout=<?php echo $_SESSION['user']['id'];?>" style="color: red;">Logout</a>
 					</small>
 				<?php endif ?>
 			</div>

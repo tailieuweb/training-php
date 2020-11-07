@@ -1,0 +1,44 @@
+.header {
+  width: 500px;
+  height: auto; }
+
+/*Authencation Pass*/
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 500px;
+  height: auto; }
+  form p.hint {
+    font-size: 13px;
+    font-style: italic;
+    line-height: 26px; }
+  form #pass-strength-result {
+    border: 1px solid #ddd;
+    text-align: center;
+    margin: 10px 0px 10px 0px;
+    padding: 5px 20px 5px 20px;
+    width: 200px;
+    height: auto;
+    font-size: 14px;
+    background-color: #f7f7f7;
+    display: block; }
+    form #pass-strength-result.bad {
+      background-color: #ffb78c;
+      font-weight: bold;
+      border-color: #ff853c !important; }
+    form #pass-strength-result.good {
+      background-color: #ffec8b;
+      font-weight: bold;
+      border-color: #ffcc00 !important; }
+    form #pass-strength-result.short {
+      background-color: #ffa0a0;
+      font-weight: bold;
+      border-color: #f04040 !important; }
+    form #pass-strength-result.strong {
+      background-color: #c3ff88;
+      font-weight: bold;
+      border-color: #8dff1c !important; }
+
+/*# sourceMappingURL=register.css.map */

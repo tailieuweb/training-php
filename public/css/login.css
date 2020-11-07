@@ -1,0 +1,14 @@
+.header,
+form {
+  max-width: 600px; }
+
+form .input-group.btnSubmit {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  form .input-group.btnSubmit .btn {
+    padding: 10px 20px 10px 20px; }
+form p {
+  text-align: center; }
+
+/*# sourceMappingURL=login.css.map */

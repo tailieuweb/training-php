@@ -1,5 +1,11 @@
 <?php 
 session_start();
+// Require https
+// if ($_SERVER['HTTPS'] != "on") {
+//     $url = "https://". $_SERVER['localhost'] . $_SERVER['localhost'];
+//     header("location: viewUser.php");
+//     EXIT;
+// }
 
 $user_id = intval($_GET['edit']);
 
@@ -37,6 +43,7 @@ if (isset($_GET['edit'])) {
 <head>
     <title>Register</title>
     <link rel="stylesheet" href="public/css/styles.css">
+    <link rel="stylesheet" href="public/css/common.css">
 </head>
 <body>
 <div class="header">
@@ -61,10 +68,11 @@ if (isset($_GET['edit'])) {
             <!-- <input type="email" name="email1" value="<?php echo $data['email']; ?>" placeholder="<?php echo $data['email']; ?>"> -->
         </div>
 
+        <div class="input-group btnSubmit">
+            <button type="button" class="btn" onClick="javascript:history.go(-1)">Back</button>
+        </div>
+
     </form>
-<div class="back" style="text-align: center">
-    <input type="button" value="Back" onClick="javascript:history.go(-1)" />
-</div>
 	
 
 

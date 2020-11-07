@@ -1,0 +1,359 @@
+/*Login*/
+
+@import url("https://fonts.googleapis.com/css?family=Numans");
+$size-height: 100%;
+$font-family: "Numans",
+sans-serif;
+$text-align: center;
+$font-weight: bold;
+$text-direction: none;
+$display-inline-block: inline-block;
+@mixin margin ($size-m-top,
+$size-m-right,
+$size-m-bottom,
+$size-m-left) {
+    margin: $size-m-top $size-m-right $size-m-bottom $size-m-left;
+}
+
+@mixin padding ($size-p-top,
+$size-p-right,
+$size-p-bottom,
+$size-p-left) {
+    padding: $size-p-top $size-p-right $size-p-bottom $size-p-left;
+}
+
+@mixin size-custom ($size-w-custom,
+$size-h-custom) {
+    width: $size-w-custom;
+    height: $size-h-custom;
+}
+
+@mixin bg-color($color) {
+    background-color: $color;
+}
+
+@mixin font-size($fsize) {
+    font-size: $fsize;
+}
+
+@mixin color($txt-color) {
+    color: $txt-color;
+}
+
+@mixin top-right($size-top,
+$size-right) {
+    top: $size-top;
+    right: $size-right;
+}
+
+@mixin border ($size-border) {
+    border: $size-border;
+}
+
+html,
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: $size-height;
+    font-family: $font-family;
+}
+
+.form-group {
+    @include margin(0,
+    10px,
+    0,
+    0);
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    height: $size-height;
+    align-content: center;
+}
+
+.card {
+    @include size-custom(400px,
+    370px);
+    @include margin(auto,
+    0,
+    auto,
+    0);
+    @include bg-color(rgba(0, 0, 0, 0.5) !important);
+}
+
+.social_icon {
+    position: absolute;
+    @include top-right(-45px,
+    20px);
+    span {
+        @include font-size(60px);
+        @include margin(0,
+        0,
+        0,
+        10px);
+        @include color(#ffc312);
+        &:hover {
+            @include color(#fff);
+            cursor: pointer;
+        }
+    }
+}
+
+.card-header {
+    h3 {
+        @include color(#fff)
+    }
+}
+
+.input-group-prepend {
+    span {
+        @include size-custom(50px,
+        auto);
+        @include bg-color(#ffc312);
+        @include color(black);
+        @include border(none !important);
+    }
+}
+
+input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.remember {
+    @include color(#000);
+    input {
+        @include size-custom(20px,
+        20px);
+        @include margin(0px,
+        5px,
+        0px,
+        15px);
+    }
+}
+
+.login_btn {
+    @include color(black);
+    @include bg-color(#ffc312);
+    @include size-custom(100px,
+    auto);
+    &:hover {
+        @include color(black);
+        @include bg-color(white);
+    }
+}
+
+.link {
+    @include color(white);
+    a {
+        @include margin(0,
+        0,
+        0,
+        4px);
+    }
+}
+
+.loginsuccess {
+    @include padding(50px,
+    0px,
+    0px,
+    0px);
+    text-align: $text-align;
+    @include color(#ffc312);
+    font-weight: $font-weight;
+}
+
+.hellousername {
+    text-align: $text-align;
+    @include color(#fff);
+}
+
+.parentElement {
+    text-align: $text-align;
+    a {
+        text-decoration: $text-direction;
+    }
+}
+
+.btn-work {
+    font-weight: $font-weight;
+    @include bg-color(#fff);
+    @include size-custom(100px,
+    50px);
+    @include margin(0,
+    auto,
+    0,
+    auto);
+    @include padding(0,
+    0,
+    0,
+    0);
+    display: $display-inline-block;
+    line-height: 50px;
+    text-align: $text-align;
+    @include color(red);
+}
+
+.notification {
+    @include color(#000);
+}
+
+
+/*End Login*/
+
+
+/*Register*/
+
+.header {
+    @include margin(50px,
+    auto,
+    0px,
+    auto);
+    @include color(white);
+    @include bg-color(#5f9ea0);
+    text-align: $text-align;
+    @include border(1px solid #b0c4de);
+    border-bottom: none;
+    border-radius: 10px 10px 0px 0px;
+    @include padding(20px,
+    20px,
+    20px,
+    20px);
+}
+
+form,
+.content {
+    @include margin(0px,
+    auto,
+    0px,
+    auto);
+    @include padding(20px,
+    20px,
+    20px,
+    20px);
+    @include border(1px solid #b0c4de);
+    @include bg-color(white);
+    border-radius: 0px 0px 10px 10px;
+}
+
+.input-group {
+    @include margin(10px,
+    0px,
+    10px,
+    0px);
+    label {
+        display: block;
+        text-align: left;
+        @include margin(3px,
+        3px,
+        3px,
+        3px);
+    }
+    input {
+        @include size-custom(93%,
+        30px);
+        @include padding(5px,
+        10px,
+        5px,
+        10px);
+        @include font-size(16px);
+        border-radius: 5px;
+        @include border(1px solid gray);
+    }
+}
+
+#user_type {
+    @include size-custom(98%,
+    40px);
+    @include padding(5px,
+    10px,
+    5px,
+    10px);
+    @include bg-color(white);
+    @include font-size(16px);
+    border-radius: 5px;
+    @include border(1px solid gray);
+}
+
+.btn {
+    @include padding(10px,
+    10px,
+    10px,
+    10px);
+    @include font-size(15px);
+    @include color(white);
+    @include bg-color(#5f9ea0);
+    @include border(none);
+    border-radius: 5px;
+}
+
+.error {
+    @include size-custom(92%,
+    auto);
+    @include margin(0px,
+    auto,
+    0px,
+    auto);
+    @include padding(10px,
+    10px,
+    10px,
+    10px);
+    @include border(1px solid #a94442);
+    @include color(#a94442);
+    @include bg-color(#f2dede);
+    border-radius: 5px;
+    text-align: left;
+}
+
+.success {
+    @include color(#3c763d);
+    @include bg-color(#dff0d8);
+    @include border(1px solid #3c763d);
+    @include margin(0px,
+    0px,
+    20px,
+    0px);
+}
+
+.profile_info {
+    img {
+        display: $display-inline-block;
+        @include size-custom(50px,
+        50px);
+        @include margin(5px,
+        5px,
+        5px,
+        5px);
+        float: left;
+    }
+    div {
+        display: $display-inline-block;
+        @include margin(5px,
+        5px,
+        5px,
+        5px);
+    }
+    &::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+        @include padding(5px,
+        5px,
+        5px,
+        5px);
+    }
+}
+
+
+/*End Register*/

@@ -1,0 +1,65 @@
+$size-height: 100%;
+$font-family: "Numans",
+sans-serif;
+$text-align: center;
+$font-weight: bold;
+$text-direction: none;
+$display-inline-block: inline-block;
+@mixin margin ($size-m-top, $size-m-right, $size-m-bottom, $size-m-left) {
+    margin: $size-m-top $size-m-right $size-m-bottom $size-m-left;
+}
+
+@mixin padding ($size-p-top, $size-p-right, $size-p-bottom, $size-p-left) {
+    padding: $size-p-top $size-p-right $size-p-bottom $size-p-left;
+}
+
+@mixin size-custom ($size-w-custom, $size-h-custom) {
+    width: $size-w-custom;
+    height: $size-h-custom;
+}
+
+@mixin bg-color($color) {
+    background-color: $color;
+}
+
+@mixin font-size($fsize) {
+    font-size: $fsize;
+}
+
+@mixin color($txt-color) {
+    color: $txt-color;
+}
+
+@mixin top-right($size-top, $size-right) {
+    top: $size-top;
+    right: $size-right;
+}
+
+@mixin border ($size-border) {
+    border: $size-border;
+}
+
+@mixin display($type-display) {
+    display: $type-display;
+}
+
+.header,
+form {
+    max-width: 600px
+}
+
+form {
+    .input-group {
+        &.btnSubmit {
+            @include display(flex);
+            justify-content: center;
+            align-items: center;
+            .btn {
+                @include padding(10px, 20px, 10px, 20px)
+            }
+        }
+    }
+    p {
+        text-align: center;
+    }
+}

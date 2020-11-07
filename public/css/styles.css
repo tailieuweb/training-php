@@ -1,225 +1,194 @@
-/* Made with love by Mutiullah Samim*/
-
-/* Login */
-
+/*Login*/
 @import url("https://fonts.googleapis.com/css?family=Numans");
-
 html,
 body {
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
-  font-family: "Numans", sans-serif;
-}
+  font-family: "Numans", sans-serif; }
+
 .form-group {
-  margin-bottom: 10px;
-}
+  margin: 0 10px 0 0; }
+
 a {
-  text-decoration: none;
-}
+  text-decoration: none; }
+
 .container {
   height: 100%;
-  align-content: center;
-}
+  align-content: center; }
 
 .card {
-  height: 370px;
-  margin-top: auto;
-  margin-bottom: auto;
   width: 400px;
-  background-color: rgba(0, 0, 0, 0.5) !important;
-}
-
-.social_icon span {
-  font-size: 60px;
-  margin-left: 10px;
-  color: #ffc312;
-}
-
-.social_icon span:hover {
-  color: white;
-  cursor: pointer;
-}
-
-.card-header h3 {
-  color: white;
-}
+  height: 370px;
+  margin: auto 0 auto 0;
+  background-color: rgba(0, 0, 0, 0.5) !important; }
 
 .social_icon {
   position: absolute;
-  right: 20px;
   top: -45px;
-}
+  right: 20px; }
+  .social_icon span {
+    font-size: 60px;
+    margin: 0 0 0 10px;
+    color: #ffc312; }
+    .social_icon span:hover {
+      color: #fff;
+      cursor: pointer; }
+
+.card-header h3 {
+  color: #fff; }
 
 .input-group-prepend span {
   width: 50px;
+  height: auto;
   background-color: #ffc312;
   color: black;
-  border: 0 !important;
-}
+  border: none !important; }
 
 input:focus {
-  outline: 0 0 0 0 !important;
-  box-shadow: 0 0 0 0 !important;
-}
+  outline: none !important;
+  box-shadow: none !important; }
 
 .remember {
-  color: #000;
-}
-
-.remember input {
-  width: 20px;
-  height: 20px;
-  margin-left: 15px;
-  margin-right: 5px;
-}
+  color: #000; }
+  .remember input {
+    width: 20px;
+    height: 20px;
+    margin: 0px 5px 0px 15px; }
 
 .login_btn {
   color: black;
   background-color: #ffc312;
   width: 100px;
-}
+  height: auto; }
+  .login_btn:hover {
+    color: black;
+    background-color: white; }
 
-.login_btn:hover {
-  color: black;
-  background-color: white;
-}
-
-.links {
-  color: white;
-}
-
-.links a {
-  margin-left: 4px;
-}
+.link {
+  color: white; }
+  .link a {
+    margin: 0 0 0 4px; }
 
 .loginsuccess {
-  padding-top: 50px;
+  padding: 50px 0px 0px 0px;
   text-align: center;
   color: #ffc312;
-  font-weight: bold;
-}
+  font-weight: bold; }
 
 .hellousername {
   text-align: center;
-  color: #fff;
-}
-
-.parentElement a {
-  text-decoration: none;
-}
+  color: #fff; }
 
 .parentElement {
-  text-align: center;
-}
+  text-align: center; }
+  .parentElement a {
+    text-decoration: none; }
 
 .btn-work {
   font-weight: bold;
-  background: #fff;
+  background-color: #fff;
   width: 100px;
   height: 50px;
-  margin: 0 auto;
-  padding: 0;
+  margin: 0 auto 0 auto;
+  padding: 0 0 0 0;
   display: inline-block;
   line-height: 50px;
   text-align: center;
-  color: red;
-}
-.notification {
-  color: #000;
-}
-/*  End Login */
+  color: red; }
 
-/* Register */
+.notification {
+  color: #000; }
+
+/*End Login*/
+/*Register*/
 .header {
-  margin: 50px auto 0px;
+  margin: 50px auto 0px auto;
   color: white;
-  background: #5f9ea0;
+  background-color: #5f9ea0;
   text-align: center;
   border: 1px solid #b0c4de;
   border-bottom: none;
   border-radius: 10px 10px 0px 0px;
-  padding: 20px;
-}
+  padding: 20px 20px 20px 20px; }
+
 form,
 .content {
-  margin: 0px auto;
-  padding: 20px;
+  margin: 0px auto 0px auto;
+  padding: 20px 20px 20px 20px;
   border: 1px solid #b0c4de;
-  background: white;
-  border-radius: 0px 0px 10px 10px;
-}
+  background-color: white;
+  border-radius: 0px 0px 10px 10px; }
+
 .input-group {
-  margin: 10px 0px 10px 0px;
-}
-.input-group label {
-  display: block;
-  text-align: left;
-  margin: 3px;
-}
-.input-group input {
-  height: 30px;
-  width: 93%;
-  padding: 5px 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid gray;
-}
+  margin: 10px 0px 10px 0px; }
+  .input-group label {
+    display: block;
+    text-align: left;
+    margin: 3px 3px 3px 3px; }
+  .input-group input {
+    width: 93%;
+    height: 30px;
+    padding: 5px 10px 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid gray; }
+
 #user_type {
-  height: 40px;
   width: 98%;
-  padding: 5px 10px;
-  background: white;
+  height: 40px;
+  padding: 5px 10px 5px 10px;
+  background-color: white;
   font-size: 16px;
   border-radius: 5px;
-  border: 1px solid gray;
-}
+  border: 1px solid gray; }
+
 .btn {
-  padding: 10px;
+  padding: 10px 10px 10px 10px;
   font-size: 15px;
   color: white;
-  background: #5f9ea0;
+  background-color: #5f9ea0;
   border: none;
-  border-radius: 5px;
-}
+  border-radius: 5px; }
+
 .error {
   width: 92%;
-  margin: 0px auto;
-  padding: 10px;
+  height: auto;
+  margin: 0px auto 0px auto;
+  padding: 10px 10px 10px 10px;
   border: 1px solid #a94442;
   color: #a94442;
-  background: #f2dede;
+  background-color: #f2dede;
   border-radius: 5px;
-  text-align: left;
-}
+  text-align: left; }
+
 .success {
   color: #3c763d;
-  background: #dff0d8;
+  background-color: #dff0d8;
   border: 1px solid #3c763d;
-  margin-bottom: 20px;
-}
+  margin: 0px 0px 20px 0px; }
+
 .profile_info img {
   display: inline-block;
   width: 50px;
   height: 50px;
-  margin: 5px;
-  float: left;
-}
+  margin: 5px 5px 5px 5px;
+  float: left; }
 .profile_info div {
   display: inline-block;
-  margin: 5px;
-}
-.profile_info:after {
+  margin: 5px 5px 5px 5px; }
+.profile_info::after {
   content: "";
   display: block;
-  clear: both;
-}
-.pagination span {
-  padding: 5px;
-}
+  clear: both; }
+
 .pagination {
   display: flex;
   justify-content: center;
-  align-items: center;
-}
-/* End Register */
+  align-items: center; }
+  .pagination span {
+    padding: 5px 5px 5px 5px; }
+
+/*End Register*/
+
+/*# sourceMappingURL=styles.css.map */
