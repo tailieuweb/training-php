@@ -52,17 +52,18 @@ if(isset($_FILES['avata']))
 				move_uploaded_file($fileName,$path.$_FILES['avata']['name']);
 			}
 			else{
-				echo "Lỗi file:";
+				echo "Lỗi file:";die();
 			}
 
 		}else{
-			echo "Phải quá lớn:";
+			echo "Phải quá lớn:";die();
 		}
 	}
 	else{
-		echo "file không đúng định dạng";
+		echo "file không đúng định dạng";die();
 	}
-	// print_r($_FILES);
+	print_r($_FILES);
+	die();
 }
 if($_FILES['addfile'])
 {
@@ -74,11 +75,11 @@ if($_FILES['addfile'])
 			move_uploaded_file($addfile,$styleMe.$_FILES['addfile']['name']);
 		}
 		else{
-			echo "Lỗi file";
+			echo "Lỗi file";die();
 		}
 	}else{
-		echo "kích thước lớn hơn cho phép";
-	}
+		echo "kích thước lớn hơn cho phép";die();
+	}die();
 }
 	
 
