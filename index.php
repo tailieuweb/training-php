@@ -39,6 +39,16 @@ if ($user['status'] == 0) {
 				</h3>
 			</div>
 		<?php endif ?>
+		<?php if (isset($_SESSION['mess_entities'])) : ?>
+			<div class="error danger">
+				<h3>
+					<?php
+					echo $_SESSION['mess_entities'];
+					unset($_SESSION['mess_entities']);
+					?>
+				</h3>
+			</div>
+		<?php endif ?>
 		<?php if (isset($mess)) : ?>
 			<div class="error danger">
 				<h3>

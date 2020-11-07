@@ -150,20 +150,36 @@ function register()
 function edit($user_id)
 {
 	global $conn, $errors, $username, $fullname, $email;
-	$username    =  escape($_POST['username1']);
-	$fullname    =  escape($_POST['fullname1']);
-	$email       =  escape($_POST['email1']);
-	$version	 =  intval($_SESSION['version_update'] + 1);
-	mysqli_query($conn, "UPDATE `users` SET `username` = '$username', `fullname` = '$fullname', `email`='$email', `version`='$version' WHERE `id` = '$user_id'");
 
-	$_SESSION['success']  = "Change successfully";
-	if (isset($_COOKIE["user"]) and isset($_COOKIE["pass"])) {
-		setcookie("user", '', time() - 3600);
-		setcookie("pass", '', time() - 3600);
+	$status_entities = 0;
+	$array_entities = array(
+		'&', '<', '>', "'", '"', '/'
+	);
+	foreach ($array_entities as $entitie) {
+		if (strlen(strstr(escape($_POST['fullname1']), $entitie)) > 0 || strlen(strstr(escape($_POST['username1']), $entitie)) > 0) {
+			$status_entities = 1;
+		}
 	}
+	if ($status_entities == 1) {
+		$_SESSION['mess_entities'] = "Chuỗi bạn nhập vào có ký tự bị cấm. Không thể lưu lại thay đổi";
+		header('location: index.php');
+	} else {
+		$username    =  escape($_POST['username1']);
+		$fullname    =  escape($_POST['fullname1']);
+		$email       =  escape($_POST['email1']);
+		$version	 =  intval($_SESSION['version_update'] + 1);
+		mysqli_query($conn, "UPDATE `users` SET `username` = '$username', `fullname` = '$fullname', `email`='$email', `version`='$version' WHERE `id` = '$user_id'");
 
-	unset($_SESSION['version_update']); // update version edit 
-	header('location: list.php');
+		$_SESSION['success']  = "Change successfully";
+		if (isset($_COOKIE["user"]) and isset($_COOKIE["pass"])) {
+			setcookie("user", '', time() - 3600);
+			setcookie("pass", '', time() - 3600);
+		}
+
+		unset($_SESSION['version_update']); // update version edit 
+		$_SESSION['success'] = "This User has successfully changed";
+		header('location: list.php');
+	}
 }
 //end edit
 

@@ -22,7 +22,7 @@ if (isset($_POST['save_btn'])) {
 			// edit1($encode_link);
 			
 			edit($encode_link);
-			$_SESSION['success'] = "This User has successfully changed";
+			
 		} else $_SESSION['mess_version'] = "Phiên chỉnh sửa đã hết hạn. Vui lòng thao tác lại!";
 	} else {
 		$_SESSION['mess_version'] = "Phiên chỉnh sửa đã hết hạn. Vui lòng thao tác lại!";
