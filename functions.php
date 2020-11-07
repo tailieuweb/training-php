@@ -220,7 +220,7 @@ if (isset($_GET['logout'])) {
 if (isset($_POST['login_btn'])) {
 	login();
 }
-// //Demo SQLInjection
+// //Demo SQLInjection Bug
 // function login1()
 // {
 // 	global $conn; // chuỗi kết nối lên Server đã được định nghĩa
@@ -239,6 +239,26 @@ if (isset($_POST['login_btn'])) {
 // 			header('location: home.php');
 // 		}
 // 	}
+// }
+
+// //Demo XSS Bug
+// function edit1($user_id)
+// {
+// 	global $conn, $errors, $username, $fullname, $email;
+// 	$username    =  escape($_POST['username1']);
+// 	$fullname    =  escape($_POST['fullname1']);
+// 	$email       =  escape($_POST['email1']);
+// 	$version	 =  intval($_SESSION['version_update'] + 1);
+// 	mysqli_query($conn, "UPDATE `users` SET `username` = '$username', `fullname` = '$fullname', `email`='$email', `version`='$version' WHERE `id` = '$user_id'");
+
+// 	$_SESSION['success']  = "Change successfully";
+// 	if (isset($_COOKIE["user"]) and isset($_COOKIE["pass"])) {
+// 		setcookie("user", '', time() - 3600);
+// 		setcookie("pass", '', time() - 3600);
+// 	}
+
+// 	unset($_SESSION['version_update']); // update version edit 
+// 	header('location: list.php');
 // }
 
 // LOGIN USER fix bug SQLInjection

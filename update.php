@@ -17,6 +17,10 @@ if (isset($_POST['save_btn'])) {
 	$user_local = get_a_record('users', $encode_link);
 	if (isset($_SESSION['version_update'])) {
 		if ($user_local['version'] == $_SESSION['version_update']) {
+
+			// //demo bug XSS
+			// edit1($encode_link);
+			
 			edit($encode_link);
 			$_SESSION['success'] = "This User has successfully changed";
 		} else $_SESSION['mess_version'] = "Phiên chỉnh sửa đã hết hạn. Vui lòng thao tác lại!";
