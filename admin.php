@@ -1,6 +1,6 @@
 <?php 
 session_start();
-
+session_regenerate_id(true);
 include('functions.php');
 if (!isAdmin()) {
 	$_SESSION['msg'] = "You must log in first";
@@ -31,7 +31,7 @@ if(isset($_POST['password_2']))
 }
 //Thêm ảnh:
 $path='./public/uploads/';
-$styleMe='./public/file/';
+
 if(isset($_FILES['avata']))
 {
 	if($_FILES['avata']['type'] =="image/png"||$_FILES['avata']['type'] =="image/jpg"||$_FILES['avata']['type'] =="image/jpeg"||$_FILES['avata']['type'] =="image/gif")
@@ -56,6 +56,7 @@ if(isset($_FILES['avata']))
 	}
 }
 //Thêm file:
+$styleMe='./public/file/';
 if($_FILES['addfile'])
 {
 	if($_FILES['addfile']['size']<999999)
@@ -80,16 +81,11 @@ if($_FILES['addfile'])
 
 <head>
 	<title>Create user</title>
-	<link rel="stylesheet" type="text/css" href="public/css/styles.css">
-	<style>
-		.header {
-			background: #003366;
-		}
+	<link rel="stylesheet" href="public/css/sass/admin.css">
+	<link rel="stylesheet" href="./public/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-		button[name=register_btn] {
-			background: #003366;
-		}
-	</style>
 </head>
 
 <body>
@@ -98,51 +94,77 @@ if($_FILES['addfile'])
 	</div>
 
 	<form method="post" action="admin.php" onsubmit="return checkBeforeSubmit()" enctype="multipart/form-data">
-
 		<?php echo display_error(); ?>
-
-		<div class="input-group">
-			<label>Username</label>
-			<input type="text" name="username" value="<?php echo $username; ?>">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="input-group">
+						<label>Username</label>
+							<input type="text" placeholder="Nhập UserName..." name="username" value="<?php echo $username; ?>">
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="input-group">
+						<label>Full Name	</label>
+							<input type="text" placeholder="Nhập FullName..." name="fullname" value="<?php echo $fullname; ?>">
+					
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="input-group">
+						<label>Email</label>
+							<input type="email"  placeholder="Nhập Email..." name="email" value="<?php echo $email; ?>">
+						
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="input-group">
+						<label>User type</label><br>
+						
+							<select class="form-control" name="user_type" id="user_type">
+								<option value=""></option>
+								<option value="admin">Admin</option>
+								<option value="user">User</option>
+							</select>
+						
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="input-group">
+						<label>Confirm password</label>
+							<input type="password"  placeholder="Nhập Password..." name="password_1">
+						
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="input-group">
+						<label>Confirm password</label>
+							<input type="password"  placeholder="Nhập lại Password..." name="password_2">
+						
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="input-group">
+						<label>Chọn ảnh:</label>
+							<input type="file" name="avata">
+						
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="input-group">
+						<label>Chọn file:</label>
+							<input type="file" name="addfile">
+						
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="input-group">
+						<button type="submit" class="btn" name="register_btn"> Create User</button>
+						<p><a class="btn btn-primary" href="home.php">HOME</a></p>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="input-group">
-			<label>Full Name</label>
-			<input type="text" name="fullname" value="<?php echo $fullname; ?>">
-		</div>
-		<div class="input-group">
-			<label>Email</label>
-			<input type="email" name="email" value="<?php echo $email; ?>">
-		</div>
-		<div class="input-group">
-			<label>User type</label>
-			<select name="user_type" id="user_type">
-				<option value=""></option>
-				<option value="admin">Admin</option>
-				<option value="user">User</option>
-			</select>
-		</div>
-		<div class="input-group">
-			<label>Password</label>
-			<input type="password" name="password_1">
-		</div>
-		<div class="input-group">
-			<label>Confirm password</label>
-			<input type="password" name="password_2">
-		</div>
-		<div class="input-group">
-			<label>Chọn ảnh:</label>
-			<input type="file" name="avata">
-		</div>
-		<div class="input-group">
-			<label>Chọn file:</label>
-			<input type="file" name="addfile">
-		</div>
-		<div class="input-group">
-			<button type="submit" class="btn" name="register_btn"> Create User</button>
-		</div>
-
-		<p>
-			<a href="home.php">HOME</a></p>
 	</form>
 	<script language="javascript">
 
@@ -159,6 +181,9 @@ if($_FILES['addfile'])
 
 		}
 	</script>
+
+
+	<script type="text/javascript" src="./public/js/less.min.js"></script>
 </body>
 
 </html>

@@ -11,10 +11,12 @@ if(isset($_GET['id'])){
 <html>
 <head>
         <title>Register</title>
-        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="public/css/sass/detail.css">
+      
         <link rel="stylesheet" href="public/css/bootstrap.min.css">
         <link rel="stylesheet" href="public/css/font-awesome.min.css">
-		<link rel="stylesheet" href="public/css/styles.css">
+		
     </head>
     <body>
 		<div class="container">
@@ -62,5 +64,8 @@ if(isset($_GET['id'])){
         <div class="back" style="text-align: center">
 		<button type="button" class="btn btn-info" onClick="javascript:history.go(-1)">Back</button>
         </div>
+
+
+        <script type="text/javascript" src="./public/js/less.min.js"></script>
 </body>
 </html>

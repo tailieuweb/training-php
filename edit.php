@@ -11,32 +11,56 @@ $result=mysqli_fetch_assoc($query);
 
 <html>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="public/css/sass/edit.css">
     <title>Register</title>
-    <link rel="stylesheet" href="public/css/styles.css">
+    
+    <script type="text/JavaScript">
+        
+            function AutoRefresh( t ) {
+               setTimeout("location.reload(true);", t);
+            }
+      
+      </script>
 </head>
-<body>
+<body onload="JavaScript:AutoRefresh(5000);">
 <div class="header">
 	<h2>Edit User</h2>
 </div>
 </form>
 
 <form method="POST">	
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <label>Username</label>
+                        <input type="text" name="username1" value="<?php echo $result['username'] ?>">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" name="fullname1" value="<?php echo $result['fullname'] ?>">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email" name="email1" value="<?php echo $result['email'] ?>">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <button id="btn-primary" type="submit" class="btn" name="save_btn" onClick = "return confirm('Bạn có muốn sửa?')"> Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         
-        <div class="input-group">
-            <label>Username</label>
-            <input type="text" name="username1" value="<?php echo $result['username'] ?>">
-        </div>
-        <div class="input-group">
-            <label>Full Name</label>
-            <input type="text" name="fullname1" value="<?php echo $result['fullname'] ?>">
-        </div>
-        <div class="input-group">
-            <label>Email</label>
-            <input type="email" name="email1" value="<?php echo $result['email'] ?>">
-        </div>
-        <div class="input-group">
-            <button  type="submit" class="btn" name="save_btn" onClick = "return confirm('Bạn có muốn sửa?')"> Save</button>
-        </div>
+       
+      
+        
 
 </form>
 <div class="back" style="text-align: center">
@@ -62,5 +86,7 @@ $conn->close();
 }
 ?>
 
+
+<script type="text/javascript" src="./public/js/less.min.js"></script>
 </body>
 </html>

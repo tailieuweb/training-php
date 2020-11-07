@@ -11,9 +11,10 @@ if (!isLoggedIn()) {
 <html>
 <head>
 	<title>Home</title>
-	<link rel="stylesheet" type="text/css" href="public/css/styles.css">
+
 	<link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="public/css/font-awesome.min.css">
+
 </head>
 <body>
 	<div class="header">
@@ -52,5 +53,8 @@ if (!isLoggedIn()) {
 			</div>
 		</div>
 	</div>
+
+
+	<script type="text/javascript" src="./public/js/less.min.js"></script>
 </body>
 </html>

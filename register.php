@@ -1,13 +1,15 @@
 <?php 
 session_start();
-
+session_regenerate_id(true);
 include('functions.php') 
 ?>
 
 <html>
 <head>
+<link rel="stylesheet" href="public/css/sass/register.scss>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Register</title>
-    <link rel="stylesheet" href="public/css/styles.css">
+
 </head>
 <body>
 <div class="header">
