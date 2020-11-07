@@ -1,0 +1,452 @@
+$colorchinh:#fff;
+$color_text:#000;
+$maunen: #02031d8f;
+$font-size:1em;
+$font_size_btn:1.5em;
+$btn_home:1.1em;
+$btn_summit:#4145dfd1;
+$backgrou_btn:#82b398;
+$height_btn:50px;
+$font_login:1em;
+$family:'Times New Roman', Times, serif;
+body{
+  margin: 0px;
+  padding: 0px;
+  //heaeder
+  .top-header{
+    padding: 10px 0px;
+    width: 100%;
+    background: #02031d8f;
+    ul{
+     text-align: center;
+      li{
+        color:$colorchinh;
+        font-family: Arial, Helvetica, sans-serif;;
+        display: inline-block;
+        font-size: 1.2em;
+        padding: 0px 30px;
+        text-align: right;
+        a{
+          text-decoration: none;
+          color: $colorchinh;
+        }
+      }
+    }
+  }
+  // sass login
+  .top_body{
+    width: 100%;
+    height: 100%;
+    background: url(../images/hinh-anh-thien-nhien-phong-canh-dep-nhat.jpg);
+    background-size: cover;
+    width: 100%;
+    height: 100%;  
+    margin: 0px;
+    padding: 0px;   
+    div.top_container{
+        width: 30%; 
+        border-radius: 10px;
+        text-align: center;
+        background: #fff;
+        position: relative;
+        left: 35%;
+        top: 10%;
+        color: #fff;
+        background: rgba(9, 136, 175, 0.479);
+        .header{
+          h2{
+           font-size: 2em;
+           font-family:$family;
+          }
+        }
+        .form_login{
+            padding: 0px 50px;
+          z-index: 100000;
+          padding-bottom: 50px;
+          
+          .btn_login{
+                padding: 5px 10px;
+                width: 80%;
+                height: 30px;
+                border: none;
+                margin: 5px 0px;
+                outline: none;
+                margin: 15px 0px;
+               font-family: 'Times New Roman', Times, serif;
+                border: {
+                  radius:5px;
+                  
+                }
+              &:hover,&:active,&:focus,&:visited,&:focus-visible,&:focus-within{
+                border: none;
+              outline: none;
+              }
+             
+          }
+       
+              #bnt_summit{
+                background: $btn_summit;
+              width: 200px;
+              height: 40px;
+              color: #fff;
+              font-size: $font_size_btn;
+              cursor: pointer;
+              }
+              .align-items-center{
+                font-size: $font_login;
+                font-family: $family;
+                text-align: left;
+                padding-left: 20px;
+                cursor: pointer;
+              }
+              p{
+                font-family: $family;
+                font-size: 1em;
+                a{
+                  font-size: 1.2em;
+                }
+              }
+        }
+        .header{
+            padding: 30px 0px;
+        }
+    }
+  }
+  // sass trang admin
+  .body_home{
+    .header{
+      background: #82b398;
+      margin: 0px;
+      padding: 0px;
+      h2{
+        padding: 10px 0px;
+        margin: 0px;
+        color: #fff;
+        text-align: center;
+        
+      }
+    }
+    .top-container{
+      width: 70%;
+      z-index: 10;
+      box-shadow: 5px 5px #e6e6e6;
+      position: relative;
+      left: 15%;
+      top:50px;
+      border: 1px solid #000 ;
+      .container{
+      margin: 50px 0px;
+      
+          .row{
+            margin: 0px ;
+            padding: 0px;
+              .col-md-6{
+                padding: 0px;
+                margin: 0px;
+               color: #000;
+               font-size: $btn_home;
+               font-family: $family;
+              }
+              .col-md-4{
+                padding:0px 50px;
+                margin: 0px;
+
+              }
+          }
+          #chuc_nang{
+            text-align: center;
+            padding-top: 30px;
+            
+            .click_chucnang{
+              outline: none;
+              padding: 10px 20px;
+              font-size: $btn_home;
+              font-family: $family;
+              background: #82b398;
+              color: #fff;
+             margin-left: 30px;
+              text-align: center;
+              text-decoration: none;
+              border: {
+                radius: 5px;
+              };
+              
+            }
+          }
+      }
+      
+      
+    }
+  } 
+  //modal
+  .top_modal{
+    background-color: rgba(0, 0, 0, 0.76);
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+
+    position: absolute;
+    display: none;
+    left: 0px;
+
+    .close_moda{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0px;
+ 
+      top: 0px;
+      z-index:1000000000;
+    }
+    .div_form{
+      z-index: 100;
+      text-align: center;
+      background: #fff;
+      width: 30%;
+      animation: 0.5s transiton_add linear;
+      border-radius: 10px;
+      position: relative;
+       top: 10%;
+       left: 35%;
+      height: 500px;
+      form{
+        .item_edit{
+          background: $maunen;
+          margin-bottom: 50px;
+          h2{
+            text-align: center;
+            padding: 10px;
+            color: $colorchinh;
+          }
+          h1{
+           padding: 10px 10px;
+            color: $colorchinh;
+            font-size: 2em;
+            position: absolute;
+            top:-20px;
+            right: 0px;
+            
+            text-align: center;
+            &:hover {
+              background: red;
+              cursor: pointer;
+            }
+          }
+          
+        }
+        .input-group{
+          padding: 10px 30px;
+          .input_edit{
+            padding: 10px;
+           width: 90%;
+           outline: none;
+            border: {
+              radius:5px;
+              top: none;
+              left: none;
+              right: none;
+              bottom: 1px solid #000;
+            }
+          
+          }
+          label{
+            font-size: 1em;
+            font-family: $family;
+          }
+          .btn{
+            outline: none;
+            padding: 10px 20px;
+            font-size: $btn_home;
+            font-family: $family;
+            background: red;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border: {
+              radius: 5px;
+            };
+            margin-top: 50px;
+          }
+
+        }
+      }
+    }
+  }
+  //list
+  .list{
+    background: #fff;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    .header{
+      width: 80%;
+      margin: 50px auto 0px;
+      color: white;
+      background: #82b398;
+      text-align: center;
+      border: 1px solid #B0C4DE;
+      border-bottom: none;
+      border-radius: 10px 10px 0px 0px;
+      padding: 5px;
+    
+      h2{
+        padding: 10px 0px;
+        margin: 0px;
+        color: #fff;
+        text-align: center;
+        
+      }
+    }
+    #form_chinh{
+     
+   
+      form{
+        border:none; display:inline-flex; width:100%;
+        .btn_search{
+          border-radius: 5px;
+          outline: none;
+          border: none;
+          padding: 0 30px;
+          background-color: $backgrou_btn;
+          margin-left: 10px;
+        }
+      }
+      table tr:nth-child(odd){
+        background-color:#eee;
+    }
+    table tr:nth-child(even){
+        background-color:white;
+    }
+    table tr:nth-child(1){
+        background-color:$backgrou_btn;
+    }
+      .table{
+        border-collapse:collapse;
+   
+        width: 100%;
+       
+        background: url(../images/logo4.png);
+        background-size: cover;
+      
+        tbody{
+          tr{
+            th{
+              border:1px 1px 1px solid #000;
+            }td{
+              a{
+                text-decoration: none;
+                color: #fff;
+              }
+              .btn_click{
+                padding:10px 40px;
+                border: none;
+                outline: none;
+                a{
+                  text-decoration: none;
+                  color: #fff;
+                }
+              
+                border-radius: 5px;
+            }
+            }
+          }
+        }
+      }
+      .row{
+        margin:50px 0px ;
+        padding: 0px;
+       width: 80%;
+       margin-left: 200px;
+        font-size: 1.2em;
+        font-family: $family;
+          .col-md-6{
+            padding: 0px;
+            margin: 0px;
+            text-align: left;
+           color: #000;
+           font-size: $btn_home;
+           font-family: $family;
+          }
+          .col-md-4{
+            text-align: center;
+            padding:0px 30px;
+            margin: 0px;
+
+          }
+      }
+    }
+    .btn_back{
+      background-color: $backgrou_btn;
+      color: $colorchinh;
+      border-radius: 5px;
+      padding: 5px 30px;
+      outline: none;
+      border: none;
+    }
+  }
+  // addusser
+  .body_admin{
+    background-color: #59726417;
+    .form_admin{
+      top: 50px;
+      width: 30%;
+      background: #fff;
+     border-radius: 5px;
+     padding: 20px 30px;
+     position: relative;
+     text-align: center;
+     background: $backgrou_btn;
+     z-index: 100;
+     left: 35%;
+     h2{
+       color: $colorchinh;
+     }
+     label{
+       padding-top: 10px;
+      color: $colorchinh;
+       font-size: 1em;
+       font-family: $family;
+     }
+     .btn{
+       margin: 20px 0px;
+     }
+    }
+  }
+  //footer
+    .footer{
+      background: #02031d8f;
+      width: 100%;
+      margin-top: 100px;
+        .row{
+          
+          padding: 0px;
+          margin: 0px;
+            .col-4{
+
+            
+              ul{
+                  li{
+                  list-style: none;
+                  color: $colorchinh;
+                  padding: 5px;
+                  font-size: 1.3em;
+                  font-family: $family;
+                  }
+              }
+          }
+      }
+      .diachi{
+        border-top:2px solid white ;
+        width: 80%;
+        position: relative;
+        left: 10%;
+        text-align: center;
+        p{
+          padding: 20px 0px;
+  color: $colorchinh;
+  font-size: 1em;
+  font-family: $family;
+        }
+      }
+    }
+}
