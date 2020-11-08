@@ -59,7 +59,7 @@ if(isAdmin() == true && isloggedIn() == true)
 							<br>
 							<?php echo $_SESSION['user']['fullname']; ?><br>
 							<?php echo $_SESSION['user']['email']; ?><br>
-							<a class="btn" href="admin.php">Add User</a> &nbsp; <a  class="btn" href="list.php?list='1'">List User</a> &nbsp; <a  class="btn" href="edit.php?edit=<?= $_SESSION['user']['id'] ?>">Edit Information</a><br>
+							<a class="btn" href="admin.php">Add User</a> &nbsp; <a  class="btn" href="list.php">List User</a> &nbsp; <a  class="btn" href="edit.php?edit=<?= $_SESSION['user']['id'] ?>">Edit Information</a><br>
 							<a class="btn login" href="home.php?logout='1'" style=" margin-top: 12px;">Logout</a>
 						</small>
 					<?php endif ?>
