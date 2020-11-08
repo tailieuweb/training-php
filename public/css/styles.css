@@ -35,9 +35,6 @@ font-size: 60px;
 margin-left: 10px;
 color: #FFC312;
 }
-.btn{
-	color:red;
-}
 
 .social_icon span:hover{
 color: white;
@@ -80,13 +77,13 @@ margin-right: 5px;
 }
 
 .login_btn{
-color: red;
+color: black;
 background-color: #FFC312;
 width: 100px;
 }
 
 .login_btn:hover{
-color: white;
+color: black;
 background-color: white;
 }
 
@@ -173,7 +170,7 @@ form, .content {
 }
 #user_type {
 	height: 40px;
-	width: 93%;
+	width: 98%;
 	padding: 5px 10px;
 	background: white;
 	font-size: 16px;
@@ -189,7 +186,6 @@ form, .content {
 	border-radius: 5px;
 	cursor: pointer;
 }
-
 .error {
 	width: 92%; 
 	margin: 0px auto; 

@@ -1,7 +1,21 @@
 <?php
 session_start();
-
 include('functions.php');
+
+
+if (!isAdmin()) {
+	$_SESSION['msg'] = "You must log in first";
+	header('location: login.php');
+}
+
+if (isset($_GET['logout'])) {
+	session_destroy();
+	unset($_SESSION['user']);
+	header("location: login.php");
+}
+
+if(isAdmin() == true && isloggedIn() == true)
+{
 if (!isAdmin()) {
     $_SESSION['msg'] = "You must log in first";
     header('location: login.php');
@@ -204,3 +218,6 @@ $num = mysqli_num_rows($sql);
 </body>
 
 </html>
+<?php
+}
+?>

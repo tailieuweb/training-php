@@ -8,6 +8,21 @@ $results = [];
 $id=$_GET['id'];
 $query = "SELECT * FROM users WHERE id_encode = '$id'";
 $results = mysqli_query($conn,$query);
+
+
+if (!isAdmin()) {
+	$_SESSION['msg'] = "You must log in first";
+	header('location: login.php');
+}
+
+if (isset($_GET['logout'])) {
+	session_destroy();
+	unset($_SESSION['user']);
+	header("location: login.php");
+}
+
+if(isAdmin() == true && isloggedIn() == true)
+{
 ?>
 
 <html>
@@ -68,3 +83,6 @@ $results = mysqli_query($conn,$query);
         
     </body>
 </html>
+<?php
+}
+?>

@@ -10,11 +10,28 @@ include('functions.php');
         
 //     }
 // }
+
+
+
 $id=$_GET['id'];
 $query=mysqli_query($conn,"select * from `users` where id_encode='$id'");
 $row=mysqli_fetch_assoc($query);
 $results = [];
 
+
+if (!isAdmin()) {
+	$_SESSION['msg'] = "You must log in first";
+	header('location: login.php');
+}
+
+if (isset($_GET['logout'])) {
+	session_destroy();
+	unset($_SESSION['user']);
+	header("location: login.php");
+}
+
+if(isAdmin() == true && isloggedIn() == true)
+{
 ?>
 
 <html>
@@ -64,3 +81,6 @@ $results = [];
 
 </body>
 </html>
+<?php
+}
+?>
