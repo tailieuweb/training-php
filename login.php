@@ -1,5 +1,7 @@
 <?php 
-session_start();
+include('init.php');
+session_regenerate_id(true);
+
 
 	include('functions.php'); 
 	if(isLoggedIn() == true && isAdmin() == true) 
