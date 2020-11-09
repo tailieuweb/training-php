@@ -127,7 +127,8 @@ function editId($id)
 	if (empty($email)) {
 		array_push($errors, "Email is required");
 	}
-	else if($email != escape($_POST['email'])){
+	$result = getUserById($id);
+	if($email != $result['email']){
 		checkEmail($email);
 	}
 
@@ -230,7 +231,6 @@ function getUserById($id)
 	global $conn;
 	$query = "SELECT * FROM users WHERE id=" . $id;
 	$result = mysqli_query($conn, $query);
-
 	$user = mysqli_fetch_assoc($result);
 	return $user;
 }

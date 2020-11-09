@@ -14,17 +14,21 @@ if (isLoggedIn() && isAdmin()) {
         }
     }
 
-
-    if(isset($_POST['save_btn']) && $_SESSION['token' .$id] == $_POST['token']){
-        editId($id);   
-    }       
-
-    $token = random(6);
-    $_SESSION['token'.$id] = $token;  
+    if(isset($_POST['save_btn'])){
+        if(!isset($_COOKIE['token' .$id])){
+            if (count($errors) == 0) {
+                editId($id);
+                setcookie('token' .$id, $id, time() + 300); 
+            }
+        }   
+        else{
+            $_SESSION['success'] = "Update again after 5 minutes";
+        }
+    } 
 }
 else{
     header("location: login.php");
-}
+}                           
 
 if (isset($_GET['edit'])) {
     if(isLoggedIn()){
@@ -58,8 +62,8 @@ if (isset($_GET['edit'])) {
                     </div>
                 <?php endif ?>	
 
-            <input type="hidden" name="token" value="<?php echo $token?>">
-
+            
+            
             <div class="input-group">
                 <label>Username</label>
                 <input type="text" name="username" value="<?php echo $result['username'] ?>" disabled>
@@ -76,9 +80,7 @@ if (isset($_GET['edit'])) {
                 <label for="image">User Image</label>
                 <input type="file" name="image" id="image">
             </div>
-            
-            
-            
+                        
             <div class="input-group">
                 <button  type="submit" class="btn" name="save_btn" onClick = "return confirm('Bạn có muốn sửa?')"> Save</button>
             </div>

@@ -3,7 +3,7 @@ session_start();
 include('functions.php');
 
 if (isLoggedIn() && isAdmin()) {
-    $id = base64_decode(isset($_GET['id']) ? $_GET['id'] : '');
+    $id = base64_decode(base64_decode(isset($_GET['id']) ? $_GET['id'] : ''));
 
     if($id == ''){
         header("location: list.php");

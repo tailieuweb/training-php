@@ -1,16 +1,7 @@
 <?php
 session_start();
 include('functions.php');
-$currentCookieParams = session_get_cookie_params();  
-$sidvalue = session_id(); 
-setcookie(  
-    'A',//name  
-    $sidvalue,//value  
-    0,//expires at end of session  
-    $currentCookieParams['path'],//path  
-    $currentCookieParams['domain'],//domain  
-    true //secure  
-);  
+
 if (isLoggedIn() && isAdmin()) {
     $results = [];
     $id = isset($_GET['id']) ? $_GET['id'] : '';
@@ -58,9 +49,10 @@ if (isLoggedIn() && isAdmin()) {
     $arrs = mysqli_query($conn,$sql);
     
     if(isset($_POST['delete']) && isset($_POST['id']) && $_SESSION['token'] == $_POST['token']){
-        $result = getUserById(base64_decode($_POST['id']));
+        $id = base64_decode(base64_decode(base64_decode($_POST['id'])));
+        $result = getUserById($id);
         if($result['user_type'] != 'admin'){
-            deleteUser(base64_decode($_POST['id']));
+            deleteUser($id);
         }
         else{
             $_SESSION['success'] = "Don't delete admin";
@@ -68,8 +60,7 @@ if (isLoggedIn() && isAdmin()) {
         
     }
     
-    $token = random(6);
-    $_SESSION['token'] = $token;
+  
     
 }
 else{
@@ -139,16 +130,14 @@ else{
                         <?php }?></th>
 
                         <th scope="col">Email</th>
+                        
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
                     </tr>   
                 </thead>
                 <tbody>
                     <?php foreach ($arrs as $arr) : ?>
-                   <?php if(isset($_SESSION['count' .$arr['id']])){
-                       unset($_SESSION['count' .$arr['id']]);
-                }
-                       ?>
+                    
                         <tr scope="row">
                             <td><img src="./public/images/<?php echo $arr['image'];?>" class="img-fluid" alt=""     style="width:50px; height:50px;"></td>
                             <td><?php echo $arr['id']; ?></td>
@@ -156,21 +145,27 @@ else{
                             <td><?php echo $arr['fullname']; ?></td>
                             <td><?php echo $arr['email']; ?></td>
                             <td>
-                                <a href="./userdetail.php?id=<?php echo base64_encode($arr['id']) ?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                <a href="./userdetail.php?id=<?php echo base64_encode(base64_encode($arr['id'])) ?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
                     
                                 <a href='./edit.php?id=<?php echo base64_encode($arr['id']) ?>'><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>  
                                
                                
                             </td>
+                        
+                           
                             <td>
                                 <form></form>
                                 <form action="" method="post">
-                                <input type="hidden" name="id" value="<?php echo base64_encode($arr['id'])?>">
-                                
+                                <input type="hidden" name="id" value="<?php echo base64_encode(base64_encode(base64_encode($arr['id'])))?>">
+                                <?php 
+                                  $token = random(6);
+                                  $_SESSION['token'] = $token;
+                                  $_SESSION['id'] =  $arr['id'];
+                                ?>
                                 <input type="hidden" name="token" value="<?php echo $token ?>">
                                 <button type="submit" name="delete" class="btn btn-primary" onClick="return confirm('Nhấn oke để xoá.')">Delete</button>
                             </td>
-                        
+                               
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
