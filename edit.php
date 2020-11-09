@@ -53,14 +53,19 @@ if (isset($_GET['edit'])) {
     </div>
     </form>
 
-    <form method="post" action="">
+    <form method="post" action="edit.php">
         <?php echo display_error(); ?>
+        <!-- <label>Hình ảnh hiện tại:</label> <br>
+        <img src="public/images/<?php echo $data['image']; ?>" width="80px"> <br>
+        <label>Chọn hình ảnh:</label> <br>
+        <input type="file" name="fileupload" id="fileupload" onchange="return fileValidation()">
+        <div id="imagePreview"></div><br> -->
+        
 
         <div class="input-group">
             <label>Username</label>
             <input type="text" name="username1" value="<?php echo $data['username']; ?>" placeholder="<?php echo $data['username']; ?>">
         </div>
-
         <div class="input-group">
             <label>Full Name</label>
             <input type="text" name="fullname1" value="<?php echo $data['fullname']; ?>" placeholder="<?php echo $data['fullname']; ?>">
@@ -73,12 +78,7 @@ if (isset($_GET['edit'])) {
             <button type="submit" class="btn" name="save_btn">Save</button>
             <button type="button" class="btn" onClick="javascript:history.go(-1)">Back</button>
         </div>
-
     </form>
-
-
-
-
+    <script src="public/js/checkTypefile.js"></script>
 </body>
-
 </html>

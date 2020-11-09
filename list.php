@@ -87,25 +87,6 @@ if (isset($_GET['list'])) {
 						<th scope="col">Action</th>
 					</tr>
                 </thead>
-                <!-- <tbody>
-                    <?php while ($row = mysqli_fetch_assoc($result)){ ?>
-                    <tr scope="row">
-                        <td><?php echo $row['id']; ?></td>   
-                        <td><?php echo $row['username']; ?></td>   
-                        <td><?php echo $row['fullname']; ?></td>   
-                        <td><?php echo $row['email']; ?></td> 
-						<td>
-							<a><i class="fa fa-eye" aria-hidden="true"></i></a>
-						
-							<a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-							
-							<a><i class="fa fa-times" aria-hidden="true"></i></a>
-							
-						</td>
-                    </tr>
-                    <?php }; ?>
-                </tbody> -->
-
                 <tbody>
                     <?php foreach ($result as $resultItem): ?>
                     <tr scope="row">
