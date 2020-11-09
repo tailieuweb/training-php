@@ -26,7 +26,7 @@ if (isset($_GET['edit_tt'])) {
 
 <html>
 <head>
-    <title>Register</title>
+    <title>Edit</title>
     <link rel="stylesheet" href="public/css/styles.css">
 </head>
 <body>
