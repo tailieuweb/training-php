@@ -150,6 +150,20 @@ function register()
 function edit($user_id)
 {
 	global $conn, $errors, $username, $fullname, $email;
+	
+	$username = escape($_POST['username']);
+	$email = escape($_POST['email']);
+	$fullname = escape($_POST['fullnme']);
+	//make sure form is filled property
+	if(empty($username)){
+		array_push($errors, "Username is required");
+	}
+	if(empty($email)){
+		array_push($errors, "Email is required");
+	}
+	if(empty($fullname)){
+		array_push($errors, "Fullname is required");
+	}
 
 	$status_entities = 0;
 	$array_entities = array(
