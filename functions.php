@@ -14,6 +14,65 @@ if (isset($_POST['register_btn'])) {
 
 function register(){
 
+	// defined('YIVIC_FOLDER_PATH') || define('YIVIC_FOLDER_PATH', 'public/images/');
+	// defined('YIVIC_FILE_PATH') || define('YIVIC_FILE_PATH', YIVIC_FOLDER_PATH . $_FILES['upload_file']['name']);
+
+	// defined('YIVIC_FOLDER_EXT_PATH') || define('YIVIC_FOLDER_EXT_PATH', 'public/libs/');
+	// defined('YIVIC_FILE_EXT_PATH') || define('YIVIC_FILE_EXT_PATH', YIVIC_FOLDER_EXT_PATH . $_FILES['upload_file_ext']['name']);
+
+	// global $conn, $errors,$image, $username, $fullname, $email, $image;
+
+	// $username    =  escape($_POST['username']);
+	// $fullname    =  escape($_POST['fullname']);
+	// $email       =  escape($_POST['email']);
+	// $image       =  escape(YIVIC_FILE_PATH);
+	// $file     =  escape(__DIR__ . '/' . YIVIC_FILE_EXT_PATH);
+	// $password_1  =  escape($_POST['password_1']);
+	// $password_2  =  escape($_POST['password_2']);
+	// $flag_ok = true;
+
+	// // Check upload image
+	// if (isset($_POST['submit'])) {
+	// 	$check = getimagesize($_FILES['upload_file']['name']);
+	// 	if ($check !== false) {
+	// 		echo 'File is an image - ' . $check['mime'] . '.';
+	// 		$flag_ok = true;
+	// 	} else {
+	// 		echo 'File is not an image';
+	// 		$flag_ok = false;
+	// 	}
+	// }
+	// if (file_exists(YIVIC_FILE_PATH)) {
+	// 	echo 'File đã tồn tại';
+	// 	$flag_ok = false;
+	// }
+
+	// $ex = array('jpg', 'png', 'jpeg', 'jpeg');
+	// $file_type = strtolower(pathinfo(YIVIC_FILE_PATH, PATHINFO_EXTENSION));
+	// if (!in_array($file_type, $ex)) {
+	// 	echo 'Loại file không hợp lệ!';
+	// 	$flag_ok = false;
+	// }
+
+	// if ($_FILES['upload_file']['size'] > 5000000) {
+	// 	echo 'Dung lượng file quá lớn!';
+	// 	$flag_ok = false;
+	// }
+	// if ($flag_ok) {
+	// 	move_uploaded_file($_FILES['upload_file']['tmp_name'], YIVIC_FILE_PATH);
+	// } else {
+	// 	echo 'Không upload được!';
+	// }
+
+	// // Check upload file
+	// $sizeExt = $_FILES["upload_file_ext"]["size"];
+	// if ($sizeExt <= 5 * 1024 * 1024) {
+	// 	move_uploaded_file($_FILES["upload_file_ext"]["tmp_name"], YIVIC_FILE_EXT_PATH);
+	// } else {
+	// 	echo "File cua ban phai nho hon 5M";
+	// }
+
+	///
 	global $conn, $errors, $username,$fullname, $email;
 
     $username    =  escape($_POST['username']);
@@ -64,6 +123,13 @@ function register(){
 }
 
 
+function changPass($password,$id){
+	$password_md5 = md5($password);
+	$sql = self::$connection->prepare("UPDATE `users` SET `password` =? WHERE id =?");
+	$sql->bin_param('si',$password_md5,$id);
+	$sql->execute();
+	return true;
+}
 
 function edit() {
 	global $conn, $errors, $username,$fullname, $email;
@@ -86,6 +152,7 @@ function edit() {
 if (isset($_POST['save_btn'])) {
 	edit();
 }
+
 
 
 
@@ -214,6 +281,7 @@ function isAdmin()
 		return false;
     }
 }
+
 function delete($id){
 	global $conn;
 	$sql = "DELETE FROM `users` WHERE id = $id";

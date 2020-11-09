@@ -19,7 +19,7 @@ $url_path = str_replace('\\', '/', $url_path);
             ?>
             <!-- tao form search -->
             <form class="form_search" method="get">
-                <input type="text" class="form-control" name="search" id="search" " 
+                <input type="text" class="form-control" name="search" id="search" 
                 <?php if (isset($value_search)) { ?> value="<?php echo $value_search ?>  " <?php  } ?> placeholder="Search...">
                 <button class="btn_search"> Search</button>
             </form>
@@ -53,6 +53,7 @@ $url_path = str_replace('\\', '/', $url_path);
                 <table id="list_danhsach">
                     <tr>
                         <th>STT</th>
+                        <th>Image</th>
                         <th>Username</th>
                         <th>FullName</th>
                         <th>Email</th>
@@ -62,6 +63,14 @@ $url_path = str_replace('\\', '/', $url_path);
                         foreach ($results as $value) : ?>
                             <tr>
                                 <td><?php echo $value['id']; ?></td>
+                                <td>
+                                    <?php
+                                    $img = isset($value['image']) ? $value['image'] : 'public/images/no-image.png';
+                                    $str_out = '';
+                                    $str_out .= '<img src="' . $img . '" style="width: 50px"/>';
+                                    echo $str_out;
+                                    ?>
+                                </td>
                                 <td><?php echo $value['username']; ?></td>
                                 <td><?php echo $value['fullname']; ?></td>
                                 <td><?php echo $value['email']; ?></td>
@@ -69,14 +78,14 @@ $url_path = str_replace('\\', '/', $url_path);
                                     <!-- Xem -->
                                     <button class="btn-warning btn_click click_xem">
                                         <a href="list.php?<?php echo $mahoa_id ?>=
-            <?php echo base64_encode(base64_encode(base64_encode(base64_encode($value['id'])))) ?>&xem=aaaa">Xem</a></button>
+                                    <?php echo base64_encode(base64_encode(base64_encode(base64_encode($value['id'])))) ?>&xem=aaaa">Xem</a></button>
                                     <!-- Sửa -->
                                     <button onclick="btn_xoa()" class="btn-success btn_click click_edit">
                                         <a href="edit.php?id=<?php echo $value['id'] ?>&sua=aaaa">Sửa </a></button>
                                     <!-- Xóa -->
-                                    <button class="btn-danger btn_click click_xoa" onclick="thongbao()">
+                                    <button class="btn-danger btn_click click_xoa" onclick="return confirm('Ban co chac muon xoa?')">
                                         <a href="list.php?<?php echo $mahoa_id ?>=
-            <?php echo base64_encode(base64_encode(base64_encode(base64_encode($value['id'])))) ?>&xoa=sss">Xóa</a></button>
+                                    <?php echo base64_encode(base64_encode(base64_encode(base64_encode($value['id'])))) ?>&xoa=sss">Xóa</a></button>
                                 </td>
                             </tr>
                         <?php endforeach;
@@ -86,9 +95,29 @@ $url_path = str_replace('\\', '/', $url_path);
                         foreach ($searchrs as $value) : ?>
                             <tr>
                                 <td><?php echo $value['id']; ?></td>
+                                <td>
+                                    <?php
+                                    $img = isset($value['image']) ? $value['image'] : 'public/images/no-image.png';
+                                    $str_out = '';
+                                    $str_out .= '<img src="' . $img . '" style="width: 50px"/>';
+                                    echo $str_out;
+                                    ?>
+                                </td>
                                 <td><?php echo $value['username']; ?></td>
                                 <td><?php echo $value['fullname']; ?></td>
                                 <td><?php echo $value['email']; ?></td>
+                                <td>
+                                    <!-- Xem -->
+                                    <button class="btn-warning btn_click click_xem">
+                                        <a href="list.php?<?php echo $mahoa_id ?>=
+                                    <?php echo base64_encode(base64_encode(base64_encode(base64_encode($value['id'])))) ?>&xem=aaaa">Xem</a></button>
+                                    <!-- Sửa -->
+                                    <button onclick="btn_xoa()" class="btn-success btn_click click_edit">
+                                        <a href="edit.php?id=<?php echo $value['id'] ?>&sua=aaaa">Sửa </a></button>
+                                    <!-- Xóa -->
+                                    <button class="btn-danger btn_click click_xoa" onclick="return confirm('Ban co chac muon xoa?')">
+                                        <a href="list.php?<?php echo $mahoa_id ?>=
+                                    <?php echo base64_encode(base64_encode(base64_encode(base64_encode($value['id'])))) ?>&xoa=sss">Xóa</a></button>
                                 </td>
                             </tr>
                     <?php endforeach;

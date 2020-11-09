@@ -6,7 +6,6 @@ $pattern_uri = '/' . $pattern_document_root . '(.*)$/';
 preg_match_all($pattern_uri, __DIR__, $matches);
 $url_path = $url_host . $matches[1][0];
 $url_path = str_replace('\\', '/', $url_path);
-
 if (!class_exists('lessc')) {
     $dir_block = dirname($_SERVER['SCRIPT_FILENAME']);
     require_once($dir_block . '/libs/lessc.inc.php');
@@ -15,8 +14,6 @@ if (!class_exists('lessc')) {
 $less = new lessc;
 $less->compileFile('less/admin.less', 'public/css/admin.css');
 ?>
-
-
 <?php 
 session_start();
 include('functions.php');

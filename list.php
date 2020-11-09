@@ -51,6 +51,12 @@ if (isset($_GET['search'])) {
     $searchrs =  mysqli_query($conn, $search);
     $a = mysqli_fetch_array($searchrs);
 }
+//xoa
+if (isset($_GET["$mahoa_id"]) && isset($_GET['xoa'])) {
+    $usern = $_GET["$mahoa_id"];
+    $mh_usern = base64_decode(base64_decode(base64_decode(base64_decode($usern))));
+    delete($mh_usern);
+}
 ?>
 
 <!DOCTYPE html>

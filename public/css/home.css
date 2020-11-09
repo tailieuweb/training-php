@@ -18,3 +18,83 @@
 .header .profile_info small a:hover {
   text-decoration: none;
 }
+.header .top_modal {
+  background-color: rgba(0,0,0,0.76);
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  position: absolute;
+  display: none;
+  left: 0px;
+}
+.header .close_moda {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 1000000000;
+}
+.header .div_form {
+  z-index: 100;
+  text-align: center;
+  background: #fff;
+  width: 30%;
+  animation: 0.5s transiton_add linear;
+  border-radius: 10px;
+  position: relative;
+  top: 10%;
+  left: 35%;
+  height: 500px;
+}
+.header .div_form .item_edit {
+  background: #02031d8f;
+  margin-bottom: 50px;
+}
+.header .div_form .item_edit h2 {
+  text-align: center;
+  padding: 10px;
+  color: #fff;
+}
+.header .div_form .item_edit h1 {
+  padding: 10px 10px;
+  color: #fff;
+  font-size: 2em;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  text-align: center;
+}
+.header .div_form .item_edit h1:hover {
+  background: red;
+  cursor: pointer;
+}
+.header .div_form .input-group {
+  padding: 10px 30px;
+}
+.header .div_form .input-group .input_edit {
+  padding: 10px;
+  width: 90%;
+  outline: none;
+  border-radius: 5px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #000;
+}
+.header .div_form .input-group label {
+  font-size: 1em;
+  font-family: "Times New Roman", Times, serif;
+}
+.header .div_form .input-group .btn {
+  outline: none;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  font-family: "Times New Roman", Times, serif;
+  background: orange;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 50px;
+}
