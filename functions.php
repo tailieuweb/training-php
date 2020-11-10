@@ -21,8 +21,8 @@ function register(){
 
 	global $conn, $errors, $username,$fullname, $email, $image,$file;
 
-    	$username    =  escape($_POST['username']);
-    	$fullname    =  escape($_POST['fullname']);
+		$username    =  escape($_POST['username']);
+		$fullname    =  escape($_POST['fullname']);
 		$email       =  escape($_POST['email']);
 		$image       =  escape( YIVIC_FILE_PATH );
 		$file     =  escape( __DIR__.'/'.YIVIC_FILE_EXT_PATH );
