@@ -80,6 +80,9 @@ if(isset($_FILES['avata']))
 <html>
 <head>
 	<title>Create user</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="public/css/styles.css">
 	<style>
 		.header {
@@ -95,22 +98,22 @@ if(isset($_FILES['avata']))
 <div class="body_admin">
 
 <?php include "haeder.php" ?>
-	<form class="form_admin" method="post" action="admin.php" enctype="multipart/form-data">
+	<form class="form_admin" method="post" action="admin.php" enctype="multipart/form-data" class="needs-validation" novalidate>
 		
 				<h2>Admin - Create User</h2>
 		
 	
 			<label>Username</label>
-			<input class="form-control" type="text" name="username" value="<?php  if(isset($username)){ echo $username; } ?>" placeholder="Nhập username...">
-		
+			<input class="form-control" type="text" id="username" name="username" value="<?php  if(isset($username)){ echo $username; } ?>" placeholder="Nhập username..." required>
+			<small class="invalid-feedback">Không nhập ký tự đặc biệt</small>
 		
 			<label>Full Name</label>
-			<input class="form-control" type="text" name="fullname" value="<?php  if(isset($fullname)){ echo $fullname; } ?>" placeholder="Nhập fullname...">
-		
+			<input class="form-control" type="text" id="fullname" name="fullname" value="<?php  if(isset($fullname)){ echo $fullname; } ?>" placeholder="Nhập fullname..." required>
+			<small class="invalid-feedback">Vui lòng nhập đầy đủ họ tên</small>
 	
 			<label>Email</label>
-			<input class="form-control" type="email" name="email" value="<?php  if(isset($email)){ echo $email; } ?>" placeholder="Nhập email...">
-	
+			<input class="form-control" type="email" name="email" value="<?php  if(isset($email)){ echo $email; } ?>" placeholder="Nhập email..." required>
+			<small class="invalid-feedback">Vui lòng không bỏ trống</small>
 		
 			<label>User type</label>
 
@@ -122,11 +125,11 @@ if(isset($_FILES['avata']))
 	
 	
 			<label>Password</label>
-			<input class="form-control" type="password" name="password_1" placeholder="Nhập password...">
-	
+			<input class="form-control" id="password-1" type="password" name="password_1" placeholder="Nhập password..." required>
+			<small class="invalid-feedback">Vui lòng nhập password</small>
 			<label>Confirm password</label>
-			<input class="form-control" type="password" name="password_2" placeholder="Nhập lại password...">
-	
+			<input class="form-control"  id="password-2" type="password" name="password_2" placeholder="Nhập lại password..." required	>
+			<small class="invalid-feedback">Vui lòng nhập password</small>
             <label>Avata image</label>
             <input class="form-control" type="file" name="upload_file" id="upload_file"/>
             <?php
@@ -141,7 +144,7 @@ if(isset($_FILES['avata']))
 
 			<input class="form-control" type="file" name="avata">
 	
-			<button type="submit" class="btn" name="register_btn"> Create User</button>
+			<button type="submit" class="btn" name="register_btn" id="register_btn"> Create User</button>
 	
 
 		<p>

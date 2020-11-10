@@ -73,7 +73,7 @@ if(isset($_POST['password_1']) && isset($_POST['password_2']))
 </head>
 
 <body>
-	<div class="top_modal" id="top_modal">
+	<div class="top_modal add_user" id="top_modal">
 
 		<div class="div_form">
 			<form method="post" class="form-edit_pass" class="needs-validation" novalidate>

@@ -55,7 +55,7 @@ $id_edit = $_SESSION['user']['id'] ;
 	<link rel="stylesheet" type="text/css" href="public/css/style_sass.css">
 </head>
 <body>
-<div class="top_modal" id="top_modal">
+<div class="top_modal add_user" id="top_modal">
 
 		<div class="div_form">
 			<form method="post" class="form-edit_pass" class="needs-validation" novalidate>
@@ -124,10 +124,10 @@ $id_edit = $_SESSION['user']['id'] ;
 	
 	<script>
 		function mo_edit() {
-			document.getElementById("top_modal").style.display = "block";
+			document.getElementById("top_modal").style.display = 'block';
 		}
 		function modal_close() {
-			document.getElementById("top_modal").style.display = "none";
+			document.getElementById("top_modal").style.display = 'none';
 		}
 		const new_pass = document.querySelector('.add_user');
 		// const new_pass = document.querySelector('#new-pass');
