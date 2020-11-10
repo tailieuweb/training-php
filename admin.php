@@ -1,11 +1,19 @@
 <?php 
 session_start();
-
 include('functions.php');
-if (!isAdmin()) {
-	$_SESSION['msg'] = "You must log in first";
-	header('location: login.php');
-}?>
+
+if (isLoggedIn() && isAdmin()) {
+	if (isset($_POST['register_btn']) && $_SESSION['token'] == $_POST['token']) {
+		register();
+	}
+	$token = random(6);
+	$_SESSION['token'] = $token;
+}
+else{
+	header("location: login.php");
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +33,19 @@ if (!isAdmin()) {
 		<h2>Admin - Create User</h2>
 	</div>
 	
-	<form method="post" action="admin.php">
+	<form method="post" action="admin.php" enctype="multipart/form-data">
 
 		<?php echo display_error(); ?>
+		<?php if (isset($_SESSION['success'])) : ?>
+                <div class="error success">
+                    <h3>
+                        <?php
+                        echo $_SESSION['success'];
+                        unset($_SESSION['success']);
+                        ?>
+                    </h3>
+                </div>
+            <?php endif ?>
 
 		<div class="input-group">
 			<label>Username</label>
@@ -58,11 +76,16 @@ if (!isAdmin()) {
 			<input type="password" name="password_2">
 		</div>
 		<div class="input-group">
-			<button type="submit" class="btn" name="register_btn"> Create User</button>
+			<label for="image">User Image</label>
+            <input type="file" name="image" id="image">
 		</div>
-
+		<input type="hidden" name="token" value="<?php echo $token?>">
+		<div class="input-group">
+			<button type="submit" class="btn" name="register_btn" onClick = "return confirm('Bạn có muốn thêm?')"> Create User</button>
+		</div>
+		
 		<p>
-		<a href="http://localhost/newlogin/home.php">HOME</a></p>
+		<a href="home.php">HOME</a></p>
 	</form>
 </body>
 </html>
