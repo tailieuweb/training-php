@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-$user_id = intval($_GET['edit_tt']);
+$user_id = base64_decode($_GET['edit_tt ']);
 
 if($_SESSION['user']['id'] != $user_id && $_SESSION['user']['user_type'] != 'admin'){
     $_SESSION['msg'] = "You must log in first";
@@ -26,7 +26,7 @@ if (isset($_GET['edit_tt'])) {
 
 <html>
 <head>
-    <title>Edit</title>
+    <title>Register</title>
     <link rel="stylesheet" href="public/css/styles.css">
 </head>
 <body>

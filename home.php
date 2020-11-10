@@ -73,7 +73,7 @@ if(isset($_POST['password_1']) && isset($_POST['password_2']))
 </head>
 
 <body>
-	<div class="top_modal add_user" id="top_modal">
+	<div class="top_modal add_user	" id="top_modal">
 
 		<div class="div_form">
 			<form method="post" class="form-edit_pass" class="needs-validation" novalidate>
@@ -116,7 +116,7 @@ if(isset($_POST['password_1']) && isset($_POST['password_2']))
 				<div class="row">
 					<?php  if (isset($_SESSION['user'])) : ?>
 					<div class="col-md-4">
-						<img class="img-fluid" src="./public/images/<?php echo $row['images'];?>" alt="">
+						<img class="img-fluid" src="./public/images/<?php echo $row['image'];?>" alt="">
 					</div>
 					<div class="col-md-6">
 						<h6 class="name">Tên Tài Khoản: <?php echo $row['username']; ?></h6>

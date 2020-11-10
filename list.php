@@ -106,10 +106,11 @@ if(isset($_GET["$mahoacaulenh_id"]) && isset($_GET['xoa'])){
             }
 ?>
 <html>
+
 <head>
     <title>Register</title>
-  
-	
+
+
     <link rel="stylesheet" type="" href="public/css/styles.css">
     <link rel="stylesheet" type="" href="public/css/editstyle.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -117,164 +118,171 @@ if(isset($_GET["$mahoacaulenh_id"]) && isset($_GET['xoa'])){
     <script src="./block.js"></script>
 </head>
 <style>
-  
+    .list_detail {
+        text-align: center;
+        background: #fff;
+        width: 35%;
+        animation: 0.5s transiton_add linear;
+        border-radius: 10px;
+        position: relative;
+        top: 20%;
+        left: 30%;
+        height: 400px;
+    }
 
-.list_detail{
-    text-align: center;
-    background: #fff;
-    width: 35%;
-    animation: 0.5s transiton_add linear;
-    border-radius: 10px;
-    position: relative;
-    top: 20%;
-    left: 30%;
-    height: 400px;
-}
-#form_chinh, .content {
-	width: 80%;
-	margin: 0px auto;
-	padding: 20px;
-	border: 1px solid #B0C4DE;
-	background: white;
-	border-radius: 0px 0px 10px 10px;
-}
+    #form_chinh,
+    .content {
+        width: 80%;
+        margin: 0px auto;
+        padding: 20px;
+        border: 1px solid #B0C4DE;
+        background: white;
+        border-radius: 0px 0px 10px 10px;
+    }
 </style>
+
 <body>
-<div class="list">
-    <div class="header">
-        <h2>List User</h2>
-    
-    </div>
-<div id="form_chinh">
-        <?php echo display_error(); 
+    <div class="list">
+        <div class="header">
+            <h2>List User</h2>
+
+        </div>
+        <div id="form_chinh">
+            <?php echo display_error(); 
         ?>
-        <form class="form_search"  method="get" style="" >
+            <form class="form_search" method="get" style="">
 
-            <input type="text" class="form-control" name="search" id="search" style="text-align: center;"<?php if(isset($value_search)){ ?> value = "<?php echo $value_search ?>  " <?php  } ?>   placeholder="Search...">
-                    <button class="btn_search"> search</button>
-<!-- <input type="submit" value="Search" class="btn_click" style="margin-left:30px; background:yellowgreen ;"> -->
+                <input t ype="text" class="form-control" name="search" id="search" style="text-align: center;"
+                    <?php if(isset($value_search)){ ?> value="<?php echo $value_search ?>  " <?php  } ?>
+                    placeholder="Search...">
+                <button class="btn_search"> search</button>
+                <!-- <input type="submit" value="Search" class="btn_click" style="margin-left:30px; background:yellowgreen ;"> -->
 
 
-        </form >
+            </form>
 
-                           <?php if(isset($id)){ ?>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                    <img class="img-fluid" src="./public/images/<?php echo $row['images'];?>" alt="">
-                                   
-                                    </div>
-                                    <div class="col-md-6">
-                                        <?php if(isset($row)==true){ ?>
-                                            <p>
-                                            <?php echo $row['username']; ?>
-                                            </p>
-                                            <p>
-                                            <?php echo $row['fullname']; ?>
-                                            </p>
-                                            <p>
-                                            <?php echo $row['email']; ?>
-                                          
-                                            </p>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                                        <?php } else {?>
-             
-<table id="list_danhsach">       
-<tr>
-    <th>STT</th>
-    <th>Username</th>
-    <th>FullName</th>
-    <th>Email</th>
-    <th>Image</th>
-    <th>Chức Năng</th>
-</tr>
-        <?php if(isset($results))
+            <?php if(isset($id)){ ?>
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-fluid" src="./public/images/<?php echo $row['image'];?>" alt="">
+
+                </div>
+                <div class="col-md-6">
+                    <?php if(isset($row)==true){ ?>
+                    <p>
+                        <?php echo $row['username']; ?>
+                    </p>
+                    <p>
+                        <?php echo $row['fullname']; ?>
+                    </p>
+                    <p>
+                        <?php echo $row['email']; ?>
+
+                    </p>
+                    <?php } ?>
+                </div>
+            </div>
+            <?php } else {?>
+
+            <table id="list_danhsach">
+                <tr>
+                    <th>STT</th>
+                    <th>Username</th>
+                    <th>FullName</th>
+                    <th>Email</th>
+                    <th>Image</th>
+                    <th>Chức Năng</th>
+                </tr>
+                <?php if(isset($results))
         { foreach($results as $value): ?>
-            <tr>
-                <td><?php echo $value['id']; ?></td>
-                <td><?php echo $value['username']; ?></td>
-                <td ><?php echo $value['fullname']; ?></td>
-                 <td><?php echo $value['email']; ?></td>
-                 <td>
-                            <?php
+                <tr>
+                    <td><?php echo $value['id']; ?></td>
+                    <td><?php echo $value['username']; ?></td>
+                    <td><?php echo $value['fullname']; ?></td>
+                    <td><?php echo $value['email']; ?></td>
+                    <td>
+                        <?php
                                 $img = isset( $value['image'] ) ? $value['image'] : 'public/images/no-image.png';
                                 $str_out = '';
                                 $str_out .= '<img src="'.$img.'" style="width: 50px"/>';
                                 echo $str_out;
                             ?>
-                        </td>
-                 <td> <button onclick="btn_xoa()" class="btn-success btn_click click_edit"><a  style="text-decoration: none;
+                    </td>
+                    <td> <button onclick="btn_xoa()" class="btn-success btn_click click_edit"><a style="text-decoration: none;
                   color: #fff;" href="edit.php?edit=<?php echo base64_encode($value['id']) ?>">Sửa</a></button>
-                
-             
-          
-            
-                <a  style="text-decoration: none;
+
+
+
+
+                        <a style="text-decoration: none;
                   color: #fff;" class="btn-warning btn_click click_xem"
-                   href="list.php?<?php echo $mahoacaulenh_id?>=
+                            href="list.php?<?php echo $mahoacaulenh_id?>=
                    <?php echo base64_encode(base64_encode(base64_encode( base64_encode($value['id']))))?>&xem=aaaa">Xem</a>
-                 
-                    <button class="btn-danger btn_click click_xoa" >
-                    <a style="text-decoration: none;
-                  color: #fff;"  href="list.php?<?php echo $mahoacaulenh_id?>=
-                    <?php echo base64_encode(base64_encode(base64_encode( base64_encode($value['id']))))?>&xoa=sss" >xóa</a></button>               
-                </td>
-             </tr>
-            <?php endforeach;}
+
+                        <button class="btn-danger btn_click click_xoa">
+                            <a style="text-decoration: none;
+                  color: #fff;"
+                                href="list.php?<?php echo $mahoacaulenh_id?>=
+                    <?php echo base64_encode(base64_encode(base64_encode( base64_encode($value['id']))))?>&xoa=sss">xóa</a></button>
+                    </td>
+                </tr>
+                <?php endforeach;}
 
             if(isset($a)){
 
                 foreach($searchrs as $value): ?>
 
-                    <tr>
-                        <td><?php echo $value['id']; ?></td>
-                        <td><?php echo $value['username']; ?></td>
-                        <td ><?php echo $value['fullname']; ?></td>
-                         <td><?php echo $value['email']; ?></td>
-                         <td>
-                            <?php
+                <tr>
+                    <td><?php echo $value['id']; ?></td>
+                    <td><?php echo $value['username']; ?></td>
+                    <td><?php echo $value['fullname']; ?></td>
+                    <td><?php echo $value['email']; ?></td>
+                    <td>
+                        <?php
                                 $img = isset( $value['image'] ) ? $value['image'] : 'public/images/no-image.png';
                                 $str_out = '';
                                 $str_out .= '<img src="'.$img.'" style="width: 50px"/>';
                                 echo $str_out;
                             ?>
-                        </td>
-                         
-                        <td> <button onclick="btn_xoa()" class="btn-success btn_click click_edit"><a href="edit.php?edit=<?php echo  base64_encode($value['id']) ?>">Sửa</a></button>            
-                <a style="text-decoration: none;
+                    </td>
+
+                    <td> <button onclick="btn_xoa()" class="btn-success btn_click click_edit"><a
+                                href="edit.php?edit=<?php echo  base64_encode($value['id']) ?>">Sửa</a></button>
+                        <a style="text-decoration: none;
                   color: #fff;" href="list.php?id=<?php echo $value['id'] ?>&xem=aa"></a>
-                <a  style="text-decoration: none;
+                        <a style="text-decoration: none;
                   color: #fff;" class="btn-warning btn_click click_xem"
-                   href="list.php?<?php echo $mahoacaulenh_id?>=
+                            href="list.php?<?php echo $mahoacaulenh_id?>=
                    <?php echo base64_encode(base64_encode(base64_encode( base64_encode($value['id']))))?>&xem=aaaa">Xem</a>
-                    <button class="btn-danger btn_click click_xoa" >
-                    <a style="text-decoration: none;
-                  color: #fff;"  href="list.php?<?php echo $mahoacaulenh_id?>=
-                    <?php echo base64_encode(base64_encode(base64_encode( base64_encode($value['id']))))?>&xoa=sss" >xóa</a></button>               
-                </td>
-                     </tr>
-                    <?php endforeach;
+                        <button class="btn-danger btn_click click_xoa">
+                            <a style="text-decoration: none;
+                  color: #fff;"
+                                href="list.php?<?php echo $mahoacaulenh_id?>=
+                    <?php echo base64_encode(base64_encode(base64_encode( base64_encode($value['id']))))?>&xoa=sss">xóa</a></button>
+                    </td>
+                </tr>
+                <?php endforeach;
             }      
             ?>
-             </table> 
-             <?php if ($search == "") : ?>
-                <div class="row">
-                    <div class="col-md-12">
-                        <?php echo $pagination; ?>
-                    </div>
+            </table>
+            <?php if ($search == "") : ?>
+            <div class="row">
+                <div class="col-md-12">
+                    <?php echo $pagination; ?>
                 </div>
+            </div>
             <?php endif; ?>
-        <?php }?>
-      
-                    <div class="back" style="text-align: center">
-                        <input class="btn_back" type="button" value="Back" onClick="javascript:history.go(-1)" />
-                       
-                    </div>
+            <?php }?>
 
-</div >
+            <div class="back" style="text-align: center">
+                <input class="btn_back" type="button" value="Back" onClick="javascript:history.go(-1)" />
 
-</div>
+            </div>
+
+        </div>
+
+    </div>
 
 </body>
+
 </html>

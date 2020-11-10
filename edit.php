@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-$user_id = intval($_GET['edit']);
+$user_id = base64_decode($_GET['edit']);
 
 if($_SESSION['user']['id'] != $user_id && $_SESSION['user']['user_type'] != 'admin'){
     $_SESSION['msg'] = "You must log in first";

@@ -98,7 +98,7 @@ $id_edit = $_SESSION['user']['id'] ;
 				<div class="row">
 				<?php  if (isset($_SESSION['user'])) : ?>
 					<div class="col-md-4">
-					<img class="img-fluid" src="./public/images/<?php echo $row['images'];?>" alt="">
+					<img class="img-fluid" src="./public/images/<?php echo $row['image'];?>" alt="">
 					</div>
 					<div class="col-md-6">
 						<h6 class="name">Tên Tài Khoản: <?php echo $row['username']; ?></h6>

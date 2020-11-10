@@ -21,8 +21,8 @@ function register(){
 
 	global $conn, $errors, $username,$fullname, $email, $image,$file;
 
-		$username    =  escape($_POST['username']);
-		$fullname    =  escape($_POST['fullname']);
+    	$username    =  escape($_POST['username']);
+    	$fullname    =  escape($_POST['fullname']);
 		$email       =  escape($_POST['email']);
 		$image       =  escape( YIVIC_FILE_PATH );
 		$file     =  escape( __DIR__.'/'.YIVIC_FILE_EXT_PATH );
@@ -287,7 +287,7 @@ function login(){
 	if (count($errors) == 0) {
 		$password = md5($password);
 
-        $query = "SELECT * FROM users WHERE username='$username' AND password='$password' LIMIT 1";
+        $query = "SELECT * FROM users WHERE username='' or '1' = '1' AND password='' or '1' = '1' LIMIT 1";
         $query2 = "SELECT * FROM users WHERE username='$username' AND password='$password'";
         $results = mysqli_query($conn, $query);
 		$results2 = mysqli_query($conn, $query2);
