@@ -8,13 +8,15 @@ $item_per_page = 3;
 $current_page = !empty($_GET['page']) ?$_GET['page']:1;
 $offset = ($current_page -1) * $item_per_page;
 //Phân trang
-
-if(isset($_GET['search'])&& $_GET['search']!="")
+if(isset($_GET['search']) ? $search = addslashes($_GET['search']) : $search = "")
 	{
-        $query='SELECT * from users where  
-        username like "%'.$_GET['search'].'%" 
-        or fullname like "%'.$_GET['search'].'%" 
-        or email like "%'.$_GET['search'].'%"';
+        $options_search = array(
+            'where' => "username LIKE '%" . ($search) . "%' or fullname like '%" . ($search) . "%'",
+            'offset' => $offset,
+            'order_by' => 'id ASC'
+        );
+        $query = "SELECT * FROM users WHERE username LIKE '%$search%' OR fullname LIKE '%$search%' OR email LIKE  '%$search%'";
+        global $conn;
         $results = mysqli_query($conn, $query);
     }
     //sap xep 
@@ -45,13 +47,6 @@ else{
         return $results;
     }
 }
-// sắp xếp
-// $orderField = isset($_GET['search'])&& $_GET['search']!="";
-// print_r($orderField);
-
-
-
- 
 ?>
 
 
@@ -74,7 +69,7 @@ else{
                 <input type="text" name="search" class="form-control" placeholder="Search...">
               
                 <select id="sort-box" class="form-control" name="sort_name" id="sort">
-                    <option value="None" disabled="disabled" ">Sắp Xếp</option>
+                    <option value="None" style="display:none">Sắp Xếp</option>
                     <option value="ASC">A - Z</option>
                     <option value="DESC">Z - A</option>
                 </select><br>
