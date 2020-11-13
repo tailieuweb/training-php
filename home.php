@@ -7,12 +7,14 @@ if (!isAdmin()) {
 	$_SESSION['msg'] = "You must log in first";
 	header('location: login.php');
 }
-
 if (isset($_GET['logout'])) {
 	session_destroy();
 	unset($_SESSION['user']);
 	header("location: login.php");
 }
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,10 +61,11 @@ if (isset($_GET['logout'])) {
 						<?php echo $_SESSION['user']['fullname']; ?><br>
                         <?php echo $_SESSION['user']['email']; ?><br>
                         <a href="admin.php">Add User</a> &nbsp; <a href="list.php?list='1'">List User</a> &nbsp; 
-						<a href="edit.php?edit='1">Edit Information</a><br>
+						<a href="edit.php?edit='1'">Edit Information</a><br>
                         <a href="home.php?logout='1'" style="color: red;">Logout</a>
 					</small>
 					<?php 
+					date_default_timezone_set("Asia/Ho_Chi_Minh");
 					echo date('d/m/Y - H:i:s');
 					?>
 				<?php endif ?>

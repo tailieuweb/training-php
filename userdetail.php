@@ -2,13 +2,9 @@
 session_start();
 include('functions.php');
 
-if (isLoggedIn() && isAdmin()) {
-    $id = base64_decode(base64_decode(isset($_GET['id']) ? $_GET['id'] : ''));
-
-    if($id == ''){
-        header("location: list.php");
-    }
-    else{
+if (isAdmin()) {
+    if(isset($_POST['detail']) && isset($_POST['id'])){
+        $id = base64_decode($_POST['id']);
         $result = getUserById($id);
         if($result == []){
             header("location: list.php");

@@ -127,6 +127,7 @@ function editId($id)
 	if (empty($email)) {
 		array_push($errors, "Email is required");
 	}
+	
 	$result = getUserById($id);
 	if($email != $result['email']){
 		checkEmail($email);

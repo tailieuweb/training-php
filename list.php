@@ -2,7 +2,8 @@
 session_start();
 include('functions.php');
 
-if (isLoggedIn() && isAdmin()) {
+if (isAdmin()) {
+    
     $results = [];
     $id = isset($_GET['id']) ? $_GET['id'] : '';
 
@@ -39,29 +40,34 @@ if (isLoggedIn() && isAdmin()) {
         }  
         else{
             $sql = "SELECT * from users limit $start,$limit";
-        } 
-        
-        
+        }         
     }
     else{
         $sql = "SELECT * from users limit $start,$limit";
     }
     $arrs = mysqli_query($conn,$sql);
     
-    if(isset($_POST['delete']) && isset($_POST['id']) && $_SESSION['token'] == $_POST['token']){
-        $id = base64_decode(base64_decode(base64_decode($_POST['id'])));
-        $result = getUserById($id);
-        if($result['user_type'] != 'admin'){
-            deleteUser($id);
-        }
-        else{
-            $_SESSION['success'] = "Don't delete admin";
-        }
-        
+    //Delete
+    if(isset($_POST['delete']) && isset($_POST['id'])){
+            $id = base64_decode(base64_decode(base64_decode($_POST['id'])));
+            $result = getUserById($id);
+
+            //Kiểm tra user có phải là admin không
+            if($result['user_type'] != 'admin'){
+                //Kiểm tra token trong session với token gửi lên có bằng nhau không
+                if($_SESSION['token' .$id] == $_POST['token' .$id]){
+                    deleteUser($id);
+                }
+                else{
+                    header("location: list.php");
+                }
+                
+            }
+            else{
+                $_SESSION['success'] = "Don't delete admin";
+            }
     }
-    
   
-    
 }
 else{
     header("location: login.php");
@@ -130,14 +136,14 @@ else{
                         <?php }?></th>
 
                         <th scope="col">Email</th>
-                        
+                        <th scope="col">Detail</th>
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
                     </tr>   
                 </thead>
                 <tbody>
                     <?php foreach ($arrs as $arr) : ?>
-                    
+                       
                         <tr scope="row">
                             <td><img src="./public/images/<?php echo $arr['image'];?>" class="img-fluid" alt=""     style="width:50px; height:50px;"></td>
                             <td><?php echo $arr['id']; ?></td>
@@ -145,11 +151,20 @@ else{
                             <td><?php echo $arr['fullname']; ?></td>
                             <td><?php echo $arr['email']; ?></td>
                             <td>
-                                <a href="./userdetail.php?id=<?php echo base64_encode(base64_encode($arr['id'])) ?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                            
-                                <a href='./edit.php?id=<?php echo base64_encode($arr['id']) ?>'><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>  
                                
-                               
+                                <form></form>
+                                <form action="userdetail.php" method="post">
+                                <input type="hidden" name="id" value="<?php echo base64_encode($arr['id'])?>">
+                  
+                                <button type="submit" name="detail" class="btn btn-primary"><i class="fa fa-eye"></i></button>  
+                            </td>
+
+                            <td>
+                            <form></form>
+                                <form action="edit.php" method="post">
+                                <input type="hidden" name="id" value="<?php echo base64_encode(base64_encode($arr['id']))?>">
+                  
+                                <button type="submit" name="edit" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i></button>
                             </td>
                         
                            
@@ -158,12 +173,12 @@ else{
                                 <form action="" method="post">
                                 <input type="hidden" name="id" value="<?php echo base64_encode(base64_encode(base64_encode($arr['id'])))?>">
                                 <?php 
-                                  $token = random(6);
-                                  $_SESSION['token'] = $token;
-                                  $_SESSION['id'] =  $arr['id'];
+                                     $token = random(6);
+                                     $_SESSION['token' .$arr['id']] = $token;                 
                                 ?>
-                                <input type="hidden" name="token" value="<?php echo $token ?>">
-                                <button type="submit" name="delete" class="btn btn-primary" onClick="return confirm('Nhấn oke để xoá.')">Delete</button>
+                                <input type="hidden" name="<?php echo 'token' .$arr['id']?>" value="<?php echo $token ?>">
+                                     
+                                <button type="submit" name="delete" class="btn btn-primary" onClick="return confirm('Nhấn oke để xoá.')"><i class="fa fa-times"></i></button>
                             </td>
                                
                         </tr>
