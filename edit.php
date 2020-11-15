@@ -11,7 +11,7 @@ if (isAdmin()) {
             header('location: list.php');
         }   
     }
-    else{
+    else if(isset($_POST['save_btn']) && !isset($_POST['id'])){
         $id = $_SESSION['id'];
         if(!isset($_COOKIE['token' .$id])){
             editId($id);
@@ -26,6 +26,9 @@ if (isAdmin()) {
             $_SESSION['success'] = "Update again after 5 minutes";
             $result = getUserById($id); 
         }
+    }
+    else{
+        header('location: list.php');
     }
 } 
 else{
@@ -77,8 +80,7 @@ if (isset($_GET['edit'])) {
             <div class="input-group">
                 <label for="image">User Image</label>
                 <input type="file" name="image" id="image">
-            </div>
-                        
+            </div>      
             <div class="input-group">
                 <button  type="submit" class="btn" name="save_btn" onClick = "return confirm('Bạn có muốn sửa?')"> Save</button>
             </div>

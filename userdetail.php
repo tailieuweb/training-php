@@ -10,6 +10,9 @@ if (isAdmin()) {
             header("location: list.php");
         }
     }
+    else{
+        header("location: list.php");
+    }
 }
 else{
     header("location: login.php");

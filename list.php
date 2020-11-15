@@ -32,9 +32,10 @@ if (isAdmin()) {
     $arrs = [];
 
     if(isset($_GET['sort']) && isset($_GET['attr'])){
-        $sort = escape($_GET['sort']);
-        $attr = escape($_GET['attr']);
-        if(($sort == 'desc' && ($attr == 'username' || $attr == 'fullname')) || ($sort == 'asc' && ($attr == 'username' || $attr == 'fullname')))
+        $sort = $_GET['sort'];
+        $attr = $_GET['attr'];
+        if(($sort == 'desc' && ($attr == 'username' || $attr == 'fullname')) || 
+        ($sort == 'asc' && ($attr == 'username' || $attr == 'fullname')))
         {
             $sql = "SELECT * FROM users ORDER BY $attr $sort limit $start,$limit";
         }  
@@ -47,27 +48,24 @@ if (isAdmin()) {
     }
     $arrs = mysqli_query($conn,$sql);
     
-    //Delete
+    
     if(isset($_POST['delete']) && isset($_POST['id'])){
             $id = base64_decode(base64_decode(base64_decode($_POST['id'])));
             $result = getUserById($id);
 
-            //Kiểm tra user có phải là admin không
             if($result['user_type'] != 'admin'){
-                //Kiểm tra token trong session với token gửi lên có bằng nhau không
+                
                 if($_SESSION['token' .$id] == $_POST['token' .$id]){
                     deleteUser($id);
                 }
                 else{
                     header("location: list.php");
-                }
-                
+                }       
             }
             else{
                 $_SESSION['success'] = "Don't delete admin";
             }
     }
-  
 }
 else{
     header("location: login.php");
@@ -150,35 +148,42 @@ else{
                             <td><?php echo $arr['username']; ?></td>
                             <td><?php echo $arr['fullname']; ?></td>
                             <td><?php echo $arr['email']; ?></td>
+
                             <td>
-                               
                                 <form></form>
                                 <form action="userdetail.php" method="post">
+
                                 <input type="hidden" name="id" value="<?php echo base64_encode($arr['id'])?>">
                   
-                                <button type="submit" name="detail" class="btn btn-primary"><i class="fa fa-eye"></i></button>  
+                                <button type="submit" name="detail" class="btn btn-primary">
+                                <i class="fa fa-eye"></i></button>  
                             </td>
 
                             <td>
-                            <form></form>
+                                <form></form>
                                 <form action="edit.php" method="post">
-                                <input type="hidden" name="id" value="<?php echo base64_encode(base64_encode($arr['id']))?>">
-                  
-                                <button type="submit" name="edit" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i></button>
+
+                                <input type="hidden" name="id" 
+                                value="<?php echo base64_encode(base64_encode($arr['id']))?>">
+
+                                <button type="submit" name="edit" class="btn btn-primary">
+                                <i class="fa fa-pencil-square-o"></i></button>
                             </td>
                         
                            
                             <td>
                                 <form></form>
                                 <form action="" method="post">
-                                <input type="hidden" name="id" value="<?php echo base64_encode(base64_encode(base64_encode($arr['id'])))?>">
+                                <input type="hidden" name="id" 
+                                value="<?php echo base64_encode(base64_encode(base64_encode($arr['id'])))?>">
                                 <?php 
                                      $token = random(6);
                                      $_SESSION['token' .$arr['id']] = $token;                 
                                 ?>
-                                <input type="hidden" name="<?php echo 'token' .$arr['id']?>" value="<?php echo $token ?>">
-                                     
-                                <button type="submit" name="delete" class="btn btn-primary" onClick="return confirm('Nhấn oke để xoá.')"><i class="fa fa-times"></i></button>
+                                <input type="hidden" name="<?php echo 'token' .$arr['id']?>" 
+                                value="<?php echo $token ?>">       
+                                <button type="submit" name="delete" class="btn btn-primary" 
+                                onClick="return confirm('Nhấn oke để xoá')"><i class="fa fa-times"></i></button>
                             </td>
                                
                         </tr>

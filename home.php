@@ -13,8 +13,6 @@ if (isset($_GET['logout'])) {
 	header("location: login.php");
 }
 
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -65,7 +63,6 @@ if (isset($_GET['logout'])) {
                         <a href="home.php?logout='1'" style="color: red;">Logout</a>
 					</small>
 					<?php 
-					date_default_timezone_set("Asia/Ho_Chi_Minh");
 					echo date('d/m/Y - H:i:s');
 					?>
 				<?php endif ?>

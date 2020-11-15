@@ -7,7 +7,6 @@ $fullname = "";
 $email    = "";
 $errors   = array();
 
-
 function searchUser($keyword)
 {
 	global $conn;
@@ -16,10 +15,8 @@ function searchUser($keyword)
 	return $result;
 }
 
-
 function register()
 {
-
 	global $conn, $errors, $username, $fullname, $email;
 
 	$username    =  escape($_POST['username']);
@@ -68,7 +65,6 @@ function register()
 						
 						$_SESSION['success']  = "New user successfully created!!";
 						header('location: list.php');
-						
 					}
 				}
 				else{
@@ -118,8 +114,9 @@ function editId($id)
 {
 	global $conn, $id, $errors, $username, $fullname, $email;
 	
-	$fullname    =  escape($_POST['fullname']);
-	$email       =  escape($_POST['email']);
+	$fullname = escape($_POST['fullname']);
+	$email = escape($_POST['email']);
+
 	if (empty($fullname)) {
 		array_push($errors, "Fullname is required");
 	}
@@ -132,7 +129,7 @@ function editId($id)
 	if($email != $result['email']){
 		checkEmail($email);
 	}
-
+	
 	if (count($errors) == 0) {
 		if (!empty($_FILES['image']['name'])){
 		
@@ -146,7 +143,7 @@ function editId($id)
 				mysqli_query($conn, "UPDATE `users` SET `fullname` = '$fullname', `email`='$email', `image` = '$images' WHERE `id` = '$id'");
 
 				$_SESSION['success']  = "Change successfully";
-				// // header("Refresh:2; url=page2.php");
+				
 				if (isset($_COOKIE["user"]) and isset($_COOKIE["pass"])) {
 					setcookie("user", '', time() - 3600);
 					setcookie("pass", '', time() - 3600);
@@ -164,7 +161,7 @@ function editId($id)
 			mysqli_query($conn, "UPDATE `users` SET `fullname` = '$fullname', `email`='$email' WHERE `id` = '$id'");
 
 				$_SESSION['success']  = "Change successfully";
-				// // header("Refresh:2; url=page2.php");
+		
 				if (isset($_COOKIE["user"]) and isset($_COOKIE["pass"])) {
 					setcookie("user", '', time() - 3600);
 					setcookie("pass", '', time() - 3600);
@@ -222,10 +219,6 @@ function checkEmail($email){
 		array_push($errors, 'Email is already exists');
 	}
 }
-// if (isset($_POST['save_btn'])) {
-// 	editId($id);
-// }
-
 
 function getUserById($id)
 {
@@ -279,7 +272,6 @@ if (isset($_GET['logout'])) {
 if (isset($_POST['login_btn'])) {
 	login();
 }
-
 
 // LOGIN USER
 function login()
@@ -348,7 +340,6 @@ function isAdmin()
 	}
 }
 
-
 function random($soKiTu){
 	$mang = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',0, 1, 2, 3, 4, 6, 7, 8, 9);
 	$kq = '';
@@ -358,10 +349,5 @@ function random($soKiTu){
 	return md5($kq);
 }
 
-function getLink($id)
-{
-    $random = md5(uniqid($id));
-    return "$random";
-}
 
 

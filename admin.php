@@ -79,6 +79,7 @@ else{
 			<label for="image">User Image</label>
             <input type="file" name="image" id="image">
 		</div>
+	
 		<input type="hidden" name="token" value="<?php echo $token?>">
 		<div class="input-group">
 			<button type="submit" class="btn" name="register_btn" onClick = "return confirm('Bạn có muốn thêm?')"> Create User</button>

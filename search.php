@@ -2,17 +2,33 @@
 session_start();
 include('functions.php');
 
-// $results = [];
-// $keyword = isset($_GET['keyword']);
-
-// $results = search($keyword);
-
+//Chỉ cho nhập chữ, số và khoảng trắng
+$pattern = '/^[a-zA-Z0-9\s]*$/';
 $keyword = '';
 if (isset($_GET['keyword'])) {
-    $keyword = escape($_GET['keyword']);
+    if (preg_match($pattern, $_GET['keyword'])){
+        $keyword = $_GET['keyword'];
+    }
 }
-$listsearch = searchUser($keyword);
+$listSearch = searchUser($keyword);
 
+if(isset($_POST['delete']) && isset($_POST['id'])){
+    $id = base64_decode(base64_decode(base64_decode($_POST['id'])));
+    $result = getUserById($id);
+
+    if($result['user_type'] != 'admin'){
+        
+        if($_SESSION['token' .$id] == $_POST['token' .$id]){
+            deleteUser($id);
+        }
+        else{
+            header("location: list.php");
+        }       
+    }
+    else{
+        $_SESSION['success'] = "Don't delete admin";
+    }
+}
 ?>
 
 <html>
@@ -67,12 +83,14 @@ $listsearch = searchUser($keyword);
                         <th scope="col">Username</th>
                         <th scope="col">Full name</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Detail</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if ($keyword != '') {
-                        foreach ($listsearch as $result) : ?>
+                        foreach ($listSearch as $result) : ?>
 
                             <tr scope="row">
                             <td><img src="./public/images/<?php echo $result['image'];?>" class="img-fluid" alt="" style="width:50px; height:50px;"></td>
@@ -81,12 +99,37 @@ $listsearch = searchUser($keyword);
                                 <td><?php echo $result['fullname']; ?></td>
                                 <td><?php echo $result['email']; ?></td>
                                 <td>
-                                    <a href="detail.php/<?php echo $result['username'] . '-' . $result['id'] ?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    <form></form>
+                                    <form action="userdetail.php" method="post">
 
-                                    <a href="admin.php?id=<?php echo $result['id'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    <input type="hidden" name="id" value="<?php echo base64_encode($result['id'])?>">
+                    
+                                    <button type="submit" name="detail" class="btn btn-primary">
+                                    <i class="fa fa-eye"></i></button>
+                                </td>
+                                <td>
+                                    <form></form>
+                                    <form action="edit.php" method="post">
 
-                                    <a href="delete.php?id=<?php echo $result['id'] ?>" onclick="return onDelete()"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                    <input type="hidden" name="id" 
+                                    value="<?php echo base64_encode(base64_encode($result['id']))?>">
 
+                                    <button type="submit" name="edit" class="btn btn-primary">
+                                    <i class="fa fa-pencil-square-o"></i></button>
+                                </td>
+                                <td>
+                                    <form></form>
+                                    <form action="" method="post">
+                                    <input type="hidden" name="id" 
+                                    value="<?php echo base64_encode(base64_encode(base64_encode($result['id'])))?>">
+                                    <?php 
+                                        $token = random(6);
+                                        $_SESSION['token' .$result['id']] = $token;                 
+                                    ?>
+                                    <input type="hidden" name="<?php echo 'token' .$result['id']?>" 
+                                    value="<?php echo $token ?>">       
+                                    <button type="submit" name="delete" class="btn btn-primary" 
+                                    onClick="return confirm('Nhấn oke để xoá')"><i class="fa fa-times"></i></button>
                                 </td>
                             </tr>
                         <?php endforeach;
