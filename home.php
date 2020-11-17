@@ -64,7 +64,7 @@ if (!isAdmin()) {
 							<br>
 							<?php echo $_SESSION['user']['fullname']; ?><br>
 							<?php echo $_SESSION['user']['email']; ?><br>
-							<a href="admin.php">Add User</a> &nbsp; <a href="list.php">List User</a> &nbsp; <a href="autocheck.php">Auto check</a> &nbsp; <a href="edit.php?edit=<?= getLink($_SESSION['user']['id']) ?>">Edit Information</a><br>
+							<a href="admin.php">Add User</a> &nbsp; <a href="list.php">List User</a> &nbsp; <a href="edit.php?edit=<?= getLink($_SESSION['user']['id']) ?>">Edit Information</a><br>
 							<a href="home.php?logout='1'" style="color: red;">Logout</a>
 						</small>
 					<?php endif ?>
