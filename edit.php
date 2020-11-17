@@ -59,11 +59,11 @@ $_SESSION['version_update'] = $data['version'];
 
         <div class="input-group">
             <label>Username</label>
-            <input required type="text" name="username1" value="<?php echo $data['username']; ?>" placeholder="<?php echo $data['username']; ?>">
+            <input required type="text" name="username1" value="<?php echo $data['username']; ?>" placeholder="Enter username">
         </div>
         <div class="input-group">
             <label>Full Name</label>
-            <input required type="text" name="fullname1" value="<?php echo $data['fullname']; ?>" placeholder="<?php echo $data['fullname']; ?>">
+            <input required type="text" name="fullname1" value="<?php echo $data['fullname']; ?>" placeholder="Enter fullname">
         </div>
         <div class="input-group">
             <label>Email</label>
