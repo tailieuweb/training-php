@@ -1,10 +1,10 @@
-<?php 
-$conn = mysqli_connect('localhost', 'root', '', 'userlogin');
+<?php
+$conn = mysqli_connect('localhost', 'root', '', 'app_login');
 
 $username = "";
 $fullname = "";
 $email    = "";
-$errors   = array(); 
+$errors   = array();
 
 
 if (isset($_POST['register_btn'])) {
@@ -21,17 +21,17 @@ function register(){
 	$password_1  =  escape($_POST['password_1']);
 	$password_2  =  escape($_POST['password_2']);
 
-	if (empty($username)) { 
-		array_push($errors, "Username is required"); 
+	if (empty($username)) {
+		array_push($errors, "Username is required");
     }
-    if (empty($fullname)) { 
-		array_push($errors, "Fullname is required"); 
+    if (empty($fullname)) {
+		array_push($errors, "Fullname is required");
 	}
-	if (empty($email)) { 
-		array_push($errors, "Email is required"); 
+	if (empty($email)) {
+		array_push($errors, "Email is required");
 	}
-	if (empty($password_1)) { 
-		array_push($errors, "Password is required"); 
+	if (empty($password_1)) {
+		array_push($errors, "Password is required");
 	}
 	if ($password_1 != $password_2) {
 		array_push($errors, "The two passwords do not match");
@@ -56,7 +56,7 @@ function register(){
 
 			$_SESSION['user'] = getUserById($logged_in_user_id); // put logged in user in session
 			$_SESSION['success']  = "You are now logged in";
-			header('location: index.php');				
+			header('location: index.php');
 		}
 	}
 }
@@ -68,7 +68,7 @@ function edit() {
 	$email       =  escape($_POST['email1']);
 
 	mysqli_query($conn, "UPDATE `users` SET `username` = '$username', `fullname` = '$fullname', `email`='$email' WHERE `username` = '$username'");
-	
+
 	$_SESSION['success']  = "Change successfully";
 	// // header("Refresh:2; url=page2.php");
 	if (isset($_COOKIE["user"]) AND isset($_COOKIE["pass"])){
@@ -76,7 +76,7 @@ function edit() {
 		setcookie("pass", '', time() - 3600);
     }
 	header('location: home.php');
-	
+
 }
 
 if (isset($_POST['save_btn'])) {
@@ -127,7 +127,7 @@ if (isset($_GET['logout'])) {
 		setcookie("user", '', time() - 3600);
 		setcookie("pass", '', time() - 3600);
     }
-    
+
 	header("location: login.php");
 }
 if (isset($_POST['login_btn'])) {
@@ -163,28 +163,28 @@ function login(){
 		if (mysqli_num_rows($results) == 1) { // user found
 			// check if user is admin or user
             $logged_in_user = mysqli_fetch_assoc($results);
-            
+
 			if ($logged_in_user['user_type'] == 'admin') {
 
 				$_SESSION['user'] = $logged_in_user;
                 $_SESSION['success']  = "You are now logged in";
-                
+
                 if (isset($_POST['remember'])){
                     //thiết lập cookie username và password
-                    setcookie("user", $row['username'], time() + (86400 * 30)); 
-                    setcookie("pass", $row['password'], time() + (86400 * 30)); 
+                    setcookie("user", $row['username'], time() + (86400 * 30));
+                    setcookie("pass", $row['password'], time() + (86400 * 30));
                 }
 
 
-				header('location: home.php');		  
+				header('location: home.php');
 			}else{
 				$_SESSION['user'] = $logged_in_user;
                 $_SESSION['success']  = "You are now logged in";
-                
+
                 if (isset($_POST['remember'])){
                     //thiết lập cookie username và password
-                    setcookie("user", $row['username'], time() + (86400 * 30)); 
-                    setcookie("pass", $row['password'], time() + (86400 * 30)); 
+                    setcookie("user", $row['username'], time() + (86400 * 30));
+                    setcookie("pass", $row['password'], time() + (86400 * 30));
                 }
 
 				header('location: index.php');
