@@ -32,14 +32,33 @@ class UserModel extends BaseModel {
 
     }
 
+    /**
+     * Update user
+     * @param $input
+     * @return mixed
+     */
     public function updateUser($input) {
-        $sql = 'UPDATE users SET user_fullname = "' . $input['user_fullname'];
+        $sql = 'UPDATE users SET name = "' . $input['name'] .'", password="'. md5($input['password']) .'"';
         $user = $this->update($sql);
 
         return $user;
     }
 
-    public function getUsers($params) {
+    /**
+     * Insert user
+     * @param $input
+     * @return mixed
+     */
+    public function insertUser($input) {
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
+                "'" . $input['name'] . "', '".$input['password']."')";
+
+        $user = $this->insert($sql);
+
+        return $user;
+    }
+
+    public function getUsers($params = []) {
         $sql = 'SELECT * FROM users';
         $users = $this->select($sql);
 
