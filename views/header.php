@@ -9,20 +9,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">App Web 1</a>
+                <a class="navbar-brand" href="list_users.php">App Web 1</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
                     <li><a href="form_user.php">Add new user</a></li>
 
                 </ul>
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" class="form-control" placeholder="Search users">
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" name="search" class="btn btn-default">Search</button>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -31,11 +30,10 @@
                             Account <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
+                            <li><a href="#">Profile</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">Login</a></li>
+                            <li><a href="#">Logout</a></li>
                         </ul>
                     </li>
                 </ul>

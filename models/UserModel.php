@@ -20,14 +20,19 @@ class UserModel extends BaseModel {
 
     public function auth($userName, $password) {
         $md5Password = $password;
-        $sql = 'SELECT * FROM users WHERE user_name = "' . $userName . '" AND user_password = "'.$md5Password.'"';
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
 
         $user = $this->select($sql);
         return $user;
     }
 
+    /**
+     * Delete user by id
+     * @param $id
+     * @return mixed
+     */
     public function deleteUserById($id) {
-        $sql = 'DELETE FROM users WEHRE user_id = '.$id;
+        $sql = 'DELETE FROM users WHERE id = '.$id;
         return $this->delete($sql);
 
     }
@@ -38,7 +43,10 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        $sql = 'UPDATE users SET name = "' . $input['name'] .'", password="'. md5($input['password']) .'"';
+        $sql = 'UPDATE users SET 
+                 name = "' . $input['name'] .'", 
+                 password="'. md5($input['password']) .'"
+                WHERE id = ' . $input['id'];
         $user = $this->update($sql);
 
         return $user;
