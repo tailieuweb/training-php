@@ -4,8 +4,8 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
 
-    public function findUserById($id) {
-        $sql = 'SELECT * FROM users WHERE id = '.$id;
+    public function findUserById($uid) {
+        $sql = "SELECT * FROM users WHERE uid = '$uid'";
         $user = $this->select($sql);
 
         return $user;
@@ -31,7 +31,7 @@ class UserModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($uid) {
+    public function deleteUserByuId($uid) {
         $sql = "DELETE FROM users WHERE `uid` = '$uid'";
         return $this->delete($sql);
     }
@@ -45,7 +45,7 @@ class UserModel extends BaseModel {
         $sql = 'UPDATE users SET 
                  name = "' . $input['name'] .'", 
                  password="'. md5($input['password']) .'"
-                WHERE id = ' . $input['id'];
+                WHERE uid = ' . $input['uid'];
         $user = $this->update($sql);
 
         return $user;

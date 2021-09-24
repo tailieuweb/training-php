@@ -7,6 +7,6 @@ $uid = NULL;
 
 if (!empty($_GET['uid'])) {
     $uid = $_GET['uid'];
-    $userModel->deleteUserById($uid); //Delete existing user
+    $userModel->deleteUserByuId($uid); //Delete existing user
 }
 header('location: list_users.php');
