@@ -4,17 +4,17 @@ $userModel = new UserModel();
 $user = NULL; //Add new user
 $uid = NULL;
 if (!empty($_GET['uid'])) {
-    $uid = $_GET['uid'];
-    $user = $userModel->findUserByUId($uid); //Update existing user
+  $uid = $_GET['uid'];
+  $user = $userModel->findUserByUId($uid); //Update existing user
 }
 if (!empty($_POST['submit'])) {
 
-    if (!empty($uid)) {
-        $userModel->updateUser($_POST);
-    } else {
-        $userModel->insertUser($_POST);
-    }
-    header('location: list_users.php');
+  if (!empty($uid)) {
+    $userModel->updateUser($_POST);
+  } else {
+    $userModel->insertUser($_POST);
+  }
+  header('location: list_users.php');
 }
 ?>
 <!DOCTYPE html>
@@ -40,12 +40,16 @@ if (!empty($_POST['submit'])) {
         <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
       </div>
       <div class="form-group">
-        <label for="password">Fullname</label>
-        <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
+        <label for="fullname">Fullname</label>
+        <span><?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?></span>
       </div>
       <div class="form-group">
-        <label for="password">Email</label>
-        <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
+        <label for="email">Email</label>
+        <span><?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?></span>
+      </div>
+      <div class="form-group">
+        <label for="type">Type</label>
+        <span><?php if (!empty($user[0]['type'])) echo $user[0]['type'] ?></span>
       </div>
     </form>
     <?php } else { ?>

@@ -42,10 +42,11 @@ class UserModel extends BaseModel
         $fullname = $input['fullname'];
         $email = $input['email'];
         $type = $input['type'];
-        $uid = md5($name . $fullname . $email . $type);
+        $password = $input['password'];
+        $uid = md5($name . $fullname . $email . $type .  $password);
         $oldUId = $input['uid'];
         $sql = "UPDATE `users` SET `uid` = '$uid', `name` = '$name', `fullname` = '$fullname', 
-                `email` = '$email', `type` = '$type' 
+                `email` = '$email', `type` = '$type'
                 WHERE `uid` = '$oldUId' ";
         $user = $this->update($sql);
         return $user;
@@ -61,9 +62,10 @@ class UserModel extends BaseModel
         $fullname = $input['fullname'];
         $email = $input['email'];
         $type = $input['type'];
-        $uid = md5($name . $fullname . $email . $type);
-        $sql = "INSERT INTO `users` (`uid`, `name`, `fullname`, `email`, `type`) 
-                VALUES ('$uid', '$name ', '$fullname', '$email', '$type') ";
+        $password = md5($input['password']);
+        $uid = md5($name . $fullname . $email . $type .  $password);
+        $sql = "INSERT INTO `users` (`uid`, `name`, `fullname`, `email`, `type`, `password`) 
+                VALUES ('$uid', '$name ', '$fullname', '$email', '$type', '$password') ";
         $user = $this->insert($sql);
         return $user;
     }

@@ -3,7 +3,7 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 $params = [];
 if (!empty($_GET['keyword'])) {
-    $params['keyword'] = $_GET['keyword'];
+  $params['keyword'] = $_GET['keyword'];
 }
 $users = $userModel->getUsers($params);
 ?>
@@ -35,25 +35,26 @@ $users = $userModel->getUsers($params);
       <tbody>
         <?php foreach ($users as $user) { ?>
         <tr>
-          <th scope="row"><?php echo $user['id'] ?></th>
+          <th scope="row"><?= $user['id'] ?></th>
           <td>
-            <?php echo $user['name'] ?>
+            <?= $user['name'] ?>
           </td>
           <td>
-            <?php echo $user['fullname'] ?>
+            <?= $user['fullname'] ?>
           </td>
           <td>
-            <?php echo $user['type'] ?>
+            <?= $user['type'] ?>
           </td>
           <td>
-            <a href="form_user.php?uid=<?php echo $user['uid'] ?>">
+            <a href="form_user.php?uid=<?= $user['uid'] ?>">
               <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
             </a>
-            <a href="view_user.php?uid=<?php echo $user['uid'] ?>">
+            <a href="view_user.php?uid=<?= $user['uid'] ?>">
               <i class="fa fa-eye" aria-hidden="true" title="View"></i>
             </a>
-            <a href="delete_user.php?uid=<?php echo $user['uid'] ?>">
-              <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
+            <a href="delete_user.php?uid=<?= $user['uid'] ?>">
+              <i class="fa fa-eraser" aria-hidden="true" title="Delete"
+                onclick="return confirm('Are you sure you want to delete this item?');"></i>
             </a>
           </td>
         </tr>
@@ -66,6 +67,7 @@ $users = $userModel->getUsers($params);
     </div>
     <?php } ?>
   </div>
+  <script src="./public/js/script.js"></script>
 </body>
 
 </html>

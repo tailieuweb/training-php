@@ -3,26 +3,19 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 $user = NULL; //Add new user
 $uid = NULL;
+$result = NULL;
 //
 if (!empty($_GET['uid'])) {
-    $uid = $_GET['uid'];
-    $user = $userModel->findUserByUId($uid); //Update existing user
+  $uid = $_GET['uid'];
+  $user = $userModel->findUserByUId($uid); //Update existing user
 }
 if (!empty($_POST['submit'])) {
-    if (!empty($uid)) {
-        $userModel->updateUser($_POST);
-    } else {
-        $userModel->insertUser($_POST);
-    }
-    header('location: list_users.php');
-}
-function textInfo($text)
-{
-    if (!empty($text)) return $text;
-}
-function echoSelected($val, $textInfo)
-{
-    if (!empty($textInfo) && $val == $textInfo) return "selected";
+  if (!empty($uid)) {
+    $userModel->updateUser($_POST);
+  } else {
+    $userModel->insertUser($_POST);
+  }
+  header("location: list_users.php");
 }
 ?>
 <!DOCTYPE html>
@@ -51,6 +44,11 @@ function echoSelected($val, $textInfo)
         <label for="fullname">Fullname</label>
         <input name="fullname" class="form-control" placeholder="Fullname"
           value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="password"
+          value="<?php if (!empty($user[0]['password'])) echo $user[0]['password'] ?>">
       </div>
       <div class="form-group">
         <label for="email">Email</label>
