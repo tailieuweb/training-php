@@ -1,74 +1,55 @@
 <?php
-
 require_once 'BaseModel.php';
-
 class UserModel extends BaseModel
 {
-
-    public function findUserByName($name)
+    public function findUserByUId($uid)
     {
-        $sql = "SELECT * FROM users WHERE name = '$name' ";
+        $sql = "SELECT * FROM users WHERE uid = '$uid' ";
         $user = $this->select($sql);
         return $user;
     }
-
-    public function findUserById($id)
-    {
-        $sql = 'SELECT * FROM users WHERE id = ' . $id;
-        $user = $this->select($sql);
-
-        return $user;
-    }
-
     public function findUser($keyword)
     {
         $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
         $user = $this->select($sql);
-
         return $user;
     }
-
     public function auth($userName, $password)
     {
         $md5Password = $password;
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
-
         $user = $this->select($sql);
         return $user;
     }
-
     /**
      * Delete user by id
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id)
+    public function deleteUserByUId($uid)
     {
-        $maxId = $this->select("SELECT max(id) FROM table");
-        for ($i = 1; $i <= $maxId; $i++) {
-            if (md5($i) == $id) {
-                $sql = 'DELETE FROM users WHERE id = ' . $i;
-                return $this->delete($sql);
-            }
-        }
-        return;
+        $sql = "DELETE FROM users WHERE uid = '$uid' ";
+        return $this->delete($sql);
     }
-
     /**
      * Update user
      * @param $input
      * @return mixed
      */
-    public function updateUser($input, $oldName)
+    public function updateUser($input)
     {
         $name = $input['name'];
-        $password = $input['password'];
-        $sql = "UPDATE users SET name = '$name' , password = '$password' WHERE name = '$oldName' ";
+        $fullname = $input['fullname'];
+        $email = $input['email'];
+        $type = $input['type'];
+        $uid = md5($name . $fullname . $email . $type);
+        $oldUId = $input['uid'];
+        $sql = "UPDATE `users` SET `uid` = '$uid', `name` = '$name', `fullname` = '$fullname', 
+                `email` = '$email', `type` = '$type' 
+                WHERE `uid` = '$oldUId' ";
         $user = $this->update($sql);
-
         return $user;
     }
-
     /**
      * Insert user
      * @param $input
@@ -76,16 +57,16 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
-        echo $input;
-        return;
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-            "'" . $input['name'] . "', '" . $input['password'] . "')";
-
+        $name = $input['name'];
+        $fullname = $input['fullname'];
+        $email = $input['email'];
+        $type = $input['type'];
+        $uid = md5($name . $fullname . $email . $type);
+        $sql = "INSERT INTO `users` (`uid`, `name`, `fullname`, `email`, `type`) 
+                VALUES ('$uid', '$name ', '$fullname', '$email', '$type') ";
         $user = $this->insert($sql);
-
         return $user;
     }
-
     /**
      * Search users
      * @param array $params
@@ -99,9 +80,7 @@ class UserModel extends BaseModel
         } else {
             $sql = 'SELECT * FROM users';
         }
-
         $users = $this->select($sql);
-
         return $users;
     }
 }
