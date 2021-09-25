@@ -6,14 +6,8 @@ $user = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
-<<<<<<< HEAD
-    //$id = $_GET['id'];
-    $id = base64_decode($_GET['id']);
-    $id = substr($id,0,-5);
-=======
     $id = base64_decode($_GET['id']);
     $id = substr($id,0,-5);//
->>>>>>> 1-php-202109/2-groups/4-D/1-21-Hung
     $user = $userModel->findUserById($id);//Update existing user
 }
 
