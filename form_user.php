@@ -14,6 +14,7 @@ if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
         $userModel->updateUser($_POST);
+    
     } else {
         $userModel->insertUser($_POST);
     }
@@ -30,7 +31,6 @@ if (!empty($_POST['submit'])) {
 <body>
     <?php include 'views/header.php'?>
     <div class="container">
-
             <?php if ($user || empty($id)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
@@ -44,6 +44,13 @@ if (!empty($_POST['submit'])) {
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="type-user">
+                            <option value="Admin">Admin</option>
+                            <option value="Guest">Guest</option>
+                            <option value="User">User</option>
+                        </select>
                     </div>
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
