@@ -46,12 +46,16 @@ class UserModel extends BaseModel
      * @param $input
      * @return mixed
      */
-    public function updateUser($input)
-    {
+    public function updateUser($input) {
+        $tz_object = new DateTimeZone('Asia/Ho_Chi_Minh');    
+        $datetime = new DateTime();
+        $datetime->setTimezone($tz_object);
+
         $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] . '", 
-                 password="' . md5($input['password']) . '"
-                WHERE id = ' . $input['id'];
+                 name = "' . $input['name'] .'", 
+                 updated_at = "' . $datetime->format('Y\-m\-d\ h:i:sa') . '", 
+                 password="'. ($input['password']) .'"
+                WHERE id = ' . base64_decode($input['id']);
         $user = $this->update($sql);
 
         return $user;
@@ -62,10 +66,22 @@ class UserModel extends BaseModel
      * @param $input
      * @return mixed
      */
+<<<<<<< HEAD
     public function insertUser($input)
     {
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
             "'" . $input['name'] . "', '" . $input['password'] . "', '" . NULL . "', '" . NULL . "', '" . NULL . "')";
+=======
+    public function insertUser($input) {
+        $tz_object = new DateTimeZone('Asia/Ho_Chi_Minh');    
+        $datetime = new DateTime();
+        $datetime->setTimezone($tz_object);
+        
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`, `updated_at`) VALUES (" .
+                "'" . $input['name'] . "', '"
+                .$input['password']. "', '"
+                .$datetime->format('Y\-m\-d\ h:i:sa')."')";
+>>>>>>> 1-php-202109/2-groups/1-A/4-54-Linh
 
         $user = $this->insert($sql);
 
