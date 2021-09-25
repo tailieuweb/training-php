@@ -58,9 +58,14 @@ if (!empty($_POST['submit'])) {
                         <label for="type">Type user</label>
                         <select name="type" class="form-control">
                             <?php
-                            foreach($type as $value) { ?>
-                            <option value="<?php echo $value['id']  ?>"><?php echo $value['name_type']  ?></option>
-                            <?php } ?>
+                            foreach($type as $value) {
+                                if($value['type_id'] == $user[0]['type']){
+                                ?>
+                            <option selected value="<?php if (!empty($value['type_id'])) echo $value['type_id'] ?>"><?php if (!empty($value['name_type'])) echo $value['name_type'] ?></option>
+                            <?php } else{ ?>
+                                    <option value="<?php if (!empty($value['type_id'])) echo $value['type_id'] ?>"><?php if (!empty($value['name_type'])) echo $value['name_type'] ?></option>
+                             <?php   }
+                            }?>
                         </select>
                     </div>
 

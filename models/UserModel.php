@@ -71,7 +71,7 @@ class UserModel extends BaseModel {
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
         } else {
-            $sql = 'SELECT * FROM users join types on users.type = types.id';
+            $sql = 'SELECT * FROM users join types on users.type = types.type_id';
         }
 
         $users = $this->select($sql);
