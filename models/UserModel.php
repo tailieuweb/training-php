@@ -38,6 +38,8 @@ class UserModel extends BaseModel {
 
     }
 
+
+
     /**
      * Update user
      * @param $input
