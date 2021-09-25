@@ -10,7 +10,6 @@ if (!empty($_GET['id'])) {
     $user = $userModel->findUserById(base64_decode($id)); //Update existing user
 }
 
-
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
