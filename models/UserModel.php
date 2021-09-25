@@ -32,6 +32,7 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function deleteUserById($id) {
+      
         $sql = 'DELETE FROM users WHERE id = '.$id;
         return $this->delete($sql);
 
@@ -58,8 +59,8 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".$input['password']."')";
+        $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
+                "'" . $input['name'] . "', '', '', '', '".$input['password']."')";
 
         $user = $this->insert($sql);
 

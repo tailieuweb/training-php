@@ -13,7 +13,10 @@ $users = $userModel->getUsers();
 <body>
     <?php include 'views/header.php'?>
     <div class="container">
-        <?php if (!empty($users)) {?>
+        <?php if (!empty($users)) {
+            ?>
+            <!-- $users = base64_decode($_GET['users']);
+            $users = substr($users,0,-5); -->
             <div class="alert alert-warning" role="alert">
                 List of users!
             </div>
@@ -28,7 +31,8 @@ $users = $userModel->getUsers();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user) {?>
+                    <?php foreach ($users as $user) {
+                        ?>
                         <tr>
                             <th scope="row"><?php echo $user['id']?></th>
                             <td>
