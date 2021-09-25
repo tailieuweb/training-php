@@ -55,6 +55,7 @@ if (!empty($_POST['submit'])) {
                         <input name="email" class="form-control" placeholder="Email">
                     </div>
 
+
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
             <?php } else { ?>
