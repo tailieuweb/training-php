@@ -46,6 +46,22 @@ if (!empty($_POST['submit'])) {
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="fullname" name="fullname" class="form-control" placeholder="Fullname">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="Type">Type</label>
+                        <select name="types" id="types">
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                            <option value="guest">Guest</option>
+                        </select>
+                    </div>
 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
