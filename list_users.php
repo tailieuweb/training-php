@@ -2,7 +2,12 @@
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
-$users = $userModel->getUsers();
+$params = [];
+if (!empty($_GET['keyword'])) {
+    $params['keyword'] = $_GET['keyword'];
+}
+
+$users = $userModel->getUsers($params);
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,7 +43,7 @@ $users = $userModel->getUsers();
                                 <?php echo $user['fullname']?>
                             </td>
                             <td>
-                                <?php echo $user['type']?>
+                                <?php echo $user['name_type']?>
                             </td>
                             <td>
                                 <a href="form_user.php?id=<?php echo $user['id'] ?>">
