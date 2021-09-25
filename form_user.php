@@ -1,6 +1,7 @@
 <?php
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
+$type = $userModel->getTypes();
 
 $user = NULL; //Add new user
 $id = NULL;
@@ -42,6 +43,27 @@ if (!empty($_POST['submit'])) {
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
                     </div>
+
+                    <div class="form-group">
+                        <label for="fullname">Fullname</label>
+                        <input class="form-control" name="fullname" placeholder="Fullname" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input  class="form-control" name="email" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type">Type user</label>
+                        <select name="type" class="form-control">
+                            <?php
+                            foreach($type as $value) { ?>
+                            <option value="<?php echo $value['id']  ?>"><?php echo $value['name_type']  ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
