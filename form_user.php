@@ -55,13 +55,25 @@ if (!empty($_POST['submit'])) {
                         <input type="email" name="email" class="form-control" placeholder="Email">
                     </div>
                     <div class="form-group">
-                        <label for="Type">Type</label>
-                        <select name="types" id="types">
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
-                            <option value="guest">Guest</option>
-                        </select>
-                    </div>
+                    <label for="type">Type</label>
+                    <select class="form-control" name="type">
+                        <option value="admin" <?php if (!empty($user[0]['type'])) {
+                                                    if ($user[0]['type'] == 'admin') {
+                                                        echo "selected";
+                                                    }
+                                                } ?>>Admin</option>
+                        <option value="user" <?php if (!empty($user[0]['type'])) {
+                                                    if ($user[0]['type'] == 'user') {
+                                                        echo "selected";
+                                                    }
+                                                } ?>>User</option>
+                        <option value="guest" <?php if (!empty($user[0]['type'])) {
+                                                    if ($user[0]['type'] == 'guest') {
+                                                        echo "selected";
+                                                    }
+                                                } ?>>Guest</option>
+                    </select>
+                </div>
 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
