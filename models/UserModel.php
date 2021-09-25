@@ -62,7 +62,7 @@ class UserModel extends BaseModel {
                 "'" . $input['name'] . "', '".$input['password']."')";
 
         $user = $this->insert($sql);
-
+        
         return $user;
     }
 
