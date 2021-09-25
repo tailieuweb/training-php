@@ -5,7 +5,12 @@ $key_code_f = "uea872dJDFD9HFYyytrt909";
 $key_code_l = "dsaj93nlds";
 
 
-$users = $userModel->getUsers();
+$params = [];
+if (!empty($_GET['keyword'])) {
+    $params['keyword'] = $_GET['keyword'];
+}
+
+$users = $userModel->getUsers($params);
 ?>
 <!DOCTYPE html>
 <html>

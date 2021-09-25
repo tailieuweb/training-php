@@ -1,6 +1,12 @@
+<?php
+$keyword = '';
+if(!empty($_GET['keyword'])) {
+    $keyword = $_GET['keyword'];
+}
+?>
 <div class="container">
     <nav class="navbar navbar-icon-top navbar-default">
-        <div class="container-fluid">
+
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -19,9 +25,11 @@
                 </ul>
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search users">
+                        <input type="text" name="keyword" class="form-control" placeholder="Search users"
+                               value="<?php echo $keyword ?>"
+                        >
                     </div>
-                    <button type="submit" name="search" class="btn btn-default">Search</button>
+                    <button type="submit" class="btn btn-default">Search</button>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -38,6 +46,5 @@
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
     </nav>
 </div>
