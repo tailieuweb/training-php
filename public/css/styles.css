@@ -1,5 +1,4 @@
 .header {
-
     margin: 50px auto 0px;
     color: white;
     background: #5F9EA0;
@@ -9,22 +8,39 @@
     border-radius: 10px 10px 0px 0px;
     padding: 20px;
 }
-.content {
 
+form,
+.content {
     margin: 0px auto;
     padding: 20px;
     border: 1px solid #B0C4DE;
     background: white;
     border-radius: 0px 0px 10px 10px;
 }
+
+.secl {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 .input-group {
     margin: 10px 0px 10px 0px;
 }
+
 .input-group label {
     display: block;
     text-align: left;
     margin: 3px;
 }
+
 .input-group input {
     height: 30px;
     width: 93%;
@@ -33,6 +49,7 @@
     border-radius: 5px;
     border: 1px solid gray;
 }
+
 #user_type {
     height: 40px;
     width: 98%;
@@ -42,6 +59,7 @@
     border-radius: 5px;
     border: 1px solid gray;
 }
+
 .btn {
     padding: 10px;
     font-size: 15px;
@@ -50,6 +68,7 @@
     border: none;
     border-radius: 5px;
 }
+
 .error {
     width: 92%;
     margin: 0px auto;
@@ -60,12 +79,14 @@
     border-radius: 5px;
     text-align: left;
 }
+
 .success {
     color: #3c763d;
     background: #dff0d8;
     border: 1px solid #3c763d;
     margin-bottom: 20px;
 }
+
 .profile_info img {
     display: inline-block;
     width: 50px;
@@ -73,10 +94,12 @@
     margin: 5px;
     float: left;
 }
+
 .profile_info div {
     display: inline-block;
     margin: 5px;
 }
+
 .profile_info:after {
     content: "";
     display: block;
@@ -86,43 +109,55 @@
 .badge-default {
     background-color: #777;
 }
+
 .badge-primary {
     background-color: #337ab7;
 }
+
 .badge-success {
     background-color: #5cb85c;
 }
+
 .badge-info {
     background-color: #5bc0de;
 }
+
 .badge-warning {
     background-color: #f0ad4e;
 }
+
 .badge-danger {
     background-color: #d9534f;
 }
 
-.navbar-icon-top .navbar-nav>li>a>.fa, .navbar-icon-top .navbar-nav>li>a>.glyphicon {
+.navbar-icon-top .navbar-nav>li>a>.fa,
+.navbar-icon-top .navbar-nav>li>a>.glyphicon {
     position: relative;
     width: 36px;
     font-size: 24px;
 }
-.navbar-icon-top .navbar-nav>li>a>.fa>.badge, .navbar-icon-top .navbar-nav>li>a>.glyphicon>.badge {
+
+.navbar-icon-top .navbar-nav>li>a>.fa>.badge,
+.navbar-icon-top .navbar-nav>li>a>.glyphicon>.badge {
     position: absolute;
     right: 0;
     font-family: sans-serif;
 }
+
 .navbar-icon-top .navbar-nav>li>a>.fa {
     top: 3px;
     line-height: 12px;
 }
+
 .navbar-icon-top .navbar-nav>li>a>.fa>.badge {
     top: -10px;
 }
+
 .navbar-icon-top .navbar-nav>li>a>.glyphicon {
     top: 6px;
     line-height: 6px;
 }
+
 .navbar-icon-top .navbar-nav>li>a>.glyphicon>.badge {
     top: -16px;
 }
@@ -135,7 +170,8 @@
         margin-top: 25px;
         margin-bottom: 25px;
     }
-    .navbar-icon-top .navbar-btn, .navbar-icon-top .navbar-form {
+    .navbar-icon-top .navbar-btn,
+    .navbar-icon-top .navbar-form {
         margin-top: 18px;
         margin-bottom: 18px;
     }
@@ -147,14 +183,16 @@
         padding-top: 0;
         padding-bottom: 0;
     }
-    .navbar-icon-top .navbar-nav>li>a>.fa, .navbar-icon-top .navbar-nav>li>a>.glyphicon {
+    .navbar-icon-top .navbar-nav>li>a>.fa,
+    .navbar-icon-top .navbar-nav>li>a>.glyphicon {
         display: block;
         width: 48px;
         margin: 2px auto 4px auto;
         top: 0;
         line-height: 24px;
     }
-    .navbar-icon-top .navbar-nav>li>a>.fa>.badge, .navbar-icon-top .navbar-nav>li>a>.glyphicon>.badge {
+    .navbar-icon-top .navbar-nav>li>a>.fa>.badge,
+    .navbar-icon-top .navbar-nav>li>a>.glyphicon>.badge {
         top: -7px;
     }
 }
