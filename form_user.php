@@ -56,14 +56,14 @@ if (!empty($_POST['submit'])) {
                     <label for="email">Email</label>
                     <input name="email" class="form-control" placeholder="Email">
                 </div>
-                <form>
+                <!-- <form>
                     <label for="type">Type</label>
                     <select class="secl" name="dropdown">
                         <option class="less1" selected>Admin</option>
                         <option>User</option>
                         <option>Guest</option>
                     </select>
-                </form>
+                </form> -->
                 <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
             </form>
         <?php } else { ?>
