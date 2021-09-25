@@ -32,7 +32,7 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
-            <?php if ($user || empty($id)) { ?>
+            <?php if ($user || isset($id)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
