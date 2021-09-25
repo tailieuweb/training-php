@@ -7,7 +7,7 @@ $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+    $user = $userModel->findUserById($id); //Update existing user
 }
 
 
@@ -24,14 +24,15 @@ if (!empty($_POST['submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>User form</title>
     <?php include 'views/meta.php' ?>
 </head>
-<body>
-    <?php include 'views/header.php'?>
-    <div class="container">
 
+<body>
+    <?php include 'views/header.php' ?>
+    <div class="container">
             <?php if ($user || empty($id)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
@@ -56,7 +57,11 @@ if (!empty($_POST['submit'])) {
                     </div>
                     <div class="form-group">
                         <label for="type">Type</label>
-                        <input class="form-control" name="type" placeholder="Type" value="<?php if (!empty($user[0]['type'])) echo $user[0]['type'] ?>">
+                            <select name="type">
+                                <option value="admin">admin</option>
+                                <option value="user">user</option>
+                                <option value="guest">guest</option>
+                            </select>
                     </div>
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -67,4 +72,5 @@ if (!empty($_POST['submit'])) {
             <?php } ?>
     </div>
 </body>
+
 </html>
