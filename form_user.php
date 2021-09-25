@@ -68,7 +68,8 @@ if (!empty($_POST['submit'])) {
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
 
-                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="submit" value="submit" class="btn btn-primary"><?php
+                     if (!empty($user[0]['name'])){echo 'Update';}else{echo 'Submit';} ?></button>
                 </form>
             <?php } else { ?>
                 <div class="alert alert-success" role="alert">
