@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', '', 'app_login');
+$conn = mysqli_connect('localhost', 'root', '', 'app_web1');
 
 $username = "";
 $fullname = "";
@@ -156,7 +156,7 @@ function login(){
 		$password = md5($password);
 
         $query = "SELECT * FROM users WHERE username='$username' AND password='$password' LIMIT 1";
-        $query2 = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+        $query2 = "SELECT * FROM users WHERE username='$username' AND password='$password' ";
         $results = mysqli_query($conn, $query);
         $results2 = mysqli_query($conn, $query2);
         $row = mysqli_fetch_array($results2);

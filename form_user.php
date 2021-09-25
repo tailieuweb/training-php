@@ -10,7 +10,6 @@ if (!empty($_GET['id'])) {
     $user = $userModel->findUserById($id);//Update existing user
 }
 
-
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
@@ -46,7 +45,6 @@ if (!empty($_POST['submit'])) {
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
-
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
             <?php } else { ?>
