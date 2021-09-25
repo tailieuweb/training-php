@@ -47,8 +47,13 @@ class UserModel extends BaseModel {
      */
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
+<<<<<<< HEAD
                  name = "' . $input['name'] .'",
                    fullname = "' . $input['fullname'] .'",  
+=======
+                 name = "' . $input['name'] .'", 
+                 email = "'.$input['email'].'",
+>>>>>>> 1-php-202109/2-groups/4-D/3-22-Khang
                  password="'. md5($input['password']) .'"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
@@ -65,12 +70,17 @@ class UserModel extends BaseModel {
      //fix add new user
     public function insertUser($input) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
                 "'" . $input['name'] . "','" . $input['fullname'] . "', '', '', '".$input['password']."')";
 =======
         $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`,`type`,`password`) VALUES (" .
                 "'" . $input['name'] . "','','".$input['email']."','','".$input['password']."')";
 >>>>>>> 1-php-202109/2-groups/4-D/1-21-Hung
+=======
+        $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`,`email`,`type` ,`password`) VALUES (" .
+                "'" . $input['name'] . "', '','','' ,'".$input['password']."')";
+>>>>>>> 1-php-202109/2-groups/4-D/3-22-Khang
 
         $user = $this->insert($sql);
 
