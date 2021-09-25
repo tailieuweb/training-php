@@ -46,15 +46,16 @@ class UserModel extends BaseModel
      * @param $input
      * @return mixed
      */
-    public function updateUser($input) {
-        $tz_object = new DateTimeZone('Asia/Ho_Chi_Minh');    
+    public function updateUser($input)
+    {
+        $tz_object = new DateTimeZone('Asia/Ho_Chi_Minh');
         $datetime = new DateTime();
         $datetime->setTimezone($tz_object);
 
         $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
+                 name = "' . $input['name'] . '", 
                  updated_at = "' . $datetime->format('Y\-m\-d\ h:i:sa') . '", 
-                 password="'. ($input['password']) .'"
+                 password="' . (md5($input['password'])) . '"
                 WHERE id = ' . base64_decode($input['id']);
         $user = $this->update($sql);
 
@@ -65,25 +66,44 @@ class UserModel extends BaseModel
      * Insert user
      * @param $input
      * @return mixed
+     * Sĩ Hùng update thêm các parameter: fullname, email, type
+     * 25/09/2021
      */
-    public function insertUser($input) {
-        $tz_object = new DateTimeZone('Asia/Ho_Chi_Minh');    
+    public function insertUser($input)
+    {
+        $tz_object = new DateTimeZone('Asia/Ho_Chi_Minh');
         $datetime = new DateTime();
         $datetime->setTimezone($tz_object);
-        
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`, `updated_at`) VALUES (" .
-                "'" . $input['name'] . "', '"
-                .$input['password']. "', '"
-                .$datetime->format('Y\-m\-d\ h:i:sa')."')";
+
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`, `updated_at`,`fullname`,`email`,`type`) VALUES (" .
+            "'" . $input['name'] . "', '"
+            . $input['password'] . "', '"
+            . $datetime->format('Y\-m\-d\ h:i:sa') . "', '"
+            . $input['fullname'] . "', '"
+            . $input['email'] . "', '"
+            . $input['type'] . "', '"
+            . "')";
 
         $user = $this->insert($sql);
 
         return $user;
     }
 
+
+    /**
+     * Search users
+     * @param array $params
+     * @return array
+     */
     public function getUsers($params = [])
     {
-        $sql = 'SELECT * FROM users';
+        //Keyword
+        if (!empty($params['keyword'])) {
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
+        } else {
+            $sql = 'SELECT * FROM users';
+        }
+
         $users = $this->select($sql);
 
         return $users;
