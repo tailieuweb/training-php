@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', '', 'app_login');
+$conn = mysqli_connect('localhost', 'root', 'mysql', 'app_web1');
 
 $username = "";
 $fullname = "";
