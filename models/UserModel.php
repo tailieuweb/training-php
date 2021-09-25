@@ -13,9 +13,8 @@ class UserModel extends BaseModel
         return $user;
     }
 
-    public function findUser($keyword)
-    {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
+    public function findUser($keyword) {
+        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
         $user = $this->select($sql);
 
         return $user;
@@ -54,7 +53,7 @@ class UserModel extends BaseModel
         $sql = 'UPDATE users SET 
                  name = "' . $input['name'] .'", 
                  updated_at = "' . $datetime->format('Y\-m\-d\ h:i:sa') . '", 
-                 password="'. ($input['password']) .'"
+                 password="'. (md5($input['password'])) .'"
                 WHERE id = ' . base64_decode($input['id']);
         $user = $this->update($sql);
 
@@ -81,9 +80,20 @@ class UserModel extends BaseModel
         return $user;
     }
 
-    public function getUsers($params = [])
-    {
-        $sql = 'SELECT * FROM users';
+
+    /**
+     * Search users
+     * @param array $params
+     * @return array
+     */
+    public function getUsers($params = []) {
+        //Keyword
+        if (!empty($params['keyword'])) {
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+        } else {
+            $sql = 'SELECT * FROM users';
+        }
+
         $users = $this->select($sql);
 
         return $users;
