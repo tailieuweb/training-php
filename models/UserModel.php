@@ -72,7 +72,7 @@ class UserModel extends BaseModel {
         $sql = "INSERT INTO `users`(`name`, `fullname`, `email`, `type`, `password`) 
         VALUES ('".$input['name']."','".$input['fullname']."','".$input['email']."','".$input['type']."','".$password."')";
         $user = $this->insert($sql);
-
+        
         return $user;
     }
 
