@@ -1,6 +1,9 @@
 <?php
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
+$key_code_f = "uea872dJDFD9HFYyytrt909";
+$key_code_l = "dsaj93nlds";
+
 
 $users = $userModel->getUsers();
 ?>
@@ -47,7 +50,7 @@ $users = $userModel->getUsers();
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="delete_user.php?id=<?php echo $user['id']?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
