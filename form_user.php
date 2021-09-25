@@ -19,6 +19,7 @@ if (!empty($_POST['submit'])) {
             // var_dump($user[0]['updated_at']);
             // var_dump($_GET['updated_at']);
             if ($user[0]['updated_at'] == $_GET['updated_at']) {
+			// 1-php-202109/2-groups/1-A/3-26-Liem
                 $userModel->updateUser($_POST);
                 header('location: list_users.php');
             }
@@ -31,7 +32,7 @@ if (!empty($_POST['submit'])) {
         $userModel->insertUser($_POST);
         header('location: list_users.php');
     }
-    // header('location: list_users.php');
+
 }
 
 ?>
@@ -61,6 +62,18 @@ if (!empty($_POST['submit'])) {
                     <label for="password">Password</label>
                     <input type="password" name="password" class="form-control" placeholder="Password">
                 </div>
+
+
+                <!-- Le Tuan Liem 25/09/2021 15:00 -->
+                <!-- update form select type -->
+              <div class="form-group">
+              <label for="">Type</label>
+                <select name="type" class="form-select" aria-label="Default select example">
+                    <option>user</option>
+                    <option>admin</option>
+                 </select>
+              </div>
+
 
                 <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
             </form>

@@ -1,14 +1,20 @@
 <?php
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
-//Hung - 25/09/2021
+
 $user = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
+
     $user = $userModel->findUserById(base64_decode($id));//Update existing user
 }
+
+=======
+    $user = $userModel->findUserById($id);//Update existing user
+}
+
 
 if (!empty($_POST['submit'])) {
 
