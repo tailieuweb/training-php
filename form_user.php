@@ -3,12 +3,13 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$id = NULL; //Add new user
+$id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     $user = $userModel->findUserById(base64_decode($id));//Update existing user
 }
+
 
 if (!empty($_POST['submit'])) {
 
@@ -38,30 +39,29 @@ if (!empty($_POST['submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>User form</title>
     <?php include 'views/meta.php' ?>
 </head>
-
 <body>
-    <?php include 'views/header.php' ?>
+    <?php include 'views/header.php'?>
     <div class="container">
 
-        <?php if ($user || empty($id)) { ?>
-            <div class="alert alert-warning" role="alert">
-                User form
-            </div>
-            <form method="POST">
-                <input type="hidden" name="id" value="<?php echo $id ?>">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+            <?php if ($user || empty($id)) { ?>
+                <div class="alert alert-warning" role="alert">
+                    User form
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Password">
-                </div>
+                <form method="POST">
+                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                    </div>
+
 
 
                 <!-- Le Tuan Liem 25/09/2021 15:00 -->
@@ -82,7 +82,7 @@ if (!empty($_POST['submit'])) {
                 User not found!
             </div>
         <?php } ?>
+
     </div>
 </body>
-
 </html>
