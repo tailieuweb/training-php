@@ -2,12 +2,10 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel
-{
+class UserModel extends BaseModel {
 
-    public function findUserById($id)
-    {
-        $sql = 'SELECT * FROM users WHERE id = ' . $id;
+    public function findUserById($id) {
+        $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
 
         return $user;
@@ -20,10 +18,9 @@ class UserModel extends BaseModel
         return $user;
     }
 
-    public function auth($userName, $password)
-    {
+    public function auth($userName, $password) {
         $md5Password = $password;
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
 
         $user = $this->select($sql);
         return $user;
@@ -34,10 +31,10 @@ class UserModel extends BaseModel
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id)
-    {
-        $sql = 'DELETE FROM users WHERE id = ' . $id;
+    public function deleteUserById($id) {
+        $sql = 'DELETE FROM users WHERE id = '.$id;
         return $this->delete($sql);
+
     }
 
     /**
@@ -53,7 +50,7 @@ class UserModel extends BaseModel
         $sql = 'UPDATE users SET 
                  name = "' . $input['name'] .'", 
                  updated_at = "' . $datetime->format('Y\-m\-d\ h:i:sa') . '", 
-                 password="'. (md5($input['password'])) .'"
+                 password="'. ($input['password']) .'"
                 WHERE id = ' . base64_decode($input['id']);
         $user = $this->update($sql);
 
@@ -80,20 +77,8 @@ class UserModel extends BaseModel
         return $user;
     }
 
-
-    /**
-     * Search users
-     * @param array $params
-     * @return array
-     */
     public function getUsers($params = []) {
-        //Keyword
-        if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
-        } else {
-            $sql = 'SELECT * FROM users';
-        }
-
+        $sql = 'SELECT * FROM users';
         $users = $this->select($sql);
 
         return $users;
