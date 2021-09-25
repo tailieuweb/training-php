@@ -50,31 +50,11 @@ if (!empty($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label for="fullname">Full Name</label>
-                    <input class="form-control" name="fullname" placeholder="Full name" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+                    <input name="fullname" class="form-control" placeholder="Fullname" value="<?php if (!empty($fullname[0]['fullname'])) echo $fullname[0]['fullname'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input name="email" class="form-control" placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <label for="type">Type</label>
-                    <select class="form-control" name="type">
-                        <option value="admin" <?php if (!empty($user[0]['type'])) {
-                                                    if ($user[0]['type'] == 'admin') {
-                                                        echo "selected";
-                                                    }
-                                                } ?>>Admin</option>
-                        <option value="user" <?php if (!empty($user[0]['type'])) {
-                                                    if ($user[0]['type'] == 'user') {
-                                                        echo "selected";
-                                                    }
-                                                } ?>>User</option>
-                        <option value="guest" <?php if (!empty($user[0]['type'])) {
-                                                    if ($user[0]['type'] == 'guest') {
-                                                        echo "selected";
-                                                    }
-                                                } ?>>Guest</option>
-                    </select>
+                    <input name="email" class="form-control" placeholder="Email" value="<?php if (!empty($email[0]['email'])) echo $email[0]['email'] ?>">
                 </div>
                 <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
             </form>
