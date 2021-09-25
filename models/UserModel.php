@@ -68,8 +68,19 @@ class UserModel extends BaseModel {
         return $user;
     }
 
+    /**
+     * Search users
+     * @param array $params
+     * @return array
+     */
     public function getUsers($params = []) {
-        $sql = 'SELECT * FROM users';
+        //Keyword
+        if (!empty($params['keyword'])) {
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+        } else {
+            $sql = 'SELECT * FROM users';
+        }
+
         $users = $this->select($sql);
 
         return $users;
