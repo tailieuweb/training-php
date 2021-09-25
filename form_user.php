@@ -46,6 +46,15 @@ if (!empty($_POST['submit'])) {
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
+                    <div class="form-group">
+                        <label for="fullname">Password</label>
+                        <input name="fullname" class="form-control" placeholder="Fullname">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Password</label>
+                        <input name="email" class="form-control" placeholder="Email">
+                    </div>
+
 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
