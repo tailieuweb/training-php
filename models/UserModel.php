@@ -47,7 +47,8 @@ class UserModel extends BaseModel {
      */
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
+                 name = "' . $input['name'] .'",
+                   fullname = "' . $input['fullname'] .'",  
                  password="'. md5($input['password']) .'"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
@@ -62,7 +63,7 @@ class UserModel extends BaseModel {
      */
     public function insertUser($input) {
         $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '', '', '', '".$input['password']."')";
+                "'" . $input['name'] . "','" . $input['fullname'] . "', '', '', '".$input['password']."')";
 
         $user = $this->insert($sql);
 
