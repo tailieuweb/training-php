@@ -11,8 +11,7 @@ if (!empty($_GET['id'])) {
 }
 
 
-if (!empty($_POST['submit'])) {
-
+if (!empty($_POST['submit'])){
     if (!empty($id)) {
         $userModel->updateUser($_POST);
     } else {
