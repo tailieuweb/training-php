@@ -19,7 +19,7 @@ class UserModel extends BaseModel {
     }
 
     public function auth($userName, $password) {
-        $md5Password = $password;
+        $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
 
         $user = $this->select($sql);
@@ -31,7 +31,8 @@ class UserModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id) {
+    public function deleteUserById($md5ID) {
+        $id = $this->decryptID($md5ID);
         $sql = 'DELETE FROM users WHERE id = '.$id;
         return $this->delete($sql);
 
@@ -43,10 +44,18 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        $sql = 'UPDATE users SET 
+        // Get date
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $date = date('Y-m-d h:i:s', time());
+        $sql = 'UPDATE `users` SET 
                  name = "' . $input['name'] .'", 
-                 password="'. md5($input['password']) .'"
+                  fullname="'. $input['fullname'] .'",
+                  email="'. $input['email'] .'",
+                  type="'. $input['type'] .'",
+                 password="'. md5($input['password']) .'",
+                 update_at="'. $date .'"
                 WHERE id = ' . $input['id'];
+                var_dump($sql);
         $user = $this->update($sql);
 
         return $user;
@@ -58,9 +67,10 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".$input['password']."')";
-
+        $password = md5($input['password']);
+        // SQL
+        $sql = "INSERT INTO `users`(`name`, `fullname`, `email`, `type`, `password`) 
+        VALUES ('".$input['name']."','".$input['fullname']."','".$input['email']."','".$input['type']."','".$password."')";
         $user = $this->insert($sql);
 
         return $user;
@@ -82,5 +92,16 @@ class UserModel extends BaseModel {
         $users = $this->select($sql);
 
         return $users;
+    }
+
+    // Decrypt id
+    private function decryptID($md5Id){
+        $users = $this->getUsers();
+        foreach($users as $user){
+            if(md5($user['id'].'TDC') == $md5Id){
+                return $user['id'];
+            }
+        }
+        return 0;
     }
 }
