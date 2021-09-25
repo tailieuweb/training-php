@@ -2,7 +2,12 @@
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
-$users = $userModel->getUsers();
+$params = [];
+if (!empty($_GET['keyword'])) {
+    $params['keyword'] = $_GET['keyword'];
+}
+
+$users = $userModel->getUsers($params);
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,13 +48,13 @@ $users = $userModel->getUsers();
                                 <?php echo $user['type'] ?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo base64_encode($user['id'])  ?>">
+                                <a href="form_user.php?id=<?php echo base64_encode($user['id']) ?>&updated_at=<?php echo $user['updated_at'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="view_user.php?id=<?php echo base64_encode($user['id']) ?>&updated_at=<?php echo $user['updated_at'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo hash('ripemd160', $user['id'])  ?>">
+                                <a href="delete_user.php?id=<?php echo base64_encode($user['id']) ?>&updated_at=<?php echo $user['updated_at'] ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
