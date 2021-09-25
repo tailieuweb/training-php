@@ -3,8 +3,7 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$data = $_GET['id'];
-$id = base64_decode($data);
+$id = NULL; //Add new user
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
