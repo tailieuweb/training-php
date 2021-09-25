@@ -6,9 +6,14 @@ $user = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
+<<<<<<< HEAD
     //$id = $_GET['id'];
     $id = base64_decode($_GET['id']);
     $id = substr($id,0,-5);
+=======
+    $id = base64_decode($_GET['id']);
+    $id = substr($id,0,-5);//
+>>>>>>> 1-php-202109/2-groups/4-D/1-21-Hung
     $user = $userModel->findUserById($id);//Update existing user
 }
 
@@ -45,6 +50,7 @@ if (!empty($_POST['submit'])) {
                         <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
                     </div>
                     <div class="form-group">
+<<<<<<< HEAD
                         <label for="fullname">Full name</label>
                         <input class="form-control" name="fullname" placeholder="Full name" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
                     </div>
@@ -63,13 +69,23 @@ if (!empty($_POST['submit'])) {
                         
                     </div> -->
                   
+=======
+                        <label for="Email">Email</label>
+                        <input class="form-control" name="email" placeholder="email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
+                    </div>
+>>>>>>> 1-php-202109/2-groups/4-D/1-21-Hung
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
+<<<<<<< HEAD
 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary"><?php
                      if (!empty($user[0]['id'])){echo 'Update';}else{echo 'Submit';} ?></button>
+=======
+                    
+                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+>>>>>>> 1-php-202109/2-groups/4-D/1-21-Hung
                 </form>
             <?php } else { ?>
                 <div class="alert alert-success" role="alert">
