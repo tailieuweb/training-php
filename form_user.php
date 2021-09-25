@@ -7,18 +7,32 @@ $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+    $user = $userModel->findUserById(base64_decode($id));//Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
-        $userModel->updateUser($_POST);
+        // Nếu thời gian cập nhật hiện tại của user trên db chưa thay đổi thì cho sửa:
+        $user = $userModel->findUserById(base64_decode($_POST['id']));
+        if (count($user) > 0) {
+            // var_dump($user[0]['updated_at']);
+            // var_dump($_GET['updated_at']);
+            if ($user[0]['updated_at'] == $_GET['updated_at']) {
+                $userModel->updateUser($_POST);
+                header('location: list_users.php');
+            }
+            else {
+                echo '<h5>THÔNG TIN ĐÃ BỊ THAY ĐỔI TRƯỚC ĐÓ!
+                <br>Bạn hãy quay lại trang "list_users.php" để xem cập nhật mới nhất!</h5>';
+            }
+        }        
     } else {
         $userModel->insertUser($_POST);
+        header('location: list_users.php');
     }
-    header('location: list_users.php');
+    // header('location: list_users.php');
 }
 
 ?>
