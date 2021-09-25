@@ -52,7 +52,10 @@ $users = $userModel->getUsers($params);
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $user['id'] ?>">
+                                <?php $string = "=4a12a+sadgak=ad/akdmdsaaks==nbjfdsi" ?>
+                                <?php $string1 = "+9aj4a12a+sadgak=ad/đk5xva//k5sks+sm6" ?>
+                                <?php $result = $string . base64_encode($user['id']) . $string1 ?>
+                                <a href="delete_user.php?id=<?php echo $result ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
