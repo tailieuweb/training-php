@@ -55,11 +55,10 @@ class UserModel extends BaseModel {
         $sql = 'UPDATE users SET 
                  name = "' . $input['name'] . '", 
                  updated_at = "' . $datetime->format('Y\-m\-d\ h:i:sa') . '", 
-
-
+                 fullname="' . ($input['fullname']) . '",
+                 email="' . ($input['email']) . '",
                  password="' . (md5($input['password'])) . '",
                  type="' . $input['type'] . '"
-
 
                 WHERE id = ' . base64_decode($input['id']);
         $user = $this->update($sql);

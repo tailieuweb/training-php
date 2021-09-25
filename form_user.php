@@ -21,7 +21,6 @@ if (!empty($_POST['submit'])) {
             // var_dump($_GET['updated_at']);
             if ($user[0]['updated_at'] == $_GET['updated_at']) {
 
-			/ 1-php-202109/2-groups/1-A/3-26-Liem
                 $userModel->updateUser($_POST);
                 header('location: list_users.php');
             } else {
@@ -39,19 +38,16 @@ if (!empty($_POST['submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>User form</title>
     <?php include 'views/meta.php' ?>
 </head>
+
 <body>
-    <?php include 'views/header.php'?>
+    <?php include 'views/header.php' ?>
     <div class="container">
 
-<<<<<<< HEAD
-            <?php if ($user || empty($id)) { ?>
-                <div class="alert alert-warning" role="alert">
-                    User form
-=======
         <?php if ($user || empty($id)) { ?>
             <div class="alert alert-warning" role="alert">
                 User form
@@ -74,18 +70,7 @@ if (!empty($_POST['submit'])) {
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" name="password" class="form-control" placeholder="Password">
-
-                <!-- Le Tuan Liem 25/09/2021 15:00 -->
-                <!-- update form select type -->
-              <div class="form-group">
-              <label for="">Type</label>
-                <select name="type" class="form-select" aria-label="Default select example">
-                    <option>user</option>
-                    <option>admin</option>
-                 </select>
-              </div>
-
-
+                </div>
                 <!-- Le Tuan Liem 25/09/2021 15:00 -->
                 <!-- update form select type -->
                 <div class="form-group">
@@ -106,4 +91,5 @@ if (!empty($_POST['submit'])) {
 
     </div>
 </body>
+
 </html>
