@@ -50,9 +50,9 @@ class UserModel extends BaseModel {
                  name = "' . $input['name'] .'", 
                  email = "'.$input['email'].'",
                  password="'. md5($input['password']) .'"
+                 password="'. md5($input['password']) .'", type = "'.$input['type'].'"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
-
         return $user;
     }
 
