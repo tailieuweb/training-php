@@ -76,9 +76,6 @@ class UserModel extends BaseModel
      * 25/09/2021
      */
 
-    // Le Tuan Liem 25/09/2021 15:00
-    //  update param Type from select form type for insertUser func
-
     public function insertUser($input)
     {
         $tz_object = new DateTimeZone('Asia/Ho_Chi_Minh');
@@ -99,7 +96,6 @@ class UserModel extends BaseModel
 
         return $user;
     }
-
 
     /**
      * Search users
