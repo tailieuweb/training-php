@@ -50,20 +50,12 @@ if (!empty($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label for="fullname">Full Name</label>
-                    <input name="fullname" class="form-control" placeholder="Fullname">
+                    <input name="fullname" class="form-control" placeholder="Fullname" value="<?php if (!empty($fullname[0]['fullname'])) echo $fullname[0]['fullname'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input name="email" class="form-control" placeholder="Email">
+                    <input name="email" class="form-control" placeholder="Email" value="<?php if (!empty($email[0]['email'])) echo $email[0]['email'] ?>">
                 </div>
-                <form>
-                    <label for="type">Type</label>
-                    <select class="secl" name="dropdown">
-                        <option class="less1" selected>Admin</option>
-                        <option>User</option>
-                        <option>Guest</option>
-                    </select>
-                </form>
                 <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
             </form>
         <?php } else { ?>
