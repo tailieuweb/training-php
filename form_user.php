@@ -47,11 +47,11 @@ if (!empty($_POST['submit'])) {
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
                     <div class="form-group">
-                        <label for="fullname">Password</label>
+                        <label for="fullname">Full Name</label>
                         <input name="fullname" class="form-control" placeholder="Fullname">
                     </div>
                     <div class="form-group">
-                        <label for="email">Password</label>
+                        <label for="email">Email</label>
                         <input name="email" class="form-control" placeholder="Email">
                     </div>
 
