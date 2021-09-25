@@ -69,7 +69,7 @@ if (!empty($_POST['submit'])) {
                     </div>
 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary"><?php
-                     if (!empty($user[0]['name'])){echo 'Update';}else{echo 'Submit';} ?></button>
+                     if (!empty($user[0]['id'])){echo 'Update';}else{echo 'Submit';} ?></button>
                 </form>
             <?php } else { ?>
                 <div class="alert alert-success" role="alert">
