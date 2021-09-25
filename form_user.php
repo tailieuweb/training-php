@@ -6,7 +6,8 @@ $user = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
+    $id = base64_decode($_GET['id']);
+    $id = substr($id,0,-5);//
     $user = $userModel->findUserById($id);//Update existing user
 }
 
@@ -46,7 +47,7 @@ if (!empty($_POST['submit'])) {
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
-
+                    
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
             <?php } else { ?>
