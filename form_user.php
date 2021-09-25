@@ -7,7 +7,7 @@ $id = NULL; //Add new user
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $userModel->findUserById(base64_decode($id));//Update existing user
+    $user = $userModel->findUserById(base64_decode($id)); //Update existing user
 }
 
 if (!empty($_POST['submit'])) {
@@ -19,19 +19,19 @@ if (!empty($_POST['submit'])) {
             // var_dump($user[0]['updated_at']);
             // var_dump($_GET['updated_at']);
             if ($user[0]['updated_at'] == $_GET['updated_at']) {
+
                 $userModel->updateUser($_POST);
                 header('location: list_users.php');
-            }
-            else {
+            } else {
                 echo '<h5>THÔNG TIN ĐÃ BỊ THAY ĐỔI TRƯỚC ĐÓ!
                 <br>Bạn hãy quay lại trang "list_users.php" để xem cập nhật mới nhất!</h5>';
             }
-        }        
+        }
     } else {
         $userModel->insertUser($_POST);
         header('location: list_users.php');
     }
-    // header('location: list_users.php');
+
 }
 
 ?>
@@ -60,6 +60,16 @@ if (!empty($_POST['submit'])) {
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" name="password" class="form-control" placeholder="Password">
+                </div>
+
+                <!-- Le Tuan Liem 25/09/2021 15:00 -->
+                <!-- update form select type -->
+                <div class="form-group">
+                    <label for="">Type</label>
+                    <select name="type" class="form-select" aria-label="Default select example">
+                        <option>user</option>
+                        <option>admin</option>
+                    </select>
                 </div>
 
                 <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
