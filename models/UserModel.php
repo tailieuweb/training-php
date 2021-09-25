@@ -61,7 +61,7 @@ class UserModel extends BaseModel {
      //fix add new user
     public function insertUser($input) {
         $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`,`type`,`password`) VALUES (" .
-                "'" . $input['name'] . "','','','', '".$input['password']."')";
+                "'" . $input['name'] . "','','".$input['email']."','','".$input['password']."')";
 
         $user = $this->insert($sql);
 
