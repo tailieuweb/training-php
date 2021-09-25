@@ -59,28 +59,29 @@ class UserModel extends BaseModel {
      */
     public function insertUser($input) {
         $sql = "INSERT INTO `users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
-            "'" . $input['name'] . "', '".$input['fullname']."', '".$input['email']."', '".$input['type']."', '".$input['password']."')";
+        "'" . $input['name'] . "', '".$input['fullname']."', '".$input['email']."', '".$input['type']."', '".$input['password']."')";
 
         $user = $this->insert($sql);
 
         return $user;
     }
 
-    /**
-     * Search users
-     * @param array $params
-     * @return array
-     */
     public function getUsers($params = []) {
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
         } else {
-            $sql = 'SELECT * FROM users';
+            $sql = 'SELECT * FROM users join types on users.type = types.id';
         }
 
         $users = $this->select($sql);
 
         return $users;
+    }
+    public function getTypes($params = []) {
+        $sql = 'SELECT * FROM types';
+        $types = $this->select($sql);
+
+        return $types;
     }
 }
