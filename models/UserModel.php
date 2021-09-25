@@ -59,7 +59,7 @@ class UserModel extends BaseModel {
      */
     public function insertUser($input) {
         $sql = "INSERT INTO `users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".$input['name']."', '".$input['name']."', '".$input['name']."', '".$input['password']."')";
+        "'" . $input['name'] . "', '".$input['fullname']."', '".$input['email']."', '".$input['type']."', '".$input['password']."')";
 
         $user = $this->insert($sql);
 
@@ -67,7 +67,13 @@ class UserModel extends BaseModel {
     }
 
     public function getUsers($params = []) {
-        $sql = 'SELECT * FROM users';
+        //Keyword
+        if (!empty($params['keyword'])) {
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+        } else {
+            $sql = 'SELECT * FROM users join types on users.type = types.id';
+        }
+
         $users = $this->select($sql);
 
         return $users;
