@@ -1,6 +1,7 @@
 <?php
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
+$type = $userModel->getTypes();
 
 $user = NULL; //Add new user
 $id = NULL;
@@ -56,9 +57,10 @@ if (!empty($_POST['submit'])) {
                     <div class="form-group">
                         <label for="type">Type user</label>
                         <select name="type" class="form-control">
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
-                            <option value="guest">Guest</option>
+                            <?php
+                            foreach($type as $value) { ?>
+                            <option value="<?php echo $value['id']  ?>"><?php echo $value['name_type']  ?></option>
+                            <?php } ?>
                         </select>
                     </div>
 
