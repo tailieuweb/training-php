@@ -35,7 +35,6 @@ class UserModel extends BaseModel {
     public function deleteUserById($id) {
         $sql = 'DELETE FROM users WHERE id = '.$id;
         return $this->delete($sql);
-
     }
 
     /**
@@ -79,7 +78,7 @@ class UserModel extends BaseModel {
         $tz_object = new DateTimeZone('Asia/Ho_Chi_Minh');
         $datetime = new DateTime();
         $datetime->setTimezone($tz_object);
-
+        var_dump($input);
 
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`, `updated_at`,`fullname`,`email`,`type`) VALUES (" .
             "'" . $input['name'] . "', '"
@@ -87,7 +86,7 @@ class UserModel extends BaseModel {
             . $datetime->format('Y\-m\-d\ h:i:sa') . "', '"
             . $input['fullname'] . "', '"
             . $input['email'] . "', '"
-            . $input['type'] . "', '"
+            . $input['type']
             . "')";
 
         $user = $this->insert($sql);

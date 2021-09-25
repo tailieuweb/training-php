@@ -11,10 +11,9 @@ if (!empty($_GET['id'])) {
 }
 
 if (!empty($_POST['submit'])) {
-
     if (!empty($id)) {
         // Nếu thời gian cập nhật hiện tại của user trên db chưa thay đổi thì cho sửa:
-        $user = $userModel->findUserById($id);
+        $user = $userModel->findUserById(base64_decode($id));
         if (count($user) > 0) {
             // var_dump($user[0]['updated_at']);
             // var_dump($_GET['updated_at']);
