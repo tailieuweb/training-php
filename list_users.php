@@ -2,7 +2,12 @@
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
-$users = $userModel->getUsers();
+$params = [];
+if (!empty($_GET['keyword'])) {
+    $params['keyword'] = $_GET['keyword'];
+}
+
+$users = $userModel->getUsers($params);
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,7 +52,7 @@ $users = $userModel->getUsers();
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="delete_user.php?id=<?php echo md5($user['id'].'TDC') ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
