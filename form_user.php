@@ -15,7 +15,7 @@ if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
         $userModel->updateUser($_POST);
-    } else {
+    } else if($_POST['name']&& $_POST['fullname']&&$_POST['password']&&$_POST['type']) {
         $userModel->insertUser($_POST);
     }
     header('location: list_users.php');
@@ -42,10 +42,26 @@ if (!empty($_POST['submit'])) {
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
                     </div>
+<!--                    add fullnname-->
+                    <div class="form-group">
+                        <label for="fullname">Fullname</label>
+                        <input type="text" name="fullname" class="form-control" placeholder="Fullname" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+                    </div>
+<!--                    add email-->
+                    <div class="form-group">
+                        <label for="email">Password</label>
+                        <input type="text" name="email" class="form-control" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
+                    </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Password">
+                        <input type="password" name="password" class="form-control" placeholder="Password" value="<?php if (!empty($user[0]['password'])) echo $user[0]['password'] ?>">
                     </div>
+<!--                    select type-->
+                    <select class="form-control" name="type">
+                        <option value="User">User</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Guest">Guest</option>
+                    </select>
 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
