@@ -3,11 +3,13 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
+
 $id = NULL;
 
 if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+    $id = base64_decode($_GET['id']);
+    $newid = substr($id,23,2);
+    $user = $userModel->findUserById($newid);//Update existing user
 }
 
 
@@ -32,15 +34,23 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
-            <?php if ($user || empty($id)) { ?>
+            <?php if ($user || empty(substr($id,23,2))) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                    <input type="hidden" name="id" value="<?php echo substr($id,23,2) ?>">
                     <div class="form-group">
                         <label for="name">User Name</label>
                         <input class="form-control" name="name" placeholder="User Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Type</label><br>
+                        <Select name="type" class="form-control">
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                            <option value="guest">Guest</option>
+                        </Select>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
