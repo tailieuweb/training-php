@@ -3,8 +3,6 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$data = $_GET['id'];
-$id = base64_decode($data);
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
@@ -23,7 +21,7 @@ if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
         // Nếu thời gian cập nhật hiện tại của user trên db chưa thay đổi thì cho sửa:
-        $user = $userModel->findUserById(base64_decode($_POST['id']));
+        $user = $userModel->findUserById($id);
         if (count($user) > 0) {
             // var_dump($user[0]['updated_at']);
             // var_dump($_GET['updated_at']);
@@ -69,6 +67,10 @@ if (!empty($_POST['submit'])) {
                 <div class="form-group">
                     <label for="fullname">Full Name</label>
                     <input class="form-control" name="fullname" placeholder="Full Name" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input class="form-control" name="email" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
