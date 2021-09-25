@@ -7,19 +7,26 @@ $id = NULL; //Add new user
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $userModel->findUserById(base64_decode($id));//Update existing user
+    //Lấy chuỗi nối đầu
+    $start = substr($id, 0, 5);
+    //Lấy chuỗi nối cuối
+    $end = substr($id, -5);
+    //Replace chuỗi đầu
+    $id = str_replace($start, "", $id);
+    //Replace chuỗi cuối
+    $id = str_replace($end, "", $id);
+    $user = $userModel->findUserById($id); //Update existing user
 }
 
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
         // Nếu thời gian cập nhật hiện tại của user trên db chưa thay đổi thì cho sửa:
-        $user = $userModel->findUserById(base64_decode($_POST['id']));
+        $user = $userModel->findUserById($id);
         if (count($user) > 0) {
             // var_dump($user[0]['updated_at']);
             // var_dump($_GET['updated_at']);
             if ($user[0]['updated_at'] == $_GET['updated_at']) {
-			// 1-php-202109/2-groups/1-A/3-26-Liem
                 $userModel->updateUser($_POST);
                 header('location: list_users.php');
             }
@@ -32,7 +39,7 @@ if (!empty($_POST['submit'])) {
         $userModel->insertUser($_POST);
         header('location: list_users.php');
     }
-
+    // header('location: list_users.php');
 }
 
 ?>
@@ -58,22 +65,19 @@ if (!empty($_POST['submit'])) {
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
                 </div>
+                <!-- Thêm form fullname và email -->
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input class="form-control" name="fullname" placeholder="Full Name" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input class="form-control" name="email" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
+                </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" name="password" class="form-control" placeholder="Password">
                 </div>
-
-
-                <!-- Le Tuan Liem 25/09/2021 15:00 -->
-                <!-- update form select type -->
-              <div class="form-group">
-              <label for="">Type</label>
-                <select name="type" class="form-select" aria-label="Default select example">
-                    <option>user</option>
-                    <option>admin</option>
-                 </select>
-              </div>
-
 
                 <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
             </form>
