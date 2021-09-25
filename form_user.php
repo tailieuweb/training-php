@@ -61,6 +61,26 @@ if (!empty($_POST['submit'])) {
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
 
+                    <!-- Nguyễn Phúc Linh: Thêm các field dữ liệu (full name, email, type) vào form - (25/09/2021) -->
+                    <!-- start -->
+                    <div class="form-group">
+                        <label for="full-name">Full name</label>
+                        <input type="text" name="full-name" class="form-control" placeholder="Full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select name="type" id="type">
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                            <option value="guest">Guest</option>
+                        </select>
+                    </div>
+                    <!-- end. -->
+
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
             <?php } else { ?>
