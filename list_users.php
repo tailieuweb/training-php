@@ -46,14 +46,15 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['type']?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo $user['id'] ?>">
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
+                                <a href="form_user.php?uid=<?= $user['uid'] ?>">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo $user['id'] ?>">
-                                    <i class="fa fa-eye" aria-hidden="true" title="View"></i>
+                                <a href="view_user.php?uid=<?= $user['uid'] ?>">
+                                <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo md5($user['id'])  ?>">
-                                    <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
+                                <a href="delete_user.php?uid=<?= $user['uid'] ?>">
+                                <i class="fa fa-eraser" aria-hidden="true" title="Delete"
+                                    onclick="return confirm('Are you sure you want to delete this item?');"></i>
                                 </a>
                             </td>
                         </tr>

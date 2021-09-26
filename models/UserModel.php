@@ -31,10 +31,10 @@ class UserModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id) {
-        $sql = 'DELETE FROM users WHERE id = '.$id;
+    public function deleteUserByUId($uid)
+    {
+        $sql = "DELETE FROM users WHERE uid = '$uid' ";
         return $this->delete($sql);
-
     }
 
     /**
@@ -43,12 +43,17 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
-                 password="'. md5($input['password']) .'"
-                WHERE id = ' . $input['id'];
+        $name = $input['name'];
+        $fullname = $input['fullname'];
+        $email = $input['email'];
+        $type = $input['type'];
+        $password = $input['password'];
+        $uid = md5($name . $fullname . $email . $type . $password);
+        $oldUId = $input['uid'];
+        $sql = "UPDATE `users` SET `uid` = '$uid', `name` = '$name', `fullname` = '$fullname', 
+                `email` = '$email', `type` = '$type', `password` = '$password'
+                WHERE `uid` = '$oldUId' ";
         $user = $this->update($sql);
-
         return $user;
     }
 
@@ -58,11 +63,15 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".$input['password']."')";
-
+        $name = $input['name'];
+        $fullname = $input['fullname'];
+        $email = $input['email'];
+        $type = $input['type'];
+        $password = $input['password'];
+        $uid = md5($name . $fullname . $email . $type . $password);
+        $sql = "INSERT INTO `users` (`uid`, `name`, `fullname`, `email`, `type`, `password`) 
+                VALUES ('$uid', '$name ', '$fullname', '$email', '$type', '$password') ";
         $user = $this->insert($sql);
-
         return $user;
     }
 

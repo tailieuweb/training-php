@@ -4,17 +4,10 @@ $userModel = new UserModel();
 
 $user = NULL; //Add new user
 $id = NULL;
-
-$user_arr = $userModel->getUsers();
-
-if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-    foreach ($user_arr as $key) {
-        if($id === md5($key['id'])){
-            $userModel->deleteUserById($key['id']);//Delete existing user         
-        }
-    }
-  
+$uid = NULL;
+if (!empty($_GET['uid'])) {
+    $uid = $_GET['uid'];
+    $userModel->deleteUserByUId($uid); //Delete existing user
 }
 header('location: list_users.php');
 ?>
