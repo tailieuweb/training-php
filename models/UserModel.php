@@ -2,25 +2,36 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel {
+class UserModel extends BaseModel
+{
 
-    public function findUserById($id) {
-        $sql = 'SELECT * FROM users WHERE id = '.$id;
+    public function findUserById($id)
+    {
+        $sql = 'SELECT * FROM users WHERE id = ' . $id;
+        $user = $this->select($sql);
+
+        return $user;
+    }
+    public function getAllid()
+    {
+        $sql = 'SELECT id FROM users';
         $user = $this->select($sql);
 
         return $user;
     }
 
-    public function findUser($keyword) {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
+    public function findUser($keyword)
+    {
+        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
         $user = $this->select($sql);
 
         return $user;
     }
 
-    public function auth($userName, $password) {
+    public function auth($userName, $password)
+    {
         $md5Password = $password;
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
 
         $user = $this->select($sql);
         return $user;
@@ -31,10 +42,17 @@ class UserModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id) {
-        $sql = 'DELETE FROM users WHERE id = '.$id;
-        return $this->delete($sql);
-
+    public function deleteUserById($id)
+    {
+        $user1 = $this->getAllid();
+        
+        foreach ($user1 as $i) {
+            $md5 = md5($i['id']);
+            if ($md5 == $id) {
+                $sql = 'DELETE FROM users WHERE id = ' . $i['id'];
+                return $this->delete($sql);
+            }
+        }
     }
 
     /**
@@ -42,10 +60,14 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function updateUser($input) {
+    public function updateUser($input)
+    {
         $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
-                 password="'. md5($input['password']) .'"
+                 name = "' . $input['name'] . '", 
+                 password="' . md5($input['password']) . '",
+                 fullname = "' . $input['fullname'] . '", 
+                 email = "' . $input['email'] . '", 
+                 type = "' . $input['type'] . '"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
 
@@ -57,9 +79,14 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".$input['password']."')";
+    public function insertUser($input)
+    {
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`, `fullname`,`email`,`type`) VALUES (" .
+            "'" . $input['name'] . "', 
+                '" . $input['password'] . "', 
+                '" . $input['fullname'] . "', 
+                '" . $input['email'] . "', 
+                '" . $input['type'] . "')";
 
         $user = $this->insert($sql);
 
@@ -71,10 +98,11 @@ class UserModel extends BaseModel {
      * @param array $params
      * @return array
      */
-    public function getUsers($params = []) {
+    public function getUsers($params = [])
+    {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
         } else {
             $sql = 'SELECT * FROM users';
         }
