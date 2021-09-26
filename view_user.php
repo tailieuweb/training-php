@@ -43,11 +43,11 @@ if (!empty($_POST['submit'])) {
                 <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
             </div>
             <div class="form-group">
-                <label for="password">Fullname</label>
+                <label for="Fullname">Fullname</label>
                 <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
             </div>
             <div class="form-group">
-                <label for="password">Email</label>
+                <label for="Email">Email</label>
                 <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
             </div>
             <div class="form-group">
