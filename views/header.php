@@ -1,6 +1,4 @@
 <?php
-// Start the session
-session_start();
 $id = '';
 if(!empty($_SESSION['id'])) {
     $id = $_SESSION['id'];
