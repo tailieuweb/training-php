@@ -20,7 +20,7 @@ $users = $userModel->getUsers();
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">ID</th>ls
                         <th scope="col">Username</th>
                         <th scope="col">Fullname</th>
                         <th scope="col">Type</th>
