@@ -50,6 +50,14 @@ if (!empty($_POST['submit'])) {
                 <label for="password">Email</label>
                 <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
             </div>
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
+            </div>
+            <div class="form-group">
+                <label for="type">Type</label>
+                <span><?php if (!empty($user[0]['type'])) echo $user[0]['type'] ?></span>
+            </div>
         </form>
     <?php } else { ?>
         <div class="alert alert-success" role="alert">
