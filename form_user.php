@@ -8,8 +8,9 @@ $uid = NULL;
 if (!empty($_GET['uid'])) {
     $uid = $_GET['uid'];
     $user = $userModel->findUserById($uid);//Update existing user
-
-    var_dump($user);
+    if (count($user) === 0) {
+        // Nếu uid không đúng thì sẽ bị lỗi.
+    }
 }
 
 if (!empty($_POST['submit'])) {
@@ -44,16 +45,16 @@ if (!empty($_POST['submit'])) {
                         <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
                     </div>
                     <div class="form-group">
-                        <label for="name">Full Name</label>
+                        <label for="fullname">Full Name</label>
                         <input class="form-control" name="fullname" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?>">
                     </div>
                     <div class="form-group">
-                        <label for="name">Email</label>
+                        <label for="email">Email</label>
                         <input class="form-control" name="email" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?>">
                     </div>
                     <div class="form-group">
-                        <label for="name">Type</label>
-                        <select class="form-control">
+                        <label for="type">Type</label>
+                        <select class="form-control" name="type">
                             <?php foreach (["admin" => "Admin", "user" => "User", "guest" => "Guest"] as $key => $value): ?>
                             <?php 
                             if ($key === $user[0]['type']) { 
