@@ -32,8 +32,6 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function deleteUserById($id) {
-        public function deleteUserById($id)
-    {
         $isAuth = $this->getUsers();
         foreach ($isAuth as $item) {
             if (md5($item['id']) == $id) {
@@ -41,7 +39,6 @@ class UserModel extends BaseModel {
                 return $this->delete($sql);
             }
         }
-    }
     }
 
     /**
