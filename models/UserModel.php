@@ -45,6 +45,9 @@ class UserModel extends BaseModel {
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
                  name = "' . $input['name'] .'", 
+                 fullname ="' . $input['fullname'] .'",
+                 email ="' . $input['email'] .'",
+                 type ="' . $input['type'] .'",
                  password="'. md5($input['password']) .'"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
@@ -66,8 +69,19 @@ class UserModel extends BaseModel {
         return $user;
     }
 
+    /**
+     * Search users
+     * @param array $params
+     * @return array
+     */
     public function getUsers($params = []) {
-        $sql = 'SELECT * FROM users';
+        //Keyword
+        if (!empty($params['keyword'])) {
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+        } else {
+            $sql = 'SELECT * FROM users';
+        }
+
         $users = $this->select($sql);
 
         return $users;
