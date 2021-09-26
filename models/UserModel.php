@@ -5,7 +5,7 @@ require_once 'BaseModel.php';
 class UserModel extends BaseModel
 {
 
-    public function findUserById($uid)
+    public function findUserByUId($uid)
     {
         $sql = "SELECT * FROM users WHERE uid = '$uid'";
         $user = $this->select($sql);
@@ -48,13 +48,15 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
-        $new_uid = md5($input['name'] . $input['fullname'] . $input['email'] . $input['type'] . $input['password']);
         $name = $input['name'];
         $fullname = $input['fullname'];
         $email = $input['email'];
         $type = $input['type'];
-        $password = md5($input['password']);
         $old_uid = $input['uid'];
+
+        $password = md5($input['password']);
+        $new_uid = md5($input['name'] . $input['fullname'] . $input['email'] . $input['type'] . $input['password']);
+        
         $sql =
             "UPDATE `users` 
         SET `uid`='$new_uid',`name`='$name',`fullname`='$fullname',`email`='$email',`type`='$type',`password`='$password' 
