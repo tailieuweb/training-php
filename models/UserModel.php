@@ -47,6 +47,7 @@ class UserModel extends BaseModel {
                  name = "' . $input['name'] .'", 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                  email ="' . $input['email'] .'",
 =======
                  type ="' . $input['type'] .'",
@@ -54,6 +55,9 @@ class UserModel extends BaseModel {
 =======
                  fullname ="' . $input['fullname'] .'",
 >>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram
+=======
+                 email ="' . $input['email'] .'",
+>>>>>>> 2-php-202109/2-groups/3-C/2-9-Hieu
                  password="'. md5($input['password']) .'"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
