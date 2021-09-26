@@ -19,7 +19,8 @@ class UserModel extends BaseModel {
     }
 
     public function auth($userName, $password) {
-        $md5Password = $password;
+        // Mã hóa
+        $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
 
         $user = $this->select($sql);
@@ -45,6 +46,9 @@ class UserModel extends BaseModel {
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
                  name = "' . $input['name'] .'", 
+                 fullname = "' . $input['fullname'] .'",
+                 email = "' . $input['email'] .'",
+                 type = "' . $input['type'] .'",  
                  password="'. md5($input['password']) .'"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
@@ -58,8 +62,11 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".$input['password']."')";
+        $password = md5($input['password']);
+
+
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
+            "'" . $input['name'] . "', '" . $password . "', '" . $input['fullname'] . "', '" . $input['email'] . "', '" . $input['type'] . "')";
 
         $user = $this->insert($sql);
 
@@ -67,9 +74,13 @@ class UserModel extends BaseModel {
     }
 
     public function getUsers($params = []) {
-        $sql = 'SELECT * FROM users';
+        //Keyword
+        if (!empty($params['keyword'])) {
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+        } else {
+            $sql = 'SELECT * FROM users';
+        }
         $users = $this->select($sql);
-
         return $users;
     }
 }
