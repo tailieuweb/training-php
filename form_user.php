@@ -49,15 +49,12 @@ if (!empty($_POST['submit'])) {
                     
                     <div class="form-group">
                         <label for="type">Type</label>
-                        <select name="type" id="type" class="form-control">
+                        <select name="type" id="type" >
                         <option value="" selected disabled hidden>Select type</option>
                         <option value="admin" <?php if (!empty($user[0]['type']) && $user[0]['type'] = "admin") echo "selected" ?>>
                             Admin</option>
                         <option value="user" <?php if (!empty($user[0]['type']) && $user[0]['type'] = "user") echo "selected" ?>>User
-                        </option>
-                        <option value="guest" <?php if (!empty($user[0]['type']) && $user[0]['type'] = "guest") echo "selected" ?>>
-                            Guest</option>
-                        </select>
+                        </option>    
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>

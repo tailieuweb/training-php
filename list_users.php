@@ -49,7 +49,7 @@ $users = $userModel->getUsers($params);
                                 <a href="form_user.php?uid=<?= $user['uid'] ?>">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?uid=<?= $user['uid'] ?>">
+                                <a href="view_user.php?id=<?= $user['id'] ?>">
                                 <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
                                 <a href="delete_user.php?uid=<?= $user['uid'] ?>">
