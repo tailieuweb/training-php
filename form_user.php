@@ -8,13 +8,17 @@ $uid = NULL;
 if (!empty($_GET['uid'])) {
     $uid = $_GET['uid'];
     $user = $userModel->findUserById($uid);//Update existing user
-    if (count($user) === 0) {
-        // Nếu uid không đúng thì sẽ bị lỗi.
+    if (count($user) == 0) {
+        echo "Không thể update user <br />";
+        echo "<strong>Quay Lại Trang danh sách user: </strong>
+        <a href='http://php.local/list_users.php'>List users</a>";
+        exit;
     }
 }
 
 if (!empty($_POST['submit'])) {
 
+    
     if (!empty($uid)) {
         $userModel->updateUser($_POST);
     } else {
