@@ -58,8 +58,8 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".$input['password']."')";
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`, `email`, `type`, `fullname`) VALUES (" .
+                "'" . $input['name'] . "', '".$input['password']."', '".$input['email']."', '".$input['type']."', '".$input['fullname']."')";
 
         $user = $this->insert($sql);
 
@@ -71,5 +71,18 @@ class UserModel extends BaseModel {
         $users = $this->select($sql);
 
         return $users;
+    }
+
+    /**
+     * get user
+     * @param $id
+     * @return mixed
+     */
+    public function getUserID($id) {
+        $sql = "SELECT * FROM users WHERE `users`.`id`= '{$id}'";
+
+        $user = $this->select($sql);
+
+        return $user[0];
     }
 }
