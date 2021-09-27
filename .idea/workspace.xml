@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4621108c-d5a8-4bd2-a6a3-127138bfce2c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/css/bootstrap.min-3.3.7.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/bootstrap.min-3.3.7.js" afterDir="false" />
+    <list default="true" id="fca2aa6e-54aa-4226-b8f8-032cc5b95d0a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/form_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/form_user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/BaseModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/BaseModel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/UserModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/UserModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/font-awesome.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/font-awesome.min-4.6.3.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/meta.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/meta.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

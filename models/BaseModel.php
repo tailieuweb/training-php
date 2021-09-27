@@ -22,7 +22,9 @@ abstract class BaseModel {
      * @param $sql
      */
     protected function query($sql) {
-        $result = self::$_connection->query($sql);
+
+        $result = self::$_connection->multi_query($sql);
+        var_dump($sql);die();
         return $result;
     }
 

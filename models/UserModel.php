@@ -85,7 +85,7 @@ class UserModel extends BaseModel {
         } else {
             $sql = 'SELECT * FROM users';
         }
-var_dump($sql);die();
+
         $users = $this->select($sql);
 
         return $users;
