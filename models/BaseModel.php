@@ -3,7 +3,7 @@ require_once 'configs/database.php';
 
 abstract class BaseModel {
     // Database connection
-    private static $_connection;
+    protected static $_connection;
 
     public function __construct() {
 
@@ -23,8 +23,7 @@ abstract class BaseModel {
      */
     protected function query($sql) {
 
-        $result = self::$_connection->multi_query($sql);
-        var_dump($sql);die();
+        $result = self::$_connection->query($sql);
         return $result;
     }
 
