@@ -1,19 +1,21 @@
 <?php
+// Start the session
+session_start();
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$id = NULL;
+$_id = NULL;
 
 if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-    $user = $userModel->findUserById($id); //Update existing user
+    $_id = $_GET['id'];
+    $user = $userModel->findUserById($_id); //Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
 
-    if (!empty($id)) {
+    if (!empty($_id)) {
         $userModel->updateUser($_POST);
     } else {
         $userModel->insertUser($_POST);
