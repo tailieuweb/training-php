@@ -2,8 +2,10 @@
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
+
 $user = NULL; //Add new user
 $id = NULL;
+
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
@@ -11,13 +13,24 @@ if (!empty($_GET['id'])) {
 }
 
 
-if (!empty($_POST['submit'])) {
+// if (!empty($_POST['submit'])) {
 
-    if (!empty($id)) {
-        $userModel->updateUser($_POST);
-    } else {
-            $userModel->insertUser($_POST);
+//     if (!empty($id)) {
+      
+//             $userModel->updateUser($_POST);
        
+//     } else {
+//             $userModel->insertUser($_POST);
+       
+//     }
+//     header('location: list_users.php');
+// }
+
+if(!empty($_POST['submit'])){
+    if(isset($id)){
+            $userModel->updateUser($_POST);
+    }else{
+        $userModel->insertUser($_POST);
     }
     header('location: list_users.php');
 }
@@ -62,7 +75,7 @@ if (!empty($_POST['submit'])) {
                         Type:
                         <br>
                         <label for="admin">Admin</label>
-                        <input type="radio" id="admin" name="t1" value="admin">
+                        <input type="radio" id="admin" name="t1" value="admin" >
                         <label for="user">User</label>
                          <input type="radio" id="user" name="t1" value="user">
                          <label for="guest">Guest</label>

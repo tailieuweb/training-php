@@ -3,7 +3,10 @@
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
-
+    //...
+    /** @Version @Column(type="integer") */
+    private $version;
+    //...
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
@@ -42,19 +45,30 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
+    // public function updateUser($input) {
+    //     $sql = 'UPDATE users SET 
+    //             name = "' . $input['name'] .'", 
+    //             password="'. md5($input['password']) .'",
+    //             fullname="'. $input['fullname'].'",
+    //             email="'. $input['email'].'",
+    //             type="'. $input['t1']. '"
+    //            WHERE id = ' . $input['id'];
+    //     $user = $this->update($sql);
+    //     return $user;
+    //  }
+
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
-                 password="'. md5($input['password']) .'",
-                 fullname="'. $input['fullname'].'",
-                 email="'. $input['email'].'",
-                 type="'. $input['t1']. '"
-                WHERE id = ' . $input['id'];
+                name = "' . $input['name'] .'", 
+                password="'. md5($input['password']) .'",
+                fullname="'. $input['fullname'].'",
+                email="'. $input['email'].'",
+                type="'. $input['t1']. '"
+               WHERE id = ' . $input['id'];
         $user = $this->update($sql);
-
         return $user;
-    }
-
+     }
+    
     /**
      * Insert user
      * @param $input
