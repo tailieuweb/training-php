@@ -7,7 +7,12 @@ $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $userModel->deleteUserById($id);//Delete existing user
+    $handleFirst = substr($id,23);
+     $idx = "";
+    for ($i=0; $i <strlen($handleFirst)-9 ; $i++) { 
+        $idx.=$handleFirst[$i];
+    }    
+    $userModel->deleteUserById($idx);//Delete existing user
 }
 header('location: list_users.php');
 ?>

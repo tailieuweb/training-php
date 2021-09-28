@@ -7,7 +7,12 @@ $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+     $handleFirst = substr($id,23);
+    $id = "";
+   for ($i=0; $i <strlen($handleFirst)-9 ; $i++) { 
+       $id.=$handleFirst[$i];
+   }    
+    $user = $userModel->findUserById($id);//Update existing user   
 }
 
 
@@ -46,6 +51,26 @@ if (!empty($_POST['submit'])) {
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
+                    <div class="form-group">
+                        <label for="fullname">Fullname</label>
+                        <input class="form-control" name="fullname" placeholder="Fullname" >
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input class="form-control" type="email" value="Sisa@gmail.com"  name="email" placeholder="email" >
+                    </div>
+                  
+                    <div class="form-group">
+                        Type:
+                        <br>
+                        <label for="admin">Admin</label>
+                       <input type="radio" id="admin" name="t1" value="admin">
+                        <label for="user">User</label>
+                         <input type="radio" id="user" name="t1" value="user">
+
+                    </div>
+
+                    
 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
