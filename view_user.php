@@ -1,3 +1,13 @@
+##<VirtualHost *:80>
+	##ServerName wordpress.local
+	##DocumentRoot C:\wamp64\www\CMS
+	##<Directory  "C:\wamp64\www\CMS">
+		##Options +Indexes +Includes +FollowSymLinks +MultiViews
+		##AllowOverride All
+		##Require local
+	##</Directory>
+##</VirtualHost>
+
 <?php
 require_once 'models/UserModel.php';
 $userModel = new UserModel();

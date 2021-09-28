@@ -43,6 +43,22 @@ if (!empty($_POST['submit'])) {
                         <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
                     </div>
                     <div class="form-group">
+                        <label for="fullname"Full >Name</label>
+                        <input class="form-control" name="fullname" placeholder="FullName" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Name</label>
+                        <input class="form-control" name="email" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select class="form-control" name="type" value="1" placeholder="Type">
+                            <option value="admin" <?php if (!empty($user[0]['type'])&&$user[0]['type'] =='admin') echo "selected=\"selected\""; ?>>Admin</option>
+                            <option value="user" <?php if (!empty($user[0]['type'])&&$user[0]['type'] =='user') echo "selected=\"selected\"";?> >User</option>
+                            <option value="guest" <?php if (!empty($user[0]['type'])&& $user[0]['type']=='guest') echo "selected=\"selected\"";?>>Guest</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
