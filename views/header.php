@@ -1,7 +1,7 @@
 <?php
 $keyword = '';
 if(!empty($_GET['keyword'])) {
-    $keyword = $_POST['keyword'];
+    $keyword = $_GET['keyword'];
 }
 ?>
 <div class="container">
