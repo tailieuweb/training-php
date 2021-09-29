@@ -31,9 +31,9 @@ class UserModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id) {
+    public function deleteUserById($id, $token) {
         $sql = 'DELETE FROM users WHERE id = '.$id;
-        return $this->delete($sql);
+        return $this->delete($sql, $token);
 
     }
 
@@ -86,5 +86,9 @@ class UserModel extends BaseModel {
         $types = $this->select($sql);
 
         return $types;
+    }
+    public function createToken(){
+        $token = $this->get_token_value();
+        return $token;
     }
 }
