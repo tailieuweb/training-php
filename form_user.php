@@ -32,7 +32,7 @@ function CheckuserdataBeforeUpdate($userModel,$id,$Name_store,$old_password){
     if ($Name_store != $data_check[0]['name']){
     $check = false;
     }
-    if($password_store != $old_password ){
+    if($password_store == $old_password ){
         $check = false;
     }
     return $check;
