@@ -49,14 +49,20 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
-                 email = "'.$input['email'].'",
-                 fullname = "'.$input['fullname'].'",
-                 password="'. md5($input['password']) .'", type = "'.$input['type'].'"
-                WHERE id = ' . $input['id'];
-        $user = $this->update($sql);
-        return $user;
+        // $sql = 'UPDATE users SET 
+        //          name = "' . $input['name'] .'", 
+        //          email = "'.$input['email'].'",
+        //          fullname = "'.$input['fullname'].'",
+        //        password="'. md5($input['password']) .'", type = "'.$input['type'].'"
+        //         WHERE id = ' . $input['id'];
+        // $user = $this->update($sql);
+        $str_replace = $this->matchRegexInput($input);
+        $sql = self::$_connection->prepare('UPDATE users SET users.name = ?, users.email = ?,users.fullname = ?
+        , users.password = ?  ,users.type = ? WHERE users.id = ?');
+
+        $sql->bind_param("sssssi",$str_replace['name'],$str_replace['email']
+                ,$str_replace['fullname'],$str_replace['password'],$str_replace['type'],$str_replace['id']);
+        return $sql->execute();
     }
 
     /**
@@ -68,10 +74,15 @@ class UserModel extends BaseModel {
      //fix add new user
     public function insertUser($input) {
         $password = md5($input['password']);
-        $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
-                "'" . $input['name'] . "','" . $input['fullname'] . "', '".$input['email']."', '".$input['type']."', '".$password."')";
-        $user = $this->insert($sql);
-        return $user;
+        // $sql = "INSERT INTO `app_web1`.`users` (`id`,`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
+        //         "'" . $input['name'] . "','" . $input['fullname'] . "', '".$input['email']."', '".$input['type']."', '".$password."')";
+        // $user = $this->insert($sql);
+        $str_replace = $this->matchRegexInput($input);
+        $sql = self::$_connection->prepare('INSERT INTO `users` (`name`,`fullname`, `email`, `type`, `password`) 
+                VALUES(?,?,?,?,?)');
+        $sql->bind_param("sssss",$str_replace['name'],$str_replace['fullname'],$str_replace['email']
+                ,$str_replace['type'],$password);
+        return $sql->execute();
     }
 
     /**
@@ -82,13 +93,17 @@ class UserModel extends BaseModel {
     public function getUsers($params = []) {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+            $str_keyword = $this->matchRegexInput($params);
+            $str_keyword =  "%" . $params['keyword'] . "%";
+
+            $sql = self::$_connection->prepare('SELECT * FROM users WHERE name LIKE ?');
+            $sql->bind_param('s',  $str_keyword);
         } else {
-            $sql = 'SELECT * FROM users';
+            $sql = self::$_connection->prepare('SELECT * FROM users');
         }
-
-        $users = $this->select($sql);
-
-        return $users;
+        $sql->execute();
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items;
     }
 }

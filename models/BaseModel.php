@@ -3,12 +3,14 @@ require_once 'configs/database.php';
 
 abstract class BaseModel {
     // Database connection
-    private static $_connection;
+    protected static $_connection;
 
     public function __construct() {
 
         if (!isset(self::$_connection)) {
-            self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+            self::$_connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+            // self::$_connection->set_charset(DB_CHARSET);
+            mysqli_set_charset(self::$_connection,DB_CHARSET);
             if (self::$_connection->connect_errno) {
                 printf("Connect failed");
                 exit();
@@ -70,4 +72,9 @@ abstract class BaseModel {
         return $result;
     }
 
+    protected function matchRegexInput($param){
+        $array_replace = array("'",'"',"<",">");
+        $str = str_replace($array_replace,'',$param);
+        return $str;
+    }
 }

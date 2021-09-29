@@ -8,6 +8,7 @@ $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = base64_decode($_GET['id']);
+    
     $newid = substr($id,23,2);
     $user = $userModel->findUserById($newid);//Update existing user
 }
