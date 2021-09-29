@@ -5,8 +5,9 @@ $userModel = new UserModel();
 $user = NULL; //Add new user
 $id = NULL;
 
-if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
+if (!empty($_GET['id'])) { 
+    //Update SQL Injection - convert id -> int -> string
+    $id = isset($_GET['id'])?(string)(int)$_GET['id']:null;
     $user = $userModel->findUserById($id);//Update existing user
 }
 
