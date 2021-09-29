@@ -31,7 +31,6 @@ if (!empty($_POST['submit'])) {
 </head>
 
 <body>
-<<<<<<< HEAD
 
 <?php include 'views/header.php' ?>
 <div class="container">
