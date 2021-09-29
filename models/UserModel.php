@@ -61,7 +61,7 @@ class UserModel extends BaseModel {
         , users.password = ?  ,users.type = ? WHERE users.id = ?');
 
         $sql->bind_param("sssssi",$str_replace['name'],$str_replace['email']
-                ,$str_replace['fullname'],$str_replace['password'],$str_replace['type'],$str_replace['id']);
+                ,$str_replace['fullname'],md5($str_replace['password']),$str_replace['type'],$str_replace['id']);
         return $sql->execute();
     }
 
