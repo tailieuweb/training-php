@@ -3,13 +3,11 @@
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
-    //...
-    /** @Version @Column(type="integer") */
-    private $version;
-    //...
+
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
+
         return $user;
     }
 
@@ -44,74 +42,24 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    // public function updateUser($input) {
-    //     $sql = 'UPDATE users SET 
-    //             name = "' . $input['name'] .'", 
-    //             password="'. md5($input['password']) .'",
-    //             fullname="'. $input['fullname'].'",
-    //             email="'. $input['email'].'",
-    //             type="'. $input['t1']. '"
-    //            WHERE id = ' . $input['id'];
-    //     $user = $this->update($sql);
-    //     return $user;
-    //  }
-
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
-<<<<<<< HEAD
                  name = "' . $input['name'] .'", 
-                 password="'. md5($input['password']) .'",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                 email ="'.$input['email'].'",
-                 fullname ="'.$input['fullname'].'",
-                 type ="'.$input['type'].'"
-=======
-                 fullname = "' . $input['fullname'] .'",
-                 email = "' . $input['email'] .'",
-                 type = "' . $input['type1'] .'"
->>>>>>> origin/1-php-202109/2-groups/2-B/5-34-Phuong
-=======
-                 fullname="'. $input['fullname'] .'",
-                 email="'. $input['email'] .'",
-                 type="'. $input['t1'] .'"
->>>>>>> origin/1-php-202109/2-groups/2-B/3-52-Nhu
+                 password="'. md5($input['password']) .'"
                 WHERE id = ' . $input['id'];
-=======
-                name = "' . $input['name'] .'", 
-                password="'. md5($input['password']) .'",
-                fullname="'. $input['fullname'].'",
-                email="'. $input['email'].'",
-                type="'. $input['t1']. '"
-               WHERE id = ' . $input['id'];
->>>>>>> origin/1-php-202109/2-groups/2-B/4-7-Duyen
         $user = $this->update($sql);
+
         return $user;
-     }
-    
+    }
+
     /**
      * Insert user
      * @param $input
      * @return mixed
      */
     public function insertUser($input) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`email`,`fullname`,`type`) VALUES (" .
-                "'" . $input['name'] . "', '".$input['password']."', '".$input['fullname']."', '".$input['email']."', '".$input['type']."')";
-=======
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
-                "'" . $input['name'] . "', '".$input['password']."', '".$input['fullname']."', '".$input['email']."', '".$input['type1']."')";
->>>>>>> origin/1-php-202109/2-groups/2-B/5-34-Phuong
-=======
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`, `email`,`type`) VALUES (" .
-                "'" . $input['name'] . "', '".md5($input['password'])."', '".$input['fullname']. "', '".$input['email']."', '".$input['t1']. "')";
->>>>>>> origin/1-php-202109/2-groups/2-B/4-7-Duyen
-=======
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
-        "'" . $input['name'] . "', '".$input['password']."', '".$input['fullname']."', '".$input['email']."', '".$input['t1']."')";
->>>>>>> origin/1-php-202109/2-groups/2-B/3-52-Nhu
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
+                "'" . $input['name'] . "', '".$input['password']."')";
 
         $user = $this->insert($sql);
 
