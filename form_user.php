@@ -2,17 +2,17 @@
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
-
 $user = NULL; //Add new user
 $id = NULL;
 $Name_store = "";
 $password_store = "";
-
-
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     $user = $userModel->findUserById($id);//Update existing user
+    $Name_store = $user[0]['name'];
+    $password_store = $user[0]['password'];
 }
+
 
 if (!empty($_POST['submit'])) {
 
