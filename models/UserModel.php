@@ -45,7 +45,10 @@ class UserModel extends BaseModel {
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
                  name = "' . $input['name'] .'", 
-                 password="'. md5($input['password']) .'"
+                 password="'. md5($input['password']) .'",
+                 email ="'.$input['email'].'",
+                 fullname ="'.$input['fullname'].'",
+                 type ="'.$input['type'].'"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
 
@@ -58,8 +61,8 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".$input['password']."')";
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`email`,`fullname`,`type`) VALUES (" .
+                "'" . $input['name'] . "', '".$input['password']."', '".$input['fullname']."', '".$input['email']."', '".$input['type']."')";
 
         $user = $this->insert($sql);
 
