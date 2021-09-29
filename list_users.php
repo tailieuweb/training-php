@@ -32,6 +32,7 @@ $users = $userModel->getUsers($params);
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">Fullname</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Type</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -47,6 +48,9 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['fullname']?>
                             </td>
                             <td>
+                                <?php echo $user['email']?>
+                            </td>
+                            <td>
                                 <?php echo $user['type']?>
                             </td>
                             <td>
@@ -60,6 +64,7 @@ $users = $userModel->getUsers($params);
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
+
                         </tr>
                     <?php } ?>
                 </tbody>
