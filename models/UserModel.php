@@ -62,6 +62,7 @@ class UserModel extends BaseModel {
                  name = "' . $input['name'] .'", 
                  password="'. md5($input['password']) .'",
 <<<<<<< HEAD
+<<<<<<< HEAD
                  email ="'.$input['email'].'",
                  fullname ="'.$input['fullname'].'",
                  type ="'.$input['type'].'"
@@ -70,6 +71,11 @@ class UserModel extends BaseModel {
                  email = "' . $input['email'] .'",
                  type = "' . $input['type1'] .'"
 >>>>>>> origin/1-php-202109/2-groups/2-B/5-34-Phuong
+=======
+                 fullname="'. $input['fullname'] .'",
+                 email="'. $input['email'] .'",
+                 type="'. $input['t1'] .'"
+>>>>>>> origin/1-php-202109/2-groups/2-B/3-52-Nhu
                 WHERE id = ' . $input['id'];
 =======
                 name = "' . $input['name'] .'", 
@@ -91,6 +97,7 @@ class UserModel extends BaseModel {
     public function insertUser($input) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`email`,`fullname`,`type`) VALUES (" .
                 "'" . $input['name'] . "', '".$input['password']."', '".$input['fullname']."', '".$input['email']."', '".$input['type']."')";
 =======
@@ -101,6 +108,10 @@ class UserModel extends BaseModel {
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`, `email`,`type`) VALUES (" .
                 "'" . $input['name'] . "', '".md5($input['password'])."', '".$input['fullname']. "', '".$input['email']."', '".$input['t1']. "')";
 >>>>>>> origin/1-php-202109/2-groups/2-B/4-7-Duyen
+=======
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
+        "'" . $input['name'] . "', '".$input['password']."', '".$input['fullname']."', '".$input['email']."', '".$input['t1']."')";
+>>>>>>> origin/1-php-202109/2-groups/2-B/3-52-Nhu
 
         $user = $this->insert($sql);
 
