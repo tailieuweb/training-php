@@ -67,6 +67,7 @@ $token = md5(uniqid());
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password" value="<?php if (!empty($user[0]['password'])) echo $user[0]['password'] ?>">
                     </div>
+<<<<<<< HEAD
 <!--                    select type-->
                     <select class="form-control" name="type">
                         <option value="User">User</option>
@@ -75,6 +76,24 @@ $token = md5(uniqid());
                     </select>
 
 
+=======
+                    <div class="form-group">
+                        <label for="fullname">Fullname</label>
+                        <input name="fullname" class="form-control" placeholder="Fullname">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input name="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        Type:
+                        <br>
+                        <label for="admin">Admin</label>
+                       <input type="radio" id="admin" name="type1" value="admin">
+                        <label for="user">User</label>
+                         <input type="radio" id="user" name="type1" value="user">
+                    </div>
+>>>>>>> origin/1-php-202109/2-groups/2-B/5-34-Phuong
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
 <!--                    Lưu sesion_token-->
                <?php $_SESSION['_token']=$token;

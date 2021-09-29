@@ -7,7 +7,6 @@ class UserModel extends BaseModel {
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
-
         return $user;
     }
 
@@ -46,9 +45,15 @@ class UserModel extends BaseModel {
         $sql = 'UPDATE users SET 
                  name = "' . $input['name'] .'", 
                  password="'. md5($input['password']) .'",
+<<<<<<< HEAD
                  email ="'.$input['email'].'",
                  fullname ="'.$input['fullname'].'",
                  type ="'.$input['type'].'"
+=======
+                 fullname = "' . $input['fullname'] .'",
+                 email = "' . $input['email'] .'",
+                 type = "' . $input['type1'] .'"
+>>>>>>> origin/1-php-202109/2-groups/2-B/5-34-Phuong
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
 
@@ -61,8 +66,13 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
+<<<<<<< HEAD
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`email`,`fullname`,`type`) VALUES (" .
                 "'" . $input['name'] . "', '".$input['password']."', '".$input['fullname']."', '".$input['email']."', '".$input['type']."')";
+=======
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
+                "'" . $input['name'] . "', '".$input['password']."', '".$input['fullname']."', '".$input['email']."', '".$input['type1']."')";
+>>>>>>> origin/1-php-202109/2-groups/2-B/5-34-Phuong
 
         $user = $this->insert($sql);
 
