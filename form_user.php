@@ -5,6 +5,8 @@ $userModel = new UserModel();
 
 $user = NULL; //Add new user
 $id = NULL;
+$Name_store = "";
+$password_store = "";
 
 
 if (!empty($_GET['id'])) {
@@ -12,27 +14,30 @@ if (!empty($_GET['id'])) {
     $user = $userModel->findUserById($id);//Update existing user
 }
 
+if (!empty($_POST['submit'])) {
 
-// if (!empty($_POST['submit'])) {
-
-//     if (!empty($id)) {
-      
-//             $userModel->updateUser($_POST);
-       
-//     } else {
-//             $userModel->insertUser($_POST);
-       
-//     }
-//     header('location: list_users.php');
-// }
-
-if(!empty($_POST['submit'])){
-    if(isset($id)){
-            $userModel->updateUser($_POST);
-    }else{
+    if (!empty($id)) {
+       if(CheckuserdataBeforeUpdate($userModel,$id,$Name_store,$_POST['old_password'])){
+           $userModel->updateUser($_POST);
+       }
+    } else {
         $userModel->insertUser($_POST);
     }
     header('location: list_users.php');
+}
+
+function CheckuserdataBeforeUpdate($userModel,$id,$Name_store,$old_password){
+   $data_check = $userModel->findUserById($id);
+   $check = true;
+    if ($Name_store != $data_check[0]['name']){
+    $check = false;
+    }
+    if($password_store != $old_password ){
+        $check = false;
+    }
+    return $check;
+
+
 }
 
 ?>
@@ -56,11 +61,16 @@ if(!empty($_POST['submit'])){
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
                     </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                    </div>
-
+                     <?php if(!empty($_GET['id'])){?> 
+            <div class="form-group">
+                <label for="password">Old Password</label>
+                <input type="password" name="old_password" class="form-control" placeholder="Password">
+            </div>
+            <?php } ?>
+            <div class="form-group">
+                <label for="password">New Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Password">
+            </div>
                     <div class="form-group">
                         <label for="fullname">Fullname</label>
                         <input type="fullname" name="fullname" class="form-control" placeholder="Fullname" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
@@ -75,9 +85,9 @@ if(!empty($_POST['submit'])){
                         Type:
                         <br>
                         <label for="admin">Admin</label>
-                        <input type="radio" id="admin" name="t1" value="admin" >
+                        <input type="radio" id="admin" name="t1" value="admin" checked="t1" >
                         <label for="user">User</label>
-                         <input type="radio" id="user" name="t1" value="user">
+                         <input type="radio" id="user" name="t1" value="user" > 
                          <label for="guest">Guest</label>
                          <input type="radio" id="guest" name="t1" value="guest">
 
