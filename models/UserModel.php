@@ -49,7 +49,15 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
+<<<<<<< HEAD
         $sql = ' UPDATE `users` SET `name`="' . $input['name'] .'",`fullname`="' . $input['fullname'] .'",`email`="' . $input['email'] .'",`type`="' . $input['type'] .'",`password`= "'. md5($input['password']) .'" WHERE id = ' . $input['id'];
+=======
+        $sql = 'UPDATE users SET 
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
+                 password="'. md5($input['password']) .'"
+                WHERE id = ' . $input['id'];
+
+>>>>>>> 1-php-202109/1-web-security
         $user = $this->update($sql);
         return $user;
     }
