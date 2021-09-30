@@ -6,8 +6,7 @@ $user = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-    $userModel->deleteUserById(base64_decode($id));//Delete existing user
+    $userModel->deleteUserById(base64_decode($_GET['id']));//Delete existing user
 }
 header('location: list_users.php');
 ?>
