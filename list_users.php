@@ -1,19 +1,15 @@
 <?php
 require_once 'models/UserModel.php';
+include 'views/header.php';
 $userModel = new UserModel();
 
-//Update SQL Injection - Remove all special chars
-function clean($string) {
-    $string = preg_replace('/[^A-Za-z0-9]/', '', $string); // Removes special chars.
-    return preg_replace('/ +/', ' ', $string); //Convert multip space -> one 
- }
+
 
 $params = [];
 if (!empty($_GET['keyword'])) {
     $keyword = clean($_GET['keyword']);
     $params['keyword'] =  $keyword; 
 }
-
 $users = $userModel->getUsers($params);
 ?>
 <!DOCTYPE html>
@@ -23,7 +19,7 @@ $users = $userModel->getUsers($params);
     <?php include 'views/meta.php' ?>
 </head>
 <body>
-    <?php include 'views/header.php'?>
+    <?php ?>
     <div class="container">
         <?php if (!empty($users)) {?>
             <div class="alert alert-warning" role="alert">
