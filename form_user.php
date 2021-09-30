@@ -80,7 +80,6 @@ if (!empty($_POST['submit'])) {
                         <option>guess</option>
                     </select>
                 </div>
-
                 <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
             </form>
         <?php } else { ?>
