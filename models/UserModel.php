@@ -74,7 +74,6 @@ class UserModel extends BaseModel {
 
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
         "'" . $input['name'] . "', '".md5($input['password'])."', '".$input['fullname']."', '".$input['email']."', '".$input['t1']."')";
->>>>>>> 1-php-202109/2-groups/2-B/master
 
         $user = $this->insert($sql);
 
