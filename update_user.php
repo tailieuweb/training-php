@@ -41,7 +41,7 @@ $users = $userModel->getUsers();
                                 <?php echo $user['type']?>
                             </td>
                             <td>
-                                <a href="edit_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="update_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
