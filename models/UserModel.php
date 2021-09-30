@@ -69,35 +69,10 @@ class UserModel extends BaseModel
      * @param $input
      * @return mixed
      */
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 1-php-202109/2-groups/9-I/master
-    public function insertUser($input)
-    {
-
-        $password = md5($input['password']);
-
-<<<<<<< HEAD
-        $sql = "INSERT INTO app_web1.`users` (name, password,`fullname`,`email`,`type`) VALUES (" .
-            "'" . $input['name'] . "', '" . $password . "', '" . $input['fullname'] . "', '" . $input['email'] . "', '" . $input['type'] . "')";
-=======
-
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
-            "'" . $input['name'] . "', '" . $password . "', '" . $input['fullname'] . "', '" . $input['email'] . "', '" . $input['type'] . "')";
-=======
-    public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".md5($input['password'])."')";
->>>>>>> 1-php-202109/1-master
->>>>>>> 1-php-202109/2-groups/9-I/master
-=======
     public function insertUser($input)
     {
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
             "'" . $input['name'] . "', '" . md5($input['password']) . "')";
->>>>>>> 1-php-202109/2-groups/9-I/master
 
         $user = $this->insert($sql);
 
