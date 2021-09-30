@@ -44,25 +44,16 @@ if (!empty($_POST['submit'])) {
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
                     </div>
-                    <div class="form-group">
-<<<<<<< HEAD
-                        <label for="fullname"Full >Name</label>
-                        <input class="form-control" name="fullname" placeholder="FullName" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Name</label>
-                        <input class="form-control" name="email" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
-                    </div>
-=======
+                    <div>
                         <label for="fullname">Full Name</label>
                         <input class="form-control" name="fullname" placeholder="FullName" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
                     </div>
+                
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input class="form-control" name="email" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
                     </div>
 
->>>>>>> 1-php-202109/2-groups/8-H/master
                     <div class="form-group">
                         <label for="type">Type</label>
                         <select class="form-control" name="type" value="1" placeholder="Type">
