@@ -15,10 +15,7 @@ if (!empty($_GET['id'])) {
 if (!empty($_POST['submit'])) {
     if (!empty($id)) {
         // Nếu thời gian cập nhật hiện tại của user trên db chưa thay đổi thì cho sửa:
-        $user = $userModel->findUserById(base64_decode($id));
         if (count($user) > 0) {
-            // var_dump($user[0]['updated_at']);
-            // var_dump($_GET['updated_at']);
             if ($user[0]['updated_at'] == $_GET['updated_at']) {
 
                 $userModel->updateUser($_POST);
@@ -32,7 +29,6 @@ if (!empty($_POST['submit'])) {
         $userModel->insertUser($_POST);
         header('location: list_users.php');
     }
-    // header('location: list_users.php');
 }
 
 ?>
@@ -47,12 +43,19 @@ if (!empty($_POST['submit'])) {
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-        <?php if ($user || isset($id)) { ?>
+        <?php
+        if ($user || isset($id)) { ?>
             <div class="alert alert-warning" role="alert">
                 User form
             </div>
             <form method="POST">
-                <input type="hidden" name="id" value="<?php echo $id ?>">
+                <input type="hidden" name="id" value="<?php
+                                                        if (!empty($user[0]['name'])) {
+                                                            echo base64_encode($user[0]['id']);
+                                                        } else {
+                                                            echo $id;
+                                                        }
+                                                        ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
