@@ -3,10 +3,14 @@ require_once 'configs/database.php';
 
 abstract class BaseModel {
     // Database connection
+<<<<<<< HEAD
     private static $_connection;
     // Life of session, 3600 = 1h
     private $_csrf_time_live = 3600;
     private $_csrf_value = '';
+=======
+    protected static $_connection;
+>>>>>>> 1-php-202109/2-groups/3-C/master
 
     public function __construct() {
 
@@ -35,6 +39,7 @@ abstract class BaseModel {
      * @param $sql
      */
     protected function query($sql) {
+
         $result = self::$_connection->query($sql);
         return $result;
     }
