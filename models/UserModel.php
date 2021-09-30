@@ -50,9 +50,10 @@ class UserModel extends BaseModel {
      */
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
                  password="'. md5($input['password']) .'"
                 WHERE id = ' . $input['id'];
+
         $user = $this->update($sql);
 
         return $user;
@@ -64,8 +65,23 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
+<<<<<<< HEAD
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`type`,`email`) VALUES (" .
                 "'" . $input['name'] ."', '".md5($input['password'])."','".$input['fullname']."','".$input['type']."','".$input['email']. "')";
+=======
+<<<<<<< HEAD
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`type`,`email`) VALUES (" .
+                "'" . $input['name'] ."', '".md5($input['password'])."','".$input['fullname']."','".$input['type']."','".$input['email']. "')";
+=======
+<<<<<<< HEAD
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`type`) VALUES (" .
+                "'" . $input['name'] ."', '".md5($input['password'])."','".$input['fullname']."','".$input['type']. "')";
+=======
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`type`,`email`) VALUES (" .
+                "'" . $input['name'] ."', '".md5($input['password'])."','".$input['fullname']."','".$input['type']."','".$input['email']. "')";
+>>>>>>> 1-php-202109/2-groups/8-H/1-19-Huynh
+>>>>>>> origin/1-php-202109/2-groups/8-H/master
+>>>>>>> 1-php-202109/2-groups/8-H/master
 
         $user = $this->insert($sql);
 
