@@ -5,16 +5,17 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$_id = NULL;
+$id = NULL;
 
 if (!empty($_GET['id'])) {
-    $_id = $_GET['id'];
-    $user = $userModel->findUserById($_id);//Update existing user
+    $id = base64_decode($_GET['id']);
+    $newid = substr($id,23);
+    $user = $userModel->findUserById($newid);//Update existing user
 }
 
 if (!empty($_POST['submit'])) {
 
-    if (!empty($_id)) {
+    if (!empty($id)) {
         $userModel->updateUser($_POST);
     
     } else {
@@ -34,12 +35,16 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
-            <?php if ($user || isset($_id)) { ?>
+            <?php if ($user || isset($newsid)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $_id ?>">
+                    <input type="hidden" name="id" value="<?php echo $newid ?>">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+                    </div>
                     <div class="form-group">
                         <label for="type">Type</label><br>
                         <Select name="type" class="form-control">
