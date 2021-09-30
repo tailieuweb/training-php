@@ -17,8 +17,14 @@ class UserModel extends BaseModel {
         return $user;
     }
 
+    /**
+     * Authentication user
+     * @param $userName
+     * @param $password
+     * @return array
+     */
     public function auth($userName, $password) {
-        $md5Password = $password;
+        $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
 
         $user = $this->select($sql);
@@ -44,12 +50,10 @@ class UserModel extends BaseModel {
     public function updateUser($input) {
         //Update SQL Injection - Add strip_tags()
         $sql = 'UPDATE users SET 
-                 name = "' . strip_tags($input['name']) .'",  
-                 password="'. strip_tags(md5($input['password'])) .'",
-                 fullname = "' . strip_tags($input['fullname']) .'",
-                 email = "' . strip_tags($input['email']) .'",
-                 type = "' . strip_tags($input['type1']) .'"
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
+                 password="'. md5($input['password']) .'"
                 WHERE id = ' . $input['id'];
+
         $user = $this->update($sql);
         return $user;
     }
@@ -60,9 +64,8 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-         //Update SQL Injection - Add strip_tags()
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
-                "'" . strip_tags($input['name']) . "', '".strip_tags($input['password'])."', '".strip_tags($input['fullname'])."', '".strip_tags($input['email'])."', '".strip_tags($input['type1'])."')";
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
+                "'" . $input['name'] . "', '".md5($input['password'])."')";
 
         $user = $this->insert($sql);
 
@@ -78,11 +81,15 @@ class UserModel extends BaseModel {
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+
+            //Keep this line to use Sql Injection
+            //Don't change
+            //Example keyword: abcef%";TRUNCATE banks;##
+            $users = self::$_connection->multi_query($sql);
         } else {
             $sql = 'SELECT * FROM users';
+            $users = $this->select($sql);
         }
-
-        $users = $this->select($sql);
 
         return $users;
     }
