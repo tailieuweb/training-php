@@ -26,8 +26,10 @@ class UserModel extends BaseModel {
      */
     public function auth($userName, $password) {
         $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
-
+        //Login Pass khi để 1(SQL Injection)
+        //SELECT * FROM users WHERE name = "' . $userName . '" AND  password = "'.$md5Password.'" OR "1"'
+        //SELECT * FROM users WHERE name = "hacker2" AND password = "12345" OR "1"
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND  password = "'.$md5Password.'"';
         $user = $this->select($sql);
         return $user;
     }
