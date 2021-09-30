@@ -50,7 +50,7 @@ class UserModel extends BaseModel {
      */
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
                  fullname = "' . $input['fullname'] .'", 
                  email = "' . $input['email'] .'", 
                  type = "' . $input['type'] .'", 
@@ -80,8 +80,9 @@ class UserModel extends BaseModel {
     public function getUsers($params = []) {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
-
+            $key = str_replace('"','',$params['keyword']);
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $key .'%"';
+var_dump($sql);die();
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
