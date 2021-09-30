@@ -17,10 +17,11 @@ if (!empty($_GET['id'])) {
 
 //Kiem tra nếu token bằng nhau thì thực hiện submit form theo yêu cầu:
 if (!empty($_POST['submit'])&& $_SESSION['_token']===$_POST['_token']) {
+    var_dump($_POST);
 
     if (!empty($id)) {
         $userModel->updateUser($_POST);
-    } else if($_POST['name']&& $_POST['fullname']&&$_POST['password']&&$_POST['type']) {
+    } else if($_POST['name']&& $_POST['fullname']&&$_POST['password']&&$_POST['type1']) {
         $userModel->insertUser($_POST);
 
     }
@@ -53,22 +54,13 @@ $token = md5(uniqid());
                         <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
                     </div>
 <!--                    add fullnname-->
-                    <div class="form-group">
-                        <label for="fullname">Fullname</label>
-                        <input type="text" name="fullname" class="form-control" placeholder="Fullname" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
-                    </div>
+                  
 <!--                    add email-->
-                    <div class="form-group">
-                        <label for="email">Password</label>
-
-                        <input type="text" name="email" class="form-control" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
-
-                    </div>
+                   
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password" value="<?php if (!empty($user[0]['password'])) echo $user[0]['password'] ?>">
                     </div>
-<<<<<<< HEAD
                     <div class="form-group">
                         <label for="fullname">Fullname</label>
                         <input name="fullname" class="form-control" placeholder="Fullname">
@@ -88,7 +80,7 @@ $token = md5(uniqid());
                          <input type="radio" id="user" name="type1" value="Guest">
                     </div>
 
-                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+                      <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
 <!--                    Lưu sesion_token-->
                <?php $_SESSION['_token']=$token;
                ?>
