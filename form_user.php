@@ -44,12 +44,18 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php' ?>
     <div class="container">
         <?php
-        if ($user) { ?>
+        if ($user || isset($id)) { ?>
             <div class="alert alert-warning" role="alert">
                 User form
             </div>
             <form method="POST">
-                <input type="hidden" name="id" value="<?php echo base64_encode($user[0]['id']) ?>">
+                <input type="hidden" name="id" value="<?php
+                                                        if (!empty($user[0]['name'])) {
+                                                            echo base64_encode($user[0]['id']);
+                                                        } else {
+                                                            echo $id;
+                                                        }
+                                                        ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">

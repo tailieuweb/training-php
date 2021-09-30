@@ -82,7 +82,5 @@ if (!empty($_POST['submit'])) {
             </div>
         </div>
     </div>
-
->>>>>>> 1-php-202109/1-web-security
 </body>
 </html>

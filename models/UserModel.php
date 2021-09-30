@@ -31,8 +31,8 @@ class UserModel extends BaseModel
     {
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
-
         $user = $this->select($sql);
+
         return $user;
     }
 
@@ -62,7 +62,6 @@ class UserModel extends BaseModel
         $datetime->setTimezone($tz_object);
 
         $sql = 'UPDATE users SET 
-
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name'])  . '", 
                  updated_at = "' . $datetime->format('Y\-m\-d\ h:i:sa') . '", 
                  fullname="' . ($input['fullname']) . '",
@@ -119,8 +118,11 @@ class UserModel extends BaseModel
 
             //Keep this line to use Sql Injection
             //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
+            //Example keyword: "abcef%";TRUNCATE banks;##
             $users = self::$_connection->multi_query($sql);
+
+            // Comment line above and uncomment following line if you want this function work normally
+            // $users = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
