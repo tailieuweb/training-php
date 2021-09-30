@@ -34,7 +34,7 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
-            <?php if ($user || isset($_id)) { ?>
+            <?php if ($user || !isset($_id)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
