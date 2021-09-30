@@ -18,6 +18,12 @@ class UserModel extends BaseModel {
         return $user;
     }
 
+    /**
+     * Authentication user
+     * @param $userName
+     * @param $password
+     * @return array
+     */
     public function auth($userName, $password) {
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
@@ -31,8 +37,7 @@ class UserModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($md5ID) {
-        $id = $this->decryptID($md5ID);
+    public function deleteUserById($id) {
         $sql = 'DELETE FROM users WHERE id = '.$id;
         return $this->delete($sql);
 
@@ -44,18 +49,10 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        // Get date
-        date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $date = date('Y-m-d h:i:s', time());
-        $sql = 'UPDATE `users` SET 
+        $sql = 'UPDATE users SET 
                  name = "' . $input['name'] .'", 
-                  fullname="'. $input['fullname'] .'",
-                  email="'. $input['email'] .'",
-                  type="'. $input['type'] .'",
-                 password="'. md5($input['password']) .'",
-                 update_at="'. $date .'"
+                 password="'. md5($input['password']) .'"
                 WHERE id = ' . $input['id'];
-                var_dump($sql);
         $user = $this->update($sql);
 
         return $user;
@@ -67,12 +64,11 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $password = md5($input['password']);
-        // SQL
-        $sql = "INSERT INTO `users`(`name`, `fullname`, `email`, `type`, `password`) 
-        VALUES ('".$input['name']."','".$input['fullname']."','".$input['email']."','".$input['type']."','".$password."')";
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
+                "'" . $input['name'] . "', '".md5($input['password'])."')";
+
         $user = $this->insert($sql);
-        
+
         return $user;
     }
 
@@ -85,23 +81,16 @@ class UserModel extends BaseModel {
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+
+            //Keep this line to use Sql Injection
+            //Don't change
+            //Example keyword: abcef%";TRUNCATE banks;##
+            $users = self::$_connection->multi_query($sql);
         } else {
             $sql = 'SELECT * FROM users';
+            $users = $this->select($sql);
         }
-
-        $users = $this->select($sql);
 
         return $users;
-    }
-
-    // Decrypt id
-    private function decryptID($md5Id){
-        $users = $this->getUsers();
-        foreach($users as $user){
-            if(md5($user['id'].'TDC') == $md5Id){
-                return $user['id'];
-            }
-        }
-        return 0;
     }
 }
