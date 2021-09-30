@@ -54,13 +54,13 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['type']?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="form_user.php?id=<?php echo rand(1111, 9999).crc32($user ['id']).rand(1111, 9999) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="view_user.php?id=<?php echo rand(1111, 9999).crc32($user['id']).rand(1111, 9999) ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="delete_user.php?id=<?php echo rand(1111, 9999).crc32($user['id']).rand(1111, 9999) ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
