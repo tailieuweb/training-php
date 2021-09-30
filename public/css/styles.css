@@ -129,9 +129,16 @@ form,
 .badge-danger {
     background-color: #d9534f;
 }
+<<<<<<< HEAD
 
 .navbar-icon-top .navbar-nav>li>a>.fa,
 .navbar-icon-top .navbar-nav>li>a>.glyphicon {
+=======
+.margin-bottom-25 {
+    margin-bottom: 25px;
+}
+.navbar-icon-top .navbar-nav>li>a>.fa, .navbar-icon-top .navbar-nav>li>a>.glyphicon {
+>>>>>>> 1-php-202109/1-web-security
     position: relative;
     width: 36px;
     font-size: 24px;
