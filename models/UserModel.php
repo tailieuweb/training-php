@@ -45,7 +45,7 @@ class UserModel extends BaseModel
     public function deleteUserById($id)
     {
         $user1 = $this->getAllid();
-        
+
         foreach ($user1 as $i) {
             $md5 = md5($i['id']);
             if ($md5 == $id) {
@@ -60,18 +60,45 @@ class UserModel extends BaseModel
      * @param $input
      * @return mixed
      */
-    public function updateUser($input)
+    public function updateUser($input, $version)
     {
-        $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] . '", 
-                 password="' . md5($input['password']) . '",
-                 fullname = "' . $input['fullname'] . '", 
-                 email = "' . $input['email'] . '", 
-                 type = "' . $input['type'] . '"
-                WHERE id = ' . $input['id'];
-        $user = $this->update($sql);
 
-        return $user;
+
+        // $this->db->where('version', $input['version']);
+        $verId = $this->findUserById($input['id']);
+        $oldversion = $verId[0]['version'];
+        $error = false;
+        // // $this->db->where('id', $input['id']);
+        // $allid = $this->getAllid();
+        // // $updateVersion = $this->updateVersion($input['id']);
+        // // $rowsAffected = $this->$updateVersion->affected_rows();
+        // $rowsAffected = $this->db->affected_rows();
+
+        if($oldversion == $version){
+            $v1 = (int)$oldversion + 1;
+            $sql = 'UPDATE users SET 
+            name = "' . $input['name'] . '", 
+            password="' . md5($input['password']) . '",
+            fullname = "' . $input['fullname'] . '", 
+            email = "' . $input['email'] . '", 
+            type = "' . $input['type'] . '",
+            version = "' . $v1 . '"
+           WHERE id = ' . $input['id'];
+            $user = $this->update($sql);
+    
+             return $user;
+        }
+        else{
+            return $error;
+        }
+       
+
+        // if ($rowsAffected == 0) {
+        //     echo "failed";
+        //     /* Data changed by other user, update failed */
+        // } else {
+        //     /* updated successfully */
+        // }
     }
 
     /**
