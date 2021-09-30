@@ -21,22 +21,17 @@ class UserModel extends BaseModel
         return $user;
     }
 
-<<<<<<< HEAD
-    public function auth($userName, $password)
-    {
-        $md5Password = $password;
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
-=======
+
     /**
      * Authentication user
      * @param $userName
      * @param $password
      * @return array
      */
-    public function auth($userName, $password) {
+    public function auth($userName, $password)
+    {
         $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
->>>>>>> 1-php-202109/1-master
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
 
         $user = $this->select($sql);
         return $user;
@@ -75,6 +70,7 @@ class UserModel extends BaseModel
      * @return mixed
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 1-php-202109/2-groups/9-I/master
@@ -96,6 +92,12 @@ class UserModel extends BaseModel
                 "'" . $input['name'] . "', '".md5($input['password'])."')";
 >>>>>>> 1-php-202109/1-master
 >>>>>>> 1-php-202109/2-groups/9-I/master
+=======
+    public function insertUser($input)
+    {
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
+            "'" . $input['name'] . "', '" . md5($input['password']) . "')";
+>>>>>>> 1-php-202109/2-groups/9-I/master
 
         $user = $this->insert($sql);
 
@@ -111,16 +113,12 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
-<<<<<<< HEAD
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
-=======
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
             $users = self::$_connection->multi_query($sql);
->>>>>>> 1-php-202109/1-master
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
