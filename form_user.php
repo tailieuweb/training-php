@@ -17,8 +17,6 @@ if (!empty($_POST['submit'])) {
         // Nếu thời gian cập nhật hiện tại của user trên db chưa thay đổi thì cho sửa:
         $user = $userModel->findUserById(base64_decode($id));
         if (count($user) > 0) {
-            // var_dump($user[0]['updated_at']);
-            // var_dump($_GET['updated_at']);
             if ($user[0]['updated_at'] == $_GET['updated_at']) {
 
                 $userModel->updateUser($_POST);
@@ -32,7 +30,6 @@ if (!empty($_POST['submit'])) {
         $userModel->insertUser($_POST);
         header('location: list_users.php');
     }
-    // header('location: list_users.php');
 }
 
 ?>
@@ -47,6 +44,7 @@ if (!empty($_POST['submit'])) {
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
+<<<<<<< HEAD
         <?php if ($user || isset($id)) { ?>
             <div class="alert alert-warning" role="alert">
                 User form

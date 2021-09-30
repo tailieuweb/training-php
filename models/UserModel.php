@@ -58,8 +58,9 @@ class UserModel extends BaseModel {
         $datetime->setTimezone($tz_object);
 
         $sql = 'UPDATE users SET 
+
                  name = "' . $input['name'] . '", 
-                 updated_at = "' . $datetime->format('Y\-m\-d\ h:i:sa') . '", 
+                 updated_at = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
                  fullname="' . ($input['fullname']) . '",
                  email="' . ($input['email']) . '",
                  password="' . (md5($input['password'])) . '",
