@@ -51,6 +51,7 @@ class UserModel extends BaseModel {
                  type="'. $input['type1']. '"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
+        return $user;
     }
     /**
      * Insert user

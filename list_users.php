@@ -4,7 +4,7 @@ include 'views/header.php';
 $userModel = new UserModel();
 
 
-params = [];
+$params = [];
 if (!empty(strip_tags($_GET['keyword']))) {
     $params['keyword'] = strip_tags($_GET['keyword']);
 	    $keyword = clean($_GET['keyword']);
