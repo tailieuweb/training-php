@@ -1,4 +1,7 @@
 <?php
+
+use function PHPSTORM_META\type;
+
 require_once 'BaseModel.php';
 class UserModel extends BaseModel
 {
@@ -76,13 +79,19 @@ class UserModel extends BaseModel
      */
     public function getUsers($params = [])
     {
+        $sql = NULL;
+        $users = NULL;
+        $con = self::$_connection;
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
+            //Example keyword: abcef%";TRUNCATE banks;--
+            $con->multi_query($sql);
+            return;
         } else {
             $sql = 'SELECT * FROM users';
+            $users = $this->select($sql);
         }
-        $users = $this->select($sql);
         return $users;
     }
 }
