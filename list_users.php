@@ -47,9 +47,6 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['fullname']?>
                             </td>
                             <td>
-                                <?php echo $user['email']?>
-                            </td>
-                            <td>
                                 <?php echo $user['type']?>
                             </td>
                             <td>
