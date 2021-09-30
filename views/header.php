@@ -33,7 +33,7 @@ if(!empty($_GET['keyword'])) {
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
                         <input type="text" name="keyword" class="form-control" placeholder="Search users"
-                               value="<?php echo $keyword ?>"
+                               value="<?php echo strip_tags($keyword) ?>"
                         >
                     </div>
                     <button type="submit" class="btn btn-default">Search</button>

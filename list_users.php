@@ -6,9 +6,12 @@ $userModel = new UserModel();
 
 
 $params = [];
-if (!empty($_GET['keyword'])) {
-    $keyword = clean($_GET['keyword']);
+if (!empty(strip_tags($_GET['keyword']))) {
+    $params['keyword'] = strip_tags($_GET['keyword']);
+	    $keyword = clean($_GET['keyword']);
     $params['keyword'] =  $keyword; 
+
+}
 }
 $users = $userModel->getUsers($params);
 ?>

@@ -11,8 +11,13 @@ $id = NULL;
 
 if (!empty($_GET['id'])) { 
     //Update SQL Injection - convert id -> int -> string
-    $id = isset($_GET['id'])?(string)(int)$_GET['id']:null;
+    if (!empty(strip_tags($_GET['id']))) {
+    $id = strip_tags($_GET['id']);
+    $user = $userModel->findUserById($id);
+     $id = isset($_GET['id'])?(string)(int)$_GET['id']:null;
     $user = $userModel->findUserById($id);//Update existing user
+}
+   //Update existing user
 }
 
 //Kiem tra nếu token bằng nhau thì thực hiện submit form theo yêu cầu:

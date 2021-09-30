@@ -5,9 +5,8 @@ $userModel = new UserModel();
 $user = NULL; //Add new user
 $id = NULL;
 
-if (!empty($_GET['id'])) {
-    //Update SQL Injection - convert id -> int -> string
-    $id = isset($_GET['id'])?(string)(int)$_GET['id']:null;
+if (!empty(strip_tags($_GET['id']))) {
+    $id = strip_tags($_GET['id']);
     $user = $userModel->findUserById($id);//Update existing user
 }
 
@@ -15,13 +14,12 @@ if (!empty($_GET['id'])) {
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
-        $userModel->updateUser($_POST);
+        $userModel->updateUser(strip_tags($_POST));
     } else {
-        $userModel->insertUser($_POST);
+        $userModel->insertUser(strip_tags($_POST));
     }
     header('location: list_users.php');
 }
-
 ?>
 <!DOCTYPE html>
 <html>
