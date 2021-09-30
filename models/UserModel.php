@@ -7,7 +7,6 @@ class UserModel extends BaseModel {
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
-
         return $user;
     }
 
@@ -43,12 +42,15 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
+        //Update SQL Injection - Add strip_tags()
         $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
-                 password="'. md5($input['password']) .'"
+                 name = "' . strip_tags($input['name']) .'",  
+                 password="'. strip_tags(md5($input['password'])) .'",
+                 fullname = "' . strip_tags($input['fullname']) .'",
+                 email = "' . strip_tags($input['email']) .'",
+                 type = "' . strip_tags($input['type1']) .'"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
-
         return $user;
     }
 
@@ -58,8 +60,9 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".$input['password']."')";
+         //Update SQL Injection - Add strip_tags()
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
+                "'" . strip_tags($input['name']) . "', '".strip_tags($input['password'])."', '".strip_tags($input['fullname'])."', '".strip_tags($input['email'])."', '".strip_tags($input['type1'])."')";
 
         $user = $this->insert($sql);
 
