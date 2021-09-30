@@ -22,13 +22,10 @@ abstract class BaseModel
      * Query in database
      * @param $sql
      */
-<<<<<<< HEAD
+
     protected function query($sql)
     {
-=======
-    protected function query($sql) {
 
->>>>>>> 1-php-202109/1-master
         $result = self::$_connection->query($sql);
         return $result;
     }
