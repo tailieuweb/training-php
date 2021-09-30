@@ -35,12 +35,12 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
-            <?php if ($user || isset($_id)) { ?>
+            <?php if ($user || isset($id)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $_id ?>">
+                    <input type="hidden" name="id" value="<?php echo $id ?>">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
@@ -61,11 +61,11 @@ if (!empty($_POST['submit'])) {
                         <select name="type" class="form-control">
                             <?php
                             foreach($type as $value) {
-                                if($value['type_id'] == $user[0]['type']){
+                                if($value['id_type'] == $user[0]['type']){
                                 ?>
-                            <option selected value="<?php if (!empty($value['type_id'])) echo $value['type_id'] ?>"><?php if (!empty($value['name_type'])) echo $value['name_type'] ?></option>
+                            <option selected value="<?php if (!empty($value['id_type'])) echo $value['id_type'] ?>"><?php if (!empty($value['name_type'])) echo $value['name_type'] ?></option>
                             <?php } else{ ?>
-                                    <option value="<?php if (!empty($value['type_id'])) echo $value['type_id'] ?>"><?php if (!empty($value['name_type'])) echo $value['name_type'] ?></option>
+                                    <option value="<?php if (!empty($value['id_type'])) echo $value['id_type'] ?>"><?php if (!empty($value['name_type'])) echo $value['name_type'] ?></option>
                              <?php   }
                             }?>
                         </select>
