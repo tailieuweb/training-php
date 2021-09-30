@@ -20,13 +20,6 @@ class UserModel extends BaseModel
 
         return $user;
     }
-
-<<<<<<< HEAD
-    public function auth($userName, $password)
-    {
-        $md5Password = $password;
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
-=======
     /**
      * Authentication user
      * @param $userName
@@ -36,7 +29,6 @@ class UserModel extends BaseModel
     public function auth($userName, $password) {
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
->>>>>>> 1-php-202109/1-master
 
         $user = $this->select($sql);
         return $user;

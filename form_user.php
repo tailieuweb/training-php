@@ -8,13 +8,8 @@ $user = NULL; //Add new user
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
-<<<<<<< HEAD
-    $id = $_GET['id'];
-    $user = $userModel->findUserById($id); //Update existing user
-=======
     $_id = $_GET['id'];
     $user = $userModel->findUserById($_id);//Update existing user
->>>>>>> 1-php-202109/1-master
 }
 
 
@@ -40,12 +35,7 @@ if (!empty($_POST['submit'])) {
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-<<<<<<< HEAD
-            <?php if ($user || empty($id)) { ?>
-=======
-
             <?php if ($user || isset($_id)) { ?>
->>>>>>> 1-php-202109/1-master
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
