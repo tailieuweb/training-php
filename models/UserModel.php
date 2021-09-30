@@ -16,8 +16,14 @@ class UserModel extends BaseModel {
         return $user;
     }
 
+    /**
+     * Authentication user
+     * @param $userName
+     * @param $password
+     * @return array
+     */
     public function auth($userName, $password) {
-        $md5Password = $password;
+        $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
         $user = $this->select($sql);
         return $user;
@@ -39,18 +45,19 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
+
         public function updateUser($input) {
             $sql = 'UPDATE users SET 
-                     name = "' . $input['name'] .'", 
+                     name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
                      password="'. md5($input['password']) .'",
                      fullname = "' . $input['fullname'] .'",
-                     email = "' . $input['email'] .'",
+                     email = "'	 . $input['email'] .'",
                      type = "' . $input['t1'] .'"
                     WHERE id = ' . $input['id'];
             $user = $this->update($sql);
             return $user;
         }
-    
+
 
     /**
      * Insert user
@@ -76,6 +83,11 @@ class UserModel extends BaseModel {
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+
+            //Keep this line to use Sql Injection
+            //Don't change
+            //Example keyword: abcef%";TRUNCATE banks;##
+            $users = self::$_connection->multi_query($sql);
         } else {
             $sql = 'SELECT * FROM `users` ORDER BY name;';
         }
