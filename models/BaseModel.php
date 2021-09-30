@@ -3,14 +3,11 @@ require_once 'configs/database.php';
 
 abstract class BaseModel {
     // Database connection
-<<<<<<< HEAD
-    private static $_connection;
+
+    protected static $_connection;
     // Life of session, 3600 = 1h
     private $_csrf_time_live = 3600;
     private $_csrf_value = '';
-=======
-    protected static $_connection;
->>>>>>> 1-php-202109/2-groups/3-C/master
 
     public function __construct() {
 
@@ -21,12 +18,13 @@ abstract class BaseModel {
 
             // Save token in 1h
             setcookie($token, time() + $this->_csrf_time_live);
-
+            $this->_csrf_value = $token;
 
             if (self::$_connection->connect_errno) {
                 printf("Connect failed");
                 exit();
             }
+            var_dump($token);
         }
 
     }
