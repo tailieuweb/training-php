@@ -45,11 +45,17 @@ if (!empty($_POST['submit'])) {
         <input name="fullname" class="form-control" placeholder="Fullname"
           value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
       </div>
+      <?php
+        if (!isset($user[0]['password'])) {
+        ?>
       <div class="form-group">
         <label for="password">Password</label>
         <input type="password" name="password" class="form-control" placeholder="password"
           value="<?php if (!empty($user[0]['password'])) echo $user[0]['password'] ?>">
       </div>
+      <?php
+        }
+        ?>
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" name="email" class="form-control" placeholder="Email"
