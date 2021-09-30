@@ -57,30 +57,26 @@ class UserModel extends BaseModel
      */
 
 
-    public function updateUser($input)
+    public function updateUser($input, $version)
     {
-        date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $open = 0; //0-opening 1-close
-        $timeOpening = date("Y-m-d H:i", strtotime('+2 minute', strtotime(date("Y-m-d H:i"))));
         $userById = $this->findUserById($input['id']);
         $error = false;
-        if(strtotime(date("Y-m-d H:i")) < strtotime($userById[0]['time'])){
-            var_dump('ok');die;
-        }
-        if ($userById[0]['opening'] == "1") {
-            return $error;
-        } else {
+        $oldTime = $userById[0]['version'];
+
+        if ($oldTime == $version) {
+            $time1 = (int)$oldTime + 1;
             $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] . '", 
-                 email = "' . $input['email'] . '", 
-                 fullname = "' . $input['fullname'] . '", 
-                 type = "' . $input['type'] . '", 
-                 opening = "' . $open . '", 
-                 time = "' . $timeOpening . '", 
-                 password="' . md5($input['password']) . '"
-                 WHERE id = ' . $input['id'];
+                name = "' . $input['name'] . '", 
+                email = "' . $input['email'] . '", 
+                fullname = "' . $input['fullname'] . '", 
+                type = "' . $input['type'] . '", 
+                version = "' . $time1 . '", 
+                password="' . md5($input['password']) . '"
+                WHERE id = ' . $input['id'];
             $user = $this->update($sql);
             return $user;
+        } else {
+            return $error;
         }
     }
 
@@ -109,13 +105,26 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
+
+            $params['keyword'] = str_replace(
+                array(
+                    ',', ';', '#', '/', '%', 'select', 'update', 'insert', 'delete', 'truncate',
+                    'union', 'or', '"', "'", 'SELECT', 'UPDATE', 'INSERT', 'DELETE', 'TRUNCATE', 'UNION', 'OR'
+                ),
+                array(''),
+                $params['keyword']
+            );
+          
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
+
+            //Keep this line to use Sql Injection
+            //Don't change
+            //Example keyword: abcef%";TRUNCATE banks;##
+            $users = self::$_connection->multi_query($sql);
         } else {
             $sql = 'SELECT * FROM users';
+            $users = $this->select($sql);
         }
-
-        $users = $this->select($sql);
-
         return $users;
     }
 }
