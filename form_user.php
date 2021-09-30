@@ -12,11 +12,11 @@ if (!empty($_GET['id'])) {
     $user = $userModel->findUserById($newid);//Update existing user
 }
 
-
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
         $userModel->updateUser($_POST);
+    
     } else {
         $userModel->insertUser($_POST);
     }
@@ -33,7 +33,6 @@ if (!empty($_POST['submit'])) {
 <body>
     <?php include 'views/header.php'?>
     <div class="container">
-
             <?php if ($user || empty(substr($id,23,2))) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
@@ -53,10 +52,17 @@ if (!empty($_POST['submit'])) {
                         </Select>
                     </div>
                     <div class="form-group">
+                        <label for="fullname">Full name</label>
+                        <input class="form-control" name="fullname" placeholder="Full name" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input class="form-control" name="email" placeholder="email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
+                    </div>
+                    <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
-
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
             <?php } else { ?>
