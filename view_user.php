@@ -8,7 +8,16 @@ $id = NULL;
 if (!empty(strip_tags($_GET['id']))) {
     $id = strip_tags($_GET['id']);
     $user = $userModel->findUserById($id);//Update existing user
+ $id = $_GET['id'];
+     $handleFirst = substr($id,23);
+     $id = "";
+    for ($i=0; $i <strlen($handleFirst)-9 ; $i++) { 
+        $id.=$handleFirst[$i];
+    }
+    $user = $userModel->findUserById($id);
 }
+
+
 
 
 if (!empty($_POST['submit'])) {

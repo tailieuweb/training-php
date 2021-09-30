@@ -13,14 +13,12 @@ class UserModel extends BaseModel {
     public function findUser($keyword) {
         $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
         $user = $this->select($sql);
-
         return $user;
     }
 
     public function auth($userName, $password) {
         $md5Password = $password;
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
-
         $user = $this->select($sql);
         return $user;
     }
@@ -62,10 +60,9 @@ class UserModel extends BaseModel {
     public function insertUser($input) {
          //Update SQL Injection - Add strip_tags()
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
-                "'" . strip_tags($input['name']) . "', '".strip_tags($input['password'])."', '".strip_tags($input['fullname'])."', '".strip_tags($input['email'])."', '".strip_tags($input['type1'])."')";
 
+        //        $sql->bind_param('sssss',$input['name'],$input['fullname'],$input['email'],$input['t1'],$input['password']);
         $user = $this->insert($sql);
-
         return $user;
     }
 
@@ -79,11 +76,9 @@ class UserModel extends BaseModel {
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
         } else {
-            $sql = 'SELECT * FROM users';
+            $sql = 'SELECT * FROM `users` ORDER BY name;';
         }
-
         $users = $this->select($sql);
-
         return $users;
     }
 }
