@@ -10,13 +10,12 @@ if (!empty($_GET['id'])) {
     $user = $userModel->findUserById($id); //Update existing user
 }
 
-
 if (!empty($_POST['submit'])) {
-
+    $version = $_POST['version'];
     if (!empty($id)) {
-        $a = $userModel->updateUser($_POST);
+        $a = $userModel->updateUser($_POST, $version);
         if ($a == false) {
-            $a = "Updating ! Pleade Try Again";
+            $a = "Updating Error! Pleade Try Again";
         } else {
             header('location: list_users.php');
         }
@@ -53,6 +52,7 @@ if (!empty($_POST['submit'])) {
 
             <form method="POST">
                 <input type="hidden" name="id" value="<?php echo $id ?>">
+                <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo $user[0]['version'] ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
