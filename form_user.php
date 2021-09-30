@@ -8,7 +8,8 @@ $userModel = new UserModel();
 
 $user = NULL; //Add new user
 $id = NULL;
-
+$Name_store = "";
+$password_store = "";
 if (!empty($_GET['id'])) { 
     //Update SQL Injection - convert id -> int -> string
     if (!empty(strip_tags($_GET['id']))) {
@@ -20,8 +21,9 @@ if (!empty($_GET['id'])) {
    for ($i=0; $i <strlen($handleFirst)-9 ; $i++) { 
        $id.=$handleFirst[$i];
    }    
-    $user = $userModel->findUserById($id);
-    
+     $user = $userModel->findUserById($id);//Update existing user
+    $Name_store = $user[0]['name'];
+    $password_store = $user[0]['password'];
    
    
 }
@@ -33,7 +35,9 @@ if (!empty($_POST['submit'])&& $_SESSION['_token']===$_POST['_token']) {
     var_dump($_POST);
 
     if (!empty($id)) {
-        $userModel->updateUser($_POST);
+       if(CheckuserdataBeforeUpdate($userModel,$id,$Name_store,$_POST['old_password'])){
+           $userModel->updateUser($_POST);
+       }
     } else if($_POST['name']&& $_POST['fullname']&&$_POST['password']&&$_POST['type1']) {
         $userModel->insertUser($_POST);
 
@@ -42,6 +46,21 @@ if (!empty($_POST['submit'])&& $_SESSION['_token']===$_POST['_token']) {
 
 }
 $token = md5(uniqid());
+
+function CheckuserdataBeforeUpdate($userModel,$id,$Name_store,$old_password){
+   $data_check = $userModel->findUserById($id);
+   $check = true;
+    if ($Name_store != $data_check[0]['name']){
+    $check = false;
+    }
+    if($password_store != $old_password ){
+        $check = false;
+    }
+    return $check;
+
+
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -69,6 +88,12 @@ $token = md5(uniqid());
 <!--                    add fullnname-->
                   
 <!--                    add email-->
+ <?php if(!empty($_GET['id'])){?> 
+            <div class="form-group">
+                <label for="password">Old Password</label>
+                <input type="password" name="old_password" class="form-control" placeholder="Password">
+            </div>
+            <?php } ?>
                    
                     <div class="form-group">
                         <label for="password">Password</label>
@@ -105,9 +130,11 @@ $token = md5(uniqid());
                         Type:
                         <br>
                         <label for="admin">Admin</label>
-                       <input type="radio" id="admin" name="t1" value="admin">
+                        <input type="radio" id="admin" name="t1" value="admin" checked="t1" >
                         <label for="user">User</label>
-                         <input type="radio" id="user" name="t1" value="user">
+                         <input type="radio" id="user" name="t1" value="user" > 
+                         <label for="guest">Guest</label>
+                         <input type="radio" id="guest" name="t1" value="guest">
 
                     </div>
 
