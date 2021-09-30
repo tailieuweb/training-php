@@ -43,6 +43,7 @@ class UserModel extends BaseModel {
 
     }
 
+
     /**
      * Update user
      * @param $input
@@ -92,5 +93,16 @@ class UserModel extends BaseModel {
         }
 
         return $users;
+    }
+
+    // Decrypt id
+    private function decryptID($md5Id){
+        $users = $this->getUsers();
+        foreach($users as $user){
+            if(md5($user['id'].'TDC') == $md5Id){
+                return $user['id'];
+            }
+        }
+        return 0;
     }
 }
