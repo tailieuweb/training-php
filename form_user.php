@@ -8,13 +8,8 @@ $user = NULL; //Add new user
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
-<<<<<<< HEAD
-    $id = $_GET['id'];
-    $user = $userModel->findUserById($id); //Update existing user
-=======
     $_id = $_GET['id'];
     $user = $userModel->findUserById($_id);//Update existing user
->>>>>>> 1-php-202109/1-master
 }
 
 
