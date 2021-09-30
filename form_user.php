@@ -8,18 +8,15 @@ $user = NULL; //Add new user
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
-<<<<<<< HEAD
-    $id = $_GET['id'];
-    $user = $userModel->findUserById($id); //Update existing user
-=======
-    $_id = $_GET['id'];
-    $user = $userModel->findUserById($_id);//Update existing user
->>>>>>> 1-php-202109/1-web-security
+    $userAuth = $userModel->getUsers();
+    foreach ($userAuth as $item) {
+        if (md5($item['id']) == $_GET['id']) {
+            $_id = $item['id'];
+            $user = $userModel->findUserById($_id);
+        }
+    }
 }
-
-
 if (!empty($_POST['submit'])) {
-
     if (!empty($_id)) {
         $userModel->updateUser($_POST);
     } else {
@@ -41,19 +38,18 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php' ?>
     <div class="container">
 
-<<<<<<< HEAD
         <?php if ($user || empty($id)) { ?>
             <div class="alert alert-warning" role="alert">
                 User form
             </div>
             <form method="POST">
-                <input type="hidden" name="id" value="<?php echo $id ?>">
+                <input type="hidden" name="id" value="<?php echo $_id ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
                 </div>
                 <div class="form-group">
-                    <label for="name">Full name</label>
+                    <label for="full-name">Full name</label>
                     <input class="form-control" name="full-name" placeholder="Full name" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
                 </div>
                 <div class="form-group">
@@ -63,28 +59,6 @@ if (!empty($_POST['submit'])) {
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" name="email" class="form-control" placeholder="email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
-=======
-            <?php if ($user || !isset($_id)) { ?>
-                <div class="alert alert-warning" role="alert">
-                    User form
-                </div>
-                <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $_id ?>">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                    </div>
-
-                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
-                </form>
-            <?php } else { ?>
-                <div class="alert alert-success" role="alert">
-                    User not found!
->>>>>>> 1-php-202109/1-web-security
                 </div>
                 <div class="form-group">
                     <label for="type">Type</label>
