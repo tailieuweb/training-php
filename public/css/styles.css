@@ -101,7 +101,9 @@ form, .content {
 .badge-danger {
 	background-color: #d9534f;
 }
-
+.margin-bottom-25 {
+    margin-bottom: 25px;
+}
 .navbar-icon-top .navbar-nav>li>a>.fa, .navbar-icon-top .navbar-nav>li>a>.glyphicon {
 	position: relative;
 	width: 36px;
