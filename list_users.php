@@ -5,12 +5,18 @@ session_start();
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
+function clean($string) {
+    $string = preg_replace('/[^A-Za-z0-9]/', '', $string); // Removes special chars.
+    return preg_replace('/ +/', ' ', $string);
+ }
+
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = strip_tags($_GET['keyword']);
 }
 
 $users = $userModel->getUsers($params);
+var_dump($users);
 ?>
 <!DOCTYPE html>
 <html>
