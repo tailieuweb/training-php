@@ -1,4 +1,6 @@
 <?php
+// Start the session
+session_start();
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
@@ -46,7 +48,8 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php' ?>
     <div class="container">
 
-        <?php if ($user || empty($id)) { ?>
+<<<<<<< HEAD
+        <?php if ($user || isset($id)) { ?>
             <div class="alert alert-warning" role="alert">
                 User form
             </div>
