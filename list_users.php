@@ -1,6 +1,8 @@
 <?php
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
+$key_code_f = "uea872dJDFD9HFYyytrt909";
+
 
 $params = [];
 if (!empty($_GET['keyword'])) {
@@ -28,6 +30,7 @@ $users = $userModel->getUsers($params);
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">Fullname</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Type</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -43,16 +46,19 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['fullname']?>
                             </td>
                             <td>
+                                <?php echo $user['email']?>
+                            </td>
+                            <td>
                                 <?php echo $user['type']?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo base64_encode($user['id']."vhurb") ?>">
+                                <a href="form_user.php?id=<?php echo base64_encode($key_code_f.$user['id']) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo base64_encode($user['id']."ugnfh") ?>">
+                                <a href="delete_user.php?id=<?php echo base64_encode($key_code_f.$user['id'])?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

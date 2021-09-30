@@ -2,14 +2,16 @@
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
+
+//23-4
+
 $user = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
-   // $id = $_GET['id'];
     $id = base64_decode($_GET['id']);
-    $id = substr($id,0,-5);
-    $userModel->deleteUserById($id);//Delete existing user
+    $newid = substr($id,23,2);
+    $userModel->deleteUserById($newid);//Delete existing user
 }
 header('location: list_users.php');
 ?>
