@@ -42,6 +42,7 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
+<<<<<<< HEAD
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
                  name = "' . $input['name'] .'", 
@@ -53,6 +54,33 @@ class UserModel extends BaseModel {
         $user = $this->update($sql);
         return $user;
     }
+=======
+    // public function updateUser($input) {
+    //     $sql = 'UPDATE users SET 
+    //             name = "' . $input['name'] .'", 
+    //             password="'. md5($input['password']) .'",
+    //             fullname="'. $input['fullname'].'",
+    //             email="'. $input['email'].'",
+    //             type="'. $input['t1']. '"
+    //            WHERE id = ' . $input['id'];
+    //     $user = $this->update($sql);
+    //     return $user;
+    //  }
+
+    public function updateUser($input) {
+        //Update SQL Injection - Add strip_tags()
+        $sql = 'UPDATE users SET 
+                 name = "' . strip_tags($input['name']) .'",  
+                 password="'. strip_tags(md5($input['password'])) .'",
+                 fullname = "' . strip_tags($input['fullname']) .'",
+                 email = "' . strip_tags($input['email']) .'",
+                 type = "' . strip_tags($input['type1']) .'"
+                WHERE id = ' . $input['id'];
+        $user = $this->update($sql);
+        return $user;
+     }
+    
+>>>>>>> 1-php-202109/2-groups/2-B/master
     /**
      * Insert user
      * @param $input
@@ -60,8 +88,11 @@ class UserModel extends BaseModel {
      */
     public function insertUser($input) {
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`, `email`,`type`) VALUES (" .
-                "'" . $input['name'] . "', '".md5($input['password'])."', '".$input['fullname']. "', '".$input['email']."', '".$input['t1']. "')";
 
+<<<<<<< HEAD
+=======
+        //        $sql->bind_param('sssss',$input['name'],$input['fullname'],$input['email'],$input['t1'],$input['password']);
+>>>>>>> 1-php-202109/2-groups/2-B/master
         $user = $this->insert($sql);
     }
 

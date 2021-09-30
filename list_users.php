@@ -4,6 +4,10 @@ include 'views/header.php';
 $userModel = new UserModel();
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1-php-202109/2-groups/2-B/master
 $params = [];
 if (!empty(strip_tags($_GET['keyword']))) {
     $params['keyword'] = strip_tags($_GET['keyword']);
@@ -11,6 +15,10 @@ if (!empty(strip_tags($_GET['keyword']))) {
     $params['keyword'] =  $keyword; 
 
 }
+<<<<<<< HEAD
+=======
+}
+>>>>>>> 1-php-202109/2-groups/2-B/master
 $users = $userModel->getUsers($params);
 function getName($n) {
     $characters = '162379812362378dhajsduqwyeuiasuiqwy460123';

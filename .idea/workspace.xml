@@ -3,12 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="fca2aa6e-54aa-4226-b8f8-032cc5b95d0a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/Test.txt" beforeDir="false" />
+=======
+>>>>>>> 1-php-202109/2-groups/2-B/master
       <change beforePath="$PROJECT_DIR$/delete_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/delete_user.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/edit.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/form_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/form_user.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/models/UserModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/UserModel.php" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/public/css/139.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/nofile.txt" beforeDir="false" />
@@ -16,6 +20,9 @@
       <change beforePath="$PROJECT_DIR$/users.sql" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/views/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/header.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/meta.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/meta.php" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/view_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/view_user.php" afterDir="false" />
+>>>>>>> 1-php-202109/2-groups/2-B/master
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +61,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$/public/js" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+>>>>>>> 1-php-202109/2-groups/2-B/master
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -77,6 +88,10 @@
       <option name="presentableId" value="Default" />
       <updated>1632046412024</updated>
       <workItem from="1632046414701" duration="13384000" />
+<<<<<<< HEAD
+=======
+      <workItem from="1632758891248" duration="2584000" />
+>>>>>>> 1-php-202109/2-groups/2-B/master
     </task>
     <servers />
   </component>
