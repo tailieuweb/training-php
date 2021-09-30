@@ -64,6 +64,7 @@ $users = $userModel->getUsers($params);
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
+
                         </tr>
                     <?php } ?>
                 </tbody>
