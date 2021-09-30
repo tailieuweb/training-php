@@ -1,23 +1,22 @@
 <?php
+
 session_start();
-
-
 
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$id = NULL;
+$_id = NULL;
 
 if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+    $_id = $_GET['id'];
+    $user = $userModel->findUserById($_id);//Update existing user
 }
 
 //Kiem tra nếu token bằng nhau thì thực hiện submit form theo yêu cầu:
 if (!empty($_POST['submit'])&& $_SESSION['_token']===$_POST['_token']) {
 
-    if (!empty($id)) {
+    if (!empty($_id)) {
         $userModel->updateUser($_POST);
     } else if($_POST['name']&& $_POST['fullname']&&$_POST['password']&&$_POST['type']) {
         $userModel->insertUser($_POST);
@@ -39,17 +38,19 @@ $token = md5(uniqid());
     <?php include 'views/header.php'?>
     <div class="container">
 
-            <?php if ($user || empty($id)) { ?>
+            <?php if ($user || !isset($_id)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
                 <form method="POST">
+
 <!--                   Ẩn token-->
                     <input type="hidden" name="_token" value="<?php echo $token ?>">
-                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                    <input type="hidden" name="id" value="<?php echo $_id ?>">
+>>>>>>> origin/1-php-202109/2-groups/2-B/master
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
                     </div>
 <!--                    add fullnname-->
                     <div class="form-group">
