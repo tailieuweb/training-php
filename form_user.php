@@ -15,7 +15,6 @@ if (!empty($_GET['id'])) {
 if (!empty($_POST['submit'])) {
     if (!empty($id)) {
         // Nếu thời gian cập nhật hiện tại của user trên db chưa thay đổi thì cho sửa:
-        $user = $userModel->findUserById(base64_decode($id));
         if (count($user) > 0) {
             if ($user[0]['updated_at'] == $_GET['updated_at']) {
 
@@ -44,13 +43,12 @@ if (!empty($_POST['submit'])) {
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-<<<<<<< HEAD
         <?php if ($user || isset($id)) { ?>
             <div class="alert alert-warning" role="alert">
                 User form
             </div>
             <form method="POST">
-                <input type="hidden" name="id" value="<?php echo $id ?>">
+                <input type="hidden" name="id" value="<?php echo base64_encode($id) ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">

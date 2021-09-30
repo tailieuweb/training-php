@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Sep 25, 2021 at 06:37 AM
--- Server version: 5.7.31
--- PHP Version: 7.3.21
+-- Máy chủ: 127.0.0.1:3306
+-- Thời gian đã tạo: Th9 30, 2021 lúc 09:35 AM
+-- Phiên bản máy phục vụ: 5.7.31-log
+-- Phiên bản PHP: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,36 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `app_web1`
+-- Cơ sở dữ liệu: `app_web1`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `banks`
+--
+
+DROP TABLE IF EXISTS `banks`;
+CREATE TABLE IF NOT EXISTS `banks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `cost` float NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `banks`
+--
+
+INSERT INTO `banks` (`id`, `user_id`, `cost`) VALUES
+(1, 1, 100000),
+(2, 2, 300000),
+(3, 3, 200000);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `users`
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -40,13 +63,13 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`, `updated_at`) VALUES
-(37, 'zzz', NULL, NULL, NULL, '123', '2021-09-25 12:59:23pm'),
-(36, '22', NULL, NULL, NULL, '22', '2021-09-24 04:11:06pm'),
-(35, '11', NULL, NULL, NULL, '11', '2021-09-24 04:11:04pm');
+(1, 'zzz', NULL, NULL, NULL, '123', '2021-09-25 12:59:23pm'),
+(2, '22', NULL, NULL, NULL, '22', '2021-09-24 04:11:06pm'),
+(3, '11', NULL, NULL, NULL, '11', '2021-09-24 04:11:04pm');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
