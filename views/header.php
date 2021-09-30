@@ -1,14 +1,12 @@
 <?php
+$id = '';
+if(!empty($_SESSION['id'])) {
+    $id = $_SESSION['id'];
+}
+
 $keyword = '';
-
-//Update SQL Injection - Remove all special chars
-function clean($string) {
-    $string = preg_replace('/[^A-Za-z0-9]/', '', $string); // Removes special chars.
-    return preg_replace('/ +/', ' ', $string); //Convert multip space -> one 
- }
-
 if(!empty($_GET['keyword'])) {
-    $keyword = clean($_GET['keyword']);
+    $keyword = $_GET['keyword'];
 }
 ?>
 <div class="container">
@@ -33,7 +31,7 @@ if(!empty($_GET['keyword'])) {
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
                         <input type="text" name="keyword" class="form-control" placeholder="Search users"
-                               value="<?php echo strip_tags($keyword) ?>"
+                               value="<?php echo $keyword ?>"
                         >
                     </div>
                     <button type="submit" class="btn btn-default">Search</button>
@@ -45,13 +43,21 @@ if(!empty($_GET['keyword'])) {
                             Account <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Profile</a></li>
+                            <li><a href="view_user.php?id=<?php echo $id ?>">Profile</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="login.php">Login</a></li>
-                            <li><a href="#">Logout</a></li>
+                            <li><a href="logout.php">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
     </nav>
+    <?php if(!empty($_SESSION['message'])){ ?>
+        <div class="alert alert-warning" role="alert">
+            <?php
+            echo $_SESSION['message'];
+            unset($_SESSION['message']);
+            ?>
+        </div>
+    <?php } ?>
 </div>
