@@ -88,7 +88,7 @@ class UserModel extends BaseModel {
 
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`, `updated_at`,`fullname`,`email`,`type`) VALUES (" .
             "'" . $input['name'] . "', '"
-            . $input['password'] . "', '"
+            . md5($input['password']) . "', '"
             . $datetime->format('Y\-m\-d\ h:i:sa') . "', '"
             . $input['fullname'] . "', '"
             . $input['email'] . "', '"

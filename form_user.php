@@ -47,8 +47,6 @@ if (!empty($_POST['submit'])) {
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-
-<<<<<<< HEAD
         <?php if ($user || isset($id)) { ?>
             <div class="alert alert-warning" role="alert">
                 User form
@@ -76,9 +74,10 @@ if (!empty($_POST['submit'])) {
                 <!-- update form select type -->
                 <div class="form-group">
                     <label for="">Type</label>
-                    <select name="type" class="form-select" aria-label="Default select example">
+                    <select class="form-control" name="type" class="form-select" aria-label="Default select example">
                         <option>user</option>
                         <option>admin</option>
+                        <option>guess</option>
                     </select>
                 </div>
 
