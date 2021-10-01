@@ -24,6 +24,10 @@ if (!empty($_POST['submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Home</title>
+    <?php include 'views/meta.php' ?>
+</head>
 
 <body>
     <?php include 'views/header.php' ?>
@@ -75,8 +79,6 @@ if (!empty($_POST['submit'])) {
             </div>
         </div>
     </div>
-
-    >>>>>>> 1-php-202109/1-web-security
 </body>
 
 </html>
