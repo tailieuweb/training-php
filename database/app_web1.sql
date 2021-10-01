@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 23, 2021 at 08:23 AM
--- Server version: 10.4.19-MariaDB-log
--- PHP Version: 8.0.7
+-- Host: 127.0.0.1:3306
+-- Generation Time: Sep 30, 2021 at 03:13 PM
+-- Server version: 8.0.24
+-- PHP Version: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `app_web1`
 --
-CREATE DATABASE IF NOT EXISTS `app_web1` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `app_web1`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `banks`
+--
+
+DROP TABLE IF EXISTS `banks`;
+CREATE TABLE IF NOT EXISTS `banks` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `banks`
+--
+
+INSERT INTO `banks` (`id`, `user_id`) VALUES
+(1, 456);
 
 -- --------------------------------------------------------
 
@@ -30,42 +48,31 @@ USE `app_web1`;
 --
 
 DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `uid` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `name` varchar(100) NOT NULL,
   `fullname` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `type` varchar(100) NOT NULL,
-  `password` varchar(250) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `password` varchar(250) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`) VALUES
-(1, 'admin', 'Admin', 'admin1@gmail.com', 'admin', 'd41d8cd98f00b204e9800998ecf8427e'),
-(2, 'user1', 'User1', 'user1@gmail.com', 'user', '24c9e15e52afc47c225b757e7bee1f9d');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+INSERT INTO `users` (`id`, `uid`, `name`, `fullname`, `email`, `type`, `password`) VALUES
+(51, 'a70f5395f2bc7573aced6a7fbcfc215f', '&lt;asdas&gt;asdasd&lt;/adsasd&gt; ', '', '', '', ''),
+(50, 'a70f5395f2bc7573aced6a7fbcfc215f', '&lt;asdas&gt;asdasd&lt;/adsasd&gt; ', '', '', '', ''),
+(52, '08c6a51dde006e64aed953b94fd68f0c', 'fsd ', '', '', '', ''),
+(56, '5fa72358f0b4fb4f2c5d7de8c9a41846', 'zxc ', '', '', '', ''),
+(57, '1943ad7439c70e644e3571b9bb4b55e6', 'sdf ', 'sdf', '', '', 'd9729feb74992cc3482b350163a1a010'),
+(55, 'd4b2758da0205c1e0aa9512cd188002a', 'dsf ', '', '', '', ''),
+(49, 'b309c4482163e9d756cf887c17db1a34', '&lt;&gt;?&lt;/&gt; &lt;&gt;&lt;/&gt;', '', '', '', '74be16979710d4c4e7c6647856088456'),
+(45, 'bdb3d3769a13988452d59d01f57d4459', 'dfg ', 'dfgdfg', 'fgdfg@sefs', 'guest', 'dfg'),
+(46, '584447d33021f0d9b6dd00a3651b7308', 'a ', 'a', 'a@gmail.com', 'guest', 'a');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
