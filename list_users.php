@@ -27,7 +27,7 @@ $users = $userModel->getUsers($params);
                 Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
             </div>
             <table class="table table-striped">
-                <thead>
+            <thead>
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
