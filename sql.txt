@@ -1,3 +1,0 @@
-INSERT INTO `users` (`uid`, `name`, `password`, `fullname`, `email`, `type`) 
-                VALUES ('4234', '234234' , '234234', '234234', '234234', '34sdf') 
-                f47a959dd3983ac0c13240472a3e05b4
