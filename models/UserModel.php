@@ -5,31 +5,27 @@ require_once 'BaseModel.php';
 class UserModel extends BaseModel {
 
     public function findUserById($id) {
-        $sql = 'SELECT * FROM users WHERE id = '.$id;
-
-        $user = $this->select($sql);
-
+        $id = $this->matchRegexInput($id);
+        $sql = self::$_connection->prepare("SELECT * FROM users WHERE id = ?");
+        $sql->bind_param("i",$id);
+        $sql->execute();
+        $user = array();
+        $user = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $user;
     }
 
     public function findUser($keyword) {
         $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
         $user = $this->select($sql);
-        return $user;
+        // return $user;
         // $sql_stmt = mysqli_prepare($_connection,'SELECT * FROM users WHERE user_name LIKE   ? OR user_email LIKE ?');
         // mysqli_stmt_bind_param($sql_stmt,'ss',$keyword,$keyword);
         // $user = mysqli_stmt_execute($sql_stmt);
         // return $user;
     }
 
-    /**
-     * Authentication user
-     * @param $userName
-     * @param $password
-     * @return array
-     */
     public function auth($userName, $password) {
-        $md5Password = md5($password);
+        $md5Password = $password;
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
         $user = $this->select($sql);
         return $user;
@@ -76,6 +72,8 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
+
+     //fix add new user
     public function insertUser($input) {
         $password = md5($input['password']);
         // $sql = "INSERT INTO `app_web1`.`users` (`id`,`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
@@ -99,7 +97,6 @@ class UserModel extends BaseModel {
         if (!empty($params['keyword'])) {
             $str_keyword = $this->matchRegexInput($params);
             $str_keyword =  "%" . $params['keyword'] . "%";
-
             $sql = self::$_connection->prepare('SELECT * FROM users WHERE name LIKE ?');
             $sql->bind_param('s',  $str_keyword);
         } else {
@@ -109,18 +106,5 @@ class UserModel extends BaseModel {
         $items = array();
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items;
-        //     $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
-
-        //     //Keep this line to use Sql Injection
-        //     //Don't change
-        //     //Example keyword: abcef%";TRUNCATE banks;##
-        //     //$users = self::$_connection->multi_query($sql);
-        // } 
-        // else {
-        //     $sql = 'SELECT * FROM users';
-        //     $users = $this->select($sql);
-        // }
-
-        // return $users;
     }
 }
