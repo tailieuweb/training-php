@@ -44,6 +44,7 @@ if (!empty($_POST['submit'])) {
             </div>
             <div class="form-group">
                 <label for="password">Fullname</label>
+<<<<<<< HEAD
                 <span><?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?></span>
             </div>
             <div class="form-group">
@@ -52,6 +53,16 @@ if (!empty($_POST['submit'])) {
             </div>
             <div class="form-group">
                 <label for="password">Type</label>
+=======
+                <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Email</label>
+                <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
+            </div>
+            <div class="form-group">
+                <label for="type">Type</label>
+>>>>>>> origin/2-php-202109/2-groups/9-I/1-12-kiet
                 <span><?php if (!empty($user[0]['type'])) echo $user[0]['type'] ?></span>
             </div>
         </form>
