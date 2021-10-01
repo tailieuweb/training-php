@@ -1,14 +1,14 @@
 <?php
 // Start the session
 session_start();
-
+include 'views/header.php';
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 
 if (!empty($_POST['submit'])) {
     $users = [
-        'username' => $_POST['username'],
+        'username' => clean($_POST['username']),
         'password' => $_POST['password']
     ];
     $user = NULL;
@@ -33,7 +33,7 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/meta.php' ?>
 </head>
 <body>
-<?php include 'views/header.php'?>
+
 
     <div class="container">
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">

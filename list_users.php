@@ -5,12 +5,6 @@ session_start();
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
-//Update SQL Injection - Remove all special chars
-function clean($string) {
-    $string = preg_replace('/[^A-Za-z0-9]/', '', $string); // Removes special chars.
-    return preg_replace('/ +/', ' ', $string); //Convert multip space -> one 
- }
-
 $params = [];
 if (!empty($_GET['keyword'])) {
     $keyword = clean($_GET['keyword']);
