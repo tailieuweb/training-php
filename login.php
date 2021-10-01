@@ -6,7 +6,8 @@ $userModel = new UserModel();
 
 if (!empty($_POST['submit'])) {
     $users = [
-        'username' => $_POST['username'], 'password' => $_POST['password']
+        'username' => $_POST['username'],
+        'password' => $_POST['password']
     ];
     $user = NULL;
     if ($user = $userModel->auth($users['username'], $users['password'])) {
