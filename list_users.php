@@ -1,4 +1,7 @@
 <?php
+// Start the session
+session_start();
+
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
@@ -20,7 +23,8 @@ $users = $userModel->getUsers($params);
     <div class="container">
         <?php if (!empty($users)) {?>
             <div class="alert alert-warning" role="alert">
-                List of users!
+                List of users! <br>
+                Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
             </div>
             <table class="table table-striped">
                 <thead>
@@ -28,6 +32,7 @@ $users = $userModel->getUsers($params);
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">Fullname</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Type</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -43,6 +48,9 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['fullname']?>
                             </td>
                             <td>
+                                <?php echo $user['email']?>
+                            </td>
+                            <td>
                                 <?php echo $user['type']?>
                             </td>
                             <td>
@@ -56,6 +64,7 @@ $users = $userModel->getUsers($params);
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
+
                         </tr>
                     <?php } ?>
                 </tbody>
