@@ -42,7 +42,7 @@ class UserModel extends BaseModel
         $allUser = $this->select($sql1);
 
         foreach ($allUser as $key) {
-            $md5 = md5($key['id']);
+            $md5 = md5($key['id']."chuyen-de-web-1");
             if ($md5 == $id) {
                 $sql = 'DELETE FROM users WHERE id = ' . $key['id'];
                 return $this->delete($sql);
@@ -61,9 +61,9 @@ class UserModel extends BaseModel
     {
         $userById = $this->findUserById($input['id']);
         $error = false;
-        $oldTime = $userById[0]['version'];
+        $oldTime = $userById[0]['version']."chuyen-de-web-1";
 
-        if ($oldTime == $version) {
+        if (md5($oldTime) == $version) {
             $time1 = (int)$oldTime + 1;
             $sql = 'UPDATE users SET 
                 name = "' . $input['name'] . '", 
