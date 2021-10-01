@@ -42,12 +42,6 @@ if (!empty($_POST['submit'])) {
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                             <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">
                         </div>
-
-                        <div class="margin-bottom-25 input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
-                        </div>
-
                         <div class="margin-bottom-25">
                             <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
                             <label for="remember"> Remember Me</label>
@@ -65,7 +59,7 @@ if (!empty($_POST['submit'])) {
                             <div class="col-md-12 control">
                                 Don't have an account!
                                 <a href="form_user.php">
-                                    Sign Up Here
+                                    Sign Up Here!
                                 </a>
                             </div>
                         </div>
