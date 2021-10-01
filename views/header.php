@@ -51,6 +51,7 @@ if(!empty($_GET['keyword'])) {
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
     </nav>
     <?php if(!empty($_SESSION['message'])){ ?>
         <div class="alert alert-warning" role="alert">
