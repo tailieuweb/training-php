@@ -50,14 +50,14 @@ class UserModel extends BaseModel {
      */
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
-<<<<<<< HEAD
+
                  name = "' . $input['name'] .'", 
                  fullname = "' . $input['fullname'] .'",
                  email = "' . $input['email'] .'",
                  type = "' . $input['type'] .'",
-=======
+
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
->>>>>>> origin/1-php-202109/1-web-security
+
                  password="'. md5($input['password']) .'"
                 WHERE id = ' . $input['id'];
 
@@ -72,13 +72,13 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-<<<<<<< HEAD
+
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `fullname`, `email`, `type`, `password`) VALUES (" .
                 "'" . $input['name'] . "', '".$input['fullname']."', '".$input['email']."', '".$input['type']."', '".$input['password']."')";
-=======
+
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
                 "'" . $input['name'] . "', '".md5($input['password'])."')";
->>>>>>> origin/1-php-202109/1-web-security
+
 
         $user = $this->insert($sql);
 
