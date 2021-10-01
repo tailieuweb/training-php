@@ -63,11 +63,6 @@ class UserModel extends BaseModel
      * @param $id
      * @return mixed
      */
-    // public function deleteUserById($id)
-    // {
-    //     $sql = 'DELETE FROM users WHERE id = ' . $id;
-    //     return $this->delete($sql);
-    // }
 
     /**
      * Update user
@@ -76,18 +71,9 @@ class UserModel extends BaseModel
      */
     public function updateUser($input, $version)
     {
-
-
-        // $this->db->where('version', $input['version']);
         $verId = $this->findUserById($input['id']);
         $oldversion = $verId[0]['version'];
         $error = false;
-        // // $this->db->where('id', $input['id']);
-        // $allid = $this->getAllid();
-        // // $updateVersion = $this->updateVersion($input['id']);
-        // // $rowsAffected = $this->$updateVersion->affected_rows();
-        // $rowsAffected = $this->db->affected_rows();
-
         if($oldversion == $version){
             $v1 = (int)$oldversion + 1;
             $sql = 'UPDATE users SET 
@@ -105,14 +91,6 @@ class UserModel extends BaseModel
         else{
             return $error;
         }
-       
-
-        // if ($rowsAffected == 0) {
-        //     echo "failed";
-        //     /* Data changed by other user, update failed */
-        // } else {
-        //     /* updated successfully */
-        // }
     }
 
 
@@ -124,8 +102,8 @@ class UserModel extends BaseModel
     public function insertUser($input)
     {
         $password = md5($input['password']);
-        $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
-            "'" . $input['name'] . "', '" . $input['full-name'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
+        $sql = "INSERT INTO `users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
+            "'" . $input['name'] . "', '" . $input['fullname'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
 
         $user = $this->insert($sql);
 

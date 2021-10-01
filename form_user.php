@@ -8,22 +8,20 @@ $user = NULL; //Add new user
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-    $user = $userModel->findUserById($id); //Update existing user
-    $userAuth = $userModel->getUsers();
-    foreach ($userAuth as $item) {
-        if (md5($item['id']) == $_GET['id']) {
-            $_id = $item['id'];
-            $user = $userModel->findUserById($_id);
-        }
-    }
+    $_id = $_GET['id'];
+    $user = $userModel->findUserById($_id); //Update existing user
+    
 }
 if (!empty($_POST['submit'])) {
     $version = $_POST['version'];
     if (!empty($_id)) {
         $notification = $userModel->updateUser($_POST, $version);
-        if ($notification == false)
+        if ($notification == false) {
             $notification = "Update Error!!!";
+        }
+        else{
+            header('location: list_users.php');
+        }
     } else {
         $userModel->insertUser($_POST);
         header('location: list_users.php');
@@ -43,13 +41,13 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php' ?>
     <div class="container">
 
-        <?php if ($user || empty($id)) { ?>
+        <?php if ($user || empty($_id)) { ?>
             <div class="alert alert-warning" role="alert">
                 User form
             </div>
             <form method="POST">
-                <input type="hidden" name="id" value="<?php echo $id ?>">
-                <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo $user[0]['version'] ?>">
+                <input type="hidden" name="id" value="<?php echo $_id ?>">
+                <input type="hidden" name="version" value="<?php if (isset($user[0]['version'])) echo $user[0]['version'] ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
