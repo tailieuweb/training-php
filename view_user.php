@@ -39,19 +39,19 @@ if (!empty($_POST['submit'])) {
         <form method="POST">
             <input type="hidden" name="id" value="<?php echo $id ?>">
             <div class="form-group">
-                <label for="name">Name:</label>
+                <label for="name">Name</label>
                 <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
             </div>
             <div class="form-group">
-                <label for="password">Fullname:</label>
+                <label for="password">Fullname</label>
                 <span><?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?></span>
             </div>
             <div class="form-group">
-                <label for="password">Email:</label>
+                <label for="password">Email</label>
                 <span><?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?></span>
             </div>
             <div class="form-group">
-                <label for="password">Type:</label>
+                <label for="password">Type</label>
                 <span><?php if (!empty($user[0]['type'])) echo $user[0]['type'] ?></span>
             </div>
         </form>
