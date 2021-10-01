@@ -38,9 +38,17 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function deleteUserById($id) {
-        $sql = 'DELETE FROM users WHERE id = '.$id;
-        return $this->delete($sql);
-
+        // Lay ra tat ca user                     
+        $user = $this->getUsers();
+        // Duyet mang user
+        foreach ($user as  $value) {
+          //  Kiem tra md5 cua cai id nao trung voi id truyen vao thi thuc hien cau sql xoa theo id
+           if(md5($value['id'])== $id){
+            $sql = 'DELETE FROM users WHERE id = ' .$value['id'];
+            return $this->delete($sql);
+           }
+            # code...
+        }
     }
 
     /**
@@ -50,12 +58,8 @@ class UserModel extends BaseModel {
      */
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
-<<<<<<< HEAD
-                 name = "' . $input['name'] .'", 
                  type ="' . $input['type'] .'",
-=======
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
->>>>>>> origin/1-php-202109/2-groups/8-H/master
                  password="'. md5($input['password']) .'"
                 WHERE id = ' . $input['id'];
 
