@@ -1,31 +1,33 @@
 <?php
+// Start the session
+session_start();
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$id = NULL;
+$_id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     $user = $userModel->findUserById($id); //Update existing user
+    $userAuth = $userModel->getUsers();
+    foreach ($userAuth as $item) {
+        if (md5($item['id']) == $_GET['id']) {
+            $_id = $item['id'];
+            $user = $userModel->findUserById($_id);
+        }
+    }
 }
-
-
 if (!empty($_POST['submit'])) {
     $version = $_POST['version'];
-    if (!empty($id)) {
-      $notification = $userModel->updateUser($_POST, $version);
-      if($notification == false){
-          $notification = "Update Error!!!";
-      }
-      else{
-          header('location: list_users.php');
-      }
+    if (!empty($_id)) {
+        $notification = $userModel->updateUser($_POST, $version);
+        if ($notification == false)
+            $notification = "Update Error!!!";
     } else {
         $userModel->insertUser($_POST);
         header('location: list_users.php');
     }
-    
 }
 
 ?>
