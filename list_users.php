@@ -63,7 +63,7 @@ $users = $userModel->getUsers($params);
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
                                 <a href="delete_user.php?id=<?php echo base64_encode($user['id']) ?>&updated_at=<?php echo $user['updated_at'] ?>">
-                                    <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
+                                    <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>                    
                                 </a>
                             </td>
                         </tr>
