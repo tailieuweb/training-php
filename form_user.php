@@ -10,7 +10,7 @@ $_id = NULL;
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
     $user = $userModel->findUserById($_id); //Update existing user
-    
+   
 }
 if (!empty($_POST['submit'])) {
     $version = $_POST['version'];
