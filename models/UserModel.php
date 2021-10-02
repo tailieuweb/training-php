@@ -38,17 +38,17 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function deleteUserById($id) {
-        // Lay ra tat ca user                     
-        $user = $this->getUsers();
-        // Duyet mang user
-        foreach ($user as  $value) {
-          //  Kiem tra md5 cua cai id nao trung voi id truyen vao thi thuc hien cau sql xoa theo id
-           if(md5($value['id'])== $id){
+       //Lay ra tat ca user
+       $user = $this ->getUsers();
+       //Duyet mang user
+       foreach ($user as $value){
+           //Kieem tra user nao co id trung voi id truyen vao mang thi xoa
+           if(md5($value['id'])==$id){
             $sql = 'DELETE FROM users WHERE id = ' .$value['id'];
             return $this->delete($sql);
            }
-            # code...
-        }
+       }
+           
     }
 
     /**
