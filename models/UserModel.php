@@ -89,7 +89,6 @@ class UserModel extends BaseModel {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
-
         return $users;
     }
 }
