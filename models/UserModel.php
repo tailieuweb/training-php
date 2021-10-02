@@ -21,10 +21,22 @@ class UserModel extends BaseModel
         return $user;
     }
 
+<<<<<<< HEAD
     public function auth($userName, $password)
     {
         $md5Password = $password;
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
+=======
+    /**
+     * Authentication user
+     * @param $userName
+     * @param $password
+     * @return array
+     */
+    public function auth($userName, $password) {
+        $md5Password = md5($password);
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+>>>>>>> 1-php-202109/1-master
 
         $user = $this->select($sql);
         return $user;
@@ -50,15 +62,9 @@ class UserModel extends BaseModel
     public function updateUser($input)
     {
         $sql = 'UPDATE users SET 
-<<<<<<< HEAD
                  name = "' . $input['name'] . '", 
                  password="' . md5($input['password']) . '"
-=======
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 password="'. md5($input['password']) .'"
->>>>>>> 1-php-202109/1-web-security
                 WHERE id = ' . $input['id'];
-
         $user = $this->update($sql);
 
         return $user;
@@ -69,11 +75,17 @@ class UserModel extends BaseModel
      * @param $input
      * @return mixed
      */
+<<<<<<< HEAD
     public function insertUser($input)
     {
 
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `fullname`, `password`,`email`, `type`,) VALUES (" .
             "'" . $input['name'] . "','" . $input['fullname'] . "', '" . $input['password'] . "', '" . $input['email'] . "','" . $input['type'] . "')";
+=======
+    public function insertUser($input) {
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
+                "'" . $input['name'] . "', '".md5($input['password'])."')";
+>>>>>>> 1-php-202109/1-master
 
         $user = $this->insert($sql);
 
@@ -89,12 +101,20 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
+<<<<<<< HEAD
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
+=======
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+
+            //Keep this line to use Sql Injection
+            //Don't change
+            //Example keyword: abcef%";TRUNCATE banks;##
+            $users = self::$_connection->multi_query($sql);
+>>>>>>> 1-php-202109/1-master
         } else {
             $sql = 'SELECT * FROM users';
+            $users = $this->select($sql);
         }
-
-        $users = $this->select($sql);
 
         return $users;
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2021 at 10:28 AM
+-- Generation Time: Sep 27, 2021 at 05:03 AM
 -- Server version: 10.4.19-MariaDB-log
 -- PHP Version: 8.0.7
 
@@ -41,10 +41,11 @@ CREATE TABLE `banks` (
 --
 
 INSERT INTO `banks` (`id`, `user_id`, `cost`) VALUES
-(1, 1, 11),
-(2, 1, 11),
-(3, 2, 11),
-(4, 3, 11);
+(1, 1, 1111),
+(2, 2, 1111),
+(3, 3, 1111),
+(4, 4, 1111),
+(5, 5, 1111);
 
 -- --------------------------------------------------------
 
@@ -55,23 +56,20 @@ INSERT INTO `banks` (`id`, `user_id`, `cost`) VALUES
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fullname` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `name` text NOT NULL,
+  `fullname` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `type` varchar(100) NOT NULL,
+  `password` varchar(250) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`) VALUES
-(1, 'test1', '', '', '', '5a105e8b9d40e1329780d62ea2265d8a'),
-(2, 'test2', '', '', '', '098f6bcd4621d373cade4e832627b4f6'),
-(3, 'hacker1', '', '', '', '2ba2a8ac968a7a2b0a7baa7f2fef18d2'),
-(4, 'test3', '', '', '', '8ad8757baa8564dc136c1e07507f4a98'),
-(5, '<a href=\"http://php.local/delete_user.php?id=4\"> Xóa user3</a>', '', '', '', 'c6ae6edca1ad45f42e619ec91a32b636');
+(2, 'test2', '', '', '', 'ad0234829205b9033196ba818f7a872b'),
+(3, 'hackerasfasf', '', '', '', '6a204bd89f3c8348afd5c77c717a097a');
 
 --
 -- Indexes for dumped tables
@@ -97,13 +95,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `banks`
 --
 ALTER TABLE `banks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
