@@ -52,12 +52,12 @@ class UserModel extends BaseModel {
 
     public function updateUser($input) {
         $sql = 'UPDATE users SET
-                 name = "' . $input['name'] .'", 
+                 name="' . $input['name'] .'", 
                  password="'. md5($input['password']) .'",
                  fullname="'. $input['fullname'].'",
                  email="'. $input['email'].'",
-                 type="'. $input['t1']. '"
-                 WHERE version = "' . $input['version']. '"
+                 type="'. $input['t1'] .'"
+                 WHERE version="' . $input['version']. '"
                  AND id = ' . $input['id'];
                  $user = $this->update($sql);
               return $user;

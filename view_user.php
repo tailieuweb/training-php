@@ -5,14 +5,11 @@ $userModel = new UserModel();
 $user = NULL; //Add new user
 $id = NULL;
 
-<<<<<<< HEAD
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     $user = $userModel->findUserById($id);//Update existing user
 }
 
-
-=======
 if (!empty(strip_tags($_GET['id']))) {
     $id = strip_tags($_GET['id']);
     $user = $userModel->findUserById($id);//Update existing user
@@ -25,10 +22,6 @@ if (!empty(strip_tags($_GET['id']))) {
     $user = $userModel->findUserById($id);
 }
 
-
-
-
->>>>>>> 1-php-202109/2-groups/2-B/master
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
