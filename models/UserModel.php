@@ -51,20 +51,16 @@ class UserModel extends BaseModel {
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
 
-                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 password="'. md5($input['password']) .'"
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
+                 password="'. md5($input['password']) .'",
                  fullname="'. $input['fullname'] .'",
                  email="'. $input['email'] .'",
-                 type="'. $input['t1'] .'"
-
- 1-php-202109/2-groups/2-B/master
+                 type="'. $input['type'] .'",
                 WHERE id = ' . $input['id'];
-
         $user = $this->update($sql);
-
         return $user;
     }
-
+    
     /**
      * Insert user
      * @param $input
@@ -73,7 +69,7 @@ class UserModel extends BaseModel {
     public function insertUser($input) {
 
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
-        "'" . $input['name'] . "', '".md5($input['password'])."', '".$input['fullname']."', '".$input['email']."', '".$input['t1']."')";
+        "'" . $input['name'] . "', '".md5($input['password'])."', '".$input['fullname']."', '".$input['email']."', '".$input['type']."')";
 
         $user = $this->insert($sql);
 
