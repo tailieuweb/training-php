@@ -8,7 +8,7 @@
 <hr />
 
 - Cong Viec:
-- [ ] Loi bao mat IDOR (Insecure Direct Object References)
+- [x] Loi bao mat IDOR (Insecure Direct Object References)
   - [x] xoa nguoi dung. 
   - [x] them nguoi dung. 
   - [x] xem nguoi dung. 
