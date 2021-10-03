@@ -10,3 +10,4 @@
 - Cong Viec:
 - [ ] Loi bao mat IDOR (Insecure Direct Object References)
   - [x] xoa nguoi dung. 
+  - [x] them nguoi dung. 
