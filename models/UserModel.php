@@ -13,6 +13,14 @@ class UserModel extends BaseModel
         return $user;
     }
 
+    public function findUserById($id)
+    {
+        $sql = "SELECT * FROM users WHERE id = $id; ";
+        $user = $this->select($sql);
+
+        return $user;
+    }
+
     public function findUser($keyword)
     {
         $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
