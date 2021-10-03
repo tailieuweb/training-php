@@ -91,8 +91,8 @@ class UserModel extends BaseModel
         $type = $input['type'];
         $password = md5($input['password']);
         $uuid = md5($name . $fullname . $email . $type . $password);
-        $sql = "INSERT INTO `users` (`uuid`, `name`, `fullname`, `email`, `type`, `password`)
-                VALUES ('$uuid', '$name ', '$fullname', '$email', '$type', '$password');";
+        $sql = "INSERT INTO `users` (`uuid`, `name`, `fullname`, `email`, `type`, `password`, `version`)
+                VALUES ('$uuid', '$name ', '$fullname', '$email', '$type', '$password', 1);";
 
         $user = $this->insert($sql);
 
