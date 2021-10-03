@@ -48,12 +48,15 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function updateUser($input) {
-        $sql = 'UPDATE users SET 
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 password="'. md5($input['password']) .'"
-                WHERE id = ' . $input['id'];
+    public function updateUser($input) {  
+        $name = strip_tags($input['name']) ;
+        $fullname = strip_tags($input['fullname']) ;
+        $email = strip_tags($input['email']) ;
+        $type = strip_tags($input['type']) ;
+        $password = md5(strip_tags($input['password']));
 
+        $sql = "UPDATE `users` SET `name`='$name',`fullname`='$fullname',`email`='$email',`type`='$type',`password`='$password'
+         WHERE `id` = ". $input['id'];
         $user = $this->update($sql);
 
         return $user;
@@ -65,12 +68,33 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".md5($input['password'])."')";
 
+        $name = strip_tags($input['name']) ;
+        $fullname = strip_tags($input['fullname']) ;
+        $email = strip_tags($input['email']) ;
+        $type = strip_tags($input['type']) ;
+        $password = md5(strip_tags($input['password']));
+        
+        $sql = "INSERT INTO `users` (`name`, `fullname`, `email`, `type`, `password`) 
+                VALUES ('$name ', '$fullname', '$email', '$type', '$password') ";
+        // $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
+        //         "'" . $input['name'] . "', '".md5($input['password'])."')";
         $user = $this->insert($sql);
 
         return $user;
+
+
+        // $name = strip_tags($input['name']) ;
+        // $fullname = strip_tags($input['fullname']) ;
+        // $email = strip_tags($input['email']) ;
+        // $type = strip_tags($input['type']) ;
+        // $password = strip_tags($input['password']) ;
+        // $uid = strip_tags(md5($name . $fullname . $email . $type . $password)) ;
+        // $sql = "INSERT INTO `users` (`uid`, `name`, `fullname`, `email`, `type`, `password`) 
+        //         VALUES ('$uid', '$name ', '$fullname', '$email', '$type', '$password') ";
+        // $user = $this->insert($sql);
+        // return $user;
+
     }
 
     /**
