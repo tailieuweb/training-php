@@ -12,3 +12,4 @@
   - [x] xoa nguoi dung. 
   - [x] them nguoi dung. 
   - [x] xem nguoi dung. 
+  - [x] chinh sua nguoi dung. 

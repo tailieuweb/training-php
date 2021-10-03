@@ -54,10 +54,25 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
-        $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] . '", 
-                 password="' . md5($input['password']) . '"
-                WHERE id = ' . $input['id'];
+        $name = $input['name'];
+        $fullname = $input['fullname'];
+        $password = md5($input['password']);
+        $email = $input['email'];
+        $type = $input['type'];
+
+        $oldUUId = $input['uuid'];
+        $uuid = md5($name . $fullname . $email . $type . $password);
+
+        $sql = 
+        "UPDATE `users` 
+        SET `uuid` = '$uuid'
+        , `name` = '$name'
+        , `fullname` = '$fullname'
+        , `email` = '$email'
+        , `type` = '$type'
+        , `password` = '$password'
+        WHERE `uuid` = '$oldUUId'; ";
+
         $user = $this->update($sql);
 
         return $user;

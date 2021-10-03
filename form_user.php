@@ -5,17 +5,19 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$_id = NULL;
+$uuid = NULL;
 
-if (!empty($_GET['id'])) {
-    $_id = $_GET['id'];
-    $user = $userModel->findUserById($_id); //Update existing user
+if (!empty($_GET['uuid'])) {
+    $uuid = $_GET['uuid'];
+    $user = $userModel->findUserByUUId($uuid); //Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
 
-    if (!empty($_id)) {
+
+    if (!empty($uuid)) {
+      
         $userModel->updateUser($_POST);
     } else {
         $userModel->insertUser($_POST);
@@ -36,12 +38,12 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php' ?>
     <div class="container">
 
-        <?php if ($user || !isset($_id)) { ?>
+        <?php if ($user || !isset($uuid)) { ?>
             <div class="alert alert-warning" role="alert">
                 User form
             </div>
             <form method="POST">
-                <input type="hidden" name="uid" value="<?php echo $_id ?>">
+                <input type="hidden" name="uuid" value="<?php echo $uuid ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
@@ -50,16 +52,12 @@ if (!empty($_POST['submit'])) {
                     <label for="fullname">Fullname</label>
                     <input name="fullname" class="form-control" placeholder="Fullname" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
                 </div>
-                <?php
-                if (!isset($user[0]['password'])) {
-                ?>
+              
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="password" value="<?php if (!empty($user[0]['password'])) echo $user[0]['password'] ?>">
                     </div>
-                <?php
-                }
-                ?>
+              
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" name="email" class="form-control" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
@@ -70,11 +68,11 @@ if (!empty($_POST['submit'])) {
 
                         <option value="" selected disabled hidden>Select type</option>
 
-                        <option value="admin" <?php if (!empty($user[0]['type']) && $user[0]['type'] = "admin") echo "selected" ?>>Admin</option>
+                        <option value="admin" <?php if (!empty($user[0]['type']) && $user[0]['type'] == "admin") echo "selected" ?>>Admin</option>
 
-                        <option value="user" <?php if (!empty($user[0]['type']) && $user[0]['type'] = "user") echo "selected" ?>>User</option>
+                        <option value="user" <?php if (!empty($user[0]['type']) && $user[0]['type'] == "user") echo "selected" ?>>User</option>
 
-                        <option value="guest" <?php if (!empty($user[0]['type']) && $user[0]['type'] = "guest") echo "selected" ?>>Guest</option>
+                        <option value="guest" <?php if (!empty($user[0]['type']) && $user[0]['type'] == "guest") echo "selected" ?>>Guest</option>
 
                     </select>
                 </div>
