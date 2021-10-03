@@ -5,9 +5,9 @@ require_once 'BaseModel.php';
 class UserModel extends BaseModel
 {
 
-    public function findUserById($id)
+    public function findUserByUUId($uuid)
     {
-        $sql = 'SELECT * FROM users WHERE id = ' . $id;
+        $sql = "SELECT * FROM users WHERE uuid = '$uuid'; ";
         $user = $this->select($sql);
 
         return $user;

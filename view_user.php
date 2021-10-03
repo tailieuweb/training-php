@@ -3,11 +3,11 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$id = NULL;
+$uuid = NULL;
 
-if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+if (!empty($_GET['uuid'])) {
+    $uuid = $_GET['uuid'];
+    $user = $userModel->findUserByUUId($uuid);//Update existing user
 }
 
 
@@ -32,7 +32,7 @@ if (!empty($_POST['submit'])) {
 <?php include 'views/header.php'?>
 <div class="container">
 
-    <?php if ($user || empty($id)) { ?>
+    <?php if ($user || empty($uuid)) { ?>
         <div class="alert alert-warning" role="alert">
             User profile
         </div>
