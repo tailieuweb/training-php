@@ -37,10 +37,9 @@ class UserModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id) {
-        $sql = 'DELETE FROM users WHERE id = '.$id;
+    public function deleteUserUUById($uuid) {
+        $sql = "DELETE FROM users WHERE uuid = '$uuid'; ";
         return $this->delete($sql);
-
     }
 
     /**
