@@ -119,7 +119,10 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
+            $mysqli = mysqli_connect("localhost", "root", "", "app_web1");
+            $key = isset($params['keyword'])?(string)(int)$params['keyword']:false;
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . mysqli_real_escape_string($mysqli,$key) . '%"';
+            // $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
 
             //Keep this line to use Sql Injection
             //Don't change
@@ -129,7 +132,7 @@ class UserModel extends BaseModel
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
-
+        // $users = $this->select($sql);
         return $users;
     }
 }

@@ -8,6 +8,7 @@ $userModel = new UserModel();
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
+    // $params['keyword'] = str_replace('/[^#?!@]/', '', $_GET['keyword']);
 }
 
 $users = $userModel->getUsers($params);
