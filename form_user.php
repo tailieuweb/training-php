@@ -20,7 +20,7 @@ if (!empty($_POST['submit'])) {
 
         $_id = substr($_POST['id'], 4, strlen($_POST['id']) - 8);
         $_user = $userModel->findUserById($_id);
-       
+
         if ($_POST['version'] == md5($_user[0]['version'])) {
             $_POST['id'] = $_id;
             $_POST['version'] = $_user[0]['version'];
@@ -64,11 +64,20 @@ if (!empty($_POST['submit'])) {
             <div class="alert alert-warning" role="alert">
                 User form
             </div>
-            <form method="POST" id="form_user">
-                <input type="hidden" name="uuid" value="<?php echo $uuid ?>">
-                <input type="hidden" name="id" value="<?php echo rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . $user[0]['id'] . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) ?>">
-                <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo md5($user[0]['version']) ?>">
-                <input type="hidden" name="value_not_change" value="<?php echo base64_encode(json_encode($user[0]))  ?>">
+            <form method="POST">
+                <?php if (!empty($uuid)) : ?>
+                    <input type="hidden" name="uuid" value="<?php echo $uuid ?>">
+                <?php endif; ?>
+                <?php if (!empty($user[0]['id'])) : ?>
+                    <input type="hidden" name="id" value="<?php echo rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . $user[0]['id'] . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) ?>">
+                <?php endif; ?>
+                <?php if (!empty($user[0]['version'])) : ?>
+                    <input type="hidden" name="version" value="<?php echo md5($user[0]['version']) ?>">
+                <?php endif; ?>
+                <?php if (!empty($user[0])) : ?>
+                    <input type="hidden" name="value_not_change" value="<?php echo base64_encode(json_encode($user[0]))  ?>">
+                <?php endif; ?>
+
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
@@ -93,7 +102,7 @@ if (!empty($_POST['submit'])) {
                     <label for="type">Type</label>
                     <select name="type" uuid="type" class="form-control">
 
-                        <option value="" selected disabled huuidden>Select type</option>
+                        <option value="" selected disabled>Select type</option>
 
                         <option value="admin" <?php if (!empty($user[0]['type']) && $user[0]['type'] == "admin") echo "selected" ?>>Admin</option>
 
