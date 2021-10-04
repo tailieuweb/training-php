@@ -122,12 +122,12 @@ class UserModel extends BaseModel
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+            // $users = self::$_connection->multi_query($sql);
         } else {
             $sql = 'SELECT * FROM users';
-            $users = $this->select($sql);
+            // $users = $this->select($sql);
         }
-
+        $users = $this->select($sql);
         return $users;
     }
 }

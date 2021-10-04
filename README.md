@@ -7,7 +7,7 @@
 
 <hr />
 
-- Cong Viec:
+## Cong Viec:
 - [x] Loi bao mat IDOR (Insecure Direct Object References)
   - [x] xoa nguoi dung. 
   - [x] them nguoi dung. 
@@ -15,4 +15,5 @@
   - [x] chinh sua nguoi dung. 
 - [x] Optimistic locking.
 - [x] Cross Site Request Forgery (CSRF or XSRF) - Giả mạo request.
-- [x] XSS - Cross-Site Scripting
+- [x] XSS - Cross-Site Scripting. <!-- htmlspecialchars() or strip_tags() -->
+- [x]  SQL Injection
