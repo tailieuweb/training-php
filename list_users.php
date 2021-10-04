@@ -24,6 +24,8 @@ $users = $userModel->getUsers($params);
 <head>
     <title>Home</title>
     <?php include 'views/meta.php' ?>
+    <!-- Thêm meta tag CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
 </head>
 
 <body>
