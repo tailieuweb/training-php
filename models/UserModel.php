@@ -67,8 +67,8 @@ class UserModel extends BaseModel
         $password = md5($input['password']);
         $email = $input['email'];
         $type = $input['type'];
-
-        $oldUUId = $input['uuid'];
+        $version = $input['version'] + 1;
+        $id = $input['id'];
         $uuid = md5($name . $fullname . $email . $type . $password);
 
         $sql = 
@@ -79,7 +79,8 @@ class UserModel extends BaseModel
         , `email` = '$email'
         , `type` = '$type'
         , `password` = '$password'
-        WHERE `uuid` = '$oldUUId'; ";
+        , `version` = $version
+        WHERE `id` = $id; ";
 
         $user = $this->update($sql);
 

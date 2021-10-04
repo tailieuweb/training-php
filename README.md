@@ -13,3 +13,4 @@
   - [x] them nguoi dung. 
   - [x] xem nguoi dung. 
   - [x] chinh sua nguoi dung. 
+- [x] Optimistic locking.

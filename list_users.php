@@ -38,9 +38,6 @@ $users = $userModel->getUsers($params);
                 </thead>
                 <tbody>
                     <?php foreach ($users as $user) {?>
-                        <?php 
-                            $_uuid = $user['uuid'] . $user['id'] . rand(0,9);
-                            ?>
                         <tr>
                             <th scope="row"><?php echo $user['id']?></th>
                             <td>
@@ -53,13 +50,13 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['type']?>
                             </td>
                             <td>
-                                <a href="form_user.php?uuid=<?php echo $_uuid ?>">
+                                <a href="form_user.php?uuid=<?php echo $user['uuid'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?uuid=<?php echo $_uuid ?>">
+                                <a href="view_user.php?uuid=<?php echo $user['uuid'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?uuid=<?php echo $_uuid ?>">
+                                <a href="delete_user.php?uuid=<?php echo $user['uuid'] ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

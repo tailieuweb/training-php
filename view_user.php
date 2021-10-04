@@ -6,7 +6,7 @@ $user = NULL; //Add new user
 $uuid = NULL;
 
 if (!empty($_GET['uuid'])) {
-    $uuid = substr($_GET['uuid'], 0, -2);
+    $uuid = $_GET['uuid'];
     $user = $userModel->findUserByUUId($uuid);//Update existing user
 }
 
