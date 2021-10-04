@@ -16,4 +16,4 @@
 - [x] Optimistic locking.
 - [x] Cross Site Request Forgery (CSRF or XSRF) - Giả mạo request.
 - [x] XSS - Cross-Site Scripting. <!-- htmlspecialchars() or strip_tags() -->
-- [x]  SQL Injection
+- [xx] 
