@@ -14,3 +14,4 @@
   - [x] xem nguoi dung. 
   - [x] chinh sua nguoi dung. 
 - [x] Optimistic locking.
+- [x] Cross Site Request Forgery (CSRF or XSRF) - Giả mạo request.
