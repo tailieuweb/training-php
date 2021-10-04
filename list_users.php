@@ -46,22 +46,22 @@ $users = $userModel->getUsers($params);
                         <tr>
                             <th scope="row"><?php echo $user['id'] ?></th>
                             <td>
-                                <?php echo $user['name'] ?>
+                                <?php echo strip_tags($user['name']) ?>
                             </td>
                             <td>
-                                <?php echo $user['fullname'] ?>
+                                <?php echo strip_tags($user['fullname']) ?>
                             </td>
                             <td>
-                                <?php echo $user['type'] ?>
+                                <?php echo strip_tags($user['type']) ?>
                             </td>
                             <td>
-                                <a href="form_user.php?uuid=<?php echo $user['uuid'] ?>">
+                                <a href="form_user.php?uuid=<?php echo strip_tags($user['uuid']) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?uuid=<?php echo $user['uuid'] ?>">
+                                <a href="view_user.php?uuid=<?php echo strip_tags($user['uuid']) ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?uuid=<?php echo $user['uuid'] ?>&btcsrf=<?php echo $csrf_token ?>">
+                                <a href="delete_user.php?uuid=<?php echo strip_tags($user['uuid']) ?>&btcsrf=<?php echo strip_tags($csrf_token) ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

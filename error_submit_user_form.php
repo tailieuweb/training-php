@@ -72,21 +72,21 @@ if (!empty($_POST['submit'])) {
         <div class="form-group">
           <label for="name">Name</label>
           <div style="display: flex;">
-            <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($newUser['name'])) echo $newUser['name'] ?>">
+            <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($newUser['name'])) echo strip_tags($newUser['name']) ?>">
           </div>
         </div>
 
         <div class="form-group">
           <label for="fullname">Fullname</label>
           <div style="display: flex;">
-            <input name="fullname" class="form-control" placeholder="Fullname" value="<?php if (!empty($newUser['fullname'])) echo $newUser['fullname'] ?>">
+            <input name="fullname" class="form-control" placeholder="Fullname" value="<?php if (!empty($newUser['fullname'])) echo strip_tags($newUser['fullname']) ?>">
           </div>
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
           <div style="display: flex;">
-            <!-- <input type="password" name="password" class="form-control" placeholder="password" value="<?php if (!empty($newUser['password'])) echo $newUser['password'] ?>"> -->
+            <!-- <input type="password" name="password" class="form-control" placeholder="password" value="<?php // if (!empty($newUser['password'])) echo strip_tags($newUser['password']) ?>"> -->
             <input type="password" name="password" class="form-control" placeholder="password" required>
           </div>
         </div>
@@ -94,7 +94,7 @@ if (!empty($_POST['submit'])) {
         <div class="form-group">
           <label for="email">Email</label>
           <div style="display: flex;">
-            <input type="email" name="email" class="form-control" placeholder="Email" value="<?php if (!empty($newUser['email'])) echo $newUser['email'] ?>">
+            <input type="email" name="email" class="form-control" placeholder="Email" value="<?php if (!empty($newUser['email'])) echo strip_tags($newUser['email']) ?>">
           </div>
 
         </div>

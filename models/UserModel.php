@@ -62,13 +62,13 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
-        $name = $input['name'];
-        $fullname = $input['fullname'];
-        $password = md5($input['password']);
-        $email = $input['email'];
-        $type = $input['type'];
+        $name =  htmlspecialchars($input['name']);
+        $fullname = htmlspecialchars($input['fullname']);
+        $password = md5(htmlspecialchars($input['password']));
+        $email = htmlspecialchars($input['email']);
+        $type = htmlspecialchars($input['type']);
         $version = $input['version'] + 1;
-        $id = $input['id'];
+        $id = htmlspecialchars($input['id']);
         $uuid = md5($name . $fullname . $email . $type . $password);
 
         $sql = 
@@ -94,10 +94,10 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
-        $name = $input['name'];
-        $fullname = $input['fullname'];
-        $email = $input['email'];
-        $type = $input['type'];
+        $name = htmlspecialchars($input['name']);
+        $fullname = htmlspecialchars($input['fullname']);
+        $email = htmlspecialchars($input['email']);
+        $type = htmlspecialchars($input['type']);
         $password = md5($input['password']);
         $uuid = md5($name . $fullname . $email . $type . $password);
         $sql = "INSERT INTO `users` (`uuid`, `name`, `fullname`, `email`, `type`, `password`, `version`)

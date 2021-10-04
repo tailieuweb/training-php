@@ -64,12 +64,12 @@ if (!empty($_POST['submit'])) {
             <div class="alert alert-warning" role="alert">
                 User form
             </div>
-            <form method="POST">
+            <form method="POST" >
                 <?php if (!empty($uuid)) : ?>
                     <input type="hidden" name="uuid" value="<?php echo $uuid ?>">
                 <?php endif; ?>
                 <?php if (!empty($user[0]['id'])) : ?>
-                    <input type="hidden" name="id" value="<?php echo rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . $user[0]['id'] . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) ?>">
+                    <input type="hidden" name="id" value="<?php echo rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . strip_tags($user[0]['id']) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) ?>">
                 <?php endif; ?>
                 <?php if (!empty($user[0]['version'])) : ?>
                     <input type="hidden" name="version" value="<?php echo md5($user[0]['version']) ?>">
@@ -77,14 +77,14 @@ if (!empty($_POST['submit'])) {
                 <?php if (!empty($user[0])) : ?>
                     <input type="hidden" name="value_not_change" value="<?php echo base64_encode(json_encode($user[0]))  ?>">
                 <?php endif; ?>
-
+                
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+                    <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo strip_tags($user[0]['name']) ?>">
                 </div>
                 <div class="form-group">
                     <label for="fullname">Fullname</label>
-                    <input name="fullname" class="form-control" placeholder="Fullname" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+                    <input name="fullname" class="form-control" placeholder="Fullname" value="<?php if (!empty($user[0]['fullname'])) echo strip_tags($user[0]['fullname']) ?>">
                 </div>
 
                 <div class="form-group">
@@ -96,7 +96,7 @@ if (!empty($_POST['submit'])) {
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
+                    <input type="email" name="email" class="form-control" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo strip_tags($user[0]['email']) ?>">
                 </div>
                 <div class="form-group">
                     <label for="type">Type</label>
