@@ -32,7 +32,7 @@ $users = $userModel->getUsers($params);
         <!-- Đoạn này thêm vào để test Reflected XSS -->
         <?php if (!empty($params['keyword'])) { ?>
             <div class="alert alert-warning" role="alert">
-                <h1>Search Result for <?php echo $params['keyword'] ?></h1>
+                <h1>Search Result for <?php echo htmlentities($params['keyword']) ?></h1>
             </div>
         <?php } ?>
         <?php if (!empty($users)) { ?>
@@ -54,18 +54,19 @@ $users = $userModel->getUsers($params);
                 <tbody>
                     <?php foreach ($users as $user) { ?>
                         <tr>
-                            <th scope="row"><?php echo $user['id'] ?></th>
+                            <!-- Sử dụng htmlentities để ngăn chặn việc thực thi code khi in dữ liệu ra màn hình -->
+                            <th scope="row"><?php echo htmlentities($user['id']) ?></th>
                             <td>
-                                <?php echo $user['name'] ?>
+                                <?php echo htmlentities($user['name']) ?>
                             </td>
                             <td>
-                                <?php echo $user['fullname'] ?>
+                                <?php echo htmlentities($user['fullname']) ?>
                             </td>
                             <td>
-                                <?php echo $user['email'] ?>
+                                <?php echo htmlentities($user['email']) ?>
                             </td>
                             <td>
-                                <?php echo $user['type'] ?>
+                                <?php echo htmlentities($user['type']) ?>
                             </td>
                             <td>
                                 <!-- Encode id with random number -->
