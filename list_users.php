@@ -11,7 +11,7 @@ $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
-
+$token = md5(uniqid());
 $users = $userModel->getUsers($params);
 ?>
 <!DOCTYPE html>
@@ -40,11 +40,14 @@ $users = $userModel->getUsers($params);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user) {?>
+
+                    <?php 
+                     foreach ($users as $user) {?>
                         <tr>
                             <th scope="row"><?php echo $user['id']?></th>
                             <td>
-                                <?php echo $user['name']?>
+                                <?php echo $user['name'];?>
+
                             </td>
                             <td>
                                 <?php echo $user['fullname']?>
@@ -56,13 +59,15 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['type']?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo base64_encode($key_code_f.$user['id']) ?>">
+                                <a href="form_user.php?id=<?php echo base64_encode(rand(100,999).$user['id'].rand(10,99)) ?>&version=<?php echo $user['version']?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo base64_encode($key_code_f.$user['id'])?>">
+                                <a href="delete_user.php?id=<?php echo base64_encode(rand(100,999).$user['id'].rand(10,99))?>&token=<?php echo $token?>">
+                                <?php $_SESSION['token'] = $token;
+                                 var_dump($_SESSION['token']);var_dump($token);?>
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

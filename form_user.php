@@ -5,22 +5,38 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$_id = NULL;
-
+$id = NULL;
+$version = NULL;
 if (!empty($_GET['id'])) {
-    $_id = $_GET['id'];
-    $user = $userModel->findUserById($_id);//Update existing user
+    $id = base64_decode($_GET['id']);
+  //  $v = base64_decode("q4USK4GWQBs");var_dump($id);die();
+    $newid = substr($id,3,-2);
+    $user = $userModel->findUserById($newid);//Update existing user 
 }
-
+if (!empty($_GET['version'])) {
+    $version =  $_GET['version'];   
+}
+function phpAlert($msg) {
+    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+}
+//  && $_SESSION['_token'] == $_POST['_token']
 if (!empty($_POST['submit'])) {
 
-    if (!empty($_id)) {
-        $userModel->updateUser($_POST);
-    
+    if (!empty($id) && !empty($version)) {     
+        if($userModel->getVersion($newid) == $version){           
+            $userModel->updateUser($_POST);          
+            $userModel->updateVersion($_POST);
+            phpAlert(   "dữ liệu đã lưu") ;
+            // var_dump($userModel->getVersion($newid));
+            // var_dump($version);
+        }else{
+            phpAlert(   "dữ liệu vừa được cập nhật vui lòng load lại trang") ;
+            //var_dump("fail");die()à;
+        }      
     } else {
         $userModel->insertUser($_POST);
     }
-    header('location: list_users.php');
+     header('location: list_users.php');
 }
 
 ?>
@@ -32,14 +48,17 @@ if (!empty($_POST['submit'])) {
 </head>
 <body>
     <?php include 'views/header.php'?>
-    <div class="container">
-
-            <?php if ($user || isset($_id)) { ?>
+    <div class="container">           
+            <?php if ($user || isset($id)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $_id ?>">
+                    <input type="hidden" name="id" value="<?php if(!empty($newid)){echo $newid;}else{echo $id;} ?>">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input class="form-control" name="name" placeholder="name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+                    </div>
                     <div class="form-group">
                         <label for="type">Type</label><br>
                         <Select name="type" class="form-control">
@@ -60,7 +79,12 @@ if (!empty($_POST['submit'])) {
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
+                   
+                    
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+                     <div class="form-group">
+                        <input type="hidden" name="version" placeholder="version" value="<?php echo $version?>">
+                    </div>
                 </form>
             <?php } else { ?>
                 <div class="alert alert-success" role="alert">

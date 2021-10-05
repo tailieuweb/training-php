@@ -52,12 +52,14 @@ class UserModel extends BaseModel {
      */
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
-                 email = "'.$input['email'].'",
+               email = "'.$input['email'].'",
+                name = "'.$input['name'].'",
                  fullname = "'.$input['fullname'].'",
-                 password="'. md5($input['password']) .'", type = "'.$input['type'].'"
+                 password="'. md5($input['password']) .'",
+                  type = "'.$input['type'].'"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
+        
         return $user;
     }
 
@@ -67,8 +69,19 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".md5($input['password'])."')";
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`,`version`) VALUES (" .
+        "'" . $input['name'] . "', '"
+        . md5($input['password']) . "', '"
+        . $input['fullname'] . "', '"
+        . $input['email'] . "', '"
+        . $input['type']
+        . "', '"
+        . 1
+        . "')";
+        $user = $this->insert($sql);
+      
+        return $user;
+                
     }
 
     /**
@@ -76,6 +89,20 @@ class UserModel extends BaseModel {
      * @param array $param
      * @return array
      */
+    public function updateVersion($input){
+        $version = $input['version'] + 1;
+        $sql = 'UPDATE users SET              
+                 version = "'.$version.'"
+                WHERE id = ' . $input['id'];
+        $user = $this->update($sql);
+        return $user;
+    }
+    public function getVersion($id){
+        $sql = 'SELECT version FROM users WHERE id = ' . $id;
+        $users = $this->select($sql);
+       // var_dump($users[0]['version']);die();
+        return $users[0]['version'];
+    }
     public function getUsers($params = []) {
         //Keyword
         if (!empty($params['keyword'])) {
@@ -89,7 +116,7 @@ class UserModel extends BaseModel {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
-
+        
         return $users;
     }
 }
