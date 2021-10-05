@@ -57,13 +57,13 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['type'] ?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo base64_encode($user['id']) ?>&token=<?= $token; ?>&updated_at=<?php echo $user['updated_at'] ?>">
+                                <a href="form_user.php?id=<?php echo base64_encode($user['id']) ?>&token=<?= md5($token); ?>&updated_at=<?php echo $user['updated_at'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo base64_encode($user['id']) ?>&token=<?= $token; ?>&updated_at=<?php echo $user['updated_at'] ?>">
+                                <a href="view_user.php?id=<?php echo base64_encode($user['id']) ?>&token=<?= md5($token); ?>&updated_at=<?php echo $user['updated_at'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo base64_encode($user['id']) ?>&token=<?= $token; ?>&updated_at=<?php echo $user['updated_at'] ?>">
+                                <a href="delete_user.php?id=<?php echo base64_encode($user['id']) ?>&token=<?= md5($token); ?>&updated_at=<?php echo $user['updated_at'] ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
