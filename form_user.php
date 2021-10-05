@@ -20,7 +20,6 @@ if (!empty($_POST['submit'])) {
             // var_dump($user[0]['updated_at']);
             // var_dump($_GET['updated_at']);
             if ($user[0]['updated_at'] == $_GET['updated_at']) {
-
                 $userModel->updateUser($_POST);
                 header('location: list_users.php');
             } else {
@@ -30,6 +29,7 @@ if (!empty($_POST['submit'])) {
         }
     } else {
         $userModel->insertUser($_POST);
+
         header('location: list_users.php');
     }
     // header('location: list_users.php');

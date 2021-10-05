@@ -33,6 +33,14 @@ class UserModel extends BaseModel {
         return $user;
     }
 
+    public function getUserByID($id) {
+        if($id == null) return null;
+        $sql = 'SELECT * FROM users WHERE id = ' . $id;
+
+        $user = $this->select($sql);
+        return $user;
+    }
+
     /**
      * Delete user by id
      * @param $id
