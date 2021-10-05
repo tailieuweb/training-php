@@ -21,9 +21,7 @@ if (!empty($_POST['submit'])) {
          $_SESSION['_token'] = [ $user[0]['id'], $token ];
         $_SESSION['message'] = 'Login successful';
 
-        echo $token;
-
-        // header('location: list_users.php');
+        header('location: list_users.php');
     } else {
         //Login failed
         $_SESSION['message'] = 'Login failed';
