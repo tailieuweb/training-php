@@ -29,7 +29,9 @@ if (!empty($_POST['submit'])) {
         }
     } else {
         $userModel->insertUser($_POST);
-
+        //Login successful
+        $_SESSION['id'] = $user[0]['id'];
+        $token = $_SESSION['_token'] = md5(substr(uniqid(), 8, 7)).md5(hash('sha256', "TOKEN")).md5(hash_hmac('sha256','TOKEN', 'highlightToken'));
         header('location: list_users.php');
     }
     // header('location: list_users.php');

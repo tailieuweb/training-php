@@ -56,7 +56,7 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['type'] ?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo base64_encode($user['id']) ?>&token=<?= base64_encode($token); ?>&updated_at=<?php echo $user['updated_at'] ?>">
+                                <a href="form_user.php?id=<?php echo base64_encode($user['id']) ?>&token=<?=  base64_encode($token); ?>&updated_at=<?php echo $user['updated_at'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <a href="view_user.php?id=<?php echo base64_encode($user['id']) ?>&token=<?= base64_encode($token); ?>&updated_at=<?php echo $user['updated_at'] ?>">
