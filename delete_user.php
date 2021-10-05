@@ -6,9 +6,9 @@ $userModel = new UserModel();
 
 $user = NULL; //Add new user
 $id = $_GET['id'] ? $_GET['id'] : null;
-$token = $_GET['token'] ? $_GET['token'] : null;
+$token = $_GET['token'] ? base64_decode($_GET['token']) : null;
 
-if (!empty($id) && $id == $_SESSION['_token'][0] && $token == $_SESSION['_token'][1]) {
+if (!empty($id) && $token == $_SESSION['_token']) {
     $userModel->deleteUserById(base64_decode($_GET['id'])); //Delete existing user
 }
 header('location: list_users.php');

@@ -17,8 +17,7 @@ if (!empty($_POST['submit'])) {
        
         //Login successful
         $_SESSION['id'] = $user[0]['id'];
-        $token = md5(substr(uniqid(), 8, 7)).md5(hash('sha256', "TOKEN")).md5(hash_hmac('sha256','TOKEN', 'highlightToken'));
-         $_SESSION['_token'] = [ $user[0]['id'], $token ];
+        $token = $_SESSION['_token'] = md5(substr(uniqid(), 8, 7)).md5(hash('sha256', "TOKEN")).md5(hash_hmac('sha256','TOKEN', 'highlightToken'));
         $_SESSION['message'] = 'Login successful';
 
         header('location: list_users.php');
