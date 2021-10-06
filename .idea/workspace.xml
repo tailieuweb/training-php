@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fca2aa6e-54aa-4226-b8f8-032cc5b95d0a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
 
       <change beforePath="$PROJECT_DIR$/list_users.php" beforeDir="false" afterPath="$PROJECT_DIR$/list_users.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/BaseModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/BaseModel.php" afterDir="false" />
@@ -10,6 +11,9 @@
 =======
       <change beforePath="$PROJECT_DIR$/form_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/form_user.php" afterDir="false" />
 
+=======
+      <change beforePath="$PROJECT_DIR$/form_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/form_user.php" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,11 +76,15 @@
       <option name="presentableId" value="Default" />
       <updated>1632046412024</updated>
       <workItem from="1632046414701" duration="13384000" />
+<<<<<<< Updated upstream
 
       <workItem from="1632547559440" duration="9835000" />
 =======
       <workItem from="1632802081869" duration="1170000" />
 
+=======
+      <workItem from="1632802081869" duration="1170000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
@@ -94,6 +102,7 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+<<<<<<< Updated upstream
 
   </component>
   <component name="XDebuggerManager">
@@ -104,5 +113,7 @@
       </configuration>
     </watches-manager>
 
+=======
+>>>>>>> Stashed changes
   </component>
 </project>
