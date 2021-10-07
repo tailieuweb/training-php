@@ -15,13 +15,15 @@ if (!empty($_POST['submit'])) {
     if ($user = $userModel->auth($users['username'], $users['password'])) {
         // Generate token when log in
         //Login successful
-        if (!isset($_SESSION['token'])) {
-            $_SESSION['id'] = $user[0]['id'];
+        if (!isset($_COOKIE['token'])) {
+            $_SESSION['id'] = $user['id'];
 
             // PREPARE DATA FOR TOKENS
-            $payload->name = $users['username'];
-            $payload->email = $users['email'];
+            $payload = new \stdClass();
+            $payload->name = $user['name'];
+            $payload->email = $user['email'];
 
+            $header = new \stdClass();
             $header->alg = "HS256";
             $header->typ = "JWT";
 
@@ -29,7 +31,8 @@ if (!empty($_POST['submit'])) {
 
             $token = hash_hmac("sha256", base64_encode(json_encode($payload)) . base64_encode(json_encode($header)), $signature);
 
-            setcookie('token', $token, time() + 1 * 20, null, null, false, true);
+            setcookie('token', $token, time() + 10 * 60, null, null, false, true);
+
             $_SESSION['message'] = 'Login successful';
         } else {
             $_SESSION['message'] = 'You\'ve logged in!';
