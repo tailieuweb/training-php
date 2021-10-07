@@ -1,7 +1,7 @@
 <?php
-// $id = '';
+$idUser = '';
 if(!empty($_SESSION['id'])) {
-    $id = $_SESSION['id'];
+    $idUser = $_SESSION['id'];
 }
 
 $keyword = '';
@@ -43,7 +43,7 @@ if(!empty($_GET['keyword'])) {
                             Account <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="view_user.php?id=<?php echo $id ?>">Profile</a></li>
+                            <li><a href="view_user.php?id=<?php echo $idUser ?>">Profile</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="login.php">Login</a></li>
                             <li><a href="logout.php">Logout</a></li>
