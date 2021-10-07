@@ -25,26 +25,29 @@ if (!empty($_POST['submit'])) {
             $_POST['id'] = $_id;
             $_POST['version'] = $_user[0]['version'];
             $userModel->updateUser($_POST);
+            header('location: list_users.php');
         } else {
-            // echo "<br />  POST <br />";
-            $post_json_encode = json_encode($_POST);
-            $post_base_64_encode = base64_encode($post_json_encode);
-            // echo $post_base_64_encode;
-            // echo base64_decode($post_base_64_encode);
-            // echo " <br /> USER <br />";
-            $user_json_encode = json_encode($_user[0]);
-            $user_base_64_encode = base64_encode($user_json_encode);
-            // echo $user_base_64_encode;
-            // echo base64_decode($user_base_64_encode);
-            // n = new: new là vừa chỉnh sưaar xong.
-            // o = old: old là phần lấy từ database xuống,
-            header("location: error_submit_user_form.php?n=$post_base_64_encode&o=$user_base_64_encode");
-            die();
+            // $value_not_change = json_decode(base64_decode($_POST['value_not_change']), true);
+            // $value_not_change = $_POST;
+            // 'name' => string '111 ' (length=4)
+            // 'fullname' => string '111' (length=3)
+            // 'email' => string 'lav@gmail.com' (length=13)
+            // 'type' => string 'admin' (length=5)
+            // 'password' => string '698d51a19d8a121ce581499d7b701668' (length=32)
+            // 'version' => string '1' (length=1)
+
+            // var_dump($_POST);
+            // echo "<br/>===================<br/>";
+            // var_dump($value_not_change);
+            // echo "<br/>===================<br/>";
+            // var_dump($_user[0]);
+            $user[0] = $_user[0];
         }
     } else {
         $userModel->insertUser($_POST);
+        header('location: list_users.php');
     }
-    header('location: list_users.php');
+    
 }
 
 ?>
