@@ -5,11 +5,13 @@ $userModel = new UserModel();
 $user = NULL; //Add new user
 $id = NULL;
 
-if (!empty($_GET['id'])) {
+if (!empty($_GET['id']) && !empty($_COOKIE['token'])) {
 
     $id = $_GET['id'];
 
     $user = $userModel->findUserById(base64_decode($id)); //Update existing user
+} else {
+    $_SESSION['message'] = 'Methods are not allowed!';
 }
 
 if (!empty($_POST['submit'])) {
@@ -33,7 +35,10 @@ if (!empty($_POST['submit'])) {
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-
+        <?php
+        if (isset($_SESSION['message']))
+            echo '<div class="alert alert-warning" role="alert">' . $_SESSION['message'] . '</div>';
+        ?>
         <?php if ($user || empty($id)) { ?>
             <div class="alert alert-warning" role="alert">
                 User profile

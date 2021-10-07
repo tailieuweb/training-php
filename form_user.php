@@ -12,10 +12,10 @@ if (!empty($_GET['id'])) {
     $user = $userModel->findUserById(base64_decode($id)); //Update existing user
 }
 
-if (!empty($_POST['submit'])) {
+if (!empty($_POST['submit']) && !empty($_COOKIE['token'])) {
     if (!empty($id)) {
         // Nếu thời gian cập nhật hiện tại của user trên db chưa thay đổi thì cho sửa:
-        if (count($user) > 0) {
+        if (count($user) > 0 && ($_POST['token'] === $_COOKIE['token'])) {
             if ($user[0]['updated_at'] == $_GET['updated_at']) {
                 $userModel->updateUser($_POST);
                 header('location: list_users.php');
@@ -23,14 +23,21 @@ if (!empty($_POST['submit'])) {
                 echo '<h5>THÔNG TIN ĐÃ BỊ THAY ĐỔI TRƯỚC ĐÓ!
                 <br>Bạn hãy quay lại trang "list_users.php" để xem cập nhật mới nhất!</h5>';
             }
+        } else {
+            $_SESSION['message'] = 'Methods are not allowed!';
         }
     } else {
-        $userModel->insertUser($_POST);
-        //Login successful
-        $_SESSION['id'] = $user[0]['id'];
-        $token = $_SESSION['_token'] = md5(substr(uniqid(), 8, 7)).md5(hash('sha256', "TOKEN")).md5(hash_hmac('sha256','TOKEN', 'highlightToken'));
-        header('location: list_users.php');
+        if ($_POST['token'] === $_COOKIE['token']) {
+            $userModel->insertUser($_POST);
+            header('location: list_users.php');
+        } else {
+            $_SESSION['message'] = 'Methods are not allowed!';
+        }
     }
+}
+
+if (empty($_COOKIE['token'])) {
+    $_SESSION['message'] = 'Methods are not allowed!';
 }
 
 ?>
@@ -46,11 +53,20 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php' ?>
     <div class="container">
         <?php
+        if (isset($_SESSION['message']))
+            echo '<div class="alert alert-warning" role="alert">' . $_SESSION['message'] . '</div>';
+        ?>
+        <?php
         if ($user || isset($id)) { ?>
             <div class="alert alert-warning" role="alert">
                 User form
             </div>
             <form method="POST">
+                <?php
+                if (!empty($_COOKIE['token'])) {
+                    echo  '<input type="hidden" name="token" value=' . $_COOKIE['token'] . '>';
+                }
+                ?>
                 <input type="hidden" name="id" value="<?php
                                                         if (!empty($user[0]['name'])) {
                                                             echo base64_encode($user[0]['id']);
