@@ -15,6 +15,7 @@ $users = $userModel->getUsers($params);
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Cách 2 -->
     <title>Home</title>
     <?php include 'views/meta.php' ?>
 </head>
@@ -41,16 +42,17 @@ $users = $userModel->getUsers($params);
                     <?php foreach ($users as $user) {?>
                         <tr>
                             <th scope="row"><?php echo $user['id']?></th>
-                            <td>
+                            <!-- Cách 1: viết thêm lệnh ko trỏ vào sự kiện này được: pointer-events:none;-->
+                            <td class="fiel">                            
                                 <?php echo $user['name']?>
                             </td>
-                            <td>
+                            <td class="fiel">
                                 <?php echo $user['fullname']?>
                             </td>
-                            <td>
+                            <td class="fiel">
                                 <?php echo $user['email']?>
                             </td>
-                            <td>
+                            <td class="fiel">
                                 <?php echo $user['type']?>
                             </td>
                             <td>

@@ -159,4 +159,8 @@
     .navbar-icon-top .navbar-nav>li>a>.fa>.badge, .navbar-icon-top .navbar-nav>li>a>.glyphicon>.badge {
         top: -7px;
     }
+    
+}
+body .container .table-striped>tbody>tr .fiel{
+    pointer-events:none;
 }
