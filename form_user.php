@@ -17,7 +17,6 @@ if (!empty($_POST['submit'])) {
         // Nếu thời gian cập nhật hiện tại của user trên db chưa thay đổi thì cho sửa:
         if (count($user) > 0) {
             if ($user[0]['updated_at'] == $_GET['updated_at']) {
-
                 $userModel->updateUser($_POST);
                 header('location: list_users.php');
             } else {
@@ -27,6 +26,9 @@ if (!empty($_POST['submit'])) {
         }
     } else {
         $userModel->insertUser($_POST);
+        //Login successful
+        $_SESSION['id'] = $user[0]['id'];
+        $token = $_SESSION['_token'] = md5(substr(uniqid(), 8, 7)).md5(hash('sha256', "TOKEN")).md5(hash_hmac('sha256','TOKEN', 'highlightToken'));
         header('location: list_users.php');
     }
 }
@@ -83,7 +85,6 @@ if (!empty($_POST['submit'])) {
                         <option>guess</option>
                     </select>
                 </div>
-
                 <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
             </form>
         <?php } else { ?>
