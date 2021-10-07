@@ -78,6 +78,7 @@ class UserModel extends BaseModel {
      * @return array
      */
     public function getUsers($params = []) {
+        
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';

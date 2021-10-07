@@ -33,7 +33,6 @@ if (!empty($_POST['submit'])) {
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-
         <?php if ($user || empty($id)) { ?>
 
         <div class="alert alert-warning" role="alert">
