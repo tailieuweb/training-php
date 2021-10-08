@@ -4,21 +4,28 @@ $userModel = new UserModel();
 
 $params = [];
 if (!empty($_GET['keyword'])) {
-    $params['keyword'] = $_GET['keyword'];
+    $search = ['/', '//', ';', '%'];
+    $replace = '';
+
+    // tim kiem roi thay doi ki tu dac biet
+    $result = str_replace($search, $replace, $_GET['keyword']);
+    $params['keyword'] = $result;
 }
 
 $users = $userModel->getUsers($params);
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Home</title>
     <?php include 'views/meta.php' ?>
 </head>
+
 <body>
-    <?php include 'views/header.php'?>
+    <?php include 'views/header.php' ?>
     <div class="container">
-        <?php if (!empty($users)) {?>
+        <?php if (!empty($users)) { ?>
             <div class="alert alert-warning" role="alert">
                 List of users!
             </div>
@@ -34,20 +41,20 @@ $users = $userModel->getUsers($params);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user) {?>
+                    <?php foreach ($users as $user) { ?>
                         <tr>
-                            <th scope="row"><?php echo $user['id']?></th>
+                            <th scope="row"><?php echo $user['id'] ?></th>
                             <td>
-                                <?php echo $user['name']?>
+                                <?php echo $user['name'] ?>
                             </td>
                             <td>
-                                <?php echo $user['fullname']?>
+                                <?php echo $user['fullname'] ?>
                             </td>
                             <td>
-                                <?php echo $user['email']?>
+                                <?php echo $user['email'] ?>
                             </td>
                             <td>
-                                <?php echo $user['type']?>
+                                <?php echo $user['type'] ?>
                             </td>
                             <td>
                                 <a href="form_user.php?id=<?php echo $user['id'] ?>">
@@ -64,11 +71,12 @@ $users = $userModel->getUsers($params);
                     <?php } ?>
                 </tbody>
             </table>
-        <?php }else { ?>
+        <?php } else { ?>
             <div class="alert alert-dark" role="alert">
                 This is a dark alert—check it out!
             </div>
         <?php } ?>
     </div>
 </body>
+
 </html>
