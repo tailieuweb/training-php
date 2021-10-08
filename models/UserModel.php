@@ -2,18 +2,20 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel {
+class UserModel extends BaseModel
+{
 
-    public function findUserById($id) {
-        $sql = 'SELECT * FROM users WHERE id = '.$id;
-        $user = $this->select($sql);
+    public function findUserById($id)
+    {
+        $sql = 'SELECT * FROM users WHERE id = ' . $id;
+        $user = $this->select($sql)[0];
 
         return $user;
     }
 
     public function findUser($keyword)
     {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
+        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
         $user = $this->select($sql);
 
         return $user;
@@ -25,11 +27,12 @@ class UserModel extends BaseModel {
      * @param $password
      * @return array
      */
-    public function auth($userName, $password) {
+    public function auth($userName, $password)
+    {
         $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
+        $user = $this->select($sql)[0];
 
-        $user = $this->select($sql);
         return $user;
     }
 
@@ -37,7 +40,7 @@ class UserModel extends BaseModel {
         if($id == null) return null;
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
 
-        $user = $this->select($sql);
+        $user = $this->select($sql)[0];
         return $user;
     }
 
@@ -46,8 +49,9 @@ class UserModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id) {
-        $sql = 'DELETE FROM users WHERE id = '.$id;
+    public function deleteUserById($id)
+    {
+        $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
     }
 
@@ -66,7 +70,7 @@ class UserModel extends BaseModel {
         $datetime->setTimezone($tz_object);
 
         $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] . '", 
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name'])  . '", 
                  updated_at = "' . $datetime->format('Y\-m\-d\ h:i:sa') . '", 
                  fullname="' . ($input['fullname']) . '",
                  email="' . ($input['email']) . '",
@@ -74,6 +78,7 @@ class UserModel extends BaseModel {
                  type="' . $input['type'] . '"
 
                 WHERE id = ' . base64_decode($input['id']);
+
         $user = $this->update($sql);
 
         return $user;
@@ -92,10 +97,9 @@ class UserModel extends BaseModel {
         $tz_object = new DateTimeZone('Asia/Ho_Chi_Minh');
         $datetime = new DateTime();
         $datetime->setTimezone($tz_object);
-        var_dump($input);
 
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`, `updated_at`,`fullname`,`email`,`type`) VALUES (" .
-            "'" . $input['name'] . "', '"
+            "'" .  mysqli_real_escape_string(self::$_connection, $input['name']) . "', '"
             . md5($input['password']) . "', '"
             . $datetime->format('Y\-m\-d\ h:i:sa') . "', '"
             . $input['fullname'] . "', '"
@@ -118,12 +122,15 @@ class UserModel extends BaseModel {
     {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
 
             //Keep this line to use Sql Injection
             //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
+            //Example keyword: "abcef%";TRUNCATE banks;##
             $users = self::$_connection->multi_query($sql);
+
+            // Comment line above and uncomment following line if you want this function work normally
+            // $users = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);

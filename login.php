@@ -13,12 +13,30 @@ if (!empty($_POST['submit'])) {
     ];
     $user = NULL;
     if ($user = $userModel->auth($users['username'], $users['password'])) {
-       if(isset($_SESSION['_token'])) 
-       
+        // Generate token when log in
         //Login successful
-        $_SESSION['id'] = $user[0]['id'];
-        $token = $_SESSION['_token'] = md5(substr(uniqid(), 8, 7)).md5(hash('sha256', "TOKEN")).md5(hash_hmac('sha256','TOKEN', 'highlightToken'));
-        $_SESSION['message'] = 'Login successful';
+        if (!isset($_COOKIE['token'])) {
+            $_SESSION['id'] = $user['id'];
+
+            // PREPARE DATA FOR TOKENS
+            $payload = new \stdClass();
+            $payload->name = $user['name'];
+            $payload->email = $user['email'];
+
+            $header = new \stdClass();
+            $header->alg = "HS256";
+            $header->typ = "JWT";
+
+            $signature = "secret key";
+
+            $token = hash_hmac("sha256", base64_encode(json_encode($payload)) . base64_encode(json_encode($header)), $signature);
+
+            setcookie('token', $token, time() + 10 * 60, null, null, false, true);
+
+            $_SESSION['message'] = 'Login successful';
+        } else {
+            $_SESSION['message'] = 'You\'ve logged in!';
+        }
 
         header('location: list_users.php');
     } else {
@@ -38,11 +56,9 @@ if (!empty($_POST['submit'])) {
 
 <body>
     <?php include 'views/header.php' ?>
-
     <div class="container">
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-            <input type="hidden" name="token" value="<?= $token?>">
-        <div class="panel panel-info">
+            <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="panel-title">Login</div>
                     <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
@@ -87,8 +103,6 @@ if (!empty($_POST['submit'])) {
             </div>
         </div>
     </div>
-
-    >>>>>>> 1-php-202109/1-web-security
 </body>
 
 </html>

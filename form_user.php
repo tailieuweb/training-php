@@ -5,37 +5,50 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$id = NULL;
+$id = isset($_GET['id']) ? base64_decode($_GET['id']) : null;
 
-if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-    $user = $userModel->findUserById(base64_decode($id)); //Update existing user
+if (!empty($id)) {
+    $user = $userModel->findUserById($id); //Update existing user
+
+    // PREPARE DATA FOR CREATE VIEW TOKENS
+    $payload = new \stdClass();
+    $payload->name = empty($user) ? null : $user['name'];
+    $payload->email = empty($user) ? null : $user['email'];
+
+    $header = new \stdClass();
+    $header->alg = "HS256";
+    $header->typ = "JWT";
+
+    $signature = "secret key";
+
+    $token = hash_hmac("sha256", base64_encode(json_encode($payload)) . base64_encode(json_encode($header)), $signature);
 }
 
-if (!empty($_POST['submit'])) {
+if (!empty($_POST['submit']) && !empty($_COOKIE['token'])) {
     if (!empty($id)) {
         // Nếu thời gian cập nhật hiện tại của user trên db chưa thay đổi thì cho sửa:
-        $user = $userModel->findUserById(base64_decode($id));
-        if (count($user) > 0) {
-            // var_dump($user[0]['updated_at']);
-            // var_dump($_GET['updated_at']);
-            if ($user[0]['updated_at'] == $_GET['updated_at']) {
+        if (count($user) > 0 && ($token === $_COOKIE['token'])) {
+            if ($user['updated_at'] == $_GET['updated_at']) {
                 $userModel->updateUser($_POST);
                 header('location: list_users.php');
             } else {
                 echo '<h5>THÔNG TIN ĐÃ BỊ THAY ĐỔI TRƯỚC ĐÓ!
                 <br>Bạn hãy quay lại trang "list_users.php" để xem cập nhật mới nhất!</h5>';
             }
+        } else {
+            $_SESSION['message'] = 'You can\'t edit other user\'s information!';
         }
     } else {
         $userModel->insertUser($_POST);
-        //Login successful
-        $_SESSION['id'] = $user[0]['id'];
-        $token = $_SESSION['_token'] = md5(substr(uniqid(), 8, 7)).md5(hash('sha256', "TOKEN")).md5(hash_hmac('sha256','TOKEN', 'highlightToken'));
         header('location: list_users.php');
     }
-    // header('location: list_users.php');
 }
+
+if (empty($_COOKIE['token'])) {
+    $_SESSION['message'] = 'Methods are not allowed!';
+}
+// REMOVE TOKENS
+unset($token);
 
 ?>
 <!DOCTYPE html>
@@ -49,24 +62,31 @@ if (!empty($_POST['submit'])) {
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-        <?php if ($user || isset($id)) { ?>
+        <?php
+        if ($user || isset($id)) { ?>
             <div class="alert alert-warning" role="alert">
                 User form
             </div>
             <form method="POST">
-                <input type="hidden" name="id" value="<?php echo $id ?>">
+                <input type="hidden" name="id" value="<?php
+                                                        if (!empty($user['name'])) {
+                                                            echo base64_encode($user['id']);
+                                                        } else {
+                                                            echo $id;
+                                                        }
+                                                        ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+                    <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user['name'])) echo $user['name'] ?>">
                 </div>
                 <!-- Thêm form fullname và email -->
                 <div class="form-group">
                     <label for="fullname">Full Name</label>
-                    <input class="form-control" name="fullname" placeholder="Full Name" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+                    <input class="form-control" name="fullname" placeholder="Full Name" value="<?php if (!empty($user['fullname'])) echo $user['fullname'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input class="form-control" name="email" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
+                    <input class="form-control" name="email" placeholder="Email" value="<?php if (!empty($user['email'])) echo $user['email'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
