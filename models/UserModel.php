@@ -1,5 +1,5 @@
 <?php
-require 'BaseModel.php';
+require 'models/BaseModel.php';
 
 class UserModel extends BaseModel {
 
