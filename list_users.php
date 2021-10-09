@@ -2,13 +2,10 @@
 // Start the session
 session_start();
 
-require_once 'models/UserModel.php';
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
 
-$userModel = new UserModel();
-
-$userModel->CreateProduct1();
-
-
+$userModel = $factory->make('user');
 
 $params = [];
 if (!empty($_GET['keyword'])) {

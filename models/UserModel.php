@@ -57,6 +57,7 @@ class UserModel extends BaseModel {
                  fullname = "'.$input['fullname'].'",
                password="'. md5($input['password']) .'", type = "'.$input['type'].'"
                 WHERE id = ' . $input['id'];
+
         $user = $this->update($sql);
         // $str_replace = $this->matchRegexInput($input);
         // $sql = self::$_connection->prepare('UPDATE users SET users.name = ?, users.email = ?,users.fullname = ?
