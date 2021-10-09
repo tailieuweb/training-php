@@ -15,8 +15,6 @@ $users = $userModel->getUsers();
     <div class="container">
         <?php if (!empty($users)) {
             ?>
-            <!-- $users = base64_decode($_GET['users']);
-            $users = substr($users,0,-5); -->
             <div class="alert alert-warning" role="alert">
                 List of users!
             </div>

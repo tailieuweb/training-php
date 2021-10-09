@@ -51,6 +51,29 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
+<<<<<<< HEAD
+      
+        $temp = 'SELECT version FROM users WHERE id = '.$input['id'].'';
+        $newTemp = $this->select($temp);
+        
+        if($newTemp[0]['version'] == $input['version']){
+            $newV = $input['version']+1;
+             $sql = 'UPDATE users SET 
+                 name = "' . $input['name'] .'", 
+                 email = "'.$input['email'].'",
+                 fullname = "'.$input['fullname'].'",
+                 password="'. md5($input['password']) .'", type = "'.$input['type'].'", version = "'.$newV.'"
+                WHERE id = ' . $input['id'] ;
+            $user = $this->update($sql);  
+            header('location: list_users.php?success');  
+            return $user;         
+        } 
+        else{                
+           header('location: list_users.php?err');  
+        }
+        
+        
+=======
         $sql = 'UPDATE users SET 
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
                  password="'. md5($input['password']) .'"
@@ -59,6 +82,7 @@ class UserModel extends BaseModel {
         $user = $this->update($sql);
       
         return $user;
+>>>>>>> 1-php-202109/2-groups/4-D/master
     }
 
     /**
@@ -87,18 +111,21 @@ class UserModel extends BaseModel {
      */
     public function getUsers($params = []) {
         //Keyword
+       
         if (!empty($params['keyword'])) {
+           
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
             $users = self::$_connection->multi_query($sql);
+            
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
-
         return $users;
+       
     }
 }
