@@ -2,25 +2,25 @@
 // Start the session
 session_start();
 require_once 'models/BankModel.php';
-$userModel = new UserModel();
+$bankModel = new BankModel();
 
 $user = NULL; //Add new user
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
-    $user = $userModel->findUserById($_id);//Update existing user
+    $user = $bankModel->findBankById($_id);//Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
 
     if (!empty($_id)) {
-        $userModel->updateUser($_POST);
+        $bankModel->updateBank($_POST);
     } else {
-        $userModel->insertUser($_POST);
+        $bankModel->insertBank($_POST);
     }
-    header('location: list_bank.php');
+    header('location: list_banks.php');
 }
 
 ?>
@@ -47,9 +47,8 @@ if (!empty($_POST['submit'])) {
                         <input class="form-control" name="id" placeholder="Id" value='<?php if (!empty($user[0]['id'])) echo htmlentities( $user[0]['id']) ?>'>
                     </div>
                     <div class="form-group">
-                        <label for="user_ID">User_ID</label>
-                        <input type="user_ID" name="user_ID" class="form-control" placeholder="User_ID">
-                    </div>
+                        <label for="user_id">User_id</label>
+                        <input class="form-control" name="user_id" placeholder="User_id" value="<?php if (!empty($user[0]['user_id'])) echo htmlentities($user[0]['user_id']) ?>">
                     <div class="form-group">
                         <label for="cost">Cost</label>
                         <input class="form-control" name="cost" placeholder="Cost" value="<?php if (!empty($user[0]['cost'])) echo htmlentities($user[0]['cost']) ?>">
@@ -62,7 +61,7 @@ if (!empty($_POST['submit'])) {
                                 <option value="guest">guest</option>
                             </select>
                     </div>
-                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="submit" value="submit" class="btn btn-primary" >Submit</button>
                 </form>
             <?php } else { ?>
                 <div class="alert alert-success" role="alert">
