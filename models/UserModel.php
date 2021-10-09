@@ -15,7 +15,7 @@ class UserModel extends BaseModel
 
     public function findUser($keyword)
     {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
+        $sql = 'SELECT * FROM users WHERE user_name LIKE %' .mysqli_real_escape_string(self::$_connection, $keyword) . '%' . ' OR user_email LIKE %' . $keyword . '%';
         $user = $this->select($sql);
 
         return $user;
@@ -56,7 +56,7 @@ class UserModel extends BaseModel
     public function updateUser($input)
     {
         $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] . '", 
+                 name = "' .mysqli_real_escape_string(self::$_connection,$input['name'])  . '", 
                  password="' . md5($input['password']) . '"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
@@ -73,7 +73,7 @@ class UserModel extends BaseModel
     
     public function insertUser($input) {
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".md5($input['password'])."')";
+                "'" .mysqli_real_escape_string(self::$_connection,$input['name'])  . "', '".md5($input['password'])."')";
 
 
         $user = $this->insert($sql);
@@ -90,10 +90,8 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
-
-            
-
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+        
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' .mysqli_real_escape_string(self::$_connection,$params['keyword'])  .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
@@ -102,8 +100,9 @@ class UserModel extends BaseModel
 
         } else {
             $sql = 'SELECT * FROM users';
-            $users = $this->select($sql);
         }
+
+        $users = $this->select($sql);
 
         return $users;
     }
