@@ -1,17 +1,22 @@
 <?php
-// Start the session
-session_start();
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
+
 $id = NULL;
 $version = NULL;
 if (!empty($_GET['id'])) {
     $id = base64_decode($_GET['id']);
-  //  $v = base64_decode("q4USK4GWQBs");var_dump($id);die();
     $newid = substr($id,3,-2);
     $user = $userModel->findUserById($newid);//Update existing user 
+
+$id = NULL;
+
+if (!empty($_GET['id'])) {
+    $id = base64_decode($_GET['id']);
+    $newid = substr($id,3,-2);
+    $user = $userModel->findUserById($newid);//Update existing user
 }
 if (!empty($_GET['version'])) {
     $version =  $_GET['version'];   
@@ -49,15 +54,26 @@ if (!empty($_POST['submit'])) {
 </head>
 <body>
     <?php include 'views/header.php'?>
+
     <div class="container">           
     <?php if ($user || !isset($_id)) { ?>
+
+    <div class="container">
+
+            <?php if ($user || isset($newsid)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
                 <form method="POST">
+
                     <input type="hidden" name="id" value="<?php if(!$id){
                         echo $newid;}else{ echo $id;
                         }?>">
+                    <input type="hidden" name="id" value="<?php if(!empty($newid)){echo $newid;}else{echo $id;}?>">
+                    <div class="form-group">
+                        <label for="name">User Name</label>
+                        <input class="form-control" name="name" placeholder="User Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+                    </div>
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">

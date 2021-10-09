@@ -15,8 +15,11 @@ $users = $userModel->getUsers();
     <div class="container">
         <?php if (!empty($users)) {
             ?>
+<<<<<<< HEAD
             <!-- $users = base64_decode($_GET['users']);
             $users = substr($id,23,2); -->
+=======
+>>>>>>> 1-php-202109/2-groups/4-D/4-47-Truong
             <div class="alert alert-warning" role="alert">
                 List of users!
             </div>

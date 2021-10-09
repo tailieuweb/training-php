@@ -2,7 +2,7 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel {
+class BankModel extends BaseModel {
 
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
@@ -28,7 +28,6 @@ class UserModel extends BaseModel {
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
         $user = $this->select($sql);
-		//var_dump($sql);die();
         return $user;
     }
 
@@ -52,16 +51,27 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        $sql = 'UPDATE users SET 
-               email = "'.$input['email'].'",
-                name = "'.$input['name'].'",
+      
+        $temp = 'SELECT version FROM users WHERE id = '.$input['id'].'';
+        $newTemp = $this->select($temp);
+        
+        if($newTemp[0]['version'] == $input['version']){
+            $newV = $input['version']+1;
+             $sql = 'UPDATE users SET 
+                 name = "' . $input['name'] .'", 
+                 email = "'.$input['email'].'",
                  fullname = "'.$input['fullname'].'",
-                 password="'. md5($input['password']) .'",
-                  type = "'.$input['type'].'"
-                WHERE id = ' . $input['id'];
-
-        $user = $this->update($sql);
-        return $user;
+                 password="'. md5($input['password']) .'", type = "'.$input['type'].'", version = "'.$newV.'"
+                WHERE id = ' . $input['id'] ;
+            $user = $this->update($sql);  
+            header('location: list_users.php?success');  
+            return $user;         
+        } 
+        else{                
+           header('location: list_users.php?err');  
+        }
+        
+        
     }
 
     /**
@@ -88,37 +98,23 @@ class UserModel extends BaseModel {
      * @param array $param
      * @return array
      */
-    public function updateVersion($input){
-        $version = $input['version'] + 1;
-        $sql = 'UPDATE users SET              
-                 version = "'.$version.'"
-                WHERE id = ' . $input['id'];
-        $user = $this->update($sql);
-        return $user;
-    }
-    public function getVersion($id){
-        $sql = 'SELECT version FROM users WHERE id = ' . $id;
-        $users = $this->select($sql);
-       // var_dump($users[0]['version']);die();
-        return $users[0]['version'];
-    }
-    public function getUsers($params = []) {
+    public function getBanks($params = []) {
         //Keyword
        
         if (!empty($params['keyword'])) {
            
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+            $banks = self::$_connection->multi_query($sql);
             
         } else {
-            $sql = 'SELECT * FROM users';
-            $users = $this->select($sql);
+            $sql = 'SELECT * FROM banks';
+            $banks = $this->select($sql);
         }
-        return $users;
+        return $banks;
        
     }
 }
