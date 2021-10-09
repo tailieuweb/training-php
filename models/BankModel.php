@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-<?php 
-require_once 'BaseModel.php';
-class BankModel  extends BaseModel {
- /**
-=======
 <?php
 
 require_once 'models/BaseModel.php';
@@ -100,7 +94,6 @@ class BankModel extends BaseModel {
     }
 
     /**
->>>>>>> dd82ea46e8673212890432092d4b9598629ed531
      * Search users
      * @param array $param
      * @return array
@@ -121,11 +114,7 @@ class BankModel extends BaseModel {
             $sql = 'SELECT * FROM banks';
             $banks = $this->select($sql);
         }
-<<<<<<< HEAD
-        return $bank;
-=======
         return $banks;
->>>>>>> dd82ea46e8673212890432092d4b9598629ed531
        
     }
 }

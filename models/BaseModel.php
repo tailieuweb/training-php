@@ -8,13 +8,7 @@ abstract class BaseModel {
     public function __construct() {
 
         if (!isset(self::$_connection)) {
-<<<<<<< HEAD
-            self::$_connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-            // self::$_connection->set_charset(DB_CHARSET);
-            // mysqli_set_charset(self::$_connection,DB_CHARSET);
-=======
             self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
->>>>>>> dd82ea46e8673212890432092d4b9598629ed531
             if (self::$_connection->connect_errno) {
                 printf("Connect failed");
                 exit();
@@ -77,9 +71,4 @@ abstract class BaseModel {
         return $result;
     }
 
-<<<<<<< HEAD
-  
-   
-=======
->>>>>>> dd82ea46e8673212890432092d4b9598629ed531
 }
