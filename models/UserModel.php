@@ -3,7 +3,7 @@
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
-
+    protected static $_instance;
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
