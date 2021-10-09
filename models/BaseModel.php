@@ -8,6 +8,7 @@ abstract class BaseModel {
     // Life of session, 3600 = 1h
     private $_csrf_time_live = 3600;
     private $_csrf_value = '';
+    protected static $_instance;
 
     public function __construct() {
 

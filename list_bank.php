@@ -29,7 +29,7 @@ $banks = $bankModel->getBanks($params);
     <div class="container">
         <?php if (!empty($banks)) {?>
             <div class="alert alert-warning" role="alert">
-                List of users! <br>
+                List of bank! <br>
                 Hacker: http://php.local/list_banks.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
             </div>
             <table class="table table-striped">

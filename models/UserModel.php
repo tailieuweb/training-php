@@ -12,6 +12,9 @@ class UserModel extends BaseModel {
     }
 
     public function findUser($keyword) {
+        
+        //$keyword = htmlentities($keyword, ENT_QUOTES, "UTF-8");
+        
         $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
         $user = $this->select($sql);
 
@@ -86,7 +89,9 @@ class UserModel extends BaseModel {
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+            // $users = self::$_connection->multi_query($sql);
+            $users = $this->select($sql);
+            // var_dump($users).die();
         } else {
 
             $sql = 'SELECT * FROM users join types on users.type = types.type_id';
@@ -105,5 +110,12 @@ class UserModel extends BaseModel {
     public function createToken(){
         $token = $this->get_token_value();
         return $token;
+    }
+    public static function getInstance() {
+        if (self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
     }
 }
