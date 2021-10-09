@@ -18,14 +18,8 @@ class UserModel extends BaseModel {
         return $user;
     }
 
-    /**
-     * Authentication user
-     * @param $userName
-     * @param $password
-     * @return array
-     */
     public function auth($userName, $password) {
-        $md5Password = md5($password);
+        $md5Password = $password;
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
 
         $user = $this->select($sql);
@@ -49,8 +43,12 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        $sql = ' UPDATE `users` SET `name`="' . $input['name'] .'",`fullname`="' . $input['fullname'] .'",`email`="' . $input['email'] .'",`type`="' . $input['type'] .'",`password`= "'. md5($input['password']) .'" WHERE id = ' . $input['id'];
+        $sql = 'UPDATE users SET 
+                 name = "' . $input['name'] .'", 
+                 password="'. md5($input['password']) .'"
+                WHERE id = ' . $input['id'];
         $user = $this->update($sql);
+
         return $user;
     }
 
@@ -60,13 +58,8 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-
-
         $sql = "INSERT INTO `users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".$input['fullname']."', '".$input['email']."', '".$input['type']."', '".$input['password']."')";
-
-
-
+                "'" . $input['name'] . "', '".$input['name']."', '".$input['name']."', '".$input['name']."', '".$input['password']."')";
         $user = $this->insert($sql);
 
         return $user;
@@ -76,20 +69,12 @@ class UserModel extends BaseModel {
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
-
-            //Keep this line to use Sql Injection
-            //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
         } else {
-
-            $sql = 'SELECT * FROM users ';
-            $users = $this->select($sql);
-            
+            $sql = 'SELECT * FROM users';
         }
+
+        $users = $this->select($sql);
 
         return $users;
     }
-
-  
 }
