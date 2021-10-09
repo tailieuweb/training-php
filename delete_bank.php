@@ -1,5 +1,8 @@
 <?php
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/1-php-202109/2-groups/9-I/master
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
