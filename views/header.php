@@ -27,13 +27,13 @@ if(!empty($_GET['keyword'])) {
                 <ul class="nav navbar-nav">
                     <li><a href="form_user.php">Add new user</a></li>
                 </ul>
+                <!-- Thêm regex pattern để lọc dữ liệu đầu vào form tìm kiếm -->
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
                         <input type="text" name="keyword" class="form-control" placeholder="Search users"
-                               value="<?php echo $keyword ?>"
-                        >
+                               value="<?php echo $keyword ?>" pattern="[A-Za-z0-9]{1,}" title="Chỉ được nhập số và chữ">
                     </div>
-                    <button type="submit" class="btn btn-default">Search</button>
+                    <button type="submit" class="btn btn-default" id="search">Search</button>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">

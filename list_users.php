@@ -8,8 +8,15 @@ $factory = new FactoryPattern();
 $userModel = $factory->make('user');
 
 $params = [];
+
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
+    //Kiểm tra keyword bằng regex trong PHP
+    // $pattern = '/^[A-Za-z0-9]$/';
+    // if (!preg_match($pattern, $params['keyword'])) {
+    //     echo "Không đúng định dạng";
+    //     $params['keyword'] = null;
+    // }
 }
 
 $users = $userModel->getUsers($params);
@@ -20,11 +27,19 @@ $users = $userModel->getUsers($params);
 <head>
     <title>Home</title>
     <?php include 'views/meta.php' ?>
+    <!-- Thêm meta tag CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
 </head>
 
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
+        <!-- Đoạn này thêm vào để test Reflected XSS -->
+        <?php if (!empty($params['keyword'])) { ?>
+            <div class="alert alert-warning" role="alert">
+                <h1>Search Result for <?php echo htmlentities($params['keyword']) ?></h1>
+            </div>
+        <?php } ?>
         <?php if (!empty($users)) { ?>
             <div class="alert alert-warning" role="alert">
                 List of users! <br>
@@ -36,6 +51,7 @@ $users = $userModel->getUsers($params);
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">Fullname</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Type</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -43,24 +59,31 @@ $users = $userModel->getUsers($params);
                 <tbody>
                     <?php foreach ($users as $user) { ?>
                         <tr>
-                            <th scope="row"><?php echo $user['id'] ?></th>
+                            <!-- Sử dụng htmlentities để ngăn chặn việc thực thi code khi in dữ liệu ra màn hình -->
+                            <th scope="row"><?php echo htmlentities($user['id']) ?></th>
                             <td>
-                                <?php echo $user['name'] ?>
+                                <?php echo htmlentities($user['name']) ?>
                             </td>
                             <td>
-                                <?php echo $user['fullname'] ?>
+                                <?php echo htmlentities($user['fullname']) ?>
                             </td>
                             <td>
-                                <?php echo $user['type'] ?>
+                                <?php echo $user['email']?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo base64_encode($user['id']) ?>&updated_at=<?php echo $user['updated_at'] ?>">
+                                <?php echo $user['type']?>
+                            </td>
+                            <td>
+                                <!-- Encode id with random number -->
+                                <a href="form_user.php?id=<?php echo rand(10000,99999).$user['id'].rand(10000,99999) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo base64_encode($user['id']) ?>&updated_at=<?php echo $user['updated_at'] ?>">
+                                <!-- Encode id with random number -->
+                                <a href="view_user.php?id=<?php echo rand(10000,99999).$user['id'].rand(10000,99999) ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo base64_encode($user['id']) ?>&updated_at=<?php echo $user['updated_at'] ?>">
+                                <!-- Encode id with random number -->
+                                <a href="delete_user.php?id=<?php echo rand(10000,99999).$user['id'].rand(10000,99999) ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

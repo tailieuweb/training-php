@@ -6,13 +6,26 @@ $user = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
-
     $id = $_GET['id'];
+    //Decode id param
 
-    $user = $userModel->findUserById(base64_decode($id)); //Update existing user
+    //Get first number
+    $start = substr($id, 0, 5);
+
+    //Get last number
+    $end = substr($id, -5);
+
+    //Replace first number with null
+    $id = str_replace($start, "", $id);
+
+    //Replace last number with null
+    $id = str_replace($end, "", $id);
+    $user = $userModel->findUserById($id); //Update existing user
 }
 
+
 if (!empty($_POST['submit'])) {
+
     if (!empty($id)) {
         $userModel->updateUser($_POST);
     } else {
@@ -46,29 +59,12 @@ if (!empty($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label for="password">Fullname</label>
-                    <span><?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?></span>
+                    <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
                 </div>
                 <div class="form-group">
                     <label for="password">Email</label>
-                    <span><?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?></span>
+                    <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
                 </div>
-
-                <!-- Nguyễn Phúc Linh: Thêm các field dữ liệu (full name, email, type) vào form - (25/09/2021) -->
-                <!-- start -->
-                <div class="form-group">
-                    <label for="">Type</label>
-                    <span><?php if (!empty($user[0]['type'])) echo $user[0]['type'] ?></span>
-                </div>
-                <div class="form-group">
-                    <label for="">Password</label>
-                    <span><?php if (!empty($user[0]['password'])) echo $user[0]['password'] ?></span>
-                </div>
-                <div class="form-group">
-                    <label for="">Updated at</label>
-                    <span><?php if (!empty($user[0]['updated_at'])) echo $user[0]['updated_at'] ?></span>
-                </div>
-                <!-- end. -->
-
             </form>
         <?php } else { ?>
             <div class="alert alert-success" role="alert">
