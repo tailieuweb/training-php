@@ -1,6 +1,8 @@
 <?php
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+
+$userModel = $factory->make('user');
 
 $user = NULL; //Add new user
 $id = NULL;
@@ -33,7 +35,6 @@ if (!empty($_POST['submit'])) {
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-
         <?php if ($user || empty($id)) { ?>
 
         <div class="alert alert-warning" role="alert">
