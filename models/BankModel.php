@@ -4,8 +4,8 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel {
     /**
-     * Get all users
-     * Search users
+     * Get all Banks
+     * Search Banks
      */
     public function getBanks($params = []) {
         //Keyword
