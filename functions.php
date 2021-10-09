@@ -97,7 +97,7 @@ function escape($val){
 	global $conn;
 	return mysqli_real_escape_string($conn, trim($val));
 }
-
+	
 function display_error() {
 	global $errors;
 

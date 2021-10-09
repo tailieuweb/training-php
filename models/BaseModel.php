@@ -67,7 +67,7 @@ abstract class BaseModel {
      * @param $sql
      */
     protected function insert($sql) {
-        $result = $this->query($sql);
+            $result = $this->query($sql);
         return $result;
     }
 

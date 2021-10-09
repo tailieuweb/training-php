@@ -6,6 +6,8 @@ require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
 $userModel = $factory->make('user');
+$bankModel = $factory -> make('bank');
+
 
 $params = [];
 if (!empty($_GET['keyword'])) {
@@ -53,6 +55,7 @@ function Xulyid($id){
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
+                        <th scope="col">Cost</th>
                         <th scope="col">Fullname</th>
                         <th scope="col">Email</th>
                         <th scope="col">Type</th>
@@ -60,11 +63,14 @@ function Xulyid($id){
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $index = 0; foreach ($users as $user) { $index++; $handle_id =Xulyid($user['id']);?>
+                    <?php $index = 0; foreach ($users as $user) { $index++; $bankValue = $bankModel->SelectCostByUserId($user['id'])    ;  $handle_id =Xulyid($user['id']);?>
                         <tr>
                             <th scope="row"><?php echo $index?></th>
                             <td>
                                 <?php echo $user['name']?>
+                            </td>
+                            <td>
+                                <?php echo   $bankValue['cost'];  ?>
                             </td>
                             <td>
                                 <?php echo $user['fullname']?>
@@ -84,6 +90,9 @@ function Xulyid($id){
                                 </a>
                                 <a href="delete_user.php?id=<?php echo $handle_id ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
+                                </a>
+                                <a href="bank_update.php?id=<?php echo $handle_id ?>">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true" title="update Bank"></i>
                                 </a>
                             </td>
                         </tr>

@@ -4,7 +4,7 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
 
-    public function findUserById($id) {
+     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
         return $user;
