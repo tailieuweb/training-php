@@ -1,6 +1,12 @@
 <?php
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+// Start the session
+session_start();
+
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+
+$userModel = $factory->make('user');
+
 
 $params = [];
 if (!empty($_GET['keyword'])) {
