@@ -110,4 +110,12 @@ class UserModel extends BaseModel {
         }
         return NULL;
     }
+
+	public static function getInstance() {
+        if (self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }
 }
