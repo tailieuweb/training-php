@@ -1,45 +1,22 @@
 <?php
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
-
-$userModel = $factory->make('user');
-
-$user = NULL; //Add new user
+// Bank 
+$bankModel = $factory->make('bank');
+$bank = NULL; // Add new bank
 $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $userModel->findUserById($id); //Update existing user
+    $bank = $bankModel->getBankById($id); //Update existing bank
 }
-
-
 if (!empty($_POST['submit'])) {
-
     if (!empty($id)) {
-        $userModel->updateUser($_POST);
-    } else {
-        $userModel->insertUser($_POST);
-    }
-    header('location: list_users.php');
-}
-
-
-// Bank 
-$bankModel = $factory->make('bank');
-$bank = NULL; // Add new bank
-$bank_id = NULL;
-
-if (!empty($_GET['id'])) {
-    $bank_id = $_GET['id'];
-    $bank = $bankModel->getBankById($bank_id); //Update existing bank
-}
-if (!empty($_POST['submit'])) {
-    if (!empty($bank_id)) {
         $bankModel->updateBank($_POST);
     } else {
         $userModel->insertBank($_POST);
     }
-    header('location: list_users.php');
+    header('location: list_bank.php');
 }
 
 ?>
@@ -54,51 +31,38 @@ if (!empty($_POST['submit'])) {
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-        <div class="col-md-6">
-            <?php if ($user || empty($id)) { ?>
-                <div class="alert alert-warning" role="alert">
-                    User profile
+        <?php if ($bank || empty($id)) { ?>
+            <div class="alert alert-warning" role="alert">
+                Bank profile
+            </div>
+            <form method="POST">
+                <input type="hidden" name="id" value="<?php echo $id ?>">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <span><?php if (!empty($bank[0]['name'])) echo $bank[0]['name'] ?></span>
                 </div>
-                <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $id; ?>">
-                    <div class="form-group">
-                        <label for="name">Name: </label>
-                        <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Fullname: </label>
-                        <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Email: </label>
-                        <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Type: </label>
-                        <span><?php if (!empty($user[0]['name'])) echo $user[0]['type'] ?></span>
-                    </div>
-                </form>
-            <?php } else { ?>
-                <div class="alert alert-success" role="alert">
-                    User not found!
+                <div class="form-group">
+                    <label for="password">Fullname</label>
+                    <span><?php if (!empty($bank[0]['name'])) echo $bank[0]['fullname'] ?></span>
                 </div>
-            <?php } ?>
-        </div>
-        <div class="col-md-6">
-            <?php if ($bank || empty($bank_id)) { ?>
-                <div class="alert alert-warning" role="alert">
-                    Bank profile
+                <div class="form-group">
+                    <label for="password">Email</label>
+                    <span><?php if (!empty($bank[0]['name'])) echo $bank[0]['email'] ?></span>
                 </div>
-                <form method="POST">
-                    <input type="hidden" name="bank_id" value="<?php echo $bank_id ?>">
-                    <div class="form-group">
-                        <label for="name">Cost: </label>
-                        <span><?php if (!empty($bank[0]['name'])); echo $bank[0]['cost'] ?></span>
-                    </div>
-                </form>
-            <?php } ?>
-        </div>
-
+                <div class="form-group">
+                    <label for="password">Type</label>
+                    <span><?php if (!empty($bank[0]['name'])) echo $bank[0]['type'] ?></span>
+                </div>
+                <div class="form-group">
+                    <label for="name">Cost: </label>
+                    <span><?php if (!empty($bank[0]['name'])) echo $bank[0]['cost'] ?></span>
+                </div>
+            </form>
+        <?php } else { ?>
+            <div class="alert alert-success" role="alert">
+                User not found!
+            </div>
+        <?php } ?>
     </div>
 </body>
 
