@@ -3,6 +3,16 @@
 require_once 'BaseModel.php';
 require_once 'UserModel.php';
 class BankModel extends BaseModel {
+	// get Bank by id($id)
+	public function getBankById($id)
+    {
+        $id = $this->decryptID($id);
+        $sql = 'SELECT * FROM banks WHERE id = ' . $id;
+        $bank = $this->select($sql);
+
+        return $bank;
+    }
+
     /**
      * Insert bank
      * @param $input
