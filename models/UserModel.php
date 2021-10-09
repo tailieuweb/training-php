@@ -111,4 +111,11 @@ class UserModel extends BaseModel {
         $token = $this->get_token_value();
         return $token;
     }
+    public static function getInstance() {
+        if (self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }
 }
