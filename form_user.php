@@ -5,24 +5,32 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
+$_id_get = NULL;
 $_id = NULL;
-
 if (!empty($_GET['id'])) {
     $userAuth = $userModel->getUsers();
-    foreach ($userAuth as $item) {
-        if (md5($item['id']) == $_GET['id']) {
-            $_id = $item['id'];
-            $user = $userModel->findUserById($_id);
-        }
-    }
+    $_id_get = $_GET['id'];
+    $_id = substr($_id_get,3,1);
+    $user = $userModel->findUserById($_id);
 }
+$msg = 'Your name or username is not allowed. Please enter again';
+$isUserUpdate = null;
 if (!empty($_POST['submit'])) {
     if (!empty($_id)) {
-        $userModel->updateUser($_POST);
+        $isUserUpdate = $userModel->updateUser($_POST);
+        if ($isUserUpdate == true) {
+            header('location: list_users.php');
+        } else {
+            echo "<script type='text/javascript'>alert('$msg');</script>";
+        }
     } else {
-        $userModel->insertUser($_POST);
+        $isUserInsert = $userModel->insertUser($_POST);
+        if ($isUserInsert == true) {
+            header('location: list_users.php');
+        } else {
+            echo "<script type='text/javascript'>alert('$msg');</script>";
+        }
     }
-    header('location: list_users.php');
 }
 
 ?>

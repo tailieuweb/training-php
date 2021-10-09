@@ -36,6 +36,20 @@ class UserModel extends BaseModel
         return $user;
     }
 
+
+    /**
+     * Get username user by id
+     * @param $id
+     * @return mixed
+     */
+
+    public function getUsernameById($id)
+    {
+        $sql = 'SELECT name FROM users where id = ' . $id;
+        $user = $this->select($sql);
+        return $user;
+    }
+
     /**
      * Delete user by id
      * @param $id
@@ -43,13 +57,8 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
-        $isAuth = $this->getUsers();
-        foreach ($isAuth as $item) {
-            if (md5($item['id']) == $id) {
-                $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
-                return $this->delete($sql);
-            }
-        }
+        $sql = 'DELETE FROM users WHERE id = ' . $id;
+        return $this->delete($sql);
     }
     /**
      * Delete user by id
@@ -69,15 +78,26 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
-        $sql = 'UPDATE users SET 
+        $input_num = 0;
+        $input_arr = array('&', '<', '>', "'", '"', '/');
+        foreach ($input_arr as $item) {
+            if (strlen(strstr($input['name'], $item)) > 0 || strlen(strstr($input['full-name'], $item)) > 0) {
+                $input_num = 1;
+            }
+        }
+        if ($input_num == 1) {
+            return false;
+        } else {
+            $sql = 'UPDATE users SET 
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '"
-                ,`fullname`="' . $input['full-name'] . '"
+                ,`fullname`="' . mysqli_real_escape_string(self::$_connection, $input['full-name'])  . '"
                 ,email="' . $input['email'] . '"
                 ,type="' . $input['type'] . '"
                 ,password="' . md5($input['password']) . '"
                 WHERE id = ' . $input['id'];
-        $user = $this->update($sql);
-        return $user;
+            $user = $this->update($sql);
+            return $user;
+        }
     }
 
 
@@ -88,13 +108,22 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
-        $password = md5($input['password']);
-        $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
-            "'" . $input['name'] . "', '" . $input['full-name'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
-
-        $user = $this->insert($sql);
-
-        return $user;
+        $input_num = 0;
+        $input_arr = array('&', '<', '>', "'", '"', '/');
+        foreach ($input_arr as $item) {
+            if (strlen(strstr($input['name'], $item)) > 0 || strlen(strstr($input['full-name'], $item)) > 0) {
+                $input_num = 1;
+            }
+        }
+        if ($input_num == 1) {
+            return false;
+        } else {
+            $password = md5($input['password']);
+            $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
+                "'" . $input['name'] . "', '" . $input['full-name'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
+            $user = $this->insert($sql);
+            return $user;
+        }
     }
 
     /**
