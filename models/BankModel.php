@@ -2,7 +2,7 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel {
+class BankModel extends BaseModel {
 
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
@@ -36,9 +36,9 @@ class UserModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id) {
+    public function deleteBankById($id) {
       
-        $sql = 'DELETE FROM users WHERE id = '.$id;
+        $sql = 'DELETE FROM banks WHERE id = '.$id;
         return $this->delete($sql);
 
     }
@@ -54,8 +54,7 @@ class UserModel extends BaseModel {
       
         $temp = 'SELECT version FROM users WHERE id = '.$input['id'].'';
         $newTemp = $this->select($temp);
-
-        // var_dump($newTemp);
+        
         if($newTemp[0]['version'] == $input['version']){
             $newV = $input['version']+1;
              $sql = 'UPDATE users SET 
@@ -66,8 +65,6 @@ class UserModel extends BaseModel {
                 WHERE id = ' . $input['id'] ;
             $user = $this->update($sql);  
             header('location: list_users.php?success');  
-            var_dump($sql);
-            die(); 
             return $user;         
         } 
         else{                
@@ -101,27 +98,23 @@ class UserModel extends BaseModel {
      * @param array $param
      * @return array
      */
-    public function getUsers($params = []) {
+    public function getBanks($params = []) {
         //Keyword
-        if (!empty($params['keyword'])) { // <script>alert('hack')</script>
-            $params['keyword'] = $this->removeSpecialCharacter($params['keyword']);
-            var_dump($params['keyword']);
-             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+       
+        if (!empty($params['keyword'])) {
+           
+            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] .'%"';
+
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-             //$users = self::$_connection->multi_query($sql);
-             $users = $this->select($sql);
-
+            $banks = self::$_connection->multi_query($sql);
+            
         } else {
-            $sql = 'SELECT * FROM users';
-            $users = $this->select($sql);
+            $sql = 'SELECT * FROM banks';
+            $banks = $this->select($sql);
         }
-         return  $users;
-    }
-    public function removeSpecialCharacter($string){
-        $array = ["'",'"',"<",">","*","","!","/"];
-        $string = str_replace($array,'',$string);
-        return $string;
+        return $banks;
+       
     }
 }
