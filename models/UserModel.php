@@ -51,7 +51,6 @@ class UserModel extends BaseModel {
 
 
     public function updateUser($input) {
-
         $sql = 'UPDATE users SET 
                  name = "' . $input['name'] .'", 
                  password="'. md5($input['password']) .'",
