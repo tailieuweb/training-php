@@ -21,12 +21,7 @@ class UserModel extends BaseModel
         return $user;
     }
 
-<<<<<<< HEAD
-    public function auth($userName, $password)
-    {
-        $md5Password = $password;
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
-=======
+
     /**
      * Authentication user
      * @param $userName
