@@ -100,6 +100,7 @@ class UserModel extends BaseModel {
 
         return $users;
     }
+
     // Decrypt id
     private function decryptID($md5Id){
         $users = $this->getUsers();
