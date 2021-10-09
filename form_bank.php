@@ -6,6 +6,7 @@ require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
 $bankModel = $factory->make('bank');
+$userModel = $factory->make('user');
 
 $bankInfo = NULL; //Add new bank
 $_id = NULL;
@@ -26,6 +27,7 @@ if (!empty($_GET['id'])) {
     //Replace last number with null
     $_id = str_replace($end, "", $_id);
     $bankInfo = $bankModel->findBankInfoByUserID($_id); //Update existing bank info
+    $user = $userModel->findUserById($_id);
 }
 
 
@@ -41,6 +43,7 @@ if (!empty($_POST['submit'])) {
         header('location: index.php');
     }
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -61,14 +64,25 @@ if (!empty($_POST['submit'])) {
             </div>
             <form method="POST">
                 <input type="hidden" name="id" value="<?php echo $_id ?>">
+
                 <div class="form-group">
-                    <label for="name">User ID</label>
-                    <input class="form-control" name="user_id" placeholder="Name" value="<?php if (!empty($bankInfo[0]['user_id'])) echo $bankInfo[0]['user_id'] ?>">
+                    <label for="name">Name</label>
+                    <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
                 </div>
+                <div class="form-group">
+                    <label for="password">Fullname</label>
+                    <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Email</label>
+                    <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
+                </div>
+                
                 <div class="form-group">
                     <label for="fullname">Cost</label>
-                    <input class="form-control" name="cost" placeholder="Full Name" value="<?php if (!empty($bankInfo[0]['cost'])) echo $bankInfo[0]['cost'] ?>">
+                    <input class="form-control" name="cost" placeholder="Amount of money" value="<?php if ($bankInfo[0]['cost'] >= 0) echo $bankInfo[0]['cost'] ?>">
                 </div>
+                
                 <!-- Hidden version field: -->
                 <div class="form-group">
                     <input type="hidden" name="ver" value="<?php echo rand(10000,99999).rand(10000,99999) ?>">
