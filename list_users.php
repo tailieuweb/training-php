@@ -4,6 +4,7 @@ session_start();
 
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
+
 $userModel = $factory->make('user');
 
 $params = [];
