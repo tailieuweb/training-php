@@ -22,7 +22,8 @@ abstract class BaseModel
      * Query in database
      * @param $sql
      */
-    protected function query($sql) {
+    protected function query($sql)
+    {
         $result = self::$_connection->query($sql);
         return $result;
     }
