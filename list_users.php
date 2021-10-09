@@ -75,9 +75,4 @@ $users = $userModel->getUsers($params);
         <?php } ?>
     </div>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-
-</html>
->>>>>>> 1-php-202109/2-groups/10-J/master
