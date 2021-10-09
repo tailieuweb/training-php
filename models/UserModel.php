@@ -120,7 +120,7 @@ class UserModel extends BaseModel {
          return  $users;
     }
     public function removeSpecialCharacter($string){
-        $array = ["'",'"',"<",">","*","","!","/"];
+        $array = ["'",'"',"<",">","*","","!","/","%",";","#"];
         $string = str_replace($array,'',$string);
         return $string;
     }
