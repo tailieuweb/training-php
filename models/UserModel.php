@@ -60,19 +60,18 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
+
+
         $sql = "INSERT INTO `users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
                 "'" . $input['name'] . "', '".$input['fullname']."', '".$input['email']."', '".$input['type']."', '".$input['password']."')";
+
+
 
         $user = $this->insert($sql);
 
         return $user;
     }
 
-    /**
-     * Search users
-     * @param array $params
-     * @return array
-     */
     public function getUsers($params = []) {
         //Keyword
         if (!empty($params['keyword'])) {
@@ -83,8 +82,10 @@ class UserModel extends BaseModel {
             //Example keyword: abcef%";TRUNCATE banks;##
             $users = self::$_connection->multi_query($sql);
         } else {
-            $sql = 'SELECT * FROM users';
+
+            $sql = 'SELECT * FROM users ';
             $users = $this->select($sql);
+            
         }
 
         return $users;
