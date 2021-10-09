@@ -60,7 +60,7 @@ $banks = $bankModel->getBanks($params);
                         <a href="view_bank.php?id=<?php echo md5($bank['id'].'TeamJ-TDC') ?>">
                             <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                         </a>
-                        <a href="delete_bank.php?id=<?php echo md5($bank['id'].'TeamJ-TDC') ?>">
+                        <a href="delete_banks.php?id=<?php echo md5($bank['id'].'TeamJ-TDC') ?>">
                             <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                         </a>
                     </td>
