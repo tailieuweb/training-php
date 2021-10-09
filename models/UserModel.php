@@ -58,16 +58,32 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
+        $result = new ResultClass();
         $id = $this->decryptID($input['id']);
-        $sql = 'UPDATE `users` SET 
-                 name = "' . $input['name'] . '", 
-                  fullname="' . $input['fullname'] . '",
-                  email="' . $input['email'] . '",
-                  type="' . $input['type'] . '",
-                 password="' . md5($input['password']) . '"
-                WHERE id = ' . $id;
-        $user = $this->update($sql);
-        return $user;
+        $temp = $this->findUserById($input['id']);
+        if (count($temp) > 0) {
+            if ($temp[0]['version'] == $input['version']) {
+                $sql = 'UPDATE `users` SET 
+                name = "' . $input['name'] . '", 
+                 fullname="' . $input['fullname'] . '",
+                 email="' . $input['email'] . '",
+                 type="' . $input['type'] . '",
+                 password="' . md5($input['password']) . '",
+                 version="' . ($input['version'] + 1) . '"
+                 WHERE id = ' . $id;
+                $user = $this->update($sql);
+                if ($user == true) {
+                    $result->setData("Đã update thành công");
+                } else {
+                    $result->setError("Lỗi");
+                }
+            } else {
+                $result->setError("Dữ liệu đã được cập nhật trước đó! Xin hãy reload lại trang");
+            }
+        } else {
+            $result->setError("Không tìm thấy id của user");
+        }
+        return $result;
     }
 
     /**
@@ -91,8 +107,9 @@ class UserModel extends BaseModel
      * @param array $params
      * @return array
      */
-    public function getUsers($params = []) {
-        
+    public function getUsers($params = [])
+    {
+
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
@@ -121,11 +138,37 @@ class UserModel extends BaseModel
         return NULL;
     }
 
-	public static function getInstance() {
-        if (self::$_instance !== null){
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
             return self::$_instance;
         }
         self::$_instance = new self();
         return self::$_instance;
+    }
+}
+
+class ResultClass
+{
+    public $isSuccess, $data, $error;
+    public function __construct()
+    {
+        $this->isSuccess = false;
+        $this->data = null;
+        $this->error = "Don't have Value";
+    }
+    // Set Data
+    public function setData($data)
+    {
+        $this->isSuccess = true;
+        $this->data = $data;
+        $this->error = null;
+    }
+    // Set Error
+    public function setError($error)
+    {
+        $this->isSuccess = false;
+        $this->data = null;
+        $this->error = $error;
     }
 }
