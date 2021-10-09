@@ -37,7 +37,7 @@ class BankModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id) {
+    public function deleteBanksById($id) {
         $sql = 'DELETE FROM banks WHERE id = '.$id;
         return $this->delete($sql);
 
