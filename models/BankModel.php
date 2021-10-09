@@ -6,9 +6,9 @@ class BankModel extends BaseModel {
 
     public function findBankById($id) {
         $sql = 'SELECT * FROM banks WHERE id = '.$id;
-        $user = $this->select($sql);
+        $bank = $this->select($sql);
 
-        return $user;
+        return $bank;
     }
 
     public function findUser_id($keyword) {
@@ -43,7 +43,21 @@ class BankModel extends BaseModel {
 
     }
 
-   
+    /**
+     * Update user
+     * @param $input
+     * @return mixed
+     */
+    public function updateUser_id($input) {
+        $sql = 'UPDATE banks SET 
+                 user_id = "' . mysqli_real_escape_string(self::$_connection, $input['user_id']) .'", 
+                 Cost="'. $input['cost'] .'"
+                WHERE id = ' . $input['id'];
+
+        $bank = $this->update($sql);
+
+        return $bank;
+    }
     
 
     /**
@@ -51,13 +65,13 @@ class BankModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".md5($input['password'])."')";
+    public function insertUser_id($input) {
+        $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
+                "'" . $input['user_id'] . "', '".$input['cost']."')";
 
-        $user = $this->insert($sql);
+        $bank = $this->insert($sql);
 
-        return $user;
+        return $bank;
     }
 
     /**

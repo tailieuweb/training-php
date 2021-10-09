@@ -1,7 +1,7 @@
 <?php
 require_once 'configs/database.php';
 
-class BaseModel {
+abstract class BaseModel {
     // Database connection
     protected static $_connection;
 
@@ -22,6 +22,7 @@ class BaseModel {
      * @param $sql
      */
     protected function query($sql) {
+
         $result = self::$_connection->query($sql);
         return $result;
     }
