@@ -3,34 +3,36 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$id = isset($_GET['id']) ? base64_decode($_GET['id']) : null;
+$id = NULL;
 
-$allowToSee = false;
+if (!empty($_GET['id'])) {
+    $id = $_GET['id'];
+    //Decode id param
 
-// find user
-$user = $userModel->getUserByID($id);
+    //Get first number
+    $start = substr($id, 0, 5);
 
-// PREPARE DATA FOR CREATE VIEW TOKENS
-$payload = new \stdClass();
-$payload->name = empty($user) ? null : $user['name'];
-$payload->email = empty($user) ? null : $user['email'];
+    //Get last number
+    $end = substr($id, -5);
 
-$header = new \stdClass();
-$header->alg = "HS256";
-$header->typ = "JWT";
+    //Replace first number with null
+    $id = str_replace($start, "", $id);
 
-$signature = "secret key";
-
-$token = hash_hmac("sha256", base64_encode(json_encode($payload)) . base64_encode(json_encode($header)), $signature);
-
-if (!empty($_GET['id']) && ($_COOKIE['token'] == $token)) {
-    $allowToSee = true;
-} else {
-    $_SESSION['message'] = 'Methods are not allowed!';
+    //Replace last number with null
+    $id = str_replace($end, "", $id);
+    $user = $userModel->findUserById($id); //Update existing user
 }
 
-//REMOVE VIEW TOKENS
-unset($token);
+
+if (!empty($_POST['submit'])) {
+
+    if (!empty($id)) {
+        $userModel->updateUser($_POST);
+    } else {
+        $userModel->insertUser($_POST);
+    }
+    header('location: list_users.php');
+}
 
 ?>
 <!DOCTYPE html>
@@ -44,49 +46,31 @@ unset($token);
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-        <?php
-        if ($allowToSee) { ?>
-            <?php if ($user || empty($id)) { ?>
-                <div class="alert alert-warning" role="alert">
-                    User profile
-                </div>
-                <form method="POST">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <span><?php if (!empty($user['name'])) echo $user['name'] ?></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Fullname</label>
-                        <span><?php if (!empty($user['fullname'])) echo $user['fullname'] ?></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Email</label>
-                        <span><?php if (!empty($user['email'])) echo $user['email'] ?></span>
-                    </div>
 
-                    <!-- Nguyễn Phúc Linh: Thêm các field dữ liệu (full name, email, type) vào form - (25/09/2021) -->
-                    <!-- start -->
-                    <div class="form-group">
-                        <label for="">Type</label>
-                        <span><?php if (!empty($user['type'])) echo $user['type'] ?></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Password</label>
-                        <span><?php if (!empty($user['password'])) echo $user['password'] ?></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Updated at</label>
-                        <span><?php if (!empty($user['updated_at'])) echo $user['updated_at'] ?></span>
-                    </div>
-                    <!-- end. -->
-
-                </form>
-            <?php } else { ?>
-                <div class="alert alert-success" role="alert">
-                    User not found!
+        <?php if ($user || empty($id)) { ?>
+            <div class="alert alert-warning" role="alert">
+                User profile
+            </div>
+            <form method="POST">
+                <input type="hidden" name="id" value="<?php echo $id ?>">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
                 </div>
-        <?php }
-        } ?>
+                <div class="form-group">
+                    <label for="password">Fullname</label>
+                    <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Email</label>
+                    <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
+                </div>
+            </form>
+        <?php } else { ?>
+            <div class="alert alert-success" role="alert">
+                User not found!
+            </div>
+        <?php } ?>
     </div>
 </body>
 
