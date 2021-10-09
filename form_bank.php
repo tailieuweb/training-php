@@ -10,12 +10,11 @@ $id = NULL;
 $listUsers = $userModel->getUsers();
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
+    $banks = $bankModel->getBankById($id);
 }
-var_dump($id);
+
 if (!empty($_POST['submit'])) {
-
     if (!empty($id)) {
-
         //Update bank
         $bankModel->updateBank($_POST);
     } else {
@@ -38,7 +37,7 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php' ?>
     <div class="container">
 
-        <?php if (!empty($id)) { ?>
+        <?php if ($banks || empty($id)) { ?>
 
             <div class="alert alert-warning" role="alert">
                 Bank form
@@ -50,7 +49,11 @@ if (!empty($_POST['submit'])) {
                     <select class="form-control" name="user_id">
                         <?php
                         foreach ($listUsers as $user) { ?>
-                            <option value=<?php echo $user['id'] ?>><?php echo $user['name'] ?></option>
+                            <option value="<?php echo $user['id'] ?>" <?php if (!empty($banks[0]['name'])) {
+                                                                            if ($banks[0]['name'] == $user['name']) {
+                                                                                echo "selected";
+                                                                            }
+                                                                        } ?>><?php echo $user['name'] ?></option>
 
                         <?php  }
                         ?>
@@ -58,7 +61,7 @@ if (!empty($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label for="cost">Cost</label>
-                    <input name="cost" class="form-control" placeholder="Cost" required>
+                    <input name="cost" class="form-control" placeholder="Cost" required value="<?php if (!empty($banks[0]['cost'])) echo $banks[0]['cost'] ?>">
                 </div>
                 <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
             </form>
