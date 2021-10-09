@@ -13,4 +13,16 @@ class BankModel extends BaseModel {
 
         return $bank;
     }
+    public function findBankById($id) {
+        $sql = 'SELECT * FROM banks WHERE id = '.$id;
+        $bank = $this->select($sql);
+
+        return $bank;
+    }
+    public function getUsers($params = []) {
+        $sql = 'SELECT * FROM users';
+        $user = $this->select($sql);
+
+        return $user;
+    }
 }
