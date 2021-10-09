@@ -63,7 +63,7 @@ if (!empty($_POST['submit'])) {
                 Form
             </div>
             <form method="POST">
-                <input type="hidden" name="id" value="<?php echo $_id ?>">
+                <input type="hidden" name="id" value="<?php echo $bankInfo[0]['id'] ?>">
 
                 <div class="form-group">
                     <label for="name">Name</label>
