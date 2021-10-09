@@ -43,11 +43,14 @@ class BankModel extends BaseModel
         $id = $this->decryptID($input['id']);
         $sql = 'UPDATE `banks` SET 
                  user_id = "' . $input['user_id'] . '", 
-                  fullname="' . $input['cost'] . '"
+                  cost="' . $input['cost'] . '"
                 WHERE id = ' . $id;
-        $user = $this->update($sql);
-        return $user;
+        $banks = $this->update($sql);
+        var_dump($input['user_id']);
+        var_dump($input['cost']);
+        return $banks;
     }
+
 
 
     /**
