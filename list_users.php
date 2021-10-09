@@ -12,7 +12,15 @@ if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword']; 
 }
 
+if(isset($_GET['success'])){
+    echo "<script>alert('!!! Cập nhật thành công !!!')</script>";
+    echo "<script>window.location.href = 'list_users.php'</script>";
+}
 
+if(isset($_GET['err'])){
+    echo "<script>alert('Có vẻ như dữ liệu của bạn đã được thay đổi trước đó rồi!!! Vui lòng kiểm tra lại dữ liệu')</script>";
+    echo "<script>window.location.href = 'list_users.php'</script>";
+}
 $users = $userModel->getUsers($params);
 ?>
 <!DOCTYPE html>
@@ -42,6 +50,7 @@ $users = $userModel->getUsers($params);
                 </thead>
                 <tbody>
                     <?php foreach ($users as $user) {?>
+                        <input type="hidden" value="<?php echo $user['version'] ?>">
                         <tr>
                             <th scope="row"><?php echo $user['id']?></th>
                             <td>

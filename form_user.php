@@ -17,11 +17,10 @@ if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
         $userModel->updateUser($_POST);
-    
     } else {
-        $userModel->insertUser($_POST);
-    }
-    header('location: list_users.php');
+        $userModel->insertUser($_POST); 
+        header('location: list_users.php');  
+    }   
 }
 
 ?>
@@ -41,6 +40,7 @@ if (!empty($_POST['submit'])) {
                 </div>
                 <form method="POST">
                     <input type="hidden" name="id" value="<?php echo $newid ?>">
+                    <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo $user[0]['version']?>">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
