@@ -13,6 +13,7 @@ $token = $userModel->createToken();
 
 $params = [];
 if (!empty($_GET['keyword'])) {
+    
     $params['keyword'] = $_GET['keyword'];
 }
 
@@ -47,12 +48,14 @@ $users = $userModel->getUsers($params);
                         <tr>
                             <th scope="row"><?php echo $user['id']?></th>
                             <td>
-                                <?php echo $user['name']?>
+                                <?php echo $user['name'] ?>
+                                
                             </td>
                             <td>
                                 <?php echo $user['fullname']?>
                             </td>
                             <td>
+                                
                                 <?php echo $user['name_type']?>
                             </td>
                             <td>

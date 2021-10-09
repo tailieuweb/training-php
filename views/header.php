@@ -6,6 +6,7 @@ if(!empty($_SESSION['id'])) {
 
 $keyword = '';
 if(!empty($_GET['keyword'])) {
+    $keywordchanges = htmlentities($_GET['keyword'], ENT_QUOTES, "UTF-8");
     $keyword = $_GET['keyword'];
 }
 ?>

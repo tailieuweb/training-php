@@ -31,7 +31,7 @@ if (!empty($_POST['submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User form</title>
+    <title>Bank form</title>
     <?php include 'views/meta.php' ?>
 </head>
 <body>
@@ -69,7 +69,7 @@ if (!empty($_POST['submit'])) {
                 </form>
             <?php } else { ?>
                 <div class="alert alert-success" role="alert">
-                    User not found!
+                    Bank not found!
                 </div>
             <?php } ?>
     </div>
