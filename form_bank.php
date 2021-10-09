@@ -47,14 +47,14 @@ if (!empty($_POST['submit'])) {
 
                     <div class="form-group">
                         <label for="type">Name user</label>
-                        <select name="type" class="form-control">
+                        <select name="id" class="form-control">
                             <?php
                             foreach($users as $value) {
                                 if($value['id'] == $bank[0]['bank_id']){
                                 ?>
-                                <option selected value="<?php if (!empty($value['user_id'])) echo $value['user_id'] ?>"><?php if (!empty($value['name'])) echo $value['name'] ?></option>
+                                <option selected value="<?php if (!empty($value['id'])) echo $value['id'] ?>"><?php if (!empty($value['name'])) echo $value['user_id'] ?></option>
                             <?php } else{ ?>
-                                <option selected value="<?php if (!empty($value['user_id'])) echo $value['user_id'] ?>"><?php if (!empty($value['name'])) echo $value['name'] ?></option>
+                                <option selected value="<?php if (!empty($value['id'])) echo $value['id'] ?>"><?php if (!empty($value['name'])) echo $value['name'] ?></option>
                              <?php   }
                             }?>
                         </select>
