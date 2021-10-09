@@ -35,7 +35,7 @@ class BankModel extends BaseModel {
             $banks = $this->select($sql);
         }
 
-        return $users;
+        return $banks;
     }
     // Decrypt id
     private function decryptID($md5Id){
