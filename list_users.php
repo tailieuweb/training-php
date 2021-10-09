@@ -52,14 +52,12 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['fullname']?>
                             </td>
                             <td>
-<<<<<<< HEAD
-                                <?php echo $user['name_type']?>
-=======
+
                                 <?php echo $user['email']?>
                             </td>
                             <td>
                                 <?php echo $user['type']?>
->>>>>>> origin/1-php-202109/2-groups/5-E/master
+
                             </td>
                             <td>
                                 <a href="form_user.php?id=<?php echo $user['id'] ?>">
