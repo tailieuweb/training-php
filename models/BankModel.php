@@ -6,11 +6,11 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel {
 
-    public function findBankById($id) {
-        $sql = 'SELECT * FROM banks WHERE id = '.$id;
-        $bank = $this->select($sql);
+    public function findUserById($id) {
+        $sql = 'SELECT * FROM users WHERE id = '.$id;
+        $user = $this->select($sql);
 
-        return $bank;
+        return $user;
     }
 
     // public function findUser($keyword) {
@@ -45,17 +45,15 @@ class BankModel extends BaseModel {
 
     // }
 
-    /**
-     * Update user
-     * @param $input
-     * @return mixed
-     */
-    public function updateBank($input) {
-        $sql = 'UPDATE banks SET 
+    // /**
+    //  * Update user
+    //  * @param $input
+    //  * @return mixed
+    //  */
+    public function updateUser($input) {
+        $sql = 'UPDATE users SET 
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 password="'. md5($input['password']) .'",
-                 user_id="'. $input['user_id'] .'",
-                 cost="'. $input['cost'] .'",
+                 password="'. md5($input['password']) .'"
                  type = "' . $input['type'] .'",
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
@@ -68,13 +66,13 @@ class BankModel extends BaseModel {
     //  * @param $input
     //  * @return mixed
     //  */
-    // public function insertUser($input) {
-    //     $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" . "'" . $input['name'] . "', '".md5($input['password'])."')";
+    public function insertUser($input) {
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" . "'" . $input['name'] . "', '".md5($input['password'])."')";
 
-    //     $user = $this->insert($sql);
+        $user = $this->insert($sql);
 
-    //     return $user;
-    // }
+        return $user;
+    }
 
     /**
      * Search users
