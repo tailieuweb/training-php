@@ -1,22 +1,27 @@
 <?php
 
 require_once 'BaseModel.php';
-
+require_once 'UserModel.php';
 class BankModel extends BaseModel {
     /**
+     * Get Banks follow User Id
      * Get all Banks
-     * Search Banks
      */
     public function getBanks($params = []) {
-        //Keyword
-        if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
-            $users = self::$_connection->query($sql);
-        } else {
-            $sql = 'SELECT * FROM users';
-            $users = $this->select($sql);
+         if (!empty($params['user-id'])) {
+            $userModel = new UserModel();
+            $user = $userModel->findUserById($params['user-id']);
+            $userId = NULL;
+            if(!empty($user)){
+                $userId = $user[0]['id'];
+            }
+            $sql = 'SELECT * FROM banks WHERE user_id = '.$userId;
+            $banks = $this->select($sql);
+        } else{
+            $sql = 'SELECT * FROM banks';
+            $banks = $this->select($sql);
         }
-        return $users;
+        return $banks;
     }
     // Decrypt id
     private function decryptID($md5Id){
