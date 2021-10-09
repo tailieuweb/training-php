@@ -43,7 +43,7 @@ $banks = $bankModel->getBanks($params);
                 <tbody>
                     <?php foreach ($banks as $bank) {?>
                         <tr>
-                            <th scope="row"><?php echo $bank['id']?></th>
+                            <th scope="row"><?php echo $bank['bank_id']?></th>
                             <td>
                                 <?php echo $bank['name']?>
                             </td>
@@ -51,13 +51,13 @@ $banks = $bankModel->getBanks($params);
                                 <?php echo $bank['cost']?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo $bank['id'] ?>">
+                                <a href="form_user.php?id=<?php echo $bank['bank_id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo $bank['id'] ?>">
+                                <a href="view_user.php?id=<?php echo $bank['bank_id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $bank['id']?>&token=<?php echo $token ?>">
+                                <a href="delete_bank.php?id=<?php echo $bank['bank_id']?>&token=<?php echo $token ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
