@@ -82,7 +82,7 @@ class UserModel extends BaseModel {
         if (!empty($params['keyword'])) {
             $key = str_replace('"','',$params['keyword']);
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $key .'%"';
-var_dump($sql);die();
+
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##

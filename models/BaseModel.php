@@ -24,7 +24,7 @@ abstract class BaseModel {
                 printf("Connect failed");
                 exit();
             }
-            var_dump($token);
+//            var_dump($token);
         }
 
     }
