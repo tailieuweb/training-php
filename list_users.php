@@ -4,14 +4,12 @@ session_start();
 
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
-
 $userModel = $factory->make('user');
-
+$bankModel = $factory -> make('bank');
 function clean($string) {
     $string = preg_replace('/[^A-Za-z0-9]/', '', $string); // Removes special chars.
     return preg_replace('/ +/', ' ', $string);
  }
-
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = strip_tags($_GET['keyword']);
