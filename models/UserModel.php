@@ -33,7 +33,6 @@ class UserModel extends BaseModel {
         $user = $this->select($sql);
         return $user;
     }
-
     /**
      * Delete user by id
      * @param $id
@@ -91,7 +90,7 @@ class UserModel extends BaseModel {
         } else {
 
             $sql = 'SELECT * FROM users join types on users.type = types.id_type';
-            
+
             $users = $this->select($sql);
         }
 
