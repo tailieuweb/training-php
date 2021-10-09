@@ -4,17 +4,16 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel {
 
-    public function getBanks($params = []) {
-        //Keyword
-        if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM banks WHERE user_id LIKE "%' . $params['keyword'] .'%"';
-            $banks = self::$_connection->multi_query($sql);
-        } else {
-            $sql = 'SELECT * FROM banks';
-            $banks = $this->select($sql);
-        }
+    public function findBankById($id) {
+        $sql = 'SELECT * FROM banks WHERE id = '.$id;
+        $user = $this->select($sql);
 
-        return $banks;
+        return $user;
     }
-    
+
+    public function updateBank($input) {
+        $sql = ' UPDATE `banks` SET `user_id`="' . $input['user_id'] .'",`cost`="' . $input['cost'] .'" WHERE id = ' . $input['id'];
+        $bank = $this->update($sql);
+        return $bank;
+    }
 }
