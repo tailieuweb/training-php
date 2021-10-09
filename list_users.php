@@ -3,8 +3,15 @@
 session_start();
 
 require_once 'models/UserModel.php';
+
+$userModel = $factory->make('user');
 $userModel = new UserModel();
 $token = $userModel->createToken();
+
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+
+
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
