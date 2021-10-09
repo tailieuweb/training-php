@@ -78,17 +78,25 @@ class UserModel extends BaseModel {
      */
     public function getUsers($params = []) {
         //Keyword
-        if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
-
+        if (!empty($params['keyword'])) { // <script>alert('hack')</script>
+            $params['keyword'] = $this->removeSpecialCharacter($params['keyword']);
+            var_dump($params['keyword']);
+             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+             //$users = self::$_connection->multi_query($sql);
+             $users = $this->select($sql);
+
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
-        return $users;
+         return  $users;
+    }
+    public function removeSpecialCharacter($string){
+        $array = ["'",'"',"<",">","*","","!","/"];
+        $string = str_replace($array,'',$string);
+        return $string;
     }
 }
