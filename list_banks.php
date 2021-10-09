@@ -63,7 +63,7 @@ $banks = $bankModel->getBanks($params);
                                 <a href="view_banks.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $bank['id'] ?>">
+                                <a href="delete_banks.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
