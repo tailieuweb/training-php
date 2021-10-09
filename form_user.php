@@ -1,26 +1,19 @@
 <?php
-// Start the session
-session_start();
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$_id = NULL;
+$id = NULL;
 
 if (!empty($_GET['id'])) {
-<<<<<<< HEAD
     $id = $_GET['id'];
     $user = $userModel->findUserById($id); //Update existing user
-=======
-    $_id = $_GET['id'];
-    $user = $userModel->findUserById($_id);//Update existing user
->>>>>>> 1-php-202109/1-master
 }
 
 
 if (!empty($_POST['submit'])) {
 
-    if (!empty($_id)) {
+    if (!empty($id)) {
         $userModel->updateUser($_POST);
     } else {
         $userModel->insertUser($_POST);
@@ -100,7 +93,7 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
-            <?php if ($user || isset($_id)) { ?>
+            <?php if ($user || !isset($_id)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
@@ -108,7 +101,7 @@ if (!empty($_POST['submit'])) {
                     <input type="hidden" name="id" value="<?php echo $_id ?>">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
@@ -123,7 +116,7 @@ if (!empty($_POST['submit'])) {
                 </div>
             <?php } ?>
     </div>
->>>>>>> 1-php-202109/1-master
+>>>>>>> 1-php-202109/1-web-security
 </body>
 
 </html>
