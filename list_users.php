@@ -16,10 +16,12 @@ $users = $userModel->getUsers($params);
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Home</title>
     <?php include 'views/meta.php' ?>
 </head>
+
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
@@ -77,4 +79,5 @@ $users = $userModel->getUsers($params);
         <?php } ?>
     </div>
 </body>
+
 </html>
