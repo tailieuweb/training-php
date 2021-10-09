@@ -1,0 +1,162 @@
+.header {
+
+    margin: 50px auto 0px;
+    color: white;
+    background: #5F9EA0;
+    text-align: center;
+    border: 1px solid #B0C4DE;
+    border-bottom: none;
+    border-radius: 10px 10px 0px 0px;
+    padding: 20px;
+}
+.content {
+
+    margin: 0px auto;
+    padding: 20px;
+    border: 1px solid #B0C4DE;
+    background: white;
+    border-radius: 0px 0px 10px 10px;
+}
+.input-group {
+    margin: 10px 0px 10px 0px;
+}
+.input-group label {
+    display: block;
+    text-align: left;
+    margin: 3px;
+}
+.input-group input {
+    height: 30px;
+    width: 93%;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+#user_type {
+    height: 40px;
+    width: 98%;
+    padding: 5px 10px;
+    background: white;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+.btn {
+    padding: 10px;
+    font-size: 15px;
+    color: white;
+    background: #5F9EA0;
+    border: none;
+    border-radius: 5px;
+}
+.error {
+    width: 92%;
+    margin: 0px auto;
+    padding: 10px;
+    border: 1px solid #a94442;
+    color: #a94442;
+    background: #f2dede;
+    border-radius: 5px;
+    text-align: left;
+}
+.success {
+    color: #3c763d;
+    background: #dff0d8;
+    border: 1px solid #3c763d;
+    margin-bottom: 20px;
+}
+.profile_info img {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    float: left;
+}
+.profile_info div {
+    display: inline-block;
+    margin: 5px;
+}
+.profile_info:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.badge-default {
+    background-color: #777;
+}
+.badge-primary {
+    background-color: #337ab7;
+}
+.badge-success {
+    background-color: #5cb85c;
+}
+.badge-info {
+    background-color: #5bc0de;
+}
+.badge-warning {
+    background-color: #f0ad4e;
+}
+.badge-danger {
+    background-color: #d9534f;
+}
+.margin-bottom-25 {
+    margin-bottom: 25px;
+}
+.navbar-icon-top .navbar-nav>li>a>.fa, .navbar-icon-top .navbar-nav>li>a>.glyphicon {
+    position: relative;
+    width: 36px;
+    font-size: 24px;
+}
+.navbar-icon-top .navbar-nav>li>a>.fa>.badge, .navbar-icon-top .navbar-nav>li>a>.glyphicon>.badge {
+    position: absolute;
+    right: 0;
+    font-family: sans-serif;
+}
+.navbar-icon-top .navbar-nav>li>a>.fa {
+    top: 3px;
+    line-height: 12px;
+}
+.navbar-icon-top .navbar-nav>li>a>.fa>.badge {
+    top: -10px;
+}
+.navbar-icon-top .navbar-nav>li>a>.glyphicon {
+    top: 6px;
+    line-height: 6px;
+}
+.navbar-icon-top .navbar-nav>li>a>.glyphicon>.badge {
+    top: -16px;
+}
+
+@media (min-width: 768px) {
+    .navbar-icon-top .navbar-brand {
+        padding: 25px 15px;
+    }
+    .navbar-icon-top .navbar-text {
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+    .navbar-icon-top .navbar-btn, .navbar-icon-top .navbar-form {
+        margin-top: 18px;
+        margin-bottom: 18px;
+    }
+    .navbar-icon-top .navbar-nav>li>a {
+        text-align: center;
+        display: table-cell;
+        height: 70px;
+        vertical-align: middle;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .navbar-icon-top .navbar-nav>li>a>.fa, .navbar-icon-top .navbar-nav>li>a>.glyphicon {
+        display: block;
+        width: 48px;
+        margin: 2px auto 4px auto;
+        top: 0;
+        line-height: 24px;
+    }
+    .navbar-icon-top .navbar-nav>li>a>.fa>.badge, .navbar-icon-top .navbar-nav>li>a>.glyphicon>.badge {
+        top: -7px;
+    }
+}
