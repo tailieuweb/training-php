@@ -21,12 +21,13 @@ if(!empty($_GET['keyword'])) {
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="list_users.php">App Web 1</a>
+                <a class="navbar-brand" href="list_bank.php">App Web 2</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="form_user.php">Add new user</a></li>
-
+                    <li><a href="form_banks.php">Add new banks</a></li>
                 </ul>
                 <form class="navbar-form navbar-left">
                     <div class="form-group">

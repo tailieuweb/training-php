@@ -1,7 +1,7 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/UserModel.php';
+require_once './models/FactoryPattern.php';
 $userModel = new UserModel();
 $type = $userModel->getTypes();
 

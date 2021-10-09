@@ -26,13 +26,14 @@ class UserModel extends BaseModel {
      */
     public function auth($userName, $password) {
         $md5Password = md5($password);
-        //Login Pass khi để 1(SQL Injection)
+    //Login Pass khi để 1(SQL Injection)
         //SELECT * FROM users WHERE name = "' . $userName . '" AND  password = "'.$md5Password.'" OR "1"'
         //SELECT * FROM users WHERE name = "hacker2" AND password = "12345" OR "1"
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND  password = "'.$md5Password.'"';
         $user = $this->select($sql);
         return $user;
     }
+
     /**
      * Delete user by id
      * @param $id
@@ -69,8 +70,8 @@ class UserModel extends BaseModel {
      */
     public function insertUser($input) {
 
-        $sql = "INSERT INTO `users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
-            "'" . $input['name'] . "', '".$input['fullname']."', '".$input['email']."', '".$input['type']."', '".md5($input['password'])."')";
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
+                "'" . $input['name'] . "', '".md5($input['password'])."')";
 
 
         $user = $this->insert($sql);
@@ -89,9 +90,10 @@ class UserModel extends BaseModel {
             $users = self::$_connection->multi_query($sql);
         } else {
 
-            $sql = 'SELECT * FROM users join types on users.type = types.id_type';
+            $sql = 'SELECT * FROM users join types on users.type = types.type_id';
 
             $users = $this->select($sql);
+
         }
 
         return $users;
