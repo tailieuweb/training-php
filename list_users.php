@@ -3,9 +3,9 @@
 session_start();
 
 require_once 'models/FactoryPattern.php';
-$factory = new FactoryPattern();
+$factorys = new FactoryPattern();
 
-$userModel = $factory->make('user');
+$userModels = $factorys->make('user');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
