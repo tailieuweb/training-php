@@ -37,9 +37,9 @@ class UserModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id) {
+    public function deleteUserById($id, $token) {
         $sql = 'DELETE FROM users WHERE id = '.$id;
-        return $this->delete($sql);
+        return $this->delete($sql, $token);
 
     }
 
@@ -50,7 +50,7 @@ class UserModel extends BaseModel {
      */
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
                  fullname = "' . $input['fullname'] .'", 
                  email = "' . $input['email'] .'", 
                  type = "' . $input['type'] .'", 
@@ -68,8 +68,8 @@ class UserModel extends BaseModel {
      */
     public function insertUser($input) {
 
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".md5($input['password'])."')";
+        $sql = "INSERT INTO `users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
+            "'" . $input['name'] . "', '".$input['fullname']."', '".$input['email']."', '".$input['type']."', '".$input['password']."')";
 
 
         $user = $this->insert($sql);
@@ -80,7 +80,8 @@ class UserModel extends BaseModel {
     public function getUsers($params = []) {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+            $key = str_replace('"','',$params['keyword']);
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $key .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
@@ -88,7 +89,7 @@ class UserModel extends BaseModel {
             $users = self::$_connection->multi_query($sql);
         } else {
 
-            $sql = 'SELECT * FROM users';
+            $sql = 'SELECT * FROM users join types on users.type = types.type_id';
             $users = $this->select($sql);
 
         }
@@ -100,5 +101,9 @@ class UserModel extends BaseModel {
         $types = $this->select($sql);
 
         return $types;
+    }
+    public function createToken(){
+        $token = $this->get_token_value();
+        return $token;
     }
 }

@@ -1,8 +1,11 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryPattern.php';
+
+$factory = new FactoryPattern();
+
+$userModel = $factory->make('user');
 $type = $userModel->getTypes();
 
 $user = NULL; //Add new user
@@ -35,7 +38,7 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
-            <?php if ($user || !isset($_id)) { ?>
+            <?php if ($user || empty($_id)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
