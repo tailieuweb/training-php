@@ -4,11 +4,11 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel {
 
-    public function findUserById($id) {
-        $sql = 'SELECT * FROM users WHERE id = '.$id;
-        $user = $this->select($sql);
+    public function findBankById($id) {
+        $sql = 'SELECT * FROM banks WHERE id = '.$id;
+        $bank = $this->select($sql);
 
-        return $user;
+        return $bank;
     }
 
     public function findUser($keyword) {
@@ -50,29 +50,18 @@ class BankModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function updateUser($input) {
-      
-        $temp = 'SELECT version FROM users WHERE id = '.$input['id'].'';
-        $newTemp = $this->select($temp);
-        
-        if($newTemp[0]['version'] == $input['version']){
-            $newV = $input['version']+1;
-             $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
-                 email = "'.$input['email'].'",
-                 fullname = "'.$input['fullname'].'",
-                 password="'. md5($input['password']) .'", type = "'.$input['type'].'", version = "'.$newV.'"
-                WHERE id = ' . $input['id'] ;
-            $user = $this->update($sql);  
-            header('location: list_users.php?success');  
-            return $user;         
-        } 
-        else{                
-           header('location: list_users.php?err');  
-        }
-        
-        
+    public function updateBank($input) {
+        $sql = 'UPDATE banks SET 
+               user_id = "'.$input['user_id'].'",
+                cost = "'.$input['cost'].'"
+                WHERE id = ' . $input['id'];
+        //var_dump($sql); die();
+        $bank = $this->update($sql);
+        return $bank;
     }
+        
+        
+    
 
     /**
      * Insert user

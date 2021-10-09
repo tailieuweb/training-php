@@ -47,7 +47,7 @@ $banks = $bankmodel->getBanks($params);
                                 <?php echo $bank['cost']?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo $bank['id'] ?>">
+                                <a href="form_bank.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <a href="view_user.php?id=<?php echo $bank['id'] ?>">
