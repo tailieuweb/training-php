@@ -3,6 +3,22 @@
 require_once 'BaseModel.php';
 require_once 'UserModel.php';
 class BankModel extends BaseModel {
+    /**
+     * Insert bank
+     * @param $input
+     * @return mixed
+     */
+    public function insertBank($input) {
+        //$password = md5($input['password']);
+        // SQL
+        $sql = "INSERT INTO `banks`(`user_id`, `cost`) 
+        VALUES ('".$input['user_id']."','".$input['cost']."')";
+        $bank = $this->insert($sql);
+
+        return $bank;
+    }
+
+    
 	/**
      * Delete bank by id
      * @param $id
@@ -44,4 +60,5 @@ class BankModel extends BaseModel {
         }
         return NULL;
     }
+    
 }
