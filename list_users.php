@@ -8,7 +8,6 @@ $factory = new FactoryPattern();
 $userModel = $factory->make('user');
 $bankModel = $factory -> make('bank');
 
-
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
@@ -63,14 +62,14 @@ function Xulyid($id){
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $index = 0; foreach ($users as $user) { $index++; $bankValue = $bankModel->SelectCostByUserId($user['id'])    ;  $handle_id =Xulyid($user['id']);?>
+                    <?php $index = 0; foreach ($users as $user) { $index++;$bankValue = $bankModel->SelectCostByUserId($user['id']);$handle_id =Xulyid($user['id']);?>
                         <tr>
                             <th scope="row"><?php echo $index?></th>
                             <td>
                                 <?php echo $user['name']?>
                             </td>
                             <td>
-                                <?php echo   $bankValue['cost'];  ?>
+                                <?php  echo $bankValue[0]['cost'];    ?>
                             </td>
                             <td>
                                 <?php echo $user['fullname']?>
