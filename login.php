@@ -21,7 +21,7 @@ if (!empty($_POST['submit'])) {
     }else {
         //Login failed
         $_SESSION['message'] = 'Login failed';
-        //ok
+        //a
     }
 
 }
