@@ -2,8 +2,10 @@
 // Start the session
 session_start();
 
-require_once 'models/BankModel.php';
-$bankModel = new BankModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+
+$bankModel = $factory->make('bank');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
@@ -49,7 +51,7 @@ $banks = $bankModel->getBanks($params);
                         <a href="view_bank.php?id=<?php echo $bank['id'] ?>">
                             <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                         </a>
-                        <a href="delete_bank.php?id=<?php echo rand(1, 9) . md5($bank['id']) . rand(1, 9) ?>">
+                        <a href="delete_bank.php?id=<?php echo $bank['id'] ?>">
                             <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                         </a>
                     </td>
