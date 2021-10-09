@@ -12,6 +12,8 @@ if (!empty($_POST['submit'])) {
         'password' => $_POST['password']
     ];
     $user = NULL;
+	//var_dump($userModel->auth($users['username'], $users['password']));
+	//die();
     if ($user = $userModel->auth($users['username'], $users['password'])) {
         //Login successful
         $_SESSION['id'] = $user[0]['id'];

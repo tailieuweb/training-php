@@ -28,6 +28,7 @@ class UserModel extends BaseModel {
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
         $user = $this->select($sql);
+		//var_dump($sql);die();
         return $user;
     }
 

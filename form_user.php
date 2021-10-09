@@ -26,17 +26,18 @@ if (!empty($_POST['submit'])) {
         if($userModel->getVersion($newid) == $version){           
             $userModel->updateUser($_POST);          
             $userModel->updateVersion($_POST);
-            phpAlert(   "dữ liệu đã lưu") ;
             // var_dump($userModel->getVersion($newid));
             // var_dump($version);
+         
         }else{
-            phpAlert(   "dữ liệu vừa được cập nhật vui lòng load lại trang") ;
-            //var_dump("fail");die()à;
+           // phpAlert(   "dữ liệu vừa được cập nhật vui lòng load lại trang") ;
+           echo '<script>alert("Phiên bản đã hết hạn, vui lòng cập nhật")</script>';
+
         }      
     } else {
         $userModel->insertUser($_POST);
     }
-     header('location: list_users.php');
+        header('location: list_users.php');
 }
 
 ?>
