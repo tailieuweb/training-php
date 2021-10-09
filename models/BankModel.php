@@ -30,4 +30,37 @@ class BankModel extends BaseModel
         $sql = 'DELETE FROM banks WHERE id = ' . $id;
         return $this->delete($sql);
     }
+
+     /**
+     * Update user
+     * @param $input
+     * @return mixed
+     */
+    public function updateBank($input)
+    {
+        $sql = 'UPDATE banks SET 
+                 user_ID = "' . mysqli_real_escape_string(self::$_connection, $input['user_ID']) .'", 
+                 cost ="'. md5($input['cost']) .'"
+                WHERE id = ' . $input['id'];
+
+        $user = $this->update($sql);
+
+        return $user;
+    }
+
+    /**
+     * Insert user
+     * @param $input
+     * @return mixed
+     */
+    public function insertBank($input)
+    {
+        $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
+            "'" . $input['user_id'] . "', '" . md5($input['cost']) . "')";
+
+        $bank = $this->insert($sql);
+
+        return $bank;
+    }
+
 }
