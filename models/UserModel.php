@@ -95,6 +95,7 @@ class UserModel extends BaseModel {
      */
     public function getUsers($params = []) {
         //Keyword
+       
         if (!empty($params['keyword'])) {
             $str_keyword = $this->matchRegexInput($params);
             $str_keyword =  "%" . $params['keyword'] . "%";

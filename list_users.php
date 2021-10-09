@@ -9,7 +9,7 @@ $userModel = $factory->make('user');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
-    $params['keyword'] = $_GET['keyword'];
+    $params['keyword'] = $_GET['keyword']; 
 }
 function getIPAddress() {  
     //whether ip is from the share internet  
@@ -58,6 +58,7 @@ $users = $userModel->getUsers($params);
                 </thead>
                 <tbody>
                     <?php foreach ($users as $user) {?>
+                        <input type="hidden" value="<?php echo $user['version'] ?>">
                         <tr>
                             <th scope="row"><?php echo strip_tags($user['id'])?></th>
                             <td>
