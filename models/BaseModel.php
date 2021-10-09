@@ -1,7 +1,7 @@
 <?php
 require_once 'configs/database.php';
 
-class BaseModel {
+abstract class BaseModel {
     // Database connection
     protected static $_connection;
 
