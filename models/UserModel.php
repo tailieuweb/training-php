@@ -50,6 +50,7 @@ class UserModel extends BaseModel
         return $this->delete($sql);
     }
 
+
     /**
      * Update user
      * @param $input
