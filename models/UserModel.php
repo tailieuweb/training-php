@@ -4,6 +4,15 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
 
+    protected static $_instance;
+
+    private  function __contructor(){}
+
+   
+
+
+
+
      public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
