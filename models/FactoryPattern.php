@@ -1,8 +1,7 @@
 <?php
-require_once 'models/UserModel.php';
-require_once 'models/BankModel.php';
-class FactoryPattern
-{
+require_once 'UserModel.php';
+require_once 'BankModel.php';
+class FactoryPattern {
 
     public function make($model)
     {
