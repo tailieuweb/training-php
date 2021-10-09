@@ -2,8 +2,10 @@
 // Start the session
 session_start();
 
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+
+$userModel = $factory->make('user');
 
 function clean($string) {
     $string = preg_replace('/[^A-Za-z0-9]/', '', $string); // Removes special chars.
