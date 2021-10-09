@@ -15,17 +15,23 @@ class UserModel extends BaseModel
 
     public function findUser($keyword)
     {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
+        $sql = 'SELECT * FROM users WHERE user_name LIKE %' .mysqli_real_escape_string(self::$_connection, $keyword) . '%' . ' OR user_email LIKE %' . $keyword . '%';
         $user = $this->select($sql);
 
         return $user;
     }
 
-    public function auth($userName, $password)
-    {
-        $md5Password = $password;
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
 
+    
+    /**
+     * Authentication user
+     * @param $userName
+     * @param $password
+     * @return array
+     */
+    public function auth($userName, $password) {
+        $md5Password = md5($password);
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
         $user = $this->select($sql);
         return $user;
     }
@@ -50,8 +56,8 @@ class UserModel extends BaseModel
     public function updateUser($input)
     {
         $sql = 'UPDATE users SET 
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 password="'. md5($input['password']) .'"
+                 name = "' .mysqli_real_escape_string(self::$_connection,$input['name'])  . '", 
+                 password="' . md5($input['password']) . '"
                 WHERE id = ' . $input['id'];
 
         $user = $this->update($sql);
@@ -64,11 +70,12 @@ class UserModel extends BaseModel
      * @param $input
      * @return mixed
      */
-    public function insertUser($input)
-    {
 
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `fullname`, `password`,`email`, `type`,) VALUES (" .
-            "'" . $input['name'] . "','" . $input['fullname'] . "', '" . $input['password'] . "', '" . $input['email'] . "','" . $input['type'] . "')";
+    
+    public function insertUser($input) {
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
+                "'" .mysqli_real_escape_string(self::$_connection,$input['name'])  . "', '".md5($input['password'])."')";
+
 
         $user = $this->insert($sql);
 
@@ -84,7 +91,14 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
+        
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' .mysqli_real_escape_string(self::$_connection,$params['keyword'])  .'%"';
+
+            //Keep this line to use Sql Injection
+            //Don't change
+            //Example keyword: abcef%";TRUNCATE banks;##
+            $users = self::$_connection->multi_query($sql);
+
         } else {
             $sql = 'SELECT * FROM users';
         }
