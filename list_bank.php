@@ -1,29 +1,28 @@
 <?php
 // Start the session
 session_start();
-
-require 'models/FactoryPattern.php';
+require_once './models/FactoryPattern.php';
 $factory = new FactoryPattern();
-// $key_code_f = "uea872dJDFD9HFYyytrt909";
+
+$bankmodel = $factory->make('bank');
+
 $params = [];
 if (!empty($_GET['keyword'])) {
-    $params['keyword'] = $_GET['keyword'];
+    $params['keyword'] = $_GET['keyword']; 
 }
-$bankModel = $factory->make('bank');
-$banks = $bankModel->getListBank($params);
+
+$banks = $bankmodel->getBanks($params);
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Home</title>
     <?php include 'views/meta.php' ?>
 </head>
-
 <body>
-    <?php include 'views/header.php' ?>
+    <?php include 'views/header.php'?>
     <div class="container">
-        <?php if (!empty($banks)) { ?>
+        <?php if (!empty($banks)) {?>
             <div class="alert alert-warning" role="alert">
                 List of users! <br>
                 Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
@@ -32,13 +31,13 @@ $banks = $bankModel->getListBank($params);
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">UserID</th>
+                        <th scope="col">User ID</th>
                         <th scope="col">Cost</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($banks as $bank) { ?>
+                    <?php foreach ($banks as $bank) {?>
                         <tr>
                             <th scope="row"><?php echo $bank['id']?></th>
                             <td>
@@ -62,12 +61,11 @@ $banks = $bankModel->getListBank($params);
                     <?php } ?>
                 </tbody>
             </table>
-        <?php } else { ?>
+        <?php }else { ?>
             <div class="alert alert-dark" role="alert">
                 This is a dark alert—check it out!
             </div>
         <?php } ?>
     </div>
 </body>
-
 </html>
