@@ -101,6 +101,7 @@ class UserModel extends BaseModel {
 
         return $users;
     }
+
     // Decrypt id
     private function decryptID($md5Id){
         $users = $this->getUsers();
@@ -110,5 +111,13 @@ class UserModel extends BaseModel {
             }
         }
         return NULL;
+    }
+
+	public static function getInstance() {
+        if (self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
     }
 }
