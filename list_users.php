@@ -14,12 +14,10 @@ $users = $userModel->getUsers($params);
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Home</title>
     <?php include 'views/meta.php' ?>
 </head>
-
 <body>
     <?php include 'views/header.php'?>
     <div class="container">
@@ -33,7 +31,6 @@ $users = $userModel->getUsers($params);
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">Fullname</th>
-                        <th scope="col">Email</th>
                         <th scope="col">Type</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -47,9 +44,6 @@ $users = $userModel->getUsers($params);
                             </td>
                             <td>
                                 <?php echo $user['fullname']?>
-                            </td>
-                            <td>
-                                <?php echo $user['email']?>
                             </td>
                             <td>
                                 <?php echo $user['type']?>
@@ -76,5 +70,4 @@ $users = $userModel->getUsers($params);
         <?php } ?>
     </div>
 </body>
-
 </html>
