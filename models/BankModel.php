@@ -68,4 +68,22 @@ class BankModel extends BaseModel{
         $bank = $this->insert($sql);
         return $bank;
     }
+    /**
+     * Update user
+     * @param $input
+     * @return mixed
+     */
+    public function updateBank($input) {
+        $sql = 'UPDATE banks SET 
+              
+                 user_id = "' . $input['user_id'] .'", 
+                
+               
+                 cost="'. $input['cost'] .'"
+                WHERE bank_id = ' . $input['bank_id'];
+        $bank = $this->update($sql);
+
+        return $bank;
+    }
+
 }

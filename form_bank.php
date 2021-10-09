@@ -13,14 +13,16 @@ $_id = NULL;
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
+   
     $bank = $bankModel->findBankById($_id);//Update existing user
+    
 }
 
 
 if (!empty($_POST['submit'])) {
 
     if (!empty($_id)) {
-        // $bankModel->insertBank($_POST);
+         $bankModel->updateBank($_POST);
     } else {
         $bankModel->insertBank($_POST);
     }
@@ -47,19 +49,20 @@ if (!empty($_POST['submit'])) {
 
                     <div class="form-group">
                         <label for="type">Name user</label>
-                        <select name="id" class="form-control">
+                        <select name="user_id" class="form-control">
                             <?php
                             foreach($users as $value) {
-                                if($value['id'] == $bank[0]['bank_id']){
+                               
+                                if($value['id'] == $bank[0]['user_id']){
                                 ?>
-                                <option selected value="<?php if (!empty($value['id'])) echo $value['id'] ?>"><?php if (!empty($value['name'])) echo $value['user_id'] ?></option>
-                            <?php } else{ ?>
                                 <option selected value="<?php if (!empty($value['id'])) echo $value['id'] ?>"><?php if (!empty($value['name'])) echo $value['name'] ?></option>
+                            <?php } else{ ?>
+                                <option  value="<?php if (!empty($value['id'])) echo $value['id'] ?>">   <?php if (!empty($value['name'])) echo $value['name'] ?> </option>
                              <?php   }
                             }?>
                         </select>
                     </div>
-
+                 
                     <div class="form-group">
                         <label for="fullname">Cost</label>
                         <input class="form-control" name="cost" placeholder="Cost" value="<?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?>">
