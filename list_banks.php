@@ -2,7 +2,11 @@
 // Start the session
 session_start();
 
+<<<<<<< HEAD
 require_once './models/FactoryPattern.php';
+=======
+require_once 'models/FactoryPattern.php';
+>>>>>>> 1-php-202109/2-groups/9-I/1-25-Le
 $factory = new FactoryPattern();
 
 $bankModel = $factory->make('bank');
