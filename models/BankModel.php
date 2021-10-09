@@ -63,10 +63,9 @@ class BankModel extends BaseModel{
      */
     public function insertBank($input) {
         $sql = "INSERT INTO `banks` (`user_id`,`cost`) VALUES (" .
-        "'" . $input['user_id'] . "', '".$input['cost']."')";
+        "'" . $input['id'] . "', '".$input['cost']."')";
 
         $bank = $this->insert($sql);
-
         return $bank;
     }
 }
