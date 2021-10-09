@@ -2,7 +2,7 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel {
+class BankModel extends BaseModel {
 
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
@@ -98,23 +98,23 @@ class UserModel extends BaseModel {
      * @param array $param
      * @return array
      */
-    public function getUsers($params = []) {
+    public function getBanks($params = []) {
         //Keyword
        
         if (!empty($params['keyword'])) {
            
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+            $banks = self::$_connection->multi_query($sql);
             
         } else {
-            $sql = 'SELECT * FROM users';
-            $users = $this->select($sql);
+            $sql = 'SELECT * FROM banks';
+            $banks = $this->select($sql);
         }
-        return $users;
+        return $banks;
        
     }
 }
