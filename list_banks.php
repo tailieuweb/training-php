@@ -43,10 +43,10 @@ $banks = $bankModel->getBanks($params);
                         <?php echo $bank['cost']?>
                     </td>
                     <td>
-                        <a href="form_user.php?id=<?php echo $bank['id'] ?>">
+                        <a href="form_banks.php?user_id=<?php echo $bank['user_id'] ?>">
                             <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                         </a>
-                        <a href="view_user.php?id=<?php echo $bank['id'] ?>">
+                        <a href="view_banks.php?id=<?php echo $bank['id'] ?>">
                             <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                         </a>
                         <a href="delete_bank.php?id=<?php echo $bank['id'] ?>">
