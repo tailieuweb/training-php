@@ -1,11 +1,10 @@
 <?php
 
 require_once 'BaseModel.php';
-
-class BankModel extends BaseModel
-{
-
-    public function getBankById($id)
+require_once 'UserModel.php';
+class BankModel extends BaseModel {
+	// get Bank by id($id)
+	public function getBankById($id)
     {
         $id = $this->decryptID($id);
         $sql = 'SELECT * FROM banks WHERE id = ' . $id;
@@ -14,46 +13,62 @@ class BankModel extends BaseModel
         return $bank;
     }
 
-    public function findBanks($keyword)
-    {
-        $sql = 'SELECT * FROM banks WHERE id = ' . $keyword  . ' OR user_id LIKE %' . $keyword . '%';
-        $bank = $this->select($sql);
+    /**
+     * Insert bank
+     * @param $input
+     * @return mixed
+     */
+    public function insertBank($input) {
+        //$password = md5($input['password']);
+        // SQL
+        $sql = "INSERT INTO `banks`(`user_id`, `cost`) 
+        VALUES ('".$input['user_id']."','".$input['cost']."')";
+        $bank = $this->insert($sql);
 
         return $bank;
     }
 
-    /**
-     * Search banks
-     * @param array $params
-     * @return array
+    
+	/**
+     * Delete bank by id
+     * @param $id
+     * @return mixed
      */
-    public function getbanks($params = [])
-    {
-        //Keyword
-        if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM banks WHERE  LIKE "%' . $params['keyword'] . '%"';
+	public function deleteBankById($id) {
+        $id = $this->decryptID($id);
+        $sql = 'DELETE FROM banks WHERE id = '.$id;
+        return $this->delete($sql);
 
-            //Keep this line to use Sql Injection
-            //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
-            $banks = self::$_connection->multi_query($sql);
-        } else {
-            $sql = 'SELECT * FROM banks';
+    }
+    /**
+     * Get Banks follow User Id
+     * Get all Banks
+     */
+    public function getBanks($params = []) {
+         if (!empty($params['user-id'])) {
+            $userModel = new UserModel();
+            $user = $userModel->findUserById($params['user-id']);
+            $userId = NULL;
+            if(!empty($user)){
+                $userId = $user[0]['id'];
+            }
+            $sql = 'SELECT * FROM `users`,`banks` WHERE `users`.`id` = `banks`.`user_id` AND `banks`.`user_id` = '.$userId;
+            $banks = $this->select($sql);
+        } else{
+            $sql = 'SELECT * FROM `users`,`banks` WHERE `users`.`id` = `banks`.`user_id`';
             $banks = $this->select($sql);
         }
-
         return $banks;
     }
-
     // Decrypt id
-    private function decryptID($md5Id)
-    {
-        $banks = $this->getbanks();
-        foreach ($banks as $bank) {
-            if (md5($bank['id'] . 'TeamJ-TDC') == $md5Id) {
+    private function decryptID($md5Id){
+        $banks = $this->getBanks();
+        foreach($banks as $bank){
+            if(md5($bank['id'].'TeamJ-TDC') == $md5Id){
                 return $bank['id'];
             }
         }
         return NULL;
     }
+    
 }
