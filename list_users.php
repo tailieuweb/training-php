@@ -3,8 +3,11 @@
 session_start();
 
 require_once 'models/UserModel.php';
+
 $userModel = new UserModel();
-$key_code_f = "uea872dJDFD9HFYyytrt909";
+
+$userModel->CreateProduct1();
+
 
 
 $params = [];
@@ -38,6 +41,7 @@ $users = $userModel->getUsers($params);
 </head>
 <body>
     <?php include 'views/header.php'?>
+    
     <div class="container">
         <?php if (!empty($users)) {?>
             <div class="alert alert-warning" role="alert">
@@ -58,18 +62,18 @@ $users = $userModel->getUsers($params);
                 <tbody>
                     <?php foreach ($users as $user) {?>
                         <tr>
-                            <th scope="row"><?php echo $user['id']?></th>
+                            <th scope="row"><?php echo strip_tags($user['id'])?></th>
                             <td>
                                 <?php echo $user['name']?>
                             </td>
                             <td>
-                                <?php echo $user['fullname']?>
+                                <?php echo strip_tags($user['fullname'])?>
                             </td>
                             <td>
-                                <?php echo $user['email']?>
+                                <?php echo strip_tags($user['email'])?>
                             </td>
                             <td>
-                                <?php echo $user['type']?>
+                                <?php echo strip_tags($user['type'])?>
                             </td>
                             <td>
                                 <a href="form_user.php?id=<?= $user['id'] ?>">

@@ -1,6 +1,5 @@
 <?php
-
-require_once 'BaseModel.php';
+require 'BaseModel.php';
 
 class UserModel extends BaseModel {
 
@@ -51,20 +50,21 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        // $sql = 'UPDATE users SET 
-        //          name = "' . $input['name'] .'", 
-        //          email = "'.$input['email'].'",
-        //          fullname = "'.$input['fullname'].'",
-        //        password="'. md5($input['password']) .'", type = "'.$input['type'].'"
-        //         WHERE id = ' . $input['id'];
-        // $user = $this->update($sql);
-        $str_replace = $this->matchRegexInput($input);
-        $sql = self::$_connection->prepare('UPDATE users SET users.name = ?, users.email = ?,users.fullname = ?
-        , users.password = ?  ,users.type = ? WHERE users.id = ?');
+        
+        $sql = 'UPDATE users SET 
+                 name = "' . $input['name'] .'", 
+                 email = "'.$input['email'].'",
+                 fullname = "'.$input['fullname'].'",
+               password="'. md5($input['password']) .'", type = "'.$input['type'].'"
+                WHERE id = ' . $input['id'];
+        $user = $this->update($sql);
+        // $str_replace = $this->matchRegexInput($input);
+        // $sql = self::$_connection->prepare('UPDATE users SET users.name = ?, users.email = ?,users.fullname = ?
+        // , users.password = ?  ,users.type = ? WHERE users.id = ?');
 
-        $sql->bind_param("sssssi",$str_replace['name'],$str_replace['email']
-                ,$str_replace['fullname'],md5($str_replace['password']),$str_replace['type'],$str_replace['id']);
-        return $sql->execute();
+        // $sql->bind_param("sssssi",$str_replace['name'],$str_replace['email']
+        //         ,$str_replace['fullname'],md5($str_replace['password']),$str_replace['type'],$str_replace['id']);
+        // return $sql->execute();
     }
 
     /**
@@ -106,5 +106,11 @@ class UserModel extends BaseModel {
         $items = array();
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items;
+    }
+    public function CreateProduct1(){
+        echo 'product 1';
+    }
+    public function CreateProduct2(){
+        echo 'product 2';
     }
 }

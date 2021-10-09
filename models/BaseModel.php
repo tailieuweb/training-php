@@ -78,4 +78,6 @@ abstract class BaseModel {
         $str = str_replace($array_replace,'',$param);
         return $str;
     }
+    protected abstract function CreateProduct1();
+    protected abstract function CreateProduct2();
 }
