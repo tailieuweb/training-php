@@ -6,7 +6,7 @@ class FactoryPattern {
         if ($model == 'user') {
             return new UserModel();
         } else if ($model == 'bank') {
-            //
+            return new BankModel();
         }
     }
 

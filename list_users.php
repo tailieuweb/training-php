@@ -44,19 +44,19 @@ $users = $userModel->getUsers($params);
                         <tr>
                             <th scope="row"><?php echo $user['id']?></th>
                             <td>
-                                <?php echo $user['name']?>
+                                <?php echo htmlentities($user['name'])?>
                             </td>
                             <td>
-                                <?php echo $user['fullname']?>
+                                <?php echo htmlentities($user['fullname'])?>
                             </td>
                             <td>
-                                <?php echo $user['email']?>
+                                <?php echo htmlentities( $user['email'])?>
                             </td>
                             <td>
                                 <?php echo $user['type']?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="form_user.php?id=<?php echo $user['id']?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
