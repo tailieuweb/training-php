@@ -6,12 +6,12 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel {
 
-    // public function findUserById($id) {
-    //     $sql = 'SELECT * FROM users WHERE id = '.$id;
-    //     $user = $this->select($sql);
+    public function findUserById($id) {
+        $sql = 'SELECT * FROM users WHERE id = '.$id;
+        $user = $this->select($sql);
 
-    //     return $user;
-    // }
+        return $user;
+    }
 
     // public function findUser($keyword) {
     //     $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
@@ -50,29 +50,29 @@ class BankModel extends BaseModel {
     //  * @param $input
     //  * @return mixed
     //  */
-    // public function updateUser($input) {
-    //     $sql = 'UPDATE users SET 
-    //              name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-    //              password="'. md5($input['password']) .'"
-    //              type = "' . $input['type'] .'",
-    //             WHERE id = ' . $input['id'];
-    //     $user = $this->update($sql);
+    public function updateUser($input) {
+        $sql = 'UPDATE users SET 
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
+                 password="'. md5($input['password']) .'"
+                 type = "' . $input['type'] .'",
+                WHERE id = ' . $input['id'];
+        $user = $this->update($sql);
 
-    //     return $user;
-    // }
+        return $user;
+    }
 
     // /**
     //  * Insert user
     //  * @param $input
     //  * @return mixed
     //  */
-    // public function insertUser($input) {
-    //     $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" . "'" . $input['name'] . "', '".md5($input['password'])."')";
+    public function insertUser($input) {
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" . "'" . $input['name'] . "', '".md5($input['password'])."')";
 
-    //     $user = $this->insert($sql);
+        $user = $this->insert($sql);
 
-    //     return $user;
-    // }
+        return $user;
+    }
 
     /**
      * Search users
