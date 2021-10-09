@@ -2,8 +2,16 @@
 // Start the session
 session_start();
 
+<<<<<<< HEAD
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
+=======
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+
+$userModel = $factory->make('user');
+
+>>>>>>> 1-php-202109/2-groups/7-G/master
 
 $params = [];
 if (!empty($_GET['keyword'])) {
