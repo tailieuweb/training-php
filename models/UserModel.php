@@ -59,8 +59,8 @@ class UserModel extends BaseModel {
                  password="'. md5($input['password']) .'",
                   type = "'.$input['type'].'"
                 WHERE id = ' . $input['id'];
+
         $user = $this->update($sql);
-        
         return $user;
     }
 

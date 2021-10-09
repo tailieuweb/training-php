@@ -2,10 +2,10 @@
 // Start the session
 session_start();
 
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
-$key_code_f = "uea872dJDFD9HFYyytrt909";
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
 
+$userModel = $factory->make('user');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
