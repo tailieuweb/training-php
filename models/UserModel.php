@@ -2,17 +2,20 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel {
+class UserModel extends BaseModel
+{
 
-    public function findUserById($id) {
-        $sql = 'SELECT * FROM users WHERE id = '.$id;
+    public function findUserById($id)
+    {
+        $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
 
         return $user;
     }
 
-    public function findUser($keyword) {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
+    public function findUser($keyword)
+    {
+        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
         $user = $this->select($sql);
 
         return $user;
@@ -24,31 +27,48 @@ class UserModel extends BaseModel {
      * @param $password
      * @return array
      */
-    public function auth($userName, $password) {
+    public function auth($userName, $password)
+    {
         $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
 
         $user = $this->select($sql);
         return $user;
     }
+
+    // public function getUseById($id)
+    // {
+    //     # code...
+    //     $sql = 'SELECT `name` FROM users WHERE id = ' . $id;
+    //     $user = $this->select($sql);
+    //     return $user;
+    // }
 
     /**
      * Delete user by id
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id) {
-       //Lay ra tat ca user
-       $user = $this ->getUsers();
-       //Duyet mang user
-       foreach ($user as $value){
-           //Kieem tra user nao co id trung voi id truyen vao mang thi xoa
-           if(md5($value['id'])==$id){
-            $sql = 'DELETE FROM users WHERE id = ' .$value['id'];
-            return $this->delete($sql);
-           }
-       }
-           
+    public function deleteUserById($id)
+    {
+        //Lay ra tat ca cac user
+        $user = $this->getUsers();
+
+        // Noi chuoi ma hoa truoc ID, chi nguoi code biet nen hacker se khong the thuc hien tan cong duoc
+        $idAuth = md5(1234) .$id;
+        //Duyet mang user
+        foreach ($user as $value) {
+
+            //Kiem tra user nao co id trung voi id truyen vao va co doan ma trung voi doan duoc noi them vao thi moi thuc hien xoa
+            if (md5('1234').md5($value['id']) == $idAuth) {
+                // var_dump($id);
+                // var_dump($idAuth);
+                // var_dump(md5('1234').md5($value['id']));
+                // die();
+                $sql = 'DELETE FROM users WHERE id = ' . $value['id'];
+                return $this->delete($sql);
+            }
+        }
     }
 
     /**
@@ -56,11 +76,12 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function updateUser($input) {
+
+    public function updateUser($input)
+    {
         $sql = 'UPDATE users SET 
-                 type ="' . $input['type'] .'",
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 password="'. md5($input['password']) .'"
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '", 
+                 password="' . md5($input['password']) . '"
                 WHERE id = ' . $input['id'];
 
         $user = $this->update($sql);
@@ -73,11 +94,10 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function insertUser($input) {
-        
+    public function insertUser($input)
+    {
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`type`,`email`) VALUES (" .
-                "'" . $input['name'] ."', '".md5($input['password'])."','".$input['fullname']."','".$input['type']."','".$input['email']. "')";
-
+            "'" . $input['name'] . "', '" . md5($input['password']) . "','" . $input['fullname'] . "','" . $input['type'] . "','" . $input['email'] . "')";
         $user = $this->insert($sql);
 
         return $user;
@@ -88,10 +108,11 @@ class UserModel extends BaseModel {
      * @param array $params
      * @return array
      */
-    public function getUsers($params = []) {
+    public function getUsers($params = [])
+    {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
 
             //Keep this line to use Sql Injection
             //Don't change
