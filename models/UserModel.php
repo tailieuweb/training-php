@@ -51,7 +51,6 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-<<<<<<< HEAD
       
         $temp = 'SELECT version FROM users WHERE id = '.$input['id'].'';
         $newTemp = $this->select($temp);
@@ -73,16 +72,6 @@ class UserModel extends BaseModel {
         }
         
         
-=======
-        $sql = 'UPDATE users SET 
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 password="'. md5($input['password']) .'"
-                WHERE id = ' . $input['id'];
-
-        $user = $this->update($sql);
-      
-        return $user;
->>>>>>> 1-php-202109/2-groups/4-D/master
     }
 
     /**
