@@ -13,8 +13,6 @@ if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
 
-$users = $userModel->getUsers($params);
-
 $banks = $bankModel->getBanks($params);
 ?>
 <!DOCTYPE html>
@@ -46,12 +44,10 @@ $banks = $bankModel->getBanks($params);
                 <?php foreach ($banks as $bank) {?>
                 <tr>
                     <th scope="row"><?php echo $bank['id']?></th>
-                    <?php foreach($users as $user) {
-                        if($user['id'] == $bank['user_id']){ ?>
+                   
                     <td>
-                        <?php echo $user['name']?>
+                        <?php echo $bank['fullname']?>
                     </td>
-                    <?php } } ?>
 
                     <td>
                         <?php echo $bank['cost']?>

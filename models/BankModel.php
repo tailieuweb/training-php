@@ -42,10 +42,10 @@ class BankModel extends BaseModel {
             if(!empty($user)){
                 $userId = $user[0]['id'];
             }
-            $sql = 'SELECT * FROM banks WHERE user_id = '.$userId;
+            $sql = 'SELECT * FROM `users`,`banks` WHERE `users`.`id` = `banks`.`user_id` AND `banks`.`user_id` = '.$userId;
             $banks = $this->select($sql);
         } else{
-            $sql = 'SELECT * FROM banks';
+            $sql = 'SELECT * FROM `users`,`banks` WHERE `users`.`id` = `banks`.`user_id`';
             $banks = $this->select($sql);
         }
         return $banks;
