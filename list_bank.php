@@ -2,20 +2,13 @@
 // Start the session
 session_start();
 
-require_once 'models/FactoryPattern.php';
+require 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
-$userModel = $factory->make('user');
-
 // $key_code_f = "uea872dJDFD9HFYyytrt909";
-
-
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
-
-$users = $userModel->getUsers($params);
-
 
 ?>
 <!DOCTYPE html>
@@ -29,7 +22,7 @@ $users = $userModel->getUsers($params);
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-        <?php if (!empty($users)) { ?>
+        <?php if (!empty($banks)) { ?>
             <div class="alert alert-warning" role="alert">
                 List of users! <br>
                 Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
@@ -46,7 +39,7 @@ $users = $userModel->getUsers($params);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user) { ?>
+                    <?php foreach ($banks as $bank) { ?>
                         <tr>
                             <th scope="row"><?php echo $user['id'] ?></th>
                             <td>
