@@ -1,27 +1,46 @@
 <?php
 // Start the session
 session_start();
-// echo md5('long');
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+
+$userModel = $factory->make('user');
 
 $params = [];
+
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
+    //Kiểm tra keyword bằng regex trong PHP
+    // $pattern = '/^[A-Za-z0-9]$/';
+    // if (!preg_match($pattern, $params['keyword'])) {
+    //     echo "Không đúng định dạng";
+    //     $params['keyword'] = null;
+    // }
 }
 
 $users = $userModel->getUsers($params);
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Home</title>
     <?php include 'views/meta.php' ?>
+    <!-- Thêm meta tag CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
 </head>
+
 <body>
-    <?php include 'views/header.php'?>
+    <?php include 'views/header.php' ?>
     <div class="container">
-        <?php if (!empty($users)) {?>
+        <!-- Đoạn này thêm vào để test Reflected XSS -->
+        <?php if (!empty($params['keyword'])) { ?>
+            <div class="alert alert-warning" role="alert">
+                <h1>Search Result for <?php echo htmlentities($params['keyword']) ?></h1>
+            </div>
+        <?php } ?>
+        <?php if (!empty($users)) { ?>
             <div class="alert alert-warning" role="alert">
                 List of users! <br>
                 Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
@@ -38,14 +57,15 @@ $users = $userModel->getUsers($params);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user) {?>
+                    <?php foreach ($users as $user) { ?>
                         <tr>
-                            <th scope="row"><?php echo $user['id']?></th>
+                            <!-- Sử dụng htmlentities để ngăn chặn việc thực thi code khi in dữ liệu ra màn hình -->
+                            <th scope="row"><?php echo htmlentities($user['id']) ?></th>
                             <td>
-                                <?php echo $user['name']?>
+                                <?php echo htmlentities($user['name']) ?>
                             </td>
                             <td>
-                                <?php echo $user['fullname']?>
+                                <?php echo htmlentities($user['fullname']) ?>
                             </td>
                             <td>
                                 <?php echo $user['email']?>
@@ -71,11 +91,12 @@ $users = $userModel->getUsers($params);
                     <?php } ?>
                 </tbody>
             </table>
-        <?php }else { ?>
+        <?php } else { ?>
             <div class="alert alert-dark" role="alert">
                 This is a dark alert—check it out!
             </div>
         <?php } ?>
     </div>
 </body>
+
 </html>
