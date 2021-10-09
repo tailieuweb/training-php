@@ -22,7 +22,6 @@ class UserModel extends BaseModel
     }
 
 
-    
     /**
      * Authentication user
      * @param $userName
@@ -32,6 +31,7 @@ class UserModel extends BaseModel
     public function auth($userName, $password) {
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+
         $user = $this->select($sql);
         return $user;
     }
@@ -59,7 +59,6 @@ class UserModel extends BaseModel
                  name = "' .mysqli_real_escape_string(self::$_connection,$input['name'])  . '", 
                  password="' . md5($input['password']) . '"
                 WHERE id = ' . $input['id'];
-
         $user = $this->update($sql);
 
         return $user;
@@ -78,7 +77,6 @@ class UserModel extends BaseModel
 
 
         $user = $this->insert($sql);
-
         return $user;
     }
 
@@ -98,7 +96,6 @@ class UserModel extends BaseModel
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
             $users = self::$_connection->multi_query($sql);
-
         } else {
             $sql = 'SELECT * FROM users';
         }
