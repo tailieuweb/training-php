@@ -3,6 +3,17 @@
 require_once 'BaseModel.php';
 require_once 'UserModel.php';
 class BankModel extends BaseModel {
+	/**
+     * Delete bank by id
+     * @param $id
+     * @return mixed
+     */
+	public function deleteBankById($id) {
+        $id = $this->decryptID($id);
+        $sql = 'DELETE FROM banks WHERE id = '.$id;
+        return $this->delete($sql);
+
+    }
     /**
      * Get Banks follow User Id
      * Get all Banks

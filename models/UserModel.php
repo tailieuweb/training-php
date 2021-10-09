@@ -85,6 +85,7 @@ class UserModel extends BaseModel {
      * @return array
      */
     public function getUsers($params = []) {
+        
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
@@ -109,5 +110,13 @@ class UserModel extends BaseModel {
             }
         }
         return NULL;
+    }
+
+	public static function getInstance() {
+        if (self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
     }
 }
