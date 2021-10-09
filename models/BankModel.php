@@ -69,13 +69,13 @@ class BankModel extends BaseModel {
     //  * @param $input
     //  * @return mixed
     //  */
-    public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" . "'" . $input['name'] . "', '".md5($input['password'])."')";
+    // public function insertUser($input) {
+    //     $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" . "'" . $input['name'] . "', '".md5($input['password'])."')";
 
-        $user = $this->insert($sql);
+    //     $user = $this->insert($sql);
 
-        return $user;
-    }
+    //     return $user;
+    // }
 
     /**
      * Search users
@@ -97,5 +97,12 @@ class BankModel extends BaseModel {
         }
 
         return $banks;
+    }
+    public static function getInstance() {
+        if (self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
     }
 }
