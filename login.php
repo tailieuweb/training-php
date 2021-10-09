@@ -22,7 +22,6 @@ if (!empty($_POST['submit'])) {
         //Login failed
         $_SESSION['message'] = 'Login failed';
     }
-
 }
 
 ?>
