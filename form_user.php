@@ -1,8 +1,11 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryPattern.php';
+
+$factory = new FactoryPattern();
+
+$userModel = $factory->make('user');
 $type = $userModel->getTypes();
 
 $user = NULL; //Add new user
