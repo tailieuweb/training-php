@@ -30,10 +30,10 @@
                             Account <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Profile</a></li>
+                            <li><a href="view_user.php">Profile</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Login</a></li>
-                            <li><a href="#">Logout</a></li>
+                            <li><a href="login.php">Login</a></li>
+                            <li><a href="logout.php">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
