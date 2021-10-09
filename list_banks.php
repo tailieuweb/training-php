@@ -57,13 +57,13 @@ $banks = $bankModel->getBanks($params);
                                 <?php echo $bank['type']?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo $bank['id'] ?>">
+                                <a href="form_bank.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <a href="view_banks.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $bank['id'] ?>">
+                                <a href="delete_banks.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
