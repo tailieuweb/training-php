@@ -19,44 +19,43 @@ if (!empty($_POST['submit'])) {
     } else {
         $bankModel->insertBank($_POST);
     }
-    header('location: list_bank.php');
+    header('location: list_banks.php');
 }
 
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Bank form</title>
     <?php include 'views/meta.php' ?>
 </head>
-<body>
-<?php include 'views/header.php'?>
-<div class="container">
 
-    <?php if ($bank || empty($id)) { ?>
+<body>
+    <?php include 'views/header.php'?>
+    <div class="container">
+
+        <?php if ($bank || empty($id)) { ?>
         <div class="alert alert-warning" role="alert">
             User profile
         </div>
         <form method="POST">
             <input type="hidden" name="id" value="<?php echo $id ?>">
             <div class="form-group">
-                <label for="name">ID</label>
-                <span><?php if (!empty($bank[0]['name'])) echo $user[0]['id'] ?></span>
+                <label for="user_id">USER_ID: </label>
+                <span><?php if (!empty($bank[0]['user_id'])) echo $bank[0]['user_id'] ?></span>
             </div>
             <div class="form-group">
-                <label for="user_id">USER_ID</label>
-                <span><?php if (!empty($bank[0]['name'])) echo $user[0]['user_id'] ?></span>
-            </div>
-            <div class="form-group">
-                <label for="cost">COST</label>
-                <span><?php if (!empty($bank[0]['name'])) echo $user[0]['cost'] ?></span>
+                <label for="cost">COST: </label>
+                <span><?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?></span>
             </div>
         </form>
-    <?php } else { ?>
+        <?php } else { ?>
         <div class="alert alert-success" role="alert">
             User not found!
         </div>
-    <?php } ?>
-</div>
+        <?php } ?>
+    </div>
 </body>
+
 </html>

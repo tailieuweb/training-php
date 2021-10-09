@@ -5,6 +5,7 @@ abstract class BaseModel
 {
     // Database connection
     protected static $_connection;
+    protected static $_instance;
 
     public function __construct()
     {
@@ -22,7 +23,8 @@ abstract class BaseModel
      * Query in database
      * @param $sql
      */
-    protected function query($sql) {
+    protected function query($sql)
+    {
         $result = self::$_connection->query($sql);
         return $result;
     }
