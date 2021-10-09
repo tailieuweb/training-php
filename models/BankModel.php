@@ -2,20 +2,20 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel {
+class BankModel extends BaseModel {
 
-    public function findUserById($id) {
-        $sql = 'SELECT * FROM users WHERE id = '.$id;
+    public function findBankById($id) {
+        $sql = 'SELECT * FROM banks WHERE id = '.$id;
         $user = $this->select($sql);
 
         return $user;
     }
 
-    public function findUser($keyword) {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
-        $user = $this->select($sql);
+    public function findUser_id($keyword) {
+        $sql = 'SELECT * FROM banks WHERE user_id LIKE %'.$keyword.'%'. ' OR cost LIKE %'.$keyword.'%';
+        $bank = $this->select($sql);
 
-        return $user;
+        return $bank;
     }
 
     /**
@@ -24,12 +24,12 @@ class UserModel extends BaseModel {
      * @param $password
      * @return array
      */
-    public function auth($userName, $password) {
-        $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+    public function auth($id, $user_id) {
+        $md5user_id = md5($user_id);
+        $sql = 'SELECT * FROM users WHERE name = "' . $id . '" AND password = "'.$$md5user_id.'"';
 
-        $user = $this->select($sql);
-        return $user;
+        $bank = $this->select($sql);
+        return $bank;
     }
 
     /**
@@ -38,26 +38,13 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function deleteUserById($id) {
-        $sql = 'DELETE FROM users WHERE id = '.$id;
+        $sql = 'DELETE FROM banks WHERE id = '.$id;
         return $this->delete($sql);
 
     }
 
-    /**
-     * Update user
-     * @param $input
-     * @return mixed
-     */
-    public function updateUser($input) {
-        $sql = 'UPDATE users SET 
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 password="'. md5($input['password']) .'"
-                WHERE id = ' . $input['id'];
-
-        $user = $this->update($sql);
-
-        return $user;
-    }
+   
+    
 
     /**
      * Insert user
@@ -78,20 +65,20 @@ class UserModel extends BaseModel {
      * @param array $params
      * @return array
      */
-    public function getUsers($params = []) {
+    public function getBanks($params = []) {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+            $sql = 'SELECT * FROM banks WHERE id LIKE "%' . $params['keyword'] .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+            $banks = self::$_connection->multi_query($sql);
         } else {
-            $sql = 'SELECT * FROM users';
-            $users = $this->select($sql);
+            $sql = 'SELECT * FROM banks';
+            $banks = $this->select($sql);
         }
 
-        return $users;
+        return $banks;
     }
 }
