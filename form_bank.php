@@ -65,6 +65,9 @@ if (!empty($_POST['submit'])) {
             <form method="POST">
                 <input type="hidden" name="id" value="<?php echo $bankInfo[0]['id'] ?>">
 
+                <?php
+                    if (!empty($_id)) {
+                ?>
                 <div class="form-group">
                     <label for="name">Name</label>
                     <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
@@ -77,9 +80,19 @@ if (!empty($_POST['submit'])) {
                     <label for="password">Email</label>
                     <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
                 </div>
+                <?php
+                    } else {
+                ?>
+                <div class="form-group">
+                    <label for="user_id">User ID</label>
+                    <input class="form-control" name="user_id" placeholder="User ID" value="<?php if ($bankInfo[0]['user_id'] >= 0) echo $bankInfo[0]['cost'] ?>">
+                </div>
+                <?php
+                    }
+                ?>
                 
                 <div class="form-group">
-                    <label for="fullname">Cost</label>
+                    <label for="cost">Cost</label>
                     <input class="form-control" name="cost" placeholder="Amount of money" value="<?php if ($bankInfo[0]['cost'] >= 0) echo $bankInfo[0]['cost'] ?>">
                 </div>
                 
@@ -95,6 +108,7 @@ if (!empty($_POST['submit'])) {
                 BankInfo not found!
             </div>
         <?php } ?>
+        
     </div>
 </body>
 

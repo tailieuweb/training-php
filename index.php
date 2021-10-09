@@ -93,6 +93,8 @@ $banks = $bankModel->getBank($params);
                 This is a dark alert—check it out!
             </div>
         <?php } ?>
+
+        <a href="http://training-php.local/form_bank.php">Add bank account!</a>
     </div>
 </body>
 
