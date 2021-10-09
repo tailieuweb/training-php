@@ -2,15 +2,26 @@
 require_once 'models/BankModel.php';
 $bankModel = new BankModel();
 
+require_once 'models/UserModel.php';
+$userModel = new UserModel();
+
 $banks = NULL; //Add new user
 $id = NULL;
+$listUsers = $userModel->getUsers();
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
 }
+
 if (!empty($_POST['submit'])) {
-    $bankModel->updateBank($_POST);
+    if (!empty($id)) {
+        //Update bank
+      
+    } else {
+        $bankModel->insertBank($_POST);
+    }
+   // header('location: form_bank.php');
 }
-var_dump($bankModel);
+
 ?>
 
 <!DOCTYPE html>
@@ -25,27 +36,34 @@ var_dump($bankModel);
     <?php include 'views/header.php' ?>
     <div class="container">
 
-        <?php if ($bank || empty($id)) { ?>
+        <?php if ($banks || empty($id)) { ?>
 
-            <div class="alert alert-warning" role="alert">
-                Bank form
+        <div class="alert alert-warning" role="alert">
+            Bank form
+        </div>
+        <form method="POST">
+            <input type="hidden" name="id" value="<?php echo $id ?>">
+            <div class="form-group">
+                <label for="type">Name</label>
+                <select class="form-control" name="user_id">
+                    <?php 
+                        foreach($listUsers as $user) { ?>
+                    <option value=<?php echo $user['id']?>><?php echo $user['name']?></option>
+
+                    <?php  }
+                    ?>
+                </select>
             </div>
-            <form method="POST">
-                <input type="hidden" name="id" value="<?php echo $id ?>">
-                <div class="form-group">
-                    <label for="user_id">User ID</label>
-                    <input class="form-control" name="user_id" placeholder="User Id" value="<?php if (!empty($bank[0]['user_id'])) echo $bank[0]['user_id'] ?>" required>
-                </div>
-                <div class="form-group">
-                    <label for="cost">Cost</label>
-                    <input name="cost" class="form-control" placeholder="Cost" required>
-                </div>
-                <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
-            </form>
+            <div class="form-group">
+                <label for="cost">Cost</label>
+                <input name="cost" class="form-control" placeholder="Cost" required>
+            </div>
+            <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+        </form>
         <?php } else { ?>
-            <div class="alert alert-success" role="alert">
-                User not found!
-            </div>
+        <div class="alert alert-success" role="alert">
+            User not found!
+        </div>
         <?php } ?>
     </div>
 </body>
