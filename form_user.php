@@ -14,13 +14,18 @@ if (!empty($_GET['id'])) {
 
 
 if (!empty($_POST['submit'])) {
-
-    if (!empty($_id)) {
-        $userModel->updateUser($_POST);
-    } else {
-        $userModel->insertUser($_POST);
+    if(($_POST['version']==$user[0]['version'])){
+        if (!empty($_id)) {
+            $userModel->updateUser($_POST);
+        } else {
+            $userModel->insertUser($_POST);
+        }
+        header('location: list_users.php');
     }
-    header('location: list_users.php');
+    else{ 
+    echo '<script>alert("Version đã thay đổi, làm mới trang web ngay bây giờ!");</script>';
+        header('Refresh:0');
+    }
 }
 
 ?>
@@ -34,38 +39,35 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
-            <?php if ($user || isset($_id)) { ?>
+            <?php if ($user || !isset($_id)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
+                <p>Version: <?php echo $user[0]['version'] ?></p>
                 <form method="POST">
                     <input type="hidden" name="id" value="<?php echo $_id ?>">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="fullname">Full Name</label>
-                        <input class="form-control" name="fullname" placeholder="FullName" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input class="form-control" name="email" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
-                    </div>
-
-                    <div class="form-group">
                         <label for="type">Type</label>
                         <select class="form-control" name="type" value="1" placeholder="Type">
                             <option value="admin" <?php if (!empty($user[0]['type'])&&$user[0]['type'] =='admin') echo "selected=\"selected\""; ?>>Admin</option>
                             <option value="user" <?php if (!empty($user[0]['type'])&&$user[0]['type'] =='user') echo "selected=\"selected\"";?> >User</option>
                             <option value="guest" <?php if (!empty($user[0]['type'])&& $user[0]['type']=='guest') echo "selected=\"selected\"";?>>Guest</option>
                         </select>
+                        <label for="fullname">Full Name</label>
+                        <input class="form-control" name="fullname" placeholder="FullName" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
-
+                    <input type="hidden" name="version" placeholder="Version"
+                    value="<?php if (!empty($user[0]['version'])) echo $user[0]['version'] ?>">
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
             <?php } else { ?>
