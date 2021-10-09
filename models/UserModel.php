@@ -59,6 +59,7 @@ class UserModel extends BaseModel
                  name = "' .mysqli_real_escape_string(self::$_connection,$input['name'])  . '", 
                  password="' . md5($input['password']) . '"
                 WHERE id = ' . $input['id'];
+
         $user = $this->update($sql);
 
         return $user;
