@@ -7,14 +7,6 @@ $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    //Xử lý chuỗi đầu
-    $string_first = substr($id, 0, 4);
-    //Xử lý chuỗi sau
-    $string_last = substr($id, -4);
-    //Thay thể chuỗi đầu = null
-    $id = str_replace($string_first, "", $id);
-    //Thay thế chuỗi sau = null
-    $id = str_replace($string_last, "", $id);
     $user = $userModel->findUserById($id);//Update existing user
 }
 
@@ -51,20 +43,12 @@ if (!empty($_POST['submit'])) {
                 <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
             </div>
             <div class="form-group">
-                <label for="fullname">Fullname</label>
-                <span><?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?></span>
+                <label for="password">Fullname</label>
+                <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
-                <span><?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?></span>
-            </div>
-            <div class="form-group">
-                <label for="type">Type</label>
-                <span><?php if (!empty($user[0]['type'])) echo $user[0]['type'] ?></span>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <span><?php if (!empty($user[0]['password'])) echo $user[0]['password'] ?></span>
+                <label for="password">Email</label>
+                <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
             </div>
         </form>
     <?php } else { ?>
