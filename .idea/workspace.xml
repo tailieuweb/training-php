@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4621108c-d5a8-4bd2-a6a3-127138bfce2c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/form_user_bank.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/app_web1(new).sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/BankModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/BankModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/header.php" afterDir="false" />
-    </list>
+    <list default="true" id="4621108c-d5a8-4bd2-a6a3-127138bfce2c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
