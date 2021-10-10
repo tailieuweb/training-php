@@ -20,14 +20,14 @@ if (!empty($_GET['id'])) {
     var_dump($_id);
     $user = $userModel->findUserById($_id);
      
-}
-if (!empty($_POST['submit'])) {
-    if (!empty($_id)) {
-        $userModel->updateUser($_POST);
     } else {
-        $userModel->insertUser($_POST);
+        $isUserInsert = $userModel->insertUser($_POST);
+        if ($isUserInsert == true) {
+            header('location: list_users.php');
+        } else {
+            echo "<script type='text/javascript'>alert('$msg');</script>";
+        }
     }
-    header('location: list_users.php');
 }
 
 ?>

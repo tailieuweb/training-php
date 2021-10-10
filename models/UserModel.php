@@ -37,6 +37,20 @@ class UserModel extends BaseModel
         return $user;
     }
 
+
+    /**
+     * Get username user by id
+     * @param $id
+     * @return mixed
+     */
+
+    public function getUsernameById($id)
+    {
+        $sql = 'SELECT name FROM users where id = ' . $id;
+        $user = $this->select($sql);
+        return $user;
+    }
+
     /**
      * Delete user by id
      * @param $id
