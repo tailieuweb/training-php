@@ -47,7 +47,7 @@ class UserModel extends BaseModel {
                  name = "' . $input['name'] .'", 
                  email ="' . $input['email'] .'",
                  password="'. md5($input['password']) .'"
-                WHERE id = ' . $input['id'];
+                WHERE id = ' . ($input['id']);
         $user = $this->update($sql);
 
         return $user;
@@ -59,8 +59,8 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".$input['password']."')";
+        $sql = "INSERT INTO `app_web1`.`users` (`name`,`email`, `password`) VALUES (" .
+                "'" . $input['name'] . "','".$input['email']."', '".md5($input['password'])."')";
 
         $user = $this->insert($sql);
 
