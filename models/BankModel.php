@@ -4,7 +4,15 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel
 {
-    
+    public function findBankById($id)
+    {
+        
+        $sql = 'SELECT * FROM bank WHERE id = ' . $id;
+        $banks = $this->select($sql);
+
+        return $banks;
+    }
+
     /**
      * Search banks
      * @param array $params
