@@ -48,7 +48,7 @@ if (!empty($_POST['submit'])) {
                         ?>
                             <option value="<?php echo $bank[$id_bank - 1]['user_id']; ?>" <?php if (!empty($bank[$id_bank - 1]['user_id']) == $item['name']) {
                                                                                                 echo "selected";
-                                                                                            } ?>><?php echo $bank[$id_bank - 1]['name']; ?></option>
+                                                                                            } ?>><?php echo $item['name']; ?></option>
                         <?php } ?>
                     </select>
                 </div>
