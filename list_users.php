@@ -3,8 +3,10 @@
 session_start();
 
 require_once 'models/UserModel.php';
-$userModel = new UserModel();
-
+require_once 'models/FactoryPattent.php';
+// $userModel = new UserModel();
+$factory = new FactoryPattent();
+$userModel = $factory->make('user');
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];

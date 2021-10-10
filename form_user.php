@@ -2,17 +2,20 @@
 // Start the session
 session_start();
 require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryPattent.php';
+// $userModel = new UserModel();
+$factory = new FactoryPattent();
+$userModel = $factory->make('user');
 
 $user = NULL; //Add new user
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
 
-    $_id = $_GET['id'];
+    // $_id = $_GET['id'];
 
     $_id = isset($_GET['id'])?(string)(int)$_GET['id']:false;
-    
+
     $user = $userModel->findUserById($_id); //Update existing user
    
 }
