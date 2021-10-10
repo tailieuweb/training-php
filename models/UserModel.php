@@ -68,11 +68,31 @@ class UserModel extends BaseModel {
 
         return $user;
     }
+    public function inserUser_bank($input) {
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `sotaikhoan`, `sodienthoai`, `email`,) VALUES (" .
+            "'" . $input['name'] . "', '".$input['sotaikhoan']."','".$input['sodienthoai']."', '".$input['email']."')";
+
+        $user = $this->insert($sql);
+
+        return $user;
+    }
 
     public function getUsers($params = []) {
-        $sql = 'SELECT * FROM users';
-        $users = $this->select($sql);
+
+        if(!empty($params['keyword'])) {
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
+            var_dump($sql);die();
+            $users = self::$_connection->multi_query($sql);
+
+        }else{
+            //echo "22233";
+            $sql = 'SELECT * FROM users ';
+            $users = $this->select($sql);
+
+        }
 
         return $users;
+
+        //var_dump($users);die();
     }
 }

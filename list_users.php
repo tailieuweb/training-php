@@ -11,6 +11,7 @@ if (!empty($_GET['keyword'])) {
 }
 
 $users = $userModel->getUsers($params);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,7 +38,7 @@ $users = $userModel->getUsers($params);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user) {?>
+                    <?php foreach ($users as $user) { //var_dump($user); ?>
                         <tr>
                             <th scope="row"><?php echo $user['id']?></th>
                             <td>
