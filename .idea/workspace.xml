@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4621108c-d5a8-4bd2-a6a3-127138bfce2c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/models/FatoryPattem.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/form_user_bank.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/form_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/form_user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/list_users.php" beforeDir="false" afterPath="$PROJECT_DIR$/list_users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/UserModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/UserModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/app_web1(new).sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/BankModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/BankModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/header.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +50,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\2-training-PHP" />
       <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php\public\js" />
       <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php" />
     </key>
