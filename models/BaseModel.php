@@ -4,6 +4,10 @@ require_once 'configs/database.php';
 abstract class BaseModel {
     // Database connection
     private static $_connection;
+    /* public static $_instance; $_instance đang là chế độ riêng tư có nghĩa là nó không thể được kế thừa.
+    Nên chúng ta phải thay đổi nó thành protected */
+    //$_instance đã có thể dc kế thừa
+    protected static $_instance;
 
     public function __construct() {
 
