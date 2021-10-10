@@ -7,8 +7,8 @@ $userModel = new UserModel();
 
 
 if (!empty($_POST['submit'])) {
+    $username = $_POST["username"];
     $users = [
-
         'username' => htmlentities($_POST['username']),
         'password' => htmlentities($_POST['password'])
     ];
@@ -16,7 +16,7 @@ if (!empty($_POST['submit'])) {
     if ($user = $userModel->auth($users['username'], $users['password'])) {
         //Login successful
         $_SESSION['id'] = $user[0]['id'];
-
+        $_SESSION['username'] =$username;
         $_SESSION['message'] = 'Login successful';
         header('location: list_users.php');
     }else {
