@@ -5,9 +5,12 @@ $userModel = new UserModel();
 $user = NULL; //Add new user
 $id = NULL;
 
-if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+if (!empty($_GET['id'])) { 
+    
+    $id = base64_decode($_GET['id']);
+    $newid = substr($id,13);
+    //var_dump($newid);
+    $user = $userModel->findUserById($newid);//Update existing user
 }
 
 
@@ -32,15 +35,31 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
-            <?php if ($user || empty($id)) { ?>
+            <?php if ($user || empty(substr($id,13))) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                    <input type="hidden" name="id" value="<?php echo substr($id,13)?>">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="fullname">Fullname</label>
+                        <input class="form-control" name="fullname" placeholder="fullName" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input class="form-control" name="email" placeholder="email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Type</label>
+                        <select name="type">    
+                            <option value="">--Select Type--</option>
+                            <option value="admin">admin</option>
+                            <option value="user">user</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>

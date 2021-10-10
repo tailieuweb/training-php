@@ -3,9 +3,9 @@
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
-
-    public function findUserById($id) {
-        $sql = 'SELECT * FROM users WHERE id = '.$id;
+    public $key = "ksghd09kjjhih";
+    public function findUserById($newid) {
+        $sql = 'SELECT * FROM users WHERE id = '.$newid;
         $user = $this->select($sql);
 
         return $user;
@@ -31,8 +31,8 @@ class UserModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id) {
-        $sql = 'DELETE FROM users WHERE id = '.$id;
+    public function deleteUserById($newid) {
+        $sql = 'DELETE FROM users WHERE id = '.$newid;
         return $this->delete($sql);
 
     }
@@ -62,7 +62,7 @@ class UserModel extends BaseModel {
      */
     public function insertUser($input) {
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `fullname`, `email`, `type`, `password`) VALUES (" .
-                "'" . $input['name'] . "','".$input['fullname']."', '".$input['email']."', '".$input['type']."','".$input['type']."', '".$input['password']."')";
+                "'" . $input['name'] . "','".$input['fullname']."', '".$input['email']."','".$input['type']."', '".$input['password']."')";
 
         $user = $this->insert($sql);
 
