@@ -1,13 +1,13 @@
 <?php
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/BankModel.php';
+$bankModel = new BankModel();
 
-$user = NULL; //Add new user
+$bank = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+    $bank = $bankModel->findBankById($id);//Update existing user
 }
 
 ?>
@@ -21,7 +21,7 @@ if (!empty($_GET['id'])) {
 <?php include 'views/header.php'?>
 <div class="container">
 
-    <?php if ($user || empty($id)) { ?>
+    <?php if ($bank || empty($id)) { ?>
         <div class="alert alert-warning" role="alert">
             User profile
         </div>
@@ -29,16 +29,13 @@ if (!empty($_GET['id'])) {
             <input type="hidden" name="id" value="<?php echo $id ?>">
             <div class="form-group">
                 <label for="name">Name</label>
-                <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
+                <span><?php if (!empty($bank[0]['name'])) echo $bank[0]['name'] ?></span>
             </div>
             <div class="form-group">
-                <label for="password">Fullname</label>
-                <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
+                <label for="password">Cost</label>
+                <span><?php if (!empty($bank[0]['name'])) echo $bank[0]['cost'] ?></span>
             </div>
-            <div class="form-group">
-                <label for="password">Email</label>
-                <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
-            </div>
+
         </form>
     <?php } else { ?>
         <div class="alert alert-success" role="alert">
