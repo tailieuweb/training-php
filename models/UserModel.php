@@ -43,6 +43,20 @@ class UserModel extends BaseModel
         return $user;
     }
 
+
+    /**
+     * Get username user by id
+     * @param $id
+     * @return mixed
+     */
+
+    public function getUsernameById($id)
+    {
+        $sql = 'SELECT name FROM users where id = ' . $id;
+        $user = $this->select($sql);
+        return $user;
+    }
+
     /**
      * Delete user by id
      * @param $id
@@ -50,13 +64,8 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
-        $isAuth = $this->getUsers();
-        foreach ($isAuth as $item) {
-            if (md5($item['id']) == $id) {
-                $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
-                return $this->delete($sql);
-            }
-        }
+        $sql = 'DELETE FROM users WHERE id = ' . $id;
+        return $this->delete($sql);
     }
     /**
      * Delete user by id

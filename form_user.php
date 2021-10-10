@@ -8,8 +8,8 @@ $factory = new FactoryPattent();
 $userModel = $factory->make('user');
 
 $user = NULL; //Add new user
+$_id_get = NULL;
 $_id = NULL;
-
 if (!empty($_GET['id'])) {
 
     // $_id = $_GET['id'];
@@ -19,6 +19,8 @@ if (!empty($_GET['id'])) {
     $user = $userModel->findUserById($_id); //Update existing user
    
 }
+$msg = 'Your name or username is not allowed. Please enter again';
+$isUserUpdate = null;
 if (!empty($_POST['submit'])) {
     $version = $_POST['version'];
     if (!empty($_id)) {

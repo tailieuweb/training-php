@@ -6,7 +6,7 @@ class FactoryPattent{
             return UserModel::getInstance();
         }
         else if($model == 'bank'){
-            
+            // return BankModel::getInstance();
         }
     }
 }

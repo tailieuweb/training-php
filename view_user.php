@@ -7,9 +7,11 @@ $userModel = $factory->make('user');
 
 $user = NULL; //Add new user
 $id = NULL;
+$_id_get = NULL;
 
 if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
+    $_id_get = $_GET['id'];
+    $id = substr($_id_get,3,1);
     $user = $userModel->findUserById($id);//Update existing user
 }
 
