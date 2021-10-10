@@ -27,7 +27,7 @@ $banks = $bankModel->getBanks($params);
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">id</th>
+                    <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Fullname</th>
                     <th scope="col">SDT</th>
@@ -64,7 +64,7 @@ $banks = $bankModel->getBanks($params);
                         <a href="form_user.php?id=<?= mt_rand($min , $max) . $bank['id'] . mt_rand($min , $max) ?>">
                             <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i> 
                         </a>
-                        <a href="view_user.php?id=<?= mt_rand($min , $max) . $bank['id'] . mt_rand($min , $max) ?>">
+                        <a href="view_bank.php?id=<?= mt_rand($min , $max) . $bank['id'] . mt_rand($min , $max) ?>">
                             <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                         </a>
                         <a href="delete_user.php?id=<?= mt_rand($min , $max) . $bank['id'] . mt_rand($min , $max) ?>">
