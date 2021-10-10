@@ -14,7 +14,7 @@ if (!empty($_GET['id'])) {
 
 
 if (!empty($_POST['submit'])) {
-    if(($_POST['version']==$user[0]['version'])){
+    if(isset($_POST['version'])&&($_POST['version']==$user[0]['version'])){
         if (!empty($_id)) {
             $userModel->updateUser($_POST);
         } else {
@@ -23,8 +23,8 @@ if (!empty($_POST['submit'])) {
         header('location: list_users.php');
     }
     else{ 
-    echo '<script>alert("Version đã thay đổi, làm mới trang web ngay bây giờ!");</script>';
-        header('Refresh:0');
+    echo '<script>alert("Không cùng một version!");</script>';
+        header('Refresh:3');
     }
 }
 
@@ -66,7 +66,7 @@ if (!empty($_POST['submit'])) {
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
-                    <input type="hidden" name="version" placeholder="Version"
+                    <input type="hidden"
                     value="<?php if (!empty($user[0]['version'])) echo $user[0]['version'] ?>">
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
