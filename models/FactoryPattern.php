@@ -5,6 +5,10 @@ require_once 'BankModel.php';
 class FactoryPattern{
     public function make($model){
         
+        // if($model != 'user' || $mode != 'bank'){
+        //     return null;
+        // }
+
         if($model == 'user'){
 
         return UserModel::getInstance();
@@ -13,6 +17,10 @@ class FactoryPattern{
 
             return BankModel::getInstance();
 
+        } else {
+
+            return null;
+            
         }
     }
 }

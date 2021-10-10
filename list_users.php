@@ -6,6 +6,8 @@ require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 $userModel = $factory->make('user');
 
+if($userModel !== null){
+
 // require_once 'models/UserModel.php';
 // $userModel = new UserModel();
 
@@ -81,6 +83,7 @@ $users = $userModel->getUsers($params);
         </div>
         <?php } ?>
     </div>
+<?php } else{echo"Lỗi factory!";} ?>
 </body>
 
 </html>
