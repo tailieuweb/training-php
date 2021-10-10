@@ -5,12 +5,14 @@ require_once 'models/BankModel.php';
 $bankModel = new BankModel();
 $bank = NULL; //Add new bank
 $_id = NULL;
-if (!empty($_GET['user_id'])) {
-    $_id = $_GET['user_id'];
+if (!empty($_GET['id'])) {
+    $_id = $_GET['id'];
 }
 $bank = $bankModel->getBanks();
 if (!empty($_POST['submit'])) {
-    $bankInsert = $bankModel->insertBank($_POST);
+    // var_dump($_POST);
+    // die();
+    $bankInsert = $bankModel->inBank($_POST);
     if ($bankInsert == true) {
         header('location: list_banks.php');
     }
@@ -35,8 +37,9 @@ if (!empty($_POST['submit'])) {
                 Bank form
             </div>
             <form method="POST">
-                <input type="hidden" name="user_id" value="<?php echo $_id ?>">
-
+                <!-- <input type="hidden" name="user_id" value="</?php echo $_id ?>"> -->
+                <input type="hidden" name="user_id" value="<?php if (isset($bank[0]['user_id'])) echo $bank[0]['user_id'] ?>">
+                <input type="hidden" name="bank_id" value="<?php echo $_id ?>">
                 <div class="form-group">
                     <label for="name">User name</label>
                     <select name="user_id">
@@ -46,9 +49,9 @@ if (!empty($_POST['submit'])) {
                         <?php foreach ($bank as $item) {
                             $id_bank = $item['bank_id'];
                         ?>
-                            <option value="<?php echo $bank[$id_bank - 1]['user_id']; ?>" <?php if (!empty($bank[$id_bank - 1]['user_id']) == $item['name']) {
+                            <option value="<?php if (!empty($bank[$id_bank - 1]['user_id'])) echo $bank[$id_bank - 1]['user_id'] ?>" <?php if (!empty($bank[$id_bank - 1]['user_id']) == $item['name']) {
                                                                                                 echo "selected";
-                                                                                            } ?>><?php echo $bank[$id_bank - 1]['name']; ?></option>
+                                                                                            } ?>><?php echo $item['name'] ?></option>
                         <?php } ?>
                     </select>
                 </div>

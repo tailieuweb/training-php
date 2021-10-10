@@ -17,12 +17,18 @@ class BankModel extends BaseModel
      * @param $input
      * @return mixed
      */
-    public function insertBank($input)
+    public function inBank($input)
     {
-            $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
-                "'" . $input['user_id'] . "', '" . $input['cost'] . "')";
-            $bank = $this->insert($sql);
-            return $bank;
+        $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
+            "'" . $input['user_id'] . "', '" . $input['cost'] . "')";
+        $bank = $this->insert($sql);
+        return $bank;
+    }
+
+    public function deletebankById($id)
+    {
+        $sql = 'DELETE FROM banks WHERE id = ' .$id;
+        return $this->delete($sql);
     }
 
     /**
@@ -34,7 +40,7 @@ class BankModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
-            
+
             $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] . '%"';
 
             //Keep this line to use Sql Injection
@@ -44,7 +50,7 @@ class BankModel extends BaseModel
         } else {
             // SELECT DISTINCT users.id, banks.id,users.name, users.fullname, 
             // users.email, banks.cost FROM banks, users where users.id = banks.user_id
-            $sql = 'SELECT DISTINCT users.id as user_id, banks.id as bank_id,users.name, users.fullname,users.email, banks.cost FROM banks, users where users.id = banks.user_id' ;
+            $sql = 'SELECT DISTINCT users.id as user_id, banks.id as bank_id,users.name, users.fullname,users.email, banks.cost FROM banks, users where users.id = banks.user_id';
             $banks = $this->select($sql);
         }
 

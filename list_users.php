@@ -66,7 +66,7 @@ $users = $userModel->getUsers($params);
                                 <a href="form_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo rand(100,999) .$user['id'] .rand(100,999)?>">
+                                <a href="view_user.php?id=<?php echo $user['id']?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
                                 <a href="delete_user.php?id=<?php echo md5($user['id']) ?>">

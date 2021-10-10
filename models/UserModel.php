@@ -64,8 +64,13 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
-        $sql = 'DELETE FROM users WHERE id = ' . $id;
-        return $this->delete($sql);
+        $isAuth = $this->getUsers();
+        foreach ($isAuth as $item) {
+            if (md5($item['id']) == $id) {
+                $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
+                return $this->delete($sql);
+            }
+        }
     }
     /**
      * Delete user by id
