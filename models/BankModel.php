@@ -4,7 +4,15 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel
 {
-    
+    public function findBankById($id)
+    {
+        
+        $sql = 'SELECT * FROM bank WHERE id = ' . $id;
+        $banks = $this->select($sql);
+
+        return $banks;
+    }
+
     /**
      * Search banks
      * @param array $params
@@ -27,4 +35,19 @@ class BankModel extends BaseModel
 
         return $banks;
     }
+
+    public function insertUser_bank($input) {
+        $sql = "INSERT INTO `bank` (`name`, `fullname`, `sdt`, `email`, `stk`) VALUES (" .
+            "'" . $input['name'] . "', '".$input['fullname']."','".$input['sdt']."', '".$input['email']."','".$input['stk']."')";
+
+        $user = $this->insert_bank($sql);
+
+        return $user;
+    }
+    protected function insert_bank($sql) {
+        $result = $this->query($sql);
+        return $result;
+    }
+
+
 }
