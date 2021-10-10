@@ -7,20 +7,8 @@ $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $bank = $bankModel->findUserById($id);//Update existing user
+    $bank = $bankModel->findBankById($id);//Update existing user
 }
-
-
-if (!empty($_POST['submit'])) {
-
-    if (!empty($id)) {
-        $bankModel->updateUser($_POST);
-    } else {
-        $bankModel->insertUser($_POST);
-    }
-    header('location: list_bank.php');
-}
-
 ?>
 <!DOCTYPE html>
 <html>
