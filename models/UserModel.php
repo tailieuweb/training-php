@@ -80,9 +80,23 @@ class UserModel extends BaseModel {
     public function getUsers($params = []) {
 
         if(!empty($params['keyword'])) {
+            $key = htmlentities($params['keyword']) ;
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
-            var_dump($sql);die();
+
+            //var_dump($sql);die();
+
             $users = self::$_connection->multi_query($sql);
+            $rows = [];
+            do {
+                /* store the result set in PHP */
+                if ($result = self::$_connection->store_result()) {
+                    while ($row = $result->fetch_assoc()) {
+                        $rows[] = $row;
+                    }
+                }
+
+            } while (self::$_connection->more_results());
+            $users = $rows;
 
         }else{
             //echo "22233";
@@ -90,9 +104,7 @@ class UserModel extends BaseModel {
             $users = $this->select($sql);
 
         }
-
         return $users;
 
-        //var_dump($users);die();
     }
 }
