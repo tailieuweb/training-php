@@ -6,10 +6,11 @@ class BankModel extends BaseModel
 {
     public function findBankById($id)
     {
+        substr($id, 4,1);
         
-        $sql = 'SELECT * FROM bank WHERE id = ' . $id;
+        $sql = 'SELECT * FROM bank WHERE id = ' . substr($id, 4,1);
         $banks = $this->select($sql);
-
+        //var_dump($banks);
         return $banks;
     }
 
@@ -37,16 +38,29 @@ class BankModel extends BaseModel
     }
 
     public function insertUser_bank($input) {
+        var_dump($input);
         $sql = "INSERT INTO `bank` (`name`, `fullname`, `sdt`, `email`, `stk`) VALUES (" .
             "'" . $input['name'] . "', '".$input['fullname']."','".$input['sdt']."', '".$input['email']."','".$input['stk']."')";
 
         $user = $this->insert_bank($sql);
-
         return $user;
     }
     protected function insert_bank($sql) {
         $result = $this->query($sql);
         return $result;
+    }
+
+    public function updateUser_bank($input) {
+        $sql = 'UPDATE bank SET 
+                 name = "' . $input['name'] .'", 
+                 fullname = "'. $input['fullname'].'",
+                 email = "' . $input['email'] .'", 
+                 sdt = "' . $input['sdt'] .'", 
+                 stk="'. $input['stk'].'"
+                WHERE id = ' . $input['id'];
+        $user = $this->update($sql);
+
+        return $user;
     }
 
 
