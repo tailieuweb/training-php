@@ -36,7 +36,9 @@ $banks = $bankModel->getBanks($params);
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($banks as $bank) { ?>
+
+                <?php //var_dump($banks);
+                foreach ($banks as $bank) { ?>
                 <tr>
                     <!-- Phân tách thông tin -->
                     <!-- Sử dùng hàm htmlentities đễ mã hóa các ký tự có khả năng thực thi javascript trước khi lưu trữ -->
@@ -61,7 +63,7 @@ $banks = $bankModel->getBanks($params);
                             $min = 1000;
                             $max = 9999;
                         ?>
-                        <a href="form_user.php?id=<?= mt_rand($min , $max) . $bank['id'] . mt_rand($min , $max) ?>">
+                        <a href="form_edit_user_bank.php?id=<?= mt_rand($min , $max) . $bank['id'] .   mt_rand($min , $max) ?>">
                             <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i> 
                         </a>
                         <a href="view_bank.php?id=<?= mt_rand($min , $max) . $bank['id'] . mt_rand($min , $max) ?>">
