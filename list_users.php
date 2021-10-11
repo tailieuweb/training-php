@@ -26,8 +26,8 @@ $users = $userModel->getUsers($params);
     <div class="container">
         <?php if (!empty($users)) {?>
             <div class="alert alert-warning" role="alert">
-                Phuong Nguyen <br>
-                Sr cho muon demo conflic
+                Phuong Nguyen Quoc <br>
+                Demo conflic merge !!!
             </div>
             <table class="table table-striped">
                 <thead>
