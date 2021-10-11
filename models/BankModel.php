@@ -8,7 +8,7 @@ class BankModel extends BaseModel
     public function getBankById($id)
     {
         $id = $this->decryptID($id);
-        $sql = 'SELECT `banks`.*, `users`.* FROM `users` INNER JOIN `banks` WHERE `users`.`id` = `banks`.`user_id` AND `banks`.`id` = ' . $id;
+        $sql = 'SELECT `banks`.*, `users`.`fullname`, `users`.`name` FROM `users` INNER JOIN `banks` WHERE `users`.`id` = `banks`.`user_id` AND `banks`.`id` = ' . $id;
         $bank = $this->select($sql);
 
         return $bank;
@@ -37,15 +37,32 @@ class BankModel extends BaseModel
      */
     public function updateBank($input)
     {
+        $result = new ResultClass();
         $id = $this->decryptID($input['id']);
-        $sql = 'UPDATE `banks` SET 
-                 user_id = "' . $input['user_id'] . '", 
-                  cost="' . $input['cost'] . '"
-                WHERE id = ' . $id;
-        $banks = $this->update($sql);
-        var_dump($input['user_id']);
-        var_dump($input['cost']);
-        return $banks;
+        $temp = $this->getBankById($input['id']);
+        if (count($temp) > 0) {
+            if ($temp[0]['version'] == $input['version']) {
+                var_dump($temp[0]['version']);
+                var_dump($input['version']);
+                $sql = 'UPDATE `banks` SET 
+                user_id = "' . $input['user_id'] . '", 
+                 cost="' . $input['cost'] . '",
+                 version="' . ($input['version'] + 1) . '"
+               WHERE id = ' . $id;
+                $banks = $this->update($sql);
+                if ($banks == true) {
+                    $result->setData("Đã update thành công");
+                } else {
+                    $result->setError("Lỗi");
+                }
+            } else {
+                $result->setError("Dữ liệu đã được cập nhật trước đó! Xin hãy reload lại trang");
+            }
+        } else {
+            $result->setError("Không tìm thấy id của bank");
+        }
+
+        return $result;
     }
 
 
