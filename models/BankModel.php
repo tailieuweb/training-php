@@ -4,6 +4,7 @@ require_once 'BaseModel.php';
 require_once 'UserModel.php';
 class BankModel extends BaseModel
 {
+    protected static $_instance;
     // get Bank by id($id)
     public function getBankById($id)
     {
@@ -21,7 +22,6 @@ class BankModel extends BaseModel
      */
     public function insertBank($input)
     {
-        //$password = md5($input['password']);
         // SQL
         $sql = "INSERT INTO `banks`(`user_id`, `cost`) 
         VALUES ('" . $input['user_id'] . "','" . $input['cost'] . "')";
@@ -108,5 +108,14 @@ class BankModel extends BaseModel
             }
         }
         return NULL;
+    }
+
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
     }
 }

@@ -47,15 +47,15 @@ if (!empty($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label for="password">Email</label>
-                    <span><?php if (!empty($bank[0]['name'])) echo $bank[0]['email'] ?></span>
+                    <span><?php if (!empty($bank[0]['email'])) echo $bank[0]['email'] ?></span>
                 </div>
                 <div class="form-group">
                     <label for="password">Type</label>
-                    <span><?php if (!empty($bank[0]['name'])) echo $bank[0]['type'] ?></span>
+                    <span><?php if (!empty($bank[0]['type'])) echo $bank[0]['type'] ?></span>
                 </div>
                 <div class="form-group">
                     <label for="name">Cost: </label>
-                    <span><?php if (!empty($bank[0]['name'])) echo $bank[0]['cost'] ?></span>
+                    <span><?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?></span>
                 </div>
             </form>
         <?php } else { ?>

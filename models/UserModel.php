@@ -5,6 +5,7 @@ require_once 'Result.php';
 
 class UserModel extends BaseModel
 {
+    protected static $_instance;
 
     public function findUserById($id)
     {
