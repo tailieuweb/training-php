@@ -2,8 +2,11 @@
 
 require_once 'BaseModel.php';
 require_once 'UserModel.php';
+
+
 class BankModel extends BaseModel
 {
+    
     protected static $_instance;
     // get Bank by id($id)
     public function getBankById($id)
@@ -24,7 +27,7 @@ class BankModel extends BaseModel
     {
         // SQL
         $sql = "INSERT INTO `banks`(`user_id`, `cost`) 
-        VALUES ('" . $input['user_id'] . "','" . $input['cost'] . "')";
+        VALUES ('" . $this -> BlockSQLInjection($input['user_id']) . "','" . $this -> BlockSQLInjection($input['cost']) . "')";
         $bank = $this->insert($sql);
 
         return $bank;
@@ -37,6 +40,7 @@ class BankModel extends BaseModel
      */
     public function updateBank($input)
     {
+        $cost = $this -> BlockSQLInjection($input['cost']);
         $result = new ResultClass();
         $id = $this->decryptID($input['id']);
         $temp = $this->getBankById($input['id']);
@@ -46,7 +50,7 @@ class BankModel extends BaseModel
                 var_dump($input['version']);
                 $sql = 'UPDATE `banks` SET 
                 user_id = "' . $input['user_id'] . '", 
-                 cost="' . $input['cost'] . '",
+                 cost="' . $cost . '",
                  version="' . ($input['version'] + 1) . '"
                WHERE id = ' . $id;
                 $banks = $this->update($sql);
@@ -85,7 +89,7 @@ class BankModel extends BaseModel
     {
         if (!empty($params['user-id'])) {
             $userModel = new UserModel();
-            $user = $userModel->findUserById($params['user-id']);
+            $user = $userModel->findUserById($this -> BlockSQLInjection($params['user-id']));
             $userId = NULL;
             if (!empty($user)) {
                 $userId = $user[0]['id'];
@@ -117,5 +121,9 @@ class BankModel extends BaseModel
         }
         self::$_instance = new self();
         return self::$_instance;
+    }
+
+    private function BlockSQLInjection($str) {
+        return str_replace(array("'", '"', "''"),array('&quot;','&quot;'),$str);
     }
 }
