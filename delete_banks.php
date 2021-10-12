@@ -8,5 +8,5 @@ if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     $bankModel->deleteBankById($id);//Delete existing user
 }
-header('location: list_users.php');
+header('location: list_bank.php');
 ?>
