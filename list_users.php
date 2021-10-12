@@ -2,8 +2,10 @@
 // Start the session
 session_start();
 
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+
+$userModel = $factory->make('user');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
@@ -31,7 +33,7 @@ $users = $userModel->getUsers($params);
     <div class="container">
         <?php if (!empty($users)) {?>
             <div class="alert alert-warning" role="alert">
-                List of users! <br>
+                List of users!<br>
                 Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
             </div>
             <table class="table table-striped">
