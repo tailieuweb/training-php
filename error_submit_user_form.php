@@ -1,7 +1,13 @@
 <?php
 session_start();
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+
+
+require_once 'models/FactoryPattern.php';
+
+$factoryModel = new FactoryPattern();
+$userModel = $factoryModel->make('user');
+
+
 $user = NULL;
 
 $post_base_64_encode = $_GET['n'];

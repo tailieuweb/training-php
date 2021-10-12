@@ -2,7 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fca2aa6e-54aa-4226-b8f8-032cc5b95d0a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/delete_bank.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/form_bank.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/list_banks.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/BankModel.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/FactoryPattern.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view_bank.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/delete_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/delete_user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/error_submit_user_form.php" beforeDir="false" afterPath="$PROJECT_DIR$/error_submit_user_form.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/form_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/form_user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/list_users.php" beforeDir="false" afterPath="$PROJECT_DIR$/list_users.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/BaseModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/BaseModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/UserModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/UserModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/view_user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/header.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,10 +57,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\HK5\Web1-Web2\tailieuweb-training-php\training-php" />
       <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php" />
       <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php\public\js" />
     </key>
@@ -67,6 +83,10 @@
       <workItem from="1632046414701" duration="13384000" />
       <workItem from="1632547559440" duration="9835000" />
       <workItem from="1632980515244" duration="1922000" />
+      <workItem from="1633835880738" duration="7132000" />
+      <workItem from="1633860784405" duration="1674000" />
+      <workItem from="1633877359609" duration="313000" />
+      <workItem from="1633991231364" duration="8598000" />
     </task>
     <servers />
   </component>
@@ -78,7 +98,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="2-php-202109/2-groups/7-G/1-37-Vu" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

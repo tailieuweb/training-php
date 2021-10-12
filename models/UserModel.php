@@ -1,9 +1,26 @@
 <?php
 
-require_once 'BaseModel.php';
+//require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
+    private static $_instance;
+
+    private function __clone()
+    {
+    }
+    private function __wakeup()
+    {
+    }
+
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }
 
     public function findUserByUUId($uuid)
     {
@@ -62,7 +79,7 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
-        $name =  htmlspecialchars($input['name']);
+        $name = htmlspecialchars($input['name']);
         $fullname = htmlspecialchars($input['fullname']);
         $password = md5(htmlspecialchars($input['password']));
         $email = htmlspecialchars($input['email']);
@@ -71,8 +88,8 @@ class UserModel extends BaseModel
         $id = htmlspecialchars($input['id']);
         $uuid = md5($name . $fullname . $email . $type . $password);
 
-        $sql = 
-        "UPDATE `users` 
+        $sql =
+            "UPDATE `users` 
         SET `uuid` = '$uuid'
         , `name` = '$name'
         , `fullname` = '$fullname'

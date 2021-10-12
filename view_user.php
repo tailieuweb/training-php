@@ -1,6 +1,8 @@
 <?php
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+
+require_once 'models/FactoryPattern.php';
+
+$userModel = FactoryPattern::make("user");
 
 $user = NULL; //Add new user
 $uuid = NULL;
