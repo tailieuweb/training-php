@@ -1,4 +1,5 @@
 <?php
+require_once 'models/UserModel.php';
 $id = '';
 if(!empty($_SESSION['id'])) {
     $id = $_SESSION['id'];
@@ -6,14 +7,8 @@ if(!empty($_SESSION['id'])) {
 
 $keyword = '';
 
-//Update SQL Injection - Remove all special chars
-function clean($string) {
-    $string = preg_replace('/[^A-Za-z0-9]/', '', $string); // Removes special chars.
-    return preg_replace('/ +/', ' ', $string); //Convert multip space -> one 
- }
-
 if(!empty($_GET['keyword'])) {
-    $keyword = clean($_GET['keyword']);
+    $keyword = UserModel::clean($_GET['keyword']);
 }
 ?>
 <div class="container">

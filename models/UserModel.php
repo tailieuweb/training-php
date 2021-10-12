@@ -3,6 +3,11 @@
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
+    //Update SQL Injection - Remove all special chars
+    static function clean($string) {
+        $string = preg_replace('/[^A-Za-z0-9@]/', '', $string); // Removes special chars.
+        return preg_replace('/ +/', ' ', $string); //Convert multip space -> one 
+    }
 
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
@@ -12,8 +17,9 @@ class UserModel extends BaseModel {
 
     public function findUser($keyword) {
         $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
-        $user = $this->select($sql);
-
+        $users = self::$_connection->multi_query($sql);
+        //Normal 
+        //$user = $this->select($sql);
         return $user;
     }
 
@@ -26,8 +32,9 @@ class UserModel extends BaseModel {
     public function auth($userName, $password) {
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
-
-        $user = $this->select($sql);
+        $user= self::$_connection->multi_query($sql);
+        //Normal 
+        //$user = $this->select($sql);
         return $user;
     }
 
@@ -48,16 +55,16 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        //Update SQL Injection - Add strip_tags()
         $sql = 'UPDATE users SET 
                  name = "' . /* mysqli_real_escape_string(self::$_connection, $input['name']) */$input['name'] .'", 
-                 password="'. md5($input['password']) .'",
-                 fullname="'. strip_tags($input['fullname']) .'",
-                 email="'. strip_tags($input['email']) .'",
-                 type="'. strip_tags($input['type']) .'",
+                 password="'. $input['password'] .'",
+                 fullname="'. $input['fullname'] .'",
+                 email="'. $input['email'] .'",
+                 type="'. $input['type'] .'",
                 WHERE id = ' . $input['id'];
-
-        $user = $this->update($sql);
+        $user = self::$_connection->multi_query($sql);
+        //Normal: 
+        //$user = $this->insert($sql);
         return $user;
     }
 
@@ -67,15 +74,15 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
+       $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
                 "'" . $input['name'] . "',
                  '".md5($input['password'])."',
-                 '".strip_tags($input['fullname'])."',
-                 '".strip_tags($input['email'])."',
-                 '".strip_tags($input['type'])."')";
-
-        $user = $this->insert($sql);
-
+                 '".$input['fullname']."',
+                 '".$input['email']."',
+                 '".$input['type']."')";
+        $user = self::$_connection->multi_query($sql);
+        //Normal: 
+        //$user = $this->insert($sql);
         return $user;
     }
 
@@ -88,11 +95,12 @@ class UserModel extends BaseModel {
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
-
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
             $users = self::$_connection->multi_query($sql);
+            //Normal 
+            //$users = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);

@@ -7,7 +7,14 @@ $userModel = new UserModel();
 
 $params = [];
 if (!empty($_GET['keyword'])) {
-    $keyword = clean($_GET['keyword']);
+    //Example keyword: abcef%";TRUNCATE banks;##
+    //Use clean()(userModel) clean special
+    //Keyword before clean special chars
+    //$keyword = $_GET['keyword'];
+
+    //Keyword after clean special chars
+    $keyword = UserModel::clean($_GET['keyword']);
+    var_dump($keyword);    
     $params['keyword'] =  $keyword; 
 }
 
@@ -19,8 +26,8 @@ $users = $userModel->getUsers($params);
     <title>Home</title>
     <?php include 'views/meta.php' ?>
 </head>
+    <?php include 'views/header.php';?>
 <body>
-    <?php include 'views/header.php'?>
     <div class="container">
         <?php if (!empty($users)) {?>
             <div class="alert alert-warning" role="alert">
