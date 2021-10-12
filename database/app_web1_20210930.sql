@@ -60,7 +60,7 @@ CREATE TABLE `users` (
   `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `version` int(5) NOT NULL
+  `version` double(5,1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -68,11 +68,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`,`version`) VALUES
-(1, 'test1', '', '', '', '5a105e8b9d40e1329780d62ea2265d8a','0'),
-(2, 'test2', '', '', '', '098f6bcd4621d373cade4e832627b4f6','0'),
-(3, 'hacker1', '', '', '', '2ba2a8ac968a7a2b0a7baa7f2fef18d2','0'),
-(4, 'test3', '', '', '', '8ad8757baa8564dc136c1e07507f4a98','0'),
-(5, '<a href=\"http://php.local/delete_user.php?id=4\"> Xóa user3</a>', '', '', '', 'c6ae6edca1ad45f42e619ec91a32b636','0');
+(1, 'test1', '', '', '', '5a105e8b9d40e1329780d62ea2265d8a','0.0'),
+(2, 'test2', '', '', '', '098f6bcd4621d373cade4e832627b4f6','0.0'),
+(3, 'hacker1', '', '', '', '2ba2a8ac968a7a2b0a7baa7f2fef18d2','0.0'),
+(4, 'test3', '', '', '', '8ad8757baa8564dc136c1e07507f4a98','0.0'),
+(5, '<a href=\"http://php.local/delete_user.php?id=4\"> Xóa user3</a>', '', '', '', 'c6ae6edca1ad45f42e619ec91a32b636','0.0');
 
 --
 -- Indexes for dumped tables

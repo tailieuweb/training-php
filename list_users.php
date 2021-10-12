@@ -24,7 +24,6 @@ $users = $userModel->getUsers($params);
         <?php if (!empty($users)) {?>
             <div class="alert alert-warning" role="alert">
                 List of users! <br>
-                Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
             </div>
             <table class="table table-striped">
             <thead>
@@ -54,13 +53,13 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['type']?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="form_user.php?id=<?php echo md5($user['id']) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="view_user.php?id=<?php echo md5($user['id']) ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="delete_user.php?id=<?php echo md5($user['id']) ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

@@ -6,26 +6,39 @@ $userModel = new UserModel();
 
 $user = NULL; //Add new user
 $_id = NULL;
+$params = [];
+if (!empty($_GET['keyword'])) {
+    $params['keyword'] = $_GET['keyword'];
+    
+}
+$users = $userModel->getUsers($params);
 
 if (!empty($_GET['id'])) {
-    $_id = $_GET['id'];
+    foreach ($users as $user1) {
+        if($_GET['id'] == md5($user1['id'])){                      
+            $_id = $user1['id'];    
+        }
+    }  
     $user = $userModel->findUserById($_id);//Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
-    if(isset($_POST['version'])&&($_POST['version']==$user[0]['version'])){
-        if (!empty($_id)) {
-            $userModel->updateUser($_POST);
-        } else {
-            $userModel->insertUser($_POST);
+    if (!empty($_id)) {
+        if(isset($_POST['version'])&&$_POST['version']==$user[0]['version']){
+            
+                $userModel->updateUser($_POST);
+            
+            header('location: list_users.php');
         }
+        else{ 
+        echo '<script>alert("Version đã thay đổi, vui lòng làm mới trang!");</script>';
+            header('Refresh:3');
+        }
+    } else {
+        $userModel->insertUser($_POST);
         header('location: list_users.php');
-    }
-    else{ 
-    echo '<script>alert("Không cùng một version!");</script>';
-        header('Refresh:3');
-    }
+}
 }
 
 ?>
@@ -43,7 +56,7 @@ if (!empty($_POST['submit'])) {
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
-                <p>Version: <?php echo $user[0]['version'] ?></p>
+                <p><?php if(isset($user[0]['version'])) echo 'Version: ' . $user[0]['version'] ?></p>
                 <form method="POST">
                     <input type="hidden" name="id" value="<?php echo $_id ?>">
                     <div class="form-group">
@@ -66,7 +79,7 @@ if (!empty($_POST['submit'])) {
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
-                    <input type="hidden"
+                    <input type="hidden" name="version"
                     value="<?php if (!empty($user[0]['version'])) echo $user[0]['version'] ?>">
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
