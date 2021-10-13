@@ -54,7 +54,7 @@ class UserModel extends BaseModel
     {   
         $isAuth = $this->getUsers();
         foreach ($isAuth as $item) {
-            if (md5($item['id']) == $id) {
+            if ($item['id'] == $id) {
                 $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
                 return $this->delete($sql);
             }
