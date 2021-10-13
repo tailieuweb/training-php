@@ -5,7 +5,7 @@ $userModel = new UserModel();
 $user = NULL; //Add new user
 $id = NULL;
 
-if (!empty(strip_tags($_GET['id']))) {
+if (!empty($_GET['id'])) {
     $id = strip_tags($_GET['id']);
     $user = $userModel->findUserById($id);//Update existing user
 }

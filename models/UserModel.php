@@ -1,6 +1,7 @@
 <?php
 
 require_once 'BaseModel.php';
+require_once 'Result.php';
 
 class UserModel extends BaseModel {
     protected static $_instance;
@@ -8,6 +9,7 @@ class UserModel extends BaseModel {
     private  function __contructor(){}
 
     public function findUserById($id) {
+        $id = $this->decryptID($id);
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
 
@@ -69,11 +71,12 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function insertUser($input) {
-
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
-        "'" . $input['name'] . "', '".md5($input['password'])."', '".$input['fullname']."', '".$input['email']."', '".$input['type']."')";
-
+    public function insertUser($input)
+    {
+        $password = md5($input['password']);
+        // SQL
+        $sql = "INSERT INTO `users`(`name`, `fullname`, `email`, `type`, `password`) 
+        VALUES ('" . $input['name'] . "','" . $input['fullname'] . "','" . $input['email'] . "','" . $input['type'] . "','" . $password . "')";
         $user = $this->insert($sql);
 
         return $user;
@@ -99,6 +102,17 @@ class UserModel extends BaseModel {
         }
 
         return $users;
+    }
+    // Decrypt id
+    private function decryptID($md5Id)
+    {
+        $users = $this->getUsers();
+        foreach ($users as $user) {
+            if (md5($user['id'] . 'TeamB-TDC') == $md5Id) {
+                return $user['id'];
+            }
+        }
+        return NULL;
     }
     public static function getInstance() {
         if (self::$_instance !== null){
