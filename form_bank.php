@@ -49,7 +49,7 @@ if (!empty($_POST['submit'])) {
                 Bank form
             </div>
             <form method="POST">
-                <input type="hidden" name="id" value="<?php echo $id ?>">
+                <input type="hidden" name="id" value="<?php echo strip_tags($id) ?>">
                 <div class="form-group">
                     <label for="type">Name</label>
                     <select class="form-control" name="user_id">
@@ -59,16 +59,16 @@ if (!empty($_POST['submit'])) {
                                                                             if ($banks[0]['name'] == $user['name']) {
                                                                                 echo "selected";
                                                                             }
-                                                                        } ?>><?php echo $user['name'] ?></option>
+                                                                        } ?>><?php echo strip_tags($user['name']) ?></option>
 
                         <?php  }
                         ?>
                     </select>
                 </div>
                 <div class="form-group">
-                    <input type="hidden" name="version" value="<?php if (!empty($banks[0]['version'])) echo $banks[0]['version'] ?>">
+                    <input type="hidden" name="version" value="<?php if (!empty($banks[0]['version'])) echo strip_tags($banks[0]['version']) ?>">
                     <label for="cost">Cost</label>
-                    <input name="cost" class="form-control" placeholder="Cost" required value="<?php if (!empty($banks[0]['cost'])) echo $banks[0]['cost'] ?>">
+                    <input name="cost" class="form-control" placeholder="Cost" required value="<?php if (!empty($banks[0]['cost'])) echo strip_tags($banks[0]['cost']) ?>">
                 </div>
                 <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
             </form>
