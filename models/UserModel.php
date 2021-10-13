@@ -21,9 +21,15 @@ class UserModel extends BaseModel
         return $user;
     }
 
+    /**
+     * Authentication user
+     * @param $
+     * @param $password
+     * @return array
+     */
     public function auth($userName, $password)
     {
-        $md5Password = $password;
+        $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
 
         $user = $this->select($sql);
@@ -37,52 +43,43 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
-        //Lấy id của tất cả user 
-        $sql1 = 'SELECT id FROM users';
-        $allUser = $this->select($sql1);
-
-        foreach ($allUser as $key) {
-            $md5 = md5($key['id']);
-            if ($md5 == $id) {
-                $sql = 'DELETE FROM users WHERE id = ' . $key['id'];
+        $isAuth = $this->getUsers();
+        foreach ($isAuth as $item) {
+            if (md5($item['id']) == $id) {
+                $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
                 return $this->delete($sql);
             }
         }
     }
+    /**
+     * Delete user by id
+     * @param $id
+     * @return mixed
+     */
+    // public function deleteUserById($id)
+    // {
+    //     $sql = 'DELETE FROM users WHERE id = ' . $id;
+    //     return $this->delete($sql);
+    // }
 
     /**
      * Update user
      * @param $input
      * @return mixed
      */
-
-
     public function updateUser($input)
     {
-        date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $open = 0; //0-opening 1-close
-        $timeOpening = date("Y-m-d H:i", strtotime('+2 minute', strtotime(date("Y-m-d H:i"))));
-        $userById = $this->findUserById($input['id']);
-        $error = false;
-        if(strtotime(date("Y-m-d H:i")) < strtotime($userById[0]['time'])){
-            var_dump('ok');die;
-        }
-        if ($userById[0]['opening'] == "1") {
-            return $error;
-        } else {
-            $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] . '", 
-                 email = "' . $input['email'] . '", 
-                 fullname = "' . $input['fullname'] . '", 
-                 type = "' . $input['type'] . '", 
-                 opening = "' . $open . '", 
-                 time = "' . $timeOpening . '", 
-                 password="' . md5($input['password']) . '"
-                 WHERE id = ' . $input['id'];
-            $user = $this->update($sql);
-            return $user;
-        }
+        $sql = 'UPDATE users SET 
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '"
+                ,`fullname`="' . $input['full-name'] . '"
+                ,email="' . $input['email'] . '"
+                ,type="' . $input['type'] . '"
+                ,password="' . md5($input['password']) . '"
+                WHERE id = ' . $input['id'];
+        $user = $this->update($sql);
+        return $user;
     }
+
 
     /**
      * Insert user
@@ -91,9 +88,9 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
-        $sql = "INSERT INTO `tranning_php`.`users` (`name`, `password` ,`fullname`,`email`,`type`) VALUES (" .
-            "'" . $input['name'] . "', '" . $input['password'] . "', '"
-            . $input['fullname'] . "', '" . $input['email'] . "', '" . $input['type'] . "')";
+        $password = md5($input['password']);
+        $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
+            "'" . $input['name'] . "', '" . $input['full-name'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
 
         $user = $this->insert($sql);
 
@@ -110,11 +107,16 @@ class UserModel extends BaseModel
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
+
+            //Keep this line to use Sql Injection
+            //Don't change
+            //Example keyword: abcef%";TRUNCATE banks;##
+            //$users = self::$_connection->multi_query($sql);
+            $users = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM users';
+            $users = $this->select($sql);
         }
-
-        $users = $this->select($sql);
 
         return $users;
     }
