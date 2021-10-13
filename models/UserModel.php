@@ -3,7 +3,7 @@
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
-
+// tim id de them user
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
@@ -12,7 +12,7 @@ class UserModel extends BaseModel {
     }
 
     public function findUser($keyword) {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
+        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR email LIKE %'.$keyword.'%';
         $user = $this->select($sql);
 
         return $user;
@@ -70,9 +70,8 @@ class UserModel extends BaseModel {
      */
     public function insertUser($input) {
 
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".md5($input['password'])."')";
-
+        $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`,`email`,`type`,`password`) 
+        VALUES (" . "'" . $input['name'] . "', '".$input['fullname']. "', '" . $input['email'] . "', '" . $input['type'] . "','".md5($input['password']) . "')";
 
         $user = $this->insert($sql);
 

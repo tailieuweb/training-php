@@ -9,13 +9,13 @@ $user = NULL; //Add new user
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
-    $_id = $_GET['id'];
-    $user = $userModel->findUserById($_id);//Update existing user
+    $id = $_GET['id'];
+    $user = $userModel->findUserById($id);//Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
-
+    // giu nguyen $_id
     if (!empty($_id)) {
         $userModel->updateUser($_POST);
     } else {
@@ -60,11 +60,11 @@ if (!empty($_POST['submit'])) {
                         <select name="type" class="form-control">
                             <?php
                             foreach($type as $value) {
-                                if($value['id_type'] == $user[0]['type']){
+                                if($value['type_id'] == $user[0]['type']){
                                 ?>
-                            <option selected value="<?php if (!empty($value['id_type'])) echo $value['id_type'] ?>"><?php if (!empty($value['name_type'])) echo $value['name_type'] ?></option>
+                            <option selected value="<?php if (!empty($value['type_id'])) echo $value['type_id'] ?>"><?php if (!empty($value['name_type'])) echo $value['name_type'] ?></option>
                             <?php } else{ ?>
-                                    <option value="<?php if (!empty($value['id_type'])) echo $value['id_type'] ?>"><?php if (!empty($value['name_type'])) echo $value['name_type'] ?></option>
+                                    <option value="<?php if (!empty($value['type_id'])) echo $value['type_id'] ?>"><?php if (!empty($value['name_type'])) echo $value['name_type'] ?></option>
                              <?php   }
                             }?>
                         </select>

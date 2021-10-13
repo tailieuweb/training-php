@@ -4,7 +4,7 @@ require_once 'models/BankModel.php';
 class FactoryPattern {
 
     public function make($model) {
-        if ($model == 'user') {
+        if ($model == 'users') {
             return new UserModel();
         } else if ($model == 'bank') {
             return new BankModel();
