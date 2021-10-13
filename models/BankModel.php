@@ -2,18 +2,20 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel
+class BankModel extends BaseModel
 {
 
-    public function findUserById($id)
+    public function findBankById($id)
     {
-        $sql1 = 'SELECT id FROM users';
+        $sql1 = 'SELECT id FROM banks';
         $allUser = $this->select($sql1);
-        $user =null;
+        $user = null;
         foreach ($allUser as $key) {
             $md5 = md5($key['id'] . "chuyen-de-web-1");
             if ($md5 == $id) {
-                $sql = 'SELECT * FROM users WHERE id = ' . $key['id'];
+                $sql = 'SELECT banks.id as bank_id,users.name,users.email,banks.cost,users.type,users.id,banks.user_id,banks.version 
+                FROM `banks`,`users` 
+                WHERE banks.user_id = users.id AND banks.id = ' . $key['id'];
                 $user = $this->select($sql);
             }
         }
@@ -28,12 +30,6 @@ class UserModel extends BaseModel
         return $user;
     }
 
-    /**
-     * Authentication user
-     * @param $
-     * @param $password
-     * @return array
-     */
     public function auth($userName, $password)
     {
         $md5Password = md5($password);
@@ -48,30 +44,20 @@ class UserModel extends BaseModel
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id)
+    public function deleteBankById($id)
     {
         //Lấy id của tất cả user 
-        $sql1 = 'SELECT id FROM users';
+        $sql1 = 'SELECT id FROM banks';
         $allUser = $this->select($sql1);
-        
+
         foreach ($allUser as $key) {
             $md5 = md5($key['id'] . "chuyen-de-web-1");
             if ($md5 == $id) {
-                $sql = 'DELETE FROM users WHERE id = ' . $key['id'];
+                $sql = 'DELETE FROM banks WHERE id = ' . $key['id'];
                 return $this->delete($sql);
             }
         }
     }
-    /**
-     * Delete user by id
-     * @param $id
-     * @return mixed
-     */
-    // public function deleteUserById($id)
-    // {
-    //     $sql = 'DELETE FROM users WHERE id = ' . $id;
-    //     return $this->delete($sql);
-    // }
 
     /**
      * Update user
@@ -80,9 +66,9 @@ class UserModel extends BaseModel
      */
 
 
-    public function updateUser($input, $version)
+    public function updateBank($input, $version)
     {
-        $sql1 = 'SELECT id FROM users';
+        $sql1 = 'SELECT id FROM banks';
         $error = false;
         $allUser = $this->select($sql1);
         $id = 0;
@@ -90,43 +76,48 @@ class UserModel extends BaseModel
             $md5 = md5($key['id'] . "chuyen-de-web-1");
             if ($md5 == $input['id']) {
                 $id = $key['id'];
-                $sql = 'SELECT * FROM users WHERE id = ' . $key['id'];
+                $sql = 'SELECT * FROM banks WHERE id = ' . $key['id'];
                 $userById = $this->select($sql);
             }
         }
         $oldTime = $userById[0]['version'] . "chuyen-de-web-1";
-
         if (md5($oldTime) == $version) {
             $time1 = (int)$oldTime + 1;
-            $sql = 'UPDATE users SET 
-                name = "' . $input['name'] . '", 
-                email = "' . $input['email'] . '", 
-                fullname = "' . $input['fullname'] . '", 
-                type = "' . $input['type'] . '", 
-                version = "' . $time1 . '", 
-                password="' . md5($input['password']) . '"
-                WHERE id = ' . $id;
+            $sql = 'UPDATE banks SET 
+            user_id = "' . $input['user_id'] . '", 
+            cost = "' . $input['cost'] . '", 
+            version = "' . $time1 . '"
+            WHERE id = ' . $id;
             $user = $this->update($sql);
             return $user;
         } else {
             return $error;
+        }
     }
-
 
     /**
      * Insert user
      * @param $input
      * @return mixed
      */
-    public function insertUser($input)
+    public function insertBanks($input)
     {
-        $sql = "INSERT INTO `tranning_php`.`users` (`name`, `password` ,`fullname`,`email`,`type`) VALUES (" .
-            "'" . $input['name'] . "', '" . md5($input['password']) . "', '"
-            . $input['fullname'] . "', '" . $input['email'] . "', '" . $input['type'] . "')";
+        $allBanks = $this->getAllBanks($input['user_id']);
+        if (empty($allBanks)) {
+            $sql = "INSERT INTO `tranning_php`.`banks` (`user_id`, `cost` ) VALUES (" .
+                "'" . $input['user_id'] . "','" . $input['cost'] . "')";
+            $bank = $this->insert($sql);
+            // $users = self::$_connection->multi_query($sql);
+            return $bank;
+        } else {
+            $cost = $allBanks[0]['cost'] + $input['cost'];
+            $sql = 'UPDATE banks SET 
+            cost = "' . $cost . '"
+            WHERE id = ' . $allBanks[0]['id'];
 
-        $user = $this->insert($sql);
-        // $users = self::$_connection->multi_query($sql);
-        return $user;
+            $user = $this->update($sql);
+            return $user;
+        }
     }
 
     /**
@@ -134,7 +125,7 @@ class UserModel extends BaseModel
      * @param array $params
      * @return array
      */
-    public function getUsers($params = [])
+    public function getBanks($params = [])
     {
         //Keyword
         if (!empty($params['keyword'])) {
@@ -148,17 +139,24 @@ class UserModel extends BaseModel
                 $params['keyword']
             );
 
-            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] . '%"';
+            $sql = 'SELECT * FROM banks WHERE cost LIKE "%' . $params['keyword'] . '%"';
 
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+            $banks = self::$_connection->multi_query($sql);
         } else {
-            $sql = 'SELECT * FROM users';
-            $users = $this->select($sql);
+            $sql = 'SELECT banks.id as bank_id,users.name,users.email,banks.cost,users.type,users.id,banks.user_id,banks.version 
+            FROM `banks`,`users` 
+            WHERE banks.user_id = users.id';
+            $banks = $this->select($sql);
         }
-        return $users;
+        return $banks;
     }
-    
+    function getAllBanks($user_id)
+    {
+        $sql = 'SELECT * FROM banks Where user_id = ' . $user_id;
+        $banks = $this->select($sql);
+        return $banks;
+    }
 }
