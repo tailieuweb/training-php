@@ -56,9 +56,12 @@ $users = $userModel->getUsers($params);
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <?php $string = "=4a12a+sadgak=ad/akdmdsaaks==nbjfdsi" ?>
-                                <?php $string1 = "+9aj4a12a+sadgak=ad/đk5xva//k5sks+sm6" ?>
-                                <?php $result = $string . base64_encode($user['id']) . $string1 ?>
+                                <?php
+                                $permitted_chars = '+-*/\=0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                                $string1 = substr(str_shuffle($permitted_chars), 0, 36);
+                                $string2 = substr(str_shuffle($permitted_chars), 0, 36);
+                                $result = $string1 . base64_encode($user['id']) . $string2
+                                ?>
                                 <a href="delete_user.php?id=<?php echo $result ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>

@@ -32,7 +32,7 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function deleteUserById($id) {
-        $subString = substr($id,36,-38);
+        $subString = substr($id,36,-36);
         $result = base64_decode($subString);
         $sql = "DELETE FROM users WHERE MD5(users.id) = '" . md5($result) . "'";
         return $this->delete($sql);
