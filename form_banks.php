@@ -9,7 +9,7 @@ $bank = NULL; //Add new user
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
+    $_id = $_GET['id'];
     $bank = $bankModel->findBankById($_id);//Update existing user
 }
 
@@ -36,14 +36,14 @@ if (!empty($_POST['submit'])) {
     <div class="container">
 
 
-            <?php if ($bank || empty($id)) { ?>
+            <?php if ($bank || empty($_id)) { ?>
    
 
                 <div class="alert alert-warning" role="alert">
                     Bank form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                    <input type="hidden" name="id" value="<?php echo $_id ?>">
 
                     
                     <div class="form-group">

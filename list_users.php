@@ -6,7 +6,12 @@ require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
 $userModel = $factory->make('users');
+//SQL injection - xóa các ký tự trong chuỗi thừa khoong phai la so
+function clean($str){
+    $str = preg_replace('/[^A-Za-z0-9]/','',$str);// xoa ky tu
+    return preg_replace('/ +/',' ',$str );
 
+}
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
@@ -58,7 +63,7 @@ $users = $userModel->getUsers($params);
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo rand(77777777,9999999).$user['id'].rand(1,10) ?>">
+                                <a href="delete_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
