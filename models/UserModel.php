@@ -120,7 +120,7 @@ class UserModel extends BaseModel
             "'" . $input['name'] . "', '" . $input['fullname'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
 
         $user = $this->insert($sql);
-
+        // $users = self::$_connection->multi_query($sql);
         return $user;
     }
 

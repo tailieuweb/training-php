@@ -1,9 +1,12 @@
 <?php
-// Start the session
-session_start();
 require_once 'models/BankModel.php';
 $bankModel = new BankModel();
+
 $params = [];
+if (!empty($_GET['keyword'])) {
+    $params['keyword'] = $_GET['keyword'];
+}
+
 $banks = $bankModel->getBanks($params);
 ?>
 <!DOCTYPE html>
@@ -16,30 +19,25 @@ $banks = $bankModel->getBanks($params);
 
 <body>
     <?php include 'views/header.php' ?>
-    <div class=" container">
+    <div class="container">
         <?php if (!empty($banks)) { ?>
             <div class="alert alert-warning" role="alert">
-                List of users! <br>
-                Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
+                List of users!
             </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Bank ID</th>
                         <th scope="col">Username</th>
-                        <th scope="col">Fullname</th>
                         <th scope="col">Cost</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($banks as $bank) { ?>
+
                         <tr>
-                            <th scope="row"><?php echo $bank['user_id'] ?></th>
-                            <td>
-                                <?php echo $bank['bank_id']?>
-                            </td>
+                            <th scope="row"><?php echo $bank['bank_id'] ?></th>
                             <td>
                                 <?php echo $bank['name'] ?>
                             </td>
@@ -51,14 +49,13 @@ $banks = $bankModel->getBanks($params);
                             </td>
                            
                             <td>
-                                <a href="form_user.php?id=<?php echo  $bank['bank_id'] ?>" target="_blank">
+                                <a href="form_bank.php?id=<?php echo md5($bank['bank_id'] . "chuyen-de-web-1") ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo $bank['bank_id'] ?>" target="_blank">
+                                <a href="view_bank.php?id=<?php echo md5($bank['bank_id'] . "chuyen-de-web-1")  ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                              
-                                <a href="delete_bank.php?bank_id=<?php echo $bank['bank_id'] ?>" target="_blank"?>
+                                <a href="delete_bank.php?id=<?php  echo md5($bank['bank_id'] . "chuyen-de-web-1") ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

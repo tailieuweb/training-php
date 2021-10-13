@@ -1,28 +1,44 @@
 <?php
-// Start the session
-session_start();
 require_once 'models/BankModel.php';
+require_once 'models/UserModel.php';
 $bankModel = new BankModel();
-$bank = NULL; //Add new bank
+$userModel = new UserModel();
+
+$bank = NULL; //Add new user
 $_id = NULL;
+//List bank join user
+$params = [];
+if (!empty($_GET['keyword'])) {
+    $params['keyword'] = $_GET['keyword'];
+}
+$users = $userModel->getUsers($params);
+
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
+    $bank = $bankModel->findBankById($_id); //Update existing user
 }
-$bank = $bankModel->getBanks();
 if (!empty($_POST['submit'])) {
-    // var_dump($_POST);
-    // die();
-    $bankInsert = $bankModel->inBank($_POST);
-    if ($bankInsert == true) {
+    $version = $_POST['version'];
+    if (!empty($_id)) {
+        $a = $bankModel->updateBank($_POST, $version);
+        if ($a == false) {
+            $a = "Updating Error! Pleade Try Again";
+        } else {
+            header('location: list_banks.php');
+        }
+    } else {
+        $bankModel->insertBanks($_POST);
         header('location: list_banks.php');
     }
+    // header('location: list_users.php');
 }
+
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Bank form</title>
+    <title>User form</title>
     <?php include 'views/meta.php' ?>
 </head>
 
@@ -30,33 +46,42 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php' ?>
     <div class="container">
 
-        <?php if ($bank || empty($id)) {
-
-        ?>
+        <?php if ($bank || empty($_id) || $users) { ?>
             <div class="alert alert-warning" role="alert">
-                Bank form
+                User form
+
             </div>
+            <?php if (isset($a)) { ?>
+                <div class="alert alert-danger" role="alert">
+                    <?php echo $a; ?>
+                </div>
+            <?php } ?>
+
             <form method="POST">
-                <!-- <input type="hidden" name="user_id" value="</?php echo $_id ?>"> -->
-                <input type="hidden" name="user_id" value="<?php if (isset($bank[0]['user_id'])) echo $bank[0]['user_id'] ?>">
-                <input type="hidden" name="bank_id" value="<?php echo $_id ?>">
+                <input type="hidden" name="id" value="<?php echo $_id ?>">
+                <input type="hidden" name="version" value="<?php if (!empty($bank[0]['version'])) echo md5($bank[0]['version'] . "chuyen-de-web-1") ?>">
                 <div class="form-group">
-                    <label for="name">User name</label>
+                    <label for="type">Type</label>
                     <select name="user_id">
-                        <option value="0" <?php if (!empty($bank[0]['name']) == '0') {
-                                                echo "selected";
-                                            } ?>>---</option>
-                        <?php foreach ($bank as $item) {
-                            $id_bank = $item['bank_id'];
+                        <?php
+                        foreach ($users as $user) {
+                            if ($user['id'] == $bank[0]['id']) {
                         ?>
-                            <option value="<?php if (!empty($bank[$id_bank - 1]['user_id'])) echo $bank[$id_bank - 1]['user_id'] ?>" <?php if (!empty($bank[$id_bank - 1]['user_id']) == $item['name']) {
-                                                                                                echo "selected";
-                                                                                            } ?>><?php echo $item['name'] ?></option>
-                        <?php } ?>
+                                <option value="<?= $user['id'] ?>" selected><?= $user['name'] ?></option>
+                            <?php
+                            } else { ?>
+                                <option value="<?= $user['id'] ?>"><?= $user['name'] ?></option>
+                        <?php
+                            }
+                        }
+                        ?>
+
                     </select>
                 </div>
-                <label for="cost">Cost</label>
-                <input type="number" name="cost" id="" placeholder="10">
+                <div class="form-group">
+                    <label for="cost">Cost</label>
+                    <input type="number" name="cost" class="form-control" placeholder="Email" value="<?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?>">
+                </div>
                 <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
             </form>
         <?php } else { ?>
