@@ -45,22 +45,22 @@ $users = $userModel->getUsers($params);
                 <tr>
                     <th scope="row"><?php echo $user['id']?></th>
                     <td>
-                        <?php echo $user['name']?>
+                        <?php echo strip_tags($user['name'])?>
                     </td>
                     <td>
-                        <?php echo $user['fullname']?>
+                        <?php echo strip_tags($user['fullname'])?>
                     </td>
                     <td>
-                        <?php echo $user['type']?>
+                        <?php echo strip_tags($user['type'])?>
                     </td>
                     <td>
-                        <a href="form_user.php?id=<?php echo md5($user['id'].'TeamJ-TDC') ?>">
+                        <a href="form_user.php?id=<?php echo htmlentities(md5($user['id'].'TeamJ-TDC')) ?>">
                             <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                         </a>
-                        <a href="view_user.php?id=<?php echo md5($user['id'].'TeamJ-TDC') ?>">
+                        <a href="view_user.php?id=<?php echo htmlentities(md5($user['id'].'TeamJ-TDC')) ?>">
                             <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                         </a>
-                        <a href="delete_user.php?id=<?php echo md5($user['id'].'TeamJ-TDC') ?>">
+                        <a href="delete_user.php?id=<?php echo htmlentities(md5($user['id'].'TeamJ-TDC')) ?>">
                             <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                         </a>
                     </td>
