@@ -42,13 +42,13 @@ if (!empty($_POST['submit'])) {
             Bank form
         </div>
         <form method="POST">
-            <input type="hidden" name="id" value="<?php echo $id ?>">
+            <input type="hidden" name="id" value="<?php echo strip_tags($id) ?>">
             <div class="form-group">
                 <label for="type">Name</label>
                 <select class="form-control" name="user_id">
                     <?php 
                         foreach($listUsers as $user) { ?>
-                    <option value=<?php echo $user['id']?>><?php echo $user['name']?></option>
+                    <option value=<?php echo strip_tags($user['id'])?>><?php echo strip_tags($user['name'])?></option>
 
                     <?php  }
                     ?>
