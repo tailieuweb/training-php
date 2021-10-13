@@ -42,17 +42,17 @@ $users = $userModel->getUsers($params);
                 <tbody>
                     <?php foreach ($users as $user) {?>
                         <tr>
-                            <th scope="row"><?php echo $user['id']?></th>
+                            <th scope="row"><?php echo htmlentities($user['id'])?></th>
                             <td>
-                                <?php echo $user['name'] ?>
+                                <?php echo htmlentities($user['name']) ?>
                                 
                             </td>
                             <td>
-                                <?php echo $user['fullname']?>
+                                <?php echo  htmlentities($user['fullname']) ?>
                             </td>
                             <td>
                                 
-                                <?php echo $user['name_type']?>
+                                <?php echo htmlentities($user['name_type'])?>
                             </td>
                             <td>
                                 <a href="form_user.php?id=<?php echo $user['id'] ?>">
