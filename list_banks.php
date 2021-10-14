@@ -29,6 +29,7 @@ $banks = $bankModel->getBanks($params);
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
+        <a href="form_bank.php">Add bank</a>
         <?php if (!empty($banks)) { ?>
         <table class="table table-striped">
             <thead>
@@ -61,6 +62,7 @@ $banks = $bankModel->getBanks($params);
                     </td>
                 </tr>
                 <?php } ?>
+                <div>chao</div>
             </tbody>
         </table>
         <?php } else { ?>
