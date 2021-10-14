@@ -7,6 +7,18 @@ $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
+    //Get first number
+    $start = substr($id, 0, 5);
+
+    //Get last number
+    $end = substr($id, -5);
+
+    //Replace first number with null
+    $id = str_replace($start, "", $id);
+
+    //Replace last number with null
+    $id = str_replace($end, "", $id);
+
     $user = $userModel->findUserById($id);//Update existing user
 }
 
