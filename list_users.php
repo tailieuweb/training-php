@@ -71,7 +71,7 @@ $users = $userModel->getUsers($params);
                 </tr>
                 <?php } ?>
             </tbody>
-            <div> AHihi</div>
+            <div> AHihi đây không phải quyền</div>
         </table>
         <?php } else { ?>
         <div class="alert alert-dark" role="alert">
