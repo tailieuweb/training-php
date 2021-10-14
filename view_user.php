@@ -8,8 +8,12 @@ $_id_get = NULL;
 
 if (!empty($_GET['id'])) {
     $_id_get = $_GET['id'];
-    $id = substr($_id_get,3,1);
-    $user = $userModel->findUserById($id);//Update existing user
+    $id_manage = $userModel->substrID($_id_get);
+
+    // var_dump($_id_get);
+    // var_dump($id_manage);
+    // die();
+    $user = $userModel->findUserById($id_manage);//Update existing user
 }
 
 

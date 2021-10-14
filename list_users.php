@@ -1,14 +1,46 @@
 <?php
 // Start the session
 session_start();
-
-
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
-
 $params = [];
-
+if (!empty($_GET['keyword'])) {
+    $params['keyword'] = $_GET['keyword'];
+}
 $users = $userModel->getUsers($params);
+// $_SESSION['token'] = bin2hex(random_bytes(35));
+$whitelist = [
+    ''
+];
+$cookies = [];
+foreach (headers_list() as $headers__value) {
+    if (strpos($headers__value, 'Set-Cookie: ') === 0) {
+        $cookies[] = $headers__value;
+    }
+}
+if (!empty($cookies)) {
+    header_remove('Set-Cookie');
+    foreach ($cookies as $cookies__value) {
+        $accept = false;
+        foreach ($whitelist as $whitelist__value) {
+            if (strpos($cookies__value, 'Set-Cookie: ' . $whitelist__value . '=') === 0) {
+                $accept = true;
+                break;
+            }
+        }
+        if ($accept === true) {
+            header($cookies__value);
+        }
+    }
+}
+if (!empty($_COOKIE)) {
+    foreach ($_COOKIE as $cookies__key => $cookies__value) {
+        if (!in_array($cookies__key, $whitelist)) {
+            unset($_COOKIE[$cookies__key]);
+            setcookie($cookies__key, '', time() - 3600, '/');
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,15 +82,15 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['type'] ?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo  rand(100,999) .$user['id'] .rand(100,999)?>">
+                                <a href="form_user.php?id=<?php echo  rand(100, 999) . md5($user['id'] . "list-user") . rand(100, 999) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo rand(100,999) .$user['id'] .rand(100,999)?>">
-                                    <i class="fa fa-eye" aria-hidden="true" title="View"></i>
+                                <a href="view_user.php?id=<?php echo  rand(100, 999) . md5($user['id'] . "list-user") . rand(100, 999) ?>">
+                                <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                              
-                                <a href="delete_user.php?id=<?php echo rand(100,999) .$user['id'] .rand(100,999)?> ">
+                                <a href="delete_user.php?id=<?php echo rand(100, 999) . md5($user['id'] . "list-user") . rand(100, 999) ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
+                                    <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?? '' ?>">
                                 </a>
                             </td>
                         </tr>
@@ -71,6 +103,8 @@ $users = $userModel->getUsers($params);
             </div>
         <?php } ?>
     </div>
+    <!-- <script>document.cookie</script> -->
+    <!-- <script src="./public/js/csrf.js"></script> -->
 </body>
 
 </html>

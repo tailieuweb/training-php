@@ -5,18 +5,16 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$_id_get = NULL;
+$id_get = NULL;
 $_id = NULL;
 if (!empty($_GET['id'])) {
-    $userAuth = $userModel->getUsers();
-    $_id_get = $_GET['id'];
-    $_id = substr($_id_get,3,1);
-    $user = $userModel->findUserById($_id);
+    $id_get = $_GET['id'];
+    $id_manage = $userModel->substrID($id_get);
+    $user = $userModel->findUserById($id_manage);
 }
 $msg = 'Your name or username is not allowed. Please enter again';
-$isUserUpdate = null;
 if (!empty($_POST['submit'])) {
-    if (!empty($_id)) {
+    if (!empty($id_get)) {
         $isUserUpdate = $userModel->updateUser($_POST);
         if ($isUserUpdate == true) {
             header('location: list_users.php');
@@ -51,7 +49,7 @@ if (!empty($_POST['submit'])) {
                 User form
             </div>
             <form method="POST">
-                <input type="hidden" name="id" value="<?php echo $_id ?>">
+                <input type="hidden" name="id" value="<?php if (!empty($user[0]['id'])) echo $user[0]['id'] ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">

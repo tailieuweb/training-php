@@ -4,13 +4,23 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
+    public function substrID($id)
+    {
+        $id_start = substr($id, 3);
+        $id_end = substr($id_start, 0, -3);
+        return $id_end;
+    }
 
     public function findUserById($id)
     {
-        $sql = 'SELECT * FROM users WHERE id = ' . $id;
-        $user = $this->select($sql);
-
-        return $user;
+        $getUsers = $this->getUsers();
+        foreach ($getUsers as $user) {
+            if (md5($user['id'] . "list-user") == $id) {
+                $sql = 'SELECT * FROM users WHERE id = ' . $user['id'];
+                $user = $this->select($sql);
+                return $user;
+            }
+        }
     }
 
     public function findUser($keyword)
@@ -57,8 +67,13 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
-        $sql = 'DELETE FROM users WHERE id = ' . $id;
-        return $this->delete($sql);
+        $getUsers = $this->getUsers();
+        foreach ($getUsers as $user) {
+            if (md5($user['id'] . "list-user") == $id) {
+                $sql = 'DELETE FROM users WHERE id = ' . $user['id'];
+                return $this->delete($sql);
+            }
+        }
     }
     /**
      * Delete user by id
@@ -76,6 +91,7 @@ class UserModel extends BaseModel
      * @param $input
      * @return mixed
      */
+
     public function updateUser($input)
     {
         $input_num = 0;
@@ -89,8 +105,8 @@ class UserModel extends BaseModel
             return false;
         } else {
             $sql = 'UPDATE users SET 
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '"
-                ,`fullname`="' . mysqli_real_escape_string(self::$_connection, $input['full-name'])  . '"
+                 name = "' . $input['name'] . '"
+                ,`fullname`="' . $input['full-name']  . '"
                 ,email="' . $input['email'] . '"
                 ,type="' . $input['type'] . '"
                 ,password="' . md5($input['password']) . '"
@@ -135,17 +151,15 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
+            // $mysqli = mysqli_connect("localhost", "root", "", "app_web1");
+            // $key = isset($params['keyword'])?(string)(int)$params['keyword']:false;
+            // $sql = 'SELECT * FROM users WHERE name LIKE "%' . mysqli_real_escape_string($mysqli,$key) . '%"';
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
-
-            //Keep this line to use Sql Injection
-            //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
-
+        $users = $this->select($sql);
         return $users;
     }
 }
