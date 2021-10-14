@@ -12,7 +12,14 @@ if (!empty($_GET['id'])) {
     $user = $userModel->findUserById($_id);//Update existing user
 }
 
-
+if (!empty($_POST['submit'])) {
+    if (!empty($_id)) {
+        $userModel->updateUser($_POST);
+    } else {
+        $userModel->insertUser($_POST);
+    }
+    header('location: list_users.php');
+}
 if (!empty($_POST['submit'])) {
     if(($_POST['version']==$user[0]['version'])){
         if (!empty($_id)) {
