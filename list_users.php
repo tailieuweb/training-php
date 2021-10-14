@@ -46,13 +46,13 @@ $users = $userModel->getUsers($params);
                 <tr>
                     <th scope="row"><?php echo $user['id'] ?></th>
                     <td>
-                        <?php echo $user['name'] ?>
+                        <?php echo htmlentities($user['name'])  ?>
                     </td>
                     <td>
-                        <?php echo $user['fullname'] ?>
+                        <?php echo htmlentities($user['fullname']) ?>
                     </td>
                     <td>
-                        <?php echo $user['email'] ?>
+                        <?php echo htmlentities($user['email']) ?>
                     </td>
                     <td>
                         <?php echo $user['type'] ?>
@@ -71,6 +71,7 @@ $users = $userModel->getUsers($params);
                 </tr>
                 <?php } ?>
             </tbody>
+            <div> AHihi đây là quyền</div>
         </table>
         <?php } else { ?>
         <div class="alert alert-dark" role="alert">
