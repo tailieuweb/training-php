@@ -4,7 +4,6 @@ require 'configs/database.php';
 abstract class BaseModel {
     // Database connection
     protected static $_connection;
-
     public function __construct() {
 
         if (!isset(self::$_connection)) {
@@ -16,7 +15,6 @@ abstract class BaseModel {
                 exit();
             }
         }
-
     }
 
     /**
@@ -73,11 +71,12 @@ abstract class BaseModel {
         return $result;
     }
 
-    protected function matchRegexInput($param){
+
+    protected  function matchRegexInput($param){
         $array_replace = array("'",'"',"<",">");
         $str = str_replace($array_replace,'',$param);
         return $str;
     }
-    protected abstract function CreateProduct1();
-    protected abstract function CreateProduct2();
+    // protected abstract function CreateProduct1();
+    // protected abstract function CreateProduct2();
 }

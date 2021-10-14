@@ -115,6 +115,5 @@ class BankModel extends BaseModel {
             $banks = $this->select($sql);
         }
         return $banks;
-       
     }
 }

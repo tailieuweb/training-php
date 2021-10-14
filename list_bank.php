@@ -1,17 +1,20 @@
 <?php
 // Start the session
 session_start();
-require_once './models/FactoryPattern.php';
-$factory = new FactoryPattern();
-
-$bankmodel = $factory->make('bank');
+spl_autoload_register(function($class){
+    require 'models/' . $class . '.php';
+});
+// require_once './models/FactoryPattern.php';
+// $factory = new FactoryPattern();
+$bankModel = new BankModel();
+// $bankmodel = $factory->make('bank');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword']; 
 }
 
-$banks = $bankmodel->getBanks($params);
+$banks = $bankModel->getBanks($params);
 ?>
 <!DOCTYPE html>
 <html>

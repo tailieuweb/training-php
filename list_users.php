@@ -58,9 +58,8 @@ $users = $userModel->getUsers($params);
                 </thead>
                 <tbody>
                     <?php foreach ($users as $user) {?>
-                        <input type="hidden" value="<?php echo $user['version'] ?>">
                         <tr>
-                            <th scope="row"><?php echo strip_tags($user['id'])?></th>
+                            <th scope="row"><?php echo $user['id']?></th>
                             <td>
                                 <?php echo $user['name']?>
                             </td>
