@@ -51,14 +51,23 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        $sql = 'UPDATE users SET 
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 password="'. md5($input['password']) .'"
-                 type = "' . $input['type'] .'",
-                WHERE id = ' . $input['id'];
-        $user = $this->update($sql);
+        $version = 'SELECT version FROM users WHERE id = '.$input['id'] .'';
+        $newVersion = $this->select($version);
 
-        return $user;
+        if($newVersion[0]['version']==$input['version']){
+            $sql = 'UPDATE users SET 
+            name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
+            password="'. md5($input['password']) .'",
+            type = "' . $input['type'] .'",
+            version="'. $input['version']+1 .'",
+            WHERE id = ' . $input['id'];
+             $user = $this->update($sql);
+             header('location: list_users.php');
+             return $user;
+        }
+        else{
+            echo "<script>alert('Bạn đã thay đổi dữ liệu ròi')</script>";
+        }
     }
 
     /**
