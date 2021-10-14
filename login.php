@@ -8,7 +8,7 @@ $userModel = new UserModel();
 
 if (!empty($_POST['submit'])) {
     $username = $_POST["username"];
-     //Sử dùng htmlentities để chuyển đổi tất cả các ký tự áp dụng thành các thực thể HTML trước khi save
+     //Sử dùng htmlentities để chuyển đổi tất cả các ký tự áp dụng thành các thực thể HTML trước khi login
     $users = [
         'username' => htmlentities($_POST['username']),
         'password' => htmlentities($_POST['password'])
