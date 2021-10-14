@@ -27,15 +27,17 @@ if (!empty($_POST['submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Bank form</title>
     <?php include 'views/meta.php' ?>
 </head>
-<body>
-<?php include 'views/header.php'?>
-<div class="container">
 
-    <?php if ($bank || empty($id)) { ?>
+<body>
+    <?php include 'views/header.php'?>
+    <div class="container">
+
+        <?php if ($bank || empty($id)) { ?>
         <div class="alert alert-warning" role="alert">
             User profile
         </div>
@@ -50,11 +52,12 @@ if (!empty($_POST['submit'])) {
                 <span><?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?></span>
             </div>
         </form>
-    <?php } else { ?>
+        <?php } else { ?>
         <div class="alert alert-success" role="alert">
             User not found!
         </div>
-    <?php } ?>
-</div>
+        <?php } ?>
+    </div>
 </body>
+
 </html>
