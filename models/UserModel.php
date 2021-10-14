@@ -37,20 +37,6 @@ class UserModel extends BaseModel
         return $user;
     }
 
-
-    /**
-     * Get username user by id
-     * @param $id
-     * @return mixed
-     */
-
-    public function getUsernameById($id)
-    {
-        $sql = 'SELECT name FROM users where id = ' . $id;
-        $user = $this->select($sql);
-        return $user;
-    }
-
     /**
      * Delete user by id
      * @param $id
@@ -99,8 +85,17 @@ class UserModel extends BaseModel
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
         return $user;
+        
     }
-
+    public  function generateRandomString($length) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
 
     /**
      * Insert user
@@ -125,20 +120,28 @@ class UserModel extends BaseModel
      */
     public function getUsers($params = [])
     {
-        //Keyword
-        if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users 
-            WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection,$params['keyword']) . '%"';
+         //Keyword
+         if (!empty($params['keyword'])) {
+
+            $params['keyword'] = str_replace(
+                array(
+                    ',', ';', '#', '/', '%', 'select', 'update', 'insert', 'delete', 'truncate',
+                    'union', 'or', '"', "'", 'SELECT', 'UPDATE', 'INSERT', 'DELETE', 'TRUNCATE', 'UNION', 'OR'
+                ),
+                array(''),
+                $params['keyword']
+            );
+        
+            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] . '%"';
+        
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            //$users = self::$_connection->multi_query($sql);
-            $users = $this->select($sql);
+            $users = self::$_connection->multi_query($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
-
         return $users;
     }
 }
