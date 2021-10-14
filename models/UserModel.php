@@ -21,10 +21,22 @@ class UserModel extends BaseModel
         return $user;
     }
 
+<<<<<<< HEAD
     public function auth($userName, $password)
     {
         $md5Password = $password;
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
+=======
+    /**
+     * Authentication user
+     * @param $userName
+     * @param $password
+     * @return array
+     */
+    public function auth($userName, $password) {
+        $md5Password = md5($password);
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+>>>>>>> origin/1-php-202109/1-master
 
         $user = $this->select($sql);
         return $user;
@@ -65,10 +77,16 @@ class UserModel extends BaseModel
      * @param $input
      * @return mixed
      */
+<<<<<<< HEAD
     public function insertUser($input)
     {
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `fullname`, `email`, `type`, `password`) VALUES (" .
             "'" . $input['name'] . "', '" . $input['fullname'] . "', '" . $input['email'] . "', '" . $input['type'] . "', '" . $input['password'] . "')";
+=======
+    public function insertUser($input) {
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
+                "'" . $input['name'] . "', '".md5($input['password'])."')";
+>>>>>>> origin/1-php-202109/1-master
 
         $user = $this->insert($sql);
 
@@ -84,15 +102,23 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
+<<<<<<< HEAD
 
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
             var_dump($sql);
             exit;
+=======
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+
+            //Keep this line to use Sql Injection
+            //Don't change
+            //Example keyword: abcef%";TRUNCATE banks;##
+            $users = self::$_connection->multi_query($sql);
+>>>>>>> origin/1-php-202109/1-master
         } else {
             $sql = 'SELECT * FROM users';
+            $users = $this->select($sql);
         }
-
-        $users = $this->select($sql);
 
         return $users;
     }
