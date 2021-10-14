@@ -7,8 +7,10 @@ $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+    $user = $userModel->findUserById($id); //Update existing user
+    
 }
+
 
 if (!empty($_POST['submit'])) {
 
@@ -36,14 +38,18 @@ if (!empty($_POST['submit'])) {
                     User form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                    <input type="hidden" name="id" value="<?php echo $user[0]['id'] ?>">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
                     </div>
                     <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="form-group">
                         <label for="fullname">Full Name</label>
-                        <input type="text" name="fullname" class="form-control" placeholder="Full Name">
+                        <input type="fullname" name="fullname" class="form-control" placeholder="fullname">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
@@ -51,16 +57,13 @@ if (!empty($_POST['submit'])) {
                     </div>
                     <div class="form-group">
                     <label for="type">Type</label>
-                        <select id="type">
+                        <select name="type" id="type">
                             <option value="admin">Admin</option>
                             <option value="user">User</option>
                             <option value="guest">Guest</option>
                         </select>                        
                     </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                    </div>
+
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
             <?php } else { ?>

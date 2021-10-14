@@ -1,4 +1,9 @@
 <?php
+$id = '';
+if(!empty($_SESSION['id'])) {
+    $id = $_SESSION['id'];
+}
+
 $keyword = '';
 if(!empty($_GET['keyword'])) {
     $keyword = $_GET['keyword'];
@@ -31,6 +36,10 @@ if(!empty($_GET['keyword'])) {
                     </div>
                     <button type="submit" class="btn btn-default">Search</button>
                 </form>
+                <ul class="nav navbar-nav">
+                    <li><a href="form_bank.php">Add new bank</a></li>
+
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -38,13 +47,21 @@ if(!empty($_GET['keyword'])) {
                             Account <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Profile</a></li>
+                            <li><a href="view_user.php?id=<?php echo $id ?>">Profile</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Login</a></li>
-                            <li><a href="#">Logout</a></li>
+                            <li><a href="login.php">Login</a></li>
+                            <li><a href="logout.php">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
     </nav>
+    <?php if(!empty($_SESSION['message'])){ ?>
+        <div class="alert alert-warning" role="alert">
+            <?php
+            echo $_SESSION['message'];
+            unset($_SESSION['message']);
+            ?>
+        </div>
+    <?php } ?>
 </div>
