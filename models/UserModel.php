@@ -73,7 +73,6 @@ class UserModel extends BaseModel {
                 "'" . $input['name'] . "', '".md5($input['password'])."', '".$input['fullname']."', '".$input['email']."', '".$input['type']."')";
 
 
->>>>>>> origin/1-php-202109/2-groups/2-B/master
 
         $user = $this->insert($sql);
 

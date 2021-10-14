@@ -47,7 +47,6 @@ $token = md5(uniqid());
 <!--                   Ẩn token-->
                     <input type="hidden" name="_token" value="<?php echo $token ?>">
                     <input type="hidden" name="id" value="<?php echo $_id ?>">
->>>>>>> origin/1-php-202109/2-groups/2-B/master
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
