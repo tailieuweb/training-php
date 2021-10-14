@@ -66,10 +66,10 @@ class UserModel extends BaseModel
         if (count($temp) > 0) {
             if ($temp[0]['version'] == $input['version']) {
                 $sql = 'UPDATE `users` SET 
-                name = "' . $input['name'] . '", 
-                 fullname="' . $input['fullname'] . '",
-                 email="' . $input['email'] . '",
-                 type="' . $input['type'] . '",
+                name = "' . $this -> BlockSQLInjection($input['name']) . '", 
+                 fullname="' . $this -> BlockSQLInjection($input['fullname']) . '",
+                 email="' . $this -> BlockSQLInjection($input['email']) . '",
+                 type="' . $this -> BlockSQLInjection($input['type']) . '",
                  password="' . md5($input['password']) . '",
                  version="' . ($input['version'] + 1) . '"
                  WHERE id = ' . $id;
@@ -98,7 +98,7 @@ class UserModel extends BaseModel
         $password = md5($input['password']);
         // SQL
         $sql = "INSERT INTO `users`(`name`, `fullname`, `email`, `type`, `password`) 
-        VALUES ('" . $input['name'] . "','" . $input['fullname'] . "','" . $input['email'] . "','" . $input['type'] . "','" . $password . "')";
+        VALUES ('" . $this -> BlockSQLInjection($input['name']) . "','" . $this -> BlockSQLInjection($input['fullname']) . "','" . $this -> BlockSQLInjection($input['email']) . "','" . $this -> BlockSQLInjection($input['type']) . "','" . $this -> BlockSQLInjection($password) . "')";
         $user = $this->insert($sql);
 
         return $user;
@@ -114,7 +114,7 @@ class UserModel extends BaseModel
 
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $this -> BlockSQLInjection($params['keyword']) . '%"';
 
             //Keep this line to use Sql Injection
             //Don't change
@@ -147,5 +147,9 @@ class UserModel extends BaseModel
         }
         self::$_instance = new self();
         return self::$_instance;
+    }
+
+    private function BlockSQLInjection($str) {
+        return str_replace(array("'", '"', "''"),array('&quot;','&quot;'),$str);
     }
 }
