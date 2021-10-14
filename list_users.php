@@ -5,8 +5,8 @@ session_start();
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
-$userModel = $factory->make('user');
 
+$type = "user";
 $params = [];
 if (!empty($_GET['keyword'])) {
     //Example keyword: abcef%";TRUNCATE banks;##
@@ -15,23 +15,28 @@ if (!empty($_GET['keyword'])) {
     //$keyword = $_GET['keyword'];
 
     //Keyword after clean special chars
-    $keyword = UserModel::clean($_GET['keyword']);
+    $keyword = FactoryPattern::clean($_GET['keyword']);
     var_dump($keyword);    
     $params['keyword'] =  $keyword; 
 }
+
+if (!empty($_GET['type'])) {
+    $type = $_GET['type'];
+}
+$userModel = $factory->getType($type);
 
 $users = $userModel->getUsers($params);
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home</title>
+    <title>home - <?php echo $type?></title>
     <?php include 'views/meta.php' ?>
 </head>
     <?php include 'views/header.php';?>
 <body>
     <div class="container">
-        <?php if (!empty($users)) {?>
+        <?php if (!empty($users) && !empty($type)) {?>
             <div class="alert alert-warning" role="alert">
                 List of users!<br>
                 Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
@@ -68,6 +73,9 @@ $users = $userModel->getUsers($params);
                                 </a>
                                 <a href="delete_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
+                                </a>
+                                <a href="delete_bank.php?id=<?php echo $user['id'] ?>">
+                                    <i class="fa fa-money" aria-hidden="true" title="Delete Cost"></i>
                                 </a>
                             </td>
                         </tr>
