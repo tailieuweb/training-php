@@ -95,21 +95,35 @@ class UserModel extends BaseModel {
      */
     public function getUsers($params = []) {
         //Keyword
-        if (!empty($params['keyword'])) {
-            $str_keyword = $this->matchRegexInput($params);
-            $str_keyword =  "%" . $params['keyword'] . "%";
-            $sql = self::$_connection->prepare('SELECT * FROM users WHERE name LIKE ?');
-            $sql->bind_param('s',  $str_keyword);
-        } else {
-            $sql = self::$_connection->prepare('SELECT * FROM users');
-        }
-        $sql->execute();
-        $items = array();
-        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
-        return $items;
+             if (!empty($params['keyword'])) {
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+
+            //Keep this line to use Sql Injection
+            //Don't change
+            //Example keyword: abcef%";TRUNCATE banks;##
+            // $users = self::$_connection->multi_query($sql);
+            $users = $this->select($sql);
+            } else {
+                $sql = 'SELECT * FROM users';
+                $users = $this->select($sql);
+            }
+
+            return $users;
+        // if (!empty($params['keyword'])) {
+        //     $str_keyword = $this->matchRegexInput($params);
+        //     $str_keyword =  "%" . $params['keyword'] . "%";
+        //     $sql = self::$_connection->prepare('SELECT * FROM users WHERE name LIKE ?');
+        //     $sql->bind_param('s',  $str_keyword);
+        // } else {
+        //     $sql = self::$_connection->prepare('SELECT * FROM users');
+        // }
+        // $sql->execute();
+        // $items = array();
+        // $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        // return $items;
     }
     public function CreateProduct1(){
-        echo 'product 1';
+        echo 'product 1'; 
     }
     public function CreateProduct2(){
         echo 'product 2';

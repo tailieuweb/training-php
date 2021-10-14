@@ -64,13 +64,13 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['name']?>
                             </td>
                             <td>
-                                <?php echo strip_tags($user['fullname'])?>
+                                <?php echo ($user['fullname'])?>
                             </td>
                             <td>
-                                <?php echo strip_tags($user['email'])?>
+                                <?php echo ($user['email'])?>
                             </td>
                             <td>
-                                <?php echo strip_tags($user['type'])?>
+                                <?php echo ($user['type'])?>
                             </td>
                             <td>
                                 <a href="form_user.php?id=<?= $user['id'] ?>">
