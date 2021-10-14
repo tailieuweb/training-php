@@ -1,7 +1,7 @@
 <?php
 // Start the session
 session_start();
-
+$_SESSION['token']=md5(1);
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
@@ -9,7 +9,6 @@ $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
-
 $users = $userModel->getUsers($params);
 ?>
 <!DOCTYPE html>
@@ -28,7 +27,6 @@ $users = $userModel->getUsers($params);
             <table class="table table-striped">
             <thead>
                     <tr>
-                        <th scope="col">ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">Fullname</th>
                         <th scope="col">Mail</th>
@@ -39,7 +37,6 @@ $users = $userModel->getUsers($params);
                 <tbody>
                     <?php foreach ($users as $user) {?>
                         <tr>
-                            <th scope="row"><?php echo $user['id']?></th>
                             <td>
                                 <?php echo $user['name']?>
                             </td>
@@ -59,9 +56,9 @@ $users = $userModel->getUsers($params);
                                 <a href="view_user.php?id=<?php echo md5($user['id']) ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo md5($user['id']) ?>">
+                                <a href="delete_user.php?id=<?php echo md5($user['id'])?>&token=<?php echo $_SESSION['token'] ?? '' ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
-                                </a>
+                                </a>                              
                             </td>
                         </tr>
                     <?php } ?>

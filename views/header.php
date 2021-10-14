@@ -43,7 +43,7 @@ if(!empty($_GET['keyword'])) {
                             Account <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="view_user.php?id=<?php echo $id ?>">Profile</a></li>
+                            <li><a href="view_user.php?id=<?php echo md5($id) ?>">Profile</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="login.php">Login</a></li>
                             <li><a href="logout.php">Logout</a></li>
