@@ -5,14 +5,15 @@ session_start();
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
-$userModel = $factory->make('user');
+$bankModel = $factory->make('bank');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
 
-$users = $userModel->getUsers($params);
+// $users = $userModel->getUsers($params);
+$banks = $bankModel->getBank($params);
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,7 +26,7 @@ $users = $userModel->getUsers($params);
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-        <?php if (!empty($users)) { ?>
+        <?php if (!empty($banks)) { ?>
             <div class="alert alert-warning" role="alert">
                 List of users! <br>
                 Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
@@ -33,39 +34,27 @@ $users = $userModel->getUsers($params);
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Fullname</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col"> User ID</th>
+                        <th scope="col">Cost</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user) { ?>
+                    <?php foreach ($banks as $bank) { ?>
                         <tr>
-                            <th scope="row"><?php echo htmlentities( $user['id']) ?></th>
+                            <th scope="row"><?php echo htmlentities( $bank['id']) ?></th>
                             <td>
-                                <?php echo $user['name'] ?>
+                                <?php echo $bank['cost'] ?>
+                            </td>
                             </td>
                             <td>
-                                <?php echo $user['fullname'] ?>
-                            </td>
-                            <td>
-                                <?php echo $user['email'] ?>
-                            </td>
-                            <td>
-                                <?php echo $user['type'] ?>
-                            </td>
-                            <td>
-                                <a href="form_user.php?id=<?php echo base64_encode($user['id']) ?>">
+                                <a href="form_bank.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo base64_encode($user['id']) ?>">
+                                <a href="view_bank.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo base64_encode($user['id']) ?>">
-                                    <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>                    
+                                <a href="delete_bank.php?id=<?php echo $bank['id'] ?>">
+                                    <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
                         </tr>
