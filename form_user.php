@@ -44,12 +44,13 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php' ?>
     <div class="container">
 
-        <?php if ($user || empty($id)) { ?>
+        <?php if ($user || empty($_id)) { ?>
             <div class="alert alert-warning" role="alert">
                 User form
             </div>
             <form method="POST">
                 <input type="hidden" name="id" value="<?php if (!empty($user[0]['id'])) echo $user[0]['id'] ?>">
+                <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo md5($user[0]['version']."chuyen-de-web-1") ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">

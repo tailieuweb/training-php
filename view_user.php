@@ -16,17 +16,6 @@ if (!empty($_GET['id'])) {
     $user = $userModel->findUserById($id_manage);//Update existing user
 }
 
-
-if (!empty($_POST['submit'])) {
-
-    if (!empty($id)) {
-        $userModel->updateUser($_POST);
-    } else {
-        $userModel->insertUser($_POST);
-    }
-    header('location: list_users.php');
-}
-
 ?>
 <!DOCTYPE html>
 <html>

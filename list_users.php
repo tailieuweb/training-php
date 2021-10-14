@@ -8,39 +8,6 @@ if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
 $users = $userModel->getUsers($params);
-// $_SESSION['token'] = bin2hex(random_bytes(35));
-$whitelist = [
-    ''
-];
-$cookies = [];
-foreach (headers_list() as $headers__value) {
-    if (strpos($headers__value, 'Set-Cookie: ') === 0) {
-        $cookies[] = $headers__value;
-    }
-}
-if (!empty($cookies)) {
-    header_remove('Set-Cookie');
-    foreach ($cookies as $cookies__value) {
-        $accept = false;
-        foreach ($whitelist as $whitelist__value) {
-            if (strpos($cookies__value, 'Set-Cookie: ' . $whitelist__value . '=') === 0) {
-                $accept = true;
-                break;
-            }
-        }
-        if ($accept === true) {
-            header($cookies__value);
-        }
-    }
-}
-if (!empty($_COOKIE)) {
-    foreach ($_COOKIE as $cookies__key => $cookies__value) {
-        if (!in_array($cookies__key, $whitelist)) {
-            unset($_COOKIE[$cookies__key]);
-            setcookie($cookies__key, '', time() - 3600, '/');
-        }
-    }
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -52,11 +19,10 @@ if (!empty($_COOKIE)) {
 
 <body>
     <?php include 'views/header.php' ?>
-    <div class=" container">
+    <div class="container">
         <?php if (!empty($users)) { ?>
             <div class="alert alert-warning" role="alert">
-                List of users! <br>
-                Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
+                List of users!
             </div>
             <table class="table table-striped">
                 <thead>
@@ -64,6 +30,7 @@ if (!empty($_COOKIE)) {
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">Fullname</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Type</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -90,7 +57,6 @@ if (!empty($_COOKIE)) {
                                 </a>
                                 <a href="delete_user.php?id=<?php echo rand(100, 999) . md5($user['id'] . "list-user") . rand(100, 999) ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
-                                    <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?? '' ?>">
                                 </a>
                             </td>
                         </tr>
