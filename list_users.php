@@ -7,11 +7,11 @@ $factory = new FactoryPattern();
 
 $userModel = $factory->make('users');
 //SQL injection - xóa các ký tự trong chuỗi thừa khoong phai la so
-function clean($str){
-    $str = preg_replace('/[^A-Za-z0-9]/','',$str);// xoa ky tu
-    return preg_replace('/ +/',' ',$str );
+// function clean($str){
+//     $str = preg_replace('/[^A-Za-z0-9]/','',$str);// xoa ky tu
+//     return preg_replace('/ +/',' ',$str );
 
-}
+// }
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];

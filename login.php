@@ -3,13 +3,14 @@
 session_start();
 include 'views/header.php';
 require_once 'models/UserModel.php';
+include 'views/meta.php';
 $userModel = new UserModel();
 
 
 if (!empty($_POST['submit'])) {
     $users = [
-        // goi hàm clean -> list_user
-        'username' => clean($_POST['username']),
+      
+        'username' => $_POST['username'],
         'password' => $_POST['password']
     ];
     $user = NULL;
@@ -31,7 +32,6 @@ if (!empty($_POST['submit'])) {
 <html>
 <head>
     <title>User form</title>
-    <?php include 'views/meta.php' ?>
 </head>
 <body>
 

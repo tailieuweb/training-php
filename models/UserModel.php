@@ -24,12 +24,17 @@ class UserModel extends BaseModel {
      * @param $password
      * @return array
      */
+    // sql injection -> fix login-> ma hoa ki tu
     public function auth($userName, $password) {
         $md5Password = md5($password);
     //Login Pass khi để 1(SQL Injection)
         //SELECT * FROM users WHERE name = "' . $userName . '" AND  password = "'.$md5Password.'" OR "1"'
         //SELECT * FROM users WHERE name = "hacker2" AND password = "12345" OR "1"
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND  password = "'.$md5Password.'"';
+        // $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND  password = "'.$md5Password.'"';
+        
+		$username = mysqli_real_escape_string(self::$_connection, $_POST['username']);
+		$md5password = mysqli_real_escape_string(self::$_connection, $_POST['password']);
+		$sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND  password = "'.$md5Password.'"';
         $user = $this->select($sql);
         return $user;
     }
@@ -55,14 +60,15 @@ class UserModel extends BaseModel {
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
                  name = "' . $input['name'] .'", 
-                 fullname = "' . strip_tags($input['fullname']) .'", 
+                 fullname = "' .  mysqli_real_escape_string(self::$_connection, $input['fullname']) .'", 
                  email = "' . strip_tags($input['email']) .'", 
-                 type = "' . strip_tags($input['type']) .'", 
+                 type = "' . $input['type'] .'", 
                  password="'. md5($input['password']) .'"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
 
         return $user;
+        
     }
 
     /**
@@ -73,7 +79,7 @@ class UserModel extends BaseModel {
     public function insertUser($input) {
 
         $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`,`email`,`type`,`password`) 
-        VALUES (" . "'" . $input['name'] . "', '".strip_tags($input['fullname']). "', '" . strip_tags($input['email']) . "', '" . strip_tags($input['type']) . "','".md5($input['password']) . "')";
+        VALUES (" . "'" . $input['name'] . "', '".mysqli_real_escape_string(self::$_connection,$input['fullname']). "', '" . strip_tags($input['email']) . "', '" . $input['type'] . "','".md5($input['password']) . "')";
 
         $user = $this->insert($sql);
 
@@ -82,10 +88,23 @@ class UserModel extends BaseModel {
     // end strip_tags
     // SQL Injection -> search -> fix
     public function getUsers($params = []) {
-        //Keyword
+        //Keywordngan chan ca tu khoa gia tri va cai ki tu
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' .mysql_real_escape_string(self::$_connection,$params['keyword'] ) .'%"';
-
+            $params['keyword'] = str_replace(
+                array(
+                    ',', ';', '#', '/', '%', 'select', 'update', 'insert', 'delete', 'truncate',
+                    
+                    'union', 'or', '"', "'", 'SELECT', 'UPDATE', 'INSERT', 'DELETE', 
+                    
+                    'TRUNCATE', 'UNION', 'OR'
+                ),
+                array(''),
+                $params['keyword']
+            );
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' .$params['keyword'] .'%"';
+            var_dump($sql);
+            // echo sprintf($sql,mysql_real_escape_string($params['keyword']));
+            // var_dump($sql);
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
