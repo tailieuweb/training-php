@@ -10,7 +10,7 @@ $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword']; 
 }
-
+$key = md5(uniqid());
 $banks = $bankmodel->getBanks($params);
 ?>
 <!DOCTYPE html>
@@ -53,7 +53,7 @@ $banks = $bankmodel->getBanks($params);
                                 <a href="view_user.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $bank['id']?>">
+                                <a href="#?id=<?php echo $bank['id']?>&token=<?php echo $key?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

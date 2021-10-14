@@ -95,6 +95,7 @@ class UserModel extends BaseModel {
                  version = "'.$version.'"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
+        //var_dump($input['version']); die(); 
         return $user;
     }
     public function getVersion($id){

@@ -17,14 +17,13 @@ if (!empty($_GET['id'])) {
 if (!empty($_GET['version'])) {
     $version =  $_GET['version'];   
 }
-function phpAlert($msg) {
-    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
-}
 if (!empty($_POST['submit'])) {
     if (!empty($newid) && !empty($version)) {     
         if($userModel->getVersion($newid) == $version){           
             $userModel->updateUser($_POST);          
             $userModel->updateVersion($_POST);
+        }else{
+           var_dump("cap nhat lai"); die();
         }      
     } else {
         $userModel->insertUser($_POST);
@@ -75,6 +74,7 @@ if (!empty($_POST['submit'])) {
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
+                    <input type="hidden" name="version" value="<?php echo $version ?>">
 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
