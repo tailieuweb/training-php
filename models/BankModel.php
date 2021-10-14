@@ -12,7 +12,7 @@ class BankModel extends BaseModel
     public function getBankById($id)
     {
         $id = $this->decryptID($id);
-        $sql = 'SELECT `banks`.*, `users`.`fullname`, `users`.`name` FROM `users` INNER JOIN `banks` WHERE `users`.`id` = `banks`.`user_id` AND `banks`.`id` = ' . $id;
+        $sql = 'SELECT * FROM `users` INNER JOIN `banks` WHERE `users`.`id` = `banks`.`user_id` AND `banks`.`id` = ' . $id;
         $bank = $this->select($sql);
 
         return $bank;

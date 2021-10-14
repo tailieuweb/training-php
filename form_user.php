@@ -59,7 +59,7 @@ if (!empty($_POST['submit'])) {
             </div>
             <div class="form-group">
                 <label for="type">Type</label>
-                <select id="type">
+                <select name="type">
                     <option value="admin">admin</option>
                     <option value="user">user</option>
                 </select>
