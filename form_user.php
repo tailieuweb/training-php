@@ -59,7 +59,7 @@ $tokenvalue = md5(uniqid());
                     </div>
 <!--                    add email-->
                     <div class="form-group">
-                        <label for="email">Password</label>
+                        <label for="email">Email</label>
 
                         <input type="text" name="email" class="form-control" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
 
