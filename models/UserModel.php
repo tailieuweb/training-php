@@ -47,8 +47,7 @@ class UserModel extends BaseModel {
         $string = substr($t,18);
 
         $version = 'SELECT version FROM users WHERE id = '.$input['id'].'';
-        $newversion = $this->select($temp);
-        var_dump($input['id']);
+        $newversion = $this->select($version);
 
         if($newversion[0]['version'] == $string){
             $new = $string+1;
