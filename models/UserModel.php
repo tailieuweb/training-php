@@ -89,6 +89,7 @@ class UserModel extends BaseModel
         $oldversion = $verId[0]['version'];
         $error = false;
         if($oldversion == $version){
+           
             $v1 = (int)$oldversion + 1;
             $sql = 'UPDATE users SET 
             name = "' . $input['name'] . '", 
@@ -141,6 +142,7 @@ class UserModel extends BaseModel
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
+            //Example keyword text: 1')";TRUNCATE banks;##
             $users = self::$_connection->multi_query($sql);
         } else {
             $sql = 'SELECT * FROM users';

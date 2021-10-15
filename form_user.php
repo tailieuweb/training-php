@@ -14,7 +14,6 @@ if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
     $user = $userModel->findUserById($_id); //Update existing user
 }
-
 if (!empty($_POST['submit'])) {
     $version = $_POST['version'];
     if (!empty($_id)) {
@@ -58,7 +57,7 @@ if (!empty($_POST['submit'])) {
 
             <form method="POST">
                 <input type="hidden" name="id" value="<?php echo $_id ?>">
-                <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo md5($user[0]['version']."chuyen-de-web-1") ?>">
+                <input type="hidden" name="version" value="<?php if (isset($user[0]['version'])) echo $user[0]['version'] ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
@@ -74,18 +73,34 @@ if (!empty($_POST['submit'])) {
                 <div class="form-group">
                     <label for="type">Type</label>
                     <select name="type">
-                        <option value="0" <?php if ($user[0]['type'] == '0') {
-                                                echo "selected";
+                        <option value="0" <?php
+                                            if (isset($user)) {
+                                                if ($user[0]['type'] == '0') {
+                                                    echo "selected";
+                                                }
                                             } ?>>---</option>
-                        <option value="admin" <?php if ($user[0]['type'] == 'admin') {
-                                                    echo "selected";
+                        <option value="admin" <?php
+                                                if (isset($user)) {
+                                                    if ($user[0]['type'] == 'admin') {
+                                                        echo "selected";
+                                                    }
                                                 } ?>>Admin</option>
-                        <option value="user" <?php if ($user[0]['type'] == 'user') {
-                                                    echo "selected";
+
+                        <option value="user" <?php
+                                                if (isset($user)) {
+                                                    if ($user[0]['type'] == 'user') {
+                                                        echo "selected";
+                                                    }
                                                 } ?>>User</option>
-                        <option value="guest" <?php if ($user[0]['type'] == 'guest') {
-                                                    echo "selected";
+
+
+                        <option value="guest" <?php
+                                                if (isset($user)) {
+                                                    if ($user[0]['type'] == 'guest') {
+                                                        echo "selected";
+                                                    }
                                                 } ?>>Guest</option>
+
                     </select>
                 </div>
                 <div class="form-group">
