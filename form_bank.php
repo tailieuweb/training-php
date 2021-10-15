@@ -38,7 +38,7 @@ if (!empty($_POST['submit'])) {
 <?php include 'views/header.php' ?>
 <div class="container">
 
-    <?php if ($bank || !isset($bank_idk)) { ?>
+    <?php if ($bank || !isset($bank_id)) { ?>
         <div class="alert alert-warning" role="alert">
             Bank form
         </div>

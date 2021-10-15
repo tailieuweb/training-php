@@ -2,21 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fca2aa6e-54aa-4226-b8f8-032cc5b95d0a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/delete_bank.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/form_bank.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/list_banks.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/BankModel.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/FactoryPattern.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/view_bank.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delete_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/delete_user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/error_submit_user_form.php" beforeDir="false" afterPath="$PROJECT_DIR$/error_submit_user_form.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/form_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/form_user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/form_bank.php" beforeDir="false" afterPath="$PROJECT_DIR$/form_bank.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/list_users.php" beforeDir="false" afterPath="$PROJECT_DIR$/list_users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/BaseModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/BaseModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/UserModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/UserModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/view_user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/FactoryPattern.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/FactoryPattern.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +75,11 @@
       <workItem from="1633835880738" duration="7132000" />
       <workItem from="1633860784405" duration="1674000" />
       <workItem from="1633877359609" duration="313000" />
-      <workItem from="1633991231364" duration="8598000" />
+      <workItem from="1633991231364" duration="8890000" />
+      <workItem from="1634037555038" duration="585000" />
+      <workItem from="1634170648991" duration="29000" />
+      <workItem from="1634222641102" duration="1661000" />
+      <workItem from="1634255359382" duration="461000" />
     </task>
     <servers />
   </component>
