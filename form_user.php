@@ -14,7 +14,7 @@ if (!empty($_GET['id'])) {
 }
 
 //Kiem tra nếu token bằng nhau thì thực hiện submit form theo yêu cầu:
-if (!empty($_POST['submit'])&& $_SESSION['_token']===$_POST['_token']) {
+if (!empty($_POST['submit'])&& $_SESSION['token']===$_POST['token']) {
 
     if (!empty($_id)) {
         $userModel->updateUser($_POST);
@@ -25,7 +25,8 @@ if (!empty($_POST['submit'])&& $_SESSION['_token']===$_POST['_token']) {
     header('location: list_users.php');
 
 }
-$token = md5(uniqid());
+//Tao token va ma hoa token:
+$tokenvalue = md5(uniqid());
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,7 +46,7 @@ $token = md5(uniqid());
                 <form method="POST">
 
 <!--                   Ẩn token-->
-                    <input type="hidden" name="_token" value="<?php echo $token ?>">
+                    <input type="hidden" name="token" value="<?php echo $tokenvalue ?>">
                     <input type="hidden" name="id" value="<?php echo $_id ?>">
                     <div class="form-group">
                         <label for="name">Name</label>
@@ -76,8 +77,8 @@ $token = md5(uniqid());
 
 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
-<!--                    Lưu sesion_token-->
-               <?php $_SESSION['_token']=$token;
+<!--                    Lưu sesiontoken từ biến token dã được tạo vào sesíon-->
+               <?php $_SESSION['token']=$tokenvalue;
                ?>
                 </form>
 

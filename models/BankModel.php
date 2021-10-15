@@ -1,74 +1,97 @@
 <?php
-require_once 'configs/database.php';
 
-abstract class BaseModel {
-    // Database connection
-    protected static $_connection;
+require_once 'BaseModel.php';
 
-    public function __construct() {
-
-        if (!isset(self::$_connection)) {
-            self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-            if (self::$_connection->connect_errno) {
-                printf("Connect failed");
-                exit();
-            }
-        }
-
-    }
-
+class BankModel extends BaseModel
+{
     /**
-     * Query in database
-     * @param $sql
+     * Get bank account
+     * @param array $params
+     * @return array
      */
-    protected function query($sql) {
-
-        $result = self::$_connection->query($sql);
-        return $result;
+    public function getBank($params = [])
+    {
+        $sql = "SELECT * FROM `banks` INNER JOIN users ON banks.user_id=users.id";
+        $banks = $this->select($sql);
+        return $banks;
     }
-
     /**
-     * Select statement
-     * @param $sql
-     */
-    protected function select($sql) {
-        $result = $this->query($sql);
-        $rows = [];
-        if (!empty($result)) {
-            while ($row = $result->fetch_assoc()) {
-                $rows[] = $row;
-            }
-        }
-        return $rows;
-    }
-
-    /**
-     * Delete statement
-     * @param $sql
+     * Delete bank account balance
+     * @param $id
      * @return mixed
      */
-    protected function delete($sql) {
-        $result = $this->query($sql);
-        return $result;
+    public function deleteBalanceById($id)
+    {
+        $sql = 'UPDATE `banks` SET `cost`="0" WHERE `user_id` ='  . $id;
+        return $this->update($sql);
+    }
+
+    public function findBankInfoById($id)
+    {
+        $sql = 'SELECT * FROM banks WHERE id = ' . $id;
+        $items = $this->select($sql);
+
+        return $items;
+    }
+
+    public function findBankInfoByUserID($user_id)
+    {
+        $sql = 'SELECT * FROM banks WHERE user_id = ' . $user_id;
+        $items = $this->select($sql);
+
+        return $items;
     }
 
     /**
-     * Update statement
-     * @param $sql
+     * Update bank info
+     * @param $input
      * @return mixed
      */
-    protected function update($sql) {
-        $result = $this->query($sql);
-        return $result;
+    public function updateBankInfo($input)
+    {
+        $sql = 'UPDATE banks SET 
+                 cost = "' . $input['cost']  . '"
+                WHERE id = ' . ($input['id']);
+        $item = $this->update($sql);
+
+        return $item;
     }
 
     /**
-     * Insert statement
-     * @param $sql
+     * Insert bank info
+     * @param $input
+     * @return mixed
      */
-    protected function insert($sql) {
-        $result = $this->query($sql);
-        return $result;
+    public function insertBankInfo($input)
+    {
+        $sql = "INSERT INTO `banks` VALUES (" .
+            0 . ", "
+            . $input['user_id'] . ", "
+            . $input['cost']
+            . ")";
+
+        $item = $this->insert($sql);
+
+        return $item;
     }
 
+    /**
+     * Search users
+     * @param array $params
+     * @return array
+     */
+    public function getBanksInfo($params = [])
+    {
+        //Keyword
+        if (!empty($params['user_id'])) {
+            $sql = 'SELECT * FROM banks 
+            WHERE user_id = ' . $params['user_id'];
+            $items = $this->select($sql);
+        } else {
+            $sql = 'SELECT * FROM banks';
+            $items = $this->select($sql);
+        }
+
+        return $items;
+    }
 }
