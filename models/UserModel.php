@@ -80,7 +80,8 @@ class UserModel extends BaseModel {
     public function getUsers($params = []) {
 
         if(!empty($params['keyword'])) {
-            $key = htmlentities($params['keyword']) ;
+            //$key = htmlentities($params['keyword']) ;
+            $key = $params['keyword'] ;
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
 
             //var_dump($sql);die();
