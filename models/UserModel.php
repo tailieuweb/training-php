@@ -2,7 +2,18 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel {
+class UserModel extends BaseModel
+{
+    public static function getInstance()
+    {
+        if(self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }
+
+    public function findUserById($id)
 
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
@@ -31,8 +42,20 @@ class UserModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id) {
-        $sql = 'DELETE FROM users WHERE id = '.$id;
+    public function deleteUserById($id)
+    {   
+        $isAuth = $this->getUsers();
+        foreach ($isAuth as $item) {
+            if ($item['id'] == $id) {
+                $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
+                return $this->delete($sql);
+            }
+        }
+    }
+    // Delete user by id : Step 2
+    public function dropUserById($id)
+    {   
+        $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
 
     }

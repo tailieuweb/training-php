@@ -9,9 +9,10 @@ $_id = NULL;
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
-    $user = $userModel->findUserById($_id);//Update existing user
+    var_dump($_id);
+    $user = $userModel->findUserById($_id);
+     
 }
-
 
 if (!empty($_POST['submit'])) {
 
@@ -47,15 +48,22 @@ if (!empty($_POST['submit'])) {
             </div>
 
             <div class="form-group">
-                <label for="fullname">Fullname</label>
-                <input class="form-control" name="fullname" placeholder="Fullname" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+                <label for="full-name">Full name</label>
+                <input class="form-control" name="full-name" placeholder="Full name" id="full-name"
+                    value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Password"
+                    value="<?php if (!empty($user[0]['password'])) echo $user[0]['password'] ?>">
             </div>
 
             <div class="form-group">
                 <label for="email">Email</label>
-                <input  class="form-control" name="email" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
-            </div>
-
+                <input type="email" name="email" class="form-control" placeholder="email"
+                    value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
+            
             <div class="form-group">
                 <label for="type">Type</label>
                 <select class="form-control" name="type">
