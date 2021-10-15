@@ -9,12 +9,22 @@ $users = $userModel->getUsers();
 $bank = NULL; //Add new user
 $_id = NULL;
 
+
+if (!empty($_GET['id'])) {
+    $_id = $_GET['id'];
+    $bank = $banksModel->findBankById($_id); //Update existing user
+}
+
+
 if (!empty($_POST['submit'])) {
 
-    if (empty($_id)) {
+    if (!empty($_id)) {
+        $banksModel->updateBank($_POST);
+    } else {
         $banksModel->insertBank($_POST);
     }
-    header('location: list_users.php');
+
+    header('location: list_bank.php');
 }
 
 ?>
@@ -35,13 +45,14 @@ if (!empty($_POST['submit'])) {
                 Bank form
             </div>
             <form method="POST">
-                <input type="hidden" name="id" value="<?php echo $id ?>">
+                <?php echo $id ?>
+                <input type="hidden" name="id" value="<?php echo $_id ?>">
                 <div class="form-group">
                     <label for="User_id">User id</label>
                     <select name="user_id" value="<?php if (!empty($user[0]['user_id'])) echo $user[0]['user_id'] ?>">
                         <option value="">-</option>
                         <?php foreach ($users as $user) { ?>
-                            <option value="<?php echo $user['id'] ?>"><?php echo $user['id'] ?></option>
+                            <option <?php if (!empty($bank[0]['user_id'])) echo $bank[0]['user_id'] == $user['id'] ? 'selected' : '' ?> value="<?php echo $user['id'] ?>"><?php echo $user['id'] ?></option>
                         <?php } ?>
                     </select>
                 </div>
