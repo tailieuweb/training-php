@@ -9,13 +9,13 @@ if (!empty($_GET['keyword'])) {
 
 $users = $userModel->getUsers($params);
 
-if(isset($_GET['yes'])){
+if(isset($_GET['Correct'])){
     echo "<script>alert('!!! Cập nhật thành công !!!')</script>";
     echo "<script>window.location.href = 'list_users.php'</script>";
 }
 
-if(isset($_GET['no'])){
-    echo "<script>alert('Có vẻ như dữ liệu của bạn đã được thay đổi trước đó rồi!!! Vui lòng kiểm tra lại dữ liệu')</script>";
+if(isset($_GET['error'])){
+    echo "<script>alert('Dữ liệu của bạn đã củ ,vui lòng tải lại để cập nhập!')</script>";
     echo "<script>window.location.href = 'list_users.php'</script>";
 }
 ?>

@@ -4,7 +4,7 @@ $userModel = new UserModel();
 
 $user = NULL; //Add new user
 $id = NULL;
-$keyCode = "aomU87239dadasdasd";
+$keyCode = "aoma87939dadasddsd";
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
