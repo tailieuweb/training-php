@@ -25,7 +25,7 @@ if (!empty($_GET['id'])) {
 
 if (!empty($_POST['submit'])) {
     if (!empty($_id)) {
-        if(isset($_POST['version'])&&$_POST['version']==$user[0]['version']){
+        if(isset($_POST['version'])&&$_POST['version']==md5($user[0]['version'])){
             
                 $userModel->updateUser($_POST);
             
@@ -80,7 +80,7 @@ if (!empty($_POST['submit'])) {
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
                     <input type="hidden" name="version"
-                    value="<?php if (!empty($user[0]['version'])) echo $user[0]['version'] ?>">
+                    value="<?php if (!empty($user[0]['version'])) echo md5($user[0]['version']) ?>">
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
             <?php } else { ?>
