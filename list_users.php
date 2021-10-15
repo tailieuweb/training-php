@@ -2,8 +2,9 @@
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
     $key = "ksghd09kjjhih";
-    // var_dump($key);
+     //var_dump($key);
 $users = $userModel->getUsers();
+
 ?>
 <!DOCTYPE html>
 <html>
