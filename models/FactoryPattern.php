@@ -1,14 +1,11 @@
 <?php
 require_once 'models/UserModel.php';
-class FactoryPattern
-{
-
-    public function make($model)
-    {
-        if ($model == 'user') {
+class FactoryPattern{
+    public function make($model){
+        if($model=='user'){
             return UserModel::getInstance();
-        } else if ($model == 'bank') {
-            //
+        }elseif($model=='bank'){
+            return BankModel::getInstance();
         }
     }
 }
