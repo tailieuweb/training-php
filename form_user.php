@@ -14,11 +14,13 @@ if (!empty($_GET['token']) && hash_equals($_SESSION['token'], $_GET['token'])) {
   if (!empty($_POST['submit'])) {
     if (!empty($uid)) {
       $userModel->updateUser($_POST);
-    } else {
-      $userModel->insertUser($_POST);
     }
     header("location: list_users.php");
   }
+}
+if (!empty($_POST['submit'])) {
+  $userModel->insertUser($_POST);
+  header("location: list_users.php");
 }
 
 ?>
