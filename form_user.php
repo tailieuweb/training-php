@@ -4,15 +4,17 @@ $userModel = new UserModel();
 
 $user = NULL; //Add new user
 $_id = NULL;
-
+$id_end = NULL;
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
-    $user = $userModel->findUserById($_id); //Update existing user
+    $id_start = substr($_id,3);
+    $id_end=substr($id_start,0,-3);
+    $user = $userModel->findUserById($id_end); //Update existing user
 }
 
 if (!empty($_POST['submit'])) {
     $version = $_POST['version'];
-    if (!empty($_id)) {
+    if (!empty($id_end)) {
         $a = $userModel->updateUser($_POST, $version);
         if ($a == false) {
             $a = "Updating Error! Pleade Try Again";
@@ -40,7 +42,7 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php' ?>
     <div class="container">
 
-        <?php if ($user || empty($_id)) { ?>
+        <?php if ($user || empty($id_end)) { ?>
             <div class="alert alert-warning" role="alert">
                 User form
 
@@ -52,7 +54,7 @@ if (!empty($_POST['submit'])) {
             <?php } ?>
 
             <form method="POST">
-                <input type="hidden" name="id" value="<?php echo $_id ?>">
+                <input type="hidden" name="id" value="<?php echo $id_end ?>">
                 <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo md5($user[0]['version']."chuyen-de-web-1") ?>">
                 <div class="form-group">
                     <label for="name">Name</label>

@@ -1,6 +1,7 @@
 <?php
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryModel.php';
+$factoryModel = new FactoryPattern();
+$userModel = $factoryModel->make('user');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
@@ -52,13 +53,13 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['email'] ?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo md5($user['id'] . "chuyen-de-web-1") ?>">
+                                <a href="form_user.php?id=<?php echo rand(100, 999).md5($user['id'] . "chuyen-de-web-1").rand(100, 999) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo md5($user['id'] . "chuyen-de-web-1")  ?>">
+                                <a href="view_user.php?id=<?php echo rand(100, 999) . md5($user['id'] . "chuyen-de-web-1") . rand(100, 999)  ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo md5($user['id'] . "chuyen-de-web-1") ?>">
+                                <a href="delete_user.php?id=<?php echo rand(100, 999) . md5($user['id'] . "chuyen-de-web-1") . rand(100, 999) ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

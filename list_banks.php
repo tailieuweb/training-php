@@ -44,15 +44,15 @@ $banks = $bankModel->getBanks($params);
                             <td>
                                 <?php echo $bank['cost'] ?>
                             </td>
-                           
+
                             <td>
-                                <a href="form_bank.php?id=<?php echo md5($bank['bank_id'] . "chuyen-de-web-1") ?>">
+                                <a href="form_bank.php?id=<?php echo rand(100, 999) . md5($bank['bank_id'] . "chuyen-de-web-1") . rand(100, 999) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_bank.php?id=<?php echo md5($bank['bank_id'] . "chuyen-de-web-1")  ?>">
+                                <a href="view_bank.php?id=<?php echo rand(100, 999) . md5($bank['bank_id'] . "chuyen-de-web-1") . rand(100, 999)  ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_bank.php?id=<?php  echo md5($bank['bank_id'] . "chuyen-de-web-1") ?>">
+                                <a href="delete_bank.php?id=<?php echo rand(100, 999) . md5($bank['bank_id'] . "chuyen-de-web-1") . rand(100, 999) ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

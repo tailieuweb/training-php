@@ -9,7 +9,7 @@ class UserModel extends BaseModel
     {
         $sql1 = 'SELECT id FROM users';
         $allUser = $this->select($sql1);
-        $user =null;
+        $user = null;
         foreach ($allUser as $key) {
             $md5 = md5($key['id'] . "chuyen-de-web-1");
             if ($md5 == $id) {
@@ -47,7 +47,7 @@ class UserModel extends BaseModel
         //Lấy id của tất cả user 
         $sql1 = 'SELECT id FROM users';
         $allUser = $this->select($sql1);
-        
+
         foreach ($allUser as $key) {
             $md5 = md5($key['id'] . "chuyen-de-web-1");
             if ($md5 == $id) {
@@ -66,18 +66,27 @@ class UserModel extends BaseModel
 
     public function updateUser($input, $version)
     {
+        $id = $input['id'];
+        $id_start = substr($id, 3);
+        $id_end = substr($id_start, 0, -3);
+        
         $sql1 = 'SELECT id FROM users';
         $error = false;
         $allUser = $this->select($sql1);
         $id = 0;
+    
         foreach ($allUser as $key) {
             $md5 = md5($key['id'] . "chuyen-de-web-1");
-            if ($md5 == $input['id']) {
+            $md5_start = substr($md5, 3);
+            $md5_end = substr($md5_start, 0, -3);
+
+            if ($md5_end == $id_end) {
                 $id = $key['id'];
                 $sql = 'SELECT * FROM users WHERE id = ' . $key['id'];
                 $userById = $this->select($sql);
             }
         }
+     
         $oldTime = $userById[0]['version'] . "chuyen-de-web-1";
 
         if (md5($oldTime) == $version) {
@@ -131,9 +140,7 @@ class UserModel extends BaseModel
                 array(''),
                 $params['keyword']
             );
-
-            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] . '%"';
-
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
@@ -144,5 +151,12 @@ class UserModel extends BaseModel
         }
         return $users;
     }
-    
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }
 }

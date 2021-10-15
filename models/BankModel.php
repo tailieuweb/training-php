@@ -72,9 +72,17 @@ class BankModel extends BaseModel
         $error = false;
         $allUser = $this->select($sql1);
         $id = 0;
+
+        $_id = $input['id'];
+        $id_start = substr($_id, 3);
+        $id_end = substr($id_start, 0, -3);
+
         foreach ($allUser as $key) {
             $md5 = md5($key['id'] . "chuyen-de-web-1");
-            if ($md5 == $input['id']) {
+            $md5_start = substr($md5, 3);
+            $md5_end = substr($md5_start, 0, -3);
+
+            if ($md5_end == $id_end) {
                 $id = $key['id'];
                 $sql = 'SELECT * FROM banks WHERE id = ' . $key['id'];
                 $userById = $this->select($sql);

@@ -7,7 +7,9 @@ $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+    $id_start = substr($id,3);
+    $id_end=substr($id_start,0,-3);
+    $user = $userModel->findUserById($id_end);//Update existing user
 }
 
 ?>
