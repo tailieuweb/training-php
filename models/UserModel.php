@@ -56,12 +56,12 @@ class UserModel extends BaseModel {
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
 
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 password="'. md5($input['password']) .'",
-                 fullname="'. $input['fullname'] .'",
-                 email="'. $input['email'] .'",
-                 type="'. $input['type'] .'",
-                WHERE id = ' . $input['id'];
+                 name = "' . mysqli_real_escape_string(self::$_connection, strip_tags($input['name'])) .'", 
+                 password="'. strip_tags(md5($input['password'])) .'",
+                 fullname="'. strip_tags($input['fullname']) .'",
+                 email="'. strip_tags($input['email']) .'",
+                 type="'. strip_tags($input['type']) .'",
+                WHERE id = ' . strip_tags($input['id']);
         $user = $this->update($sql);
         return $user;
     }
@@ -76,7 +76,7 @@ class UserModel extends BaseModel {
         $password = md5($input['password']);
         // SQL
         $sql = "INSERT INTO `users`(`name`,`password`,`fullname`, `email`, `type`) 
-        VALUES ('" . $input['name'] . "','" . md5($input['password']) . "','" . $input['fullname'] . "','" . $input['email'] . "','" . $input['type'] . "')";
+        VALUES ('" . strip_tags($input['name']) . "','" . strip_tags(md5($input['password'])) . "','" . strip_tags($input['fullname']) . "','" . strip_tags($input['email']) . "','" . strip_tags($input['type']) . "')";
         $user = $this->insert($sql);
 
         return $user;
