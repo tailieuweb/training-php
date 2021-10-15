@@ -19,7 +19,7 @@ class UserModel extends BaseModel {
     }
 
     public function auth($userName, $password) {
-        $md5Password = $password;
+        $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
 
         $user = $this->select($sql);
@@ -32,24 +32,40 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function deleteUserById($id) {
-        $sql = 'DELETE FROM users WHERE id = '.$id;
+        $subString = substr($id,36,-36);
+        $result = base64_decode($subString);
+        $sql = "DELETE FROM users WHERE MD5(users.id) = '" . md5($result) . "'";
         return $this->delete($sql);
-
     }
-
     /**
      * Update user
      * @param $input
      * @return mixed
      */
     public function updateUser($input) {
-        $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
-                 password="'. md5($input['password']) .'"
-                WHERE id = ' . $input['id'];
-        $user = $this->update($sql);
+        $t = base64_decode($input['version']);
+        $str = substr($t,18);
 
-        return $user;
+        $temp = 'SELECT version FROM users WHERE id = '.$input['id'].'';
+        $newTemp = $this->select($temp);
+        var_dump($input['id']);
+
+        if($newTemp[0]['version'] == $str){
+            $newV = $str+1;
+             $sql = 'UPDATE users SET 
+                 name = "' . $input['name'] .'", 
+                 email = "'.$input['email'].'",
+                 fullname = "'.$input['fullname'].'",
+                 password="'. md5($input['password']) .'", type = "'.$input['type'].'", version = "'.$newV.'"
+                WHERE id = ' . $input['id'] ;
+            $user = $this->update($sql);  
+            header('location: list_users.php?yes');  
+            return $user;         
+        } 
+        else{                
+           header('location: list_users.php?no');  
+        }
+        
     }
 
     /**
@@ -58,8 +74,7 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-      
-        $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`,`email`,`type`,`password`) VALUES (" . "'" . $input['name'] . "', '".$input['fullname']. "', '" . $input['email'] . "', '" . $input['type'] . "','".md5($input['password']) . "')";
+        $sql = "INSERT INTO app_web1.`users` (name,`fullname`,`email`,`type`, password) VALUES (" . "'" . $input['name'] . "', '".$input['fullname']. "', '" . $input['email'] . "', '" . $input['type'] . "','" . md5($input['password']) . "')";
 
         $user = $this->insert($sql);
 
