@@ -8,13 +8,18 @@ class FactoryPattern {
         return preg_replace('/ +/', ' ', $string); //Convert multip space -> one 
     }
     
-    public function getType($model) {
-        if ($model == 'user') {
-            return UserModel::getInstance();
-        } else if ($model == 'bank') {
-            return BankModel::getInstance();
+    public static function create($model) {
+        switch($model) {
+            case "user":
+                $modelObj = new UserModel();
+                break;
+            case "bank":
+                $modelObj = new BankModel();
+                break;
+            default:
+                $modelObj = NULL;
+                break;
         }
-        return null;
+    return $modelobj;
     }
-
 }

@@ -23,7 +23,7 @@ if (!empty($_GET['keyword'])) {
 if (!empty($_GET['type'])) {
     $type = $_GET['type'];
 }
-$userModel = $factory->getType($type);
+$userModel = $factory::create("user");
 
 $users = $userModel->getUsers($params);
 ?>

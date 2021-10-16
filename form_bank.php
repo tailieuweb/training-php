@@ -4,8 +4,8 @@ session_start();
 require_once 'models/FactoryPattern.php';
 require_once 'models/UserModel.php';
 $factory = new FactoryPattern();
-$userModel = new UserModel();
-$bankModel = $factory->getType('bank');
+$userModel = $factory::create("user");
+$bankModel = $factory::create("bank");
 $user = NULL; //Add new user
 $bank = NULL;
 $_id = NULL;

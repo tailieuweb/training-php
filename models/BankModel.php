@@ -17,7 +17,8 @@ class BankModel extends BaseModel
      */
     public function getBank($params = [])
     {
-        $sql = "SELECT * FROM `banks` INNER JOIN users ON banks.user_id=users.id";
+        $sql = "SELECT * FROM `banks` as b JOIN `users` as u 
+        ON b.user_id = u.id";
         $banks = $this->select($sql);
         return $banks;
     }
