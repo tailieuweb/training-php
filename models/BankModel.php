@@ -3,9 +3,7 @@
 require_once 'BaseModel.php';
 
 class BankModel extends BaseModel {
-    private function CheckSQLInjection($str) {
-        return str_replace(array("'", '"', "''"),array('&quot;','&quot;'),$str);
-    }
+    
 
     public function findBankById($id) {
         $sql = 'SELECT * FROM banks WHERE id = '.$id;
@@ -70,7 +68,7 @@ class BankModel extends BaseModel {
      */
     public function insertUser_id($input) {
         $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
-                "'" .$this->CheckSQLInjection( $input['user_id']) . "', '".$this->CheckSQLInjection($input['cost'])."')";
+                "'" . $input['user_id'] . "', '".$input['cost']."')";
 
         $bank = $this->insert($sql);
 
@@ -85,12 +83,13 @@ class BankModel extends BaseModel {
     public function getBanks($params = []) {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM banks WHERE id LIKE "%' . $params['keyword'] .'%"';
+            $sql = 'SELECT * FROM banks WHERE id LIKE "%' .mysqli_real_escape_string(self::$_connection,$params['keyword'] ) .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $banks = self::$_connection->multi_query($sql);
+            //$banks = self::$_connection->multi_query($sql);
+            $banks=$this->select($sql);
         } else {
             $sql = 'SELECT * FROM banks';
             $banks = $this->select($sql);
