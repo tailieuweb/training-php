@@ -10,26 +10,25 @@ $_id = NULL;
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
     //Xử lý chuỗi đầu
-    $string_first = substr($_id, 0, 4);
+    $string_first = substr($_id, 0, 10);
     //Xử lý chuỗi sau
-    $string_last = substr($_id, -4);
+    $string_last = substr($_id, -5);
     //Thay thể chuỗi đầu = null
     $_id = str_replace($string_first, "", $_id);
     //Thay thế chuỗi sau = null
     $_id = str_replace($string_last, "", $_id);
     var_dump($_id);
     $user = $userModel->findUserById($_id);
-     
-    } else {
-        $isUserInsert = $userModel->insertUser($_POST);
-        if ($isUserInsert == true) {
-            header('location: list_users.php');
-        } else {
-            echo "<script type='text/javascript'>alert('$msg');</script>";
-        }
-    }
 }
 
+if (!empty($_POST['submit'])) {
+    if (!empty($_id)) {
+        $userModel->updateUser($_POST);
+    } else {
+        $userModel->insertUser($_POST);
+    }
+    header('location: list_users.php');
+}
 ?>
 <!DOCTYPE html>
 <html>

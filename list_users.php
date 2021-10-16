@@ -11,6 +11,7 @@ if (!empty($_GET['keyword'])) {
 }
 
 $users = $userModel->getUsers($params);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,7 @@ $users = $userModel->getUsers($params);
 <head>
     <title>Home</title>
     <?php include 'views/meta.php' ?>
-    
+
 </head>
 
 <body>
@@ -36,6 +37,7 @@ $users = $userModel->getUsers($params);
                     <th scope="col">ID</th>
                     <th scope="col">Username</th>
                     <th scope="col">Fullname</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Type</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -44,32 +46,33 @@ $users = $userModel->getUsers($params);
                 <?php foreach ($users as $user) { ?>
                 <tr>
                     <!-- Phân tách thông tin -->
-                    <!-- Sử dùng hàm htmlentities đễ mã hóa các ký tự có khả năng thực thi javascript trước khi lưu trữ -->
-                    <th scope="row"><?php echo htmlentities($user['id']) ?></th>
+                    <!-- Sử dùng hàm htmlspecialchars đễ mã hóa các ký tự có khả năng thực thi javascript trước khi lưu trữ Stored XSS -->
+                    <th scope="row"><?php echo htmlspecialchars($user['id']) ?></th>
                     <td>
-                        <?php echo htmlentities($user['name']) ?>
+                        <?php echo htmlspecialchars($user['name']) ?>
                     </td>
                     <td>
-                        <?php echo htmlentities($user['fullname']) ?>
+                        <?php echo htmlspecialchars($user['fullname']) ?>
                     </td>
                     <td>
-                        <?php echo htmlentities($user['email']) ?>
+                        <?php echo htmlspecialchars($user['email']) ?>
                     </td>
                     <td>
-                        <?php echo htmlentities($user['type']) ?>
+                        <?php echo htmlspecialchars($user['type']) ?>
                     </td>
                     <td>
                         <?php
-                            $min = 1000;
-                            $max = 9999;
+                            $min = 10000;
+                            $max = 99999;
+                            $ran_string = $userModel->generateRandomString(10);
                         ?>
-                        <a href="form_user.php?id=<?= mt_rand($min , $max) . $user['id'] . mt_rand($min , $max) ?>">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i> 
+                        <a href="form_user.php?id=<?= $ran_string . $user['id'] . mt_rand($min , $max) ?>">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                         </a>
-                        <a href="view_user.php?id=<?= mt_rand($min , $max) . $user['id'] . mt_rand($min , $max) ?>">
+                        <a href="view_user.php?id=<?= $ran_string . $user['id'] . mt_rand($min , $max) ?>">
                             <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                         </a>
-                        <a href="delete_user.php?id=<?= mt_rand($min , $max) . $user['id'] . mt_rand($min , $max) ?>">
+                        <a href="delete_user.php?id=<?= $ran_string . $user['id'] . mt_rand($min , $max) ?>">
                             <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                         </a>
                     </td>
@@ -78,11 +81,15 @@ $users = $userModel->getUsers($params);
             </tbody>
         </table>
         <?php } else { ?>
-        <div class="alert alert-dark" role="alert">
-            This is a dark alert—check it out!
+        <!-- Test Reflected XSS bằng htmlspecialchars -->
+        <?php if (!empty($params['keyword'])) { ?>
+        <div class="alert alert-warning" role="alert">
+            <?php echo htmlspecialchars($params['keyword']) ?>
         </div>
+        <?php } ?>
         <?php } ?>
     </div>
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+<script src="public/js/xss.js"></script>
 </html>

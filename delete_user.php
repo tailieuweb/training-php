@@ -4,12 +4,13 @@ $userModel = new UserModel();
 
 $user = NULL; //Add new user
 $id = NULL;
+
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     //Xử lý chuỗi đầu
-    $string_first = substr($id, 0, 4);
+    $string_first = substr($id, 0, 10);
     //Xử lý chuỗi sau
-    $string_last = substr($id, -4);
+    $string_last = substr($id, -5);
     //Thay thể chuỗi đầu = null
     $id = str_replace($string_first, "", $id);
     //Thay thế chuỗi sau = null

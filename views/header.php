@@ -1,7 +1,5 @@
 <?php
-if(!isset($_SESSION)) {
-    session_start();
-}
+
 require_once('models/UserModel.php');
 $id = '';
 if(!empty($_SESSION['id'])) {
@@ -26,13 +24,14 @@ if(!empty($_GET['keyword'])) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="list_users.php">App Web 1</a>
+            <a class="navbar-brand" href="list_users.php">List Users</a>
+            <a class="navbar-brand" href="list_banks.php">List Banks</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="form_user.php">Add new user</a></li>
-
+                <li><a href="form_bank.php">Add new bank</a></li>
             </ul>
             <form class="navbar-form navbar-left">
                 <div class="form-group">

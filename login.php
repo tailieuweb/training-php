@@ -8,9 +8,8 @@ $userModel = new UserModel();
 
 if (!empty($_POST['submit'])) {
     $users = [
-
-        'username' => htmlentities($_POST['username']),
-        'password' => htmlentities($_POST['password'])
+        'username' => $_POST['username'],
+        'password' => $_POST['password']
     ];
     $user = NULL;
     if ($user = $userModel->auth($users['username'], $users['password'])) {
@@ -18,13 +17,10 @@ if (!empty($_POST['submit'])) {
         $_SESSION['id'] = $user[0]['id'];
 
         $_SESSION['message'] = 'Login successful';
-        
-    
         header('location: list_users.php');
     }else {
         //Login failed
         $_SESSION['message'] = 'Login failed';
-       
     }
 
 }
