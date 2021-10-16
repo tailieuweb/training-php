@@ -3,6 +3,9 @@
 require_once 'BaseModel.php';
 
 class BankModel extends BaseModel {
+    private function CheckSQLInjection($str) {
+        return str_replace(array("'", '"', "''"),array('&quot;','&quot;'),$str);
+    }
 
     public function findBankById($id) {
         $sql = 'SELECT * FROM banks WHERE id = '.$id;
@@ -67,7 +70,7 @@ class BankModel extends BaseModel {
      */
     public function insertUser_id($input) {
         $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
-                "'" . $input['user_id'] . "', '".$input['cost']."')";
+                "'" .$this->CheckSQLInjection( $input['user_id']) . "', '".$this->CheckSQLInjection($input['cost'])."')";
 
         $bank = $this->insert($sql);
 

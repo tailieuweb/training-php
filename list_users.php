@@ -39,7 +39,7 @@ $users = $userModel->getUsers($params);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user) {?>
+                    <?php foreach ( $users  as $user) {?>
                         <tr>
                             <th scope="row"><?php echo $user['id']?></th>
                             <td>
