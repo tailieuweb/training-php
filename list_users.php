@@ -1,11 +1,10 @@
 <?php
 // Start the session
 session_start();
+$_SESSION['token'] = md5(uniqid(mt_rand(), true));
 
-require_once 'models/FactoryPattern.php';
-$factory = new FactoryPattern();
-
-$userModel = $factory->make('user');
+require_once 'models/UserModel.php';
+$userModel = new UserModel();
 
 $params = [];
 if (!empty($_GET['keyword'])) {
@@ -17,10 +16,10 @@ $users = $userModel->getUsers($params);
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Cách 2 -->
     <title>Home</title>
     <?php include 'views/meta.php' ?>
 </head>
+
 <body>
     <?php include 'views/header.php'?>
     <div class="container">
@@ -44,20 +43,19 @@ $users = $userModel->getUsers($params);
                     <?php foreach ($users as $user) {?>
                         <tr>
                             <th scope="row"><?php echo $user['id']?></th>
-                            <!-- Cách 1: viết thêm lệnh ko trỏ vào sự kiện này được: pointer-events:none;-->
-                            <td class="fiel">                            
+                            <td>                            
                                 <?php echo $user['name']?>
                             </td>
-                            <td class="fiel">
+                            <td>
                                 <?php echo $user['fullname']?>
                             </td>
-                            <td class="fiel">
+                            <td>
                                 <?php echo $user['email']?>
                             </td>
-                            <td class="fiel">
+                            <td >
                                 <?php echo $user['type']?>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <a href="form_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
@@ -66,9 +64,22 @@ $users = $userModel->getUsers($params);
                                 </a>
                                 <a href="delete_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
+                                </a> -->
+                            <td style="display:flex">
+                            <a href="form_user.php?id=<?php echo $user['id'] ?>" style="width:18px;">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
+                                <a href="view_user.php?id=<?php echo $user['id'] ?>">
+                                    <i class="fa fa-eye" aria-hidden="true" title="View"></i>
+                                </a>
+                            <form action="delete_user.php" method="GET" style="width:16px;">
+                                    <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?? '' ?>">
+                                    <input type="hidden" name="id" value="<?php echo $user['id']?>">
+                                    <button type="submit" value="delete" class="fa fa-eraser" 
+                                    style="color: #337ab7;background: none;border: none;outline:none;">
+                                    </button>
+                            </form>
                             </td>
-
                         </tr>
                     <?php } ?>
                 </tbody>
