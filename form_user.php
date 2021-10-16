@@ -21,7 +21,7 @@ if (!empty($_POST['submit'])) {
     header('location: list_users.php');
 }
 if (!empty($_POST['submit'])) {
-    if(($_POST['version']==$user[0]['version'])){
+    if(($_POST['version']==md5($user[0]['version']))){
         if (!empty($_id)) {
             $userModel->updateUser($_POST);
         } else {
@@ -29,8 +29,7 @@ if (!empty($_POST['submit'])) {
         }
         header('location: list_users.php');
     }
-    else{ 
-    echo '<script>alert("Version đã thay đổi, làm mới trang web ngay bây giờ!");</script>';
+    else{     
         header('Refresh:0');
     }
 }
@@ -50,7 +49,6 @@ if (!empty($_POST['submit'])) {
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
-                <p>Version: <?php echo $user[0]['version'] ?></p>
                 <form method="POST">
                     <input type="hidden" name="id" value="<?php echo $_id ?>">
                     <div class="form-group">
@@ -74,7 +72,7 @@ if (!empty($_POST['submit'])) {
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
                     <input type="hidden" name="version" placeholder="Version"
-                    value="<?php if (!empty($user[0]['version'])) echo $user[0]['version'] ?>">
+                    value="<?php if (!empty($user[0]['version'])) echo md5($user[0]['version']) ?>">
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
             <?php } else { ?>
