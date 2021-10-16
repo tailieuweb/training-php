@@ -6,9 +6,17 @@ class FactoryPattern {
     public function make($model)
     {
         if ($model == 'user') {
-            return new UserModel();
+            // Singleton pattern:
+            return UserModel::getInstance();
+
+            // Normal:
+            // return new UserModel();
         } else if ($model == 'bank') {
-            return new BankModel();
+            // Singleton pattern:
+            return BankModel::getInstance();
+
+            // Normal:
+            // return new BankModel();
         }
     }
 }

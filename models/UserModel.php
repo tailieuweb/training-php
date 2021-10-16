@@ -4,6 +4,14 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
+    // Singleton pattern:
+    public static function getInstance() {
+        if (self::$_user_instance !== null) {
+            return self::$_user_instance;
+        }
+        self::$_user_instance = new self();
+        return self::$_user_instance;
+    }
 
     public function findUserById($id)
     {

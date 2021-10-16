@@ -4,6 +4,15 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel
 {
+    // Singleton pattern:
+    public static function getInstance() {
+        if (self::$_bank_instance !== null) {
+            return self::$_bank_instance;
+        }
+        self::$_bank_instance = new self();
+        return self::$_bank_instance;
+    }
+
     /**
      * Get bank account
      * @param array $params
