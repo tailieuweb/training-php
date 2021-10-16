@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 23, 2021 at 08:23 AM
--- Server version: 10.4.19-MariaDB-log
--- PHP Version: 8.0.7
+-- Máy chủ: 127.0.0.1:3306
+-- Thời gian đã tạo: Th10 16, 2021 lúc 01:13 PM
+-- Phiên bản máy phục vụ: 5.7.31
+-- Phiên bản PHP: 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,54 +18,66 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `app_web1`
+-- Cơ sở dữ liệu: `app_web1`
 --
-CREATE DATABASE IF NOT EXISTS `app_web1` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `app_web1`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `banks`
+--
+
+DROP TABLE IF EXISTS `banks`;
+CREATE TABLE IF NOT EXISTS `banks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `cost` float NOT NULL,
+  `version` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `banks`
+--
+
+INSERT INTO `banks` (`id`, `user_id`, `cost`, `version`) VALUES
+(1, 1, 11, 0),
+(2, 1, 11, 0),
+(3, 2, 11, 0),
+(4, 33, 102, 10),
+(8, 4, 16, 1),
+(9, 3, 222, 3),
+(10, 31, 11, 0),
+(11, 32, 22, 1),
+(13, 34, 2, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `users`
 --
 
 DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `fullname` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `type` varchar(100) NOT NULL,
-  `password` varchar(250) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fullname` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`) VALUES
-(1, 'admin', 'Admin', 'admin1@gmail.com', 'admin', 'd41d8cd98f00b204e9800998ecf8427e'),
-(2, 'user1', 'User1', 'user1@gmail.com', 'user', '24c9e15e52afc47c225b757e7bee1f9d');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+(3, 'ad', 'tam ngoc', '', '0', '6cda6088340bee4207e440021e294123'),
+(4, 'Test3', 'Test3', '', '0', '0e41c75a03a63eb168614430bdffd21b'),
+(33, 'Tam Tran', 'Tam Tran', 'a@gmail.com', 'guest', 'd1d16c28c7674cfc5e269dbe1209f552'),
+(34, 'anh', 'anh nguyen', 'anh@gmail.com', 'user', '698d51a19d8a121ce581499d7b701668'),
+(32, 'admin', 'Tam', 'admin@gmail.com', 'admin', 'b59c67bf196a4758191e42f76670ceba');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

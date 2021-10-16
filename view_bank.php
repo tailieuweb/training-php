@@ -1,13 +1,14 @@
 <?php
-require_once 'models/BankModel.php';
-$bankModel = new BankModel();
-
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+$bankModel = $factory->make('bank');
 $bank = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     $bank = $bankModel->findBankById($id);//Update existing user
+    
 }
 
 ?>

@@ -1,10 +1,26 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/BankModel.php';
-$bankModel = new BankModel();
+// require_once 'models/BankModel.php';
+// require_once 'models/UserModel.php';
+// $bankModel = new BankModel();
+// $params = [];
+// $banks = $bankModel->getBanks($params);
+// $userModel = new UserModel();
+// $params = [];
+// $users = $userModel->getUsers();
+// var_dump($banks);
+// var_dump($users);die();
+
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+$bankModel = $factory->make('bank');
+
+// $bankModel = FactoryPattern::make('bank');
 $params = [];
 $banks = $bankModel->getBanks($params);
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,7 +50,8 @@ $banks = $bankModel->getBanks($params);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($banks as $bank) { ?>
+                    <?php foreach ($banks as $bank) {
+                        ?>
                         <tr>
                             <th scope="row"><?php echo $bank['user_id'] ?></th>
                             <td>
@@ -51,14 +68,14 @@ $banks = $bankModel->getBanks($params);
                             </td>
                            
                             <td>
-                                <a href="form_user.php?id=<?php echo  $bank['bank_id'] ?>" target="_blank">
+                                <a href="form_bank.php?id=<?php echo  $bank['bank_id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo $bank['bank_id'] ?>" target="_blank">
+                                <a href="view_bank.php?id=<?php echo $bank['bank_id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
                               
-                                <a href="delete_user.php?id=<?php echo $bank['bank_id'] ?>" target="_blank"?>
+                                <a href="delete_bank.php?id=<?php echo $bank['bank_id'] ?>"?>
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
