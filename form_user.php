@@ -2,7 +2,9 @@
 // Start the session
 session_start();
 require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryPattent.php';
+$factory = new FactoryPattent();
+$userModel = $factory->make('user');
 
 $user = NULL; //Add new user
 $_id = NULL;

@@ -1,6 +1,9 @@
 <?php
 require_once 'models/BankModel.php';
-$bankModel = new BankModel();
+require_once 'models/FactoryPattent.php';
+
+$factory = new FactoryPattent();
+$bankModel = $factory->make('bank');
 
 $bank = NULL; //Add new user
 $id = NULL;

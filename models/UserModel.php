@@ -4,7 +4,8 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
-
+    protected static $_instance;
+    
     public function findUserById($id)
     {
         
@@ -18,7 +19,6 @@ class UserModel extends BaseModel
     {
         $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
         $user = $this->select($sql);
-
         return $user;
     }
 
@@ -63,11 +63,7 @@ class UserModel extends BaseModel
      * @param $id
      * @return mixed
      */
-    // public function deleteUserById($id)
-    // {
-    //     $sql = 'DELETE FROM users WHERE id = ' . $id;
-    //     return $this->delete($sql);
-    // }
+ 
 
     /**
      * Update user
@@ -133,7 +129,14 @@ class UserModel extends BaseModel
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
-
         return $users;
+    }
+   
+    public static function getInstance(){
+        if(self::$_instance != null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
     }
 }

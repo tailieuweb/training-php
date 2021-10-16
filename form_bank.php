@@ -1,8 +1,15 @@
 <?php
-require_once 'models/BankModel.php';
+session_start();
 require_once 'models/UserModel.php';
-$bankModel = new BankModel();
-$userModel = new UserModel();
+require_once 'models/FactoryPattent.php';
+$factory = new FactoryPattent();
+$bankModel = '';
+$userModel = '';
+// var_dump($factory->make('user'));
+
+$userModel = $factory->make('user');
+$bankModel = $factory->make('bank');
+
 
 $bank = NULL; //Add new user
 $_id = NULL;
