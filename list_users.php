@@ -4,6 +4,7 @@ $factoryModel = new FactoryPattern();
 $userModel = $factoryModel->make('user');
 
 $params = [];
+
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
@@ -53,7 +54,7 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['email'] ?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo rand(100, 999).md5($user['id'] . "chuyen-de-web-1").rand(100, 999) ?>">
+                                <a href="form_user.php?id=<?php echo rand(100, 999) . md5($user['id'] . "chuyen-de-web-1") . rand(100, 999) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <a href="view_user.php?id=<?php echo rand(100, 999) . md5($user['id'] . "chuyen-de-web-1") . rand(100, 999)  ?>">

@@ -1,6 +1,9 @@
 <?php
+require_once 'models/FactoryModel.php';
 require_once 'models/BankModel.php';
-$bankModel = new BankModel();
+$factoryModel = new FactoryPattern();
+
+$bankModel = $factoryModel->make('bank');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
