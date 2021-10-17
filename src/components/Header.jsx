@@ -2,7 +2,7 @@ import AuthModal from "./Auth/AuthModal";
 import { useState } from "react";
 
 export default function Header() {
-  const [isLogin, setLogin] = useState(false);
+  const [isLogin, setLogin] = useState();
 
   const onLogout = () => {};
 
