@@ -18,8 +18,11 @@ export default function Posts() {
       }
     });
   }, []);
-
-  const onDeletePost = () => {};
+  const onDeletePost = () => {
+    apiCaller(`products/${postSelected.id}`, "DELETE", null).then(res => {
+        console.log(res);
+      });
+  };
 
   return (
     <div className="row mt-4">

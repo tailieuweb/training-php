@@ -1,11 +1,5 @@
 export default function PostsDelete(props) {
-  const { postSelected, onDeletePost, product } = props;
-  
-  const onDelete = (id) => {
-    callApi(`products/${id}`, "DELETE", null).then(res => {
-      console.log(res);
-    });
-  }
+  const { postSelected, onDeletePost} = props;
   return (
     <div
       className="modal fade"
@@ -45,7 +39,6 @@ export default function PostsDelete(props) {
               type="button"
               className="btn btn-danger"
               onClick={onDeletePost}
-              onClick={() => onDelete(product.id)}
             >
               Delete
             </button>
