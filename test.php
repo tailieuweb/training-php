@@ -1,80 +1,67 @@
 <?php
-abstract class BaseModel
-{
-    private static $_instance = null;
+abstract class Base {
 
-    public function __construct()
+    protected static $_instance;
+}
+class User extends Base {
+    public static function getInstance()
     {
-    }
-
-    static function get()
-    {
+        parent::$_instance = null; 
+        if(self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
         return self::$_instance;
     }
-    static function  set($_instance)
-    {
-        self::$_instance = $_instance;
-    }
-}
+    public function print(){
 
-class User extends BaseModel
-{
-    public function __construct()
-    {
+        echo 'Đây là lớp user <br>';
+
     }
+    
+
+}
+class Bank extends Base {
     public static function getInstance()
     {
-
-        if (parent::get()  !== null) {
-            return parent::get();
+        parent::$_instance = null;
+        if(self::$_instance !== null){
+            return self::$_instance;
         }
-        parent::set(new self());
-        return parent::get();
+        self::$_instance = new self();
+        return self::$_instance;
     }
-    public function print()
-    {
-        return "instance user\n";
-    }
-}
+    public function print(){
 
-class Bank extends BaseModel
-{
-    public static function getInstance()
-    {
-        if (parent::get()  !== null) {
-            return parent::get();
-        }
-        parent::set(new self());
-        return parent::get();
-    }
-    public function print()
-    {
-        return "instance bank vl";
-    }
-    public function print2()
-    {
-        return "instance bank vl";
-    }
-}
+        echo 'Đây là lớp bank';
 
-class Factory
-{
-    public function make($model)
-    {
-        if ($model == 'user') {
-            return User::getInstance();
-        } elseif ($model == 'bank') {
+    }
+
+}
+class Factory {
+    public function make($model){
+        
+        // if($model != 'user' || $mode != 'bank'){
+        //     return null;
+        // }
+
+        if($model == 'user'){
+
+        return User::getInstance();
+
+        } else if($model == 'bank'){
+
             return Bank::getInstance();
+
+        } else {
+
+            return null;
+            
         }
     }
+
 }
-
-
-$fac = new Factory();
-
-$u = $fac->make('user');
-$b = $fac->make('bank');
-
-
-echo $u->print();
-echo $b->print();
+$factory = new Factory();
+$bank = $factory->make('bank');
+$user = $factory->make('user');
+$user->print();
