@@ -81,7 +81,7 @@ class UserModel extends BaseModel {
 
         if(!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
-            var_dump($sql);die();
+            //var_dump($sql);die();
             $users = self::$_connection->multi_query($sql);
 
         }else{

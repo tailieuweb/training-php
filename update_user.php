@@ -61,7 +61,7 @@ $users = $userModel->getUsers();
             </table>
         <?php }else { ?>
             <div class="alert alert-dark" role="alert">
-                This is a dark alert—check it out!
+                This is a dark alert check it out!
             </div>
         <?php } ?>
     </div>
