@@ -18,10 +18,16 @@ export const actLoadPosts = () => {
   };
 };
 
-export const actEditPosts = () => {
-  return (dispatch) => {};
+export const actEditPost = (post) => {
+  return (dispatch) => {
+    return apiCaller(`products/${post.id}`, "POST", null).then((res) => {
+      if (res.success) {
+        dispatch(actLoadPosts());
+      }
+    });
+  };
 };
 
-export const actDeletePosts = () => {
+export const actDeletePost = (post) => {
   return (dispatch) => {};
 };
