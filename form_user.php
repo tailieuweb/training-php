@@ -72,11 +72,9 @@ if (!empty($_POST['submit'])) {
                          <label for="guest">Guest</label>
                          <input type="radio" id="guest" name="t1" value="guest">
                     
-                   <?php if(isset($_GET['id'])){?>
-                  
-                    <div class="form-group">
-                        <label for="">Version</label>
-                        <input type="text" name="version" class="form-control" placeholder="Version" value="" required>
+                <?php if(isset($_GET['id'])){?>
+                    <div class="form-group">   
+                        <input type="hidden" name="version" class="form-control" placeholder="Version" value="<?php if (!empty($user[0]['version'])) echo ($user[0]['version']) ?>" required>
                     </div>
                    <?php }?>
 
