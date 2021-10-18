@@ -1,5 +1,7 @@
 import { useRouter } from "next/dist/client/router";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { actLoadPosts } from "../../redux/actions/postsActions";
 import apiCaller from "../../utils/apiCaller";
 import Pagination from "../Base/Pagination";
 import PostsAddForm from "./PostsAddForm";
@@ -12,6 +14,8 @@ export default function Posts() {
   const router = useRouter();
   const { pageNum } = router.query;
 
+  const dispatch = useDispatch();
+  // const posts = useSelector(state => state.posts)
   const [posts, setPosts] = useState([]);
   const [postsBase, setPostsBase] = useState([]);
   const [postSelected, setPostSelected] = useState([]);
@@ -26,6 +30,7 @@ export default function Posts() {
         setPostsBase(postsData);
       }
     });
+    dispatch(actLoadPosts());
   }, []);
 
   useEffect(() => {
