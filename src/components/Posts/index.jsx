@@ -1,22 +1,18 @@
 import { useEffect, useState } from "react";
-import apiCaller from "../../utils/apiCaller";
+import { useDispatch } from "react-redux";
+import { actLoadPosts } from "../../redux/actions/postsActions";
 import PostsAddForm from "./PostsAddForm";
 import PostsDelete from "./PostsDelete";
 import PostsItem from "./PostsItem";
 
 export default function Posts() {
+  const dispatch = useDispatch();
+  // const posts = useSelector(state => state.posts)
   const [posts, setPosts] = useState([]);
-  const [postsBase, setPostsBase] = useState([]);
   const [postSelected, setPostSelected] = useState([]);
 
   useEffect(() => {
-    apiCaller("products").then((res) => {
-      if (res.success) {
-        const postsData = res.data.reverse();
-        setPosts(postsData);
-        setPostsBase(postsData);
-      }
-    });
+    dispatch(actLoadPosts());
   }, []);
 
   const onDeletePost = () => {};

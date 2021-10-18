@@ -1,3 +1,5 @@
+import apiCaller from '../../utils/apiCaller';
+
 //Action Types
 export const SET_POSTS = "LOAD_POSTS";
 
