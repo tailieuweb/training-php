@@ -1,6 +1,6 @@
 import { useRouter } from "next/dist/client/router";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actLoadPosts } from "../../redux/actions/postsActions";
 import apiCaller from "../../utils/apiCaller";
 import Pagination from "../Base/Pagination";
@@ -15,23 +15,11 @@ export default function Posts() {
   const { pageNum } = router.query;
 
   const dispatch = useDispatch();
-  // const posts = useSelector(state => state.posts)
+  const { posts: postsBase } = useSelector((state) => state.posts);
   const [posts, setPosts] = useState([]);
-  const [postsBase, setPostsBase] = useState([]);
   const [postSelected, setPostSelected] = useState([]);
 
-  useEffect(() => {
-    apiCaller("products").then((res) => {
-      if (res.success) {
-        const postsData = res.data.reverse();
-        setPosts(
-          postsData.splice((pageNum - 1) * ITEM_PER_PAGE, ITEM_PER_PAGE)
-        );
-        setPostsBase(postsData);
-      }
-    });
-    dispatch(actLoadPosts());
-  }, []);
+  useEffect(() => dispatch(actLoadPosts()), []);
 
   useEffect(() => {
     const postsData = [...postsBase].splice(
@@ -39,7 +27,7 @@ export default function Posts() {
       ITEM_PER_PAGE
     );
     setPosts(postsData);
-  }, [pageNum]);
+  }, [pageNum, postsBase]);
 
   const onDeletePost = () => {};
 
