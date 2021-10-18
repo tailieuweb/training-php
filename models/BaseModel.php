@@ -1,11 +1,10 @@
 <?php
-require 'configs/database.php';
+require_once 'configs/database.php';
 
-abstract class BaseModel {
+ class BaseModel {
     // Database connection
-    protected static $_connection;
+    private static  $_connection;
     public function __construct() {
-
         if (!isset(self::$_connection)) {
             self::$_connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
             // self::$_connection->set_charset(DB_CHARSET);
@@ -15,15 +14,20 @@ abstract class BaseModel {
                 exit();
             }
         }
+        return self::$_connection;
+        // echo 'Connected';
     }
 
+    public function connectDatabase(){
+        return self::$_connection;
+    }
+   
     /**
      * Query in database
      * @param $sql
      */
     protected function query($sql) {
-
-        $result = self::$_connection->query($sql);
+        $result = $this->connectDatabase()->query($sql);
         return $result;
     }
 
@@ -41,6 +45,14 @@ abstract class BaseModel {
         }
         return $rows;
     }
+
+    public function select_result($sql){
+        $sql->execute();
+        $item = array();
+        $item = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $item;
+    }
+
 
     /**
      * Delete statement

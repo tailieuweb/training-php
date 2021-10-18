@@ -2,11 +2,13 @@
 // Start the session
 session_start();
 
-require_once 'models/FactoryPattern.php';
-$factory = new FactoryPattern();
+spl_autoload_register(function($class){
+    require './models/' . $class . '.php';
+});
+//$factory = new FactoryPattern();
 
-$userModel = $factory->make('user');
-
+//$userModel = $factory->make('user');
+$userModel = new UserModel();
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword']; 
@@ -61,7 +63,7 @@ $users = $userModel->getUsers($params);
                         <tr>
                             <th scope="row"><?php echo $user['id']?></th>
                             <td>
-                                <?php echo $user['name']?>
+                                <?php echo strip_tags($user['name'])?>
                             </td>
                             <td>
                                 <?php echo ($user['fullname'])?>

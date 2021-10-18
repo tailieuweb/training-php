@@ -1,14 +1,15 @@
 <?php
 // Start the session
 session_start();
-spl_autoload_register(function($class){
-    require 'models/' . $class . '.php';
-});
+
+require_once './models/Facade/Facade.php';
+    $facade = new Facade();
+
 // require_once './models/FactoryPattern.php';
 // $factory = new FactoryPattern();
-$bankModel = new BankModel();
+$userModel = $facade->makeRequire('UserModel');
+$bankModel = $facade->makeRequire('BankModel');
 // $bankmodel = $factory->make('bank');
-
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword']; 
@@ -53,7 +54,7 @@ $banks = $bankModel->getBanks($params);
                                 <a href="form_user.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo $bank['id'] ?>">
+                                <a href="view_bank.php?id=<?php echo strip_tags($bank['id']) ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
                                 <a href="delete_user.php?id=<?php echo $bank['id']?>">
