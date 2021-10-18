@@ -1,5 +1,8 @@
+import { useState } from "react";
+
 export default function PostsItem(props) {
   const { post, onSelectPost } = props;
+  const [isReadMore, setIsReadMore] = useState(false);
 
   return (
     <div className="card">
@@ -41,7 +44,21 @@ export default function PostsItem(props) {
           </div>
         </div>
         <h3 className="text-primary my-4"># {post.title}</h3>
-        <p className="card-text"></p>
+        <p className="card-text">
+          {isReadMore
+            ? post.description
+            : `${post.description.slice(0, 400)}...`}
+          {!isReadMore && (
+            <span
+              style={{ fontSize: 12, cursor: "pointer" }}
+              className="font-weight-bold"
+              onClick={() => setIsReadMore(true)}
+            >
+              {" "}
+              Read more
+            </span>
+          )}
+        </p>
       </div>
     </div>
   );
