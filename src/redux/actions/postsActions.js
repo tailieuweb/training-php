@@ -1,4 +1,4 @@
-import apiCaller from '../../utils/apiCaller';
+import apiCaller from "../../utils/apiCaller";
 
 //Action Types
 export const SET_POSTS = "LOAD_POSTS";
@@ -16,4 +16,12 @@ export const actLoadPosts = () => {
       }
     });
   };
+};
+
+export const actEditPosts = () => {
+  return (dispatch) => {};
+};
+
+export const actDeletePosts = () => {
+  return (dispatch) => {};
 };
