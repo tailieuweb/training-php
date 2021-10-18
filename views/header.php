@@ -5,7 +5,7 @@ if(!empty($_SESSION['id'])) {
 }
 
 $keyword = '';
-if(!empty($_GET['keyword'])) {
+if (!empty($_GET['keyword'])) {
     $keyword = $_GET['keyword'];
 }
 ?>
@@ -24,42 +24,42 @@ if(!empty($_GET['keyword'])) {
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="list_bank.php">List Bank</a></li>
-                    <li><a href="form_user_bank.php">Add User_Bank</a></li>
-                    <li><a href="form_user.php">Add new user</a></li>
-                </ul>
-                <form class="navbar-form navbar-left">
-                    <div class="form-group">
-                        <input type="text" name="keyword" class="form-control" placeholder="Search users"
-                               value="<?php echo $keyword ?>"
-                        >
-                    </div>
-                    <button type="submit" class="btn btn-default">Search</button>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-user-circle-o"></i>
-                            Account <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="profile.php">Profile</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="login.php">Login</a></li>
-                            <li><a href="logout.php">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-    <?php if(!empty($_SESSION['message'])){ ?>
-        <div class="alert alert-warning" role="alert">
-            <?php
-            echo $_SESSION['message'];
-            unset($_SESSION['message']);
-            ?>
         </div>
-    <?php } ?>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="list_bank.php">List Bank</a></li>
+                <li><a href="form_user.php">Add new user</a></li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" name="keyword" class="form-control" placeholder="Search users" value="<?php echo $keyword ?>">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user-circle-o"></i>
+                        Account <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="profile.php">Profile</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="login.php">Login</a></li>
+                        <li><a href="logout.php">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</nav>
+<?php if (!empty($_SESSION['message'])) { ?>
+    <div class="alert alert-warning" role="alert">
+        <?php
+        echo $_SESSION['message'];
+        unset($_SESSION['message']);
+        ?>
+    </div>
+<?php } ?>
 </div>
