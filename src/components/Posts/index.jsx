@@ -29,7 +29,11 @@ export default function Posts() {
     setPosts(postsData);
   }, [pageNum, postsBase]);
 
-  const onDeletePost = () => {};
+  const onDeletePost = () => {
+    apiCaller(`products/${postSelected.id}`, "DELETE", null).then(res => {
+        console.log(res);
+      });
+  };
 
   return (
     <div className="row mt-4">
