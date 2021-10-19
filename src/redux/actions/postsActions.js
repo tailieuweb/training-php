@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import apiCaller from "../../utils/apiCaller";
 
 //Action Types
@@ -18,10 +19,25 @@ export const actLoadPosts = () => {
   };
 };
 
-export const actEditPosts = () => {
+export const actAddPost = (post) => {
   return (dispatch) => {};
 };
 
-export const actDeletePosts = () => {
+export const actEditPost = (post) => {
+  return (dispatch) => {
+    const { title, description } = post;
+    const data = { title, description };
+    return apiCaller(`products/${post.id}`, "POST", data)
+      .then((res) => {
+        if (res.success) {
+          dispatch(actLoadPosts());
+          toast.success("Sửa thành công!");
+        }
+      })
+      .catch(() => toast.error("Có lỗi xảy ra!"));
+  };
+};
+
+export const actDeletePost = (post) => {
   return (dispatch) => {};
 };

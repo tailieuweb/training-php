@@ -1,24 +1,33 @@
 import { useRouter } from "next/dist/client/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actLoadPosts } from "../../redux/actions/postsActions";
+import { actEditPost, actLoadPosts } from "../../redux/actions/postsActions";
 import apiCaller from "../../utils/apiCaller";
 import Pagination from "../Base/Pagination";
 import PostsAddForm from "./PostsAddForm";
+import PostsEdit from "./PostsEdit";
 import PostsDelete from "./PostsDelete";
 import PostsItem from "./PostsItem";
+import { toast } from "react-toastify";
 
 const ITEM_PER_PAGE = 5;
+const inputPost = { id: "", title: "", description: "" };
 
 export default function Posts() {
+  // Next
   const router = useRouter();
   const { pageNum } = router.query;
 
+  // Redux
   const dispatch = useDispatch();
-  const { posts: postsBase } = useSelector((state) => state.posts);
-  const [posts, setPosts] = useState([]);
-  const [postSelected, setPostSelected] = useState([]);
+  const selectorPosts = useSelector((state) => state.posts);
+  const postsBase = selectorPosts?.posts;
 
+  // State React
+  const [posts, setPosts] = useState([]);
+  const [postSelected, setPostSelected] = useState(inputPost);
+
+  // Effect
   useEffect(() => dispatch(actLoadPosts()), []);
 
   useEffect(() => {
@@ -29,14 +38,38 @@ export default function Posts() {
     setPosts(postsData);
   }, [pageNum, postsBase]);
 
-  const onDeletePost = () => {
-    apiCaller(`products/${postSelected.id}`, "DELETE", null).then(res => {
-        console.log(res);
-      });
+  // Functions
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setPostSelected({ ...postSelected, [name]: value });
   };
 
+  const onEditPost = async (e) => {
+    e.preventDefault();
+    const { title, description } = postSelected;
+    if (title.length === 0 || description.length === 0) {
+      return toast.warning("Vui lòng nhập đầy đủ thông tin");
+    }
+
+    // request and close modal
+    await dispatch(actEditPost(postSelected));
+    document.querySelector("#editModal button[data-dismiss='modal']").click();
+  };
+
+  const onDeletePost = () => {
+    apiCaller(`products/${postSelected.id}`, "DELETE", null).then((res) => {
+      console.log(res);
+    });
+  };
+
+  // Render
   return (
     <div className="row mt-4">
+      <PostsEdit
+        postSelected={postSelected}
+        onChange={onChange}
+        onEditPost={onEditPost}
+      />
       <PostsDelete postSelected={postSelected} onDeletePost={onDeletePost} />
       <div className="col-md-6">
         <PostsAddForm />
