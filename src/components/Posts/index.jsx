@@ -8,6 +8,7 @@ import PostsAddForm from "./PostsAddForm";
 import PostsEdit from "./PostsEdit";
 import PostsDelete from "./PostsDelete";
 import PostsItem from "./PostsItem";
+import { toast } from "react-toastify";
 
 const ITEM_PER_PAGE = 5;
 const inputPost = { id: "", title: "", description: "" };
@@ -43,7 +44,18 @@ export default function Posts() {
     setPostSelected({ ...postSelected, [name]: value });
   };
 
-  const onEditPost = () => dispatch(actEditPost(postSelected));
+  const onEditPost = async (e) => {
+    e.preventDefault();
+    const { title, description } = postSelected;
+    if (title.length === 0 || description.length === 0) {
+      return toast.warning("Vui lòng nhập đầy đủ thông tin");
+    }
+
+    // request and close modal
+    await dispatch(actEditPost(postSelected));
+    document.querySelector("#editModal button[data-dismiss='modal']").click();
+  };
+
   const onDeletePost = () => {
     apiCaller(`products/${postSelected.id}`, "DELETE", null).then((res) => {
       console.log(res);

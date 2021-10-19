@@ -9,7 +9,11 @@ export default function PostsEdit(props) {
       aria-labelledby="editModalLabel"
       aria-hidden="true"
     >
-      <div className="modal-dialog modal-dialog-centered" role="document">
+      <form
+        onSubmit={onEditPost}
+        className="modal-dialog modal-dialog-centered"
+        role="document"
+      >
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="editModalLabel">
@@ -35,6 +39,7 @@ export default function PostsEdit(props) {
                 className="form-control"
                 placeholder="Type a awesome title..."
                 aria-describedby="helpId"
+                required
               />
             </div>
             <div className="form-group">
@@ -46,6 +51,7 @@ export default function PostsEdit(props) {
                 placeholder="Share with us your own stories and others."
                 value={postSelected.description}
                 onChange={onChange}
+                required
               ></textarea>
             </div>
           </div>
@@ -57,16 +63,12 @@ export default function PostsEdit(props) {
             >
               Close
             </button>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={onEditPost}
-            >
+            <button type="submit" className="btn btn-primary">
               Edit Your Confessions
             </button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
