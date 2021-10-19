@@ -108,4 +108,12 @@ class UserModel extends BaseModel
         $result = $this->select_result($sql) ? $this->select_result($sql) : [];
         return $result;
     }
+
+    public static function getInstance() {
+        if (self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }
 }

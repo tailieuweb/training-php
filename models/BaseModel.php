@@ -3,7 +3,9 @@ require_once 'configs/database.php';
 
  class BaseModel {
     // Database connection
-    private static  $_connection;
+    protected static $_connection;
+    protected static $_instance;
+
     public function __construct() {
         if (!isset(self::$_connection)) {
             self::$_connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
