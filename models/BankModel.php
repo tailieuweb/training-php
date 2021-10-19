@@ -2,15 +2,15 @@
 
 // require './models/Pattern/BankRepository.php';
 require_once './models/BaseModel.php';
-class BankModel extends BaseModel {
-
-
-    public function findUserByID($id){
-        $sql = $this->connectDatabase()->prepare('SELECT us.name, us.fullname, us.email,bk.cost FROM banks bk
+class BankModel extends BaseModel
+{
+    public function findUserByID($id)
+    {
+        $sql = BaseModel::connectDatabase()->prepare('SELECT us.name, us.fullname, us.email,bk.cost FROM banks bk
         , users us WHERE bk.user_id = us.id  AND bk.id = ?');
-        $sql->bind_param("i",$id);
+        $sql->bind_param("i", $id);
         $user = $this->select_result($sql);
-        return $user; 
+        return $user;
     }
 
     // public function findUser($keyword) {
@@ -38,7 +38,7 @@ class BankModel extends BaseModel {
     //  * @return mixed
     //  */
     // public function deleteUserById($id) {
-      
+
     //     $sql = 'DELETE FROM users WHERE id = '.$id;
     //     return $this->delete($sql);
 
@@ -52,10 +52,10 @@ class BankModel extends BaseModel {
     //  * @return mixed
     //  */
     // public function updateUser($input) {
-      
+
     //     $temp = 'SELECT version FROM users WHERE id = '.$input['id'].'';
     //     $newTemp = $this->select($temp);
-        
+
     //     if($newTemp[0]['version'] == $input['version']){
     //         $newV = $input['version']+1;
     //          $sql = 'UPDATE users SET 
@@ -71,8 +71,8 @@ class BankModel extends BaseModel {
     //     else{                
     //        header('location: list_users.php?err');  
     //     }
-        
-        
+
+
     // }
 
     // /**
@@ -89,9 +89,9 @@ class BankModel extends BaseModel {
     //     . $input['type']
     //     . "')";
     //     $user = $this->insert($sql);
-      
+
     //     return $user;
-                
+
     // }
 
     // /**
@@ -99,18 +99,18 @@ class BankModel extends BaseModel {
     //  * @param array $param
     //  * @return array
     //  */
-    public function getBanks($params = []) {
+    public function getBanks($params = [])
+    {
         //Keyword
-       
+
         if (!empty($params['keyword'])) {
-           
-            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] .'%"';
+
+            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] . '%"';
 
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
             $banks = $this->connectDatabase()->multi_query($sql);
-            
         } else {
             $sql = 'SELECT * FROM banks';
             $banks = $this->select($sql);

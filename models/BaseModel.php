@@ -4,12 +4,11 @@ require_once 'configs/database.php';
  class BaseModel {
     // Database connection
     protected static $_connection;
-    protected static $_instance;
+    private static $_instance;
 
     public function __construct() {
         if (!isset(self::$_connection)) {
             self::$_connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-            // self::$_connection->set_charset(DB_CHARSET);
             mysqli_set_charset(self::$_connection,DB_CHARSET);
             if (self::$_connection->connect_errno) {
                 printf("Connect failed");
@@ -17,10 +16,17 @@ require_once 'configs/database.php';
             }
         }
         return self::$_connection;
-        // echo 'Connected';
     }
 
-    public function connectDatabase(){
+    public static function getInstance(){
+        if(!self::$_instance){
+            self::$_instance = new static();
+        }
+        return self::$_instance;
+    }
+
+
+    public static function connectDatabase(){
         return self::$_connection;
     }
    
@@ -48,7 +54,7 @@ require_once 'configs/database.php';
         return $rows;
     }
 
-    public function select_result($sql){
+    public static function select_result($sql){
         $sql->execute();
         $item = array();
         $item = $sql->get_result()->fetch_all(MYSQLI_ASSOC);

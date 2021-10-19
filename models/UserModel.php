@@ -4,6 +4,14 @@ require_once './models/BaseModel.php';
 class UserModel extends BaseModel
 {
 
+    public static function getInstance() {
+        if (self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }
+    
     public function findUserById($id) {
         $id = $this->matchRegexInput($id);
         $sql = $this->connectDatabase()->prepare("SELECT * FROM users WHERE id = ?");
@@ -109,11 +117,4 @@ class UserModel extends BaseModel
         return $result;
     }
 
-    public static function getInstance() {
-        if (self::$_instance !== null){
-            return self::$_instance;
-        }
-        self::$_instance = new self();
-        return self::$_instance;
-    }
 }
