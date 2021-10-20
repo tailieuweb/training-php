@@ -36,7 +36,10 @@ if (!empty($_GET['id'])) {
             User profile
         </div>
         <form method="POST">
-            <input name="id" value="<?php echo $_id ?>">
+        <div class="form-group">
+                <label for="name">ID: </label>
+                <span><?php if (!empty($user[0]['id'])) echo $user[0]['id'] ?></span>
+            </div>            
             <div class="form-group">
                 <label for="name">Name: </label>
                 <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>

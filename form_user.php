@@ -1,8 +1,9 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'DesignPattern/FactoryPattern.php';
+$factory = new FactoryPattern();
+$userModel = $factory->make('user');
 
 $user = NULL; //Add new user
 $_id = NULL;
@@ -25,8 +26,7 @@ if (!empty($_GET['id'])) {
 
 if (!empty($_POST['submit'])) {
     if (!empty($_id)) {
-        if(isset($_POST['version'])&&$_POST['version']==md5($user[0]['version'])){
-            
+        if(isset($_POST['version'])&&$_POST['version']==md5($user[0]['version'])){            
                 $userModel->updateUser($_POST);
             
             header('location: list_users.php');
@@ -37,7 +37,7 @@ if (!empty($_POST['submit'])) {
         }
     } else {
         $userModel->insertUser($_POST);
-        // header('location: list_users.php');
+        header('location: list_users.php');
 }
 }
 
