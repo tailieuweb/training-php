@@ -1,20 +1,22 @@
 <?php
+// Start the session
+session_start();
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 $type = $userModel->getTypes();
 
 $user = NULL; //Add new user
-$id = NULL;
+$_id = NULL;
 
 if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+    $_id = $_GET['id'];
+    $user = $userModel->findUserById($_id);//Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
 
-    if (!empty($id)) {
+    if (!empty($_id)) {
         $userModel->updateUser($_POST);
     } else {
         $userModel->insertUser($_POST);
@@ -33,15 +35,15 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
-            <?php if ($user || empty($id)) { ?> 
+            <?php if ($user || !isset($_id)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                    <input type="hidden" name="id" value="<?php echo $_id ?>">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
                     </div>
 
                     <div class="form-group">
@@ -59,19 +61,11 @@ if (!empty($_POST['submit'])) {
                         <select name="type" class="form-control">
                             <?php
                             foreach($type as $value) {
-<<<<<<< HEAD
                                 if($value['type_id'] == $user[0]['type']){
                                 ?>
                             <option selected value="<?php if (!empty($value['type_id'])) echo $value['type_id'] ?>"><?php if (!empty($value['name_type'])) echo $value['name_type'] ?></option>
                             <?php } else{ ?>
                                     <option value="<?php if (!empty($value['type_id'])) echo $value['type_id'] ?>"><?php if (!empty($value['name_type'])) echo $value['name_type'] ?></option>
-=======
-                                if($value['id_type'] == $user[0]['type']){
-                                ?>
-                            <option selected value="<?php if (!empty($value['id_type'])) echo $value['id_type'] ?>"><?php if (!empty($value['name_type'])) echo $value['name_type'] ?></option>
-                            <?php } else{ ?>
-                                    <option value="<?php if (!empty($value['id_type'])) echo $value['id_type'] ?>"><?php if (!empty($value['name_type'])) echo $value['name_type'] ?></option>
->>>>>>> 1-php-202109/2-groups/3-C/4-2-Anh
                              <?php   }
                             }?>
                         </select>
