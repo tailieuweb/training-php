@@ -1,18 +1,20 @@
 <?php
 
 require_once 'BaseModel.php';
+require_once 'UserRepository.php';
 
-class UserModel extends BaseModel {
+class UserModel extends BaseModel{
+    use UserRepository;
 
     public function findUserById($id) {
-        $sql = 'SELECT * FROM users WHERE id = '.$id;
+        $sql = $this->findUId($id);
         $user = $this->select($sql);
 
         return $user;
     }
 
     public function findUser($keyword) {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
+        $sql = $this->findU($keyword);
         $user = $this->select($sql);
 
         return $user;
@@ -26,7 +28,7 @@ class UserModel extends BaseModel {
      */
     public function auth($userName, $password) {
         $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+        $sql = $this->login($userName,$password);
         $user = $this->select($sql);
 		//var_dump($sql);die();
         return $user;
@@ -38,8 +40,7 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function deleteUserById($id) {
-      
-        $sql = 'DELETE FROM users WHERE id = '.$id;
+        $sql = $this->del($id);
         return $this->delete($sql);
 
     }
@@ -52,13 +53,7 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        $sql = 'UPDATE users SET 
-               email = "'.$input['email'].'",
-                name = "'.$input['name'].'",
-                 fullname = "'.$input['fullname'].'",
-                 password="'. md5($input['password']) .'",
-                  type = "'.$input['type'].'"
-                WHERE id = ' . $input['id'];
+        $sql = $this->updateU($input);
 
         $user = $this->update($sql);
         return $user;
@@ -70,15 +65,7 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`,`version`) VALUES (" .
-        "'" . $input['name'] . "', '"
-        . md5($input['password']) . "', '"
-        . $input['fullname'] . "', '"
-        . $input['email'] . "', '"
-        . $input['type']
-        . "', '"
-        . 1
-        . "')";
+        $sql = $this->insertU($input);
         $user = $this->insert($sql);
         return $user;
                 
@@ -91,15 +78,13 @@ class UserModel extends BaseModel {
      */
     public function updateVersion($input){
         $version = $input['version'] + 1;
-        $sql = 'UPDATE users SET              
-                 version = "'.$version.'"
-                WHERE id = ' . $input['id'];
+        $sql = $this->updateVs($input);
         $user = $this->update($sql);
         //var_dump($input['version']); die(); 
         return $user;
     }
     public function getVersion($id){
-        $sql = 'SELECT version FROM users WHERE id = ' . $id;
+        $sql = $this->getVs($id);
         $users = $this->select($sql);
        // var_dump($users[0]['version']);die();
         return $users[0]['version'];
