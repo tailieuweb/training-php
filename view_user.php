@@ -5,10 +5,12 @@ $userModel = new UserModel();
 $user = NULL; //Add new user
 $_id = NULL;
 $params = [];
+
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
     
 }
+
 $users = $userModel->getUsers($params);
 if (!empty($_GET['id'])) {
     foreach ($users as $user1) {
@@ -18,7 +20,6 @@ if (!empty($_GET['id'])) {
     }  
     $user = $userModel->findUserById($_id);//Update existing user
 }
-
 
 ?>
 <!DOCTYPE html>
