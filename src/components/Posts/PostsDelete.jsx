@@ -1,5 +1,5 @@
 export default function PostsDelete(props) {
-  const { postSelected, onDeletePost } = props;
+  const { postSelected, onDeletePost} = props;
   return (
     <div
       className="modal fade"

@@ -6,12 +6,46 @@ import apiCaller from "../../utils/apiCaller";
 
 export default function Auth(props) {
   const [authType, setAuthStatus] = useState("signIn");
-
+  const {
+    name,
+    email,
+    password,
+    confirm_password,
+    setName,
+    setEmail,
+    setPassword,
+    setConfirmPassword,
+    setLogin,
+  } = props;
   //Hàm call api login
   const signIn = () => {};
 
   //Hàm call api register
-  const signUp = () => {};
+  const signUp = () => {
+    if (password !== confirm_password) {
+      return toast("Mật khẩu nhập lại không đúng!");
+    }
+    if (name === "") {
+      return toast("Tên không được trống!");
+    }
+    if (email === "") {
+      return toast("Email không được trống!");
+    }
+    apiCaller("api/register", "POST", {
+      name,
+      email,
+      password,
+      confirm_password,
+    })
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        toast("Đăng ký thành công!");
+      })
+      .catch((error) => {
+        console.log("error", error);
+        toast("Email đã tồn tại vui lòng nhập lại!");
+      });
+  };
 
   //Hàm click signIn và signUp
   const auth = () => {
@@ -38,7 +72,20 @@ export default function Auth(props) {
         </button>
       </div>
       <div className="modal-body px-5 py-3">
-        {authType === "signIn" ? <AuthSignIn /> : <AuthSignUp />}
+        {authType === "signIn" ? (
+          <AuthSignIn />
+        ) : (
+          <AuthSignUp
+            name={name}
+            setName={setName}
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+            confirm_password={confirm_password}
+            setConfirmPassword={setConfirmPassword}
+          />
+        )}
       </div>
       <div className="modal-footer d-flex justify-content-between">
         <button
