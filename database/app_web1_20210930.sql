@@ -60,7 +60,7 @@ CREATE TABLE `users` (
   `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `version` DOUBLE(10,1) NOT NULL
+  `version` double(5,1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --

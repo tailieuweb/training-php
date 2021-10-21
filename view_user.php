@@ -3,22 +3,22 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$id = NULL;
+$_id = NULL;
+$params = [];
 
-if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+if (!empty($_GET['keyword'])) {
+    $params['keyword'] = $_GET['keyword'];
+    
 }
 
-
-if (!empty($_POST['submit'])) {
-
-    if (!empty($id)) {
-        $userModel->updateUser($_POST);
-    } else {
-        $userModel->insertUser($_POST);
-    }
-    header('location: list_users.php');
+$users = $userModel->getUsers($params);
+if (!empty($_GET['id'])) {
+    foreach ($users as $user1) {
+        if($_GET['id'] == md5($user1['id'])){                      
+            $_id = $user1['id'];    
+        }
+    }  
+    $user = $userModel->findUserById($_id);//Update existing user
 }
 
 ?>
@@ -37,17 +37,20 @@ if (!empty($_POST['submit'])) {
             User profile
         </div>
         <form method="POST">
-            <input type="hidden" name="id" value="<?php echo $id ?>">
+        <div class="form-group">
+                <label for="name">ID: </label>
+                <span><?php if (!empty($user[0]['id'])) echo $user[0]['id'] ?></span>
+            </div>            
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Name: </label>
                 <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
             </div>
             <div class="form-group">
-                <label for="password">Fullname</label>
+                <label for="password">Fullname: </label>
                 <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
             </div>
             <div class="form-group">
-                <label for="password">Email</label>
+                <label for="password">Email: </label>
                 <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
             </div>
         </form>
