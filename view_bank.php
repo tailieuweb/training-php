@@ -4,7 +4,6 @@ $factory = new FactoryPattern();
 
 $bankModel = $factory->make('bank');
 
-
 $bank = NULL; //Add new bank
 $id = NULL;
 

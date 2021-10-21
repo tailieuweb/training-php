@@ -1,15 +1,17 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/BankModel.php';
-$bankModel = new BankModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
 
-$bank = NULL; //Add new user
+$bankModel = $factory->make('bank');
+
+$bank = NULL; //Add new bank
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
-    $bank = $bankModel->findBankById($_id); //Update existing user
+    $bank = $bankModel->findBankById($_id); //Update existing bank
 }
 
 
@@ -43,9 +45,9 @@ if (!empty($_POST['submit'])) {
         <form method="POST">
             <input type="hidden" name="id" value="<?php echo $_id ?>">
             <div class="form-group">
-                <label for="user_id">User ID</label>
-                <input class="form-control" name="user_id" placeholder="User ID"
-                    value='<?php if (!empty($bank[0]['user_id'])) echo $bank[0]['user_id']  ?>'>
+                <label for="user_id">User id</label>
+                <input class="form-control" name="user_id" placeholder="User id"
+                    value='<?php if (!empty($bank[0]['user_id'])) echo htmlentities($bank[0]['user_id'])  ?>'>
             </div>
             <div class="form-group">
                 <label for="cost">Cost</label>

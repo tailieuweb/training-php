@@ -29,7 +29,6 @@ class BankModel extends BaseModel
 
         return $bank;
     }
-
     /**
      * Update user
      * @param $input
