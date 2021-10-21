@@ -1,8 +1,7 @@
 import { useRouter } from "next/dist/client/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actEditPost, actLoadPosts } from "../../redux/actions/postsActions";
-import apiCaller from "../../utils/apiCaller";
+import { actEditPost, actLoadPosts, actDeletePost } from "../../redux/actions/postsActions";
 import Pagination from "../Base/Pagination";
 import PostsAddForm from "./PostsAddForm";
 import PostsEdit from "./PostsEdit";
@@ -56,10 +55,11 @@ export default function Posts() {
     document.querySelector("#editModal button[data-dismiss='modal']").click();
   };
 
-  const onDeletePost = () => {
-    apiCaller(`products/${postSelected.id}`, "DELETE", null).then((res) => {
-      console.log(res);
-    });
+  const onDeletePost = async (e)  => {
+    e.preventDefault();
+   // request and close modal
+   await dispatch(actDeletePost(postSelected));
+   document.querySelector("#editModal button[data-dismiss='modal']").click();
   };
 
   // Render
