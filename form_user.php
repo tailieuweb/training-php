@@ -8,8 +8,13 @@ $user = NULL; //Add new user
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
+
+    $id = $_GET['id'];
+    $user = $userModel->findUserById($id);//View user
+
     $_id = $_GET['id'];
     $user = $userModel->findUserById($_id);//Update existing user
+
 }
 
 
@@ -44,6 +49,22 @@ if (!empty($_POST['submit'])) {
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
                     </div>
+                    <div class="form-group">
+                        <label for="name">Fullname</label>
+                        <input class="form-control" name="fullname" placeholder="Fullname" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Email</label>
+                        <input class="form-control" name="email" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Type</label>
+                        <select name="type">    
+                            <option value="">--Select Type--</option>
+                            <option value="admin">admin</option>
+                            <option value="user">user</option>
+                        </select>
+                    </div>                              
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">

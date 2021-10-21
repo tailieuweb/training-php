@@ -35,6 +35,7 @@ if (!empty($_GET['id'])) {
             </div>
             <div class="form-group">
                 <label for="password">Fullname</label>
+
                 <span><?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?></span>
             </div>
             <div class="form-group">
@@ -43,8 +44,9 @@ if (!empty($_GET['id'])) {
             </div>
             <div class="form-group">
                 <label for="password">Type</label>
-                <span><?php if (!empty($user[0]['type'])) echo $user[0]['type'] ?></span>
-            </div>
+
+                <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
+            </div>          
         </form>
     <?php } else { ?>
         <div class="alert alert-success" role="alert">
