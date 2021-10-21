@@ -2,11 +2,12 @@
 // Start the session
 session_start();
 
-require_once 'models/CSRFToken.php';
-require_once 'models/FactoryPattern.php';
+
+require 'models/CSRFToken.php';
+require 'models/FactoryPattern.php';
+
 
 $userModel = FactoryPattern::make('user');
-
 $csrf_token = CSRFToken::GenerateToken();
 $_SESSION["csrf_token"] = $csrf_token;
 $params = [];

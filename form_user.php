@@ -3,7 +3,17 @@
 session_start();
 
 require_once 'models/FactoryPattern.php';
+    require 'models/Repositories.php';
 
+$repositories = new Repositories();
+//
+//$input['name'] = "name nek";
+//$input['fullname'] = "full name nek";
+//$input['email'] = "email@email.com";
+//$input['type'] = "user";
+//$input['password'] = "1234";
+
+//$repositories->createAUser($input);
 $userModel = FactoryPattern::make("user");
 
 $user = NULL; //Add new user
@@ -46,7 +56,8 @@ if (!empty($_POST['submit'])) {
             $user[0] = $_user[0];
         }
     } else {
-        $userModel->insertUser($_POST);
+//        $userModel->insertUser($_POST);
+        $repositories->createAUser($_POST);
         header('location: list_users.php');
     }
     

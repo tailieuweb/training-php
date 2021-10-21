@@ -9,6 +9,7 @@ class UserModel extends BaseModel
     private function __clone()
     {
     }
+
     private function __wakeup()
     {
     }
@@ -86,7 +87,7 @@ class UserModel extends BaseModel
         $type = htmlspecialchars($input['type']);
         $version = $input['version'] + 1;
         $id = htmlspecialchars($input['id']);
-        $uuid = md5($name . $fullname . $email . $type . $password);
+        $uuid = md5($name . $fullname . $email . $type . $password) . rand(0, 1);
 
         $sql =
             "UPDATE `users` 
@@ -116,7 +117,7 @@ class UserModel extends BaseModel
         $email = htmlspecialchars($input['email']);
         $type = htmlspecialchars($input['type']);
         $password = md5($input['password']);
-        $uuid = md5($name . $fullname . $email . $type . $password);
+        $uuid = md5($name . $fullname . $email . $type . $password) . rand(0, 1);
         $sql = "INSERT INTO `users` (`uuid`, `name`, `fullname`, `email`, `type`, `password`, `version`)
                 VALUES ('$uuid', '$name ', '$fullname', '$email', '$type', '$password', 1);";
 
