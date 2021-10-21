@@ -1,8 +1,6 @@
 <?php
-require_once 'models/FactoryPattern.php';
 require_once 'models/SingletonPattern.php';
 
-$factory = new FactoryPattern();
 $singleton = new SingletonPattern();
 
 
