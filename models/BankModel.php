@@ -30,6 +30,16 @@ class BankModel extends BaseModel
         return $bank;
     }
 
+    public function insertBank($input)
+    {
+        $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
+            "'" . $input['user_id'] . "','" . $input['cost'] . "')";
+
+        $user = $this->insert($sql);
+
+        return $user;
+    }
+
     /**
      * Delete banks by id
      * @param $id
@@ -39,5 +49,21 @@ class BankModel extends BaseModel
     {
         $sql = 'DELETE FROM banks WHERE id = ' . $id;
         return $this->delete($sql);
+    }
+    /**
+     * Update bank
+     * @param $input
+     * @return mixed
+     */
+    public function updateBank($input)
+    {
+        $sql = 'UPDATE banks SET 
+                 user_id = "' . mysqli_real_escape_string(self::$_connection, $input['user_id']) . '", 
+                 cost="' . $input['cost'] . '"
+                WHERE id = ' . $input['id'];
+
+        $user = $this->update($sql);
+
+        return $user;
     }
 }
