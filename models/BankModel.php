@@ -30,19 +30,20 @@ class BankModel extends BaseModel
         return $bank;
     }
     /**
-     * Update user
+     * Update bank
      * @param $input
      * @return mixed
      */
     public function updateBank($input)
     {
         $sql = 'UPDATE banks SET 
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['user_id']) .$input['cost'] . '"
+                 user_id = "' . mysqli_real_escape_string(self::$_connection, $input['user_id']) . '", 
+                 cost="' . $input['cost'] . '"
                 WHERE id = ' . $input['id'];
 
-        $bank = $this->update($sql);
+        $user = $this->update($sql);
 
-        return $bank;
+        return $user;
     }
 
     /**
