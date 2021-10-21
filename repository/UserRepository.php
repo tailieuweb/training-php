@@ -67,14 +67,11 @@ trait UserRepository{
     public function getVs($id){
         return'SELECT version FROM users WHERE id = ' . $id;
     }
-    // public function getUsers($params = []) {   
-    //     if (!empty($params['keyword'])) {
-           
-    //         return 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
-    //         $users = self::$_connection->multi_query($sql);
-            
-    //     } else {
-    //         return 'SELECT * FROM users';
-    //     }       
-    // }
+
+    public function findByName($keyword){
+         return 'SELECT * FROM users WHERE name LIKE "%' . $keyword .'%"';
+    }
+    public function selectUser(){
+        return 'SELECT * FROM users';
+    }
 }

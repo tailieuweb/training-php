@@ -1,7 +1,7 @@
 <?php
 
 require_once 'BaseModel.php';
-require_once 'UserRepository.php';
+require_once './repository/UserRepository.php';
 
 class UserModel extends BaseModel{
     use UserRepository;
@@ -94,7 +94,7 @@ class UserModel extends BaseModel{
        
         if (!empty($params['keyword'])) {
            
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+            $sql = $this->findByName($params['keyword']);
 
             //Keep this line to use Sql Injection
             //Don't change
@@ -102,7 +102,7 @@ class UserModel extends BaseModel{
             $users = self::$_connection->multi_query($sql);
             
         } else {
-            $sql = 'SELECT * FROM users';
+            $sql = $this->selectUser();
             $users = $this->select($sql);
         }
         return $users;
