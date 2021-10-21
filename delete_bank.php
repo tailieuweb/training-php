@@ -1,8 +1,12 @@
 <?php
 require_once 'models/FactoryPattern.php';
-$factory = new FactoryPattern();
+require_once 'models/SingletonPattern.php';
 
-$bankModel = $factory->make('bank');
+$factory = new FactoryPattern();
+$singleton = new SingletonPattern();
+
+
+$bankModel = $singleton->make('bank');
 
 $bank = NULL; //Add new user
 $id = NULL;
