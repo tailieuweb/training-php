@@ -50,12 +50,17 @@ class UserModel extends BaseModel {
      */
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
+<<<<<<< HEAD
                  name = "' . $input['name'] .'", 
                  fullname = "' . $input['fullname'] .'", 
                  email = "' . $input['email'] .'", 
                  type = "' . $input['type'] .'", 
+=======
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
+>>>>>>> main
                  password="'. md5($input['password']) .'"
                 WHERE id = ' . $input['id'];
+
         $user = $this->update($sql);
 
         return $user;
@@ -70,7 +75,10 @@ class UserModel extends BaseModel {
 
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
                 "'" . $input['name'] . "', '".md5($input['password'])."')";
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 
         $user = $this->insert($sql);
 
@@ -87,6 +95,7 @@ class UserModel extends BaseModel {
             //Example keyword: abcef%";TRUNCATE banks;##
             $users = self::$_connection->multi_query($sql);
         } else {
+<<<<<<< HEAD
 
             $sql = 'SELECT * FROM users join types on users.type = types.type_id';
         }
@@ -97,6 +106,12 @@ class UserModel extends BaseModel {
 
         }
 
+=======
+            $sql = 'SELECT * FROM users';
+            $users = $this->select($sql);
+        }
+
+>>>>>>> main
         return $users;
     }
     public function getTypes($params = []) {
