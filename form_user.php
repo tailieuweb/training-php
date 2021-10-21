@@ -45,7 +45,7 @@ if (!empty($_POST['submit'])) {
             <div class="form-group">
                 <label for="name">Name</label>
                 <input class="form-control" name="name" placeholder="Name"
-                    value='<?php if (!empty($user[0]['name'])) echo htmlentities($user[0]['name'])  ?>'>
+                    value='<?php if (!empty($user[0]['name'])) echo $user[0]['name']  ?>'>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
@@ -76,6 +76,8 @@ if (!empty($_POST['submit'])) {
             User not found!
         </div>
         <?php } ?>
+    <div class="le">nguyen tan le</div>
+
     </div>
 </body>
 
