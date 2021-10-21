@@ -52,13 +52,13 @@ if (!empty($_POST['submit'])) {
             <div class="form-group">
                 <label for="cost">Cost</label>
                 <input class="form-control" name="cost" placeholder="Cost"
-                    value="<?php if (!empty($bank[0]['cost'])) echo htmlentities( $bank[0]['cost']) ?>">
+                    value="<?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?>">
             </div>
             <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
         </form>
         <?php } else { ?>
         <div class="alert alert-success" role="alert">
-            bank not found!
+            User not found!
         </div>
         <?php } ?>
     </div>

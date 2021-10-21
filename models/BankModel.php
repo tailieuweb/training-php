@@ -8,7 +8,7 @@ class BankModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM uses WHERE name LIKE "%' . $params['keyword'] . '%"';
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
 
             //Keep this line to use Sql Injection
             //Don't change
@@ -29,15 +29,35 @@ class BankModel extends BaseModel
 
         return $bank;
     }
+    /**
+     * Update user
+     * @param $input
+     * @return mixed
+     */
+    public function updateBank($input)
+    {
+        $sql = 'UPDATE banks SET 
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['user_id']) .$input['cost'] . '"
+                WHERE id = ' . $input['id'];
 
+        $bank = $this->update($sql);
+
+        return $bank;
+    }
+
+    /**
+     * Insert user
+     * @param $input
+     * @return mixed
+     */
     public function insertBank($input)
     {
         $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
-            "'" . $input['user_id'] . "','" . $input['cost'] . "')";
+            "'" . $input['user_id'] . "', '" . $input['cost'] . "')";
 
-        $user = $this->insert($sql);
+        $bank = $this->insert($sql);
 
-        return $user;
+        return $bank;
     }
 
     /**
@@ -50,20 +70,12 @@ class BankModel extends BaseModel
         $sql = 'DELETE FROM banks WHERE id = ' . $id;
         return $this->delete($sql);
     }
-    /**
-     * Update bank
-     * @param $input
-     * @return mixed
-     */
-    public function updateBank($input)
-    {
-        $sql = 'UPDATE banks SET 
-                 user_id = "' . mysqli_real_escape_string(self::$_connection, $input['user_id']) . '", 
-                 cost="' . $input['cost'] . '"
-                WHERE id = ' . $input['id'];
 
-        $user = $this->update($sql);
-
-        return $user;
+    public static function getInstance() {
+        if (self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
     }
 }

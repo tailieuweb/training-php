@@ -2,7 +2,7 @@
 // Start the session
 session_start();
 
-require_once './models/FactoryPattern.php';
+require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
 $bankModel = $factory->make('bank');
@@ -65,6 +65,7 @@ $banks = $bankModel->getBanks($params);
         </div>
         <?php } ?>
     </div>
+    <a href="form_bank.php">Add bank</a>
 </body>
 
 </html>
