@@ -55,12 +55,21 @@ class UserModel extends BaseModel {
      */
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
+<<<<<<< HEAD
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
+=======
+<<<<<<< HEAD
+                 name = "' . $input['name'] .'", 
+>>>>>>> 1-php-202109/2-groups/3-C/5-31-Nam
                  fullname = "' . $input['fullname'] .'", 
                  email = "' . $input['email'] .'", 
                  type = "' . $input['type'] .'", 
+=======
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
+>>>>>>> main
                  password="'. md5($input['password']) .'"
                 WHERE id = ' . $input['id'];
+
         $user = $this->update($sql);
 
         return $user;
@@ -73,9 +82,17 @@ class UserModel extends BaseModel {
      */
     public function insertUser($input) {
 
+<<<<<<< HEAD
         $sql = "INSERT INTO `users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
             "'" . $input['name'] . "', '".$input['fullname']."', '".$input['email']."', '".$input['type']."', '".$input['password']."')";
+=======
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
+                "'" . $input['name'] . "', '".md5($input['password'])."')";
+<<<<<<< HEAD
+>>>>>>> 1-php-202109/2-groups/3-C/5-31-Nam
 
+=======
+>>>>>>> main
 
         $user = $this->insert($sql);
 
@@ -95,12 +112,19 @@ class UserModel extends BaseModel {
             $users = $this->select($sql);
             // var_dump($users).die();
         } else {
+<<<<<<< HEAD
 
             $sql = 'SELECT * FROM users join types on users.type = types.type_id';
             $users = $this->select($sql);
 
         }
 
+=======
+            $sql = 'SELECT * FROM users';
+            $users = $this->select($sql);
+        }
+
+>>>>>>> main
         return $users;
     }
     public function getTypes($params = []) {
