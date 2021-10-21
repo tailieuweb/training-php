@@ -1,10 +1,15 @@
 import AuthModal from "./Auth/AuthModal";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function Header() {
-  const [isLogin, setLogin] = useState(false);
+  const [isLogin, setLogin] = useState();
 
-  const onLogout = () => {};
+  const onLogout = () => {
+    localStorage.removeItem("token");
+    setLogin(false);
+    toast("Logout thành công!!!!");
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
