@@ -1,8 +1,10 @@
 <?php
-require_once 'models/FactoryPattern.php';
-$factory = new FactoryPattern();
+require_once 'models/SingletonPattern.php';
 
-$bankModel = $factory->make('bank');
+$singleton = new SingletonPattern();
+
+
+$bankModel = $singleton->make('bank');
 
 $bank = NULL; //Add new bank
 $id = NULL;
