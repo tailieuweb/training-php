@@ -6,10 +6,11 @@ import {
   actAddPost,
   actDeletePost,
   actEditPost,
-  actLoadPosts,
+  actLoadPosts
 } from "../../redux/actions/postsActions";
 import Pagination from "../Base/Pagination";
 import PostsAdd from "./PostsAdd";
+import PostsAddItem from "./PostsAddItem";
 import PostsDelete from "./PostsDelete";
 import PostsEdit from "./PostsEdit";
 import PostsItem from "./PostsItem";
@@ -82,6 +83,11 @@ export default function Posts() {
   // Render
   return (
     <div className="row mt-4">
+      <PostsAdd
+        postSelected={postSelected}
+        onChange={onChange}
+        onAddPost={onAddPost}
+      />
       <PostsEdit
         postSelected={postSelected}
         onChange={onChange}
@@ -89,11 +95,7 @@ export default function Posts() {
       />
       <PostsDelete postSelected={postSelected} onDeletePost={onDeletePost} />
       <div className="col-md-6">
-        <PostsAdd
-          postSelected={postSelected}
-          onChange={onChange}
-          onAddPost={onAddPost}
-        />
+        <PostsAddItem />
       </div>
       {posts.map((post) => (
         <div key={post.id} className="col-md-6">
