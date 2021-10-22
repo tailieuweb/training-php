@@ -20,7 +20,18 @@ export const actLoadPosts = () => {
 };
 
 export const actAddPost = (post) => {
-  return (dispatch) => {};
+  return (dispatch) => {
+    const { title, description } = post;
+    const data = { title, description };
+    return apiCaller(`products`, "POST", data)
+    .then((res) => {
+      if (res.success) {
+        dispatch(actLoadPosts());
+        toast.success("Thêm thành công!");
+      }
+    })
+    .catch(() => toast.error("Có lỗi xảy ra!"));
+  };
 };
 
 export const actEditPost = (post) => {
