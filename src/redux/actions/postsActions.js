@@ -50,5 +50,14 @@ export const actEditPost = (post) => {
 };
 
 export const actDeletePost = (post) => {
-  return (dispatch) => {};
+    return (dispatch) => {
+      return apiCaller(`products/${post.id}`, "DELETE", null)
+        .then((res) => {
+          if (res.success) {
+            dispatch(actLoadPosts());
+            toast.success("Xóa thành công!");
+          }
+        })
+        .catch(() => toast.error("Có lỗi xảy ra!"));
+  };
 };
