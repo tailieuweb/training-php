@@ -50,29 +50,16 @@ class UserModel extends BaseModel {
      */
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
-<<<<<<< HEAD
                  name = "' . $input['name'] .'", 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                  email ="' . $input['email'] .'",
-=======
                  type ="' . $input['type'] .'",
->>>>>>> 2-php-202109/2-groups/3-C/1-16-Nghi
-=======
                  fullname ="' . $input['fullname'] .'",
->>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram
-=======
                  email ="' . $input['email'] .'",
->>>>>>> 2-php-202109/2-groups/3-C/2-9-Hieu
-=======
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
->>>>>>> 1-php-202109/1-web-security
-                 password="'. md5($input['password']) .'"
+                 password="'. md5($input['password']) .'",
+                 version = version + 0.1
                 WHERE id = ' . $input['id'];
-
         $user = $this->update($sql);
-
         return $user;
     }
 
@@ -82,8 +69,8 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".md5($input['password'])."')";
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`type`,`email`) VALUES (" .
+        "'" . $input['name'] ."', '".md5($input['password'])."','".$input['fullname']."','".$input['type']."','".$input['email']. "')";
 
         $user = $this->insert($sql);
 
@@ -110,5 +97,14 @@ class UserModel extends BaseModel {
         }
 
         return $users;
+    }
+    public static function getInstance(){
+        if(self::$_instance!==null){
+            return self::$_instance;
+        }
+        else{
+            self::$_instance = new self();
+            return self::$_instance;
+        }
     }
 }
