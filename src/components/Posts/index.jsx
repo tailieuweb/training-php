@@ -1,10 +1,10 @@
 import { useRouter } from "next/dist/client/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actEditPost, actLoadPosts } from "../../redux/actions/postsActions";
+import { actAddPost, actEditPost, actLoadPosts } from "../../redux/actions/postsActions";
 import apiCaller from "../../utils/apiCaller";
 import Pagination from "../Base/Pagination";
-import PostsAddForm from "./PostsAddForm";
+import PostsAdd from "./PostsAdd";
 import PostsEdit from "./PostsEdit";
 import PostsDelete from "./PostsDelete";
 import PostsItem from "./PostsItem";
@@ -44,6 +44,18 @@ export default function Posts() {
     setPostSelected({ ...postSelected, [name]: value });
   };
 
+  const onAddPost = async (e) => {
+    e.preventDefault();
+    const { title, description } = postSelected;
+    if (title.length === 0 || description.length === 0) {
+      return toast.warning("Vui lòng nhập đầy đủ thông tin");
+    }
+
+    // request and close modal
+    await dispatch(actAddPost(postSelected));
+    document.querySelector("#addModal button[data-dismiss='modal']").click();
+  };
+
   const onEditPost = async (e) => {
     e.preventDefault();
     const { title, description } = postSelected;
@@ -72,7 +84,11 @@ export default function Posts() {
       />
       <PostsDelete postSelected={postSelected} onDeletePost={onDeletePost} />
       <div className="col-md-6">
-        <PostsAddForm />
+        <PostsAdd
+          postSelected={postSelected}
+          onChange={onChange}
+          onAddPost={onAddPost}
+        />
       </div>
       {posts.map((post) => (
         <div key={post.id} className="col-md-6">
