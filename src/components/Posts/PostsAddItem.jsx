@@ -1,6 +1,6 @@
-import PostsAdd from "./PostsAdd";
+import React from "react";
 
-export default function PostsAddForm() {
+export default function PostsAddItem() {
   return (
     <div className="card">
       <div className="card-body">
@@ -10,12 +10,11 @@ export default function PostsAddForm() {
               type="button"
               className="btn btn-primary btn-sm"
               data-toggle="modal"
-              data-target="#postsAddModal"
+              data-target="#addModal"
             >
               <i className="fa fa-plus mr-1" aria-hidden="true"></i> New Your
               Confessions
             </button>
-            <PostsAdd />
           </div>
         </div>
         <small className="card-text d-block mt-3">

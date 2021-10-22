@@ -1,6 +1,6 @@
 import { SET_POSTS } from "../actions/postsActions";
 
-const postsReducer = (state = { posts: null }, action) => {
+const postsReducer = (state = { posts: [] }, action) => {
   switch (action.type) {
     case SET_POSTS:
       return { ...state, posts: action.posts };
