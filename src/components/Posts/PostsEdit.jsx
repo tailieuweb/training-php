@@ -1,23 +1,23 @@
-export default function PostsAdd(props) {
-  const { postSelected, onChange, onAddPost } = props;
+export default function PostsEdit(props) {
+  const { postSelected, onChange, onEditPost } = props;
   return (
     <div
       className="modal fade"
-      id="addModal"
+      id="editModal"
       tabIndex="-1"
       role="dialog"
-      aria-labelledby="addModalLabel"
+      aria-labelledby="editModalLabel"
       aria-hidden="true"
     >
       <form
-        onSubmit={onAddPost}
+        onSubmit={onEditPost}
         className="modal-dialog modal-dialog-centered"
         role="document"
       >
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title" id="addModalLabel">
-              Write Your Confessions
+            <h5 className="modal-title" id="editModalLabel">
+              Edit Your Confessions
             </h5>
             <button
               type="button"
@@ -64,7 +64,7 @@ export default function PostsAdd(props) {
               Close
             </button>
             <button type="submit" className="btn btn-primary">
-              Post Your Confessions
+              Edit Your Confessions
             </button>
           </div>
         </div>
