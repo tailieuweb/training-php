@@ -59,7 +59,7 @@ export default function Posts() {
     e.preventDefault();
    // request and close modal
    await dispatch(actDeletePost(postSelected));
-   document.querySelector("#editModal button[data-dismiss='modal']").click();
+   document.querySelector("#deleteModal button[data-dismiss='modal']").click();
   };
 
   // Render
