@@ -49,9 +49,7 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
-                 email ="' . $input['email'] .'",
+        $sql = 'UPDATE users SET
                  type ="' . $input['type'] .'",
                  fullname ="' . $input['fullname'] .'",
                  email ="' . $input['email'] .'",
@@ -106,5 +104,5 @@ class UserModel extends BaseModel {
             self::$_instance = new self();
             return self::$_instance;
         }
-    }
+
 }

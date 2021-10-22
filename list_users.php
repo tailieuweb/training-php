@@ -1,7 +1,6 @@
 <?php
 // Start the session
 session_start();
-$_SESSION['token']=md5(1);
 require_once 'DesignPattern/FactoryPattern.php';
 $factory = new FactoryPattern();
 $userModel = $factory->make('user');
@@ -57,9 +56,9 @@ $users = $userModel->getUsers($params);
                                 <a href="view_user.php?id=<?php echo md5($user['id']) ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo md5($user['id'])?>&token=<?php echo $_SESSION['token'] ?? '' ?>">
+                                <a href="delete_user.php?id=<?php echo md5($user['id'])?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
-                                </a>                              
+                                </a>
                             </td>
                         </tr>
                     <?php } ?>
