@@ -74,7 +74,7 @@ $users = $userModel->getUsers($params);
                                 <a href="form_user.php?id=<?php echo base64_encode(rand(100,999).$user['id'].rand(10,99)) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="view_user.php?id=<?php echo base64_encode(rand(100,999).$user['id'].rand(10,99)) ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
                                 <a href="delete_user.php?id=<?php echo base64_encode(rand(100,999).$user['id'].rand(10,99)) ?>">
