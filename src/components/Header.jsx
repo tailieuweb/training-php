@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { actLogoutUser } from "../redux/actions/authActions";
 import Auth from "./Auth";
 
 export default function Header(props) {
@@ -7,7 +7,12 @@ export default function Header(props) {
   const authSelector = useSelector((state) => state.auth);
   const user = authSelector?.user;
 
-  const onLogout = () => {};
+  // Redux
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
+    dispatch(actLogoutUser());
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">

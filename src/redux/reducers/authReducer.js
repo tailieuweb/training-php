@@ -5,6 +5,7 @@ const counterReducer = (state = { user: null }, action) => {
     case LOGIN_AUTH:
       return { ...state, user: action.user };
     case LOGOUT_AUTH:
+      localStorage.removeItem(".user");
       return { ...state, user: null };
     default:
       return { ...state };

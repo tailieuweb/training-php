@@ -59,3 +59,10 @@ export const actSignInUser = (user) => {
 export const actSignUpUser = (user) => {
   return (dispatch) => {};
 };
+
+export const actLogoutUser = () => {
+  return (dispatch) => {
+    dispatch(logoutUser());
+    toast.success("Logout thành công!");
+  };
+};
