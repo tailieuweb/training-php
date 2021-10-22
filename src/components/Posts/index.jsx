@@ -6,7 +6,7 @@ import {
   actAddPost,
   actDeletePost,
   actEditPost,
-  actLoadPosts
+  actLoadPosts,
 } from "../../redux/actions/postsActions";
 import Pagination from "../Base/Pagination";
 import PostsAdd from "./PostsAdd";
@@ -77,7 +77,7 @@ export default function Posts() {
     e.preventDefault();
     // request and close modal
     await dispatch(actDeletePost(postSelected));
-    document.querySelector("#editModal button[data-dismiss='modal']").click();
+    document.querySelector("#deleteModal button[data-dismiss='modal']").click();
   };
 
   // Render
