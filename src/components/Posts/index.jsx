@@ -94,9 +94,11 @@ export default function Posts() {
         onEditPost={onEditPost}
       />
       <PostsDelete postSelected={postSelected} onDeletePost={onDeletePost} />
-      <div className="col-md-6">
-        <PostsAddItem />
-      </div>
+      {parseInt(pageNum) === 1 && (
+        <div className="col-md-6">
+          <PostsAddItem />
+        </div>
+      )}
       {posts.map((post) => (
         <div key={post.id} className="col-md-6">
           <PostsItem post={post} onSelectPost={() => setPostSelected(post)} />
