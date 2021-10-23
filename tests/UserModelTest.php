@@ -36,4 +36,19 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
+
+    /**
+     * Test cong 2 so am
+    */
+    public function test2SoAm(){
+        $userModel = new UserModel();
+        $a = -1;
+        $b = -2;
+        $expected = -3;
+
+        $actual = $userModel->sumb($a, $b);
+
+        $this->assertEquals($expected, $actual);
+
+    }
 }
