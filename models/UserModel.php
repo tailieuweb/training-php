@@ -109,4 +109,23 @@ class UserModel extends BaseModel
         return $result;
     }
 
+<<<<<<< HEAD
 }
+=======
+    public static function getInstance() {
+        if (self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }
+    /**
+     * For testing
+     * @param $a
+     * @param $b
+     */
+    public function sumb($a, $b) {
+        return $a + $b;
+    }
+}
+>>>>>>> 1-php-202109/2-groups/4-D/master-phpunit
