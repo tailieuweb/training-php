@@ -4,6 +4,7 @@ $userModel = new UserModel();
 
 $user = NULL; //Add new user
 $id = NULL;
+$keyCode = "aomU87239dadasdasd";
 
 if (!empty($_GET['id'])) {
     $id = base64_decode($_GET['id']);
@@ -38,7 +39,7 @@ if (!empty($_POST['submit'])) {
                 </div>
                 <form method="POST">
                     <input type="hidden" name="id" value="<?php echo $newid ?>">
-                    <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo $user[0]['version']?>">
+                    <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo base64_encode($keyCode.$user[0]['version'])?>">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
