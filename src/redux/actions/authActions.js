@@ -73,3 +73,10 @@ export const actSignUpUser = (user, callback) => {
       .catch(() => toast.error("Có lỗi xảy ra!"));
   };
 };
+
+export const actLogoutUser = () => {
+  return (dispatch) => {
+    dispatch(logoutUser());
+    toast.success("Logout thành công!");
+  };
+};
