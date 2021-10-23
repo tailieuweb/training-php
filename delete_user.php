@@ -9,18 +9,14 @@ $user = NULL; //Add new user
 $id = NULL;
 $token = NULL;
 
-if (isset($_POST['secret'])) {
 
-    $token = $_POST['secret'];
-    $id = $_POST['id'];
-    if ($token == $_SESSION['_token']) {
+if (!empty($_GET['id'])) {
+    $id = $_GET['id'];
+    $token = $_GET['token'];
+    if ($token==$_SESSION['_token']) {
         $userModel->deleteUserById($id); //Delete existing user
     }
+  
 }
-
-// if (!empty($_GET['id'])) {
-//     $id = $_GET['id'];
-//     $userModel->deleteUserById($id); //Delete existing user
-// }
 
 header('location: list_users.php');
