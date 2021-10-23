@@ -108,17 +108,13 @@ class UserModel extends BaseModel
         $result = BaseModel::select_result($sql) ? BaseModel::select_result($sql) : [];
         return $result;
     }
-
-<<<<<<< HEAD
-}
-=======
-    public static function getInstance() {
-        if (self::$_instance !== null){
-            return self::$_instance;
-        }
-        self::$_instance = new self();
-        return self::$_instance;
-    }
+    // public static function getInstance() {
+    //     if (self::$_instance !== null){
+    //         return self::$_instance;
+    //     }
+    //     self::$_instance = new self();
+    //     return self::$_instance;
+    // }
     /**
      * For testing
      * @param $a
@@ -128,4 +124,3 @@ class UserModel extends BaseModel
         return $a + $b;
     }
 }
->>>>>>> 1-php-202109/2-groups/4-D/master-phpunit

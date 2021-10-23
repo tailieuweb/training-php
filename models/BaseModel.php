@@ -6,7 +6,7 @@ require_once 'configs/database.php';
     private $connection;
     private static $instance = NULL;
     
-    private function __construct()
+    public function __construct()
     {
         return $this->connection;
     }
