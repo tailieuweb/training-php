@@ -3,7 +3,20 @@ use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
 {
-
+    public function testGetUserById(){
+        $userModel = new UserModel();
+        $expected = ["id"=>2];
+        //$actual : ["id" => "2",.....]
+        $actual = $userModel->findUserById(2);
+        /*
+            if ($expected["id"](2) === $actual["id"](?)) {
+                return true
+            } else {
+                return false
+            }
+        */
+        $this->assertEquals($expected["id"],$actual[0]["id"]);
+    }
     /**
      * Test case Okie
      */
