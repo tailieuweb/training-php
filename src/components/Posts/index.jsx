@@ -21,12 +21,14 @@ const inputPost = { id: "", title: "", description: "" };
 export default function Posts() {
   // Next
   const router = useRouter();
-  const { pageNum } = router.query;
+  const { pageNum = 1 } = router.query;
 
   // Redux
   const dispatch = useDispatch();
   const selectorPosts = useSelector((state) => state.posts);
   const postsBase = selectorPosts?.posts;
+  const authSelector = useSelector((state) => state.auth);
+  const user = authSelector?.user;
 
   // State React
   const [posts, setPosts] = useState([]);
@@ -53,7 +55,7 @@ export default function Posts() {
     e.preventDefault();
     const { title, description } = postSelected;
     if (title.length === 0 || description.length === 0) {
-      return toast.warning("Vui lòng nhập đầy đủ thông tin");
+      return toast.warning("Please enter the full information.");
     }
 
     // request and close modal
@@ -63,9 +65,14 @@ export default function Posts() {
 
   const onEditPost = async (e) => {
     e.preventDefault();
+
+    if (postSelected?.user_id !== user?.id) {
+      return;
+    }
+
     const { title, description } = postSelected;
     if (title.length === 0 || description.length === 0) {
-      return toast.warning("Vui lòng nhập đầy đủ thông tin");
+      return toast.warning("Please enter the full information.");
     }
 
     // request and close modal
@@ -94,12 +101,18 @@ export default function Posts() {
         onEditPost={onEditPost}
       />
       <PostsDelete postSelected={postSelected} onDeletePost={onDeletePost} />
-      <div className="col-md-6">
-        <PostsAddItem />
-      </div>
+      {parseInt(pageNum) === 1 && (
+        <div className="col-md-6">
+          <PostsAddItem user={user} />
+        </div>
+      )}
       {posts.map((post) => (
         <div key={post.id} className="col-md-6">
-          <PostsItem post={post} onSelectPost={() => setPostSelected(post)} />
+          <PostsItem
+            user={user}
+            post={post}
+            onSelectPost={() => setPostSelected(post)}
+          />
         </div>
       ))}
       <div className="col-md-12">

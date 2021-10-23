@@ -37,7 +37,7 @@ export const actLoadSignInUser = () => {
   };
 };
 
-export const actSignInUser = (user) => {
+export const actSignInUser = (user, callback) => {
   return (dispatch) => {
     const { email, password } = user;
     const data = { email, password };
@@ -49,13 +49,35 @@ export const actSignInUser = (user) => {
             ".user",
             JSON.stringify({ ...res.data, password })
           );
-          toast.success("Đăng nhập thành công!");
+          toast.success("SignIn successfully!");
+          callback();
         }
       })
-      .catch(() => toast.error("Email hoặc mật khẩu của bạn không chính xác!"));
+      .catch(() => toast.warning("Your email or password is incorrect!"));
   };
 };
 
-export const actSignUpUser = (user) => {
-  return (dispatch) => {};
+export const actSignUpUser = (user, callback) => {
+  return () => {
+    const { name,email, password, confirm_password } = user;
+    const data = { name,email, password, confirm_password };
+    return apiCaller(`api/register`, "POST", data)
+      .then((res) => {
+        if (res.success) {
+          if (!res.data.success) {
+            return toast.warning("This email is already exists!");
+          }
+          toast.success("SignUp successfully!");
+          callback();
+        }
+      })
+      .catch(() => toast.error("An error occurred!"));
+  };
+};
+
+export const actLogoutUser = () => {
+  return (dispatch) => {
+    dispatch(logoutUser());
+    toast.success("SignOut successfully!");
+  };
 };

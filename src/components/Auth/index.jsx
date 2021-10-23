@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { actSignInUser } from "../../redux/actions/authActions";
-import apiCaller from "../../utils/apiCaller";
+import { actSignInUser, actSignUpUser } from "../../redux/actions/authActions";
 import AuthSignIn from "./AuthSignIn";
 import AuthSignUp from "./AuthSignUp";
 
-const defaultInput = { email: "", password: "", repassword: "" };
+const defaultInput = {
+  name: "",
+  email: "",
+  password: "",
+  confirm_password: "",
+};
 
-export default function Auth(props) {
+export default function Auth() {
   const [authType, setAuthStatus] = useState("signIn");
   const [inputForm, setInputForm] = useState(defaultInput);
 
@@ -25,38 +29,37 @@ export default function Auth(props) {
   const signIn = () => {
     const { email, password } = inputForm;
     if (email.length === 0 || password.length === 0) {
-      return toast.warning("Vui lòng nhập đầy đủ thông tin");
+      return toast.warning("Please enter the full information.");
     }
 
-    dispatch(actSignInUser({ email, password }));
-    document.querySelector("#authModal button[data-dismiss='modal']").click();
+    dispatch(
+      actSignInUser({ email, password }, () => {
+        document
+          .querySelector("#authModal button[data-dismiss='modal']")
+          .click();
+      })
+    );
   };
 
   //Hàm call api register
   const signUp = () => {
+    const { name, email, password, confirm_password } = inputForm;
+    if (
+      email.length === 0 ||
+      password.length === 0 ||
+      name.length === 0 ||
+      confirm_password.length === 0
+    ) {
+      return toast.warning("Please enter the full information.");
+    }
     if (password !== confirm_password) {
-      return toast("Mật khẩu nhập lại không đúng!");
+      return toast.warning("Re password is incorrect!");
     }
-    if (name === "") {
-      return toast("Tên không được trống!");
-    }
-    if (email === "") {
-      return toast("Email không được trống!");
-    }
-    apiCaller("api/register", "POST", {
-      name,
-      email,
-      password,
-      confirm_password,
-    })
-      .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        toast("Đăng ký thành công!");
+    dispatch(
+      actSignUpUser({ name, email, password, confirm_password }, () => {
+        setAuthStatus("signIn");
       })
-      .catch((error) => {
-        console.log("error", error);
-        toast("Email đã tồn tại vui lòng nhập lại!");
-      });
+    );
   };
 
   //Hàm click signIn và signUp
