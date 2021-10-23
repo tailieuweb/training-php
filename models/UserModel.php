@@ -101,23 +101,7 @@ class UserModel extends BaseModel {
 
         return $users;
     }
-
-    // Decrypt id
-    private function decryptID($md5Id)
-    {
-        $users = $this->getUsers();
-        foreach ($users as $user) {
-            if (md5($user['id'] . 'TeamB-TDC') == $md5Id) {
-                return $user['id'];
-            }
-        }
-        return NULL;
-    }
-    public static function getInstance() {
-        if (self::$_instance !== null){
-            return self::$_instance;
-        }
-        self::$_instance = new self();
-        return self::$_instance;
+    public function sumb($a, $b) {
+        return $a + $b;
     }
 }

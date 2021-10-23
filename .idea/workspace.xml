@@ -4,10 +4,13 @@
     <list default="true" id="fca2aa6e-54aa-4226-b8f8-032cc5b95d0a" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/update_user.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/list_users.php" beforeDir="false" afterPath="$PROJECT_DIR$/list_users.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/BaseModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/BaseModel.php" afterDir="false" />
 >>>>>>> origin/1-php-202109/2-groups/2-B/master
       <change beforePath="$PROJECT_DIR$/models/UserModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/UserModel.php" afterDir="false" />
+=======
+>>>>>>> origin/1-php-202109/2-groups/2-B/master-phpunit
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,19 +76,14 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4621108c-d5a8-4bd2-a6a3-127138bfce2c" name="Default Changelist" comment="" />
+      <changelist id="fca2aa6e-54aa-4226-b8f8-032cc5b95d0a" name="Default Changelist" comment="" />
       <created>1632046412024</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1632046412024</updated>
       <workItem from="1632046414701" duration="13384000" />
-<<<<<<< HEAD
-      <workItem from="1632652505399" duration="2058000" />
-      <workItem from="1632725273804" duration="438000" />
-      <workItem from="1632752330211" duration="3873000" />
-      <workItem from="1632839141394" duration="4006000" />
-      <workItem from="1632894963245" duration="975000" />
-
+      <workItem from="1632547559440" duration="9835000" />
+      <workItem from="1632980515244" duration="1922000" />
     </task>
     <servers />
   </component>
