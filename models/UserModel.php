@@ -101,8 +101,10 @@ class UserModel extends BaseModel {
      * @param $b
      */
     public function sumb($a, $b) {
-        if(!is_numeric($a)) return 'error';
-        if(!is_numeric($b)) return 'error';
-        return $a + $b;
+        
+        if (is_string($a) && is_string($b)) return $a.$b;
+        elseif(!is_string($a) && !is_string($b)) return $a + $b;
+        else
+        return 'error';
     }
 }
