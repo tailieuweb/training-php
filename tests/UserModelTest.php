@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
@@ -9,14 +10,44 @@ class UserModelTest extends TestCase
      */
     public function testSumOk()
     {
-       $userModel = new UserModel();
-       $a = 1;
-       $b = 2;
-       $expected = 3;
+        $userModel = new UserModel();
+        $a = 1;
+        $b = 2;
+        $expected = 3;
 
-       $actual = $userModel->sumb($a,$b);
+        $actual = $userModel->sumb($a, $b);
 
-       $this->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test sumbnegative Okie
+     */
+    public function testSumNegative()
+    {
+        $userModel = new UserModel();
+        $a = -1;
+        $b = -2;
+        $expected = -3;
+
+        $actual = $userModel->sumb($a, $b);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test sumbnegative Okie
+     */
+    public function testSumNegaPos()
+    {
+        $userModel = new UserModel();
+        $a = -1;
+        $b = 2;
+        $expected = 1;
+
+        $actual = $userModel->sumb($a, $b);
+
+        $this->assertEquals($expected, $actual);
     }
 
     /**
@@ -28,7 +59,7 @@ class UserModelTest extends TestCase
         $a = 1;
         $b = 2;
 
-        $actual = $userModel->sumb($a,$b);
+        $actual = $userModel->sumb($a, $b);
 
         if ($actual != 3) {
             $this->assertTrue(false);
