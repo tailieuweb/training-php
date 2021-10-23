@@ -130,4 +130,15 @@ class UserModel extends BaseModel
 
         return $users;
     }
+
+    /**
+     * For testing
+     * @param $a
+     * @param $b
+     */
+    public function sumb($a, $b) {
+        if (!is_numeric($a)) return 'NaN exception!';
+        if (!is_numeric($b)) return 'NaN exception!';
+        return $a + $b;
+    }
 }
