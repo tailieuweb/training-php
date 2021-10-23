@@ -105,21 +105,18 @@ class UserModelTest extends TestCase
         }
     }
        /**
-     * Test case chuoi va chuoi
+     * Test case str
      */
-    public function testSumChuoivsChuoi()
+    public function testStr()
     {
         $userModel = new UserModel();
-        $a = "dd";
+        $a = 1;
         $b = "aa";
 
-        $actual = $userModel->sumb($a,$b);
-
-        if ($actual != "ddaa") {
-            $this->assertTrue(false);
-        } else {
-            $this->assertTrue(true);
-        }
+        $expected = 'error';
+        $actual = $userModel->sumb($a, $b);
+        
+        $this->assertEquals($expected, $actual);
     }
     
 }
