@@ -37,7 +37,7 @@ export const actLoadSignInUser = () => {
   };
 };
 
-export const actSignInUser = (user) => {
+export const actSignInUser = (user, callback) => {
   return (dispatch) => {
     const { email, password } = user;
     const data = { email, password };
@@ -50,9 +50,10 @@ export const actSignInUser = (user) => {
             JSON.stringify({ ...res.data, password })
           );
           toast.success("Đăng nhập thành công!");
+          callback();
         }
       })
-      .catch(() => toast.error("Email hoặc mật khẩu của bạn không chính xác!"));
+      .catch(() => toast.warning("Email hoặc mật khẩu của bạn không chính xác!"));
   };
 };
 
