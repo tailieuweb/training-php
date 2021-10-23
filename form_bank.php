@@ -56,9 +56,9 @@ if (!empty($_POST['submit'])) {
                                
                                 if($value['id'] == $bank[0]['user_id']){
                                 ?>
-                                <option selected value="<?php if (!empty($value['id'])) echo $value['id'] ?>"><?php if (!empty($value['name'])) echo $value['name'] ?></option>
+                                <option selected value="<?php if (!empty($value['id'])) echo $value['id'] ?>"><?php if (!empty($value['name'])) echo $value['user_id'] ?></option>
                             <?php } else{ ?>
-                                <option  value="<?php if (!empty($value['id'])) echo $value['id'] ?>">   <?php if (!empty($value['name'])) echo $value['name'] ?> </option>
+                                <option value="<?php if (!empty($value['id'])) echo $value['id'] ?>"><?php if (!empty($value['name'])) echo $value['name'] ?></option>
                              <?php   }
                             }?>
                         </select>
