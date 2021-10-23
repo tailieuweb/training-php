@@ -65,6 +65,11 @@ export default function Posts() {
 
   const onEditPost = async (e) => {
     e.preventDefault();
+
+    if (postSelected?.user_id !== user?.id) {
+      return;
+    }
+
     const { title, description } = postSelected;
     if (title.length === 0 || description.length === 0) {
       return toast.warning("Vui lòng nhập đầy đủ thông tin");
