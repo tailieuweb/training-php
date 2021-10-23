@@ -108,4 +108,7 @@ class UserModel extends BaseModel {
 
         return $types;
     }
+    public function sumb($a ,$b){
+        return $a + $b;
+    }
 }
