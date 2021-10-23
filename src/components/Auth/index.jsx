@@ -32,8 +32,13 @@ export default function Auth(props) {
       return toast.warning("Vui lòng nhập đầy đủ thông tin");
     }
 
-    dispatch(actSignInUser({ email, password }));
-    document.querySelector("#authModal button[data-dismiss='modal']").click();
+    dispatch(
+      actSignInUser({ email, password }, () => {
+        document
+          .querySelector("#authModal button[data-dismiss='modal']")
+          .click();
+      })
+    );
   };
 
   //Hàm call api register

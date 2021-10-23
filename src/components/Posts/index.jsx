@@ -21,12 +21,14 @@ const inputPost = { id: "", title: "", description: "" };
 export default function Posts() {
   // Next
   const router = useRouter();
-  const { pageNum } = router.query;
+  const { pageNum = 1 } = router.query;
 
   // Redux
   const dispatch = useDispatch();
   const selectorPosts = useSelector((state) => state.posts);
   const postsBase = selectorPosts?.posts;
+  const authSelector = useSelector((state) => state.auth);
+  const user = authSelector?.user;
 
   // State React
   const [posts, setPosts] = useState([]);
@@ -101,7 +103,11 @@ export default function Posts() {
       )}
       {posts.map((post) => (
         <div key={post.id} className="col-md-6">
-          <PostsItem post={post} onSelectPost={() => setPostSelected(post)} />
+          <PostsItem
+            user={user}
+            post={post}
+            onSelectPost={() => setPostSelected(post)}
+          />
         </div>
       ))}
       <div className="col-md-12">
