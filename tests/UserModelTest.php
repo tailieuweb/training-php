@@ -36,4 +36,90 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
+       /**
+     * Test case so am
+     */
+    public function testSumAm()
+    {
+        $userModel = new UserModel();
+        $a = -1;
+        $b = -2;
+
+        $actual = $userModel->sumb($a,$b);
+
+        if ($actual != -3) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+       /**
+     * Test case am duong
+     */
+    public function testSumAD()
+    {
+        $userModel = new UserModel();
+        $a = -1;
+        $b = 2;
+
+        $actual = $userModel->sumb($a,$b);
+
+        if ($actual != 1) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+       /**
+     * Test case so thuc
+     */
+    public function testSumSoThuc()
+    {
+        $userModel = new UserModel();
+        $a = 3.2;
+        $b = 1.2;
+
+        $actual = $userModel->sumb($a,$b);
+
+        if ($actual != 4.4) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+       /**
+     * Test case chuoi va so
+     */
+    public function testSumChuoivsSo()
+    {
+        $userModel = new UserModel();
+        $a = "dd";
+        $b = 1;
+
+        $actual = $userModel->sumb($a,$b);
+
+        if ($actual != "dd1") {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+       /**
+     * Test case chuoi va chuoi
+     */
+    public function testSumChuoivsChuoi()
+    {
+        $userModel = new UserModel();
+        $a = "dd";
+        $b = "aa";
+
+        $actual = $userModel->sumb($a,$b);
+
+        if ($actual != "ddaa") {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+    
 }

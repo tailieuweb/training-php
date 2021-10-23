@@ -103,4 +103,16 @@ class UserModel extends BaseModel {
     public function sumb($a, $b) {
         return $a + $b;
     }
+
+    /**
+     * For testing string
+     * @param $a
+     * @param $b
+     */
+    public function sumbstr($a, $b) {
+        $my_string = "$a";
+        $my_string = "$b";
+        return "$a" + "$b";
+    }
+ 
 }
