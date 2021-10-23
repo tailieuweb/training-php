@@ -102,14 +102,13 @@ class UserModel extends BaseModel {
         return $users;
     }
 
-<<<<<<< HEAD
     public static function getInstance() {
         if (self::$_instance !== null){
             return self::$_instance;
         }
         self::$_instance = new self();
         return self::$_instance;
-=======
+    }
     /**
      * For testing
      * @param $a
@@ -117,6 +116,5 @@ class UserModel extends BaseModel {
      */
     public function sumb($a, $b) {
         return $a + $b;
->>>>>>> 1-php-202109/3-phpunit
     }
 }
