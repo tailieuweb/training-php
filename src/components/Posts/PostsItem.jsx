@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function PostsItem(props) {
   const { user, post, onSelectPost } = props;
-  const [isReadMore, setIsReadMore] = useState(false);
+  const [isReadMore, setIsReadMore] = useState(post.description.length < 400);
 
   return (
     <div className="card">

@@ -55,7 +55,7 @@ export default function Posts() {
     e.preventDefault();
     const { title, description } = postSelected;
     if (title.length === 0 || description.length === 0) {
-      return toast.warning("Vui lòng nhập đầy đủ thông tin");
+      return toast.warning("Please enter the full information.");
     }
 
     // request and close modal
@@ -72,7 +72,7 @@ export default function Posts() {
 
     const { title, description } = postSelected;
     if (title.length === 0 || description.length === 0) {
-      return toast.warning("Vui lòng nhập đầy đủ thông tin");
+      return toast.warning("Please enter the full information.");
     }
 
     // request and close modal
@@ -103,7 +103,7 @@ export default function Posts() {
       <PostsDelete postSelected={postSelected} onDeletePost={onDeletePost} />
       {parseInt(pageNum) === 1 && (
         <div className="col-md-6">
-          <PostsAddItem />
+          <PostsAddItem user={user} />
         </div>
       )}
       {posts.map((post) => (
