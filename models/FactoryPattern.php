@@ -20,6 +20,6 @@ class FactoryPattern {
                 $modelObj = NULL;
                 break;
         }
-    return $modelobj;
+    return $modelObj;
     }
 }
