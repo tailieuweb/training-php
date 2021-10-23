@@ -68,13 +68,10 @@ class BankModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
-        "'" . $input['name'] . "', '"
-        . md5($input['password']) . "', '"
-        . $input['fullname'] . "', '"
-        . $input['email'] . "', '"
-        . $input['type']
+    public function insertBank($input) {
+        $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
+        "'" . $input['user_id'] . "', '"
+        . $input['cost'] 
         . "')";
         $user = $this->insert($sql);
       

@@ -3,7 +3,7 @@ require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
 $userModel = $factory->make('user');
-
+$userRepository = $factory->make('repository');
 $user = NULL; //Add new user
 
 $id = NULL;
@@ -26,7 +26,7 @@ if (!empty($_POST['submit'])) {
            var_dump("cap nhat lai"); die();
         }      
     } else {
-        $userModel->insertUser($_POST);
+        $userRepository->createUser($_POST);
     }
         header('location: list_users.php');
 }

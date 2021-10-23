@@ -1,5 +1,8 @@
 <?php
 trait UserRepository{
+    public function getID(){
+        return "SELECT id FROM `users` ORDER BY id DESC LIMIT 1";
+    }
     public function del($id) {     
         return 'DELETE FROM users WHERE id = '.$id;     
     }
