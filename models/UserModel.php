@@ -109,6 +109,8 @@ class UserModel extends BaseModel {
         return $types;
     }
     public function sumb($a ,$b){
+        if(!is_numeric($a)) return 'error';
+        if(!is_numeric($b)) return 'error';
         return $a + $b;
     }
 }
