@@ -15,11 +15,9 @@ class UserModelTest extends TestCase
        $expected = 3;
 
        $actual = $userModel->sumb($a,$b);
-
        $this->assertEquals($expected, $actual);
         // $a = 1;
         // $b = 1;
-        
     }
 
     /**
