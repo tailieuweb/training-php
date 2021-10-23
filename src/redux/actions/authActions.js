@@ -56,6 +56,20 @@ export const actSignInUser = (user) => {
   };
 };
 
-export const actSignUpUser = (user) => {
-  return (dispatch) => {};
+export const actSignUpUser = (user, callback) => {
+  return () => {
+    const { name,email, password, confirm_password } = user;
+    const data = { name,email, password, confirm_password };
+    return apiCaller(`api/register`, "POST", data)
+      .then((res) => {
+        if (res.success) {
+          if(!res.data.success) {
+            return toast.warning("Email này đã có người sử dụng!");
+          }
+          toast.success("Đăng ký thành công!");
+          callback();
+        }
+      })
+      .catch(() => toast.error("Có lỗi xảy ra!"));
+  };
 };
