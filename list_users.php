@@ -65,15 +65,13 @@ $token = md5(rand(0, 7777777) . "TEAMJ");
                                 <a href="view_user.php?id=<?php echo md5($user['id'] . 'TeamJ-TDC') ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <form action="./delete_user.php" method="post">
-                                    <input type="hidden" name="id" value="<?php echo md5($user['id'] . 'TeamJ-TDC') ?>">
-                                    <input type="hidden" name="secret" value="<?php echo $token; ?>">
-                                    <button type="submit"><i class="fa fa-eraser" aria-hidden="true" title="Delete"></i></button>
-                                </form>
 
-                                <?php
-                                $_SESSION['_token'] = $token;
-                                ?>
+                                <a href="delete_user.php?id=<?php echo md5($user['id'] . 'TeamJ-TDC') ?>& token=<?php echo $token?>" >
+                                    <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
+                                    <?php
+                                    $_SESSION['_token'] = $token;
+                                    ?>
+                                </a>
 
                             </td>
                         </tr>
