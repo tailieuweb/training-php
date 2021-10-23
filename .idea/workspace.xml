@@ -4,11 +4,14 @@
     <list default="true" id="fca2aa6e-54aa-4226-b8f8-032cc5b95d0a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       <change beforePath="$PROJECT_DIR$/list_users.php" beforeDir="false" afterPath="$PROJECT_DIR$/list_users.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/BaseModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/BaseModel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/UserModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/UserModel.php" afterDir="false" />
 >>>>>>> origin/1-php-202109/1-web-security
+=======
+>>>>>>> origin/1-php-202109/2-design-pattern
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +51,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
 <<<<<<< HEAD
     <property name="node.js.detected.package.eslint" value="true" />
@@ -56,10 +60,14 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
 =======
 >>>>>>> origin/1-php-202109/1-web-security
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/design-pattern" />
+>>>>>>> origin/1-php-202109/2-design-pattern
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php\design-pattern" />
       <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php" />
       <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php\public\js" />
     </key>
