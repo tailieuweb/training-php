@@ -49,11 +49,11 @@ export const actSignInUser = (user, callback) => {
             ".user",
             JSON.stringify({ ...res.data, password })
           );
-          toast.success("Đăng nhập thành công!");
+          toast.success("SignIn successfully!");
           callback();
         }
       })
-      .catch(() => toast.warning("Email hoặc mật khẩu của bạn không chính xác!"));
+      .catch(() => toast.warning("Your email or password is incorrect!"));
   };
 };
 
@@ -64,20 +64,20 @@ export const actSignUpUser = (user, callback) => {
     return apiCaller(`api/register`, "POST", data)
       .then((res) => {
         if (res.success) {
-          if(!res.data.success) {
-            return toast.warning("Email này đã có người sử dụng!");
+          if (!res.data.success) {
+            return toast.warning("This email is already exists!");
           }
-          toast.success("Đăng ký thành công!");
+          toast.success("SignUp successfully!");
           callback();
         }
       })
-      .catch(() => toast.error("Có lỗi xảy ra!"));
+      .catch(() => toast.error("An error occurred!"));
   };
 };
 
 export const actLogoutUser = () => {
   return (dispatch) => {
     dispatch(logoutUser());
-    toast.success("Logout thành công!");
+    toast.success("SignOut successfully!");
   };
 };

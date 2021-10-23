@@ -12,7 +12,7 @@ const defaultInput = {
   confirm_password: "",
 };
 
-export default function Auth(props) {
+export default function Auth() {
   const [authType, setAuthStatus] = useState("signIn");
   const [inputForm, setInputForm] = useState(defaultInput);
 
@@ -29,7 +29,7 @@ export default function Auth(props) {
   const signIn = () => {
     const { email, password } = inputForm;
     if (email.length === 0 || password.length === 0) {
-      return toast.warning("Vui lòng nhập đầy đủ thông tin");
+      return toast.warning("Please enter the full information.");
     }
 
     dispatch(
@@ -50,10 +50,10 @@ export default function Auth(props) {
       name.length === 0 ||
       confirm_password.length === 0
     ) {
-      return toast.warning("Vui lòng nhập đầy đủ thông tin");
+      return toast.warning("Please enter the full information.");
     }
     if (password !== confirm_password) {
-      return toast.warning("Mật khẩu nhập lại không đúng!");
+      return toast.warning("Re password is incorrect!");
     }
     dispatch(
       actSignUpUser({ name, email, password, confirm_password }, () => {
