@@ -51,23 +51,13 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        $version = 'SELECT version FROM users WHERE id = '.$input['id'] .'';
-        $newVersion = $this->select($version);
+        $sql = 'UPDATE users SET 
+                 name = "' . $input['name'] .'", 
+                 password="'. md5($input['password']) .'"
+                WHERE id = ' . $input['id'];
+        $user = $this->update($sql);
 
-        if($newVersion[0]['version']==$input['version']){
-            $sql = 'UPDATE users SET 
-            name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-            password="'. md5($input['password']) .'",
-            type = "' . $input['type'] .'",
-            version="'. $input['version']+1 .'",
-            WHERE id = ' . $input['id'];
-             $user = $this->update($sql);
-             header('location: list_users.php');
-             return $user;
-        }
-        else{
-            echo "<script>alert('Bạn đã thay đổi dữ liệu ròi')</script>";
-        }
+        return $user;
     }
 
     /**
@@ -76,14 +66,8 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-
-//<<<<<<< HEAD
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`type`,`email`) VALUES (" .
-                "'" . $input['name'] . "', '".$input['password']."', '" . $input['fullname']. "', '" . $input['type']. "', '" . $input['email']. "')";
-//=======
-//        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-//                "'" . $input['name'] . "', '".md5($input['password'])."')";
-//>>>>>>> 1-php-202109/1-web-security
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
+                "'" . $input['name'] . "', '".md5($input['password'])."')";
 
         $user = $this->insert($sql);
 
@@ -112,11 +96,12 @@ class UserModel extends BaseModel {
         return $users;
     }
 
-    public static function getInstance() {
-        if (self::$_instance !== null){
-            return self::$_instance;
-        }
-        self::$_instance = new self();
-        return self::$_instance;
+    /**
+     * For testing
+     * @param $a
+     * @param $b
+     */
+    public function sumb($a, $b) {
+        return $a + $b;
     }
 }
