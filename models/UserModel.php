@@ -105,7 +105,7 @@ class UserModel extends BaseModel {
         //Keyword
         if (!empty($params['keyword'])) { // <script>alert('hack')</script>
             $params['keyword'] = $this->removeSpecialCharacter($params['keyword']);
-            var_dump($params['keyword']);
+            //var_dump($params['keyword']);
              $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
             //Keep this line to use Sql Injection
             //Don't change
