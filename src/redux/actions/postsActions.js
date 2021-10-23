@@ -24,13 +24,13 @@ export const actAddPost = (post) => {
     const { title, description } = post;
     const data = { title, description };
     return apiCaller(`products`, "POST", data)
-    .then((res) => {
-      if (res.success) {
-        dispatch(actLoadPosts());
-        toast.success("Thêm thành công!");
-      }
-    })
-    .catch(() => toast.error("Có lỗi xảy ra!"));
+      .then((res) => {
+        if (res.success) {
+          dispatch(actLoadPosts());
+          toast.success("Add post successfully!");
+        }
+      })
+      .catch(() => toast.error("An error occurred!"));
   };
 };
 
@@ -42,13 +42,22 @@ export const actEditPost = (post) => {
       .then((res) => {
         if (res.success) {
           dispatch(actLoadPosts());
-          toast.success("Sửa thành công!");
+          toast.success("Edit post successfully!");
         }
       })
-      .catch(() => toast.error("Có lỗi xảy ra!"));
+      .catch(() => toast.error("An error occurred!"));
   };
 };
 
 export const actDeletePost = (post) => {
-  return (dispatch) => {};
+    return (dispatch) => {
+      return apiCaller(`products/${post.id}`, "DELETE", null)
+        .then((res) => {
+          if (res.success) {
+            dispatch(actLoadPosts());
+            toast.success("Delete post successfully!");
+          }
+        })
+        .catch(() => toast.error("An error occurred!"));
+  };
 };

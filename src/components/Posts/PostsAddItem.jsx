@@ -1,6 +1,6 @@
-import React from "react";
+import { toast } from "react-toastify";
 
-export default function PostsAddItem() {
+export default function PostsAddItem({ user }) {
   return (
     <div className="card">
       <div className="card-body">
@@ -11,6 +11,13 @@ export default function PostsAddItem() {
               className="btn btn-primary btn-sm"
               data-toggle="modal"
               data-target="#addModal"
+              onClick={() => {
+                if (!user) {
+                  toast.info(
+                    "Please login to be able to edit posts or you can post anonymously."
+                  );
+                }
+              }}
             >
               <i className="fa fa-plus mr-1" aria-hidden="true"></i> New Your
               Confessions

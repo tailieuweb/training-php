@@ -9,7 +9,10 @@ export default function PostsDelete(props) {
       aria-labelledby="modelTitleId"
       aria-hidden="true"
     >
-      <div className="modal-dialog" role="document">
+      <form 
+      onSubmit={onDeletePost}
+      className="modal-dialog"
+       role="document">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">Delete Confession</h5>
@@ -36,15 +39,14 @@ export default function PostsDelete(props) {
               Close
             </button>
             <button
-              type="button"
+              type="submit"
               className="btn btn-danger"
-              onClick={onDeletePost}
             >
               Delete
             </button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

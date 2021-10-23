@@ -1,14 +1,17 @@
-import AuthModal from "./Auth/AuthModal";
-import { useState } from "react";
-import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { actLogoutUser } from "../redux/actions/authActions";
+import Auth from "./Auth";
 
-export default function Header() {
-  const [isLogin, setLogin] = useState();
+export default function Header(props) {
+  const { isLoading } = props;
+  const authSelector = useSelector((state) => state.auth);
+  const user = authSelector?.user;
+
+  // Redux
+  const dispatch = useDispatch();
 
   const onLogout = () => {
-    localStorage.removeItem("token");
-    setLogin(false);
-    toast("Logout thành công!!!!");
+    dispatch(actLogoutUser());
   };
 
   return (
@@ -30,28 +33,30 @@ export default function Header() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
-            <div>
-              {isLogin === false ? (
-                <button
-                  className="btn btn-primary btn-sm"
-                  type="button"
-                  data-toggle="modal"
-                  data-target="#authModal"
-                >
-                  <i className="fa fa-sign-in" /> Sign In
-                </button>
-              ) : (
-                <button
-                  className="btn btn-danger btn-sm"
-                  type="button"
-                  onClick={onLogout}
-                >
-                  <i className="fa fa-sign-out" /> Sign Out
-                </button>
-              )}
-            </div>
-            <AuthModal isLogin={isLogin} setLogin={setLogin} />
+            {!isLoading && (
+              <div>
+                {!user ? (
+                  <button
+                    className="btn btn-primary btn-sm"
+                    type="button"
+                    data-toggle="modal"
+                    data-target="#authModal"
+                  >
+                    <i className="fa fa-sign-in" /> Sign In
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-danger btn-sm"
+                    type="button"
+                    onClick={onLogout}
+                  >
+                    <i className="fa fa-sign-out" /> Sign Out
+                  </button>
+                )}
+              </div>
+            )}
           </ul>
+          <Auth />
         </div>
       </div>
     </nav>
