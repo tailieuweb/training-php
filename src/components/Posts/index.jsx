@@ -21,7 +21,7 @@ const inputPost = { id: "", title: "", description: "" };
 export default function Posts() {
   // Next
   const router = useRouter();
-  const { pageNum } = router.query;
+  const { pageNum = 1 } = router.query;
 
   // Redux
   const dispatch = useDispatch();
