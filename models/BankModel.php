@@ -4,15 +4,29 @@
 require_once './models/BaseModel.php';
 class BankModel extends BaseModel
 {
+    private static $instanceBankModel = NULL;
+
+    private function __construct()
+    {
+        return self::$instanceBankModel;
+    }
+    public static function getInstance() : BankModel{
+        if(self::$instanceBankModel == NULL){
+            self::$instanceBankModel = new BankModel();
+        }
+        return self::$instanceBankModel;
+    }
+
+
+    
     public function findUserByID($id)
     {
-        $sql = BaseModel::connectDatabase()->prepare('SELECT us.name, us.fullname, us.email,bk.cost FROM banks bk
+        $sql = $this->connectDatabase()->prepare('SELECT us.name, us.fullname, us.email,bk.cost FROM banks bk
         , users us WHERE bk.user_id = us.id  AND bk.id = ?');
         $sql->bind_param("i", $id);
         $user = $this->select_result($sql);
         return $user;
     }
-
     // public function findUser($keyword) {
     //     $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
     //     $user = $this->select($sql);
@@ -110,7 +124,7 @@ class BankModel extends BaseModel
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $banks = $this->connectDatabase()->multi_query($sql);
+            $banks = BaseModel::connectDatabase()->multi_query($sql);
         } else {
             $sql = 'SELECT * FROM banks';
             $banks = $this->select($sql);

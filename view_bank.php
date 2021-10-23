@@ -1,8 +1,10 @@
 <?php
-    require_once './models/Facade/Facade.php';
-    $facade = new Facade();
-    $bankModel = $facade->makeRequire('BankModel');
-    $userModel = $facade->makeRequire('UserModel');
+  spl_autoload_register(function($class){
+    require './models/' . $class . '.php';
+});
+    $bankModel = BankModel::getInstance();
+    var_dump($bankModel);
+    echo '<br>';
     $id = 0;
     if($_GET['id'] > 0 && is_numeric($_GET['id'])){
         $id = $_GET['id'];
@@ -10,7 +12,25 @@
     else{
         header('location:list_bank.php');
     }
-    $banks = $bankModel->findUserByID($id);
+    
+    $bankModel1= BankModel::getInstance();
+    var_dump($bankModel1);
+    echo '<br>';
+
+    $bankModel2 = BankModel::getInstance();
+    var_dump($bankModel2);
+    echo '<br>';
+
+    $bankModel4 = BankModel::getInstance();
+    var_dump($bankModel4);
+    echo '<br>';
+    
+    $bankModel5 = BankModel::getInstance();
+    var_dump($bankModel5);
+    // $bankss = $bankModel->findUserByID(6);
+    // var_dump($bankModel5 === $bankModel);
+    // var_dump($bankModel == $bankModel1);
+    // $banks = $bankModel->findUserByID($id);
 ?>
 
 <!DOCTYPE html>

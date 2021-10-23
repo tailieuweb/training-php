@@ -3,18 +3,10 @@
 require_once './models/BaseModel.php';
 class UserModel extends BaseModel
 {
-
-    public static function getInstance() {
-        if (self::$_instance !== null){
-            return self::$_instance;
-        }
-        self::$_instance = new self();
-        return self::$_instance;
-    }
     
     public function findUserById($id) {
         $id = $this->matchRegexInput($id);
-        $sql = $this->connectDatabase()->prepare("SELECT * FROM users WHERE id = ?");
+        $sql = BaseModel::connectDatabase()->prepare("SELECT * FROM users WHERE id = ?");
         $sql->bind_param("i",$id);
         $sql->execute();
         $user = array();
@@ -108,12 +100,12 @@ class UserModel extends BaseModel
         if (!empty($params['keyword'])) {
             $str_keyword = $this->matchRegexInput($params);
             $str_keyword =  "%" . $params['keyword'] . "%";
-            $sql = $this->connectDatabase()->prepare('SELECT * FROM users WHERE name LIKE ?');
+            $sql = BaseModel::connectDatabase()->prepare('SELECT * FROM users WHERE name LIKE ?');
             $sql->bind_param('s',  $str_keyword);
         } else {
-            $sql = $this->connectDatabase()->prepare('SELECT * FROM users');
+            $sql = BaseModel::connectDatabase()->prepare('SELECT * FROM users');
         }
-        $result = $this->select_result($sql) ? $this->select_result($sql) : [];
+        $result = BaseModel::select_result($sql) ? BaseModel::select_result($sql) : [];
         return $result;
     }
 

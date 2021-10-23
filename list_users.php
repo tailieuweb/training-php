@@ -1,14 +1,11 @@
 <?php
 // Start the session
 session_start();
-
-spl_autoload_register(function($class){
-    require './models/' . $class . '.php';
-});
-//$factory = new FactoryPattern();
+require './models/FactoryPattern.php';
 
 //$userModel = $factory->make('user');
-$userModel = new UserModel();
+$userModel = UserModel::getInstance();
+
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword']; 
@@ -42,6 +39,7 @@ $users = $userModel->getUsers($params);
     <?php include 'views/header.php'?>
     
     <div class="container">
+    
         <?php if (!empty($users)) {?>
             <div class="alert alert-warning" role="alert">
                 List of users! <br>

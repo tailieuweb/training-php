@@ -3,39 +3,37 @@ require_once 'configs/database.php';
 
  class BaseModel {
     // Database connection
-    protected static $_connection;
-    private static $_instance;
+    private $connection;
+    private static $instance = NULL;
+    
+    private function __construct()
+    {
+        return $this->connection;
+    }
 
-    public function __construct() {
-        if (!isset(self::$_connection)) {
-            self::$_connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-            mysqli_set_charset(self::$_connection,DB_CHARSET);
-            if (self::$_connection->connect_errno) {
-                printf("Connect failed");
-                exit();
-            }
+    public function connectDatabase()  {
+        $this->connection =new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT) or die('Connection Failed' or mysqli_connect_error());
+        return $this->connection;    
+    }
+
+    public static function getInstance() : BaseModel{
+        if(self::$instance == NULL){
+            self::$instance = new BaseModel();
         }
-        return self::$_connection;
-    }
-
-    public static function getInstance(){
-        if(!self::$_instance){
-            self::$_instance = new static();
-        }
-        return self::$_instance;
+        return self::$instance;
     }
 
 
-    public static function connectDatabase(){
-        return self::$_connection;
-    }
+    // public static function connectDatabase(){
+    //     return self::$_connection;
+    // }
    
     /**
      * Query in database
      * @param $sql
      */
     protected function query($sql) {
-        $result = $this->connectDatabase()->query($sql);
+        $result =   $this->connectDatabase()->query($sql);
         return $result;
     }
 
@@ -44,7 +42,7 @@ require_once 'configs/database.php';
      * @param $sql
      */
     protected function select($sql) {
-        $result = $this->query($sql);
+        $result = $this->connectDatabase()->query($sql);
         $rows = [];
         if (!empty($result)) {
             while ($row = $result->fetch_assoc()) {
@@ -54,7 +52,7 @@ require_once 'configs/database.php';
         return $rows;
     }
 
-    public static function select_result($sql){
+    public function select_result($sql){
         $sql->execute();
         $item = array();
         $item = $sql->get_result()->fetch_all(MYSQLI_ASSOC);

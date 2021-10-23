@@ -2,27 +2,20 @@
 // Start the session
 session_start();
 
-// spl_autoload_register(function($class){
-//     require './models/' . $class . '.php';
-// });
-require_once './models/Facade/Facade.php';
-    $facade = new Facade();
+spl_autoload_register(function($class){
+    require './models/' . $class . '.php';
+});
+// require_once './models/Facade/Facade.php';
+//     $facade = new Facade();
+$bankModel = BankModel::getInstance();  
+$baseModel = BaseModel::getInstance();
 
-// $userModel = $facade->makeRequire('UserModel');
-// $bankModel = $facade->makeRequire('BankModel');
-// $bankModel = new BankModel();
-// $userModel = new UserModel();
+var_dump($baseModel);
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword']; 
 }
-
-
-
-
-$banks = $bankModel->getBanks($params);
-
-
+$banks = $bankModel->getBanks();
 ?>
 <!DOCTYPE html>
 <html>
