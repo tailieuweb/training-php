@@ -2,20 +2,17 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel
-{
+class UserModel extends BaseModel {
 
-    public function findUserById($id)
-    {
-        $sql = 'SELECT * FROM users WHERE id = ' . $id;
+    public function findUserById($id) {
+        $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
 
         return $user;
     }
 
-    public function findUser($keyword)
-    {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
+    public function findUser($keyword) {
+        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
         $user = $this->select($sql);
 
         return $user;
@@ -27,10 +24,9 @@ class UserModel extends BaseModel
      * @param $password
      * @return array
      */
-    public function auth($userName, $password)
-    {
+    public function auth($userName, $password) {
         $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
 
         $user = $this->select($sql);
         return $user;
@@ -41,9 +37,8 @@ class UserModel extends BaseModel
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id)
-    {
-        $sql = 'DELETE FROM users WHERE id = ' . $id;
+    public function deleteUserById($id) {
+        $sql = 'DELETE FROM users WHERE id = '.$id;
         return $this->delete($sql);
     }
 
@@ -108,16 +103,13 @@ class UserModel extends BaseModel
 
         return $users;
     }
-    public static function getInstance()
-    {
-        // if (self::$_instance !== null) {
-        //     var_dump('returning to instance');
-        //     return self::$_instance;
-        // }
-        // var_dump('creating to instance');
-        // self::$_instance = new self();
-        var_dump('creating to instance');
-        self::$_instance = new self();
-        return self::$_instance;
+
+    /**
+     * For testing
+     * @param $a
+     * @param $b
+     */
+    public function sumb($a, $b) {
+        return $a + $b;
     }
 }
