@@ -1,6 +1,5 @@
 <?php
 require_once 'models/FactoryModel.php';
-require_once 'models/BankModel.php';
 $factoryModel = new FactoryPattern();
 
 $bankModel = $factoryModel->make('bank');
@@ -25,7 +24,7 @@ $banks = $bankModel->getBanks($params);
     <div class="container">
         <?php if (!empty($banks)) { ?>
             <div class="alert alert-warning" role="alert">
-                List of users!
+                List of banks!
             </div>
             <table class="table table-striped">
                 <thead>
@@ -40,7 +39,7 @@ $banks = $bankModel->getBanks($params);
                     <?php foreach ($banks as $bank) { ?>
 
                         <tr>
-                            <th scope="row"><?php echo $bank['bank_id'] ?></th>
+                            <th scope="row"><?php echo $bank['id'] ?></th>
                             <td>
                                 <?php echo $bank['name'] ?>
                             </td>
@@ -49,13 +48,13 @@ $banks = $bankModel->getBanks($params);
                             </td>
 
                             <td>
-                                <a href="form_bank.php?id=<?php echo rand(100, 999) . md5($bank['bank_id'] . "chuyen-de-web-1") . rand(100, 999) ?>">
+                                <a href="form_bank.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_bank.php?id=<?php echo rand(100, 999) . md5($bank['bank_id'] . "chuyen-de-web-1") . rand(100, 999)  ?>">
+                                <a href="view_bank.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_bank.php?id=<?php echo rand(100, 999) . md5($bank['bank_id'] . "chuyen-de-web-1") . rand(100, 999) ?>">
+                                <a href="delete_bank.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
