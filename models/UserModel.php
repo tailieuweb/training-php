@@ -100,6 +100,10 @@ class UserModel extends BaseModel {
      * @param $b
      */
     public function sumb($a, $b) {
+        if (!is_numeric($a)) return "Error sum with string";
+        if (!is_numeric($b)) return "Error sum with string";
+        if (gettype($a) === "string") return "Error sum with string";
+        if (gettype($b) === "string") return "Error sum with string";
         return $a + $b;
     }
 }
