@@ -4,6 +4,9 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
+    public function sumb($a,$b){
+        return $a + $b;
+    }
     public static function getInstance()
     {
         if(self::$_instance !== null){
