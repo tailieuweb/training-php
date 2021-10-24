@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import { toast } from "react-toastify";
 import apiCaller from "../../utils/apiCaller";
 
@@ -18,16 +19,15 @@ export const logoutUser = () => ({
 export const actLoadSignInUser = () => {
   return (dispatch) => {
     try {
-      const { email, password } = JSON.parse(localStorage.getItem(".user"));
+      const storage = localStorage.getItem(".user");
+      const { email, password } = jwt.verify(storage, "json-token");
       const data = { email, password };
       return apiCaller(`api/login`, "POST", data)
         .then((res) => {
           if (res.success) {
             dispatch(loginUser(res.data));
-            localStorage.setItem(
-              ".user",
-              JSON.stringify({ ...res.data, password })
-            );
+            const token = jwt.sign({ ...res.data, password }, "json-token");
+            localStorage.setItem(".user", token);
           }
         })
         .catch(() => localStorage.removeItem(".user"));
@@ -45,10 +45,8 @@ export const actSignInUser = (user, callback) => {
       .then((res) => {
         if (res.success) {
           dispatch(loginUser(res.data));
-          localStorage.setItem(
-            ".user",
-            JSON.stringify({ ...res.data, password })
-          );
+          const token = jwt.sign({ ...res.data, password }, "json-token");
+          localStorage.setItem(".user", token);
           toast.success("SignIn successfully!");
           callback();
         }
@@ -59,8 +57,8 @@ export const actSignInUser = (user, callback) => {
 
 export const actSignUpUser = (user, callback) => {
   return () => {
-    const { name,email, password, confirm_password } = user;
-    const data = { name,email, password, confirm_password };
+    const { name, email, password, confirm_password } = user;
+    const data = { name, email, password, confirm_password };
     return apiCaller(`api/register`, "POST", data)
       .then((res) => {
         if (res.success) {
