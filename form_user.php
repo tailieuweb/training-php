@@ -33,7 +33,11 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
+<<<<<<< HEAD
             <?php if ($user || empty($id)) { ?>
+=======
+            <?php if ($user || !isset($_id)) { ?>
+>>>>>>> origin/2-php-202109/2-groups/2-B/master-phpunit
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
