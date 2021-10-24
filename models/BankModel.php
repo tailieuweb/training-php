@@ -4,7 +4,10 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel
 {
-
+    public function option($data)
+    {
+        echo "okiiii";
+    }
     public function findBankById($id)
     {
         $sql1 = 'SELECT id FROM banks';
@@ -110,22 +113,27 @@ class BankModel extends BaseModel
      */
     public function insertBanks($input)
     {
-        $allBanks = $this->getAllBanks($input['user_id']);
-        if (empty($allBanks)) {
-            $sql = "INSERT INTO `tranning_php`.`banks` (`user_id`, `cost` ) VALUES (" .
-                "'" . $input['user_id'] . "','" . $input['cost'] . "')";
-            $bank = $this->insert($sql);
-            // $users = self::$_connection->multi_query($sql);
-            return $bank;
-        } else {
-            $cost = $allBanks[0]['cost'] + $input['cost'];
-            $sql = 'UPDATE banks SET 
-            cost = "' . $cost . '"
-            WHERE id = ' . $allBanks[0]['id'];
+        $sql = "INSERT INTO `tranning_php`.`banks` (`user_id`, `cost` ) VALUES (" .
+            "'" . $input['user_id'] . "','" . $input['cost'] . "')";
+        $bank = $this->insert($sql);
+        // $users = self::$_connection->multi_query($sql);
+        return $bank;
+        // $allBanks = $this->getAllBanks($input['user_id']);
+        // if (empty($allBanks)) {
+        //     $sql = "INSERT INTO `tranning_php`.`banks` (`user_id`, `cost` ) VALUES (" .
+        //         "'" . $input['user_id'] . "','" . $input['cost'] . "')";
+        //     $bank = $this->insert($sql);
+        //     // $users = self::$_connection->multi_query($sql);
+        //     return $bank;
+        // } else {
+        //     $cost = $allBanks[0]['cost'] + $input['cost'];
+        //     $sql = 'UPDATE banks SET 
+        //     cost = "' . $cost . '"
+        //     WHERE id = ' . $allBanks[0]['id'];
 
-            $user = $this->update($sql);
-            return $user;
-        }
+        //     $user = $this->update($sql);
+        //     return $user;
+        // }
     }
 
     /**

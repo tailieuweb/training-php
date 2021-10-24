@@ -1,11 +1,22 @@
 <?php
 
 require_once 'BaseModel.php';
+require_once 'BankModel.php';
 
 class UserModel extends BaseModel
 {
- 
-
+    public function option($data)
+    {
+        $this->insertUser($data);
+        $sql = "SELECT MAX(id) FROM users";
+        $id = $this->select($sql);
+        $insertBanks = [
+            'user_id' => $id[0]['MAX(id)'],
+            'cost' => 2000,
+        ];
+        $banks = new BankModel();
+        $banks->insertBanks($insertBanks);
+    }
     public function findUserById($id)
     {
         $sql1 = 'SELECT id FROM users';
@@ -70,12 +81,12 @@ class UserModel extends BaseModel
         $id = $input['id'];
         $id_start = substr($id, 3);
         $id_end = substr($id_start, 0, -3);
-        
+
         $sql1 = 'SELECT id FROM users';
         $error = false;
         $allUser = $this->select($sql1);
         $id = 0;
-    
+
         foreach ($allUser as $key) {
             $md5 = md5($key['id'] . "chuyen-de-web-1");
             $md5_start = substr($md5, 3);
@@ -87,7 +98,7 @@ class UserModel extends BaseModel
                 $userById = $this->select($sql);
             }
         }
-     
+
         $oldTime = $userById[0]['version'] . "chuyen-de-web-1";
 
         if (md5($oldTime) == $version) {
