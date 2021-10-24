@@ -21,8 +21,8 @@ export const actLoadPosts = () => {
 
 export const actAddPost = (post) => {
   return (dispatch) => {
-    const { title, description } = post;
-    const data = { title, description };
+    const { title, description, user_id = 0 } = post;
+    const data = { title, description, user_id };
     return apiCaller(`products`, "POST", data)
       .then((res) => {
         if (res.success) {
@@ -36,8 +36,8 @@ export const actAddPost = (post) => {
 
 export const actEditPost = (post) => {
   return (dispatch) => {
-    const { title, description } = post;
-    const data = { title, description };
+    const { title, description, user_id = 0 } = post;
+    const data = { title, description, user_id, category_id: 0 };
     return apiCaller(`products/${post.id}`, "POST", data)
       .then((res) => {
         if (res.success) {

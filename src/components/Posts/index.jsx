@@ -59,7 +59,8 @@ export default function Posts() {
     }
 
     // request and close modal
-    await dispatch(actAddPost(postSelected));
+    await dispatch(actAddPost({ ...postSelected, user_id: user?.id }));
+    setPostSelected(inputPost);
     document.querySelector("#addModal button[data-dismiss='modal']").click();
   };
 
@@ -76,14 +77,21 @@ export default function Posts() {
     }
 
     // request and close modal
-    await dispatch(actEditPost(postSelected));
+    await dispatch(actEditPost({ ...postSelected, user_id: user?.id }));
+    setPostSelected(inputPost);
     document.querySelector("#editModal button[data-dismiss='modal']").click();
   };
 
   const onDeletePost = async (e) => {
     e.preventDefault();
+
+    if (postSelected?.user_id !== user?.id) {
+      return;
+    }
+
     // request and close modal
     await dispatch(actDeletePost(postSelected));
+    setPostSelected(inputPost);
     document.querySelector("#deleteModal button[data-dismiss='modal']").click();
   };
 
