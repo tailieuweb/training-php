@@ -35,6 +35,9 @@ if (!empty($_POST['submit'])) {
 </head>
 
 <body>
+<style>
+
+</style>
     <?php include 'views/header.php'?>
 
     <div class="container">
