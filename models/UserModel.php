@@ -2,25 +2,29 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel {
+class UserModel extends BaseModel
+{
 
-    public function findUserById($id) {
-        $sql = 'SELECT * FROM users WHERE id = '.$id;
+    public function findUserById($id)
+    {
+        $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
 
         return $user;
     }
 
-    public function findUser($keyword) {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
+    public function findUser($keyword)
+    {
+        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
         $user = $this->select($sql);
 
         return $user;
     }
 
-    public function auth($userName, $password) {
+    public function auth($userName, $password)
+    {
         $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
 
         $user = $this->select($sql);
         return $user;
@@ -31,10 +35,10 @@ class UserModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id) {
-        $sql = 'DELETE FROM users WHERE id = '.$id;
+    public function deleteUserById($id)
+    {
+        $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
-
     }
 
     /**
@@ -42,13 +46,14 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function updateUser($input) {
+    public function updateUser($input)
+    {
         $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
-                 fullname = "'. $input['fullname'].'",
-                 email = "' . $input['email'] .'", 
-                 type = "' . $input['type'] .'", 
-                 password="'. md5($input['password']) .'"
+                 name = "' . $input['name'] . '", 
+                 fullname = "' . $input['fullname'] . '",
+                 email = "' . $input['email'] . '", 
+                 type = "' . $input['type'] . '", 
+                 password="' . md5($input['password']) . '"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
 
@@ -60,39 +65,45 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function insertUser($input) {
+    public function insertUser($input)
+    {
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `fullname`, `email`, `type`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".$input['fullname']."','".$input['email']."', '".$input['type']."','".$input['password']."')";
+            "'" . $input['name'] . "', '" . $input['fullname'] . "','" . $input['email'] . "', '" . $input['type'] . "','" . $input['password'] . "')";
 
         $user = $this->insert($sql);
 
         return $user;
     }
-    public function inserUser_bank($input) {
+    public function inserUser_bank($input)
+    {
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `sotaikhoan`, `sodienthoai`, `email`,) VALUES (" .
-            "'" . $input['name'] . "', '".$input['sotaikhoan']."','".$input['sodienthoai']."', '".$input['email']."')";
+            "'" . $input['name'] . "', '" . $input['sotaikhoan'] . "','" . $input['sodienthoai'] . "', '" . $input['email'] . "')";
 
         $user = $this->insert($sql);
 
         return $user;
     }
 
-    public function getUsers($params = []) {
+    public function getUsers($params = [])
+    {
 
-        if(!empty($params['keyword'])) {
+        if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
             //var_dump($sql);die();
             $users = self::$_connection->multi_query($sql);
-
-        }else{
+        } else {
             //echo "22233";
             $sql = 'SELECT * FROM users ';
             $users = $this->select($sql);
-
         }
 
         return $users;
 
         //var_dump($users);die();
+    }
+
+    public  function sumb($a, $b)
+    {
+        return $a + $b;
     }
 }
