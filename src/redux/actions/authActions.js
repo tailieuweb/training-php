@@ -2,6 +2,8 @@ import jwt from "jsonwebtoken";
 import { toast } from "react-toastify";
 import apiCaller from "../../utils/apiCaller";
 
+const APP_JWT_TOKEN = process.env.NEXT_PUBLIC_APP_JWT_TOKEN;
+
 //Action Types
 export const LOGIN_AUTH = "LOGIN_AUTH";
 export const LOGOUT_AUTH = "LOGOUT_AUTH";
@@ -20,13 +22,13 @@ export const actLoadSignInUser = () => {
   return (dispatch) => {
     try {
       const storage = localStorage.getItem(".user");
-      const { email, password } = jwt.verify(storage, "json-token");
+      const { email, password } = jwt.verify(storage, APP_JWT_TOKEN);
       const data = { email, password };
       return apiCaller(`api/login`, "POST", data)
         .then((res) => {
           if (res.success) {
             dispatch(loginUser(res.data));
-            const token = jwt.sign({ ...res.data, password }, "json-token");
+            const token = jwt.sign({ ...res.data, password }, APP_JWT_TOKEN);
             localStorage.setItem(".user", token);
           }
         })
@@ -45,7 +47,7 @@ export const actSignInUser = (user, callback) => {
       .then((res) => {
         if (res.success) {
           dispatch(loginUser(res.data));
-          const token = jwt.sign({ ...res.data, password }, "json-token");
+          const token = jwt.sign({ ...res.data, password }, APP_JWT_TOKEN);
           localStorage.setItem(".user", token);
           toast.success("SignIn successfully!");
           callback();
