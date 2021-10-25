@@ -20,24 +20,44 @@ export const actLoadPosts = () => {
 };
 
 export const actAddPost = (post) => {
-  return (dispatch) => {};
+  return (dispatch) => {
+    const { title, description, user_id = 0 } = post;
+    const data = { title, description, user_id };
+    return apiCaller(`products`, "POST", data)
+      .then((res) => {
+        if (res.success) {
+          dispatch(actLoadPosts());
+          toast.success("Add post successfully!");
+        }
+      })
+      .catch(() => toast.error("An error occurred!"));
+  };
 };
 
 export const actEditPost = (post) => {
   return (dispatch) => {
-    const { title, description } = post;
-    const data = { title, description };
+    const { title, description, user_id = 0 } = post;
+    const data = { title, description, user_id, category_id: 0 };
     return apiCaller(`products/${post.id}`, "POST", data)
       .then((res) => {
         if (res.success) {
           dispatch(actLoadPosts());
-          toast.success("Sửa thành công!");
+          toast.success("Edit post successfully!");
         }
       })
-      .catch(() => toast.error("Có lỗi xảy ra!"));
+      .catch(() => toast.error("An error occurred!"));
   };
 };
 
 export const actDeletePost = (post) => {
-  return (dispatch) => {};
+    return (dispatch) => {
+      return apiCaller(`products/${post.id}`, "DELETE", null)
+        .then((res) => {
+          if (res.success) {
+            dispatch(actLoadPosts());
+            toast.success("Delete post successfully!");
+          }
+        })
+        .catch(() => toast.error("An error occurred!"));
+  };
 };
