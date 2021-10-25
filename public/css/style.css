@@ -2538,7 +2538,7 @@ ul {
 /* line 72, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_banner.scss */
 .banner_part .owl-nav {
   position: absolute;
-  right: -20%;
+  right: -10%;
   bottom: 0;
   padding: 35px 80px;
   background-color: #fff;
@@ -2603,7 +2603,7 @@ ul {
   font-weight: 700;
   color: #cde8eb;
   position: absolute;
-  right: -16%;
+  right: -20%;
   top: 38%;
 }
 
