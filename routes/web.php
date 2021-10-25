@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
+})->name('index');
+
+/*---------------------User route group start---------------------*/
+Route::group(['prefix' => '/user'], function (){
+Route::get('/login',[UserController::class,'userLogin']);
+Route::post('/login', [UserController::class,'userLoginSubmit'])->name('user.login.submit');
+Route::get('/register', [UserController::class,'userRegister'])->name('user.register');
+Route::post('/register', [UserController::class,'userRegisterSubmit'])->name('user.register.submit');
 });
+/*---------------------User route group end-----------------------*/
