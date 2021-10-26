@@ -1,3 +1,4 @@
+<div>@include('partial.notification')</div>
 <header class="main_menu home_menu">
     <div class="container">
         <div class="row align-items-center">
@@ -38,11 +39,11 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    blog
+                                    actions
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                    <a class="dropdown-item" href="blog.html"> blog</a>
-                                    <a class="dropdown-item" href="single-blog.html">Single blog</a>
+                                    <a class="dropdown-item" href="{{route('user.login')}}"> login</a>
+                                    <a class="dropdown-item" href="{{route('user.register')}}">register</a>
                                 </div>
                             </li>
 

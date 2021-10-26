@@ -21,7 +21,7 @@ Route::get('/', [PageController::class, 'index'])->name('index');
 
 /*---------------------User route group start---------------------*/
 Route::group(['prefix' => '/user'], function () {
-    Route::get('/login', [UserController::class, 'userLogin']);
+    Route::get('/login', [UserController::class, 'userLogin'])->name('user.login');
     Route::post('/login', [UserController::class, 'userLoginSubmit'])->name('user.login.submit');
     Route::get('/register', [UserController::class, 'userRegister'])->name('user.register');
     Route::post('/register', [UserController::class, 'userRegisterSubmit'])->name('user.register.submit');
