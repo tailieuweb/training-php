@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="{{url('css/slick.css')}}">
     <!-- themify icon -->
     <link rel="stylesheet" href="https://unpkg.com/@icon/themify-icons/themify-icons.css">
+    @stack('styles')
     <!-- style CSS -->
     <link rel="stylesheet" href="{{url('css/style.css')}}">
-    @stack('styles')
 </head>
 
 <body>

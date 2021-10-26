@@ -32,3 +32,5 @@ Route::group(['prefix' => '/user'], function () {
 //Route::resource('product', ProductController::class);
 //Show product detail
 Route::get('/product/{slug}', [PageController::class, 'productDetail'])->name('product.detail');
+//Show list all products
+Route::get('/products', [PageController::class, 'listProducts'])->name('product.list');
