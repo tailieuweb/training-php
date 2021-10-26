@@ -52,8 +52,8 @@
                         </ul>
                     </div>
                     <div class="hearer_icon d-flex">
-                        <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
-                        <a href=""><i class="ti-heart"></i></a>
+                        <a id="search_1" href="javascript:void(0)"><i class="ti ti-search"></i></a>
+                        <a href=""><i class="ti ti-heart"></i></a>
                         <div class="dropdown cart">
                             <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-cart-plus"></i>
@@ -75,7 +75,7 @@
             <form class="d-flex justify-content-between search-inner">
                 <input type="text" class="form-control" id="search_input" placeholder="Search Here">
                 <button type="submit" class="btn"></button>
-                <span class="ti-close" id="close_search" title="Close Search"></span>
+                <span class="ti ti-close" id="close_search" title="Close Search"></span>
             </form>
         </div>
     </div>
