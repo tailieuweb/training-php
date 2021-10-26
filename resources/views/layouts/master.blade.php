@@ -15,18 +15,21 @@
     <link rel="stylesheet" href="{{url('css/animate.css')}}">
     <!-- owl carousel CSS -->
     <link rel="stylesheet" href="{{url('css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{url('css/lightslider.min.css')}}">
     <!-- font awesome CSS -->
     <link rel="stylesheet" href="{{url('css/all.css')}}">
     <!-- flaticon CSS -->
     <link rel="stylesheet" href="{{url('css/flaticon.css')}}">
-    <link rel="stylesheet" href="{{url('css/themify-icons.css')}}">
     <!-- font awesome CSS -->
     <link rel="stylesheet" href="{{url('css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{url('css/font-awesome.min.css')}}">
     <!-- swiper CSS -->
     <link rel="stylesheet" href="{{url('css/slick.css')}}">
+    <!-- themify icon -->
+    <link rel="stylesheet" href="https://unpkg.com/@icon/themify-icons/themify-icons.css">
+    @stack('styles')
     <!-- style CSS -->
     <link rel="stylesheet" href="{{url('css/style.css')}}">
-    @method('style')
 </head>
 
 <body>
@@ -42,7 +45,7 @@
     @include('partial.footer')
     <!--::footer_part end::-->
 
-    @method('javascript')
+    @stack('scripts')
 </body>
 
 </html>

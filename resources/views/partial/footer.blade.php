@@ -100,6 +100,8 @@
 <script src="{{url('js/bootstrap.min.js')}}"></script>
 <!-- easing js -->
 <script src="{{url('js/jquery.magnific-popup.js')}}"></script>
+<!-- lightslider js -->
+<script src="{{url('js/lightslider.min.js')}}"></script>
 <!-- swiper js -->
 <script src="{{url('js/swiper.min.js')}}"></script>
 <!-- swiper js -->
@@ -111,10 +113,8 @@
 <script src="{{url('js/slick.min.js')}}"></script>
 <script src="{{url('js/jquery.counterup.min.js')}}"></script>
 <script src="{{url('js/waypoints.min.js')}}"></script>
-<script src="{{url('js/contact.js')}}"></script>
 <script src="{{url('js/jquery.ajaxchimp.min.js')}}"></script>
 <script src="{{url('js/jquery.form.js')}}"></script>
 <script src="{{url('js/jquery.validate.min.js')}}"></script>
-<script src="{{url('js/mail-script.js')}}"></script>
 <!-- custom js -->
 <script src="{{url('js/custom.js')}}"></script>
