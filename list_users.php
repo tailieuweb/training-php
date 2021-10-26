@@ -1,7 +1,7 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/UserModel.php';
+require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 $userModel = $factory->make('user');
 if (empty($_SESSION['token'])) {
