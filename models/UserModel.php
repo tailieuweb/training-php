@@ -66,16 +66,16 @@ class UserModel extends BaseModel
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id)
-    {
-        $getUsers = $this->getUsers();
-        foreach ($getUsers as $user) {
-            if (md5($user['id'] . "list-user") == $id) {
-                $sql = 'DELETE FROM users WHERE id = ' . $user['id'];
-                return $this->delete($sql);
-            }
-        }
-    }
+    // public function deleteUserById($id)
+    // {
+    //     $getUsers = $this->getUsers();
+    //     foreach ($getUsers as $user) {
+    //         if (md5($user['id'] . "list-user") == $id) {
+    //             $sql = 'DELETE FROM users WHERE id = ' . $user['id'];
+    //             return $this->delete($sql);
+    //         }
+    //     }
+    // }
     /**
      * Delete user by id
      * @param $id
@@ -86,7 +86,11 @@ class UserModel extends BaseModel
     //     $sql = 'DELETE FROM users WHERE id = ' . $id;
     //     return $this->delete($sql);
     // }
-
+    public function deleteUserById($id)
+    {
+        $sql = 'DELETE FROM users WHERE id = ' . $id;
+        return $this->delete($sql);
+    }
     /**
      * Update user
      * @param $input
