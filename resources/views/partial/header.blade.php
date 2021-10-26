@@ -3,7 +3,7 @@
         <div class="row align-items-center">
             <div class="col-lg-12">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="navbar-brand" href="{{route('index')}}"> <img src="{{url('img/logo.png')}}" alt="logo" style="max-width: 50%;"> </a>
+                    <a class="navbar-brand" href="{{route('index')}}"> <img src="{{url('img/logo.png')}}" alt="logo" style="max-width: 35%;"> </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="menu_icon"><i class="fas fa-bars"></i></span>
                     </button>
@@ -18,7 +18,7 @@
                                     Shop
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                    <a class="dropdown-item" href="category.html"> shop category</a>
+                                    <a class="dropdown-item" href="{{route('product.list')}}"> products list</a>
                                     <a class="dropdown-item" href="single-product.html">product details</a>
 
                                 </div>
