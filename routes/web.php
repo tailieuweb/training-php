@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -34,3 +35,8 @@ Route::group(['prefix' => '/user'], function () {
 Route::get('/product/{slug}', [PageController::class, 'productDetail'])->name('product.detail');
 //Show list all products
 Route::get('/products', [PageController::class, 'listProducts'])->name('product.list');
+//Cart
+Route::get('cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('cart/add/{slug}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('cart/remove/{id}', [CartController::class, 'removeCart'])->name('cart.remove');
+Route::post('cart/update', [CartController::class, 'updateCart'])->name('cart.update');

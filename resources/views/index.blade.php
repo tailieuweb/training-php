@@ -143,7 +143,7 @@
                                     <div class="single_product_text">
                                         <h4>{{$product->title}}</h4>
                                         <h3>{{number_format($product->price)}} $</h3>
-                                        <a href="#" class="add_cart">+ add to cart<i class="ti ti-heart"></i></a>
+                                        <a href="{{route('cart.add',$product->slug)}}" class="add_cart">+ add to cart<i class="ti ti-heart"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +168,7 @@
                                     <div class="single_product_text">
                                         <h4>{{$product->title}}</h4>
                                         <h3>{{number_format($product->price)}} $</h3>
-                                        <a href="#" class="add_cart">+ add to cart<i class="ti ti-heart"></i></a>
+                                        <a href="{{route('cart.add',$product->slug)}}" class="add_cart">+ add to cart<i class="ti ti-heart"></i></a>
                                     </div>
                                 </div>
                             </div>

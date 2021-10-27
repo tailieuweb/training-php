@@ -25,12 +25,7 @@
     </div>
 </footer>
 
-<script>
-    $('#notification').modal('show');
-    setTimeout(function() {
-        $('#notification').modal('hide');
-    }, 3000);
-</script>
+
 <!-- jquery plugins here-->
 <script src="{{url('js/jquery-1.12.1.min.js')}}"></script>
 <!-- popper js -->
