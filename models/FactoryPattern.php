@@ -4,9 +4,10 @@ class FactoryPattern {
 
     public function make($model) {
         if ($model == 'user') {
-            return new UserModel();
+            // return new UserModel();
+            return UserModel::getInstace();
         } else if ($model == 'bank') {
-            //
+            // return new BankModel();
         }
     }
 
