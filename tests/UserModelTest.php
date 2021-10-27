@@ -6,9 +6,9 @@ class UserModelTest extends TestCase
 {
 
     /**
-     * Test case Okie
+     * 1) Test trường hợp cộng 2 số dương
      */
-    public function testSumOk()
+    public function testPositiveNumbers()
     {
         $userModel = new UserModel();
         $a = 1;
@@ -21,9 +21,9 @@ class UserModelTest extends TestCase
     }
 
     /**
-     * Test sumbnegative Okie
+     * 2) Test trường hợp cộng 2 số âm
      */
-    public function testSumNegative()
+    public function testNegativeNumbers()
     {
         $userModel = new UserModel();
         $a = -1;
@@ -36,14 +36,89 @@ class UserModelTest extends TestCase
     }
 
     /**
-     * Test sumbnegative Okie
+     * 3) Test trường hợp cộng 1 số âm 1 số dương
      */
-    public function testSumNegaPos()
+    public function testNegaPosNumbers()
     {
         $userModel = new UserModel();
         $a = -1;
         $b = 2;
         $expected = 1;
+
+        $actual = $userModel->sumb($a, $b);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * 4) Test trường hợp cộng 2 số thực dương
+     */
+    public function testPositiveRealNumbers()
+    {
+        $userModel = new UserModel();
+        $a = 1.1;
+        $b = 2.1;
+        $expected = 3.2;
+
+        $actual = $userModel->sumb($a, $b);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * 5) Test trường hợp cộng 2 số thực âm
+     */
+    public function testNegativeRealNumbers()
+    {
+        $userModel = new UserModel();
+        $a = -1.1;
+        $b = -2.1;
+        $expected = -3.2;
+
+        $actual = $userModel->sumb($a, $b);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * 6) Test trường hợp cộng 1 số thực âm và 1 số thực dương
+     */
+    public function testNegaPosRealNumbers()
+    {
+        $userModel = new UserModel();
+        $a = -1.1;
+        $b = 2.1;
+        $expected = 1;
+
+        $actual = $userModel->sumb($a, $b);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * 7) Test trường hợp cộng chuỗi  và số
+     */
+    public function testStringsNumbers()
+    {
+        $userModel = new UserModel();
+        $a = "Lap";
+        $b = 2.1;
+        $expected = "test error";
+
+        $actual = $userModel->sumb($a, $b);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * 8) Test trường hợp cộng chuỗi và chuỗi
+     */
+    public function testStringsStrings()
+    {
+        $userModel = new UserModel();
+        $a = "Tran Van";
+        $b = "Lap";
+        $expected = "test error";
 
         $actual = $userModel->sumb($a, $b);
 

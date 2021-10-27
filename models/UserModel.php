@@ -108,26 +108,9 @@ class UserModel extends BaseModel
      */
     public function sumb($a, $b)
     {
+        if (!is_numeric($a) || !is_numeric($b)) {
+            return "test error";
+        }
         return $a + $b;
-    }
-
-    /**
-     * For testing
-     * @param $a
-     * @param $b
-     */
-    public function sumbnegative($a, $b)
-    {
-        return (-$a) + (-$b);
-    }
-
-    /**
-     * For testing
-     * @param $a
-     * @param $b
-     */
-    public function sumbnegapos($a, $b)
-    {
-        return (-$a) + $b;
     }
 }
