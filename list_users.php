@@ -1,17 +1,25 @@
 <?php
 // Start the session
 session_start();
-$_SESSION['token'] = md5(uniqid(mt_rand(), true));
-
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
-
+if (empty($_SESSION['token'])) {
+    $_SESSION['token'] = bin2hex(random_bytes(32));
+}
+$token = $_SESSION['token'];
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
-
 $users = $userModel->getUsers($params);
+if (!empty($_GET['token'])) {
+    if (hash_equals($_SESSION['token'], $_GET['token'])) {
+        if (!empty($_GET['id'])) {
+            $id = $_GET['id'];
+            $userModel->deleteUserById($id); //Delete existing user
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,17 +63,18 @@ $users = $userModel->getUsers($params);
                             <td >
                                 <?php echo $user['type']?>
                             </td>
-                            <!-- <td>
+                            <td>
                                 <a href="form_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="list_users.php?id=<?php echo $user['id'] ?>&token=<?php echo $token ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
-                                </a> -->
-                            <td style="display:flex">
+                                    <input type="hidden" name="token" value="<?php echo $token ?>">
+                                </a>
+                            <!-- <td style="display:flex">
                             <a href="form_user.php?id=<?php echo $user['id'] ?>" style="width:18px;">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
@@ -78,7 +87,7 @@ $users = $userModel->getUsers($params);
                                     <button type="submit" value="delete" class="fa fa-eraser" 
                                     style="color: #337ab7;background: none;border: none;outline:none;">
                                     </button>
-                            </form>
+                            </form> -->
                             </td>
                         </tr>
                     <?php } ?>
