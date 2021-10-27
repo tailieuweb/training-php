@@ -3,19 +3,35 @@
 require_once './models/BaseModel.php';
 class UserModel extends BaseModel
 {
-    
-    public function findUserById($id) {
+    private static $instanceUserModel = NULL;
+
+    private function __construct()
+    {
+        return self::$instanceUserModel;
+    }
+
+    public static function getInstance(): UserModel
+    {
+        if (self::$instanceUserModel == NULL) {
+            self::$instanceUserModel = new UserModel();
+        }
+        return self::$instanceUserModel;
+    }
+
+    public function findUserById($id)
+    {
         $id = $this->matchRegexInput($id);
         $sql = BaseModel::connectDatabase()->prepare("SELECT * FROM users WHERE id = ?");
-        $sql->bind_param("i",$id);
+        $sql->bind_param("i", $id);
         $sql->execute();
         $user = array();
         $user = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $user;
     }
 
-    public function findUser($keyword) {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
+    public function findUser($keyword)
+    {
+        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
         // $user = $this->select($sql);
         // return $user;
         // $sql_stmt = mysqli_prepare($_connection,'SELECT * FROM users WHERE user_name LIKE   ? OR user_email LIKE ?');
@@ -24,9 +40,10 @@ class UserModel extends BaseModel
         // return $user;
     }
 
-    public function auth($userName, $password) {
+    public function auth($userName, $password)
+    {
         $md5Password = $password;
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
         $user = $this->select($sql);
         return $user;
     }
@@ -41,7 +58,6 @@ class UserModel extends BaseModel
 
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
-
     }
 
 
@@ -51,13 +67,14 @@ class UserModel extends BaseModel
      * @param $input
      * @return mixed
      */
-    public function updateUser($input) {
+    public function updateUser($input)
+    {
 
         $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
-                 email = "'.$input['email'].'",
-                 fullname = "'.$input['fullname'].'",
-               password="'. md5($input['password']) .'", type = "'.$input['type'].'"
+                 name = "' . $input['name'] . '", 
+                 email = "' . $input['email'] . '",
+                 fullname = "' . $input['fullname'] . '",
+               password="' . md5($input['password']) . '", type = "' . $input['type'] . '"
                 WHERE id = ' . $input['id'];
 
         $user = $this->update($sql);
@@ -67,8 +84,15 @@ class UserModel extends BaseModel
 
         // $sql->bind_param("sssssi",$str_replace['name'],$str_replace['email']
         //         ,$str_replace['fullname'],md5($str_replace['password']),$str_replace['type'],$str_replace['id']);
-        $sql->bind_param("sssssi",$input['name'],$input['email']
-            ,$input['fullname'],md5($input['password']),$input['type'],$input['id']);
+        $sql->bind_param(
+            "sssssi",
+            $input['name'],
+            $input['email'],
+            $input['fullname'],
+            md5($input['password']),
+            $input['type'],
+            $input['id']
+        );
         return $sql->execute();
     }
 
@@ -78,14 +102,21 @@ class UserModel extends BaseModel
      * @return mixed
      */
 
-     //fix add new user
-    public function insertUser($input) {
+    //fix add new user
+    public function insertUser($input)
+    {
         $password = md5($input['password']);
         $str_replace = $this->matchRegexInput($input);
         $sql = $this->connectDatabase()->prepare('INSERT INTO `users` (`name`,`fullname`, `email`, `type`, `password`) 
                 VALUES(?,?,?,?,?)');
-        $sql->bind_param("sssss",$str_replace['name'],$str_replace['fullname'],$str_replace['email']
-                ,$str_replace['type'],$password);
+        $sql->bind_param(
+            "sssss",
+            $str_replace['name'],
+            $str_replace['fullname'],
+            $str_replace['email'],
+            $str_replace['type'],
+            $password
+        );
         return $sql->execute();
     }
 
@@ -108,5 +139,4 @@ class UserModel extends BaseModel
         $result = BaseModel::select_result($sql) ? BaseModel::select_result($sql) : [];
         return $result;
     }
-
 }

@@ -1,23 +1,26 @@
 <?php
 require_once 'configs/database.php';
 
- class BaseModel {
+class BaseModel
+{
     // Database connection
     private $connection;
     private static $instance = NULL;
-    
+
     private function __construct()
     {
         return $this->connection;
     }
 
-    public function connectDatabase()  {
-        $this->connection =new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT) or die('Connection Failed' or mysqli_connect_error());
-        return $this->connection;    
+    public function connectDatabase()
+    {
+        $this->connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT) or die('Connection Failed' or mysqli_connect_error());
+        return $this->connection;
     }
 
-    public static function getInstance() : BaseModel{
-        if(self::$instance == NULL){
+    public static function getInstance(): BaseModel
+    {
+        if (self::$instance == NULL) {
             self::$instance = new BaseModel();
         }
         return self::$instance;
@@ -27,12 +30,13 @@ require_once 'configs/database.php';
     // public static function connectDatabase(){
     //     return self::$_connection;
     // }
-   
+
     /**
      * Query in database
      * @param $sql
      */
-    protected function query($sql) {
+    protected function query($sql)
+    {
         $result =   $this->connectDatabase()->query($sql);
         return $result;
     }
@@ -41,7 +45,8 @@ require_once 'configs/database.php';
      * Select statement
      * @param $sql
      */
-    protected function select($sql) {
+    protected function select($sql)
+    {
         $result = $this->connectDatabase()->query($sql);
         $rows = [];
         if (!empty($result)) {
@@ -52,7 +57,8 @@ require_once 'configs/database.php';
         return $rows;
     }
 
-    public function select_result($sql){
+    public function select_result($sql)
+    {
         $sql->execute();
         $item = array();
         $item = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -65,7 +71,8 @@ require_once 'configs/database.php';
      * @param $sql
      * @return mixed
      */
-    protected function delete($sql) {
+    protected function delete($sql)
+    {
         $result = $this->query($sql);
         return $result;
     }
@@ -75,7 +82,8 @@ require_once 'configs/database.php';
      * @param $sql
      * @return mixed
      */
-    protected function update($sql) {
+    protected function update($sql)
+    {
         $result = $this->query($sql);
         return $result;
     }
@@ -84,15 +92,17 @@ require_once 'configs/database.php';
      * Insert statement
      * @param $sql
      */
-    protected function insert($sql) {
+    protected function insert($sql)
+    {
         $result = $this->query($sql);
         return $result;
     }
 
 
-    protected  function matchRegexInput($param){
-        $array_replace = array("'",'"',"<",">");
-        $str = str_replace($array_replace,'',$param);
+    protected  function matchRegexInput($param)
+    {
+        $array_replace = array("'", '"', "<", ">");
+        $str = str_replace($array_replace, '', $param);
         return $str;
     }
     // protected abstract function CreateProduct1();
