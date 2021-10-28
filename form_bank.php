@@ -1,14 +1,14 @@
 <?php
 // Start the session
 session_start();
-
 require_once 'models/FactoryPattern.php';
+
 $factory = new FactoryPattern();
 
 $bankModel = $factory->make('bank');
-$user = $bankModel->getUsers();
 
-$bank = NULL; //Add new user
+$users = $bankModel->getUser();
+$bank = NULL; //Add new bank
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
@@ -20,11 +20,11 @@ if (!empty($_GET['id'])) {
 if (!empty($_POST['submit'])) {
 
     if (!empty($_id)) {
-        $bankModel->updateBank($_POST);
+        // $bankModel->insertBank($_POST);
     } else {
-        $userModel->insertUser($_POST);
+        $bankModel->insertBank($_POST);
     }
-    header('location: list_users.php');
+    header('location: list_bank.php');
 }
 
 ?>
@@ -38,41 +38,33 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
-
             <?php if ($bank || empty($_id)) { ?>
-   
-
                 <div class="alert alert-warning" role="alert">
                     Bank form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $_id ?>">
+                    <input type="hidden" name="bank_id" value="<?php echo $_id ?>">
 
-                    
                     <div class="form-group">
-                        <label for="type">User</label>
-                        <select name="user_id" class="form-control">
+                        <label for="type">Name user</label>
+                        <select name="id" class="form-control">
                             <?php
-                            foreach($user as $value) {
-                                if($value['id'] == $bank[0]['user_id']){
+                            foreach($users as $value) {
+                                if($value['id'] == $bank[0]['bank_id']){
                                 ?>
-                            <option selected value="<?php if (!empty($value['id'])) echo $value['id'] ?>"><?php if (!empty($value['name'])) echo $value['name'] ?></option>
+                                <option selected value="<?php if (!empty($value['id'])) echo $value['id'] ?>"><?php if (!empty($value['name'])) echo $value['user_id'] ?></option>
                             <?php } else{ ?>
-                                    <option value="<?php if (!empty($value['id'])) echo $value['id'] ?>"><?php if (!empty($value['name'])) echo $value['name'] ?></option>
+                                <option value="<?php if (!empty($value['id'])) echo $value['id'] ?>"><?php if (!empty($value['name'])) echo $value['name'] ?></option>
                              <?php   }
                             }?>
                         </select>
                     </div>
+
                     <div class="form-group">
-                        <label for="name">cost</label>
-                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?>'>
+                        <label for="fullname">Cost</label>
+                        <input class="form-control" name="cost" placeholder="Cost" value="<?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?>">
                     </div>
 
-                   
-
-                  
-
-                 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
             <?php } else { ?>
