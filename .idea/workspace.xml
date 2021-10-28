@@ -3,12 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="fca2aa6e-54aa-4226-b8f8-032cc5b95d0a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< HEAD
-=======
+
       <change beforePath="$PROJECT_DIR$/list_users.php" beforeDir="false" afterPath="$PROJECT_DIR$/list_users.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/BaseModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/BaseModel.php" afterDir="false" />
->>>>>>> 1-php-202109/1-master
+
       <change beforePath="$PROJECT_DIR$/models/UserModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/UserModel.php" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,12 +71,16 @@
       <option name="presentableId" value="Default" />
       <updated>1632046412024</updated>
       <workItem from="1632046414701" duration="13384000" />
-<<<<<<< HEAD
+
       <workItem from="1632551259613" duration="95000" />
       <workItem from="1632551356954" duration="2701000" />
-=======
+
       <workItem from="1632547559440" duration="9835000" />
->>>>>>> 1-php-202109/1-master
+
+      <workItem from="1632980515244" duration="1922000" />
+
+
+
     </task>
     <servers />
   </component>
@@ -94,8 +98,7 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-<<<<<<< HEAD
-=======
+
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -104,6 +107,6 @@
         <watch expression="$_POST" language="PHP" />
       </configuration>
     </watches-manager>
->>>>>>> 1-php-202109/1-master
+
   </component>
 </project>

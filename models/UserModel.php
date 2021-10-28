@@ -126,15 +126,10 @@ class UserModel extends BaseModel {
      * @param $a
      * @param $b
      */
-    public function sumb($a, $b) {
-        if(!is_numeric($a) || !is_numeric($b))
-        {
-            return false;
-        }
-        else{
-            return $a + $b;
-        }
-        
+    public function sumb($a ,$b){
+        if(!is_numeric($a)) return 'error';
+        if(!is_numeric($b)) return 'error';
+        return $a + $b;
     }
     //Check string have work specical
     public function checkString($field){
