@@ -36,4 +36,16 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
+    
+    public function testSumStr(){
+        $userModel = new UserModel();
+        $a = 1;
+        $b = "quyen";
+        
+        $expected = "error";
+
+        $actual = $userModel->sumb($a,$b);
+
+        $this->assertEquals($expected,$actual);
+    }
 }
