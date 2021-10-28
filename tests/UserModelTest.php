@@ -53,6 +53,21 @@ class UserModelTest extends TestCase
         }
     }
 
+    public function testSumNegativevsNegative()
+    {
+        $userModel = new UserModel();
+        $a = -1;
+        $b = -2;
+
+        $actual = $userModel->sumb($a, $b);
+
+        if ($actual != -3) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+
     public function testSumNumbervsString()
     {
         $userModel = new UserModel();

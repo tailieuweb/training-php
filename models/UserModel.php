@@ -109,6 +109,17 @@ class UserModel extends BaseModel
         return $users;
     }
 
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
+            var_dump('returning instance');
+            return self::$_instance;
+        }
+        var_dump('creating instance');
+        self::$_instance = new self();
+        return self::$_instance;
+    }
+
     /**
      * For testing
      * @param $a
