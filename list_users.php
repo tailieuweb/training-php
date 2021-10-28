@@ -1,7 +1,7 @@
 <?php
 // Start the session
 session_start();
-
+//1-b
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
@@ -11,8 +11,9 @@ $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
-
+//feature 1-a
 $users = $userModel->getUsers($params);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,7 +51,24 @@ $users = $userModel->getUsers($params);
                                 <?php echo  $user['type'] ?>
                             </td>
                             <td>
+
                                 <a href="form_user.php?id=<?php echo rand(10000, 99999) . base64_encode($user['id'] . rand(9999, 99999)) ?>">
+
+
+                                <?php echo $user['email'] ?>
+
+                                <?php echo $user['email']?>
+                            </td>
+                            <td>
+                                <?php echo $user['type']?>
+
+                            </td>
+                            <td>
+                                <?php echo $user['type'] ?>
+                            </td>
+                            <td>
+                                <a href="form_user.php?id=<?php echo base64_encode($user['id']) ?>">
+
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <a href="view_user.php?id=<?php echo rand(10000, 99999) . base64_encode($user['id'] . rand(9999, 99999)) ?>">

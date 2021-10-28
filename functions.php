@@ -1,5 +1,8 @@
 <?php
+
 $conn = mysqli_connect('localhost', 'root', 'mysql', 'app_web1');
+
+$conn = mysqli_connect('localhost', 'root', '', 'app_web1');
 
 $username = "";
 $fullname = "";
@@ -165,6 +168,14 @@ function login()
 		$results = mysqli_query($conn, $query);
 		$results2 = mysqli_query($conn, $query2);
 		$row = mysqli_fetch_array($results2);
+
+        $query = "SELECT * FROM users WHERE username='$username' AND password='$password' LIMIT 1";
+        $query2 = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+        $results = mysqli_query($conn, $query);
+        $results2 = mysqli_query($conn, $query2);
+        $row = mysqli_fetch_array($results2);
+
+
 		if (mysqli_num_rows($results) == 1) { // user found
 			// check if user is admin or user
 			$logged_in_user = mysqli_fetch_assoc($results);
@@ -172,31 +183,61 @@ function login()
 			if ($logged_in_user['user_type'] == 'admin') {
 
 				$_SESSION['user'] = $logged_in_user;
+
 				$_SESSION['success']  = "You are now logged in";
+
+
+        if (mysqli_num_rows($results) == 1) { // user found
+            // check if user is admin or user
+            $logged_in_user = mysqli_fetch_assoc($results);
+
+            if ($logged_in_user['user_type'] == 'admin') {
+
+                $_SESSION['user'] = $logged_in_user;
+                $_SESSION['success']  = "You are now logged in";
+
 
 				if (isset($_POST['remember'])) {
 					//thiết lập cookie username và password
 					setcookie("user", $row['username'], time() + (86400 * 30));
 					setcookie("pass", $row['password'], time() + (86400 * 30));
 				}
+
 
 
 				header('location: home.php');
 			} else {
 				$_SESSION['user'] = $logged_in_user;
+
 				$_SESSION['success']  = "You are now logged in";
+
+
+                header('location: home.php');
+            }else{
+                $_SESSION['user'] = $logged_in_user;
+
+                $_SESSION['success']  = "You are now logged in";
+
 
 				if (isset($_POST['remember'])) {
 					//thiết lập cookie username và password
 					setcookie("user", $row['username'], time() + (86400 * 30));
 					setcookie("pass", $row['password'], time() + (86400 * 30));
 				}
+
 
 				header('location: index.php');
 			}
 		} else {
 			array_push($errors, "Wrong username/password combination");
 		}
+
+                header('location: index.php');
+            }
+        }else {
+            array_push($errors, "Wrong username/password combination");
+        }
+
 	}
 }
 
