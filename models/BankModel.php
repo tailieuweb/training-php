@@ -36,9 +36,9 @@ class BankModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id) {
+    public function deleteBankById($id) {
       
-        $sql = 'DELETE FROM users WHERE id = '.$id;
+        $sql = 'DELETE FROM banks WHERE id = '.$id;
         return $this->delete($sql);
 
     }
@@ -74,7 +74,6 @@ class BankModel extends BaseModel {
         . $input['cost'] 
         . "')";
         $user = $this->insert($sql);
-      
         return $user;
                 
     }
@@ -102,5 +101,16 @@ class BankModel extends BaseModel {
         }
         return $banks;
        
+    }
+       /**
+     * Delete user by id
+     * @param $id
+     * @return mixed
+     */
+    public function deleteBankByUserId($user_id) {
+      
+        $sql = 'DELETE FROM banks WHERE user_id = '.$user_id;
+        return $this->delete($sql);
+
     }
 }

@@ -1,20 +1,18 @@
 <?php
 
 require_once 'BaseModel.php';
-require_once './repository/UserRepository.php';
 
 class UserModel extends BaseModel{
-    use UserRepository;
 
     public function findUserById($id) {
-        $sql = $this->findUId($id);
+        $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
 
         return $user;
     }
 
     public function findUser($keyword) {
-        $sql = $this->findU($keyword);
+        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
         $user = $this->select($sql);
 
         return $user;
@@ -28,7 +26,7 @@ class UserModel extends BaseModel{
      */
     public function auth($userName, $password) {
         $md5Password = md5($password);
-        $sql = $this->login($userName,$password);
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
         $user = $this->select($sql);
 		//var_dump($sql);die();
         return $user;
@@ -40,7 +38,7 @@ class UserModel extends BaseModel{
      * @return mixed
      */
     public function deleteUserById($id) {
-        $sql = $this->del($id);
+        $sql = 'DELETE FROM users WHERE id = '.$id;     
         return $this->delete($sql);
 
     }
@@ -53,7 +51,13 @@ class UserModel extends BaseModel{
      * @return mixed
      */
     public function updateUser($input) {
-        $sql = $this->updateU($input);
+        $sql = 'UPDATE users SET 
+        email = "'.$input['email'].'",
+         name = "'.$input['name'].'",
+          fullname = "'.$input['fullname'].'",
+          password="'. md5($input['password']) .'",
+           type = "'.$input['type'].'"
+         WHERE id = ' . $input['id'];
 
         $user = $this->update($sql);
         return $user;
@@ -65,7 +69,15 @@ class UserModel extends BaseModel{
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = $this->insertU($input);
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`,`version`) VALUES (" .
+        "'" . $input['name'] . "', '"
+        . md5($input['password']) . "', '"
+        . $input['fullname'] . "', '"
+        . $input['email'] . "', '"
+        . $input['type']
+        . "', '"
+        . 1
+        . "')";   
         $user = $this->insert($sql);
         return $user;
                 
@@ -78,13 +90,15 @@ class UserModel extends BaseModel{
      */
     public function updateVersion($input){
         $version = $input['version'] + 1;
-        $sql = $this->updateVs($input);
+        $sql = 'UPDATE users SET              
+        version = "'.$version.'"
+       WHERE id = ' . $input['id'];
         $user = $this->update($sql);
         //var_dump($input['version']); die(); 
         return $user;
     }
     public function getVersion($id){
-        $sql = $this->getVs($id);
+        $sql = 'SELECT version FROM users WHERE id = ' . $id;
         $users = $this->select($sql);
        // var_dump($users[0]['version']);die();
         return $users[0]['version'];
@@ -94,7 +108,7 @@ class UserModel extends BaseModel{
        
         if (!empty($params['keyword'])) {
            
-            $sql = $this->findByName($params['keyword']);
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
@@ -102,7 +116,7 @@ class UserModel extends BaseModel{
             $users = self::$_connection->multi_query($sql);
             
         } else {
-            $sql = $this->selectUser();
+            $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
         return $users;
@@ -115,5 +129,10 @@ class UserModel extends BaseModel{
         }
         self::$_instance = new self();
         return self::$_instance;
+    }
+    public function getID(){
+        $sql = "SELECT id FROM `users` ORDER BY id DESC LIMIT 1";
+        $user = $this->select($sql);
+        return $user;
     }
 }

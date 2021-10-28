@@ -16,7 +16,7 @@ if (!empty($_GET['id']) && !empty($_GET['token'])) {
    if($_GET['token'] == $_SESSION['token']){
         $id = base64_decode($_GET['id']);
         $newid = substr($id,3,-2);
-        $userRepository->delUser($newid);//Delete existing user
+        $userRepository->deleteUser($newid);//Delete existing user
     }
     
   
