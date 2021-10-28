@@ -5,10 +5,6 @@ abstract class BaseModel {
     // Database connection
     protected static $_connection;
 
-    // Singleton pattern:
-    protected static $_user_instance;
-    protected static $_bank_instance;
-
     public function __construct() {
 
         if (!isset(self::$_connection)) {
