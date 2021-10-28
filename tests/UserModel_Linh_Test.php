@@ -38,7 +38,7 @@ class UserModelTest extends TestCase
     }
 
     /**
-     * Test case Not good
+     * Test case: String and number.
      */
     public function testSum_StringAndNum()
     {
@@ -53,7 +53,7 @@ class UserModelTest extends TestCase
     }
 
     /**
-     * Test case Not good
+     * Test case: String and string.
      */
     public function testSum_StringAndString()
     {
@@ -68,7 +68,7 @@ class UserModelTest extends TestCase
     }
 
     /**
-     * Test case Not good
+     * Test case: Floating point numbers.
      */
     public function testSum_FloatingPointNumbers()
     {
