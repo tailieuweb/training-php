@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" bootstrap="vendor/autoload.php" colors="true" cacheResult="false">
-
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         cacheResult ="false"
+>
     <testsuites>
-        <!-- <testsuite name="UserModelTest">
-            <file>./tests/UserModelTest.php</file>
-        </testsuite> -->
-        <testsuite name="BankModelTest">
-            <file>./tests/BankModelTest.php</file>
+        <testsuite name="SqlWsContractImport">
+            <file>./Tests/UserModelTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./tests</directory>
+            <directory suffix=".php">./models</directory>
         </whitelist>
     </filter>
     <php>
@@ -24,4 +25,3 @@
         <server name="TELESCOPE_ENABLED" value="false"/>
     </php>
 </phpunit>
-
