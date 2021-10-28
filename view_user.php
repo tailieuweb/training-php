@@ -6,13 +6,26 @@ $user = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
-
     $id = $_GET['id'];
+    //Decode id param
 
-    $user = $userModel->findUserById(base64_decode($id)); //Update existing user
+    //Get first number
+    $start = substr($id, 0, 5);
+
+    //Get last number
+    $end = substr($id, -5);
+
+    //Replace first number with null
+    $id = str_replace($start, "", $id);
+
+    //Replace last number with null
+    $id = str_replace($end, "", $id);
+    $user = $userModel->findUserById($id); //Update existing user
 }
 
+
 if (!empty($_POST['submit'])) {
+
     if (!empty($id)) {
         $userModel->updateUser($_POST);
     } else {
@@ -20,6 +33,7 @@ if (!empty($_POST['submit'])) {
     }
     header('location: list_users.php');
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -41,25 +55,21 @@ if (!empty($_POST['submit'])) {
             <form method="POST">
                 <input type="hidden" name="id" value="<?php echo $id ?>">
                 <div class="form-group">
-                    <label for="name">Name : </label>
+                    <label for="name">Name</label>
                     <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
                 </div>
+
+                <!-- start -->
                 <div class="form-group">
-                    <label for="fullname">Fullname : </label>
-                    <span><?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?></span>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email : </label>
-                    <span><?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?></span>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password :</label>
-                    <span><?php if (!empty($user[0]['password'])) echo $user[0]['password'] ?></span>
-                </div>
-                <div class="form-group">
-                    <label for="type">Type : </label>
+                    <label for="type">Type</label>
                     <span><?php if (!empty($user[0]['type'])) echo $user[0]['type'] ?></span>
                 </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <span><?php if (!empty($user[0]['password'])) echo $user[0]['password'] ?></span>
+                </div>
+                <!-- end. -->
+
             </form>
         <?php } else { ?>
             <div class="alert alert-success" role="alert">
