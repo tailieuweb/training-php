@@ -9,12 +9,12 @@ cacheResult ="false"
 <testsuite name="SqlWsContractImport">					
 <file>./Tests/UserModelTest.php</file>					
 </testsuite>					
-</testsuites>
-<filter>				
-<whitelist processUncoveredFilesFromWhitelist="true">				
-<directory suffix=".php">./models</directory>				
-</whitelist>				
-</filter>									
+</testsuites>					
+<filter>					
+<whitelist processUncoveredFilesFromWhitelist="true">					
+<directory suffix=".php">./models</directory>					
+</whitelist>					
+</filter>					
 <php>					
 <server name="APP_ENV" value="testing"/>					
 <server name="BCRYPT_ROUNDS" value="4"/>					
@@ -24,3 +24,4 @@ cacheResult ="false"
 <server name="SESSION_DRIVER" value="array"/>					
 <server name="TELESCOPE_ENABLED" value="false"/>					
 </php>					
+</phpunit>					
