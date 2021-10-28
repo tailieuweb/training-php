@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
@@ -9,14 +10,14 @@ class UserModelTest extends TestCase
      */
     public function testSumOk()
     {
-       $userModel = new UserModel();
-       $a = 1;
-       $b = 2;
-       $expected = 3;
+        $userModel = new UserModel();
+        $a = 1;
+        $b = 2;
+        $expected = 3;
 
-       $actual = $userModel->sumb($a,$b);
+        $actual = $userModel->sumb($a, $b);
 
-       $this->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**
@@ -28,10 +29,46 @@ class UserModelTest extends TestCase
         $a = 1;
         $b = 2;
 
-        $actual = $userModel->sumb($a,$b);
+        $actual = $userModel->sumb($a, $b);
 
         if ($actual != 3) {
             $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+
+    /**
+     * Cộng
+     */
+    public function sumb($a, $b)
+    {
+        if (!is_numeric($a)) return "error";
+        if (!is_numeric($b)) return "error";
+        return $a + $b;
+    }
+
+    public function testFindUserByIdOk()
+    {
+        $userModel = new UserModel();
+        $userId = 14;
+        $userName = 'abc';
+
+        $user = $userModel->findUserById($userId);
+        $actual = $user[0]['name'];
+
+        $this->assertEquals($userName, $actual);
+    }
+
+    public function testFindUserByIdNg()
+    {
+        $userModel = new UserModel();
+        $userId = 10;
+
+        $user = $userModel->findUserById($userId);
+
+        if (empty($user)) {
+            $this->assertTrue(true);
         } else {
             $this->assertTrue(true);
         }
