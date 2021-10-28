@@ -18,7 +18,7 @@ if (!empty($_GET['keyword'])) {
     // }
 }
 
-$banks = $bankModel->getBank($params);
+$banks = $bankModel->getBankAccounts($params);
 
 ?>
 <!DOCTYPE html>
@@ -34,6 +34,8 @@ $banks = $bankModel->getBank($params);
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
+        <a href="index.php">Home</a>
+
         <?php if (!empty($banks)) { ?>
             <table class="table table-striped">
                 <thead>
@@ -93,8 +95,6 @@ $banks = $bankModel->getBank($params);
                 This is a dark alert—check it out!
             </div>
         <?php } ?>
-
-        <a href="http://training-php.local/form_bank.php">Add bank account!</a>
     </div>
 </body>
 

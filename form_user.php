@@ -95,9 +95,15 @@ if (!empty($_POST['submit'])) {
                         <option value="guess">GUESS</option>
                     </select>
                 </div>
+                <!-- Add password field -->
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" name="password" class="form-control" placeholder="Password">
+                </div>
+                <!-- Add bank account balance field -->
+                <div class="form-group">
+                    <label for="name">Account balance</label>
+                    <input class="form-control" name="cost" placeholder="Amount of money" value="">
                 </div>
                 <!-- Hidden version field: -->
                 <div class="form-group">
