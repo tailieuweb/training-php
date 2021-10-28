@@ -1,22 +1,30 @@
 <?php
+// Start the session
+session_start();
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$id = NULL;
+$_id = NULL;
 
+<<<<<<< HEAD
 if (!empty($_GET['id'])) { 
     
     $id = base64_decode($_GET['id']);
     $newid = substr($id,13);
     //var_dump($newid);
     $user = $userModel->findUserById($newid);//Update existing user
+=======
+if (!empty($_GET['id'])) {
+    $_id = $_GET['id'];
+    $user = $userModel->findUserById($_id);//Update existing user
+>>>>>>> 2-php-202109/2-groups/9-I/master-phpunit
 }
 
 
 if (!empty($_POST['submit'])) {
 
-    if (!empty($id)) {
+    if (!empty($_id)) {
         $userModel->updateUser($_POST);
     } else {
         $userModel->insertUser($_POST);
@@ -35,15 +43,39 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
+<<<<<<< HEAD
             <?php if ($user || empty(substr($id,13))) { ?>
+=======
+            <?php if ($user || !isset($_id)) { ?>
+>>>>>>> 2-php-202109/2-groups/9-I/master-phpunit
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
                 <form method="POST">
+<<<<<<< HEAD
                     <input type="hidden" name="id" value="<?php echo substr($id,13)?>">
+=======
+                    <input type="hidden" name="id" value="<?php echo $_id ?>">
+>>>>>>> 2-php-202109/2-groups/9-I/master-phpunit
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Fullname</label>
+                        <input class="form-control" name="fullname" placeholder="Fullname" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Email</label>
+                        <input class="form-control" name="email" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Type</label>
+                        <select name="type">    
+                            <option value="">--Select Type--</option>
+                            <option value="admin">admin</option>
+                            <option value="user">user</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="fullname">Fullname</label>
