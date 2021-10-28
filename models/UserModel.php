@@ -107,10 +107,12 @@ class UserModel extends BaseModel {
 
         return $types;
     }
+    //
     public function createToken(){
         $token = $this->get_token_value();
         return $token;
     }
+    
     public static function getInstance() {
         if (self::$_instance !== null){
             return self::$_instance;
