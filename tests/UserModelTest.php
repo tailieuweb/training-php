@@ -128,7 +128,7 @@ class UserModelTest extends TestCase
         {
             $userModel = new UserModel();
             $a = 'a';
-            $b = 1.5;
+            $b = 1;
             $actual = $userModel->sumb($a,$b);
     
           if($actual != 'error')
@@ -156,5 +156,17 @@ class UserModelTest extends TestCase
           {
               $this->assertTrue(true); 
           }
+        }
+        //check chuoi
+        public function testCheckString(){
+            $userModel = new UserModel();
+            $str = "abcde$@#ghe";
+            $check = $userModel->checkString($str);
+            if($check == true){
+                $this->assertTrue(true);
+            }
+            else{
+                $this->assertTrue(false);
+            }
         }
 }
