@@ -5,7 +5,7 @@ session_start();
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
-$bankModel = $factory->make('bank');
+$userRepository = $factory->make('UserRepository');
 $params = [];
 
 if (!empty($_GET['keyword'])) {
@@ -18,7 +18,7 @@ if (!empty($_GET['keyword'])) {
     // }
 }
 
-$banks = $bankModel->getBankAccounts($params);
+$userAccounts = $userRepository->getBankAccounts($params);
 
 ?>
 <!DOCTYPE html>
@@ -36,7 +36,7 @@ $banks = $bankModel->getBankAccounts($params);
     <div class="container">
         <a href="index.php">Home</a>
 
-        <?php if (!empty($banks)) { ?>
+        <?php if (!empty($userAccounts)) { ?>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -50,39 +50,39 @@ $banks = $bankModel->getBankAccounts($params);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($banks as $bank) { ?>
+                    <?php foreach ($userAccounts as $userAcc) { ?>
                         <tr>
                             <!-- Sử dụng htmlentities để ngăn chặn việc thực thi code khi in dữ liệu ra màn hình -->
-                            <th scope="row"><?php echo htmlentities($bank['id']) ?></th>
+                            <th scope="row"><?php echo htmlentities($userAcc['id']) ?></th>
                             <td>
-                                <?php echo htmlentities($bank['name']) ?>
+                                <?php echo htmlentities($userAcc['name']) ?>
                             </td>
                             <td>
-                                <?php echo htmlentities($bank['fullname']) ?>
+                                <?php echo htmlentities($userAcc['fullname']) ?>
                             </td>
                             <td>
-                                <?php echo $bank['email']?>
+                                <?php echo $userAcc['email']?>
                             </td>
                             <td>
-                                <?php echo $bank['type']?>
+                                <?php echo $userAcc['type']?>
                             </td>
                             <td>
-                                <?php echo $bank['cost']?>
+                                <?php echo $userAcc['cost']?>
                             </td>
                             <td>
                                 <!-- Encode id with random number -->
-                                <a href="form_user.php?id=<?php echo rand(10000,99999).$bank['id'].rand(10000,99999) ?>">
+                                <a href="form_user.php?id=<?php echo rand(10000,99999).$userAcc['id'].rand(10000,99999) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <!-- Encode id with random number -->
-                                <a href="view_user.php?id=<?php echo rand(10000,99999).$bank['id'].rand(10000,99999) ?>">
+                                <a href="view_user.php?id=<?php echo rand(10000,99999).$userAcc['id'].rand(10000,99999) ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
                                 <!-- Encode id with random number -->
-                                <a href="delete_bank.php?id=<?php echo rand(10000,99999).$bank['id'].rand(10000,99999) ?>">
+                                <a href="delete_bank.php?id=<?php echo rand(10000,99999).$userAcc['id'].rand(10000,99999) ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
-                                <a href="form_bank.php?id=<?php echo rand(10000,99999).$bank['id'].rand(10000,99999) ?>">
+                                <a href="form_bank.php?id=<?php echo rand(10000,99999).$userAcc['id'].rand(10000,99999) ?>">
                                     <span aria-hidden="true" title="Update bank account">&#9998;</span>
                                 </a>
                             </td>

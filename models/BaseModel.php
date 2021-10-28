@@ -8,6 +8,7 @@ abstract class BaseModel {
     // Singleton pattern:
     protected static $_user_instance;
     protected static $_bank_instance;
+    protected static $_userRepo_instance;
 
     public function __construct() {
 

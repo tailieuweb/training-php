@@ -41,6 +41,24 @@ class BankModel extends BaseModel
     }
 
     /**
+     * Get bank account by user id
+     * @param array $user_id
+     * @return array
+     */
+    public function getBankAccountByUserID($user_id)
+    {
+        //Keyword
+        $sql = 'SELECT users.*, banks.id AS bank_id, banks.cost AS cost 
+            FROM users 
+            INNER JOIN banks 
+            ON banks.user_id = users.id 
+            WHERE users.id LIKE ' . $user_id
+            . ' ORDER BY id ASC';
+        $banks = $this->select($sql);
+        return $banks;
+    }
+
+    /**
      * Delete bank account balance
      * @param $id
      * @return mixed
