@@ -1,9 +1,8 @@
 <?php
 
 $conn = mysqli_connect('localhost', 'root', 'mysql', 'app_web1');
-=======
-$conn = mysqli_connect('localhost', 'root', '', 'app_web1');
 
+$conn = mysqli_connect('localhost', 'root', '', 'app_web1');
 
 $username = "";
 $fullname = "";
@@ -180,7 +179,6 @@ function login(){
             if ($logged_in_user['user_type'] == 'admin') {
 
                 $_SESSION['user'] = $logged_in_user;
-
                 $_SESSION['success']  = "You are now logged in";
 
                 if (isset($_POST['remember'])){
@@ -213,13 +211,13 @@ function login(){
 		}else {
 			array_push($errors, "Wrong username/password combination");
 		}
-
+=======
                 header('location: index.php');
             }
         }else {
             array_push($errors, "Wrong username/password combination");
         }
-
+>>>>>>> origin/1-php-202109/1-master
 	}
 }
 
@@ -231,7 +229,4 @@ function isAdmin()
 		return false;
     }
 }
-
-
-=======
 
