@@ -1,13 +1,14 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/FactoryPattern.php';
 
+
+require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
 $bankModel = $factory->make('bank');
+$user = $bankModel->getUsers();
 
-$users = $bankModel->getUser();
 $bank = NULL; //Add new bank
 $_id = NULL;
 
