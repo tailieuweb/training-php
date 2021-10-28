@@ -13,6 +13,7 @@ if (!empty($_GET['keyword'])) {
 }
 
 $users = $userModel->getUsers($params);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -52,7 +53,14 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['fullname'] ?>
                             </td>
                             <td>
+<<<<<<< HEAD
                                 <?php echo $user['email'] ?>
+=======
+                                <?php echo $user['email']?>
+                            </td>
+                            <td>
+                                <?php echo $user['type']?>
+>>>>>>> origin/1-php-202109/1-master
                             </td>
                             <td>
                                 <?php echo $user['type'] ?>
