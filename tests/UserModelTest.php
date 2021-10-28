@@ -46,4 +46,28 @@ class UserModelTest extends TestCase
         $userModel->sumb($a,$b);
         $this->assertTrue(true);
     }
+
+    public function testFindUserByIdNotOk()
+    {
+        $userModel = new UserModel();
+        $userID = 2;
+        $user = $userModel->findUserById($userID);
+
+        if(!empty($user)){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+
+    public function testFindUserByIdOk()
+    {
+        $userModel = new UserModel();
+        $userID = 2;
+        $userName = 'test2';
+        $user = $userModel->findUserById($userID);
+        $actual = $user[0]['name'];
+        $this->assertEquals($userName, $actual);
+    }
 }
