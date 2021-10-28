@@ -1,8 +1,12 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryPattern.php';
+
+$factory = new FactoryPattern();
+
+$userModel = $factory->make('user');
+$type = $userModel->getTypes();
 
 $user = NULL; //Add new user
 $_id = NULL;
@@ -34,7 +38,7 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
-            <?php if ($user || !isset($_id)) { ?>
+            <?php if ($user || empty($_id)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
@@ -44,6 +48,32 @@ if (!empty($_POST['submit'])) {
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
                     </div>
+
+                    <div class="form-group">
+                        <label for="fullname">Fullname</label>
+                        <input class="form-control" name="fullname" placeholder="Fullname" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input  class="form-control" name="email" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type">Type user</label>
+                        <select name="type" class="form-control">
+                            <?php
+                            foreach($type as $value) {
+                                if($value['type_id'] == $user[0]['type']){
+                                ?>
+                            <option selected value="<?php if (!empty($value['type_id'])) echo $value['type_id'] ?>"><?php if (!empty($value['name_type'])) echo $value['name_type'] ?></option>
+                            <?php } else{ ?>
+                                    <option value="<?php if (!empty($value['type_id'])) echo $value['type_id'] ?>"><?php if (!empty($value['name_type'])) echo $value['name_type'] ?></option>
+                             <?php   }
+                            }?>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="fullname">Full Name</label>
                         <input class="form-control" name="fullname" placeholder="FullName" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
