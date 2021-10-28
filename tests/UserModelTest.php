@@ -19,15 +19,19 @@ class UserModelTest extends TestCase {
     /**
      * Test function findUserById
      */
-    // public function testFindUser(){
-    //     $user = new UserModel();
-    //     $keys = "a";
+    public function testFindUser(){
+        $user = new UserModel();
+        $keys = "a";
 
-    //     // $expected = "LE VAN LAM";
-    //     $actual = $user->findUser($keys);
+        // $expected = "LE VAN LAM";
+        $actual = $user->findUser($keys);
 
-    //     // var_dump($actual);die();
-    // }
+        if(empty($actual)){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+        // var_dump($actual);die();
+    }
 
     /**
      * Test function findUserById
@@ -35,7 +39,7 @@ class UserModelTest extends TestCase {
     public function testAuth(){
         $user = new UserModel();
         $name = "Le LAM";
-        $pass = "123456";
+        $pass = "12345";
 
         // $expected = "LE VAN LAM";
         $actual = $user->auth($name, $pass);
@@ -46,8 +50,49 @@ class UserModelTest extends TestCase {
         else{
             return $this->assertTrue(false); 
         }
+    }
 
-        // var_dump($actual);die();
+    /**
+     * Test function create token
+     */
+    public function testCreateToken(){
+        $user = new UserModel();
+        $name = "Le LAM";
+        $pass = "12345";
+
+        // $expected = "LE VAN LAM";
+        $actual = $user->createToken();
+        if($actual == ''){
+            return $this->assertTrue(true);
+        }
+        else{
+            return $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function get instance
+     */
+    public function testGetInstance(){
+        $user = new UserModel();
+        $temp = null;
+        // $expected = "LE VAN LAM";
+        $actual = $user->getInstance();
+
+        if($temp == $actual){
+            return $this->assertTrue(false); 
+        }
+        return $this->assertTrue(true); 
+    }
+    public function testGetInstanceNg(){
+        $user = new UserModel();
+        $temp = "BaseModel";
+        // $expected = "LE VAN LAM";
+        $actual = $user->getInstance();
+
+        if($temp == $actual){
+            return $this->assertTrue(false); 
+        }
+        return $this->assertTrue(true); 
     }
 
     /**
