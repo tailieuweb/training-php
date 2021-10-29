@@ -38,11 +38,7 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function deleteUserById($id) {
-<<<<<<< HEAD
         $subString = substr($id,36,-36);
-=======
-        $subString = substr($id,36,-38);
->>>>>>> origin/2-php-202109/2-groups/2-B/4-23-Thang-phpunit
         $result = base64_decode($subString);
         $sql = "DELETE FROM users WHERE MD5(users.id) = '" . md5($result) . "'";
         return $this->delete($sql);
@@ -53,7 +49,6 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-<<<<<<< HEAD
         $t = base64_decode($input['version']);
         $string = substr($t,18);
 
@@ -76,11 +71,7 @@ class UserModel extends BaseModel {
            header('location: list_users.php?error');  
         }
         
-=======
-        $sql = "UPDATE `users` SET name = " . "'" . $input['name'] . "', fullname = " . "'" . $input['fullname'] . "', email = " . "'" . $input['email'] . "', type = " . "'" . $input['type'] . "', password = " . "'" . md5($input['password']) . "' WHERE id = " . "'" . $input['id'] . "'";
-        $user = $this->update($sql);
-        return $user;
->>>>>>> origin/2-php-202109/2-groups/2-B/4-23-Thang-phpunit
+
     }
 
     /**
@@ -89,13 +80,8 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-<<<<<<< HEAD
+
         $sql = "INSERT INTO app_web1.`users` (name,`fullname`,`email`,`type`, password) VALUES (" . "'" . $input['name'] . "', '".$input['fullname']. "', '" . $input['email'] . "', '" . $input['type'] . "','" . md5($input['password']) . "')";
-=======
-        $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`,`email`,`type`, `password`) VALUES (" . "'" . $input['name'] . "', '".$input['fullname']. "', '" . $input['email'] . "', '" . $input['type'] . "','" . md5($input['password']) . "')";
->>>>>>> origin/2-php-202109/2-groups/2-B/4-23-Thang-phpunit
-        $user = $this->insert($sql);
-        return $user;
     }
 
     /**
