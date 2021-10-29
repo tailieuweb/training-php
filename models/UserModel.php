@@ -106,4 +106,10 @@ class UserModel extends BaseModel {
         if (gettype($b) === "string") return "Error sum with string";
         return $a + $b;
     }
+
+    public function sumTest(int $a = 10, int $b = 0): int
+    {
+        return $a + $b;
+    }
+
 }
