@@ -6,13 +6,14 @@ require_once 'UserModel.php';
 
 class BankModel extends BaseModel
 {
-    
     protected static $_instance;
     // get Bank by id($id)
     public function getBankById($id)
     {
-        $id = $this->decryptID($id);
-        $sql = 'SELECT `banks`.*, `users`.`fullname`, `users`.`name` FROM `users` INNER JOIN `banks` WHERE `users`.`id` = `banks`.`user_id` AND `banks`.`id` = ' . $id;
+        $id = $this->decryptID($id,$this->getBanks());
+        $sql = 'SELECT `banks`.*, `users`.`fullname` as userFullname, `users`.`name` as userName, `users`.`email` as userEmail, `users`.`type` as userType  
+        FROM `users` INNER JOIN `banks` 
+        WHERE `users`.`id` = `banks`.`user_id` AND `banks`.`id` = ' . $id;
         $bank = $this->select($sql);
 
         return $bank;
@@ -42,7 +43,7 @@ class BankModel extends BaseModel
     {
         $cost = $this -> BlockSQLInjection($input['cost']);
         $result = new ResultClass();
-        $id = $this->decryptID($input['id']);
+        $id = $this->decryptID($input['id'],$this->getBanks());
         $temp = $this->getBankById($input['id']);
         if (count($temp) > 0) {
             if ($temp[0]['version'] == $input['version']) {
@@ -77,7 +78,7 @@ class BankModel extends BaseModel
      */
     public function deleteBankById($id)
     {
-        $id = $this->decryptID($id);
+        $id = $this->decryptID($id,$this->getBanks());
         $sql = 'DELETE FROM banks WHERE id = ' . $id;
         return $this->delete($sql);
     }
@@ -102,28 +103,13 @@ class BankModel extends BaseModel
         }
         return $banks;
     }
-    // Decrypt id
-    private function decryptID($md5Id)
-    {
-        $banks = $this->getBanks();
-        foreach ($banks as $bank) {
-            if (md5($bank['id'] . 'TeamJ-TDC') == $md5Id) {
-                return $bank['id'];
-            }
-        }
-        return NULL;
-    }
 
     public static function getInstance()
     {
-        if (self::$_instance !== null) {
+        if (self::$_instance != null) {
             return self::$_instance;
         }
         self::$_instance = new self();
         return self::$_instance;
-    }
-
-    private function BlockSQLInjection($str) {
-        return str_replace(array("'", '"', "''"),array('&quot;','&quot;'),$str);
     }
 }
