@@ -1,13 +1,14 @@
 <?php
-require_once 'models/BankModel.php';
-$bankModel = new BankModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+$bankModel = $factory->make('bank');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
 
-$users = $bankModel->getBanks($params);
+$banks = $bankModel->getBanks($params);
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,7 @@ $users = $bankModel->getBanks($params);
 <body>
     <?php include 'views/header.php'?>
     <div class="container">
-        <?php if (!empty($users)) {?>
+        <?php if (!empty($banks)) {?>
             <div class="alert alert-warning" role="alert">
                 List of Banks!
             </div>
@@ -32,23 +33,23 @@ $users = $bankModel->getBanks($params);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user) {?>
+                    <?php foreach ($banks as $bank) {?>
                         <tr>
-                            <th scope="row"><?php echo $user['id']?></th>
+                            <th scope="row"><?php echo $bank['id']?></th>
                             <td>
-                                <?php echo $user['user_id']?>
+                                <?php echo $bank['user_id']?>
                             </td>
                             <td>
-                                <?php echo $user['cost']?>
+                                <?php echo $bank['cost']?>
                             </td>
                             <td>
-                                <a href="form_bank.php?id=<?php echo $user['id'] ?>">
+                                <a href="form_bank.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_bank.php?id=<?php echo $user['id'] ?>">
+                                <a href="view_bank.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_bank.php?id=<?php echo $user['id'] ?>">
+                                <a href="delete_bank.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
