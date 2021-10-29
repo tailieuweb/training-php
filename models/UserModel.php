@@ -1,12 +1,15 @@
 <?php
 
 require_once 'BaseModel.php';
+require_once 'Result.php';
 
 class UserModel extends BaseModel
 {
+    protected static $_instance;
 
     public function findUserById($id)
     {
+        $id = $this->decryptID($id);
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
 
@@ -43,9 +46,11 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
+        $id = $this->decryptID($id);
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
     }
+
 
     /**
      * Update user
@@ -54,13 +59,32 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
-        $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] . '", 
-                 password="' . md5($input['password']) . '"
-                WHERE id = ' . $input['id'];
-        $user = $this->update($sql);
-
-        return $user;
+        $result = new ResultClass();
+        $id = $this->decryptID($input['id']);
+        $temp = $this->findUserById($input['id']);
+        if (count($temp) > 0) {
+            if ($temp[0]['version'] == $input['version']) {
+                $sql = 'UPDATE `users` SET 
+                name = "' . $this -> BlockSQLInjection($input['name']) . '", 
+                 fullname="' . $this -> BlockSQLInjection($input['fullname']) . '",
+                 email="' . $this -> BlockSQLInjection($input['email']) . '",
+                 type="' . $this -> BlockSQLInjection($input['type']) . '",
+                 password="' . md5($input['password']) . '",
+                 version="' . ($input['version'] + 1) . '"
+                 WHERE id = ' . $id;
+                $user = $this->update($sql);
+                if ($user == true) {
+                    $result->setData("Đã update thành công");
+                } else {
+                    $result->setError("Lỗi");
+                }
+            } else {
+                $result->setError("Dữ liệu đã được cập nhật trước đó! Xin hãy reload lại trang");
+            }
+        } else {
+            $result->setError("Không tìm thấy id của user");
+        }
+        return $result;
     }
 
     /**
@@ -70,9 +94,10 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-            "'" . $input['name'] . "', '" . md5($input['password']) . "')";
-
+        $password = md5($input['password']);
+        // SQL
+        $sql = "INSERT INTO `users`(`name`, `fullname`, `email`, `type`, `password`) 
+        VALUES ('" . $this -> BlockSQLInjection($input['name']) . "','" . $this -> BlockSQLInjection($input['fullname']) . "','" . $this -> BlockSQLInjection($input['email']) . "','" . $this -> BlockSQLInjection($input['type']) . "','" . $this -> BlockSQLInjection($password) . "')";
         $user = $this->insert($sql);
 
         return $user;
@@ -85,14 +110,16 @@ class UserModel extends BaseModel
      */
     public function getUsers($params = [])
     {
+
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $this -> BlockSQLInjection($params['keyword']) . '%"';
 
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+            //$users = self::$_connection->multi_query($sql);
+            $users = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
@@ -101,15 +128,39 @@ class UserModel extends BaseModel
         return $users;
     }
 
-    /**
+    // Decrypt id
+    private function decryptID($md5Id)
+    {
+        $users = $this->getUsers();
+        foreach ($users as $user) {
+            if (md5($user['id'] . 'TeamJ-TDC') == $md5Id) {
+                return $user['id'];
+            }
+        }
+        return NULL;
+    }
+
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }
+
+    private function BlockSQLInjection($str) {
+        return str_replace(array("'", '"', "''"),array('&quot;','&quot;'),$str);
+    }
+/**
      * For testing
      * @param $a
      * @param $b
      */
     public function sumb($a, $b)
     {
-        if (!is_numeric($a) || !is_numeric($b)) {
-            return "test error";
+        if(!is_numeric($a) || !is_numeric($b)){
+            return 'error';
         }
         return $a + $b;
     }

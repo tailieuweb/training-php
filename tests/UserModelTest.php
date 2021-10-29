@@ -6,9 +6,9 @@ class UserModelTest extends TestCase
 {
 
     /**
-     * 1) Test trường hợp cộng 2 số dương
+     * Test case Sum Positive Number
      */
-    public function testPositiveNumbers()
+    public function testSumPositiveNumber()
     {
         $userModel = new UserModel();
         $a = 1;
@@ -19,26 +19,24 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-
     /**
-     * 2) Test trường hợp cộng 2 số âm
+     * Test case Sum Negative Number
      */
-    public function testNegativeNumbers()
+    public function testSumNegativeNumber()
     {
         $userModel = new UserModel();
-        $a = -1;
+        $a = -3;
         $b = -2;
-        $expected = -3;
+        $expected = -5;
 
         $actual = $userModel->sumb($a, $b);
 
         $this->assertEquals($expected, $actual);
     }
-
     /**
-     * 3) Test trường hợp cộng 1 số âm 1 số dương
+     * Test case Sum a Positive and a Negative Number
      */
-    public function testNegaPosNumbers()
+    public function testSumPosiAndNegaNumber()
     {
         $userModel = new UserModel();
         $a = -1;
@@ -51,74 +49,70 @@ class UserModelTest extends TestCase
     }
 
     /**
-     * 4) Test trường hợp cộng 2 số thực dương
+     * Test case Sum Float Positive Number
      */
-    public function testPositiveRealNumbers()
+    public function testSumFloatPositiveNumber()
     {
         $userModel = new UserModel();
-        $a = 1.1;
-        $b = 2.1;
-        $expected = 3.2;
+        $a = 1.3;
+        $b = 2.4;
+        $expected = 3.7;
 
         $actual = $userModel->sumb($a, $b);
 
         $this->assertEquals($expected, $actual);
     }
-
     /**
-     * 5) Test trường hợp cộng 2 số thực âm
+     * Test case Sum Negative Number
      */
-    public function testNegativeRealNumbers()
+    public function testSumFloatNegativeNumber()
     {
         $userModel = new UserModel();
-        $a = -1.1;
-        $b = -2.1;
-        $expected = -3.2;
+        $a = -2.4;
+        $b = -3.5;
+        $expected = -5.9;
 
         $actual = $userModel->sumb($a, $b);
 
         $this->assertEquals($expected, $actual);
     }
-
     /**
-     * 6) Test trường hợp cộng 1 số thực âm và 1 số thực dương
+     * Test case Sum a Positive and a Negative Number
      */
-    public function testNegaPosRealNumbers()
+    public function testSumFloatPosiAndNegaNumber()
     {
         $userModel = new UserModel();
-        $a = -1.1;
-        $b = 2.1;
-        $expected = 1;
+        $a = -1.3;
+        $b = 2.4;
+        $expected = 1.1;
 
         $actual = $userModel->sumb($a, $b);
 
         $this->assertEquals($expected, $actual);
     }
-
     /**
-     * 7) Test trường hợp cộng chuỗi  và số
+     * Test case Sum Number and String
      */
-    public function testStringsNumbers()
+    public function testSumNumberAndString()
     {
         $userModel = new UserModel();
-        $a = "Lap";
-        $b = 2.1;
-        $expected = "test error";
+        $a = 'abc';
+        $b = 2.4;
+        $expected = 'error';
 
         $actual = $userModel->sumb($a, $b);
 
         $this->assertEquals($expected, $actual);
     }
-
     /**
-     * 8) Test trường hợp cộng chuỗi và chuỗi
+     * Test case Sum String and String
      */
-    public function testStringsStrings()
+    public function testSumStringAndString()
     {
         $userModel = new UserModel();
-        $a = "Tran Van";
-        $b = "Lap";
-        $expected = "test error";
+        $a = 'abc';
+        $b = 'xyz';
+        $expected = 'error';
 
         $actual = $userModel->sumb($a, $b);
 
