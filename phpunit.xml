@@ -8,12 +8,8 @@
     <testsuites>
         <testsuite name="SqlWsContractImport">
             <file>./Tests/UserModelTest.php</file>
-        </testsuite>
-<<<<<<< HEAD
-    </testsuites>
-=======
+        </testsuite>=
     </testsuites>   
->>>>>>> 1-php-202109/2-groups/10-J/master-phpunit
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./models</directory>
