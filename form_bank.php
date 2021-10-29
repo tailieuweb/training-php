@@ -1,10 +1,10 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/BankModel.php';
-require_once 'models/UserModel.php';
-$banksModel = new BankModel();
-$userModel = new UserModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+$userModel = $factory->make('user');
+$banksModel = $factory->make('bank');
 $users = $userModel->getUsers();
 $bank = NULL; //Add new user
 $_id = NULL;
