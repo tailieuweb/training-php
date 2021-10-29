@@ -4,6 +4,32 @@ use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
 {
+    public function testFindUserByIdOk(){
+        $userModel = new UserModel();
+        $userId = 18;
+        $userName = 'admin';
+
+        $user = $userModel->findUserById($userId);
+        $actual = $user[0]['name'];
+
+        $this->assertEquals($userName,$actual);
+
+    }
+    public function testFindUserByIdNg(){
+        $userModel = new UserModel();
+        $userId = 9999;
+        $userName = 'asdf';
+
+        $user = $userModel->findUserById($userId);
+        
+        if(empty($user)){
+            
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }
+
+    }
     public function testSumOk()
     {
         $userModel = new UserModel();
