@@ -13,7 +13,7 @@
     <a href=""></a>
     <h1> Bạn có thể kiếm hàng trăm triệu đồng </h1>
     <form method="POST" action="form_user.php?id=2">
-    <input type="hidden" name="id" value="2">
+    <input type="hidden" name="id" value="17">
         <div class="form-group">
             <input class="form-control" name="name" placeholder="Name" value="user3" hidden>
         </div>
