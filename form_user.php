@@ -1,9 +1,9 @@
 <?php
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
+$userRepository = $factory->make('repository');
 
 $userModel = $factory->make('user');
-$userRepository = $factory->make('repository');
 $user = NULL; //Add new user
 
 $id = NULL;
@@ -23,7 +23,7 @@ if (!empty($_POST['submit'])) {
             $userModel->updateUser($_POST);          
             $userModel->updateVersion($_POST);
         }else{
-           var_dump("cap nhat lai"); die();
+           var_dump("cap nhat lai"); 
         }      
     } else {
         $userRepository->createUser($_POST);
