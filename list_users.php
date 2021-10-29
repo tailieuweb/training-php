@@ -1,25 +1,30 @@
-<!-- <?php
-        // Start the session
-        session_start();
+<?php
+// Start the session
+session_start();
 
-        require_once 'models/FactoryPattern.php';
-        $factory = new FactoryPattern();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
 
-        $userModel = $factory->make('user');
+$userModel = $factory->make('user');
 
-        $params = [];
-        if (!empty($_GET['keyword'])) {
-            $params['keyword'] = $_GET['keyword'];
-        }
+$params = [];
+if (!empty($_GET['keyword'])) {
+    $params['keyword'] = $_GET['keyword'];
+}
 
-        $users = $userModel->getUsers($params);
-        ?> -->
+$users = $userModel->getUsers($params);
+
+$token = md5(rand(0, 7777777) . "TEAMJ");
+
+
+?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Home</title>
     <?php include 'views/meta.php' ?>
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
@@ -43,26 +48,31 @@
                 <tbody>
                     <?php foreach ($users as $user) { ?>
                         <tr>
-                            <th scope="row"><?php echo strip_tags($user['id']) ?></th>
+                            <th scope="row"><?php echo $user['id'] ?></th>
                             <td>
-                                <?php echo strip_tags($user['name']) ?>
+                                <?php echo $user['name'] ?>
                             </td>
                             <td>
-                                <?php echo strip_tags($user['fullname']) ?>
+                                <?php echo $user['fullname'] ?>
                             </td>
                             <td>
-                                <?php echo strip_tags($user['type']) ?>
+                                <?php echo $user['type'] ?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo strip_tags(md5($user['id'] . 'TeamJ-TDC')) ?>">
+                                <a href="form_user.php?id=<?php echo md5($user['id'] . 'TeamJ-TDC') ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo strip_tags(md5($user['id'] . 'TeamJ-TDC')) ?>">
+                                <a href="view_user.php?id=<?php echo md5($user['id'] . 'TeamJ-TDC') ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo strip_tags(md5($user['id'] . 'TeamJ-TDC')) ?>">
+
+                                <a href="delete_user.php?id=<?php echo md5($user['id'] . 'TeamJ-TDC') ?>& token=<?php echo $token?>" >
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
+                                    <?php
+                                    $_SESSION['_token'] = $token;
+                                    ?>
                                 </a>
+
                             </td>
                         </tr>
                     <?php } ?>
@@ -74,5 +84,13 @@
             </div>
         <?php } ?>
     </div>
+    <script>
+        function confirmDelete(delUrl) {
+            if (confirm("Are you sure you want to delete")) {
+                document.location = delUrl;
+            }
+        }
+    </script>
 </body>
+
 </html>
