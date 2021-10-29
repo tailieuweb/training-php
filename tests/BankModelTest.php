@@ -12,7 +12,6 @@ class BankModelTest extends TestCase{
             'cost' => 2000
         ); 
         $actual = $bankModel->insertBank($bank);
-       // var_dump($actual);die();
         if($actual == true){
             $this->assertTrue(true);
         }else{
@@ -30,7 +29,6 @@ class BankModelTest extends TestCase{
             'cost' => 2000
         ); 
         $actual = $bankModel->updateBank($bank);
-      //  var_dump($actual);die();
         if($actual == true){
             $this->assertTrue(true);
         }else{
@@ -38,22 +36,21 @@ class BankModelTest extends TestCase{
         }      
     }
     /**
-     * Test case nhập user id không phải là kiểu int
+     * Test case nhập user id và cost không phải là kiểu int
      */
     public function testUpdateBankNg(){
         $bankModel = new BankModel();
         $bank = array(
             'id' => 23,
             'user_id' => 'm',
-            'cost' => 5000
-        ); 
-        $actual = $bankModel->updateBank($bank);
-        $actualBank = $bankModel->findBankById($bank['id']);
-        $actualId = $actualBank[0]["user_id"];
-        if($actual == true && $actualId == $bank['user_id']){
+            'cost' => 7000
+        );  $bankModel->updateBank($bank);
+        if(is_numeric($bank['user_id']) && is_numeric($bank['cost'])){
+           
             $this->assertTrue(false);
         }else{
             $this->assertTrue(true);
         }   
     }
+
 }
