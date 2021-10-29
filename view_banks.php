@@ -1,22 +1,30 @@
 <?php
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+// require_once 'models/BankModel.php';
+// $bankModel = new BankModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+
+$bankModel = $factory->make('bank');
+
+$params = [];
+
+$banks = $bankModel->getBanks($params);
 
 $user = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+    $user = $bankModel->findUserById($id);//Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
-        $userModel->updateUser($_POST);
+        $bankModel->updateUser($_POST);
     } else {
-        $userModel->insertUser($_POST);
+        $bankModel->insertUser($_POST);
     }
     header('location: list_users.php');
 }
@@ -41,6 +49,10 @@ if (!empty($_POST['submit'])) {
             <div class="form-group">
                 <label for="name">Name</label>
                 <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
+            </div>
+            <div class="form-group">
+                <label for="cost">Cost</label>
+                <span><?php if (!empty($user[0]['name'])) echo $banks[0]['cost'] ?></span>
             </div>
             <div class="form-group">
                 <label for="password">Fullname</label>

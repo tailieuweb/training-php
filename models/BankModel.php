@@ -1,71 +1,62 @@
 <?php
 
+use function PHPSTORM_META\type;
+
 require_once 'BaseModel.php';
 
-class BankModel extends BaseModel
-{
-    public static function getInstance()
-    {
-        if(self::$_instance !== null){
-            return self::$_instance;
-        }
-        self::$_instance = new self();
-        return self::$_instance;
+class BankModel extends BaseModel {
+
+    public function findBankById($id) {
+        $sql = 'SELECT * FROM banks WHERE id = '.$id;
+        $bank = $this->select($sql);
+
+        return $bank;
     }
-    
-    public function findBankById($id)
-    {
-        substr($id, 4,1);
-        
-        $sql = 'SELECT * FROM bank WHERE id = ' . substr($id, 4,1);
-        $banks = $this->select($sql);
-        //var_dump($banks);
-        return $banks;
-    }
+
+    // public function findUser($keyword) {
+    //     $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
+    //     $user = $this->select($sql);
+
+    //     return $user;
+    // }
+
+    // /**
+    //  * Authentication user
+    //  * @param $userName
+    //  * @param $password
+    //  * @return array
+    //  */
+    // public function auth($userName, $password) {
+    //     $md5Password = md5($password);
+    //     $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+
+    //     $user = $this->select($sql);
+    //     return $user;
+    // }
 
     /**
-     * Search banks
-     * @param array $params
-     * @return array
-     */
-    public function getBanks($params = [])
-    {
-        //Keyword
-        if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM bank WHERE name LIKE "%' . $params['keyword'] . '%"';
+    //  * Delete user by id
+    //  * @param $id
+    //  * @return mixed
+    //  */
+     public function deleteBankById($id) {
+         $sql = 'DELETE FROM banks WHERE id = '.$id;
+         return $this->delete($sql);
 
-            //Keep this line to use Sql Injection
-            //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
-            $banks = self::$_connection->multi_query($sql);
-        } else {
-            $sql = 'SELECT * FROM bank';
-            $banks = $this->select($sql);
-        }
+     }
 
-        return $banks;
-    }
-
-    public function insertUser_bank($input) {
-        var_dump($input);
-        $sql = "INSERT INTO `bank` (`name`, `fullname`, `sdt`, `email`, `stk`) VALUES (" .
-            "'" . $input['name'] . "', '".$input['fullname']."','".$input['sdt']."', '".$input['email']."','".$input['stk']."')";
-
-        $user = $this->insert_bank($sql);
-        return $user;
-    }
-    protected function insert_bank($sql) {
-        $result = $this->query($sql);
-        return $result;
-    }
-
-    public function updateUser_bank($input) {
-        $sql = 'UPDATE bank SET 
-                 name = "' . $input['name'] .'", 
-                 fullname = "'. $input['fullname'].'",
-                 email = "' . $input['email'] .'", 
-                 sdt = "' . $input['sdt'] .'", 
-                 stk="'. $input['stk'].'"
+    // /**
+    //  * Update user
+    //  * @param $input
+    //  * @return mixed
+    //  */
+    public function updateBank($input) {
+        $sql = 'UPDATE banks SET 
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
+                 password="'. md5($input['password']) .'",
+                 user_id="'. $input['user_id'] .'",
+                 cost="'. $input['cost'] .'",
+                 type = "' . $input['type'] .'",
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
 
@@ -73,4 +64,38 @@ class BankModel extends BaseModel
     }
 
 
+    // /**
+    //  * Insert user
+    //  * @param $input
+    //  * @return mixed
+    //  */
+    public function insertUser($input) {
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" . "'" . $input['name'] . "', '".md5($input['password'])."')";
+
+        $user = $this->insert($sql);
+
+        return $user;
+    }
+
+    /**
+     * Search users
+     * @param array $params
+     * @return array
+     */
+    public function getBanks($params = []) {
+        //Keyword
+        if (!empty($params['keyword'])) {
+            $sql = 'SELECT * FROM `banks` , `users` WHERE `users`.`id` = `banks`.`user_id` AND name LIKE "%' . $params['keyword'] .'%"';
+
+            //Keep this line to use Sql Injection
+            //Don't change
+            //Example keyword: abcef%";TRUNCATE banks;##
+            $banks = self::$_connection->multi_query($sql);
+        } else {
+            $sql = 'SELECT * FROM `banks` , `users` WHERE `users`.`id` = `banks`.`user_id`';
+            $banks = $this->select($sql);
+        }
+
+        return $banks;
+    }
 }
