@@ -1,13 +1,13 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-class UserModelTest extends TestCase
+class BankModelTest extends TestCase
 {
 
     /**
      * Test case Okie
      */
-    public function testSumOk()
+    public function testBankOk()
     {
        $userModel = new UserModel();
        $a = 1;

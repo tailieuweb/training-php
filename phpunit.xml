@@ -8,7 +8,7 @@
     <testsuites>
         <testsuite name="SqlWsContractImport">
             <file>./Tests/UserModelTest.php</file>
-        </testsuite>=
+        </testsuite>
     </testsuites>   
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
