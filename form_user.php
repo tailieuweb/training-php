@@ -2,6 +2,8 @@
 // Start the session
 session_start();
 require_once 'DesignPattern/FactoryPattern.php';
+require_once 'DesignPattern/RepsositoryPattern.php';
+$repsository = new RepsositoryPattern();
 $factory = new FactoryPattern();
 $userModel = $factory->make('user');
 
@@ -31,12 +33,12 @@ if (!empty($_POST['submit'])) {
             
             header('location: list_users.php');
         }
-        else{ 
+        else{
         echo '<script>alert("Version đã thay đổi, vui lòng làm mới trang!");</script>';
             header('Refresh:3');
         }
     } else {
-        $userModel->insertUser($_POST);
+        $repsository->createUser($_POST);
         header('location: list_users.php');
 }
 }
