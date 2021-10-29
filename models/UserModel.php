@@ -95,13 +95,25 @@ class UserModel extends BaseModel {
 
         return $users;
     }
-
+    /**
+     * Convert to number
+     * @param $input
+     */
+    public function convertNumber($input):int {
+        if (is_string($input)) {
+            $input = (int)$input;
+        }
+        return $input;
+    }
     /**
      * For testing
      * @param $a
      * @param $b
      */
-    public function sumb($a, $b) {
+    public function sumb(int $a, int $b) {
+        $this->convertNumber($a);
+        $this->convertNumber($b);
         return $a + $b;
     }
+   
 }
