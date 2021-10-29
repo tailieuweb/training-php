@@ -36,4 +36,88 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
+    /**
+     * Test case Sum Duong
+     */
+    public function testSumDuong()
+    {
+       $userModel = new UserModel();
+       $a = 1;
+       $b = 2;
+       $expected = 3;
+
+       $actual = $userModel->sumb($a,$b);
+
+       $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test case Sum Am
+     */
+    public function testSumAm()
+    {
+       $userModel = new UserModel();
+       $a = -1;
+       $b = -2;
+       $expected = -3;
+
+       $actual = $userModel->sumb($a,$b);
+
+       $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test case Sum Am Duong
+     */
+    public function testSumAmDuong()
+    {
+       $userModel = new UserModel();
+       $a = -1;
+       $b = 2;
+       $expected = 1;
+
+       $actual = $userModel->sumb($a,$b);
+
+       $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test case Sum So Thuc
+     */
+    public function testSumSoThuc()
+    {
+       $userModel = new UserModel();
+       $a = 1;
+       $b = 2;
+       $expected = 3;
+
+       $actual = $userModel->sumb($a,$b);
+
+       $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test case Sum So va chuoi
+     */
+    public function testSumSoVaChuoi()
+    {
+       $userModel = new UserModel();
+       $a = 1;
+       $b = (int)"a";
+       $expected = (int)"1a";
+
+       $actual = $userModel->sumb($a,$b);
+
+       $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test case Sum chuoi va chuoi
+     */
+    public function testSumChuoiVaChuoi()
+    {
+       $userModel = new UserModel();
+       $a = (int)"b";
+       $b = (int)"a";
+       $expected = (int)"ab";
+
+       $actual = $userModel->sumb($a,$b);
+
+       $this->assertEquals($expected, $actual);
+    }
 }
