@@ -10,4 +10,3 @@
   - [x] 2) Test trường hợp số thực: tương tự như trên (1, 2, 3)
   - [x] 3) Test trường hợp cộng chuỗi  và số
   - [x] 4) Test trường hợp cộng chuỗi và chuỗi
-
