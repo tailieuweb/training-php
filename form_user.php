@@ -5,21 +5,11 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-<<<<<<< HEAD
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
     $user = $userModel->findUserById($_id);//Update existing user
-=======
-$id = NULL;
-$keyCode = "aoma87939dadasddsd";
-
-if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-    $user = $userModel->findUserById($id); //Update existing user
-    
->>>>>>> origin/2-php-202109/2-groups/2-B/1-2-Chung-phpunit
 }
 
 
