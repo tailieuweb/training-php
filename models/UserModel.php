@@ -107,9 +107,4 @@ class UserModel extends BaseModel {
         return $a + $b;
     }
 
-    public function sumTest(int $a = 10, int $b = 0): int
-    {
-        return $a + $b;
-    }
-
 }
