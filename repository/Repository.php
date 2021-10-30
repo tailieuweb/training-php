@@ -1,4 +1,6 @@
 <?php
+require_once "./models/UserModel.php";
+require_once "./models/BankModel.php";
 class Repository{
     /*
     Tạo mới user đồng thời tặng 500 vào bank
