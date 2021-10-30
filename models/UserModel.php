@@ -100,6 +100,12 @@ class UserModel extends BaseModel {
      * @param $b
      */
     public function sumb($a, $b) {
+        if(is_string($a)){
+            return 'Not invalid';
+        }
+        if(is_string($b)){
+            return 'Not invalid';
+        }
         return $a + $b;
     }
 }
