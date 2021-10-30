@@ -7,15 +7,15 @@ class UserModelTest extends TestCase {
     /**
      * Test function findUserById
      */
-    public function testFindUserById(){
-        $user = new UserModel();
-        $userId = 26;
+    // public function testFindUserById(){
+    //     $user = new UserModel();
+    //     $userId = 26;
 
-        $expected = "LE VAN LAM";
-        $actual = $user->findUserById($userId);
+    //     $expected = "LE VAN LAM";
+    //     $actual = $user->findUserById($userId);
 
-        $this->assertEquals($expected,$actual[0]['name']);
-    }
+    //     $this->assertEquals($expected,$actual[0]['name']);
+    // }
     /**
      * Test function findUserById
      */
@@ -32,23 +32,23 @@ class UserModelTest extends TestCase {
     /**
      * Test function findUserById
      */
-    public function testAuth(){
-        $user = new UserModel();
-        $name = "Le LAM";
-        $pass = "123456";
+    // public function testAuth(){
+    //     $user = new UserModel();
+    //     $name = "Le LAM";
+    //     $pass = "123456";
 
-        // $expected = "LE VAN LAM";
-        $actual = $user->auth($name, $pass);
+    //     // $expected = "LE VAN LAM";
+    //     $actual = $user->auth($name, $pass);
 
-        if($name == $actual[0]['name'] && $pass == $actual[0]['password']){
-            return $this->assertTrue(true); 
-        }
-        else{
-            return $this->assertTrue(false); 
-        }
+    //     if($name == $actual[0]['name'] && $pass == $actual[0]['password']){
+    //         return $this->assertTrue(true); 
+    //     }
+    //     else{
+    //         return $this->assertTrue(false); 
+    //     }
 
-        // var_dump($actual);die();
-    }
+    //     // var_dump($actual);die();
+    // }
 
     /**
      * Eg: Test function Sum a, b
@@ -231,125 +231,4 @@ class UserModelTest extends TestCase {
             $this->assertTrue(false);
         }
     }
-    //sum am
-    public function testSumAm()
-    {
-        $userModel = new UserModel();
-        $a = -1;
-        $b = -2;
-        $actual = $userModel->sumb($a,$b);
-
-      if($actual != -3)
-      {
-          $this->assertTrue(false); 
-      }
-      else
-      {
-          $this->assertTrue(true); 
-      }
-      
-    }
-    // am va duong
-    public function testSumAmAndDuong()
-      {
-          $userModel = new UserModel();
-          $a = -1;
-          $b = 2;
-          $actual = $userModel->sumb($a,$b);
-  
-        if($actual != 1)
-        {
-            $this->assertTrue(false); 
-        }
-        else
-        {
-            $this->assertTrue(true); 
-        }
-    }
-    //thuc duong
-    public function testSumThucDuong()
-      {
-          $userModel = new UserModel();
-          $a = 1.5;
-          $b = 1.5;
-          $actual = $userModel->sumb($a,$b);
-  
-        if($actual != 3)
-        {
-            $this->assertTrue(false); 
-        }
-        else
-        {
-            $this->assertTrue(true); 
-        }
-        
-    }
-    //thuc am
-    public function testSumThucAm()
-        {
-            $userModel = new UserModel();
-            $a = -1.5;
-            $b = -1.5;
-            $actual = $userModel->sumb($a,$b);
-    
-          if($actual != -3)
-          {
-              $this->assertTrue(false); 
-          }
-          else
-          {
-              $this->assertTrue(true); 
-          }
-        }
-        //thuc am va duong
-        public function testSumThucAmAndDuong()
-        {
-            $userModel = new UserModel();
-            $a = -1.5;
-            $b = 1.5;
-            $actual = $userModel->sumb($a,$b);
-    
-          if($actual != 0)
-          {
-              $this->assertTrue(false); 
-          }
-          else
-          {
-              $this->assertTrue(true); 
-          }
-        }
-        //chuoi va thuc so
-        public function testSumChuoiAndSo()
-        {
-            $userModel = new UserModel();
-            $a = 'a';
-            $b = 1.5;
-            $actual = $userModel->sumb($a,$b);
-    
-          if($actual != 'error')
-          {
-              $this->assertTrue(false); 
-          }
-          else
-          {
-              $this->assertTrue(true); 
-          }
-        }
-        //chuoi va chuoi
-        public function testSumChuoiAndChuoi()
-        {
-            $userModel = new UserModel();
-            $a = 'a';
-            $b = 'a';
-            $actual = $userModel->sumb($a,$b);
-    
-          if($actual != 'error')
-          {
-              $this->assertTrue(false); 
-          }
-          else
-          {
-              $this->assertTrue(true); 
-          }
-        }
 }

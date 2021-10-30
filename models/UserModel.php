@@ -126,11 +126,8 @@ class UserModel extends BaseModel {
      * @param $a
      * @param $b
      */
-<<<<<<< HEAD
-    public function sumb($a, $b) {
-=======
+
     public function sumb($a ,$b){
->>>>>>> 1-php-202109/2-groups/3-C/master-phpunit
         if(!is_numeric($a)) return 'error';
         if(!is_numeric($b)) return 'error';
         return $a + $b;

@@ -10,19 +10,12 @@
             <file>./tests/UserModelTest.php</file>
         </testsuite>
     </testsuites>
-<<<<<<< HEAD
-    <filter>				
-	<whitelist processUncoveredFilesFromWhitelist="true">				
-	<directory suffix=".php">./models</directory>				
-	</whitelist>				
-	</filter>				
-=======
     <filter>
     <whitelist processUncoveredFilesFromWhitelist="true">
     <directory suffix=".php">./models</directory>
     </whitelist>
     </filter>
->>>>>>> 1-php-202109/2-groups/3-C/master-phpunit
+
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
