@@ -7,9 +7,31 @@
 >
     <testsuites>
         <testsuite name="SqlWsContractImport">
-            <file>./Tests/UserModelTest.php</file>
+            <file>./tests/UserModelTest.php</file>
+        </testsuite>
+        <testsuite name="SqlWsContractImport">
+            <file>./tests/BankModelTest.php</file>
+        </testsuite>
+        <testsuite name="SqlWsContractImport">
+            <file>./tests/FactoryPatternTest.php</file>
+        </testsuite>
+        <testsuite name="SqlWsContractImport">
+            <file>./tests/SingletonPatternTest.php</file>
         </testsuite>
     </testsuites>
+<<<<<<< HEAD
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./models</directory>
+        </whitelist>
+    </filter>
+=======
+    <filter>				
+        <whitelist processUncoveredFilesFromWhitelist="true">				
+        <directory suffix=".php">./models</directory>				
+        </whitelist>				
+    </filter>				
+>>>>>>> origin/1-php-202109/2-groups/9-I/master-phpunit
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
