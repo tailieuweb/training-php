@@ -136,6 +136,7 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
+<<<<<<< HEAD
     public function TestDeleteUserById() {
         $userModel = new UserModel();
         $id=1;
@@ -145,5 +146,67 @@ class UserModelTest extends TestCase
         } else {
             $this->assertTrue(true);
         }
+=======
+
+    /**
+     * Test case testUpdateUserOk
+     */
+    public function testUpdateUserOk()
+    {
+        $userModel = new UserModel();
+        $id = -1;
+        $userModel->deleteUserById($id);
+        $userModel->insertUserWithId($id, "testName1", "testFullName", "testEmail", "testType", "testPassword");
+        $user = $userModel->findUserById($id);
+        $userVersion = $user[0]['version'];
+        $input = [
+            "id" => $id,
+            "name" => "nameUpdate",
+            "fullname" => "fullnameUpdate",
+            "email" => "emailUpdate",
+            "type" => "typeUpdate",
+            "password" => "passwordUpdate",
+            "version" => $userVersion
+        ];
+        $userUpdate = $userModel->updateUser($input);
+        $check = false;
+        if (
+            $userUpdate->isSuccess == true &&
+            $userUpdate->data == "Đã update thành công" &&
+            $userUpdate->error == NULL
+        ) {
+            $check = true;
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
+    }
+
+    /**
+     * Test case Not good
+     */
+    public function testUpdateUserNg()
+    {
+        $userModel = new UserModel();
+        $id = -111;
+        $input = [
+            "id" => $id,
+            "name" => "nameUpdate",
+            "fullname" => "fullnameUpdate",
+            "email" => "emailUpdate",
+            "type" => "typeUpdate",
+            "password" => "passwordUpdate",
+            "version" => 1
+        ];
+        $userUpdate = $userModel->updateUser($input);
+        if (
+            $userUpdate->isSuccess == false &&
+            $userUpdate->data == NULL &&
+            $userUpdate->error == "Không tìm thấy id của user"
+        ) {
+            $check = true;
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
+>>>>>>> 1-php-202109/2-groups/10-J/master-phpunit
     }
 }
