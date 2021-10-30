@@ -5,8 +5,7 @@ abstract class BaseModel {
     // Database connection
 
     protected static $_connection;
-    // Life of session, 3600 = 1h
-    private $_csrf_time_live = 3600;
+    
     private $_csrf_value = '';
 
     public function __construct() {
@@ -14,11 +13,11 @@ abstract class BaseModel {
         if (!isset(self::$_connection)) {
             self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
             // Create token
-            $token = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+            // $token = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
 
-            // Save token in 1h
-            setcookie($token, time() + $this->_csrf_time_live);
-            $this->_csrf_value = $token;
+
+            // setcookie($token, time() + $this->_csrf_time_live);
+            // $this->_csrf_value = $token;
 
             if (self::$_connection->connect_errno) {
                 printf("Connect failed");

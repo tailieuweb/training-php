@@ -20,7 +20,7 @@ if (!empty($_GET['id'])) {
 if (!empty($_POST['submit'])) {
 
     if (!empty($_id)) {
-        // $bankModel->insertBank($_POST);
+        $bankModel->updateBank($_POST);
     } else {
         $bankModel->insertBank($_POST);
     }
@@ -50,9 +50,9 @@ if (!empty($_POST['submit'])) {
                         <select name="id" class="form-control">
                             <?php
                             foreach($users as $value) {
-                                if($value['id'] == $bank[0]['bank_id']){
+                                if($value['id'] == $bank[0]['user_id']){
                                 ?>
-                                <option selected value="<?php if (!empty($value['id'])) echo $value['id'] ?>"><?php if (!empty($value['name'])) echo $value['user_id'] ?></option>
+                                <option selected value="<?php if (!empty($value['id'])) echo $value['id'] ?>"><?php if (!empty($value['name'])) echo $value['name'] ?></option>
                             <?php } else{ ?>
                                 <option value="<?php if (!empty($value['id'])) echo $value['id'] ?>"><?php if (!empty($value['name'])) echo $value['name'] ?></option>
                              <?php   }
