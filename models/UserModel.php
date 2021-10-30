@@ -103,7 +103,7 @@ class UserModel extends BaseModel {
 
         return $users;
     }
-    public function getTypes($params = []) {
+    public function getTypes() {
         $sql = 'SELECT * FROM types';
         $types = $this->select($sql);
 

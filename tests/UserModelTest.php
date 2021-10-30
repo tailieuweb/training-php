@@ -50,6 +50,99 @@ class UserModelTest extends TestCase {
         // var_dump($actual);die();
     }
 
+
+    //test func deleteUserById
+
+    public function testDeleteUserByIdNg()
+    {
+        $userModel = new UserModel();
+        $id = 8;
+        $token_false = 'JFASJDBAJS566';
+       
+        $actual = $userModel->deleteUserById($id,$token_false);
+       
+        // $this->assertEquals($userModel->findUserById($id),$actual);
+        if( $actual == NULL)
+        {
+            $this->assertTrue(true); 
+        }
+        else{
+            $this->assertTrue(false); 
+        }
+    }
+
+    
+    //test func updateUser
+
+    // public function testUpdateUserOk()
+    // {
+    //     $userModel = new UserModel();
+    //     $input['id'] = 8;
+    //     $input['name'] = 'phpunit_update';
+        
+    //     $actual = $userModel->updateUser($input['name'], $input['id']);
+    //     var_dump($actual).die();
+       
+    // }
+
+     
+    //test func insertUser
+
+    public function testinsertUserOk()
+    {
+        $userModel = new UserModel();
+        $input = [];
+        $input['name'] = 'phpunit insert';
+        $input['fullname'] = "phpunit insert";
+        $input['email'] = "phpunitinsert@gmail.com";
+        $input['type'] = 1;
+        $input['password'] = "phpunitinsert";
+      
+        $actual = $userModel->insertUser( $input);
+        if($actual != true)
+        {
+            $this->assertTrue(false); 
+        }
+        else
+        {
+            $this->assertTrue(true); 
+        }
+        
+       
+    }
+    //test func getUser
+
+    public function testGetUserOk()
+    {
+        $userModel = new UserModel();
+    
+        $count_array = 6;
+        $actual = $userModel->getUsers();
+        
+        $this->assertEquals($count_array,count($actual));
+    }
+    public function testGetUserbyKeyWordOk()
+    {
+        $userModel = new UserModel();
+        $params= [];
+        $params['keyword'] = 'aa';
+        $count_array = 1;
+        $actual = $userModel->getUsers( $params);
+         
+        $this->assertEquals($count_array,count($actual));
+    }
+
+     //test func getTypes
+
+     public function testGetTypeOk()
+     {
+         $userModel = new UserModel();
+       
+         $count_array = 3;
+         $actual = $userModel->getTypes();
+         $this->assertEquals($count_array,count($actual));
+     }
+
     /**
      * Eg: Test function Sum a, b
      * Test characters
