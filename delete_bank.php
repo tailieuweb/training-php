@@ -1,8 +1,9 @@
 <?php
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
 
-$user = NULL; //Add new user
+$bankModel = $factory->make('bank');
+
 $id = NULL;
 
 if (!empty($_GET['id'])) {
@@ -20,7 +21,6 @@ if (!empty($_GET['id'])) {
 
     //Replace last number with null
     $id = str_replace($end, "", $id);
-    $userModel->deleteUserById($id);//Delete existing user
+    $bankModel->deleteBalanceById($id);
 }
-header('location: list_users.php');
-?>
+header('location: index.php');
