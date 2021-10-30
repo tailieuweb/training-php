@@ -19,15 +19,34 @@ class UserModelTest extends TestCase {
     /**
      * Test function findUserById
      */
-    // public function testFindUser(){
-    //     $user = new UserModel();
-    //     $keys = "a";
+    public function testFindUserByIdNg(){
+        $user = new UserModel();
+        $userId = 1;
 
-    //     // $expected = "LE VAN LAM";
-    //     $actual = $user->findUser($keys);
+        $actual = $user->findUserById($userId);
 
-    //     // var_dump($actual);die();
-    // }
+        // var_dump($actual);die();
+        if(empty($actual)){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+        // $this->assertEquals($expected,$actual[0]['name']);
+    }
+    /**
+     * Test function findUser
+     */
+    public function testFindUser(){
+        $user = new UserModel();
+        $keys = "a";
+        // $expected = "LE VAN LAM";
+        $actual = $user->findUser($keys);
+
+        if(!empty($actual)){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+        // var_dump($actual);die();
+    }
 
     /**
      * Test function findUserById
@@ -35,7 +54,7 @@ class UserModelTest extends TestCase {
     public function testAuth(){
         $user = new UserModel();
         $name = "Le LAM";
-        $pass = "123456";
+        $pass = "12345";
 
         // $expected = "LE VAN LAM";
         $actual = $user->auth($name, $pass);
@@ -46,9 +65,104 @@ class UserModelTest extends TestCase {
         else{
             return $this->assertTrue(false); 
         }
+    }
+
+    /**
+     * Test function create token
+     */
+    public function testCreateToken(){
+        $user = new UserModel();
+        $name = "Le LAM";
+        $pass = "12345";
+
+        // $expected = "LE VAN LAM";
+        $actual = $user->createToken();
+        if($actual == ''){
+            return $this->assertTrue(true);
+        }
+        else{
+            return $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function get instance
+     */
+    public function testGetInstance(){
+        $user = new UserModel();
+        $actual = $user->getInstance();
+
+        if($user == $actual){
+            return $this->assertTrue(true); 
+        }
+        return $this->assertTrue(false); 
+    }
+    public function testGetInstanceChange(){
+        $user = new UserModel();
+        //Create user 2
+        $user2 = new UserModel();
+        $input = [];
+        $input['id'] = 11;
+        $input['name'] = "Test update";
+        $input['fullname'] = "Test update change";
+        $input['email'] = "testUpdate@gmail.com";
+        $input['type'] = 3;
+        $input['password'] = "12345";
+        $update = $user->updateUser($input);
+        
+        $actual = $user2->getInstance();
+        if($user == $actual){
+            return $this->assertTrue(true); 
+        }
+        return $this->assertTrue(false); 
+        // var_dump($user);die();
+    }
+
+    /**
+     * Test get type user right
+     */
+    public function testUpdateUser(){
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = 11;
+        $input['name'] = "Test update";
+        $input['fullname'] = "Test update ok";
+        $input['email'] = "testUpdate@gmail.com";
+        $input['type'] = 3;
+        $input['password'] = "12345";
+        $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
+        if($actual == true){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
     }
+    /**
+     * Test get type user wrong
+     */
+    public function testUpdateUserNg(){
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = 1;//id user not exits
+        $input['name'] = "Test update";
+        $input['fullname'] = "Test update wrong";
+        $input['email'] = "testUpdate@gmail.com";
+        $input['type'] = 3;
+        $input['password'] = "12345";
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        if($actual == true){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+
+
+
+
+
+
 
 
     //test func deleteUserById
