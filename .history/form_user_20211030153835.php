@@ -1,27 +1,20 @@
 <?php
-// Start the session
-session_start();
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$_id = NULL;
+$id = NULL;
 
 if (!empty($_GET['id'])) {
-<<<<<<< HEAD
-    $_id = $_GET['id'];
-    $user = $userModel->findUserById($_id);//Update existing user
-=======
     $id = $_GET['id'];
     $user = $userModel->findUserById($id); //Update existing user
     
->>>>>>> 2-php-202109/2-groups/2-B/1-2-Chung-phpunit
 }
 
 
 if (!empty($_POST['submit'])) {
 
-    if (!empty($_id)) {
+    if (!empty($id)) {
         $userModel->updateUser($_POST);
     } else {
         $userModel->insertUser($_POST);
@@ -41,14 +34,11 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
-            <?php if ($user || !isset($_id)) { ?>
+            <?php if ($user || empty($id)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
                 <form method="POST">
-<<<<<<< HEAD
-                    <input type="hidden" name="id" value="<?php echo $_id ?>">
-=======
 <<<<<<< HEAD
 <<<<<<< HEAD
                     <input type="hidden" name="id" value="<?php echo $_id ?>">
@@ -59,10 +49,9 @@ if (!empty($_POST['submit'])) {
 =======
                     <input type="hidden" name="id" value="<?php echo $user[0]['id'] ?>">
 >>>>>>> origin/2-php-202109/2-groups/2-B/4-23-Thang-phpunit
->>>>>>> 2-php-202109/2-groups/2-B/1-2-Chung-phpunit
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
+                        <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>

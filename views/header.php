@@ -36,6 +36,10 @@ if(!empty($_GET['keyword'])) {
                     </div>
                     <button type="submit" class="btn btn-default">Search</button>
                 </form>
+                <ul class="nav navbar-nav">
+                    <li><a href="form_bank.php">Add new bank</a></li>
+
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
