@@ -15,6 +15,83 @@ class UserModelTest extends TestCase
         $this->assertEquals($userName,$actual);
 
     }
+    public function testFindUserByIdStr() {
+        $userModel = new UserModel();
+        
+        $id = 'asdf';
+        
+        
+        $expected = 'error';
+        $actual = $userModel->findUserById($id);
+        
+        $this->assertEquals($expected, $actual);
+        
+        }
+    public function testFindUserByIdNull() {
+        $userModel = new UserModel();
+        $id = '';
+        $expected = 'error';
+        $actual = $userModel->findUserById($id);
+            
+        $this->assertEquals($expected, $actual);
+            
+        }
+    public function testTwoString()
+    {
+        $userModel = new UserModel();
+        $a = 'a';
+        $b = 'b';
+
+        //number + string
+        //number
+        //numberstring
+
+        $expected = 'error';
+        $actual = $userModel->sumb($a, $b);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testSumNotgood()
+    {
+        $userModel = new UserModel();
+        $a = 1;
+        $b = 2;
+        
+        $actual = $userModel->sumb($a,$b);
+        
+        if ($actual != 3) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+    public function testFindUserByIdObject() {
+        $userModel = new UserModel();
+        
+        $id = new stdClass();
+        $expected = 'error';
+        $actual = $userModel->findUserById($id);
+        
+        $this->assertEquals($expected, $actual);
+        
+        }
+    public function testString()
+    {
+        $userModel = new UserModel();
+        $a = 1;
+        $b = 'a';
+
+        //number + string
+        //number
+        //numberstring
+
+        $expected = 'error';
+        $actual = $userModel->sumb($a, $b);
+
+        $this->assertEquals($expected, $actual);
+
+    }
     public function testFindUserByIdNg(){
         $userModel = new UserModel();
         $userId = 9999;
@@ -114,6 +191,7 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
+  
 
     public function testSumNegativeFloat()
     {
