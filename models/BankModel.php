@@ -2,7 +2,7 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel {
+class BankModel extends BaseModel {
 
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
@@ -37,14 +37,10 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function deleteUserById($id) {
+      
+        $sql = 'DELETE FROM users WHERE id = '.$id;
+        return $this->delete($sql);
 
-        if(is_numeric($id)){
-            $sql = 'DELETE FROM users WHERE id = '.$id;
-            return $this->delete($sql);
-        } 
-        else{
-            return false;
-        }
     }
 
 
@@ -54,15 +50,13 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function updateUser($input) { 
-         
-        $t = base64_decode($input['version']);
-        $str = substr($t,18);
-
+    public function updateUser($input) {
+      
         $temp = 'SELECT version FROM users WHERE id = '.$input['id'].'';
         $newTemp = $this->select($temp);
-        if($newTemp[0]['version'] == $str){
-            $newV = $str+1;
+        
+        if($newTemp[0]['version'] == $input['version']){
+            $newV = $input['version']+1;
              $sql = 'UPDATE users SET 
                  name = "' . $input['name'] .'", 
                  email = "'.$input['email'].'",
@@ -104,41 +98,23 @@ class UserModel extends BaseModel {
      * @param array $param
      * @return array
      */
-    public function getUsers($params = []) {
+    public function getBanks($params = []) {
         //Keyword
        
         if (!empty($params['keyword'])) {
            
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+            $banks = self::$_connection->multi_query($sql);
             
         } else {
-            $sql = 'SELECT * FROM users';
-            $users = $this->select($sql);
+            $sql = 'SELECT * FROM banks';
+            $banks = $this->select($sql);
         }
-        return $users;
+        return $banks;
        
-    }
-
-    public static function getInstance() {
-        if (self::$_instance !== null){
-            return self::$_instance;
-        }
-        self::$_instance = new self();
-        return self::$_instance;
-    }
-    /**
-     * For testing
-     * @param $a
-     * @param $b
-     */
-    public function sumb($a, $b) {
-        if(!is_numeric($a)) return "error";
-        if(!is_numeric($b)) return "error";
-        return $a + $b;
     }
 }
