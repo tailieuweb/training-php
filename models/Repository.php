@@ -60,7 +60,7 @@ class Repository
      */
     public function getBankById($id)
     {
-        return $this->userModel->getBankById($id);
+        return $this->bankModel->getBankById($id);
     }
     /**
      * Insert bank
@@ -69,7 +69,7 @@ class Repository
      */
     public function insertBank($input)
     {
-        return $this->userModel->insertBank($input);
+        return $this->bankModel->insertBank($input);
     }
     /**
      * Update user
@@ -78,7 +78,7 @@ class Repository
      */
     public function updateBank($input)
     {
-        return $this->userModel->updateBank($input);
+        return $this->bankModel->updateBank($input);
     }
     /**
      * Delete bank by id
@@ -87,7 +87,7 @@ class Repository
      */
     public function deleteBankById($id)
     {
-        return $this->userModel->deleteBankById($id);
+        return $this->bankModel->deleteBankById($id);
     }
     /**
      * Get Banks follow User Id
@@ -95,7 +95,7 @@ class Repository
      */
     public function getBanks($params = [])
     {
-        return $this->userModel->getBanks($params);
+        return $this->bankModel->getBanks($params);
     }
     public static function getInstance()
     {

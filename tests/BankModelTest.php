@@ -1,11 +1,9 @@
 
 <?php
-
 use PHPUnit\Framework\TestCase;
 
 class BankModelTest extends TestCase
 {
-
     /**
      * Test case Sum Positive Number
      */
@@ -51,4 +49,15 @@ class BankModelTest extends TestCase
     //     return $result;
     // }
 
+    // public function testDeleteBankById() {
+    //     $bankModel = new BankModel();
+    //     $id=1;
+    //     $actual = $bankModel->deleteBankById($id);
+    //     if(empty($id)==1) {
+    //         $this->assertTrue(false);
+    //     } else {
+    //         $this->assertTrue(true);
+    //     }
+    // }
 }
+
