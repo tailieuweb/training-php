@@ -33,6 +33,7 @@ $banks = $bankmodel->getBanks($params);
                         <th scope="col">ID</th>
                         <th scope="col">User ID</th>
                         <th scope="col">Cost</th>
+                        <th scope="col">Bank</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -45,6 +46,9 @@ $banks = $bankmodel->getBanks($params);
                             </td>
                             <td>
                                 <?php echo $bank['cost']?>
+                            </td>
+                            <td>
+                                <?php echo $bank['bank']?>
                             </td>
                             <td>
                                 <a href="form_bank.php?id=<?php echo $bank['id'] ?>">

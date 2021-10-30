@@ -11,7 +11,7 @@ class UserModel extends BaseModel {
         return $user;
     }
 
-    public function findUser($keyword) {
+    public function find($keyword) {
         $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
         $user = $this->select($sql);
 
@@ -93,7 +93,8 @@ class UserModel extends BaseModel {
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+            //$users = self::$_connection->multi_query($sql);
+            $users = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
