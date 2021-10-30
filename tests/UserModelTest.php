@@ -19,14 +19,29 @@ class UserModelTest extends TestCase {
     /**
      * Test function findUserById
      */
+    public function testFindUserByIdNg(){
+        $user = new UserModel();
+        $userId = 1;
+
+        $actual = $user->findUserById($userId);
+
+        // var_dump($actual);die();
+        if(empty($actual)){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+        // $this->assertEquals($expected,$actual[0]['name']);
+    }
+    /**
+     * Test function findUser
+     */
     public function testFindUser(){
         $user = new UserModel();
         $keys = "a";
-
         // $expected = "LE VAN LAM";
         $actual = $user->findUser($keys);
 
-        if(empty($actual)){
+        if(!empty($actual)){
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -74,26 +89,80 @@ class UserModelTest extends TestCase {
      */
     public function testGetInstance(){
         $user = new UserModel();
-        $temp = null;
-        // $expected = "LE VAN LAM";
         $actual = $user->getInstance();
 
-        if($temp == $actual){
-            return $this->assertTrue(false); 
+        if($user == $actual){
+            return $this->assertTrue(true); 
         }
-        return $this->assertTrue(true); 
+        return $this->assertTrue(false); 
     }
-    public function testGetInstanceNg(){
+    public function testGetInstanceChange(){
         $user = new UserModel();
-        $temp = "BaseModel";
-        // $expected = "LE VAN LAM";
-        $actual = $user->getInstance();
-
-        if($temp == $actual){
-            return $this->assertTrue(false); 
+        //Create user 2
+        $user2 = new UserModel();
+        $input = [];
+        $input['id'] = 11;
+        $input['name'] = "Test update";
+        $input['fullname'] = "Test update change";
+        $input['email'] = "testUpdate@gmail.com";
+        $input['type'] = 3;
+        $input['password'] = "12345";
+        $update = $user->updateUser($input);
+        
+        $actual = $user2->getInstance();
+        if($user == $actual){
+            return $this->assertTrue(true); 
         }
-        return $this->assertTrue(true); 
+        return $this->assertTrue(false); 
+        // var_dump($user);die();
     }
+
+    /**
+     * Test get type user right
+     */
+    public function testUpdateUser(){
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = 11;
+        $input['name'] = "Test update";
+        $input['fullname'] = "Test update ok";
+        $input['email'] = "testUpdate@gmail.com";
+        $input['type'] = 3;
+        $input['password'] = "12345";
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        if($actual == true){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    /**
+     * Test get type user wrong
+     */
+    public function testUpdateUserNg(){
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = 1;//id user not exits
+        $input['name'] = "Test update";
+        $input['fullname'] = "Test update wrong";
+        $input['email'] = "testUpdate@gmail.com";
+        $input['type'] = 3;
+        $input['password'] = "12345";
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        if($actual == true){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+
+
+
+
+
+
 
     /**
      * Eg: Test function Sum a, b
