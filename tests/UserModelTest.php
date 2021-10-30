@@ -97,7 +97,9 @@ class UserModelTest extends TestCase
        $this->assertEquals($expected, $actual);
     }
 
-    //Test function insertUser OK
+    /**
+     * Test case insertUser OK
+     */
     public function testInsertUserOk()
     {
       $userModel = new UserModel();
@@ -113,7 +115,9 @@ class UserModelTest extends TestCase
       $this->assertEquals($expected, $actual);
     }
 
-    //Test function insertUser not good
+   /**
+     * Test case insertUser Not good
+     */
     public function testInsertUserNg()
     {
       $userModel = new UserModel();
@@ -132,10 +136,38 @@ class UserModelTest extends TestCase
          $this->assertFalse(false);
       }
     }
-    
-    //Test function getInstance
-    public function testGetInstanceUser()
+
+    /**
+     * Test case  findUserById OK
+     */
+    public function testFindUserByIdOk()
     {
-        $this->assertInstanceOf('UserModel', UserModel::getInstance());
+        $userModel = new UserModel();
+        $userId = 2;
+        $userName = 'test2';
+
+        $user = $userModel->findUserById($userId);
+        $actual = $user[0]['name'];
+
+        $this->assertEquals($userName, $actual);
+    }
+
+    /**
+     * Test case findUserById Not good
+     */
+    public function testFindUserByIdNg()
+    {
+      $userModel = new UserModel();
+      $userId = 2222;
+      $expected = null;
+
+      $user = $userModel->findUserById($userId);
+
+      if(empty($user)){
+         $this->assertTrue(true);
+      }
+      else{
+         $this->assertFalse(false);
+      }
     }
 }
