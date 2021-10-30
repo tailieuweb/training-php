@@ -48,6 +48,7 @@ class UserModelTest extends TestCase
         return $a + $b;
     }
 
+    //test testFindUserById
     public function testFindUserByIdOk()
     {
         $userModel = new UserModel();
@@ -71,6 +72,45 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         } else {
             $this->assertTrue(true);
+        }
+    }
+
+    //test getUser
+    public function testInsertUserOk()
+    {
+        $userModel = new UserModel();
+        $user = array(
+            'id' => 14,
+            'name' => 'abc',
+            'fullname'=>'vitcon',
+            'type' => 'admin',
+            'email'=> 'hhhhh@gmail.com',
+            'password'=> '123456'
+        );
+        $actual = $userModel->insertUser($user);
+        if($actual == true){
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }
+    }
+
+    public function testInsertUserNotG()
+    {
+        $userModel = new UserModel();
+        $user = array(
+            'id' => 14,
+            'name' => 'abc',
+            'fullname'=>'', //full name rỗng
+            'type' => 'admin',
+            'email'=> 'hhhhh@gmail.com',
+            'password'=> '123456'
+        );
+        $actual = $userModel->insertUser($user);
+        if($actual == false){
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
         }
     }
 }
