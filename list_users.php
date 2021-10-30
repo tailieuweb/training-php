@@ -1,7 +1,7 @@
 <?php
 // Start the session
 session_start();
-
+//1-b
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
@@ -16,7 +16,7 @@ $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = strip_tags($_GET['keyword']);
 }
-
+//feature 1-a
 $users = $userModel->getUsers($params);
 ?>
 <!DOCTYPE html>
@@ -30,7 +30,7 @@ $users = $userModel->getUsers($params);
     <div class="container">
         <?php if (!empty($users)) {?>
             <div class="alert alert-warning" role="alert">
-                List of users! <br>
+                List of users!<br>
                 Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
             </div>
             <table class="table table-striped">
