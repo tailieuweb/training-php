@@ -14,6 +14,11 @@ if (!empty($_GET['keyword'])) {
 //feature 1-a
 $users = $userModel->getUsers($params);
 
+
+if(isset($_GET['Correct'])){
+    echo "<script>alert('!!! Cập nhật thành công !!!')</script>";
+    echo "<script>window.location.href = 'list_users.php'</script>";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -53,14 +58,12 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['fullname'] ?>
                             </td>
                             <td>
-<<<<<<< HEAD
+
                                 <?php echo $user['email'] ?>
-=======
-                                <?php echo $user['email']?>
                             </td>
                             <td>
                                 <?php echo $user['type']?>
->>>>>>> origin/1-php-202109/1-master
+
                             </td>
                             <td>
                                 <?php echo $user['type'] ?>
