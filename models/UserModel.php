@@ -112,6 +112,7 @@ class UserModel extends BaseModel {
      * @param $b
      */
     public function sumb($a, $b) {
+       true; 
         return $a + $b;
     }
 }
