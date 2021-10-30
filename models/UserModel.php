@@ -9,7 +9,7 @@ class UserModel extends BaseModel
 
     public function findUserById($id)
     {
-        $id = $this->decryptID($id);
+        $id = $this->decryptID($id,$this->getUsers());
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
 
@@ -46,7 +46,7 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
-        $id = $this->decryptID($id);
+        $id = $this->decryptID($id,$this->getUsers());
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
     }
@@ -60,15 +60,15 @@ class UserModel extends BaseModel
     public function updateUser($input)
     {
         $result = new ResultClass();
-        $id = $this->decryptID($input['id']);
+        $id = $this->decryptID($input['id'],$this->getUsers());
         $temp = $this->findUserById($input['id']);
         if (count($temp) > 0) {
             if ($temp[0]['version'] == $input['version']) {
                 $sql = 'UPDATE `users` SET 
-                name = "' . $this->BlockSQLInjection($input['name']) . '", 
-                 fullname="' . $this->BlockSQLInjection($input['fullname']) . '",
-                 email="' . $this->BlockSQLInjection($input['email']) . '",
-                 type="' . $this->BlockSQLInjection($input['type']) . '",
+                name = "' . $this -> BlockSQLInjection($input['name']) . '", 
+                 fullname="' . $this -> BlockSQLInjection($input['fullname']) . '",
+                 email="' . $this -> BlockSQLInjection($input['email']) . '",
+                 type="' . $this -> BlockSQLInjection($input['type']) . '",
                  password="' . md5($input['password']) . '",
                  version="' . ($input['version'] + 1) . '"
                  WHERE id = ' . $id;
@@ -183,5 +183,14 @@ class UserModel extends BaseModel
             return 'error';
         }
         return $a + $b;
+    }
+
+    public static function getInstance()
+    {
+        if (self::$_instance != null) {
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
     }
 }
