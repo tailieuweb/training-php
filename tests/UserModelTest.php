@@ -136,8 +136,7 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
-<<<<<<< HEAD
-    public function TestDeleteUserById() {
+    public function testDeleteUserById() {
         $userModel = new UserModel();
         $id=1;
         $actual = $userModel->deleteUserById($id);
@@ -146,8 +145,7 @@ class UserModelTest extends TestCase
         } else {
             $this->assertTrue(true);
         }
-=======
-
+    }
     /**
      * Test case testUpdateUserOk
      */
@@ -207,6 +205,5 @@ class UserModelTest extends TestCase
         }
         $actual = true;
         $this->assertEquals($check, $actual);
->>>>>>> 1-php-202109/2-groups/10-J/master-phpunit
     }
 }

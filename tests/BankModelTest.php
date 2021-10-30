@@ -1,32 +1,10 @@
-<<<<<<< HEAD
-<?php
-=======
 
 <?php
-
->>>>>>> 1-php-202109/2-groups/10-J/master-phpunit
 use PHPUnit\Framework\TestCase;
 
 class BankModelTest extends TestCase
 {
-
     /**
-<<<<<<< HEAD
-     * Test case Okie
-     */
-    public function testBankOk()
-    {
-       $userModel = new UserModel();
-       $a = 1;
-       $b = 2;
-       $expected = 3;
-
-       $actual = $userModel->sumb($a,$b);
-
-       $this->assertEquals($expected, $actual);
-    }
-}
-=======
      * Test case Sum Positive Number
      */
     public function testUpdateBankOk()
@@ -71,5 +49,15 @@ class BankModelTest extends TestCase
     //     return $result;
     // }
 
+    // public function testDeleteBankById() {
+    //     $bankModel = new BankModel();
+    //     $id=1;
+    //     $actual = $bankModel->deleteBankById($id);
+    //     if(empty($id)==1) {
+    //         $this->assertTrue(false);
+    //     } else {
+    //         $this->assertTrue(true);
+    //     }
+    // }
 }
->>>>>>> 1-php-202109/2-groups/10-J/master-phpunit
+
