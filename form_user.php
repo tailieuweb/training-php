@@ -3,7 +3,10 @@
 session_start();
 require_once 'models/UserModel.php';
 require_once 'models/FactoryPattent.php';
+require_once 'models/Repository.php';
 $factory = new FactoryPattent();
+$reponsitory = new Repository();
+
 $userModel = $factory->make('user');
 
 $user = NULL; //Add new user
@@ -27,8 +30,10 @@ if (!empty($_POST['submit'])) {
     if (!empty($_id)) {
         $userModel->updateUser($_POST);
     } else {
-        $userModel->insertUser($_POST);
+      $reponsitory->createAppUser($_POST);
+      
     }
+  
     header('location: list_users.php');
 }
 ?>

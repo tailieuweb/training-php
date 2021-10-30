@@ -139,4 +139,13 @@ class UserModel extends BaseModel
         self::$_instance = new self();
         return self::$_instance;
     }
+    // Get id user new : 
+    public function getUserByIdNew()
+    {
+        $sql = "SELECT MAX(id) as user_id FROM users";
+        $user = $this->select($sql);
+        
+        return $user;
+    }
+    
 }

@@ -9,7 +9,7 @@ class FactoryPattent{
         else if($model == 'bank'){
             return BankModel::getInstance();
         }
-       
+        return null;
     }
 }
 ?>
