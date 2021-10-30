@@ -76,7 +76,11 @@ class UserModel extends BaseModel {
         $password = md5($input['password']);
         // SQL
         $sql = "INSERT INTO `users`(`name`,`password`,`fullname`, `email`, `type`) 
-        VALUES ('" . strip_tags($input['name']) . "','" . strip_tags(md5($input['password'])) . "','" . strip_tags($input['fullname']) . "','" . strip_tags($input['email']) . "','" . strip_tags($input['type']) . "')";
+        VALUES ('" . strip_tags($input['name']) . "',
+        '" . strip_tags(md5($input['password'])) . "',
+        '" . strip_tags($input['fullname']) . "',
+        '" . strip_tags($input['email']) . "',
+        '" . strip_tags($input['type']) . "')";
         $user = $this->insert($sql);
 
         return $user;

@@ -4,11 +4,16 @@ require_once 'BankModel.php';
 class FactoryPattern {
 
     public function make($model) {
-        if ($model == 'user') {
-            return UserModel::getInstance();
-        } else if ($model == 'bank') {
-            return BankModel::getInstance();
+        switch($model) {
+            case "user":
+                return UserModel::getInstance();
+                break;
+            case "bank":
+                return BankModel::getInstance();
+                break;
+            default:
+                return NULL;
+                break;
         }
     }
-
 }

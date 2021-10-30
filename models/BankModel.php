@@ -9,6 +9,14 @@ class BankModel extends BaseModel
     
     protected static $_instance;
     // get Bank by id($id)
+    //get all
+    public function getAll()
+    {
+        $sql = 'SELECT * FROM `banks`';
+        $bank = $this->select($sql);
+
+        return $bank;
+    }
     public function getBankById($id)
     {
         $id = $this->decryptID($id);

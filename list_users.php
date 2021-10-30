@@ -46,13 +46,13 @@ $users = $userModel->getUsers($params);
                         <tr>
                             <th scope="row"><?php echo $user['id']?></th>
                             <td>
-                                <?php echo $user['name']?>
+                                <?php echo Strip_tags($user['name'])?>
                             </td>
                             <td>
-                                <?php echo $user['fullname']?>
+                                <?php echo Strip_tags($user['fullname'])?>
                             </td>
                             <td>
-                                <?php echo $user['type']?>
+                                <?php echo Strip_tags($user['type'])?>
                             </td>
                             <td>
                                 <a href="form_user.php?id=<?php echo $user['id'] ?>">
