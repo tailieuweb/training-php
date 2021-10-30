@@ -5,9 +5,16 @@ class FactoryPattern {
 
     public function make($model) {
         if ($model == 'users') {
-            return new UserModel();
+            //singleton
+            return UserModel::getInstance();
+
+            // Normal return:
+            // return new UserModel();
         } else if ($model == 'bank') {
-            return new BankModel();
+            return BankModel::getInstance();
+
+            //Normal return:
+            // return new BankModel();
         }
     }
 

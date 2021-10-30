@@ -3,7 +3,16 @@
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
-// tim id de them user
+    //singleton pattern user
+    public static function getInstance(){
+        if(self::$_user_instance  != null){
+            return self::$_user_instance;
+        }
+        self::$_user_instance = new self;
+        return self::$_user_instance;
+    }
+    
+// sreach user --> insert id
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);

@@ -3,6 +3,15 @@
 require_once 'BaseModel.php';
 
 class BankModel extends BaseModel {
+    //singuleton pattern bank
+    public static function getInstance(){
+        if(self::$_bank_instance  != null){
+            return self::$_bank_instance;
+        }
+        self::$_bank_instance = new self;
+        return self::$_bank_instance;
+    }
+
     // find bank id
     public function findBankById($id) {
         $sql = 'SELECT * FROM banks WHERE id = '.$id;
