@@ -1,5 +1,5 @@
 <?php
-require_once(realpath($_SERVER["DOCUMENT_ROOT"]) .'/training-php/repositories/UserRepository.php');
+require_once('./repositories/UserRepository.php');
 
 class FactoryPattern {
 

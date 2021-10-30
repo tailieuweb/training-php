@@ -1,7 +1,7 @@
 <?php
-require_once(realpath($_SERVER["DOCUMENT_ROOT"]) .'/training-php/models/BaseModel.php');
-require_once(realpath($_SERVER["DOCUMENT_ROOT"]) .'/training-php/models/UserModel.php');
-require_once(realpath($_SERVER["DOCUMENT_ROOT"]) .'/training-php/models/BankModel.php');
+require_once('./models/BaseModel.php');
+require_once('./models/UserModel.php');
+require_once('./models/BankModel.php');
 
 class UserRepository extends BaseModel {
 
