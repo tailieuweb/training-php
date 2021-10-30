@@ -11,10 +11,12 @@
         </testsuite>
     </testsuites>
     <filter>				
-    <whitelist processUncoveredFilesFromWhitelist="true">				
-    <directory suffix=".php">./models</directory>				
-    </whitelist>				
-    </filter>				
+
+<whitelist processUncoveredFilesFromWhitelist="true">				
+<directory suffix=".php">./models</directory>				
+</whitelist>				
+</filter>				
+>>>>>>> 1-php-202109/2-groups/11-K/1-29-Luong-phpunit
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
