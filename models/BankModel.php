@@ -4,15 +4,15 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel {
 
-    public function findUserById($id) {
-        $sql = 'SELECT * FROM users WHERE id = '.$id;
+    public function findBankById($id) {
+        $sql = 'SELECT * FROM banks WHERE id = '.$id;
         $user = $this->select($sql);
 
         return $user;
     }
 
-    public function findUser($keyword) {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
+    public function findBank($keyword) {
+        $sql = 'SELECT * FROM banks WHERE cost LIKE %'.$keyword.'%'. ' OR user_id LIKE %'.$keyword.'%';
         $user = $this->select($sql);
 
         return $user;
