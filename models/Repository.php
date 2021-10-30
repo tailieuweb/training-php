@@ -3,12 +3,13 @@ require_once 'BaseModel.php';
 require_once 'UserModel.php';
 class Repository
 {
+   protected static $_instance;
    private $userModel;
    private $bankModel;
    //constructor
    public function __construct() {
-       $this->$userModel = new UserModel;
-       $this->$bankModel = new BankModel;
+       $this->userModel = new UserModel;
+       $this->bankModel = new BankModel;
    }
    public function findUserById($id)
     {
@@ -95,5 +96,13 @@ class Repository
     public function getBanks($params = [])
     {
         return $this->userModel->getBanks($params);
+    }
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
     }
 }

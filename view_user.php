@@ -1,24 +1,22 @@
 <?php
 require_once 'models/FactoryPattern.php';
+require_once 'models/Repository.php';
 $factory = new FactoryPattern();
-
-$userModel = $factory->make('user');
-
+$repository = $factory-> make('repository');
+// $userModel = $factory->make('user');
 $user = NULL; //Add new user
 $id = NULL;
-
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+    // $user = $userModel->findUserById($id);//Update existing user
+    $user = $repository ->findUserById($id);
 }
-
-
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
-        $userModel->updateUser($_POST);
+        $repository->updateUser($_POST);
     } else {
-        $userModel->insertUser($_POST);
+        $repository->insertUser($_POST);
     }
     header('location: list_users.php');
 }
@@ -46,15 +44,15 @@ if (!empty($_POST['submit'])) {
             </div>
             <div class="form-group">
                 <label for="password">Fullname</label>
-                <span><?php if (!empty($user[0]['name'])) echo htmlentities($user[0]['fullname'] )?></span>
+                <span><?php if (!empty($user[0]['fullname'])) echo htmlentities($user[0]['fullname'] )?></span>
             </div>
             <div class="form-group">
                 <label for="password">Email</label>
-                <span><?php if (!empty($user[0]['name'])) echo htmlentities($user[0]['email']) ?></span>
+                <span><?php if (!empty($user[0]['email'])) echo htmlentities($user[0]['email']) ?></span>
             </div>
             <div class="form-group">
                 <label for="password">Type</label>
-                <span><?php if (!empty($user[0]['name'])) echo htmlentities($user[0]['type']) ?></span>
+                <span><?php if (!empty($user[0]['type'])) echo htmlentities($user[0]['type']) ?></span>
             </div>
         </form>
     <?php } else { ?>
