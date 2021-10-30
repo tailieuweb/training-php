@@ -35,7 +35,50 @@ class UserModelTest extends TestCase
             
         $this->assertEquals($expected, $actual);
             
+    }
+    public function testFindUserByIdObject() {
+        $userModel = new UserModel();
+        
+        $id = new stdClass();
+        $expected = 'error';
+        $actual = $userModel->findUserById($id);
+        
+        $this->assertEquals($expected, $actual);
+        
         }
+
+    public function testFindUserByIdNg(){
+        $userModel = new UserModel();
+        $userId = 9999;
+        $userName = 'asdf';
+
+        $user = $userModel->findUserById($userId);
+        
+        if(empty($user)){
+            
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }
+
+    }
+    public function testString()
+    {
+        $userModel = new UserModel();
+        $a = 1;
+        $b = 'a';
+
+        //number + string
+        //number
+        //numberstring
+
+        $expected = 'error';
+        $actual = $userModel->sumb($a, $b);
+
+        $this->assertEquals($expected, $actual);
+
+    }    
+
     public function testTwoString()
     {
         $userModel = new UserModel();
@@ -65,47 +108,6 @@ class UserModelTest extends TestCase
         } else {
             $this->assertTrue(true);
         }
-    }
-    public function testFindUserByIdObject() {
-        $userModel = new UserModel();
-        
-        $id = new stdClass();
-        $expected = 'error';
-        $actual = $userModel->findUserById($id);
-        
-        $this->assertEquals($expected, $actual);
-        
-        }
-    public function testString()
-    {
-        $userModel = new UserModel();
-        $a = 1;
-        $b = 'a';
-
-        //number + string
-        //number
-        //numberstring
-
-        $expected = 'error';
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
-
-    }
-    public function testFindUserByIdNg(){
-        $userModel = new UserModel();
-        $userId = 9999;
-        $userName = 'asdf';
-
-        $user = $userModel->findUserById($userId);
-        
-        if(empty($user)){
-            
-            $this->assertTrue(true);
-        }else{
-            $this->assertTrue(false);
-        }
-
     }
     public function testSumOk()
     {
