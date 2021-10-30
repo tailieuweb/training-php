@@ -97,45 +97,45 @@ class UserModelTest extends TestCase
        $this->assertEquals($expected, $actual);
     }
 
-    public function testFindByIdOk()
-    {
-       $userModel = new UserModel();
-       $userId = 2;
-       $userName = 'test2';
-
-       $user = $userModel->findUserById($userId);
-       $actual = $user[0]['name'];
-
-       $this->assertEquals($userName, $actual);
-    }
-
-    public function testFindByIdNg()
-    {
-       $userModel = new UserModel();
-       $userId = 222;
-       
-       $expected = null;
-
-       $user = $userModel->findUserById($userId);
-
-       if(empty($user)){
-          $this->assertTrue(true);
-       }
-       else
-       {
-         $this->assertFalse(false);
-       }
-    }
-
+    //Test function insertUser OK
     public function testInsertUserOk()
     {
       $userModel = new UserModel();
-       $userId = 3;
-       $userName = 'test3';
+      $input['name'] = 'le';
+      $input['password']  = '1234';
+      $input['fullname'] = 'lenguyentan';
+      $input['email'] = 'tanle123@gmail.com';
+      $input['type'] = 'admin';
+      $userModel->insertUser($input);
+      $ex = $userModel->findUserById(6);
+      $expected = $input['name']['password']['fullname']['email']['type'];
+      $actual = $ex[0]['name']['password']['fullname']['email']['type'];
+      $this->assertEquals($expected, $actual);
+    }
 
-       $user = $userModel->insertUser($userId);
-       $actual = $user[0]['name'];
-
-       $this->assertEquals($userName, $actual);
+    //Test function insertUser not good
+    public function testInsertUserNg()
+    {
+      $userModel = new UserModel();
+      $input['name'] = 'tanle';
+      $input['password']  = '12345';
+      $input['fullname'] = 'nguyentanle';
+      $input['email'] = 'tanle@gmail.com';
+      $input['type'] = 'user';
+      
+      $user = $userModel->insertUser($input);
+      $expected = $userModel->findUserById(6);
+      if($expected != null){
+         $this->assertTrue(true);
+      }
+      else{
+         $this->assertFalse(false);
+      }
+    }
+    
+    //Test function getInstance
+    public function testGetInstanceUser()
+    {
+        $this->assertInstanceOf('UserModel', UserModel::getInstance());
     }
 }
