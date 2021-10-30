@@ -21,6 +21,6 @@ if (!empty($_GET['id'])) {
 
     //Replace last number with null
     $id = str_replace($end, "", $id);
-    $bankModel->deleteBalanceById($id);
+    $bankModel->deleteBalanceByUserId($id);
 }
 header('location: index.php');
