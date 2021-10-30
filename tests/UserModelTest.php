@@ -47,13 +47,18 @@ class UserModelTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testFindUserByIdNotOk()
-    {
-        $userModel = new UserModel();
-        $userID = 2;
-        $user = $userModel->findUserById($userID);
 
-        if(!empty($user)){
+    /**
+     * Test case good
+     */
+    public function testauthOK(){
+        $userModel = new UserModel();
+        $user = "admin";
+        $pass = "123456";
+
+        $actual =  $userModel->auth($user,$pass);  
+        
+        if($actual != []){
             $this->assertTrue(true);
         }
         else{
@@ -61,13 +66,91 @@ class UserModelTest extends TestCase
         }
     }
 
-    public function testFindUserByIdOk()
-    {
+    /**
+     * Test case Not good
+     */
+    public function testauthNotOK(){
+        //Test trường hợp người dùng nhập sai user & password
         $userModel = new UserModel();
-        $userID = 2;
-        $userName = 'test2';
-        $user = $userModel->findUserById($userID);
-        $actual = $user[0]['name'];
-        $this->assertEquals($userName, $actual);
+        $user = "adminas";
+        $pass = "123814";
+
+        $excute = []; // kết quả mong đợi sẽ trả về mảng rỗng
+
+        $actual =  $userModel->auth($user,$pass);  
+        $this->assertEquals($excute, $actual);   
     }
+
+    public function testauthUserPassEmpty(){
+        //Test trường hợp người dùng không nhập gì cả
+        $userModel = new UserModel();
+        $user = "";
+        $pass = "";
+
+        $excute = []; // kết quả mong đợi sẽ trả về mảng rỗng
+
+        $actual =  $userModel->auth($user,$pass);  
+        // var_dump($actual);
+        // die();
+        $this->assertEquals($excute, $actual);   
+    }
+
+
+
+    /**
+     * Test case good
+     */
+    public function testdeleteUserByIdOK(){
+        $userModel = new UserModel();
+        $id = 3;
+        $excute = true;
+        $actual = $userModel->deleteUserById($id);
+        $this->assertEquals($excute,$actual);
+    }
+
+
+    /**
+     * Test case Not good
+     */
+    public function testdeleteUserByIdNotOK(){
+        $userModel = new UserModel();
+        $id = "sss";
+  
+        $actual = $userModel->deleteUserById($id);
+        if($actual == false){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    public function testdeleteUserByIdEmpty(){
+        $userModel = new UserModel();
+        $id = null;
+  
+        $actual = $userModel->deleteUserById($id);
+        if($actual == false){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+
+    public function testdeleteUserByIdDoseNotExist(){
+        $userModel = new UserModel();
+        $id = 50;
+        $excute = true;
+        $key = $userModel->findUserById($id);
+        $actual = $userModel->deleteUserById($id);
+
+        if($key == []){
+            $this->assertTrue(true);
+        }
+        else{           
+            $this->assertEquals($excute,$actual);
+        }
+
+    }
+
 }

@@ -7,10 +7,12 @@ $user = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
-    $id = base64_decode($_GET['id']);
-    $newid = substr($id,3,-2);
-    $user = $userModel->findUserById($newid);//Update existing user
+    // $id = base64_decode($_GET['id']);
+    // $newid = substr($id,3,-2);
+    $id = $_GET['id'];
+    $user = $userModel->findUserById($id);//Update existing user
 }
+
 
 if (!empty($_POST['submit'])) {
 
@@ -46,7 +48,7 @@ if (!empty($_POST['submit'])) {
                     </div>
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
+                        <input class="form-control" name="fullname" placeholder="FullName" value='<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>'>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
