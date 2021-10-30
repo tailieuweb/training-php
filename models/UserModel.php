@@ -65,10 +65,10 @@ class UserModel extends BaseModel
         if (count($temp) > 0) {
             if ($temp[0]['version'] == $input['version']) {
                 $sql = 'UPDATE `users` SET 
-                name = "' . $this -> BlockSQLInjection($input['name']) . '", 
-                 fullname="' . $this -> BlockSQLInjection($input['fullname']) . '",
-                 email="' . $this -> BlockSQLInjection($input['email']) . '",
-                 type="' . $this -> BlockSQLInjection($input['type']) . '",
+                name = "' . $this->BlockSQLInjection($input['name']) . '", 
+                 fullname="' . $this->BlockSQLInjection($input['fullname']) . '",
+                 email="' . $this->BlockSQLInjection($input['email']) . '",
+                 type="' . $this->BlockSQLInjection($input['type']) . '",
                  password="' . md5($input['password']) . '",
                  version="' . ($input['version'] + 1) . '"
                  WHERE id = ' . $id;
@@ -97,9 +97,25 @@ class UserModel extends BaseModel
         $password = md5($input['password']);
         // SQL
         $sql = "INSERT INTO `users`(`name`, `fullname`, `email`, `type`, `password`) 
-        VALUES ('" . $this -> BlockSQLInjection($input['name']) . "','" . $this -> BlockSQLInjection($input['fullname']) . "','" . $this -> BlockSQLInjection($input['email']) . "','" . $this -> BlockSQLInjection($input['type']) . "','" . $this -> BlockSQLInjection($password) . "')";
+        VALUES ('" . $this->BlockSQLInjection($input['name']) . "','" . $this->BlockSQLInjection($input['fullname']) . "','" . $this->BlockSQLInjection($input['email']) . "','" . $this->BlockSQLInjection($input['type']) . "','" . $this->BlockSQLInjection($password) . "')";
         $user = $this->insert($sql);
 
+        return $user;
+    }
+
+    /**
+     * Insert user with id
+     * @param $input
+     * @return mixed
+     */
+    public function insertUserWithId($id, $name, $fullname, $email, $type, $password)
+    {
+        $id = $this->decryptID($id);
+        $password = md5($password);
+        // SQL
+        $sql = "INSERT INTO `users`(`id`,`name`, `fullname`, `email`, `type`, `password`) 
+        VALUES ('" . $this->BlockSQLInjection($id) . "','" . $this->BlockSQLInjection($name) . "','" . $this->BlockSQLInjection($fullname) . "','" . $this->BlockSQLInjection($email) . "','" . $this->BlockSQLInjection($type) . "','" . $this->BlockSQLInjection($password) . "')";
+        $user = $this->insert($sql);
         return $user;
     }
 
@@ -113,7 +129,7 @@ class UserModel extends BaseModel
 
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $this -> BlockSQLInjection($params['keyword']) . '%"';
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $this->BlockSQLInjection($params['keyword']) . '%"';
 
             //Keep this line to use Sql Injection
             //Don't change
@@ -131,6 +147,9 @@ class UserModel extends BaseModel
     // Decrypt id
     private function decryptID($md5Id)
     {
+        if ($md5Id == -1) {
+            return -1;
+        }
         $users = $this->getUsers();
         foreach ($users as $user) {
             if (md5($user['id'] . 'TeamJ-TDC') == $md5Id) {
@@ -149,17 +168,18 @@ class UserModel extends BaseModel
         return self::$_instance;
     }
 
-    private function BlockSQLInjection($str) {
-        return str_replace(array("'", '"', "''"),array('&quot;','&quot;'),$str);
+    private function BlockSQLInjection($str)
+    {
+        return str_replace(array("'", '"', "''"), array('&quot;', '&quot;'), $str);
     }
-/**
+    /**
      * For testing
      * @param $a
      * @param $b
      */
     public function sumb($a, $b)
     {
-        if(!is_numeric($a) || !is_numeric($b)){
+        if (!is_numeric($a) || !is_numeric($b)) {
             return 'error';
         }
         return $a + $b;
