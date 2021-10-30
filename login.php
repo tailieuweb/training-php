@@ -1,6 +1,7 @@
 <?php
 // Start the session
 session_start();
+<<<<<<< HEAD
 
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
@@ -23,6 +24,8 @@ if (!empty($_POST['submit'])) {
     }
     header('location: list_users.php');
 
+=======
+>>>>>>> origin/1-php-202109/2-groups/11-K/2-56-Tien-phpunit
 
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
@@ -40,21 +43,26 @@ if (!empty($_POST['submit'])) {
 
         $_SESSION['message'] = 'Login successful';
         header('location: list_users.php');
-    }else {
+    } else {
         //Login failed
         $_SESSION['message'] = 'Login failed';
     }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/1-php-202109/2-groups/11-K/2-56-Tien-phpunit
 }
 
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>User form</title>
     <?php include 'views/meta.php' ?>
 </head>
+<<<<<<< HEAD
 <body>
 
     <?php include 'views/header.php'?>
@@ -85,16 +93,21 @@ if (!empty($_POST['submit'])) {
     </div>
 
 <?php include 'views/header.php'?>
+=======
+
+<body>
+    <?php include 'views/header.php' ?>
+>>>>>>> origin/1-php-202109/2-groups/11-K/2-56-Tien-phpunit
 
     <div class="container">
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-            <div class="panel panel-info" >
+            <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="panel-title">Login</div>
                     <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
                 </div>
 
-                <div style="padding-top:30px" class="panel-body" >
+                <div style="padding-top:30px" class="panel-body">
                     <form method="post" class="form-horizontal" role="form">
 
                         <div class="margin-bottom-25 input-group">
@@ -122,10 +135,10 @@ if (!empty($_POST['submit'])) {
 
                         <div class="form-group">
                             <div class="col-md-12 control">
-                                    Don't have an account!
-                                    <a href="form_user.php">
-                                        Sign Up Here
-                                    </a>
+                                Don't have an account!
+                                <a href="form_user.php">
+                                    Sign Up Here
+                                </a>
                             </div>
                         </div>
                     </form>
@@ -134,6 +147,10 @@ if (!empty($_POST['submit'])) {
         </div>
     </div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/1-php-202109/2-groups/11-K/2-56-Tien-phpunit
 </body>
+
 </html>

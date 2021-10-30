@@ -21,6 +21,7 @@ if (!empty($_POST['submit'])) {
         header('location: list_users.php');
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,12 +41,8 @@ if (!empty($_POST['submit'])) {
             </div>
             <form method="POST">
                 <input type="hidden" name="id" value="<?php echo $_id ?>">
-
                 <input type="hidden" name="id" value="<?php echo $user[0]['id'] ?>">
                 <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo base64_encode($keyCode . $user[0]['version']) ?>">
-
-                <input type="hidden" name="id" value="<?php echo $user[0]['id'] ?>">
-
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
