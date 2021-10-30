@@ -5,7 +5,8 @@ require_once 'BaseModel.php';
 class UserModel extends BaseModel
 {
     // Singleton pattern:
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (self::$_user_instance !== null) {
             return self::$_user_instance;
         }
@@ -117,7 +118,7 @@ class UserModel extends BaseModel
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users 
-            WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection,$params['keyword']) . '%"';
+            WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection, $params['keyword']) . '%"';
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
@@ -136,7 +137,11 @@ class UserModel extends BaseModel
      * @param $a
      * @param $b
      */
-    public function sumb($a, $b) {
+    public function sumb($a, $b)
+    {
+        if (!is_numeric($a) or !is_numeric(($b))) {
+            return 'error';
+        }
         return $a + $b;
     }
 }
