@@ -103,7 +103,7 @@ class BankModel extends BaseModel {
        
         if (!empty($params['keyword'])) {
            
-            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] .'%"';
+            $sql = 'SELECT * FROM banks WHERE cost LIKE "%' . $params['keyword'] .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
