@@ -6,7 +6,7 @@ class SingletonPatternTest extends TestCase
     /**
      * Test case singletonUser Ok
      */
-     public function testSingletonUserOK()
+     public function testMakeOK()
      {
          $singleton = new SingletonPattern();
          $userModel = new UserModel();
@@ -19,24 +19,51 @@ class SingletonPatternTest extends TestCase
      }
 
      /**
-     * Test case singletonBank Ok
+     * Test case singletonUser Null
      */
-     public function testSingletonBankOK()
-     {
-         $singleton = new SingletonPattern();
-         $bankModel = new BankModel();
+    public function testMakeNull()
+    {
+        $singleton = new SingletonPattern();
 
-         $singleton = $singleton->make('bank');
-         $expected = $bankModel;
-         $actual = $singleton;
+        $model = '';
+        $expected = 'error';
+        $actual = $singleton->make($model);
 
-         $this->assertEquals($expected, $actual);
-     }
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case singletonUser  != user != bank
+     */
+    public function testMakeKhac()
+    {
+        $singleton = new SingletonPattern();
+
+        $model = 'le';
+        $expected = 'error';
+        $actual = $singleton->make($model);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case singletonUser  Number
+     */
+    public function testMakeNumber()
+    {
+        $singleton = new SingletonPattern();
+
+        $model = 1;
+        $expected = 'error';
+        $actual = $singleton->make($model);
+
+        $this->assertEquals($expected, $actual);
+    }
 
      /**
      * Test case singleton Not good
      */
-     public function testSingletonPatternNg()
+     public function testMakeNg()
      {
         $singleton = new SingletonPattern();
         $userModel = new UserModel();
