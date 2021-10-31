@@ -32,12 +32,12 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
-            <?php if ($user || isset($newsid)) { ?>
+            <?php if ($user || !isset($newsid)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $newid ?>">
+                    <input type="hidden" name="id" value="<?php if(!empty($newid)){echo $newid;}else{echo $id;}?>">
                     <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo $user[0]['version']?>">
                     <div class="form-group">
                         <label for="name">Name</label>

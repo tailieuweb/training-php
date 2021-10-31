@@ -51,12 +51,16 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-      
+        $t = base64_decode($input['version']);
+        $str = substr($t,18);
+
+        // var_dump($input['version']);
+        // die();
+
         $temp = 'SELECT version FROM users WHERE id = '.$input['id'].'';
         $newTemp = $this->select($temp);
-        
-        if($newTemp[0]['version'] == $input['version']){
-            $newV = $input['version']+1;
+        if($newTemp[0]['version'] == $str){
+            $newV = $str+1;
              $sql = 'UPDATE users SET 
                  name = "' . $input['name'] .'", 
                  email = "'.$input['email'].'",
@@ -73,6 +77,7 @@ class UserModel extends BaseModel {
         
         
     }
+
 
     /**
      * Insert user
@@ -100,21 +105,20 @@ class UserModel extends BaseModel {
      */
     public function getUsers($params = []) {
         //Keyword
-       
-        if (!empty($params['keyword'])) {
-           
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
-
+        if (!empty($params['keyword'])) { // <script>alert('hack')</script>
+            //$params['keyword'] = $this->removeSpecialCharacter($params['keyword']);
+            //var_dump($params['keyword']);
+             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
-            
+             //$users = self::$_connection->multi_query($sql);
+             $users = $this->select($sql);
+
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
-        return $users;
-       
+         return  $users;
     }
 }
