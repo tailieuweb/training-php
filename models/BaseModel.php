@@ -90,6 +90,9 @@ abstract class BaseModel
      */
     protected function decryptID($md5Id, $arr = [])
     {
+        if (is_object($md5Id)) {
+            return null;
+        }
         if ($md5Id == -1) {
             return -1;
         }
