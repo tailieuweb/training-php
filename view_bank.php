@@ -1,13 +1,18 @@
 <?php
 require_once 'models/BankModel.php';
-$bankModel = new BankModel();
+require_once 'models/FactoryPattent.php';
+
+$factory = new FactoryPattent();
+$bankModel = $factory->make('bank');
 
 $bank = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $bank = $bankModel->findBankById($id);//Update existing user
+    $id_start = substr($id,3);
+    $id_end=substr($id_start,0,-3);
+    $bank = $bankModel->findBankById($id_end);//Update existing user
 }
 
 ?>

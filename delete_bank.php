@@ -1,12 +1,18 @@
 <?php
 require_once 'models/BankModel.php';
-$bankModel = new BankModel();
-$id_bank = NULL;
-if (!empty($_GET['bank_id'])) {
-    $id_bank = $_GET['bank_id'];
-    // var_dump($id_bank);
-    $bank = $bankModel->deletebankById($id_bank);//Delete existing bank
+require_once 'models/FactoryPattent.php';
 
+$factory = new FactoryPattent();
+$bankModel = $factory->make('bank');
+
+$bank = NULL; //Add new user
+$id = NULL;
+
+if (!empty($_GET['id'])) {
+    $id = $_GET['id'];
+    $id_start = substr($id,3);
+    $id_end=substr($id_start,0,-3);
+    $bankModel->deleteBankById($id_end);//Delete existing user
 }
 header('location: list_banks.php');
 ?>

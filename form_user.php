@@ -3,8 +3,10 @@
 session_start();
 require_once 'models/UserModel.php';
 require_once 'models/FactoryPattent.php';
-// $userModel = new UserModel();
+require_once 'models/Repository.php';
 $factory = new FactoryPattent();
+$reponsitory = new Repository();
+
 $userModel = $factory->make('user');
 
 $user = NULL; //Add new user
@@ -12,25 +14,28 @@ $_id = NULL;
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
-    $user = $userModel->findUserById($_id); //Update existing user
+    //Xử lý chuỗi đầu
+    $string_first = substr($_id, 0, 10);
+    //Xử lý chuỗi sau
+    $string_last = substr($_id, -5);
+    //Thay thể chuỗi đầu = null
+    $_id = str_replace($string_first, "", $_id);
+    //Thay thế chuỗi sau = null
+    $_id = str_replace($string_last, "", $_id);
+    var_dump($_id);
+    $user = $userModel->findUserById($_id);
 }
+
 if (!empty($_POST['submit'])) {
-    $version = $_POST['version'];
     if (!empty($_id)) {
-        $a = $userModel->updateUser($_POST, $version);
-        if ($a == false) {
-            $a = "Updating Error! Pleade Try Again";
-        } else {
-            header('location: list_users.php');
-        }
+        $userModel->updateUser($_POST);
     } else {
-        $userModel->insertUser($_POST);
-
-        header('location: list_users.php');
+      $reponsitory->createAppUser($_POST);
+      
     }
-    // header('location: list_users.php');
+  
+    header('location: list_users.php');
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,75 +50,56 @@ if (!empty($_POST['submit'])) {
     <div class="container">
 
         <?php if ($user || empty($_id)) { ?>
-            <div class="alert alert-warning" role="alert">
-                User form
-
+        <div class="alert alert-warning" role="alert">
+            User form
+        </div>
+        <form method="POST">
+            <input type="hidden" name="id" value="<?php echo $_id ?>">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control" name="name" placeholder="Name"
+                    value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
             </div>
-            <?php if (isset($a)) { ?>
-                <div class="alert alert-danger" role="alert">
-                    <?php echo $a; ?>
-                </div>
-            <?php } ?>
-
-            <form method="POST">
-                <input type="hidden" name="id" value="<?php echo $_id ?>">
-                <input type="hidden" name="version" value="<?php if (isset($user[0]['version'])) echo $user[0]['version'] ?>">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
-                </div>
-                <div class="form-group">
-                    <label for="fullname">FullName</label>
-                    <input type="text" name="fullname" class="form-control" placeholder="FullName" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
-                </div>
-                <div class="form-group">
-                    <label for="type">Type</label>
-                    <select name="type">
-                        <option value="0" <?php
-                                            if (isset($user)) {
-                                                if ($user[0]['type'] == '0') {
-                                                    echo "selected";
-                                                }
+            <div class="form-group">
+                <label for="full-name">Full name</label>
+                <input class="form-control" name="full-name" placeholder="Full name"
+                    value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Password"
+                    value="<?php if (!empty($user[0]['password'])) echo $user[0]['password'] ?>">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" class="form-control" placeholder="email"
+                    value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
+            </div>
+            <div class="form-group">
+                <label for="type">Type</label>
+                <select name="type">
+                    <option value="0" <?php if (!empty($user[0]['type']) == '0') {
+                                                echo "selected";
                                             } ?>>---</option>
-                        <option value="admin" <?php
-                                                if (isset($user)) {
-                                                    if ($user[0]['type'] == 'admin') {
-                                                        echo "selected";
-                                                    }
+                    <option value="admin" <?php if (!empty($user[0]['type']) == 'admin') {
+                                                    echo "selected";
                                                 } ?>>Admin</option>
-
-                        <option value="user" <?php
-                                                if (isset($user)) {
-                                                    if ($user[0]['type'] == 'user') {
-                                                        echo "selected";
-                                                    }
+                    <option value="user" <?php if (!empty($user[0]['type']) == 'user') {
+                                                    echo "selected";
                                                 } ?>>User</option>
-
-
-                        <option value="guest" <?php
-                                                if (isset($user)) {
-                                                    if ($user[0]['type'] == 'guest') {
-                                                        echo "selected";
-                                                    }
-                                                } ?>>Guest</option>
-
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Password" value="<?php if (!empty($user[0]['password'])) echo $user[0]['password'] ?>">
-                </div>
-
-                <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
-            </form>
-        <?php } else { ?>
-            <div class="alert alert-success" role="alert">
-                User not found!
+                    <option value="guest" <?php if (!empty($user[0]['type']) == 'guest') {
+                                                    echo "selected";
+                                                } ?>>Guest
+                    <option>
+                </select>
             </div>
+
+            <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <?php } else { ?>
+        <div class="alert alert-success" role="alert">
+            User not found!
+        </div>
         <?php } ?>
     </div>
 </body>

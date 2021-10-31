@@ -1,11 +1,19 @@
 <?php
-require_once 'models/BankModel.php';
+session_start();
 require_once 'models/UserModel.php';
-$bankModel = new BankModel();
-$userModel = new UserModel();
+require_once 'models/FactoryPattent.php';
+$factory = new FactoryPattent();
+$bankModel = '';
+$userModel = '';
+// var_dump($factory->make('user'));
+
+$userModel = $factory->make('user');
+$bankModel = $factory->make('bank');
+
 
 $bank = NULL; //Add new user
 $_id = NULL;
+$id_end = NULL;
 //List bank join user
 $params = [];
 if (!empty($_GET['keyword'])) {
@@ -15,12 +23,17 @@ $users = $userModel->getUsers($params);
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
-    $bank = $bankModel->findBankById($_id); //Update existing user
+    $id_start = substr($_id, 3);
+    $id_end = substr($id_start, 0, -3);
+    
+    $bank = $bankModel->findBankById($id_end); //Update existing user
+    
 }
 if (!empty($_POST['submit'])) {
     $version = $_POST['version'];
-    if (!empty($_id)) {
+    if (!empty($id_end)) {
         $a = $bankModel->updateBank($_POST, $version);
+        
         if ($a == false) {
             $a = "Updating Error! Pleade Try Again";
         } else {

@@ -4,19 +4,14 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
-
+    protected static $_instance;
+    
     public function findUserById($id)
     {
-        $sql1 = 'SELECT id FROM users';
-        $allUser = $this->select($sql1);
-        $user =null;
-        foreach ($allUser as $key) {
-            $md5 = md5($key['id'] . "chuyen-de-web-1");
-            if ($md5 == $id) {
-                $sql = 'SELECT * FROM users WHERE id = ' . $key['id'];
-                $user = $this->select($sql);
-            }
-        }
+        
+        $sql = 'SELECT * FROM users WHERE id = ' . $id;
+        $user = $this->select($sql);
+
         return $user;
     }
 
@@ -24,7 +19,6 @@ class UserModel extends BaseModel
     {
         $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
         $user = $this->select($sql);
-
         return $user;
     }
 
@@ -43,77 +37,61 @@ class UserModel extends BaseModel
         return $user;
     }
 
-
-    /**
-     * Get username user by id
-     * @param $id
-     * @return mixed
-     */
-
-    public function getUsernameById($id)
-    {
-        $sql = 'SELECT name FROM users where id = ' . $id;
-        $user = $this->select($sql);
-        return $user;
-    }
-
     /**
      * Delete user by id
      * @param $id
      * @return mixed
      */
     public function deleteUserById($id)
-    {
-        //Lấy id của tất cả user 
-        $sql1 = 'SELECT id FROM users';
-        $allUser = $this->select($sql1);
-        
-        foreach ($allUser as $key) {
-            $md5 = md5($key['id'] . "chuyen-de-web-1");
-            if ($md5 == $id) {
-                $sql = 'DELETE FROM users WHERE id = ' . $key['id'];
+    {   
+        $isAuth = $this->getUsers();
+        foreach ($isAuth as $item) {
+            if (md5($item['id']) == $id) {
+                $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
                 return $this->delete($sql);
             }
         }
+    }
+    // Delete user by id : Step 2
+    public function dropUserById($id)
+    {   
+        $sql = 'DELETE FROM users WHERE id = ' . $id;
+        return $this->delete($sql);
     }
     /**
      * Delete user by id
      * @param $id
      * @return mixed
      */
+ 
 
     /**
      * Update user
      * @param $input
      * @return mixed
      */
-
-
-    public function updateUser($input, $version)
+    public function updateUser($input)
     {
-        $verId = $this->findUserById($input['id']);
-        $oldversion = $verId[0]['version'];
-        $error = false;
-        if($oldversion == $version){
-           
-            $v1 = (int)$oldversion + 1;
-            $sql = 'UPDATE users SET 
-            name = "' . $input['name'] . '", 
-            password="' . md5($input['password']) . '",
-            fullname = "' . $input['fullname'] . '", 
-            email = "' . $input['email'] . '", 
-            type = "' . $input['type'] . '",
-            version = "' . $v1 . '"
-           WHERE id = ' . $input['id'];
-            $user = $this->update($sql);
-    
-             return $user;
-        }
-        else{
-            return $error;
-        }
+        $sql = 'UPDATE users SET 
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '"
+                ,`fullname`="' . $input['full-name'] . '"
+                ,email="' . $input['email'] . '"
+                ,type="' . $input['type'] . '"
+                ,password="' . md5($input['password']) . '"
+                WHERE id = ' . $input['id'];
+        $user = $this->update($sql);
+        return $user;
+        
     }
-
+    public  function generateRandomString($length) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
 
     /**
      * Insert user
@@ -122,9 +100,9 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
-        $sql = "INSERT INTO `tranning_php`.`users` (`name`, `password` ,`fullname`,`email`,`type`) VALUES (" .
-            "'" . $input['name'] . "', '" . md5($input['password']) . "', '"
-            . $input['fullname'] . "', '" . $input['email'] . "', '" . $input['type'] . "')";
+        $password = md5($input['password']);
+        $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
+            "'" . $input['name'] . "', '" . $input['full-name'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
 
         $user = $this->insert($sql);
         // $users = self::$_connection->multi_query($sql);
@@ -154,13 +132,9 @@ class UserModel extends BaseModel
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
-        // $users = $this->select($sql);
         return $users;
     }
-
-    /**
-     * 
-     */
+   
     public static function getInstance(){
         if(self::$_instance != null){
             return self::$_instance;
@@ -168,3 +142,12 @@ class UserModel extends BaseModel
         self::$_instance = new self();
         return self::$_instance;
     }
+    // Get id user new : 
+    public function getUserByIdNew()
+    {
+        $sql = "SELECT MAX(id) as user_id FROM users";
+        $user = $this->select($sql);
+        
+        return $user;
+    }
+    

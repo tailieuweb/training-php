@@ -12,13 +12,15 @@ $keyword = '';
 if (!empty($_GET['keyword'])) {
     $keyword = $_GET['keyword'];
 }
+
 ?>
 <div class="container">
     <nav class="navbar navbar-icon-top navbar-default">
-
+      
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -35,7 +37,8 @@ if (!empty($_GET['keyword'])) {
             </ul>
             <form class="navbar-form navbar-left">
                 <div class="form-group">
-                    <input type="text" name="keyword" class="form-control" placeholder="Search users" value="<?php echo $keyword ?>">
+                    <input type="text" name="keyword" class="form-control" placeholder="Search users"
+                        value="<?php echo $keyword ?>">
                 </div>
                 <button type="submit" class="btn btn-default">Search</button>
             </form>
@@ -46,7 +49,15 @@ if (!empty($_GET['keyword'])) {
                         Account <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="view_user.php?id=<?php echo md5($id . "chuyen-de-web-1") ?>">Profile</a></li>
+                        <?php 
+                         
+                            $userModel = new UserModel();
+                            $rand_string = $userModel->generateRandomString(10);
+                           
+                        ?>
+                        <li><a
+                                href="view_user.php?id=<?= $rand_string . $id . mt_rand(10000 , 99999)?>">Profile</a>
+                        </li>
                         <li role="separator" class="divider"></li>
                         <li><a href="login.php">Login</a></li>
                         <li><a href="logout.php">Logout</a></li>
@@ -61,6 +72,6 @@ if (!empty($_GET['keyword'])) {
             echo $_SESSION['message'];
             unset($_SESSION['message']);
             ?>
-        </div>
+    </div>
     <?php } ?>
 </div>

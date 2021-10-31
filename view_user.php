@@ -1,7 +1,6 @@
 <?php
 require_once 'models/UserModel.php';
 require_once 'models/FactoryPattent.php';
-// $userModel = new UserModel();
 $factory = new FactoryPattent();
 $userModel = $factory->make('user');
 
@@ -10,6 +9,14 @@ $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
+    //Xử lý chuỗi đầu
+    $string_first = substr($id, 0, 10);
+    //Xử lý chuỗi sau
+    $string_last = substr($id, -5);
+    //Thay thể chuỗi đầu = null
+    $id = str_replace($string_first, "", $id);
+    //Thay thế chuỗi sau = null
+    $id = str_replace($string_last, "", $id);
     $user = $userModel->findUserById($id);//Update existing user
 }
 
@@ -58,4 +65,5 @@ if (!empty($_GET['id'])) {
     <?php } ?>
 </div>
 </body>
+
 </html>
