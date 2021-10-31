@@ -24,6 +24,7 @@ if(isset($_GET['err'])){
     echo "<script>window.location.href = 'list_users.php'</script>";
 }
 $users = $userModel->getUsers($params);
+
 ?>
 <!DOCTYPE html>
 <html>
