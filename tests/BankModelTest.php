@@ -37,6 +37,9 @@ class BankModelTest extends TestCase
         }
     }
 
+    /**
+     * Test case findUserById String
+     */
     public function testFindBankByIdStr() 
     {
         $bankModel = new BankModel();
@@ -51,6 +54,9 @@ class BankModelTest extends TestCase
   
     }
 
+    /**
+     * Test case findUserById Null
+     */
     public function testFindBankByIdNull() 
     {
         $bankModel = new BankModel();
@@ -62,6 +68,9 @@ class BankModelTest extends TestCase
   
     }
 
+    /**
+     * Test case findUserById Object
+     */
     public function testFindBankByIdObject() 
     {
         $bankModel = new BankModel();
