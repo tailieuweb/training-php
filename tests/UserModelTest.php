@@ -180,20 +180,14 @@ class UserModelTest extends TestCase
     }
 
     /**
-     * Test case Not good
+     * Test case testUpdateUserNg Not good
      */
     public function testUpdateUserNg()
     {
         $userModel = new UserModel();
-        $id = -111;
+        $id = "abc";
         $input = [
-            "id" => $id,
-            "name" => "nameUpdate",
-            "fullname" => "fullnameUpdate",
-            "email" => "emailUpdate",
-            "type" => "typeUpdate",
-            "password" => "passwordUpdate",
-            "version" => 1
+            "id" => $id
         ];
         $userUpdate = $userModel->updateUser($input);
         if (
@@ -204,6 +198,63 @@ class UserModelTest extends TestCase
             $check = true;
         }
         $actual = true;
+        $this->assertEquals($check, $actual);
+    }
+
+    /**
+     * Test case testUpdateUserNg Not good
+     */
+    public function testAuthOk()
+    {
+        $userModel = new UserModel();
+        $id = -1;
+        $password = "lap";
+        $name = "Lap";
+        $userModel->deleteUserById($id);
+        $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
+        $auth = $userModel->auth($name, $password);
+        $check = false;
+        if (!empty($auth)) {
+            if (
+                isset($auth[0]['name']) &&
+                isset($auth[0]['password'])
+            ) {
+                if (
+                    $auth[0]['name'] == $name &&
+                    $auth[0]['password'] == md5($password)
+                ) {
+                    $check = true;
+                }
+            }
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
+    }
+
+    /**
+     * Test case testUpdateUserNg Not good
+     */
+    public function testAuthNg()
+    {
+        $userModel = new UserModel();
+        $password = md5("lap1");
+        $name = "Lap1";
+        $auth = $userModel->auth($name, $password);
+        $check = false;
+        if (!empty($auth)) {
+            if (
+                isset($auth[0]['name']) &&
+                isset($auth[0]['password'])
+            ) {
+                if (
+                    $auth[0]['name'] == $name &&
+                    $auth[0]['password'] == md5($password)
+                ) {
+                    $check = true;
+                }
+            }
+        }
+        $actual = false;
         $this->assertEquals($check, $actual);
     }
 }
