@@ -1,63 +1,61 @@
-
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 class BankModelTest extends TestCase
 {
     /**
-     * Test case Sum Positive Number
+     * Test case testUpdateBankOk
      */
     public function testUpdateBankOk()
     {
         $bankModel = new BankModel();
-        $id = 1;
-        $user_id = 3;
-        $cost = "1234";
-        $version = 2;
-        $bank = $bankModel->updateBank($id);
-        $actual = $bank[0]['3'];
-        $this->assertEquals($user_id, $actual);
+        $id = -1;
+        $bankModel->deleteBankById($id);
+        $bankModel->insertBankWithId($id, 3, 3);
+        $bank = $bankModel->getBankById($id);
+        $bankVersion = $bank[0]['version'];
+        $input = [
+            "id" => $id,
+            "user_id" => 4,
+            "cost" => 4,
+            "version" => $bankVersion
+        ];
+        $bankUpdate = $bankModel->updateBank($input);
+        $check = false;
+        if (
+            $bankUpdate->isSuccess == true &&
+            $bankUpdate->data == "Đã update thành công" &&
+            $bankUpdate->error == NULL
+        ) {
+            $check = true;
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
     }
-    // public function updateBank($input)
-    // {
-    //     $cost = $this -> BlockSQLInjection($input['cost']);
-    //     $result = new ResultClass();
-    //     $id = $this->decryptID($input['id']);
-    //     $temp = $this->getBankById($input['id']);
-    //     if (count($temp) > 0) {
-    //         if ($temp[0]['version'] == $input['version']) {
-    //             var_dump($temp[0]['version']);
-    //             var_dump($input['version']);
-    //             $sql = 'UPDATE `banks` SET 
-    //             user_id = "' . $input['user_id'] . '", 
-    //              cost="' . $cost . '",
-    //              version="' . ($input['version'] + 1) . '"
-    //            WHERE id = ' . $id;
-    //             $banks = $this->update($sql);
-    //             if ($banks == true) {
-    //                 $result->setData("Đã update thành công");
-    //             } else {
-    //                 $result->setError("Lỗi");
-    //             }
-    //         } else {
-    //             $result->setError("Dữ liệu đã được cập nhật trước đó! Xin hãy reload lại trang");
-    //         }
-    //     } else {
-    //         $result->setError("Không tìm thấy id của bank");
-    //     }
 
-    //     return $result;
-    // }
-
-    // public function testDeleteBankById() {
-    //     $bankModel = new BankModel();
-    //     $id=1;
-    //     $actual = $bankModel->deleteBankById($id);
-    //     if(empty($id)==1) {
-    //         $this->assertTrue(false);
-    //     } else {
-    //         $this->assertTrue(true);
-    //     }
-    // }
+    /**
+     * Test case testUpdateBankNg Not good
+     */
+    public function testUpdateBankNg()
+    {
+        $bankModel = new BankModel();
+        $id = "abc";
+        $input = [
+            "id" => $id,
+            "cost" => 4,
+        ];
+        $bankUpdate = $bankModel->updateBank($input);
+        var_dump($bankUpdate);
+        // die();
+        if (
+            $bankUpdate->isSuccess == false &&
+            $bankUpdate->data == NULL &&
+            $bankUpdate->error == "Không tìm thấy id của bank"
+        ) {
+            $check = true;
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
+    }
 }
-
