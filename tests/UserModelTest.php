@@ -136,7 +136,16 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
-
+    public function testDeleteUserById() {
+        $userModel = new UserModel();
+        $id=1;
+        $actual = $userModel->deleteUserById($id);
+        if(empty($id)==1) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
     /**
      * Test case testUpdateUserOk
      */
