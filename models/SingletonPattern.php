@@ -10,6 +10,9 @@ class SingletonPattern {
         } else if ($model == 'bank') {
             $object = BankModel::getInstance();
         }
+        else{
+            return 'error';
+        }
         return $object;
     }
 }
