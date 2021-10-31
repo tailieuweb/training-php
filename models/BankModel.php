@@ -4,7 +4,7 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel
 {
-
+    protected static $_instance;
     public function findBankById($id)
     {
         $sql1 = 'SELECT id FROM banks';

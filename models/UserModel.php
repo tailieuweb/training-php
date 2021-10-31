@@ -4,7 +4,7 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
-
+    protected static $_instance;
     public function findUserById($id)
     {
         if (is_numeric($id)) {
@@ -36,8 +36,8 @@ class UserModel extends BaseModel
      */
     public function auth($userName, $password)
     {
-        $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
+        // $md5Password = md5($password);
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $password . '"';
 
         $user = $this->select($sql);
         return $user;
@@ -70,7 +70,7 @@ class UserModel extends BaseModel
 
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '", 
 
-                 password="' . md5($input['password']) . '"
+                 password="' . $input['password'] . '"
                 WHERE id = ' . $input['id'];
 
         $user = $this->update($sql);
@@ -102,13 +102,13 @@ class UserModel extends BaseModel
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
-            var_dump($sql);
-            die();
+            // var_dump($sql);
+            // die();
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
-            // $users = $this->select($sql);
+            // $users = self::$_connection->multi_query($sql);
+            $users = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
@@ -120,10 +120,10 @@ class UserModel extends BaseModel
     public static function getInstance()
     {
         if (self::$_instance !== null) {
-            var_dump('returning instance');
+            // var_dump('returning instance');
             return self::$_instance;
         }
-        var_dump('creating instance');
+        // var_dump('creating instance');
         self::$_instance = new self();
         return self::$_instance;
     }
