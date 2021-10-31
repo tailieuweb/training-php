@@ -96,14 +96,46 @@ class UserModelTest extends TestCase
 
        $this->assertEquals($expected, $actual);
     }
-    public function testFindUserByIdOk(){
-       $userModel = new UserModel();
-       $userId = 8;
-       $userName = 'test';
-        
-       $user = $userModel ->findUserById($userId);
-       $actual = $user[0]['name'];
+    
+    
+    /**
+     * Test case getInstance
+     */
+    public function testGetInstanceUser()
+    {
+        $this->assertInstanceOf('UserModel', UserModel::getInstance());
+    }
+    /**
+     * Test case  findUserById OK
+     */
+    public function testFindUserByIdOk()
+    {
+        $userModel = new UserModel();
+        $userId = 2;
+        $userName = 'test2';
 
-       $this->asserEquals($userName, $actual);
+        $user = $userModel->findUserById($userId);
+        $actual = $user[0]['name'];
+
+        $this->assertEquals($userName, $actual);
+    }
+
+    /**
+     * Test case findUserById Not good
+     */
+    public function testFindUserByIdNg()
+    {
+      $userModel = new UserModel();
+      $userId = 2222;
+      $expected = null;
+
+      $user = $userModel->findUserById($userId);
+
+      if(empty($user)){
+         $this->assertTrue(true);
+      }
+      else{
+         $this->assertFalse(false);
+      }
     }
 }
