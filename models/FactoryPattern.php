@@ -1,14 +1,18 @@
 <?php
+
+use phpDocumentor\Reflection\Types\Null_;
+
 require 'models/UserModel.php';
 require 'models/BankModel.php';
 class FactoryPattern {
 
     public function make($model) {
+        $object = Null;
         if ($model == 'user') {
-            return UserModel::getInstance();
+            $object = new UserModel();
         } else if ($model == 'bank') {
-            return new BankModel();
+            $object = new BankModel();
         }
+        return $object;
     }
-
 }
