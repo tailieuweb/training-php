@@ -2,22 +2,27 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel {
-
+class UserModel extends BaseModel
+{
     protected static $_instance;
-    
-    public function findUserById($id) {
-        $sql = 'SELECT * FROM users WHERE id = '.$id;
-        $user = $this->select($sql);
-
-        return $user;
+    public function findUserById($id)
+    {
+        if (is_numeric($id)) {
+            $sql = 'SELECT * FROM users WHERE id = ' . $id;
+            // var_dump($sql);
+            // die();
+            $user = $this->select($sql);
+            return $user;
+        } else {
+            return false;
+        }
     }
 
-    public function findUser($keyword) {
-        
-        //$keyword = htmlentities($keyword, ENT_QUOTES, "UTF-8");
-        
-        $sql = 'SELECT * FROM users WHERE name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
+    public function findUser($keyword)
+    {
+        $sql = 'SELECT * FROM users WHERE name LIKE "%' . $keyword . '%"' . 'OR email LIKE "%' . $keyword . '%"';
+        // var_dump($sql);
+        // die();
         $user = $this->select($sql);
 
         return $user;
@@ -29,9 +34,10 @@ class UserModel extends BaseModel {
      * @param $password
      * @return array
      */
-    public function auth($userName, $password) {
-        $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+    public function auth($userName, $password)
+    {
+        // $md5Password = md5($password);
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $password . '"';
 
         $user = $this->select($sql);
         return $user;
@@ -42,10 +48,10 @@ class UserModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id, $token) {
-        $sql = 'DELETE FROM users WHERE id = '.$id;
-        return $this->delete($sql, $token);
-
+    public function deleteUserById($id)
+    {
+        $sql = 'DELETE FROM users WHERE id = ' . $id;
+        return $this->delete($sql);
     }
 
     /**
@@ -53,14 +59,20 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function updateUser($input) {
+    public function updateUser($input)
+    {
         $sql = 'UPDATE users SET 
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 fullname = "' . $input['fullname'] .'", 
-                 email = "' . $input['email'] .'", 
-                 type = "' . $input['type'] .'", 
-                 password="'. md5($input['password']) .'"
+
+                 name = "' . $input['name'] . '", 
+                 fullname = "' . $input['fullname'] . '",
+                 email = "' . $input['email'] . '",
+                 type = "' . $input['type'] . '",
+
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '", 
+
+                 password="' . $input['password'] . '"
                 WHERE id = ' . $input['id'];
+
         $user = $this->update($sql);
 
         return $user;
@@ -71,73 +83,62 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function insertUser($input) {
-
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`type`,`email`) VALUES (" .
-                "'" . $input['name'] ."', '".md5($input['password'])."','".$input['fullname']."','".$input['type']."','".$input['email']. "')";
-
+    public function insertUser($input)
+    {
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `fullname`, `email`, `type`, `password`) VALUES (" .
+            "'" . $input['name'] . "', '" . $input['fullname'] . "', '" . $input['email'] . "', '" . $input['type'] . "', '" . $input['password'] . "')";
         $user = $this->insert($sql);
 
         return $user;
     }
 
-    public function getUsers($params = []) {
+    /**
+     * Search users
+     * @param array $params
+     * @return array
+     */
+    public function getUsers($params = [])
+    {
         //Keyword
         if (!empty($params['keyword'])) {
-            $key = str_replace('"','',$params['keyword']);
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $key .'%"';
-
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
+            // var_dump($sql);
+            // die();
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
             // $users = self::$_connection->multi_query($sql);
             $users = $this->select($sql);
-            // var_dump($users).die();
         } else {
-
-            $sql = 'SELECT * FROM users join types on users.type = types.type_id';
+            $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
-
         }
 
         return $users;
     }
-    public function getTypes($params = []) {
-        $sql = 'SELECT * FROM types';
-        $types = $this->select($sql);
 
-        return $types;
-    }
-    public function createToken(){
-        $token = $this->get_token_value();
-        return $token;
-    }
-    public static function getInstance() {
-        if (self::$_instance !== null){
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
+            // var_dump('returning instance');
             return self::$_instance;
         }
+        // var_dump('creating instance');
         self::$_instance = new self();
         return self::$_instance;
     }
-    //
-   /**
+
+    /**
      * For testing
      * @param $a
      * @param $b
      */
-    public function sumb($a ,$b){
-        if(!is_numeric($a)) return 'error';
-        if(!is_numeric($b)) return 'error';
-        return $a + $b;
-    }
-    //Check string have work specical
-    public function checkString($field){
-        if(filter_var($field, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
-            return true;
-        } 
-        else if(is_int($field)){
-            return true;
+    public function sumb($a, $b)
+    {
+        if (is_string($a) == true || is_string($b) == true) {
+            return false;
+        } else {
+            return $a + $b;
         }
-        return false;
     }
 }

@@ -13,4 +13,3 @@ if (!empty($_GET['id']) && !empty($_GET['token'])) {
     $userModel->deleteUserById($id, $token);//Delete existing user
 }
 header('location: list_users.php');
-?>

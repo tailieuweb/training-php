@@ -1,16 +1,15 @@
 <?php
-require_once 'models/FactoryPattern.php';
+require_once 'models/BankModel.php';
+$bankModel = new BankModel();
 
-$factory = new FactoryPattern();
-
-$bankModel = $factory->make('bank');
 $bank = NULL; //Add new user
 $id = NULL;
-$token = NULL;
-if (!empty($_GET['id']) && !empty($_GET['token'])) {
+
+if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $token = $_GET['token'];
-    $bankModel->deleteBankById($id, $token);//Delete existing user
+    $id_start = substr($id,3);
+    $id_end=substr($id_start,0,-3);
+    $bankModel->deleteBankById($id_end);//Delete existing user
 }
-header('location: list_bank.php');
+header('location: list_banks.php');
 ?>
