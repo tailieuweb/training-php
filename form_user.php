@@ -1,6 +1,6 @@
 <?php
 require_once 'models/FactoryPattern.php';
-$factory = new FactoryPattern();
+$factory = FactoryPattern::getInstance();
 
 $userModel = $factory->make('user');
 

@@ -59,7 +59,7 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
-        $result = new ResultClass();
+        $result = ResultClass::getInstance();
         $id = $this->decryptID($input['id'], $this->getUsers());
         $temp = $this->findUserById($input['id']);
         if (count($temp) > 0) {
