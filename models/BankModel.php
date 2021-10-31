@@ -4,8 +4,8 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel {
 
-    public function findUserById($id) {
-        $sql = 'SELECT * FROM users WHERE id = '.$id;
+    public function findBankById($id) {
+        $sql = 'SELECT * FROM banks WHERE id = '.$id;
         $user = $this->select($sql);
 
         return $user;
@@ -36,9 +36,9 @@ class BankModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id) {
+    public function deleteBankById($id) {
       
-        $sql = 'DELETE FROM users WHERE id = '.$id;
+        $sql = 'DELETE FROM banks WHERE id = '.$id;
         return $this->delete($sql);
 
     }
@@ -50,28 +50,12 @@ class BankModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function updateUser($input) {
-      
-        $temp = 'SELECT version FROM users WHERE id = '.$input['id'].'';
-        $newTemp = $this->select($temp);
-        
-        if($newTemp[0]['version'] == $input['version']){
-            $newV = $input['version']+1;
-             $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
-                 email = "'.$input['email'].'",
-                 fullname = "'.$input['fullname'].'",
-                 password="'. md5($input['password']) .'", type = "'.$input['type'].'", version = "'.$newV.'"
-                WHERE id = ' . $input['id'] ;
-            $user = $this->update($sql);  
-            header('location: list_users.php?success');  
-            return $user;         
-        } 
-        else{                
-           header('location: list_users.php?err');  
-        }
-        
-        
+    public function updateBank($input) {
+            
+        $sql = 'UPDATE banks SET user_id ="'.$input['user_id'].'", cost = "'.$input['cost'].'" WHERE id = "'.$input['id'].'"';
+
+        $bank = $this->update($sql);
+        return $bank;
     }
 
     /**
@@ -79,17 +63,11 @@ class BankModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
-        "'" . $input['name'] . "', '"
-        . md5($input['password']) . "', '"
-        . $input['fullname'] . "', '"
-        . $input['email'] . "', '"
-        . $input['type']
-        . "')";
-        $user = $this->insert($sql);
-      
-        return $user;
+    public function insertBank($input) {
+        $sql = 'INSERT INTO app_web1.banks (user_id,cost) VALUES ('.$input['user_id'].', '.$input['cost'].')';
+        $bank = $this->insert($sql);
+        return $bank;
+        
                 
     }
 
@@ -100,7 +78,6 @@ class BankModel extends BaseModel {
      */
     public function getBanks($params = []) {
         //Keyword
-       
         if (!empty($params['keyword'])) {
            
             $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] .'%"';

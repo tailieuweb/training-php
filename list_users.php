@@ -74,7 +74,7 @@ $users = $userModel->getUsers($params);
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $user['id']?>">
+                                <a href="delete_user.php?id=<?php echo base64_encode($key_code.$user['id'])?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
