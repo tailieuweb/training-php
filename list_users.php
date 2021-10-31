@@ -1,7 +1,9 @@
 <?php
 // Start the session
 session_start();
-require './models/FactoryPattern.php';
+spl_autoload_register(function($class){
+    require './models/' . $class . '.php';
+});
 
 //$userModel = $factory->make('user');
 $userModel = UserModel::getInstance();

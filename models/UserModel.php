@@ -3,9 +3,21 @@
 require_once './models/BaseModel.php';
 class UserModel extends BaseModel
 {
-    
+    private static $instanceUserModel = NULL;
+
+    private function __construct()
+    {
+        return self::$instanceUserModel;
+    }
+    public static function getInstance() : UserModel{
+        if(self::$instanceUserModel == NULL){
+            self::$instanceUserModel = new UserModel();
+        }
+        return self::$instanceUserModel;
+    }
+
     public function findUserById($id) {
-        $id = $this->matchRegexInput($id);
+        $id = BaseModel::matchRegexInput($id);
         $sql = BaseModel::connectDatabase()->prepare("SELECT * FROM users WHERE id = ?");
         $sql->bind_param("i",$id);
         $sql->execute();
@@ -81,7 +93,7 @@ class UserModel extends BaseModel
      //fix add new user
     public function insertUser($input) {
         $password = md5($input['password']);
-        $str_replace = $this->matchRegexInput($input);
+        $str_replace = BaseModel::matchRegexInput($input);
         $sql = $this->connectDatabase()->prepare('INSERT INTO `users` (`name`,`fullname`, `email`, `type`, `password`) 
                 VALUES(?,?,?,?,?)');
         $sql->bind_param("sssss",$str_replace['name'],$str_replace['fullname'],$str_replace['email']
@@ -98,14 +110,14 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
-            $str_keyword = $this->matchRegexInput($params);
+            $str_keyword = BaseModel::matchRegexInput($params);
             $str_keyword =  "%" . $params['keyword'] . "%";
-            $sql = BaseModel::connectDatabase()->prepare('SELECT * FROM users WHERE name LIKE ?');
+            $sql = $this->connectDatabase()->prepare('SELECT * FROM users WHERE name LIKE ?');
             $sql->bind_param('s',  $str_keyword);
         } else {
-            $sql = BaseModel::connectDatabase()->prepare('SELECT * FROM users');
+            $sql = $this->connectDatabase()->prepare('SELECT * FROM users');
         }
-        $result = BaseModel::select_result($sql) ? BaseModel::select_result($sql) : [];
+        $result = $this->select_result($sql) ? $this->select_result($sql) : [];
         return $result;
     }
     // public static function getInstance() {

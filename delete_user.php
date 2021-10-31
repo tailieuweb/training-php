@@ -1,6 +1,6 @@
 <?php
 require_once 'models/UserModel.php';
-$userModel = new UserModel();
+$userModel = UserModel::getInstance();
 
 
 //23-4

@@ -39,24 +39,24 @@ class BankModel extends BaseModel
     //  * @param $password
     //  * @return array
     //  */
-    // public function auth($userName, $password) {
-    //     $md5Password = md5($password);
-    //     $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
-    //     $user = $this->select($sql);
-    //     return $user;
-    // }
+    public function auth($userName, $password) {
+        $md5Password = md5($password);
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+        $user = $this->select($sql);
+        return $user;
+    }
 
     // /**
     //  * Delete user by id
     //  * @param $id
     //  * @return mixed
     //  */
-    // public function deleteUserById($id) {
+    public function deleteUserById($id) {
 
-    //     $sql = 'DELETE FROM users WHERE id = '.$id;
-    //     return $this->delete($sql);
+        $sql = 'DELETE FROM banks WHERE id = '.$id;
+        return $this->delete($sql);
 
-    // }
+    }
 
 
 
@@ -131,4 +131,5 @@ class BankModel extends BaseModel
         }
         return $banks;
     }
+
 }

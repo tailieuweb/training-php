@@ -90,10 +90,20 @@ require_once 'configs/database.php';
     }
 
 
-    protected  function matchRegexInput($param){
+    public static function matchRegexInput($param){
         $array_replace = array("'",'"',"<",">");
         $str = str_replace($array_replace,'',$param);
         return $str;
+    }
+    public static function matchRegexLogin($username,$password){
+        $check_username = preg_match('/^[A-Z-a-z-0-9]+$/',$username);
+        $check_password = preg_match('/^[A-Z-a-z-0-9]+$/',$password);
+        if($check_username == 1 && $check_password == 1){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     // protected abstract function CreateProduct1();
     // protected abstract function CreateProduct2();
