@@ -2,8 +2,14 @@
 // Start the session
 session_start();
 
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+$userModel = $factory->make('user');
+
+if($userModel !== null){
+
+// require_once 'models/UserModel.php';
+// $userModel = new UserModel();
 
 $params = [];
 if (!empty($_GET['keyword'])) {
@@ -11,6 +17,7 @@ if (!empty($_GET['keyword'])) {
 }
 
 $users = $userModel->getUsers($params);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,8 +45,8 @@ $users = $userModel->getUsers($params);
             <tbody>
                 <?php foreach ($users as $user) { ?>
                 <tr>
-                    <!-- Phân tách thông tin -->
-                    <!-- Sử dùng hàm htmlentities đễ mã hóa các ký tự có khả năng thực thi javascript trước khi lưu trữ -->
+                    <!-- Sử dùng htmlentities để chuyển đổi tất cả các ký tự áp dụng thành các thực thể HTML trước khi save-->
+                    <!-- Mã hoá các kí tự có thể thực thi các câu lệnh script -->
                     <th scope="row"><?php echo htmlentities($user['id']) ?></th>
                     <td>
                         <?php echo htmlentities($user['name']) ?>
@@ -54,17 +61,13 @@ $users = $userModel->getUsers($params);
                         <?php echo htmlentities($user['type']) ?>
                     </td>
                     <td>
-                        <?php
-                            $min = 1000;
-                            $max = 9999;
-                        ?>
-                        <a href="form_user.php?id=<?= mt_rand($min , $max) . $user['id'] . mt_rand($min , $max) ?>">
+                        <a href="form_user.php?id=<?= rand(100,999).$user['id'].rand(100,999)?> ">
                             <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i> 
                         </a>
-                        <a href="view_user.php?id=<?= mt_rand($min , $max) . $user['id'] . mt_rand($min , $max) ?>">
+                        <a href="view_user.php?id=<?=rand(100,999).$user['id'].rand(100,999)?>">
                             <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                         </a>
-                        <a href="delete_user.php?id=<?= mt_rand($min , $max) . $user['id'] . mt_rand($min , $max) ?>">
+                        <a href="delete_user.php?id=<?=rand(100,999).$user['id'].rand(100,999)?>">
                             <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                         </a>
                     </td>
@@ -129,6 +132,6 @@ $users = $userModel->getUsers($params);
 >>>>>>> 2-php-202109/2-groups/8-H/4-33-Tri
         <?php } ?>
     </div>
+<?php } else{echo"Lỗi factory!";} ?>
 </body>
-
 </html>
