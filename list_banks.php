@@ -29,8 +29,9 @@ $banks = $bankModel->getBanks($params);
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
+                        <th scope="col">Fullname</th>
                         <th scope="col">Cost</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">Version</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,9 +43,14 @@ $banks = $bankModel->getBanks($params);
                                 <?php echo $bank['name'] ?>
                             </td>
                             <td>
+                                <?php echo $bank['fullname'] ?>
+                            </td>
+                            <td>
                                 <?php echo $bank['cost'] ?>
                             </td>
-                           
+                            <td>
+                                <?php echo $bank['version'] ?>
+                            </td>
                             <td>
                                 <a href="form_bank.php?id=<?php echo md5($bank['bank_id'] . "chuyen-de-web-1") ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
@@ -52,7 +58,7 @@ $banks = $bankModel->getBanks($params);
                                 <a href="view_bank.php?id=<?php echo md5($bank['bank_id'] . "chuyen-de-web-1")  ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_bank.php?id=<?php  echo md5($bank['bank_id'] . "chuyen-de-web-1") ?>">
+                                <a href="delete_bank.php?bank_id=<?php  echo md5($bank['bank_id'] . "chuyen-de-web-1") ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

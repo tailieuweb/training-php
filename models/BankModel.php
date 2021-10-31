@@ -104,9 +104,9 @@ class BankModel extends BaseModel
     {
         $allBanks = $this->getAllBanks($input['user_id']);
         if (empty($allBanks)) {
-            $sql = "INSERT INTO `tranning_php`.`banks` (`user_id`, `cost` ) VALUES (" .
+            $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
                 "'" . $input['user_id'] . "','" . $input['cost'] . "')";
-            $bank = $this->insert($sql);
+                $bank = self::$_connection->multi_query($sql);
             // $users = self::$_connection->multi_query($sql);
             return $bank;
         } else {
@@ -118,6 +118,7 @@ class BankModel extends BaseModel
             $user = $this->update($sql);
             return $user;
         }
+        
     }
 
     /**
@@ -146,7 +147,7 @@ class BankModel extends BaseModel
             //Example keyword: abcef%";TRUNCATE banks;##
             $banks = self::$_connection->multi_query($sql);
         } else {
-            $sql = 'SELECT banks.id as bank_id,users.name,users.email,banks.cost,users.type,users.id,banks.user_id,banks.version 
+            $sql = 'SELECT banks.id as bank_id,users.name,users.fullname,users.email,banks.cost,users.type,users.id,banks.user_id,banks.version 
             FROM `banks`,`users` 
             WHERE banks.user_id = users.id';
             $banks = $this->select($sql);

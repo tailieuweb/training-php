@@ -43,6 +43,20 @@ class UserModel extends BaseModel
         return $user;
     }
 
+
+    /**
+     * Get username user by id
+     * @param $id
+     * @return mixed
+     */
+
+    public function getUsernameById($id)
+    {
+        $sql = 'SELECT name FROM users where id = ' . $id;
+        $user = $this->select($sql);
+        return $user;
+    }
+
     /**
      * Delete user by id
      * @param $id
@@ -67,11 +81,6 @@ class UserModel extends BaseModel
      * @param $id
      * @return mixed
      */
-    // public function deleteUserById($id)
-    // {
-    //     $sql = 'DELETE FROM users WHERE id = ' . $id;
-    //     return $this->delete($sql);
-    // }
 
     /**
      * Update user
@@ -82,34 +91,27 @@ class UserModel extends BaseModel
 
     public function updateUser($input, $version)
     {
-        $sql1 = 'SELECT id FROM users';
+        $verId = $this->findUserById($input['id']);
+        $oldversion = $verId[0]['version'];
         $error = false;
-        $allUser = $this->select($sql1);
-        $id = 0;
-        foreach ($allUser as $key) {
-            $md5 = md5($key['id'] . "chuyen-de-web-1");
-            if ($md5 == $input['id']) {
-                $id = $key['id'];
-                $sql = 'SELECT * FROM users WHERE id = ' . $key['id'];
-                $userById = $this->select($sql);
-            }
-        }
-        $oldTime = $userById[0]['version'] . "chuyen-de-web-1";
-
-        if (md5($oldTime) == $version) {
-            $time1 = (int)$oldTime + 1;
+        if($oldversion == $version){
+           
+            $v1 = (int)$oldversion + 1;
             $sql = 'UPDATE users SET 
-                name = "' . $input['name'] . '", 
-                email = "' . $input['email'] . '", 
-                fullname = "' . $input['fullname'] . '", 
-                type = "' . $input['type'] . '", 
-                version = "' . $time1 . '", 
-                password="' . md5($input['password']) . '"
-                WHERE id = ' . $id;
+            name = "' . $input['name'] . '", 
+            password="' . md5($input['password']) . '",
+            fullname = "' . $input['fullname'] . '", 
+            email = "' . $input['email'] . '", 
+            type = "' . $input['type'] . '",
+            version = "' . $v1 . '"
+           WHERE id = ' . $input['id'];
             $user = $this->update($sql);
-            return $user;
-        } else {
+    
+             return $user;
+        }
+        else{
             return $error;
+        }
     }
 
 
@@ -138,27 +140,31 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
-
-            $params['keyword'] = str_replace(
-                array(
-                    ',', ';', '#', '/', '%', 'select', 'update', 'insert', 'delete', 'truncate',
-                    'union', 'or', '"', "'", 'SELECT', 'UPDATE', 'INSERT', 'DELETE', 'TRUNCATE', 'UNION', 'OR'
-                ),
-                array(''),
-                $params['keyword']
-            );
-
-            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] . '%"';
+            $mysqli = mysqli_connect("localhost", "root", "", "app_web1");
+            $key = isset($params['keyword'])?(string)(int)$params['keyword']:false;
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . mysqli_real_escape_string($mysqli,$key) . '%"';
+            // $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
 
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
+            //Example keyword text: 1')";TRUNCATE banks;##
             $users = self::$_connection->multi_query($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
+        // $users = $this->select($sql);
         return $users;
     }
-    
-}
+
+    /**
+     * 
+     */
+    public static function getInstance(){
+        if(self::$_instance != null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }

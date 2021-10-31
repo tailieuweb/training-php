@@ -3,11 +3,14 @@
 session_start();
 
 require_once 'models/UserModel.php';
-$userModel = new UserModel();
-
+require_once 'models/FactoryPattent.php';
+// $userModel = new UserModel();
+$factory = new FactoryPattent();
+$userModel = $factory->make('user');
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
+    // $params['keyword'] = str_replace('/[^#?!@]/', '', $_GET['keyword']);
 }
 
 $users = $userModel->getUsers($params);
@@ -49,19 +52,22 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['fullname'] ?>
                             </td>
                             <td>
+                                <?php echo $user['email']?>
+                            </td>
+                            <td>
                                 <?php echo $user['type'] ?>
                             </td>
                             <td>
-                                <?php echo $user['email'] ?>
+                                <?php echo $user['version']?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo md5($user['id'] . "chuyen-de-web-1") ?>">
+                                <a href="form_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo md5($user['id'] . "chuyen-de-web-1")  ?>">
+                                <a href="view_user.php?id=<?php echo $user['id']?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo md5($user['id'] . "chuyen-de-web-1") ?>">
+                                <a href="delete_user.php?id=<?php echo md5($user['id']) ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

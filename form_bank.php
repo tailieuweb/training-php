@@ -59,7 +59,7 @@ if (!empty($_POST['submit'])) {
 
             <form method="POST">
                 <input type="hidden" name="id" value="<?php echo $_id ?>">
-                <input type="hidden" name="version" value="<?php if (!empty($bank[0]['version'])) echo md5($bank[0]['version'] . "chuyen-de-web-1") ?>">
+                <input type="hidden" name="version" value="<?php if (isset($bank[0]['version'])) echo md5($bank[0]['version'] . "chuyen-de-web-1") ?>">
                 <div class="form-group">
                     <label for="type">Type</label>
                     <select name="user_id">
@@ -80,7 +80,7 @@ if (!empty($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label for="cost">Cost</label>
-                    <input type="number" name="cost" class="form-control" placeholder="Email" value="<?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?>">
+                    <input type="text" name="cost" class="form-control" placeholder="cost" value="<?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?>">
                 </div>
                 <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
             </form>
