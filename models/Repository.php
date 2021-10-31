@@ -8,8 +8,8 @@ class Repository
    private $bankModel;
    //constructor
    public function __construct() {
-       $this->userModel = new UserModel;
-       $this->bankModel = new BankModel;
+       $this->userModel = UserModel::getInstance();
+       $this->bankModel = BankModel::getInstance();
    }
    public function findUserById($id)
     {

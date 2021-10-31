@@ -1,6 +1,6 @@
 <?php
 require_once 'models/FactoryPattern.php';
-$factory = new FactoryPattern();
+$factory = FactoryPattern::getInstance();
 // Bank 
 $bankModel = $factory->make('bank');
 $bank = NULL; // Add new bank

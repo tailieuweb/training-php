@@ -56,7 +56,7 @@ class BankModel extends BaseModel
     public function updateBank($input)
     {
         $cost = $this->BlockSQLInjection($input['cost']);
-        $result = new ResultClass();
+        $result = ResultClass::getInstance();
         $id = $this->decryptID($input['id'], $this->getBanks());
         $temp = $this->getBankById($input['id']);
         if (count($temp) > 0) {
@@ -103,7 +103,7 @@ class BankModel extends BaseModel
     public function getBanks($params = [])
     {
         if (!empty($params['user-id'])) {
-            $userModel = new UserModel();
+            $userModel = UserModel::getInstance();
             $user = $userModel->findUserById($this->BlockSQLInjection($params['user-id']));
             $userId = NULL;
             if (!empty($user)) {
