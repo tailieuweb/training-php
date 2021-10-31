@@ -12,7 +12,7 @@ abstract class BaseModel
 
         if (!isset(self::$_connection)) {
             self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-            var_dump('connecting to database successfully');
+            // var_dump('connecting to database successfully');
             if (self::$_connection->connect_errno) {
                 printf("Connect failed");
                 exit();
