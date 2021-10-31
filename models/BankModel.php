@@ -72,13 +72,13 @@ class BankModel extends BaseModel
         return NULL;
     }
 
-    public static function getInstance()
-    {
-        if (self::$_instance !== null) {
-            return self::$_instance;
+    // Singleton pattern:
+    public static function getInstance() {
+        if (self::$bankInstance !== null) {
+            return self::$bankInstance;
         }
-        self::$_instance = new self();
-        return self::$_instance;
+        self::$bankInstance = new self();
+        return self::$bankInstance;
     }
 
     private function BlockSQLInjection($str) {

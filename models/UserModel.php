@@ -118,11 +118,12 @@ class UserModel extends BaseModel {
         }
         return NULL;
     }
+    // Singleton pattern:
     public static function getInstance() {
-        if (self::$_instance !== null){
-            return self::$_instance;
+        if (self::$userInstance !== null) {
+            return self::$userInstance;
         }
-        self::$_instance = new self();
-        return self::$_instance;
+        self::$userInstance = new self();
+        return self::$userInstance;
     }
 }

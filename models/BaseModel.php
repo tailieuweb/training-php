@@ -1,10 +1,11 @@
 <?php
 require_once 'configs/database.php';
-
 abstract class BaseModel {
     // Database connection
     protected static $_connection;
-
+    protected static $userInstance;
+    protected static $bankInstance;
+    
     public function __construct() {
 
         if (!isset(self::$_connection)) {
