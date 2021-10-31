@@ -58,4 +58,30 @@ class BankModelTest extends TestCase
         $actual = true;
         $this->assertEquals($check, $actual);
     }
+
+    /**
+     * Test case insertUserWithIdOk 
+     */
+    public function testInsertBankWithIdOk()
+    {
+        $bankModel = new BankModel();
+        $id = -1;
+        $bankModel->deleteBankById($id);
+        $result = $bankModel->insertBankWithId($id, 3, 3);
+        $actual = true;
+        $this->assertEquals($result, $actual);
+    }
+
+    /**
+     * Test case insertUserWithIdNg Not good
+     */
+    public function testInsertBankWithIdNg()
+    {
+        $bankModel = new BankModel();
+        $id = "acb";
+        $bankModel->deleteBankById($id);
+        $result = $bankModel->insertBankWithId($id, 3, 3);
+        $actual = false;
+        $this->assertEquals($result, $actual);
+    }
 }

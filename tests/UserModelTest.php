@@ -136,11 +136,12 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
-    public function testDeleteUserById() {
+    public function testDeleteUserById()
+    {
         $userModel = new UserModel();
-        $id=1;
+        $id = 1;
         $actual = $userModel->deleteUserById($id);
-        if(empty($id)==1) {
+        if (empty($id) == 1) {
             $this->assertTrue(false);
         } else {
             $this->assertTrue(true);
@@ -256,5 +257,35 @@ class UserModelTest extends TestCase
         }
         $actual = false;
         $this->assertEquals($check, $actual);
+    }
+
+    /**
+     * Test case insertUserWithIdOk 
+     */
+    public function testInsertUserWithIdOk()
+    {
+        $userModel = new UserModel();
+        $id = -1;
+        $password = "lap";
+        $name = "Lap";
+        $userModel->deleteUserById($id);
+        $insert =  $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
+        $actual = true;
+        $this->assertEquals($insert, $actual);
+    }
+
+    /**
+     * Test case insertUserWithIdNg Not good
+     */
+    public function testInsertUserWithIdNg()
+    {
+        $userModel = new UserModel();
+        $id = "abc";
+        $password = "lap";
+        $name = "Lap";
+        $userModel->deleteUserById($id);
+        $insert =  $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
+        $actual = false;
+        $this->assertEquals($insert, $actual);
     }
 }
