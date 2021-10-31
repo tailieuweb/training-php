@@ -103,16 +103,17 @@ class UserModelTest extends TestCase
     public function testInsertUserOk()
     {
       $userModel = new UserModel();
+      $userId = 6;
       $input['name'] = 'le';
       $input['password']  = '1234';
       $input['fullname'] = 'lenguyentan';
       $input['email'] = 'tanle123@gmail.com';
       $input['type'] = 'admin';
       $userModel->insertUser($input);
-      $ex = $userModel->findUserById(6);
-      $expected = $input['name']['password']['fullname']['email']['type'];
-      $actual = $ex[0]['name']['password']['fullname']['email']['type'];
-      $this->assertEquals($expected, $actual);
+      $expected = $userModel->findUserById($userId);
+      $actual = $expected[4]['name']['password']['fullname']['email']['type'];
+      //var_dump($actual); die();
+      $this->assertEquals($input['name']['password']['fullname']['email']['type'], $actual);
     }
 
    /**
@@ -130,40 +131,6 @@ class UserModelTest extends TestCase
       $user = $userModel->insertUser($input);
       $expected = $userModel->findUserById(6);
       if($expected != null){
-         $this->assertTrue(true);
-      }
-      else{
-         $this->assertFalse(false);
-      }
-    }
-
-    /**
-     * Test case  findUserById OK
-     */
-    public function testFindUserByIdOk()
-    {
-        $userModel = new UserModel();
-        $userId = 2;
-        $userName = 'test2';
-
-        $user = $userModel->findUserById($userId);
-        $actual = $user[0]['name'];
-
-        $this->assertEquals($userName, $actual);
-    }
-
-    /**
-     * Test case findUserById Not good
-     */
-    public function testFindUserByIdNg()
-    {
-      $userModel = new UserModel();
-      $userId = 2222;
-      $expected = null;
-
-      $user = $userModel->findUserById($userId);
-
-      if(empty($user)){
          $this->assertTrue(true);
       }
       else{
