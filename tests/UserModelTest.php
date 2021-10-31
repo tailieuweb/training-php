@@ -113,8 +113,8 @@ class UserModelTest extends TestCase
     public function testFindUserByIdWithInteger()
     {
         $user = new UserModel();
-        $id = '6';
-        $expected = 'test2';
+        $id = '1';
+        $expected = 'test1';
         $actual = $user->findUserById($id);
         $this->assertEquals($expected, $actual[0]['name']);
     }
@@ -132,7 +132,7 @@ class UserModelTest extends TestCase
     public function testFindUserGoodWithString()
     {
         $user = new UserModel();
-        $keys = "test2";
+        $keys = "test1";
         // $expected = "LE VAN LAM";
         $actual = $user->findUser($keys);
         // var_dump($actual);
@@ -146,7 +146,7 @@ class UserModelTest extends TestCase
     {
         $user = new UserModel();
         $params = [];
-        $params['keyword'] = 'nam';
+        $params['keyword'] = 'huynh';
         // $expected = "LE VAN LAM";
         $actual = $user->getUsers($params);
         // var_dump($actual);
@@ -172,8 +172,8 @@ class UserModelTest extends TestCase
     public function testAuthGood()
     {
         $user = new UserModel();
-        $username = 'thanh nhu';
-        $password = '1234';
+        $username = 'huynh';
+        $password = '123';
         $actual = $user->auth($username, $password);
         if (!empty($actual)) {
             return $this->assertTrue(true);
@@ -194,7 +194,7 @@ class UserModelTest extends TestCase
     public function testUpdateUserGood()
     {
         $user = new UserModel();
-        $input = array('id' => '2', 'name' => 'gia nam', 'fullname' => 'nguyen gia name', 'email' => 'example@gmail.com', 'type' => 'admin', 'password' => '1234');
+        $input = array('id' => '2', 'name' => 'maihuynh', 'fullname' => 'huynh mai xuan', 'email' => 'example@gmail.com', 'type' => 'admin', 'password' => '1234');
         $actual = $user->updateUser($input);
         // var_dump($actual);
         // die();
@@ -207,7 +207,7 @@ class UserModelTest extends TestCase
     public function testInsertUserGood()
     {
         $user = new UserModel();
-        $input = array('name' => 'gia nam', 'fullname' => 'nguyen gia name', 'email' => 'example@gmail.com', 'type' => 'admin', 'password' => '1234');
+        $input = array('name' => 'huynh', 'fullname' => 'mai xuan huynh', 'email' => 'example@gmail.com', 'type' => 'admin', 'password' => '1234');
         $actual = $user->insertUser($input);
         // var_dump($actual);
         // die();
