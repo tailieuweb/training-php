@@ -36,4 +36,40 @@ class BankModelTest extends TestCase
             $this->assertFalse(false);
         }
     }
+
+    public function testFindBankByIdStr() 
+    {
+        $bankModel = new BankModel();
+  
+        $id = 'abc';
+  
+  
+        $expected = 'error';
+        $actual = $bankModel->findBankById($id);
+  
+        $this->assertEquals($expected, $actual);
+  
+    }
+
+    public function testFindBankByIdNull() 
+    {
+        $bankModel = new BankModel();
+        $id = '';
+        $expected = 'error';
+        $actual = $bankModel->findBankById($id);
+  
+        $this->assertEquals($expected, $actual);
+  
+    }
+
+    public function testFindBankByIdObject() 
+    {
+        $bankModel = new BankModel();
+  
+        $id = new stdClass();
+        $expected = 'error';
+        $actual = $bankModel->findBankById($id);
+  
+        $this->assertEquals($expected, $actual);
+    }
 }
