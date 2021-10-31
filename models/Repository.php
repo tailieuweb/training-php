@@ -55,6 +55,16 @@ class Repository
     {
         return $this->userModel->getUsers($params);
     }
+     /**
+     * Authentication user
+     * @param $userName
+     * @param $password
+     * @return array
+     */
+    public function auth($userName, $password)
+    {
+        return $this->userModel->auth($userName, $password);
+    }
 /**
      * -----------BANK------------
      */
