@@ -1,6 +1,8 @@
 <?php
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+
+$userModel = $factory->make('user');
 
 $user = NULL; //Add new user
 $id = NULL;
@@ -16,9 +18,9 @@ if (!empty($_GET['id'])) {
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
-        $userModel->updateUser($_POST);
+        $userModel->updateUser($_POST,$bankModel);
     } else {
-        $userModel->insertUser($_POST); 
+        $userModel->insertUser($_POST,$bankModel); 
         header('location: list_users.php');  
     }   
 }
@@ -33,13 +35,12 @@ if (!empty($_POST['submit'])) {
 <body>
     <?php include 'views/header.php'?>
     <div class="container">
-
-            <?php if ($user || isset($newsid)) { ?>
+            <?php if ($user || !isset($newsid)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $newid ?>">
+                    <input type="hidden" name="id" value="<?php if(!empty($newid)){echo $newid;}else{echo $id;}?>">
                     <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo base64_encode($keyCode.$user[0]['version'])?>">
                     <div class="form-group">
                         <label for="name">Name</label>
