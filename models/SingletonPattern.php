@@ -4,10 +4,12 @@ require_once 'models/BankModel.php';
 class SingletonPattern {
 
     public function make($model) {
+        $object = Null;
         if ($model == 'user') {
-            return UserModel::getInstance();
+            $object = UserModel::getInstance();
         } else if ($model == 'bank') {
-            return BankModel::getInstance();
+            $object = BankModel::getInstance();
         }
+        return $object;
     }
 }
