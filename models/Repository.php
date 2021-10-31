@@ -24,8 +24,6 @@ class Repository extends BaseModel
                 "'" . $getID[0]['id'] . "', '" . $input['cost'] . "')";
 
             $banks = $this->insert($sqlBank);
-
-            return $banks;
         }
         return $user;
     }
@@ -53,8 +51,6 @@ class Repository extends BaseModel
                 WHERE user_id = ' . $input['id'];
 
             $banks = $this->update($sqlBank);
-
-            return $banks;
         }
         return $user;
     }
