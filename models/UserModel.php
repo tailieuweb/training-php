@@ -51,33 +51,17 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        $t = base64_decode($input['version']);
-        $str = substr($t,18);
-
-        // var_dump($input['version']);
-        // die();
-
-        $temp = 'SELECT version FROM users WHERE id = '.$input['id'].'';
-        $newTemp = $this->select($temp);
-        if($newTemp[0]['version'] == $str){
-            $newV = $str+1;
              $sql = 'UPDATE users SET 
                  name = "' . $input['name'] .'", 
                  email = "'.$input['email'].'",
                  fullname = "'.$input['fullname'].'",
-                 password="'. md5($input['password']) .'", type = "'.$input['type'].'", version = "'.$newV.'"
+                 password="'. md5($input['password']) .'", type = "'.$input['type'].'"
                 WHERE id = ' . $input['id'] ;
             $user = $this->update($sql);  
             header('location: list_users.php?success');  
-            return $user;         
-        } 
-        else{                
-           header('location: list_users.php?err');  
-        }
-        
-        
+            var_dump($sql); die();
+            return $user;    
     }
-
 
     /**
      * Insert user
@@ -121,4 +105,5 @@ class UserModel extends BaseModel {
         }
          return  $users;
     }
+
 }
