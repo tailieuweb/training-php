@@ -4,6 +4,7 @@ import { actLoadSignInUser } from "../redux/actions/authActions";
 import Footer from "./Footer";
 import Header from "./Header";
 import Posts from "./Posts";
+import Loading from "../components/Base/Loading";
 
 export default function HomePage() {
   const dispatch = useDispatch();

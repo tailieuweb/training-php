@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { actLogoutUser } from "../redux/actions/authActions";
-import Auth from "./Auth";
+import { actLogoutUser } from "../../redux/actions/authActions";
+import Auth from "../Auth";
+import HeaderAuth from "./HeaderAuth";
+import HeaderLanguages from "./HeaderLanguages";
+import HeaderSearch from "./HeaderSearch";
 
 export default function Header(props) {
   const { isLoading } = props;
@@ -12,6 +15,10 @@ export default function Header(props) {
 
   const onLogout = () => {
     dispatch(actLogoutUser());
+  };
+
+  const onSearch = () => {
+    console.log("Search");
   };
 
   return (
@@ -32,29 +39,10 @@ export default function Header(props) {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto">
-            {!isLoading && (
-              <div>
-                {!user ? (
-                  <button
-                    className="btn btn-primary btn-sm"
-                    type="button"
-                    data-toggle="modal"
-                    data-target="#authModal"
-                  >
-                    <i className="fa fa-sign-in" /> Sign In
-                  </button>
-                ) : (
-                  <button
-                    className="btn btn-danger btn-sm"
-                    type="button"
-                    onClick={onLogout}
-                  >
-                    <i className="fa fa-sign-out" /> Sign Out
-                  </button>
-                )}
-              </div>
-            )}
+          <ul className="w-75 navbar-nav ml-auto align-items-center d-flex justify-content-end flex-row mt-3 mt-lg-0">
+            <HeaderSearch onSearch={onSearch} />
+            <HeaderLanguages />
+            <HeaderAuth isLoading={isLoading} user={user} onLogout={onLogout} />
           </ul>
           <Auth />
         </div>
