@@ -9,5 +9,6 @@ class FactoryPattern {
         } else if ($model == 'bank') {
             return BankModel::getInstance();
         }
+    return $modelObj;
     }
 }

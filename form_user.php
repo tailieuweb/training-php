@@ -1,11 +1,15 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
-
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+$userModel = $factory::create("user");
+$bankModel = $factory::create("bank");
 $user = NULL; //Add new user
+$bank = NULL;
 $_id = NULL;
+$params = [];
+$prevCost = 0;
 
 if (!empty($_GET['id'])) { 
     //Update SQL Injection - convert id -> int -> string
@@ -16,23 +20,14 @@ if (!empty($_GET['id'])) {
 
 if (!empty($_POST['submit'])) {
     //Use clean()(UserModel) clean all special chars (-@) 
-    $_POST = UserModel::clean($_POST);
+    $_POST =  FactoryPattern::clean($_POST);
     if (!empty($_id)) {
-        $userModel->updateUser($_POST);
+       $userModel->updateUser($_POST);
     } else {
-        $userModel->insertUser($_POST);
+       $userModel->insertUser($_POST);
     }
     header('location: list_users.php');
 }
-//Print sql
-//example keyword: fullname = "phuongnguyen','pn0921997@gmail.com','user');TRUNCATE demo;##"
-$sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
-    "'" . $_POST['name'] . "',
-    '".md5($_POST['password'])."',
-    '".$_POST['fullname']."',
-    '".$_POST['email']."',
-    '".$_POST['type']."')";
-echo $sql;
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,7 +40,7 @@ echo $sql;
 <body>
     <div class="container">
 
-        <?php if ($user || !isset($_id)) { ?>
+        <?php if (($user || !isset($_id))) { ?>
         <div class="alert alert-warning" role="alert">
             User form
         </div>
@@ -80,12 +75,17 @@ echo $sql;
                 </select>
             </div>
             <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+            <?php if (isset($_id)) {?>
+            <button class="btn btn-success">
+                <a href="form_bank.php?id=<?= $_id?>" style="text-decoration: none; color: white;">
+                    Add Cost
+                </a>
+            </button>
+            <?php } ?>
         </form>
         <?php } else { ?>
-        <div class="alert alert-success" role="alert">
-            User not found!
-        </div>
-        <?php } ?>
+            User not found
+        <?php }?>
     </div>
 </body>
 
