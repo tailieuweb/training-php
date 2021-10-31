@@ -3,13 +3,14 @@
          xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          colors="true"
-         cacheResult="false"
+         cacheResult ="false"
 >
     <testsuites>
         <testsuite name="SqlWsContractImport">
             <file>./Tests/UserModelTest.php</file>
+            <file>./Tests/BankModelTest.php</file>
         </testsuite>
-    </testsuites>
+    </testsuites>   
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./models</directory>

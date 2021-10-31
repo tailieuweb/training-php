@@ -4,7 +4,7 @@
       "models/"
     ]
   },
-  "require-dev": {
+  "require": {
     "phpunit/phpunit": "^9.5"
   }
 }
