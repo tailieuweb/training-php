@@ -5,11 +5,9 @@ use PHPUnit\Framework\TestCase;
 class BankModelTest extends TestCase
 {
     /**
-     * Lap testUpdateBank in bankMoldel
+     * Test updateBank Function in BankModel - 'Lập' do this
      */
-    /**
-     * Test case testUpdateBankOk
-     */
+    // Test case testUpdateBankOk
     public function testUpdateBankOk()
     {
         $bankModel = new BankModel();
@@ -36,10 +34,7 @@ class BankModelTest extends TestCase
         $actual = true;
         $this->assertEquals($check, $actual);
     }
-
-    /**
-     * Test case testUpdateBankNg Not good
-     */
+    // Test case testUpdateBankNg Not good
     public function testUpdateBankNg()
     {
         $bankModel = new BankModel();
@@ -59,12 +54,11 @@ class BankModelTest extends TestCase
         $actual = true;
         $this->assertEquals($check, $actual);
     }
+
     /**
-     * Lap insertUserWithIdOk in bankMoldel
+     * Test insertUserWithIdOk Function in BankModel - 'Lập' do this
      */
-    /**
-     * Test case insertUserWithIdOk 
-     */
+    // Test case insertUserWithIdOk 
     public function testInsertBankWithIdOk()
     {
         $bankModel = new BankModel();
@@ -75,10 +69,7 @@ class BankModelTest extends TestCase
         $mongDoiCost = '4';
         $this->assertEquals($mongDoiCost, $bank[0]['cost']);
     }
-
-    /**
-     * Test case insertUserWithIdNg Not good
-     */
+    // Test case insertUserWithIdNg Not good
     public function testInsertBankWithIdStr()
     {
         $bankModel = new BankModel();
@@ -91,10 +82,7 @@ class BankModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-
-    /**
-     * Test case insertUserWithIdNull
-     */
+    // Test case insertUserWithIdNull
     public function testInsertBankWithIdNull()
     {
         $bankModel = new BankModel();
@@ -107,10 +95,7 @@ class BankModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-
-    /**
-     * Test case testInsertBankWithIdObject
-     */
+    // Test case testInsertBankWithIdObject
     public function testInsertBankWithIdObject()
     {
         $bankModel = new BankModel();
@@ -123,10 +108,7 @@ class BankModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-
-    /**
-     * Test case testInsertBankWithIdNg
-     */
+    // Test case testInsertBankWithIdNg
     public function testInsertBankWithIdNg()
     {
         $bankModel = new BankModel();
