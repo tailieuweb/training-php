@@ -14,6 +14,7 @@ import PostsAddItem from "./PostsAddItem";
 import PostsDelete from "./PostsDelete";
 import PostsEdit from "./PostsEdit";
 import PostsItem from "./PostsItem";
+import PostsSkeleton from "./PostsSkeleton";
 
 const ITEM_PER_PAGE = 5;
 const inputPost = { id: "", title: "", description: "" };
@@ -31,11 +32,17 @@ export default function Posts() {
   const user = authSelector?.user;
 
   // State React
+  const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [postSelected, setPostSelected] = useState(inputPost);
 
   // Effect
-  useEffect(() => dispatch(actLoadPosts()), []);
+  useEffect(() => {
+    (async () => {
+      await dispatch(actLoadPosts());
+      setIsLoading(false);
+    })();
+  }, []);
 
   useEffect(() => {
     const postsData = [...postsBase].splice(
@@ -114,8 +121,13 @@ export default function Posts() {
           <PostsAddItem user={user} />
         </div>
       )}
+      {[...Array(5).keys()].map((item) => (
+        <div key={item} className={`col-md-6 ${isLoading ? "" : "d-none"}`}>
+          <PostsSkeleton />
+        </div>
+      ))}
       {posts.map((post) => (
-        <div key={post.id} className="col-md-6">
+        <div key={post.id} className={`col-md-6 ${isLoading ? "d-none" : ""}`}>
           <PostsItem
             user={user}
             post={post}
