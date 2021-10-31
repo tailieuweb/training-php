@@ -5,6 +5,9 @@ use PHPUnit\Framework\TestCase;
 class BankModelTest extends TestCase
 {
     /**
+     * Lap testUpdateBank in bankMoldel
+     */
+    /**
      * Test case testUpdateBankOk
      */
     public function testUpdateBankOk()
@@ -46,8 +49,6 @@ class BankModelTest extends TestCase
             "cost" => 4,
         ];
         $bankUpdate = $bankModel->updateBank($input);
-        var_dump($bankUpdate);
-        // die();
         if (
             $bankUpdate->isSuccess == false &&
             $bankUpdate->data == NULL &&
@@ -58,7 +59,9 @@ class BankModelTest extends TestCase
         $actual = true;
         $this->assertEquals($check, $actual);
     }
-
+    /**
+     * Lap insertUserWithIdOk in bankMoldel
+     */
     /**
      * Test case insertUserWithIdOk 
      */
@@ -67,21 +70,73 @@ class BankModelTest extends TestCase
         $bankModel = new BankModel();
         $id = -1;
         $bankModel->deleteBankById($id);
-        $result = $bankModel->insertBankWithId($id, 3, 3);
-        $actual = true;
-        $this->assertEquals($result, $actual);
+        $bankModel->insertBankWithId($id, 3, 4);
+        $bank = $bankModel->getBankById($id);
+        $mongDoiCost = '4';
+        $this->assertEquals($mongDoiCost, $bank[0]['cost']);
     }
 
     /**
      * Test case insertUserWithIdNg Not good
      */
-    public function testInsertBankWithIdNg()
+    public function testInsertBankWithIdStr()
     {
         $bankModel = new BankModel();
         $id = "acb";
         $bankModel->deleteBankById($id);
         $result = $bankModel->insertBankWithId($id, 3, 3);
-        $actual = false;
-        $this->assertEquals($result, $actual);
+        if (empty($result)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+
+    /**
+     * Test case insertUserWithIdNull
+     */
+    public function testInsertBankWithIdNull()
+    {
+        $bankModel = new BankModel();
+        $id = null;
+        $bankModel->deleteBankById($id);
+        $result = $bankModel->insertBankWithId($id, 3, 3);
+        if (empty($result)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+
+    /**
+     * Test case testInsertBankWithIdObject
+     */
+    public function testInsertBankWithIdObject()
+    {
+        $bankModel = new BankModel();
+        $id = new ResultClass();
+        $bankModel->deleteBankById($id);
+        $result = $bankModel->insertBankWithId($id, 3, 3);
+        if (empty($result)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+
+    /**
+     * Test case testInsertBankWithIdNg
+     */
+    public function testInsertBankWithIdNg()
+    {
+        $bankModel = new BankModel();
+        $id = -99999;
+        $bankModel->deleteBankById($id);
+        $result = $bankModel->insertBankWithId($id, 3, 3);
+        if (empty($result)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
 }

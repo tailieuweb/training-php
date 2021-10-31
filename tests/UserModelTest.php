@@ -269,9 +269,10 @@ class UserModelTest extends TestCase
         $password = "lap";
         $name = "Lap";
         $userModel->deleteUserById($id);
-        $insert =  $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
-        $actual = true;
-        $this->assertEquals($insert, $actual);
+        $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
+        $result =  $userModel->findUserById($id);
+        $mongDoiName = 'Lap';
+        $this->assertEquals($mongDoiName, $result[0]['name']);
     }
 
     /**
@@ -280,12 +281,69 @@ class UserModelTest extends TestCase
     public function testInsertUserWithIdNg()
     {
         $userModel = new UserModel();
+        $id = -99999;
+        $password = "lap";
+        $name = "Lap";
+        $userModel->deleteUserById($id);
+        $result =  $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
+        if (empty($result)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+
+    /**
+     * Test case testInsertUserWithIdStr
+     */
+    public function testInsertUserWithIdStr()
+    {
+        $userModel = new UserModel();
         $id = "abc";
         $password = "lap";
         $name = "Lap";
         $userModel->deleteUserById($id);
-        $insert =  $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
-        $actual = false;
-        $this->assertEquals($insert, $actual);
+        $result =  $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
+        if (empty($result)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+
+    /**
+     * Test case testInsertUserWithIdNull
+     */
+    public function testInsertUserWithIdNull()
+    {
+        $userModel = new UserModel();
+        $id = null;
+        $password = "lap";
+        $name = "Lap";
+        $userModel->deleteUserById($id);
+        $result =  $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
+        if (empty($result)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+
+    /**
+     * Test case testInsertUserWithIdObject
+     */
+    public function testInsertUserWithIdObject()
+    {
+        $userModel = new UserModel();
+        $id = new ResultClass();
+        $password = "lap";
+        $name = "Lap";
+        $userModel->deleteUserById($id);
+        $result =  $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
+        if (empty($result)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
 }
