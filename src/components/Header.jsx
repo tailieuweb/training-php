@@ -32,7 +32,21 @@ export default function Header(props) {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto">
+          <ul className="navbar-nav ml-auto align-items-center">
+            <form className="d-flex mr-2">
+              <input
+                type="text"
+                className="form-control form-control-sm mr-2"
+                placeholder="Type a keyword...."
+                required
+              />
+              <button
+                className="d-flex align-items-center btn btn-primary btn-sm"
+                type="submit"
+              >
+                <i className="fa fa-search mr-2" aria-hidden="true" /> Search
+              </button>
+            </form>
             {!isLoading && (
               <div>
                 {!user ? (
