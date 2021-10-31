@@ -19,7 +19,6 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-
     /**
      * Test case Not good
      */
@@ -110,5 +109,63 @@ class UserModelTest extends TestCase
         } else {
             $this->assertTrue(true);
         }
+    }
+    public function testFindUserByIdWithInteger()
+    {
+        $user = new UserModel();
+        $id = '2';
+        $expected = 'test2';
+        $actual = $user->findUserById($id);
+        $this->assertEquals($expected, $actual[0]['name']);
+    }
+    public function testFindUserByIdWithString()
+    {
+        $user = new UserModel();
+        $id = 'hai';
+        $actual = $user->findUserById($id);
+        if ($actual == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    public function testFindUserGoodWithString()
+    {
+        $user = new UserModel();
+        $keys = "an";
+        // $expected = "LE VAN LAM";
+        $actual = $user->findUser($keys);
+        // var_dump($actual);
+        // die();
+        if (!empty($actual)) {
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    public function testGetUserGoodWithString()
+    {
+        $user = new UserModel();
+        $keys = "an";
+        // $expected = "LE VAN LAM";
+        $actual = $user->getUsers($keys);
+        var_dump($actual);
+        die();
+        if (!empty($actual)) {
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    public function testGetUserGoodWithNull()
+    {
+        $user = new UserModel();
+        $keys = "";
+        // $expected = "LE VAN LAM";
+        $actual = $user->getUsers($keys);
+        // var_dump($actual);
+        // die();
+        if (!empty($actual)) {
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
     }
 }

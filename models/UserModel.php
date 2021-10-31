@@ -7,15 +7,22 @@ class UserModel extends BaseModel
 
     public function findUserById($id)
     {
-        $sql = 'SELECT * FROM users WHERE id = ' . $id;
-        $user = $this->select($sql);
-
-        return $user;
+        if (is_numeric($id)) {
+            $sql = 'SELECT * FROM users WHERE id = ' . $id;
+            // var_dump($sql);
+            // die();
+            $user = $this->select($sql);
+            return $user;
+        } else {
+            return false;
+        }
     }
 
     public function findUser($keyword)
     {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
+        $sql = 'SELECT * FROM users WHERE name LIKE "%' . $keyword . '%"' . 'OR email LIKE "%' . $keyword . '%"';
+        // var_dump($sql);
+        // die();
         $user = $this->select($sql);
 
         return $user;
@@ -95,12 +102,13 @@ class UserModel extends BaseModel
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
-
+            var_dump($sql);
+            die();
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            // $users = self::$_connection->multi_query($sql);
-            $users = $this->select($sql);
+            $users = self::$_connection->multi_query($sql);
+            // $users = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
