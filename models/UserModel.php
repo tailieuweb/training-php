@@ -4,10 +4,18 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
+    public static function getInstance()
+    {
+        if(self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }
 
     public function findUserById($id)
     {
-        
+        $id = $this->Giaima($id);
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
 
@@ -44,6 +52,7 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {   
+        $id = $this->Giaima($id);
         $isAuth = $this->getUsers();
         foreach ($isAuth as $item) {
             if (md5($item['id']) == $id) {
@@ -55,6 +64,7 @@ class UserModel extends BaseModel
     // Delete user by id : Step 2
     public function dropUserById($id)
     {   
+        $id = $this->Giaima($id);
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
     }
@@ -76,13 +86,14 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
+        $id = $this->Giaima($input['id']);
         $sql = 'UPDATE users SET 
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '"
                 ,`fullname`="' . $input['full-name'] . '"
                 ,email="' . $input['email'] . '"
                 ,type="' . $input['type'] . '"
                 ,password="' . md5($input['password']) . '"
-                WHERE id = ' . $input['id'];
+                WHERE id = ' . $id;
         $user = $this->update($sql);
         return $user;
     }
@@ -125,5 +136,9 @@ class UserModel extends BaseModel
         }
 
         return $users;
+    }
+    private function Giaima($id){
+        $string = substr($id, 3, -3);
+        return $string;
     }
 }
