@@ -51,13 +51,16 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-      
+        $t = base64_decode($input['version']);
+        $str = substr($t,18);
+
+        // var_dump($input['version']);
+        // die();
+
         $temp = 'SELECT version FROM users WHERE id = '.$input['id'].'';
         $newTemp = $this->select($temp);
-
-        // var_dump($newTemp);
-        if($newTemp[0]['version'] == $input['version']){
-            $newV = $input['version']+1;
+        if($newTemp[0]['version'] == $str){
+            $newV = $str+1;
              $sql = 'UPDATE users SET 
                  name = "' . $input['name'] .'", 
                  email = "'.$input['email'].'",
@@ -66,8 +69,6 @@ class UserModel extends BaseModel {
                 WHERE id = ' . $input['id'] ;
             $user = $this->update($sql);  
             header('location: list_users.php?success');  
-            var_dump($sql);
-            die(); 
             return $user;         
         } 
         else{                
@@ -83,15 +84,16 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`,`version`) VALUES (" .
         "'" . $input['name'] . "', '"
         . md5($input['password']) . "', '"
         . $input['fullname'] . "', '"
         . $input['email'] . "', '"
         . $input['type']
-        . "')";
+        . "', '"
+        . 1
+        . "')";   
         $user = $this->insert($sql);
-      
         return $user;
                 
     }

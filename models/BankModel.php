@@ -4,15 +4,15 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel {
 
-    public function findUserById($id) {
-        $sql = 'SELECT * FROM users WHERE id = '.$id;
+    public function findBankById($id) {
+        $sql = 'SELECT * FROM banks WHERE id = '.$id;
         $user = $this->select($sql);
 
         return $user;
     }
 
     public function findUser($keyword) {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
+        $sql = 'SELECT * FROM banks WHERE cost LIKE %'.$keyword.'%'. ' OR user_id LIKE %'.$keyword.'%' ;
         $user = $this->select($sql);
 
         return $user;
@@ -75,26 +75,23 @@ class BankModel extends BaseModel {
     }
 
     /**
-     * Insert user
+     * Insert bank
      * @param $input
      * @return mixed
      */
-    public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
-        "'" . $input['name'] . "', '"
-        . md5($input['password']) . "', '"
-        . $input['fullname'] . "', '"
-        . $input['email'] . "', '"
-        . $input['type']
+    public function insertBank($input) {
+        $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
+        "'" . $input['user_id'] . "', '"
+        . $input['cost'] . "', '"
         . "')";
-        $user = $this->insert($sql);
+        $bank = $this->insert($sql);
       
-        return $user;
+        return $bank;
                 
     }
 
     /**
-     * Search users
+     * Search banks
      * @param array $param
      * @return array
      */
@@ -103,12 +100,13 @@ class BankModel extends BaseModel {
        
         if (!empty($params['keyword'])) {
            
-            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] .'%"';
+            $sql = 'SELECT * FROM banks WHERE cost LIKE "%' . $params['keyword'] .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $banks = self::$_connection->multi_query($sql);
+            // $banks = self::$_connection->multi_query($sql);
+            $banks = $this->select($sql);
             
         } else {
             $sql = 'SELECT * FROM banks';
