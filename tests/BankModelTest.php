@@ -1,6 +1,8 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertTrue;
+
 class BankModelTest extends TestCase{
     /**
      * Test case Okie
@@ -10,13 +12,26 @@ class BankModelTest extends TestCase{
         $bank = array(
             'user_id' => 1,
             'cost' => 2000
-        ); 
+        );
+        $expected = true; 
         $actual = $bankModel->insertBank($bank);
-        if($actual == true){
-            $this->assertTrue(true);
-        }else{
+        $this->assertEquals($actual,$expected);   
+    }
+     /**
+     * Test case nhập user id và cost không phải là kiểu int
+     */
+    public function testInsertBankNg(){
+        $bankModel = new BankModel();
+        $bank = array(
+            'user_id' => 'v',
+            'cost' => 4423
+        ); 
+         $bankModel->insertBank($bank);
+        if(is_numeric($bank['user_id']) && is_numeric($bank['cost'])){          
             $this->assertTrue(false);
-        }      
+        }else{
+            $this->assertTrue(true);
+        }   
     }
      /**
      * Test case Okie
@@ -24,33 +39,103 @@ class BankModelTest extends TestCase{
     public function testUpdateBank(){
         $bankModel = new BankModel();
         $bank = array(
-            'id' => 13,
-            'user_id' => 5,
-            'cost' => 2000
+            'id' => 72,
+            'user_id' => 23,
+            'cost' => 200
         ); 
+        $expected = true;
         $actual = $bankModel->updateBank($bank);
-        if($actual == true){
-            $this->assertTrue(true);
-        }else{
-            $this->assertTrue(false);
-        }      
+        $this->assertEquals($actual, $expected);   
     }
     /**
      * Test case nhập user id và cost không phải là kiểu int
      */
-    public function testUpdateBankNg(){
+    public function testUpdateBankNgString(){
         $bankModel = new BankModel();
         $bank = array(
-            'id' => 23,
+            'id' => 73,
             'user_id' => 'm',
-            'cost' => 7000
-        );  $bankModel->updateBank($bank);
-        if(is_numeric($bank['user_id']) && is_numeric($bank['cost'])){
-           
+            'cost' => 'm'
+        );
+        $bankModel->updateBank($bank);
+        if(is_numeric($bank['user_id']) == true && is_numeric($bank['cost']) == true){           
             $this->assertTrue(false);
         }else{
             $this->assertTrue(true);
         }   
     }
-
+     /**
+     * Test case nhập user id và cost rỗng
+     */
+    public function testUpdateBankNgEmpty(){
+        $bankModel = new BankModel();
+        $bank = array(
+            'id' => 74,
+            'user_id' => NULL,
+            'cost' => NULL
+        );
+        $expected = true;
+        $actual = $bankModel->updateBank($bank);
+        $this->assertEquals($expected,$actual); 
+        if(!empty($bank['user_id']) && !empty($bank['cost'])){           
+            $this->assertTrue(false);
+        }else{
+            $this->assertTrue(true);
+        }   
+    }
+     /**
+     * Test case find user_id
+     */
+    public function testGetBanksFind(){
+        $bankModel = new BankModel();      
+        $bank = array(
+            'keyword' => 1
+        );
+        $actual =  $bankModel->getBanks($bank);
+        if(!empty($actual)){
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }
+        
+    }
+    /**
+     * Test case find user_id not good
+     */
+    public function testGetBanksFindNg(){
+        $bankModel = new BankModel();      
+        $bank = array(
+            'keyword' => 235
+        );
+        $actual =  $bankModel->getBanks($bank);
+        if(!empty($actual)){
+            $this->assertTrue(false);
+        }else{
+            $this->assertTrue(true);
+        }
+        
+    }
+    /**
+     * Test case find user_id
+     */
+    public function testGetBanksUser(){
+        $bankModel = new BankModel();    
+        $actual =  $bankModel->getBanks();
+       
+        if(!empty($actual)){          
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }
+    }
+    // public function testGetBanksUserNg(){
+    //     $bankModel = new BankModel();    
+    //     $actual =  $bankModel->getBanks();
+       
+    //     if(!empty($actual)){          
+    //         $this->assertTrue(false);
+    //     }else{
+    //         $this->assertTrue(true);
+    //     }
+    // }
 }
