@@ -4,7 +4,8 @@ require_once 'configs/database.php';
 abstract class BaseModel {
     // Database connection
     protected static $_connection;
-    protected static $_instance;
+    protected static $userInstance;
+    protected static $bankInstance;
 
     public function __construct() {
 

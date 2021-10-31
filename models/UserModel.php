@@ -20,7 +20,7 @@ class UserModel extends BaseModel {
         $users = self::$_connection->multi_query($sql);
         //Normal 
         //$user = $this->select($sql);
-        return $user;
+        return $users;
     }
 
     /**
@@ -31,7 +31,9 @@ class UserModel extends BaseModel {
      */
     public function auth($userName, $password) {
         $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+        $sql = 'SELECT * FROM users 
+        WHERE name = "' . mysqli_real_escape_string(self::$_connection, $userName) . '" 
+        AND password = "'.$md5Password.'"';
         $user= self::$_connection->multi_query($sql);
         //Normal 
         //$user = $this->select($sql);
@@ -109,11 +111,12 @@ class UserModel extends BaseModel {
         return $users;
     }
 
+    // Singleton pattern:
     public static function getInstance() {
-        if (self::$_instance !== null){
-            return self::$_instance;
+        if (self::$userInstance !== null) {
+            return self::$userInstance;
         }
-        self::$_instance = new self();
-        return self::$_instance;
+        self::$userInstance = new self();
+        return self::$userInstance;
     }
 }
