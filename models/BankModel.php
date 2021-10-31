@@ -4,6 +4,7 @@
 require_once './models/BaseModel.php';
 class BankModel extends BaseModel
 {
+    public $x = 100;
     private static $instanceBankModel = NULL;
 
     private function __construct()
@@ -16,8 +17,6 @@ class BankModel extends BaseModel
         }
         return self::$instanceBankModel;
     }
-
-
     
     public function findUserByID($id)
     {
