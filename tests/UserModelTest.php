@@ -17,7 +17,7 @@ class UserModelTest extends TestCase {
         $this->assertEquals($expected,$actual[0]['name']);
     }
     /**
-     * Test function findUserById
+     * Test function findUserById with id not exits
      */
     public function testFindUserByIdNg(){
         $user = new UserModel();
@@ -33,19 +33,101 @@ class UserModelTest extends TestCase {
         // $this->assertEquals($expected,$actual[0]['name']);
     }
     /**
+     * Test function findUserById with id is string
+     */
+    public function testFindUserByIdStr() {
+        $userModel = new UserModel();
+
+        $id = 'asdf';
+
+        $expected = [];
+        $actual = $userModel->findUserById($id);
+
+        $this->assertEquals($expected, $actual);
+
+    }
+    /**
+     * Test function findUserById with id null
+     */
+    public function testFindUserByIdNull() {
+        $userModel = new UserModel();
+
+        $id = null;
+
+        $expected = [];
+        $actual = $userModel->findUserById($id);
+
+        $this->assertEquals($expected, $actual);
+
+    }
+    /**
+     * Test function findUserById with id is object
+     */
+    public function testFindUserByIdObject() {
+        $userModel = new UserModel();
+
+        $id = new BankModel();
+
+        $expected = 'error';
+        $actual = $userModel->findUserById($id);
+
+        $this->assertEquals($expected, $actual);
+
+    }
+
+    /**
      * Test function findUser
      */
-    public function testFindUser(){
+    public function testFindUsers(){
         $user = new UserModel();
         $keys = "a";
         // $expected = "LE VAN LAM";
         $actual = $user->findUser($keys);
-
         if(!empty($actual)){
-            return $this->assertTrue(true);
+            $this->assertTrue(true);
         }
-        return $this->assertTrue(false);
+        else{
+            $this->assertTrue(false);
+        }
+        
         // var_dump($actual);die();
+    }
+    /**
+     * Test function findUser with key not exits
+     */
+    public function testFindUserNg(){
+        $user = new UserModel();
+        $keys = "45125215sad";
+
+        $expected = [];
+        $actual = $user->findUser($keys);
+
+        $this->assertEquals($expected, $actual);
+        // var_dump($actual);die();
+    }
+    /**
+     * Test function findUser with key is array
+     */
+    public function testFindUserArray(){
+        $user = new UserModel();
+        $keys = ["dsad"];
+
+        $expected = 'error';
+        $actual = $user->findUser($keys);
+
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test function findUser with key is null
+     */
+    public function testFindUserNull(){
+        $user = new UserModel();
+        $keys = null;
+
+        $expected = [];
+        $actual = $user->findUser($keys);
+
+        $this->assertEquals($expected, $actual);
     }
 
     /**
@@ -58,12 +140,12 @@ class UserModelTest extends TestCase {
 
         // $expected = "LE VAN LAM";
         $actual = $user->auth($name, $pass);
-
+        
         if($name == $actual[0]['name'] && $pass == $actual[0]['password']){
-            return $this->assertTrue(true); 
+            $this->assertTrue(true); 
         }
         else{
-            return $this->assertTrue(false); 
+            $this->assertTrue(false); 
         }
     }
 

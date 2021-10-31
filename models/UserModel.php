@@ -15,7 +15,7 @@ class UserModel extends BaseModel {
 
     public function findUser($keyword) {
         
-        //$keyword = htmlentities($keyword, ENT_QUOTES, "UTF-8");
+        // $keyword = htmlentities($keyword, ENT_QUOTES, "UTF-8");
         
         $sql = 'SELECT * FROM users WHERE name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
         $user = $this->select($sql);
