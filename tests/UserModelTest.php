@@ -4,20 +4,21 @@ use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase {
 
-    /**
-     * Test function findUserById
-     */
-    public function testFindUserById(){
-        $user = new UserModel();
-        $userId = 26;
+    
+    /*Test function findUserById
+    */
+    
+    // public function testFindUserById(){
+    //      $user = new UserModel();
+    //      $userId = 26;
 
-        $expected = "LE VAN LAM";
-        $actual = $user->findUserById($userId);
+    //      $expected = "LE VAN LAM";
+    //      $actual = $user->findUserById($userId);
 
-        $this->assertEquals($expected,$actual[0]['name']);
-    }
-    /**
-     * Test function findUserById
+    //      $this->assertEquals($expected,$actual[0]['name']);
+    //  }
+    
+     /* Test function findUserById
      */
     // public function testFindUser(){
     //     $user = new UserModel();
@@ -34,10 +35,8 @@ class UserModelTest extends TestCase {
      */
     public function testAuth(){
         $user = new UserModel();
-        $name = "Le LAM";
-        $pass = "123456";
-
-        // $expected = "LE VAN LAM";
+        $name = "Huynh";
+        $pass = "123";
         $actual = $user->auth($name, $pass);
 
         if($name == $actual[0]['name'] && $pass == $actual[0]['password']){
@@ -50,7 +49,7 @@ class UserModelTest extends TestCase {
         // var_dump($actual);die();
     }
 
-    /**
+    /*
      * Eg: Test function Sum a, b
      * Test characters
      */
@@ -62,6 +61,16 @@ class UserModelTest extends TestCase {
         $expected = 3;
 
         $actual = $userModel->sumb($a,$b);
+        $this->assertEquals($expected,$actual);
+    }
+    public function testSubOk()
+    {
+        $userModel = new UserModel();
+        $a = 1;
+        $b = 2;
+        $expected = -1;
+
+        $actual = $userModel->subs($a,$b);
         $this->assertEquals($expected,$actual);
     }
     public function testSumDuong()

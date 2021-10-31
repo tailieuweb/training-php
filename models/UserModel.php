@@ -4,7 +4,7 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
 
-    protected static $_instance;
+    // protected static $_instance;
     
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
@@ -129,6 +129,11 @@ class UserModel extends BaseModel {
         if(!is_numeric($a)) return 'error';
         if(!is_numeric($b)) return 'error';
         return $a + $b;
+    }
+    public function subs($a ,$b){
+        if(!is_numeric($a)) return 'error';
+        if(!is_numeric($b)) return 'error';
+        return $a - $b;
     }
     //Check string have work specical
     public function checkString($field){

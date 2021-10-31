@@ -2,18 +2,11 @@
 // Start the session
 session_start();
 
-require_once 'models/FactoryPattern.php';
-
-$factory = new FactoryPattern();
-
-$userModel = $factory->make('user');
-// $userModel = new UserModel();
-$token = $userModel->createToken();
-
+require_once 'models/UserModel.php';
+$userModel = new UserModel();
 
 $params = [];
 if (!empty($_GET['keyword'])) {
-    
     $params['keyword'] = $_GET['keyword'];
 }
 
@@ -39,7 +32,6 @@ $users = $userModel->getUsers($params);
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">Fullname</th>
-                        <th scope="col">Email</th>
                         <th scope="col">Type</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -47,16 +39,12 @@ $users = $userModel->getUsers($params);
                 <tbody>
                     <?php foreach ($users as $user) {?>
                         <tr>
-                            <th scope="row"><?php echo htmlentities($user['id'])?></th>
+                            <th scope="row"><?php echo $user['id']?></th>
                             <td>
-                                <?php echo htmlentities($user['name']) ?>
-                                
+                                <?php echo $user['name']?>
                             </td>
                             <td>
-                                <?php echo  htmlentities($user['fullname']) ?>
-                            </td>
-                            <td>
-                                <?php echo $user['email']?>
+                                <?php echo $user['fullname']?>
                             </td>
                             <td>
                                 <?php echo $user['type']?>
@@ -68,11 +56,10 @@ $users = $userModel->getUsers($params);
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $user['id']?>&token=<?php echo $token ?>">
+                                <a href="delete_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
-
                         </tr>
                     <?php } ?>
                 </tbody>
