@@ -3,17 +3,18 @@ require_once 'BaseModel.php';
 require_once 'UserModel.php';
 class Repository
 {
-   protected static $_instance;
-   private $userModel;
-   private $bankModel;
-   //constructor
-   public function __construct() {
-       $this->userModel = UserModel::getInstance();
-       $this->bankModel = BankModel::getInstance();
-   }
-   public function findUserById($id)
+    protected static $_instance;
+    private $userModel;
+    private $bankModel;
+    //constructor
+    public function __construct()
     {
-       return $this->userModel->findUserById($id);
+        $this->userModel = UserModel::getInstance();
+        $this->bankModel = BankModel::getInstance();
+    }
+    public function findUserById($id)
+    {
+        return $this->userModel->findUserById($id);
     }
     public function findUser($keyword)
     {
@@ -27,6 +28,15 @@ class Repository
     public function deleteUserById($id)
     {
         return $this->userModel->deleteUserById($id);
+    }
+    /**
+     * Insert user with id
+     * @param $input
+     * @return mixed
+     */
+    public function insertUserWithId($id, $name, $fullname, $email, $type, $password)
+    {
+        return $this->userModel->insertUserWithId($id, $name, $fullname, $email, $type, $password);
     }
     /**
      * Update user
@@ -55,7 +65,7 @@ class Repository
     {
         return $this->userModel->getUsers($params);
     }
-     /**
+    /**
      * Authentication user
      * @param $userName
      * @param $password
@@ -65,7 +75,7 @@ class Repository
     {
         return $this->userModel->auth($userName, $password);
     }
-/**
+    /**
      * -----------BANK------------
      */
     public function getBankById($id)
@@ -80,6 +90,15 @@ class Repository
     public function insertBank($input)
     {
         return $this->bankModel->insertBank($input);
+    }
+    /**
+     * Insert bank
+     * @param $input
+     * @return mixed
+     */
+    public function insertBankWithId($id, $user_id, $cost)
+    {
+        return $this->bankModel->insertBankWithId($id, $user_id, $cost);
     }
     /**
      * Update user

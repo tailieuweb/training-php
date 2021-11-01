@@ -42,6 +42,9 @@ class BankModel extends BaseModel
     {
         // SQL
         $id = $this->decryptID($id);
+        if (!is_numeric($id)) {
+            return false;
+        }
         $sql = "INSERT INTO `banks`(`id`, `user_id`, `cost`) 
         VALUES ('" . $this->BlockSQLInjection($id) . "','" . $this->BlockSQLInjection($user_id) . "','" . $this->BlockSQLInjection($cost) . "')";
         $bank = $this->insert($sql);
