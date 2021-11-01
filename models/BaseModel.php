@@ -4,6 +4,8 @@ require_once 'configs/database.php';
 abstract class BaseModel {
     // Database connection
     protected static $_connection;
+    protected static $userInstance;
+    protected static $bankInstance;
 
     public function __construct() {
 
@@ -22,7 +24,6 @@ abstract class BaseModel {
      * @param $sql
      */
     protected function query($sql) {
-
         $result = self::$_connection->query($sql);
         return $result;
     }

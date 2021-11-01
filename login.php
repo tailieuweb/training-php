@@ -1,20 +1,19 @@
 <?php
 // Start the session
 session_start();
-
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
-
+//Example keyword: pn0921997@gmail.com';TRUNCATE demo;##
 if (!empty($_POST['submit'])) {
     $users = [
-        'username' => $_POST['username'],
+        'username' => UserModel::clean($_POST['username']),
         'password' => $_POST['password']
     ];
     $user = NULL;
     if ($user = $userModel->auth($users['username'], $users['password'])) {
-        //Login successful
-        $_SESSION['id'] = $user[0]['id'];
+       //Login successful
+       $_SESSION['id'] = $user[0]['id'];
 
         $_SESSION['message'] = 'Login successful';
         header('location: list_users.php');
@@ -22,7 +21,6 @@ if (!empty($_POST['submit'])) {
         //Login failed
         $_SESSION['message'] = 'Login failed';
     }
-
 }
 
 ?>
@@ -32,9 +30,8 @@ if (!empty($_POST['submit'])) {
     <title>User form</title>
     <?php include 'views/meta.php' ?>
 </head>
+    <?php include 'views/header.php';?>
 <body>
-<?php include 'views/header.php'?>
-
     <div class="container">
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             <div class="panel panel-info" >
