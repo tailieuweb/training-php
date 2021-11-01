@@ -105,12 +105,11 @@ class BankModel extends BaseModel
     {
         if (!empty($params['user-id'])) {
             $userModel = UserModel::getInstance();
-            $user = $userModel->findUserById($this->BlockSQLInjection($params['user-id']));
-            $userId = NULL;
-            if (!empty($user)) {
-                $userId = $user[0]['id'];
-            }
+            $userId = $this->decryptID($params['user-id'], $userModel->getUsers());
             $sql = 'SELECT * FROM `users`,`banks` WHERE `users`.`id` = `banks`.`user_id` AND `banks`.`user_id` = ' . $userId;
+            if(!$userId){
+                $sql = 'SELECT * FROM `users`,`banks` WHERE `users`.`id` = `banks`.`user_id`';
+            }
             $banks = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM `users`,`banks` WHERE `users`.`id` = `banks`.`user_id`';
