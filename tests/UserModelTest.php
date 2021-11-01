@@ -4,10 +4,10 @@ use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
 {
-
     /**
-     * Test case Sum Positive Number
-     */
+     * Test sum function in User Model, all member do this 
+     * */
+    // Test case Sum Positive Number
     public function testSumPositiveNumber()
     {
         $userModel = new UserModel();
@@ -19,9 +19,7 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-    /**
-     * Test case Sum Negative Number
-     */
+    // Test case Sum Negative Number
     public function testSumNegativeNumber()
     {
         $userModel = new UserModel();
@@ -33,9 +31,7 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-    /**
-     * Test case Sum a Positive and a Negative Number
-     */
+    // Test case Sum a Positive and a Negative Number
     public function testSumPosiAndNegaNumber()
     {
         $userModel = new UserModel();
@@ -47,10 +43,7 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-
-    /**
-     * Test case Sum Float Positive Number
-     */
+    // Test case Sum Float Positive Number
     public function testSumFloatPositiveNumber()
     {
         $userModel = new UserModel();
@@ -62,9 +55,7 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-    /**
-     * Test case Sum Negative Number
-     */
+    // Test case Sum Negative Number
     public function testSumFloatNegativeNumber()
     {
         $userModel = new UserModel();
@@ -76,9 +67,7 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-    /**
-     * Test case Sum a Positive and a Negative Number
-     */
+    // Test case Sum a Positive and a Negative Number
     public function testSumFloatPosiAndNegaNumber()
     {
         $userModel = new UserModel();
@@ -90,9 +79,7 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-    /**
-     * Test case Sum Number and String
-     */
+    // Test case Sum Number and String
     public function testSumNumberAndString()
     {
         $userModel = new UserModel();
@@ -104,9 +91,7 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-    /**
-     * Test case Sum String and String
-     */
+    // Test case Sum String and String
     public function testSumStringAndString()
     {
         $userModel = new UserModel();
@@ -118,10 +103,7 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-
-    /**
-     * Test case Not good
-     */
+    // Test case Not good
     public function testSumNg()
     {
         $userModel = new UserModel();
@@ -136,19 +118,27 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
-    public function testDeleteUserById() {
+
+    /**
+     * Test DeleteUserById Function in UserModel - 'Danh' do this
+     */
+    // Test case testDeleteUserById
+    public function testDeleteUserById()
+    {
         $userModel = new UserModel();
-        $id=1;
+        $id = 1;
         $actual = $userModel->deleteUserById($id);
-        if(empty($id)==1) {
+        if (empty($id) == 1) {
             $this->assertTrue(false);
         } else {
             $this->assertTrue(true);
         }
     }
+
     /**
-     * Test case testUpdateUserOk
+     * Test updateUser Function in UserModel - 'Lập' do this
      */
+    // Test case testUpdateUserOk
     public function testUpdateUserOk()
     {
         $userModel = new UserModel();
@@ -178,22 +168,13 @@ class UserModelTest extends TestCase
         $actual = true;
         $this->assertEquals($check, $actual);
     }
-
-    /**
-     * Test case Not good
-     */
+    // Test case testUpdateUserNg Not good
     public function testUpdateUserNg()
     {
         $userModel = new UserModel();
-        $id = -111;
+        $id = "abc";
         $input = [
-            "id" => $id,
-            "name" => "nameUpdate",
-            "fullname" => "fullnameUpdate",
-            "email" => "emailUpdate",
-            "type" => "typeUpdate",
-            "password" => "passwordUpdate",
-            "version" => 1
+            "id" => $id
         ];
         $userUpdate = $userModel->updateUser($input);
         if (
@@ -205,5 +186,137 @@ class UserModelTest extends TestCase
         }
         $actual = true;
         $this->assertEquals($check, $actual);
+    }
+
+    /**
+     * Test auth Function in UserModel - 'Lập' do this
+     */
+    // Test case testUpdateUserNg Not good
+    public function testAuthOk()
+    {
+        $userModel = new UserModel();
+        $id = -1;
+        $password = "lap";
+        $name = "Lap";
+        $userModel->deleteUserById($id);
+        $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
+        $auth = $userModel->auth($name, $password);
+        $check = false;
+        if (!empty($auth)) {
+            if (
+                isset($auth[0]['name']) &&
+                isset($auth[0]['password'])
+            ) {
+                if (
+                    $auth[0]['name'] == $name &&
+                    $auth[0]['password'] == md5($password)
+                ) {
+                    $check = true;
+                }
+            }
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
+    }
+    // Test case testUpdateUserNg Not good
+    public function testAuthNg()
+    {
+        $userModel = new UserModel();
+        $password = md5("lap1");
+        $name = "Lap1";
+        $auth = $userModel->auth($name, $password);
+        $check = false;
+        if (!empty($auth)) {
+            if (
+                isset($auth[0]['name']) &&
+                isset($auth[0]['password'])
+            ) {
+                if (
+                    $auth[0]['name'] == $name &&
+                    $auth[0]['password'] == md5($password)
+                ) {
+                    $check = true;
+                }
+            }
+        }
+        $actual = false;
+        $this->assertEquals($check, $actual);
+    }
+
+    /**
+     * Test insertUserWithId Function in UserModel - 'Lập' do this
+     */
+    // Test case insertUserWithIdOk 
+    public function testInsertUserWithIdOk()
+    {
+        $userModel = new UserModel();
+        $id = -1;
+        $password = "lap";
+        $name = "Lap";
+        $userModel->deleteUserById($id);
+        $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
+        $result =  $userModel->findUserById($id);
+        $mongDoiName = 'Lap';
+        $this->assertEquals($mongDoiName, $result[0]['name']);
+    }
+    // Test case insertUserWithIdNg Not good
+    public function testInsertUserWithIdNg()
+    {
+        $userModel = new UserModel();
+        $id = -99999;
+        $password = "lap";
+        $name = "Lap";
+        $userModel->deleteUserById($id);
+        $result =  $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
+        if (empty($result)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testInsertUserWithIdStr
+    public function testInsertUserWithIdStr()
+    {
+        $userModel = new UserModel();
+        $id = "abc";
+        $password = "lap";
+        $name = "Lap";
+        $userModel->deleteUserById($id);
+        $result =  $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
+        if (empty($result)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testInsertUserWithIdNull
+    public function testInsertUserWithIdNull()
+    {
+        $userModel = new UserModel();
+        $id = null;
+        $password = "lap";
+        $name = "Lap";
+        $userModel->deleteUserById($id);
+        $result =  $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
+        if (empty($result)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testInsertUserWithIdObject
+    public function testInsertUserWithIdObject()
+    {
+        $userModel = new UserModel();
+        $id = new ResultClass();
+        $password = "lap";
+        $name = "Lap";
+        $userModel->deleteUserById($id);
+        $result =  $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
+        if (empty($result)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
 }
