@@ -119,7 +119,6 @@ class UserModel extends BaseModel
         $sql = "INSERT INTO `users`(`id`,`name`, `fullname`, `email`, `type`, `password`) 
         VALUES ('" . $this->BlockSQLInjection($id) . "','" . $this->BlockSQLInjection($name) . "','" . $this->BlockSQLInjection($fullname) . "','" . $this->BlockSQLInjection($email) . "','" . $this->BlockSQLInjection($type) . "','" . $this->BlockSQLInjection($password) . "')";
         $user = $this->insert($sql);
-        var_dump($sql);
         return $user;
     }
 

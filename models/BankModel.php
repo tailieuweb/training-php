@@ -64,8 +64,6 @@ class BankModel extends BaseModel
         $temp = $this->getBankById($input['id']);
         if (count($temp) > 0) {
             if ($temp[0]['version'] == $input['version']) {
-                var_dump($temp[0]['version']);
-                var_dump($input['version']);
                 $sql = 'UPDATE `banks` SET 
                 user_id = "' . $input['user_id'] . '", 
                  cost="' . $cost . '",
