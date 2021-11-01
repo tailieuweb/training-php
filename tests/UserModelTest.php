@@ -113,14 +113,29 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // public function testStr()
-    // {
-    //     $userModel = new UserModel();
-    //     $a = -1.5;
-    //     $b = "1234123";
-    //     $expected = false;
-    //     $actual = $userModel->sumb($a, $b);
+    public function testFindUserByIdOk()
+    {
+        $userModel = new UserModel();
+        $userId = 8;
+        $userName = 'asdf';
 
-    //     $this->assertEquals($expected, $actual);
-    // }
+        $user = $userModel->findUserById($userId);
+        $actual = $user[0]['name'];
+
+        $this->assertEquals($userName, $actual);
+    }
+
+    public function testFindUserByIdNg()
+    {
+        $userModel = new UserModel();
+        $userId = 9999;
+
+        $user = $userModel->findUserById($userId);
+
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
 }

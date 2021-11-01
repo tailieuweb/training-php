@@ -44,10 +44,9 @@ class BankModel extends BaseModel
 
         return $user;
     }
+
     protected function insert_bank($sql) {
         $result = $this->query($sql);
         return $result;
     }
-
-
 }
