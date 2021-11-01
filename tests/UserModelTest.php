@@ -139,14 +139,13 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-    // Test case testDeleteUserById not good
+    // Test case testDeleteUserById1 Just Check
     public function testDeleteUserById1()
     {
         $userModel = new UserModel();
         $id = -1;
         $userModel->insertUserWithId($id, 'Danh', 'Nguyen Khac Danh', 'nguyenkhacdanh@gmail.com', 'guest', '12345');
         $check = $userModel->deleteUserById($id);
-       
         if (
             $check == true
         ) {

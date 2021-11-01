@@ -302,4 +302,73 @@ class FactoryPatternTest extends TestCase
         $check = false;
         $this->assertEquals($check, $result);
     }
+    /**
+     * Test DeleteUserById Function in Repository - 'Danh' do this
+     */
+    // Test case testDeleteUserByIdRepository
+    public function testDeleteUserByIdRepository()
+    {
+        $repository = new Repository();
+        $id = -1;
+        $repository->insertUserWithId($id, 'Danh', 'Nguyen Khac Danh', 'nguyenkhacdanh@gmail.com', 'guest', '12345');
+        $check = $repository->deleteUserById($id);
+        $findUser = $repository->findUserById($id);
+        if (
+            $check == true &&
+            count($findUser) == 0
+        ) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testDeleteUserByIdRepository1 Just Check
+    public function testDeleteUserByIdRepository1()
+    {
+        $repository = new Repository();
+        $id = -1;
+        $repository->insertUserWithId($id, 'Danh', 'Nguyen Khac Danh', 'nguyenkhacdanh@gmail.com', 'guest', '12345');
+        $check = $repository->deleteUserById($id);
+        if (
+            $check == true
+        ) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test DeleteBankById Function in Repository - 'Danh' do this
+     */
+    // Test case testDeleteBankByIdRepository
+    public function testDeleteBankByIdRepository()
+    {
+        $repository = new Repository();
+        $id = -1;
+        $repository->insertBankWithId($id, "Danh", 1000);
+        $check = $repository->deleteBankById($id);
+        $findUser = $repository->getBankById($id);
+        if (
+            $check == true && count($findUser)==0
+        ){
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testDeleteBankByIdRepository1 Just Check
+    public function testDeleteBankByIdRepository1()
+    {
+        $repository = new Repository();
+        $id = -1;
+        $repository->insertBankWithId($id, "Danh", 1000);
+        $check = $repository->deleteBankById($id);
+        if (
+            $check == true
+        ){
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
 }
