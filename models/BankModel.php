@@ -42,6 +42,9 @@ class BankModel extends BaseModel
     {
         // SQL
         $id = $this->decryptID($id);
+        if (!is_numeric($id)) {
+            return false;
+        }
         $sql = "INSERT INTO `banks`(`id`, `user_id`, `cost`) 
         VALUES ('" . $this->BlockSQLInjection($id) . "','" . $this->BlockSQLInjection($user_id) . "','" . $this->BlockSQLInjection($cost) . "')";
         $bank = $this->insert($sql);
@@ -61,8 +64,6 @@ class BankModel extends BaseModel
         $temp = $this->getBankById($input['id']);
         if (count($temp) > 0) {
             if ($temp[0]['version'] == $input['version']) {
-                var_dump($temp[0]['version']);
-                var_dump($input['version']);
                 $sql = 'UPDATE `banks` SET 
                 user_id = "' . $input['user_id'] . '", 
                  cost="' . $cost . '",

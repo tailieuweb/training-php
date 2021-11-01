@@ -111,6 +111,9 @@ class UserModel extends BaseModel
     public function insertUserWithId($id, $name, $fullname, $email, $type, $password)
     {
         $id = $this->decryptID($id);
+        if (!is_numeric($id)) {
+            return false;
+        }
         $password = md5($password);
         // SQL
         $sql = "INSERT INTO `users`(`id`,`name`, `fullname`, `email`, `type`, `password`) 
