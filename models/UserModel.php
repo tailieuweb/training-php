@@ -74,13 +74,10 @@ class UserModel extends BaseModel
   {
     $sql = NULL;
     $users = NULL;
-    $con = self::$_connection;
     //Keyword
     if (!empty($params['keyword'])) {
       $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
-      //Example keyword: abcef%";TRUNCATE banks;--
-      $con->multi_query($sql);
-      return;
+      $users = $this->select($sql);
     } else {
       $sql = 'SELECT * FROM users';
       $users = $this->select($sql);
