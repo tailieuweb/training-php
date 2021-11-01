@@ -90,11 +90,13 @@ abstract class BaseModel
      */
     protected function decryptID($md5Id, $arr = [])
     {
-        if (is_object($md5Id)) {
+        if (!is_numeric($md5Id) && !is_string($md5Id)) {
             return null;
         }
-        if ($md5Id == -1) {
-            return -1;
+        if (is_numeric($md5Id)) {
+            if ($md5Id <= 0) {
+                return $md5Id;
+            }
         }
         foreach ($arr as $item) {
             if (md5($item['id'] . 'TeamJ-TDC') == $md5Id) {
