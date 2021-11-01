@@ -3,18 +3,17 @@ require_once 'BaseModel.php';
 require_once 'UserModel.php';
 class Repository
 {
-    protected static $_instance;
-    private $userModel;
-    private $bankModel;
-    //constructor
-    public function __construct()
+   protected static $_instance;
+   private $userModel;
+   private $bankModel;
+   //constructor
+   public function __construct() {
+       $this->userModel = UserModel::getInstance();
+       $this->bankModel = BankModel::getInstance();
+   }
+   public function findUserById($id)
     {
-        $this->userModel = new UserModel;
-        $this->bankModel = new BankModel;
-    }
-    public function findUserById($id)
-    {
-        return $this->userModel->findUserById($id);
+       return $this->userModel->findUserById($id);
     }
     public function findUser($keyword)
     {
@@ -38,17 +37,6 @@ class Repository
     {
         return $this->userModel->updateUser($input);
     }
-
-    /**
-     * Insert user with id
-     * @param $input
-     * @return mixed
-     */
-    public function insertUserWithId($id, $name, $fullname, $email, $type, $password)
-    {
-        return $this->insertUserWithId($id, $name, $fullname, $email, $type, $password);
-    }
-
     /**
      * Insert user
      * @param $input
@@ -67,7 +55,17 @@ class Repository
     {
         return $this->userModel->getUsers($params);
     }
-    /**
+     /**
+     * Authentication user
+     * @param $userName
+     * @param $password
+     * @return array
+     */
+    public function auth($userName, $password)
+    {
+        return $this->userModel->auth($userName, $password);
+    }
+/**
      * -----------BANK------------
      */
     public function getBankById($id)

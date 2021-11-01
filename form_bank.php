@@ -1,9 +1,9 @@
 <?php
 require_once 'models/BankModel.php';
-$bankModel = new BankModel();
+$bankModel = BankModel::getInstance();
 
 require_once 'models/UserModel.php';
-$userModel = new UserModel();
+$userModel = UserModel::getInstance();
 
 $banks = NULL; //Add new user
 $id = NULL;

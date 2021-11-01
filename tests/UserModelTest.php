@@ -4,10 +4,10 @@ use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
 {
-
     /**
-     * Test case Sum Positive Number
-     */
+     * Test sum function in User Model, all member do this 
+     * */
+    // Test case Sum Positive Number
     public function testSumPositiveNumber()
     {
         $userModel = new UserModel();
@@ -19,9 +19,7 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-    /**
-     * Test case Sum Negative Number
-     */
+    // Test case Sum Negative Number
     public function testSumNegativeNumber()
     {
         $userModel = new UserModel();
@@ -33,9 +31,7 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-    /**
-     * Test case Sum a Positive and a Negative Number
-     */
+    // Test case Sum a Positive and a Negative Number
     public function testSumPosiAndNegaNumber()
     {
         $userModel = new UserModel();
@@ -47,10 +43,7 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-
-    /**
-     * Test case Sum Float Positive Number
-     */
+    // Test case Sum Float Positive Number
     public function testSumFloatPositiveNumber()
     {
         $userModel = new UserModel();
@@ -62,9 +55,7 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-    /**
-     * Test case Sum Negative Number
-     */
+    // Test case Sum Negative Number
     public function testSumFloatNegativeNumber()
     {
         $userModel = new UserModel();
@@ -76,9 +67,7 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-    /**
-     * Test case Sum a Positive and a Negative Number
-     */
+    // Test case Sum a Positive and a Negative Number
     public function testSumFloatPosiAndNegaNumber()
     {
         $userModel = new UserModel();
@@ -90,9 +79,7 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-    /**
-     * Test case Sum Number and String
-     */
+    // Test case Sum Number and String
     public function testSumNumberAndString()
     {
         $userModel = new UserModel();
@@ -104,9 +91,7 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-    /**
-     * Test case Sum String and String
-     */
+    // Test case Sum String and String
     public function testSumStringAndString()
     {
         $userModel = new UserModel();
@@ -118,10 +103,7 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-
-    /**
-     * Test case Not good
-     */
+    // Test case Not good
     public function testSumNg()
     {
         $userModel = new UserModel();
@@ -136,6 +118,11 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
+
+    /**
+     * Test DeleteUserById Function in UserModel - 'Danh' do this
+     */
+    // Test case testDeleteUserById
     public function testDeleteUserById()
     {
         $userModel = new UserModel();
@@ -147,9 +134,11 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
+
     /**
-     * Test case testUpdateUserOk
+     * Test updateUser Function in UserModel - 'Lập' do this
      */
+    // Test case testUpdateUserOk
     public function testUpdateUserOk()
     {
         $userModel = new UserModel();
@@ -179,10 +168,7 @@ class UserModelTest extends TestCase
         $actual = true;
         $this->assertEquals($check, $actual);
     }
-
-    /**
-     * Test case testUpdateUserNg Not good
-     */
+    // Test case testUpdateUserNg Not good
     public function testUpdateUserNg()
     {
         $userModel = new UserModel();
@@ -203,8 +189,9 @@ class UserModelTest extends TestCase
     }
 
     /**
-     * Test case testUpdateUserNg Not good
+     * Test auth Function in UserModel - 'Lập' do this
      */
+    // Test case testUpdateUserNg Not good
     public function testAuthOk()
     {
         $userModel = new UserModel();
@@ -231,10 +218,7 @@ class UserModelTest extends TestCase
         $actual = true;
         $this->assertEquals($check, $actual);
     }
-
-    /**
-     * Test case testUpdateUserNg Not good
-     */
+    // Test case testUpdateUserNg Not good
     public function testAuthNg()
     {
         $userModel = new UserModel();
@@ -260,8 +244,9 @@ class UserModelTest extends TestCase
     }
 
     /**
-     * Test case insertUserWithIdOk 
+     * Test insertUserWithId Function in UserModel - 'Lập' do this
      */
+    // Test case insertUserWithIdOk 
     public function testInsertUserWithIdOk()
     {
         $userModel = new UserModel();
@@ -274,10 +259,7 @@ class UserModelTest extends TestCase
         $mongDoiName = 'Lap';
         $this->assertEquals($mongDoiName, $result[0]['name']);
     }
-
-    /**
-     * Test case insertUserWithIdNg Not good
-     */
+    // Test case insertUserWithIdNg Not good
     public function testInsertUserWithIdNg()
     {
         $userModel = new UserModel();
@@ -292,10 +274,7 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-
-    /**
-     * Test case testInsertUserWithIdStr
-     */
+    // Test case testInsertUserWithIdStr
     public function testInsertUserWithIdStr()
     {
         $userModel = new UserModel();
@@ -310,10 +289,7 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-
-    /**
-     * Test case testInsertUserWithIdNull
-     */
+    // Test case testInsertUserWithIdNull
     public function testInsertUserWithIdNull()
     {
         $userModel = new UserModel();
@@ -328,10 +304,7 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-
-    /**
-     * Test case testInsertUserWithIdObject
-     */
+    // Test case testInsertUserWithIdObject
     public function testInsertUserWithIdObject()
     {
         $userModel = new UserModel();

@@ -1,7 +1,7 @@
 <?php
 require_once 'models/FactoryPattern.php';
 require_once 'models/Repository.php';
-$factory = new FactoryPattern();
+$factory = FactoryPattern::getInstance();
 $repository = $factory-> make('repository');
 // $userModel = $factory->make('user');
 $user = NULL; //Add new user
