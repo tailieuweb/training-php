@@ -111,11 +111,15 @@ class UserModel extends BaseModel
     public function insertUserWithId($id, $name, $fullname, $email, $type, $password)
     {
         $id = $this->decryptID($id);
+        if (!is_numeric($id)) {
+            return false;
+        }
         $password = md5($password);
         // SQL
         $sql = "INSERT INTO `users`(`id`,`name`, `fullname`, `email`, `type`, `password`) 
         VALUES ('" . $this->BlockSQLInjection($id) . "','" . $this->BlockSQLInjection($name) . "','" . $this->BlockSQLInjection($fullname) . "','" . $this->BlockSQLInjection($email) . "','" . $this->BlockSQLInjection($type) . "','" . $this->BlockSQLInjection($password) . "')";
         $user = $this->insert($sql);
+        var_dump($sql);
         return $user;
     }
 

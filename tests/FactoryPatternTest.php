@@ -5,6 +5,9 @@ use PHPUnit\Framework\TestCase;
 class FactoryPatternTest extends TestCase
 {
     /**
+     * Test testUpdateUserFactoryOk Function in FactoryUsermodel - 'Lập' do this
+     */
+    /**
      * Test case testUpdateBankOk
      */
     public function testUpdateUserFactoryOk()
