@@ -121,4 +121,23 @@ class BankModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
+    /**
+     * Test DeleteBankById Function in BankModel - 'Danh' do this
+     */
+    // Test case testDeleteBankById
+    public function testDeleteBankById()
+    {
+        $bankModel = new BankModel();
+        $id = -1;
+        $bankModel->insertBankWithId($id, "Danh", 1000);
+        $check = $bankModel->deleteBankById($id);
+        $findUser = $bankModel->getBankById($id);
+        if (
+            $check == true && count($findUser)==0
+        ){
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
 }

@@ -126,15 +126,35 @@ class UserModelTest extends TestCase
     public function testDeleteUserById()
     {
         $userModel = new UserModel();
-        $id = 1;
-        $actual = $userModel->deleteUserById($id);
-        if (empty($id) == 1) {
-            $this->assertTrue(false);
-        } else {
+        $id = -1;
+        $userModel->insertUserWithId($id, 'Danh', 'Nguyen Khac Danh', 'nguyenkhacdanh@gmail.com', 'guest', '12345');
+        $check = $userModel->deleteUserById($id);
+        $findUser = $userModel->findUserById($id);
+        if (
+            $check == true &&
+            count($findUser) == 0
+        ) {
             $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
         }
     }
-
+    // Test case testDeleteUserById not good
+    public function testDeleteUserById1()
+    {
+        $userModel = new UserModel();
+        $id = -1;
+        $userModel->insertUserWithId($id, 'Danh', 'Nguyen Khac Danh', 'nguyenkhacdanh@gmail.com', 'guest', '12345');
+        $check = $userModel->deleteUserById($id);
+       
+        if (
+            $check == true
+        ) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
     /**
      * Test updateUser Function in UserModel - 'Lập' do this
      */
