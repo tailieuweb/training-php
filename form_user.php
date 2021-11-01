@@ -1,29 +1,33 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once "models/FactoryPattern.php";
+$factory = new FactoryPattern();
+$userModel = $factory->make('user');
+$BankModel = $factory->make('bank');
 
 $user = NULL; //Add new user
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-     $handleFirst = substr($id,23);
-    $id = "";
+    $_id = $_GET['id'];
+    $formid = $_id;
+     $handleFirst = substr($_id,23);
+    $_id = "";
    for ($i=0; $i <strlen($handleFirst)-9 ; $i++) { 
-       $id.=$handleFirst[$i];
+       $_id.=$handleFirst[$i];
    }    
-    $user = $userModel->findUserById($id);//Update existing user   
+    $user = $userModel->findUserById($_id);//Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
 
     if (!empty($_id)) {
-        $userModel->updateUser($_POST);
+
+        $userModel->updateUser($_POST,$BankModel);
     } else {
-        $userModel->insertUser($_POST);
+        $userModel->insertUser($_POST,$BankModel);
     }
     header('location: list_users.php');
 }
@@ -44,7 +48,7 @@ if (!empty($_POST['submit'])) {
                     User form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $_id ?>">
+                    <input type="hidden" name="id" value="<?php echo $formid; ?>">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>

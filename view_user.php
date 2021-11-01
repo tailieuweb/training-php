@@ -1,6 +1,8 @@
 <?php
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+$userModel = $factory->make("user");
+$BankModel = $factory->make("bank");
 
 $user = NULL; //Add new user
 $id = NULL;
@@ -13,6 +15,7 @@ if (!empty($_GET['id'])) {
         $id.=$handleFirst[$i];
     }    
     $user = $userModel->findUserById($id);//Update existing user
+    $cost  = $BankModel->SelectCostByUserId($id);
 }
 
 
@@ -54,6 +57,10 @@ if (!empty($_POST['submit'])) {
             <div class="form-group">
                 <label for="password">Email</label>
                 <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Bank Cost</label>
+                <span><?php if (!empty($cost[0]['cost']))  echo $cost[0]['cost']; else echo  0;     ?></span>
             </div>
         </form>
     <?php } else { ?>

@@ -90,9 +90,7 @@ function Xulyid($id){
                                 <a href="delete_user.php?id=<?php echo $handle_id ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
-                                <a href="bank_update.php?id=<?php echo $handle_id ?>">
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true" title="update Bank"></i>
-                                </a>
+
                             </td>
                         </tr>
                     <?php } ?>

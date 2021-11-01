@@ -2,7 +2,7 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel {
+class UserModel extends BaseModel  {
 
     protected static $_instance;
 
@@ -43,10 +43,10 @@ class UserModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id) {
+    public function deleteUserById($id,$bankModel) {
         $sql = 'DELETE FROM users WHERE id = '.$id;
-        return $this->delete($sql);
-
+         $this->delete($sql);
+         return $bankModel->deleteUserById($id);
     }
 
     /**
@@ -55,7 +55,15 @@ class UserModel extends BaseModel {
      * @return mixed
      */
 
-        public function updateUser($input) {
+        public function updateUser($input,$BankModel) {
+
+            $_id = $input['id'];
+            $handleFirst = substr($_id,23);
+            $_id = "";
+            for ($i=0; $i <strlen($handleFirst)-9 ; $i++) {
+                $_id.=$handleFirst[$i];
+            }
+            $input['id'] = $_id;
             $sql = 'UPDATE users SET 
                      name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
                      password="'. md5($input['password']) .'",
@@ -64,6 +72,7 @@ class UserModel extends BaseModel {
                      type = "' . $input['t1'] .'"
                     WHERE id = ' . $input['id'];
             $user = $this->update($sql);
+            $BankModel->updateUser($input);
             return $user;
         }
 
@@ -73,13 +82,16 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function insertUser($input) {
+    public function insertUser($input,$bankModel) {
     //    $sql = "INSERT INTO `users`( `name`, `fullname`, `email`, `type`, `password`) VALUES (?,?,?,?,?)";
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
         "'" . $input['name'] . "', '".$input['password']."', '".$input['fullname']."', '".$input['email']."', '".$input['t1']."')";
 
         //        $sql->bind_param('sssss',$input['name'],$input['fullname'],$input['email'],$input['t1'],$input['password']);
         $user = $this->insert($sql);
+        $Lastid = $this->SelectLastid();
+        $input['id']=  $Lastid[0]['MAX(id)'];
+        $bankModel->insertUser($input);
         return $user;
     }
 
@@ -110,5 +122,11 @@ class UserModel extends BaseModel {
         }
         self::$_instance = new self();
         return self::$_instance;
+    }
+
+    public  function  SelectLastid(){
+            $sql = 'SELECT MAX(id) FROM users';
+            $user = $this -> select($sql);
+            return $user;
     }
 }

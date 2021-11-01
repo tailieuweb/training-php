@@ -15,7 +15,7 @@ if (!empty($_GET['id'])) {
     }    
   //  $userModel->deleteUserById($idx);//Delete existing user
     $rand = rand(5,100000);
-    $BankModel->updateBank($rand,$idx);
+    $BankModel->updateUser();
 }
 header('location: list_users.php');
 ?>
