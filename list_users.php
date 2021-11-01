@@ -9,21 +9,13 @@ $factory = new FactoryPattern();
 $type = "user";
 $params = [];
 if (!empty($_GET['keyword'])) {
-    //Example keyword: abcef%";TRUNCATE banks;##
-    //Use clean()(userModel) clean special
-    //Keyword before clean special chars
-    //$keyword = $_GET['keyword'];
-
-    //Keyword after clean special chars
-    $keyword = FactoryPattern::clean($_GET['keyword']);
-    var_dump($keyword);    
     $params['keyword'] =  $keyword; 
 }
 
 if (!empty($_GET['type'])) {
     $type = $_GET['type'];
 }
-$userModel = $factory::create("user");
+$userModel = $factory->make("user");
 
 $users = $userModel->getUsers($params);
 ?>

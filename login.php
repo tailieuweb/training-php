@@ -1,13 +1,13 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
-
+require_once './models/FactoryPattern.php';
+$factory = new FactoryPattern();
+$userModel = $factory->make('user');
 //Example keyword: pn0921997@gmail.com';TRUNCATE demo;##
 if (!empty($_POST['submit'])) {
     $users = [
-        'username' => UserModel::clean($_POST['username']),
+        'username' => $_POST['username'],
         'password' => $_POST['password']
     ];
     $user = NULL;

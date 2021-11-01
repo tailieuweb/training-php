@@ -4,8 +4,8 @@ session_start();
 require_once 'models/FactoryPattern.php';
 require_once 'models/UserModel.php';
 $factory = new FactoryPattern();
-$userModel = $factory::create("user");
-$bankModel = $factory::create("bank");
+$userModel = $factory->make("user");
+$bankModel = $factory->make("bank");
 $user = NULL; //Add new user
 $bank = NULL;
 $_id = NULL;
@@ -22,8 +22,6 @@ if (!empty($_GET['id'])) {
 
 
 if (!empty($_POST['submit'])) {
-    //Use clean()(UserModel) clean all special chars (-@) 
-    $_POST =  FactoryPattern::clean($_POST);
     if (!empty($_id) && $bank) {
        $bankModel->updateBankInfo($_POST);
     } else {
