@@ -14,7 +14,7 @@ class BankModel extends BaseModel
         foreach ($allUser as $key) {
             $md5 = md5($key['id'] . "chuyen-de-web-1");
             if ($md5 == $id) {
-                $sql = 'SELECT banks.id as bank_id,users.name,users.email,banks.cost,users.type,users.id,banks.user_id,banks.version 
+                $sql = 'SELECT banks.id as bank_id,users.name,users.email,banks.cost,users.type,users.id,banks.user_id
                 FROM `banks`,`users` 
                 WHERE banks.user_id = users.id AND banks.id = ' . $key['id'];
                 $user = $this->select($sql);
@@ -22,23 +22,16 @@ class BankModel extends BaseModel
         }
         return $user;
     }
+    // Find id banks pass design pattern
+    public function findBankByIdVersionTwo($id) {
+        $sql = 'SELECT * FROM banks WHERE id = '.$id;
+        $bank = $this->select($sql);
 
-    public function findUser($keyword)
-    {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
-        $user = $this->select($sql);
-
-        return $user;
+        return $bank;
     }
+   
 
-    public function auth($userName, $password)
-    {
-        $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
-
-        $user = $this->select($sql);
-        return $user;
-    }
+    
 
     /**
      * Delete user by id
@@ -67,42 +60,14 @@ class BankModel extends BaseModel
      */
 
 
-    public function updateBank($input, $version)
+    public function updateBank($input)
     {
-        $sql1 = 'SELECT id FROM banks';
-        $error = false;
-        $allUser = $this->select($sql1);
-        $id = 0;
-
-        $_id = $input['id'];
-        $id_start = substr($_id, 3);
-        $id_end = substr($id_start, 0, -3);
-
-        foreach ($allUser as $key) {
-            $md5 = md5($key['id'] . "chuyen-de-web-1");
-            $md5_start = substr($md5, 3);
-            $md5_end = substr($md5_start, 0, -3);
-
-            if ($md5_end == $id_end) {
-                $id = $key['id'];
-                $sql = 'SELECT * FROM banks WHERE id = ' . $key['id'];
-                $userById = $this->select($sql);
-            }
-        }
-        $oldTime = $userById[0]['version'];
-       
-        if ($oldTime != $version) {
-            $time1 = (int)$oldTime + 1;
-            $sql = 'UPDATE banks SET 
+        $sql = 'UPDATE banks SET 
             user_id = "' . $input['user_id'] . '", 
             cost = "' . $input['cost'] . '", 
-            version = "' . $time1 . '"
-            WHERE id = ' . $id;
-            $user = $this->update($sql);
-            return $user;
-        } else {
-            return $error;
-        }
+            WHERE id = ' . $input['id'];
+        $bank = $this->update($sql);
+        return $bank;
     }
 
     /**
@@ -110,30 +75,18 @@ class BankModel extends BaseModel
      * @param $input
      * @return mixed
      */
-    function getAllBanks($user_id)
-    {
-        $sql = 'SELECT * FROM banks Where user_id = ' . $user_id;
-        $banks = $this->select($sql);
-        return $banks;
-    }
+    // function getAllBanks($user_id)
+    // {
+    //     $sql = 'SELECT * FROM banks Where user_id = ' . $user_id;
+    //     $banks = $this->select($sql);
+    //     return $banks;
+    // }
     public function insertBanks($input)
     {
-        $allBanks = $this->getAllBanks($input['user_id']);
-        if (empty($allBanks)) {
-            $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
-                "'" . $input['user_id'] . "','" . $input['cost'] . "')";
-            $bank = $this->insert($sql);
-            // $users = self::$_connection->multi_query($sql);
-            return $bank;
-        } else {
-            $cost = $allBanks[0]['cost'] + $input['cost'];
-            $sql = 'UPDATE banks SET 
-            cost = "' . $cost . '"
-            WHERE id = ' . $allBanks[0]['id'];
-
-            $user = $this->update($sql);
-            return $user;
-        }
+        $sql = "INSERT INTO `php_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
+        "'" . $input['user_id'] . "','" . $input['cost'] . "')";
+        $bank = $this->insert($sql);
+        return $bank;
     }
 
     /**
@@ -162,7 +115,7 @@ class BankModel extends BaseModel
             //Example keyword: abcef%";TRUNCATE banks;##
             $banks = self::$_connection->multi_query($sql);
         } else {
-            $sql = 'SELECT banks.id as bank_id,users.name,users.email,banks.cost,users.type,users.id,banks.user_id,banks.version 
+            $sql = 'SELECT banks.id as bank_id,users.name,users.email,banks.cost,users.type,users.id,banks.user_id
             FROM `banks`,`users` 
             WHERE banks.user_id = users.id';
             $banks = $this->select($sql);

@@ -1,6 +1,6 @@
 <?php
-require_once 'FactoryPattent.php';
-require_once 'BaseModel.php';
+require_once 'models/FactoryPattent.php';
+require_once 'models/BaseModel.php';
 
 class Repository extends BaseModel {
     
@@ -9,15 +9,10 @@ class Repository extends BaseModel {
         //Application pass Factory
         $factory = new FactoryPattent();
         $insertUser = $factory->make('user')->insertUser($data);
-        
-        if(!empty($data['cost'])) {
-            $user = $factory->make('user')->getUserByIdNew();
-            //Insert banks
-            $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
-            "'" . $user[0]['user_id'] . "','" . $input['cost'] . "')";
-
-            $insertBank = $this->insert($sql);
-            return $insertBank;
+        // Check cost rong khong.
+        // Neu rong thì them vao khi tao user moi
+        if(empty($data['cost'])) {
+            $user = $factory->make('user')->insertUserAndBanks();
         }
         return $insertUser;
     }

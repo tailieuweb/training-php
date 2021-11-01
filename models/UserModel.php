@@ -101,7 +101,7 @@ class UserModel extends BaseModel
     public function insertUser($input)
     {
         $password = md5($input['password']);
-        $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
+        $sql = "INSERT INTO `php_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
             "'" . $input['name'] . "', '" . $input['full-name'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
 
         $user = $this->insert($sql);
@@ -144,8 +144,17 @@ class UserModel extends BaseModel
     {
         $sql = "SELECT MAX(id) as user_id FROM users";
         $user = $this->select($sql);
-        
         return $user;
+    }
+    // Insers banks khi create user : 
+    public function insertUserAndBanks()
+    {
+        $user = $this->getUserByIdNew();
+        $sql = "INSERT INTO `php_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
+        "'" . $user[0]['user_id'] . "','" . 500 . "')";
+
+        $bank = $this->insert($sql);
+        return $bank;
     }
     
 }
