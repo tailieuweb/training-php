@@ -1,6 +1,6 @@
 <?php
-require_once 'models/UserModel.php';
-require_once 'models/BankModel.php';
+require_once 'models/RepositoryPattern.php';
+//require_once 'models/BankModel.php';
 class FactoryPattern extends BaseModel{
 
     public function make($model) {

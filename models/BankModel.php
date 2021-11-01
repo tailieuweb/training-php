@@ -1,6 +1,6 @@
 <?php
 
-require_once 'BaseModel.php';
+require_once 'RepositoryPattern.php';
 
 class BankModel extends BaseModel {
 
