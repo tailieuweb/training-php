@@ -115,11 +115,8 @@ class BankModelTest extends TestCase
         $id = -99999;
         $bankModel->deleteBankById($id);
         $result = $bankModel->insertBankWithId($id, 3, 3);
-        if (empty($result)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
+        $check = false;
+        $this->assertEquals($check, $result);
     }
     /**
      * Test DeleteBankById Function in BankModel - 'Danh' do this

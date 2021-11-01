@@ -288,11 +288,8 @@ class UserModelTest extends TestCase
         $name = "Lap";
         $userModel->deleteUserById($id);
         $result =  $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
-        if (empty($result)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
+        $check = false;
+        $this->assertEquals($check, $result);
     }
     // Test case testInsertUserWithIdStr
     public function testInsertUserWithIdStr()
