@@ -4,10 +4,20 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel
 {
-    public function option($data)
+    
+    public function getUserID()
     {
-        echo "okiiii";
+        return $this->user_id;
     }
+    public function getCost()
+    {
+        return $this->cost = 1000;
+    }
+    public function insertUserDecorator($data, $banks)
+    {
+        echo "bankModel";
+    }
+
     public function findBankById($id)
     {
         $sql1 = 'SELECT id FROM banks';
@@ -15,7 +25,7 @@ class BankModel extends BaseModel
         $user = null;
         foreach ($allUser as $key) {
             $md5 = md5($key['id'] . "chuyen-de-web-1");
-            if ($md5 == $id) {
+            if ($md5 == $id && !is_bool($id)) {
                 $sql = 'SELECT banks.id as bank_id,users.name,users.email,banks.cost,users.type,users.id,banks.user_id,banks.version 
                 FROM `banks`,`users` 
                 WHERE banks.user_id = users.id AND banks.id = ' . $key['id'];
@@ -116,24 +126,7 @@ class BankModel extends BaseModel
         $sql = "INSERT INTO `tranning_php`.`banks` (`user_id`, `cost` ) VALUES (" .
             "'" . $input['user_id'] . "','" . $input['cost'] . "')";
         $bank = $this->insert($sql);
-        // $users = self::$_connection->multi_query($sql);
         return $bank;
-        // $allBanks = $this->getAllBanks($input['user_id']);
-        // if (empty($allBanks)) {
-        //     $sql = "INSERT INTO `tranning_php`.`banks` (`user_id`, `cost` ) VALUES (" .
-        //         "'" . $input['user_id'] . "','" . $input['cost'] . "')";
-        //     $bank = $this->insert($sql);
-        //     // $users = self::$_connection->multi_query($sql);
-        //     return $bank;
-        // } else {
-        //     $cost = $allBanks[0]['cost'] + $input['cost'];
-        //     $sql = 'UPDATE banks SET 
-        //     cost = "' . $cost . '"
-        //     WHERE id = ' . $allBanks[0]['id'];
-
-        //     $user = $this->update($sql);
-        //     return $user;
-        // }
     }
 
     /**
@@ -167,6 +160,12 @@ class BankModel extends BaseModel
             WHERE banks.user_id = users.id';
             $banks = $this->select($sql);
         }
+        return $banks;
+    }
+    function getAll()
+    {
+        $sql = 'SELECT * FROM banks ';
+        $banks = $this->select($sql);
         return $banks;
     }
     function getAllBanks($user_id)

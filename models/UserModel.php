@@ -5,17 +5,22 @@ require_once 'BankModel.php';
 
 class UserModel extends BaseModel
 {
-    public function option($data)
-    {
+    public function insertUserDecorator($data,$bank)
+    {   
         $this->insertUser($data);
+        $lastUserId = $this->lastUserId();
+        $inputBank = [
+            'user_id' => $lastUserId,
+            'cost' => $bank->getCost()
+        ];
+        $d = $bank->insertBanks($inputBank);
+        return $d;
+    }
+    public function lastUserId()
+    {
         $sql = "SELECT MAX(id) FROM users";
         $id = $this->select($sql);
-        $insertBanks = [
-            'user_id' => $id[0]['MAX(id)'],
-            'cost' => 2000,
-        ];
-        $banks = new BankModel();
-        $banks->insertBanks($insertBanks);
+        return $id[0]['MAX(id)'];
     }
     public function findUserById($id)
     {
@@ -162,6 +167,13 @@ class UserModel extends BaseModel
             $users = $this->select($sql);
         }
         return $users;
+    }
+    public function sumb($a, $b)
+    {
+        if (!is_numeric($a)) {
+            return "Not number";
+        }
+        return $a + $b;
     }
     public static function getInstance()
     {

@@ -1,4 +1,4 @@
 <?php
 interface OptionUser {
-    public function option($data);
+    public function insertUserDecorator($data,$bank);
 }
