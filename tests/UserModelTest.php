@@ -148,4 +148,37 @@ class UserModelTest extends TestCase
          $this->assertTrue(false);
       }
    }
+   /*
+     * Test function: updateUser()
+     * Author: Long
+     */
+
+   //Test update user with valid input ok
+   public function testUpdateUserOk()
+   {
+      $userModel = new UserModel();
+      $user['name'] = "Long";
+      $user['password'] = "123";
+      $user['id'] = "2";
+      //Excute function
+      $userModel->updateUser($user);
+      //Get actual
+      $actual = $userModel->findUser($user['name']);
+      //Compare
+      $this->assertEquals($user['name'], $actual[0]['name']);
+   }
+   //Test update user with valid input true
+   public function testUpdateUserTrue()
+   {
+      $userModel = new UserModel();
+      $user['name'] = "Long";
+      $user['password'] = "123";
+      $user['id'] = "2";
+      //Excute function
+      $userModel->updateUser($user);
+      //Get actual
+      $actual = $userModel->findUser($user['name']);
+      //Compare
+      ($actual[0]['name'] != $user['name']) ? $this->assertTrue(false) : $this->assertTrue(true);
+   }
 }
