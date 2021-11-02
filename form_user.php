@@ -1,92 +1,90 @@
 <?php
-
+// Start the session
 session_start();
-
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
-
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+$userModel = $factory->make("user");
+$bankModel = $factory->make("bank");
 $user = NULL; //Add new user
+$bank = NULL;
 $_id = NULL;
+$params = [];
+$prevCost = 0;
 
-if (!empty($_GET['id'])) {
-    $_id = $_GET['id'];
+if (!empty($_GET['id'])) { 
+    //Update SQL Injection - convert id -> int -> string
+    $_id = isset($_GET['id'])?(string)(int)$_GET['id']:null;
     $user = $userModel->findUserById($_id);//Update existing user
 }
 
-//Kiem tra nếu token bằng nhau thì thực hiện submit form theo yêu cầu:
-if (!empty($_POST['submit'])&& $_SESSION['token']===$_POST['token']) {
 
+if (!empty($_POST['submit'])) {
     if (!empty($_id)) {
-        $userModel->updateUser($_POST);
-    } else if($_POST['name']&& $_POST['fullname']&&$_POST['password']&&$_POST['type']) {
-        $userModel->insertUser($_POST);
-
+       $userModel->updateUser($_POST);
+    } else {
+       $userModel->insertUser($_POST);
     }
     header('location: list_users.php');
-
 }
-//Tao token va ma hoa token:
-$tokenvalue = md5(uniqid());
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>User form</title>
     <?php include 'views/meta.php' ?>
 </head>
+    <?php include 'views/header.php';?>
 <body>
-
-    <?php include 'views/header.php'?>
     <div class="container">
 
-            <?php if ($user || !isset($_id)) { ?>
-                <div class="alert alert-warning" role="alert">
-                    User form
-                </div>
-                <form method="POST">
-
-<!--                   Ẩn token-->
-                    <input type="hidden" name="token" value="<?php echo $tokenvalue ?>">
-                    <input type="hidden" name="id" value="<?php echo $_id ?>">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
-                    </div>
-<!--                    add fullnname-->
-                    <div class="form-group">
-                        <label for="fullname">Fullname</label>
-                        <input type="text" name="fullname" class="form-control" placeholder="Fullname" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
-                    </div>
-<!--                    add email-->
-                    <div class="form-group">
-                        <label for="email">Email</label>
-
-                        <input type="text" name="email" class="form-control" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
-
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Password" value="<?php if (!empty($user[0]['password'])) echo $user[0]['password'] ?>">
-                    </div>
-<!--                    select type-->
-                    <select class="form-control" name="type">
-                        <option value="User">User</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Guest">Guest</option>
-                    </select>
-
-
-                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
-<!--                    Lưu sesiontoken từ biến token dã được tạo vào sesíon-->
-               <?php $_SESSION['token']=$tokenvalue;
-               ?>
-                </form>
-
-            <?php } else { ?>
-                <div class="alert alert-success" role="alert">
-                    User not found!
-                </div>
+        <?php if (($user || !isset($_id))) { ?>
+        <div class="alert alert-warning" role="alert">
+            User form
+        </div>
+        <form method="POST">
+            <input type="hidden" name="id" value="<?php echo $_id ?>">
+            <div class="form-group mb-3">
+                <label for="name">Name</label>
+                <input class="form-control" name="name" placeholder="Name"
+                    value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>' required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="password">Password</label>
+                <input type="text" name="password" class="form-control" placeholder="Password" value='<?php if (!empty($user[0]['name'])) echo $user[0]['password'] ?>' required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="fullname">Fullname</label>
+                <input class="form-control" name="fullname" placeholder="fullname"
+                    value='<?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?>' required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="email">Email</label>
+                <input name="email" class="form-control" placeholder="email"
+                    value='<?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?>'>
+            </div>
+            
+            <div class="form-group mb-3">
+                <label for="type" class="form-label">Type</label>
+                <select class="form-control" name="type">
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                    <option value="guest">Guest</option>
+                </select>
+            </div>
+            <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+            <?php if (isset($_id)) {?>
+            <button class="btn btn-success">
+                <a href="form_bank.php?id=<?= $_id?>" style="text-decoration: none; color: white;">
+                    Add Cost
+                </a>
+            </button>
             <?php } ?>
+        </form>
+        <?php } else { ?>
+            User not found
+        <?php }?>
     </div>
 </body>
+
 </html>

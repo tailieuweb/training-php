@@ -3,20 +3,24 @@
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
-    protected static $_instance;
+    public function getAll() {
+        $sql = 'SELECT * FROM users';
+        $user = $this->select($sql);
+        return $user;
+    }
 
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
-
         return $user;
     }
 
     public function findUser($keyword) {
         $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
-        $user = $this->select($sql);
-
-        return $user;
+        //$users = self::$_connection->multi_query($sql);
+        //Normal 
+        $users = $this->select($sql);
+        return $users;
     }
 
     /**
@@ -27,8 +31,11 @@ class UserModel extends BaseModel {
      */
     public function auth($userName, $password) {
         $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
-
+        $sql = 'SELECT * FROM users 
+        WHERE name = "' . mysqli_real_escape_string(self::$_connection, $userName) . '" 
+        AND password = "'.$md5Password.'"';
+        $user= self::$_connection->multi_query($sql);
+        //Normal 
         $user = $this->select($sql);
         return $user;
     }
@@ -49,13 +56,15 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function updateUser($input) {
-        $sql = 'UPDATE users SET
-                name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 password="'. md5($input['password']) .'",
-                 email ="'.$input['email'].'",
-                 fullname ="'.$input['fullname'].'",
-                 type ="'.$input['type'].'"
+    public function updateUser($input)
+    {
+
+        $sql = 'UPDATE users SET 
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name'])  . '", 
+                 fullname="' . $input['fullname'] . '",
+                 email="' . $input['email'] . '",
+                 password="' . $input['password'] . '",
+                 type="' . $input['type'] . '"
                 WHERE id = ' . $input['id'];
 
         $user = $this->update($sql);
@@ -69,31 +78,34 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`email`,`fullname`,`type`) VALUES (" .
-                "'" . $input['name'] . "', '".md5($input['password'])."', '".$input['fullname']."', '".$input['email']."', '".$input['type']."')";
-
-
-
+       $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
+                "'" . $input['name'] . "',
+                 '".md5($input['password'])."',
+                 '".$input['fullname']."',
+                 '".$input['email']."',
+                 '".$input['type']."')";
+        //$user = self::$_connection->multi_query($sql);
+        //Normal: 
         $user = $this->insert($sql);
-
         return $user;
     }
 
     /**
      * Search users
-     * @param array $params
+     * @param array $params 
      * @return array
      */
     public function getUsers($params = []) {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
-
+            $sql = 'SELECT * FROM users
+            WHERE u.name LIKE "%' . $params['keyword'] .'%"';
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+            //$users = self::$_connection->multi_query($sql);
+            //Normal 
+            $users = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
@@ -102,22 +114,12 @@ class UserModel extends BaseModel {
         return $users;
     }
 
-    // Decrypt id
-    private function decryptID($md5Id)
-    {
-        $users = $this->getUsers();
-        foreach ($users as $user) {
-            if (md5($user['id'] . 'TeamB-TDC') == $md5Id) {
-                return $user['id'];
-            }
-        }
-        return NULL;
-    }
+    // Singleton pattern:
     public static function getInstance() {
-        if (self::$_instance !== null){
-            return self::$_instance;
+        if (self::$userInstance !== null) {
+            return self::$userInstance;
         }
-        self::$_instance = new self();
-        return self::$_instance;
+        self::$userInstance = new self();
+        return self::$userInstance;
     }
 }
