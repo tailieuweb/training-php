@@ -1,6 +1,6 @@
 <?php
-require_once 'UserModel.php';
-require_once 'BankModel.php';
+require_once('./repositories/UserRepository.php');
+
 class FactoryPattern {
 
     public function make($model)
@@ -17,6 +17,9 @@ class FactoryPattern {
 
             // Normal:
             // return new BankModel();
+        } else if ($model == 'UserRepository') {
+            // Singleton pattern:
+            return UserRepository::getInstance();
         }
     }
 }

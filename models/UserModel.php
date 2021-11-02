@@ -12,7 +12,17 @@ class UserModel extends BaseModel
         self::$_user_instance = new self();
         return self::$_user_instance;
     }
+    
+    // Get the lastest user id:
+    public function getTheID()
+    {
+        $sql = 'SELECT MAX(id) as user_id FROM users';
+        $user = $this->select($sql);
 
+        return $user[0]["user_id"];
+    }
+
+    // Get user by id:
     public function findUserById($id)
     {
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
@@ -21,6 +31,7 @@ class UserModel extends BaseModel
         return $user;
     }
 
+    // Get user by keyword:
     public function findUser($keyword)
     {
         $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
@@ -89,12 +100,15 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
+        $id = intval($this->getTheID()) + 1;
+
         $tz_object = new DateTimeZone('Asia/Ho_Chi_Minh');
         $datetime = new DateTime();
         $datetime->setTimezone($tz_object);
 
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`, `updated_at`,`fullname`,`email`,`type`) VALUES (" .
-            "'" .  mysqli_real_escape_string(self::$_connection, $input['name']) . "', '"
+        $sql = "INSERT INTO `app_web1`.`users` (`id`, `name`, `password`, `updated_at`,`fullname`,`email`,`type`) VALUES (" .
+            "'" .  $id . "', '"
+            . mysqli_real_escape_string(self::$_connection, $input['name']) . "', '"
             . md5($input['password']) . "', '"
             . $datetime->format('Y\-m\-d\ h:i:sa') . "', '"
             . $input['fullname'] . "', '"
@@ -139,6 +153,7 @@ class UserModel extends BaseModel
     public function sumb($a, $b) {
         if (!is_numeric($a)) return 'NaN exception!';
         if (!is_numeric($b)) return 'NaN exception!';
+        
         return $a + $b;
     }
 }
