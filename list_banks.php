@@ -1,26 +1,15 @@
 <?php
 // Start the session
 session_start();
-// require_once 'models/BankModel.php';
-// require_once 'models/UserModel.php';
-// $bankModel = new BankModel();
-// $params = [];
-// $banks = $bankModel->getBanks($params);
-// $userModel = new UserModel();
-// $params = [];
-// $users = $userModel->getUsers();
-// var_dump($banks);
-// var_dump($users);die();
-
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 $bankModel = $factory->make('bank');
 
-// $bankModel = FactoryPattern::make('bank');
 $params = [];
+if (!empty($_GET['keyword'])) {
+    $params['keyword'] = $_GET['keyword'];
+}
 $banks = $bankModel->getBanks($params);
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,7 +30,7 @@ $banks = $bankModel->getBanks($params);
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">User ID</th>
                         <th scope="col">Bank ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">Fullname</th>
@@ -51,11 +40,11 @@ $banks = $bankModel->getBanks($params);
                 </thead>
                 <tbody>
                     <?php foreach ($banks as $bank) {
-                        ?>
+                    ?>
                         <tr>
                             <th scope="row"><?php echo $bank['user_id'] ?></th>
                             <td>
-                                <?php echo $bank['bank_id']?>
+                                <?php echo $bank['bank_id'] ?>
                             </td>
                             <td>
                                 <?php echo $bank['name'] ?>
@@ -66,16 +55,15 @@ $banks = $bankModel->getBanks($params);
                             <td>
                                 <?php echo $bank['cost'] ?>
                             </td>
-                           
+
                             <td>
-                                <a href="form_bank.php?id=<?php echo  $bank['bank_id'] ?>">
+                                <a href="form_bank.php?id=<?php echo rand(100, 999) . md5($bank['bank_id'] . "chuyen-de-web-1") . rand(100, 999) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_bank.php?id=<?php echo $bank['bank_id'] ?>">
+                                <a href="view_bank.php?id=<?php echo rand(100, 999) . md5($bank['bank_id'] . "chuyen-de-web-1") . rand(100, 999)  ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                              
-                                <a href="delete_bank.php?id=<?php echo $bank['bank_id'] ?>"?>
+                                <a href="delete_bank.php?id=<?php echo rand(100, 999) . md5($bank['bank_id'] . "chuyen-de-web-1") . rand(100, 999) ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

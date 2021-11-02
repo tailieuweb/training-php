@@ -14,10 +14,12 @@ if (!empty($_GET['keyword'])) {
 $users = $userModel->getUsers($params);
 
 if (!empty($_GET['id'])) {
-    $_id = $_GET['id'];
-    $bank = $bankModel->findBankById($_id); //Update existing user
+    $id = $_GET['id'];
+    $bank = $bankModel->findBankById($id); //Update existing user
 }
+
 if (!empty($_POST['submit'])) {
+    // 
     $version = $_POST['version'];
     if (!empty($_id)) {
         $a = $bankModel->updateBank($_POST, $version);

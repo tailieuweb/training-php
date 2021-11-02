@@ -4,23 +4,14 @@ session_start();
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 $userModel = $factory->make('user');
-if (empty($_SESSION['token'])) {
-    $_SESSION['token'] = bin2hex(random_bytes(32));
-}
-$token = $_SESSION['token'];
 $params = [];
+
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
+
 $users = $userModel->getUsers($params);
-if (!empty($_GET['token'])) {
-    if (hash_equals($_SESSION['token'], $_GET['token'])) {
-        if (!empty($_GET['id'])) {
-            $id = $_GET['id'];
-            $userModel->deleteUserById($id); //Delete existing user
-        }
-    }
-}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,18 +50,20 @@ if (!empty($_GET['token'])) {
                                 <?php echo $user['fullname'] ?>
                             </td>
                             <td>
+                                <?php echo $user['email'] ?>
+                            </td>
+                            <td>
                                 <?php echo $user['type'] ?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo md5($user['id'] . "list-user")  ?>">
+                            <a href="form_user.php?id=<?php echo rand(100, 999) . md5($user['id'] . "chuyen-de-web-1") . rand(100, 999) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo md5($user['id'] . "list-user")  ?>">
-                                <i class="fa fa-eye" aria-hidden="true" title="View"></i>
+                                <a href="view_user.php?id=<?php echo rand(100, 999) . md5($user['id'] . "chuyen-de-web-1") . rand(100, 999)  ?>">
+                                    <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="list_users.php?id=<?php echo $user['id'] ?>&token=<?php echo $token ?>">
+                                <a href="delete_user.php?id=<?php echo rand(100, 999) . md5($user['id'] . "chuyen-de-web-1") . rand(100, 999) ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
-                                    <input type="hidden" name="token" value="<?php echo $token ?>">
                                 </a>
                             </td>
                         </tr>
