@@ -1,6 +1,5 @@
 <?php
-require_once 'BaseModel.php';
-
+require_once 'models/BaseModel.php';
 class BankModel extends BaseModel
 {
     public function insertBank($input)
@@ -12,11 +11,62 @@ class BankModel extends BaseModel
 
         return $user;
     }
-    public static function getInstance(){
-        if(self::$_instance !== null){
+
+    public function updateBank($input)
+    {
+        $sql = 'UPDATE banks SET 
+                 user_id = ' . $input['user_id'] . ', 
+                 cost = ' . $input['cost'] . '
+                WHERE id = ' . $input['id'];
+
+        $bank = $this->update($sql);
+
+        return $bank;
+    }
+
+    /**
+     * Delete user by id
+     * @param $id
+     * @return mixed
+     */
+    public function deleteBankById($id)
+    {
+        $sql = 'DELETE FROM banks WHERE id = ' . $id;
+        return $this->delete($sql);
+    }
+
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
             return self::$_instance;
         }
         self::$_instance = new self();
         return self::$_instance;
+    }
+
+    public function findBankById($id)
+    {
+        $sql = 'SELECT * FROM banks WHERE id = ' . $id;
+        $bank = $this->select($sql);
+
+        return $bank;
+    }
+    /**
+     * Search users
+     * @param array $params
+     * @return array
+     */
+    public function getBanks($params = [])
+    {
+        //Keyword
+        if (!empty($params['keyword'])) {
+            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] . '%"';
+        } else {
+            $sql = 'SELECT * FROM banks';
+        }
+
+        $users = $this->select($sql);
+
+        return $users;
     }
 }

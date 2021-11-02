@@ -27,9 +27,10 @@ class UserModel extends BaseModel
      * @param $password
      * @return array
      */
-    public function auth($userName, $password) {
+    public function auth($userName, $password)
+    {
         $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
 
         $user = $this->select($sql);
         return $user;
@@ -89,13 +90,17 @@ class UserModel extends BaseModel
     public function getUsers($params = [])
     {
         //Keyword
+        $users = null;
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
-
-            //Keep this line to use Sql Injection
-            //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+            $stmt = self::$_connection->prepare("SELECT * FROM users WHERE name LIKE CONCAT('%',?,'%')");
+            if($stmt) {
+                $stmt->bind_param("s", $params['keyword']);
+                $stmt->execute();
+                $users = array();
+                $users = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            }
+            // $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+            // $users = self::$_connection->multi_query($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
@@ -103,8 +108,10 @@ class UserModel extends BaseModel
 
         return $users;
     }
-    public static function getInstance(){
-        if(self::$_instance !== null){
+
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
             return self::$_instance;
         }
         self::$_instance = new self();
