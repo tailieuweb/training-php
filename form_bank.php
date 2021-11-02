@@ -3,24 +3,25 @@
 session_start();
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
-$repository = $factory->make('Repository');
-$users = $repository->getListUser();
+$userModel = $factory->make('user');
+$banksModel = $factory->make('bank');
+$users = $userModel->getUsers();
 $bank = NULL; //Add new user
 $_id = NULL;
 
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
-    $bank = $repository->getBankID($_id); //Update existing user
+    $bank = $banksModel->findBankById($_id); //Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
 
     if (!empty($_id)) {
-        $repository->update_Bank($_POST);
+        $banksModel->updateBank($_POST);
     } else {
-        $repository->create_Bank($_POST);
+        $banksModel->insertBank($_POST);
     }
 
     header('location: list_bank.php');

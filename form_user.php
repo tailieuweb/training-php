@@ -3,23 +3,23 @@
 session_start();
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
-$repository = $factory->make('Repository');
+$userModel = $factory->make('user');
 
 $user = NULL; //Add new user
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
-    $user = $repository->getUserID($_id); //Update existing user
+    $user = $userModel->findUserById($_id); //Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
 
     if (!empty($_id)) {
-        $repository->update_User($_POST);
+        $userModel->updateUser($_POST);
     } else {
-        $repository->create_User($_POST);
+        $userModel->insertUser($_POST);
     }
     header('location: list_users.php');
 }

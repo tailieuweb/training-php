@@ -4,7 +4,7 @@ session_start();
 
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
-$repository = $factory->make('Repository');
+$userModel = $factory->make('user');
 
 $id = NULL;
 $params = [];
@@ -20,11 +20,11 @@ if (!empty($_GET['token'])) {
     if (hash_equals($_SESSION['token'], $_GET['token'])) {
         if (!empty($_GET['id'])) {
             $id = $_GET['id'];
-            $repository->delete_User($id); //Delete existing user
+            $userModel->deleteUserById($id); //Delete existing user
         }
     }
 }
-$users = $repository->getListUser($params);
+$users = $userModel->getUsers($params);
 ?>
 <!DOCTYPE html>
 <html>
