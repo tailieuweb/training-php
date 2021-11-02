@@ -21,9 +21,15 @@ class UserModel extends BaseModel
         return $user;
     }
 
+    /**
+     * Authentication user
+     * @param $userName
+     * @param $password
+     * @return array
+     */
     public function auth($userName, $password)
     {
-        $md5Password = $password;
+        $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
 
         $user = $this->select($sql);
@@ -50,6 +56,9 @@ class UserModel extends BaseModel
     {
         $sql = 'UPDATE users SET 
                  name = "' . $input['name'] . '", 
+                 fullname = "' . $input['fullname'] . '", 
+                 email = "' . $input['email'] . '",
+                 type = "' . $input['type'] . '",
                  password="' . md5($input['password']) . '"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
@@ -81,14 +90,31 @@ class UserModel extends BaseModel
     public function getUsers($params = [])
     {
         //Keyword
+        $users = null;
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
+            $stmt = self::$_connection->prepare("SELECT * FROM users WHERE name LIKE CONCAT('%',?,'%')");
+            if($stmt) {
+                $stmt->bind_param("s", $params['keyword']);
+                $stmt->execute();
+                $users = array();
+                $users = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            }
+            // $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+            // $users = self::$_connection->multi_query($sql);
         } else {
             $sql = 'SELECT * FROM users';
+            $users = $this->select($sql);
         }
 
-        $users = $this->select($sql);
-
         return $users;
+    }
+
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
     }
 }
