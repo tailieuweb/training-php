@@ -1,6 +1,6 @@
 <?php
 require  "DecoratorBank.php";
-class LaiXuat extends DecoratorBank {
+class LaiSuat extends DecoratorBank {
     public  function cost()
     {
         $banks = $this->bank->cost();
