@@ -1,45 +1,23 @@
 <?php
-session_start();
-require_once 'models/FactoryPattern.php';
+require_once 'models/UserModel.php';
 
-$factory = new FactoryPattern();
-
-$userModel = $factory->make('user');
 $user = NULL; //Add new user
-$uid = NULL;
-// $uid = $_GET['uid'];
-// $user = $userModel->findUserByUId($uid); //Update existing user
-// var_dump($user);
-// echo'<br>'. $uid ."<br>";
-// if ($user || empty($uid))
-// {
-//   echo 'KHÔNG TỒN TẠI USER OR UID';
-// }
-// else{
-//   var_dump($user);
-//   echo'<br>'. $uid;
-// }
-// // die();
-//
-if (!empty($_GET['token']) && hash_equals($_SESSION['token'], $_GET['token'])) {
-  if (!empty($_GET['uid'])) {
-    $uid = $_GET['uid'];
-    $user = $userModel->findUserByUId($uid); //Update existing user
-  }
-  if (!empty($_POST['submit'])) {
-    if (!empty($uid)) {
-      $userModel->updateUser($_POST);
+$id = NULL;
+
+if (!empty($_GET['id'])) {
+    $id = $_GET['id'];
+    $user =UserModel::getInstance()->findUserById($id); //Update existing user
+}
+
+
+if (!empty($_POST['submit'])) {
+
+    if (!empty($id)) {
+       UserModel::getInstance()->updateUser($_POST);
     } else {
-      $userModel->insertUser($_POST);
+       UserModel::getInstance()->insertUser($_POST);
     }
     header('location: list_users.php');
-  }
-}
-else{
-  //đang fix lỗi chưa tìm được thông tin người đăng nhập khi bấm vào profile
-  echo 'token ko ton tai <br>';
-  echo $_GET['token'].' <br>';
-  echo hash_equals($_SESSION['token'], $_GET['token']).' <br>';
 }
 
 ?>
@@ -47,55 +25,43 @@ else{
 <html>
 
 <head>
-  <title>User form</title>
-  <?php include 'views/meta.php' ?>
+    <title>User form</title>
+    <?php include 'views/meta.php' ?>
 </head>
 
 <body>
-  <?php include 'views/header.php' ?>
-  <div class="container">
+    <?php include 'views/header.php' ?>
+    <div class="container">
 
-    <?php if ($user || empty($uid)) { ?>
-      <div class="alert alert-warning" role="alert">
-        User profile
-      </div>
-      <form method="POST">
-        <input type="hidden" name="uid" value="<?php echo $uid ?>">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <span><?php if (!empty($user[0]['name'])) {
-                  echo $user[0]['name'];
-                }
-                ?></span>
-        </div>
-        <div class="form-group">
-          <label for="fullname">Fullname</label>
-          <span><?php if (!empty($user[0]['fullname'])) {
-                  echo $user[0]['fullname'];
-                }
-                ?></span>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <span><?php if (!empty($user[0]['email'])) {
-                  echo $user[0]['email'];
-                }
-                ?></span>
-        </div>
-        <div class="form-group">
-          <label for="type">Type</label>
-          <span><?php if (!empty($user[0]['type'])) {
-                  echo $user[0]['type'];
-                }
-                ?></span>
-        </div>
-      </form>
-    <?php } else { ?>
-      <div class="alert alert-success" role="alert">
-        User not found!
-      </div>
-    <?php } ?>
-  </div>
+        <?php if ($user || empty($id)) { ?>
+            <div class="alert alert-warning" role="alert">
+                User profile
+            </div>
+            <form method="POST">
+                <input type="hidden" name="id" value="<?php echo $id ?>">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Fullname</label>
+                    <span><?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?></span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Email</label>
+                    <span><?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?></span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Type</label>
+                    <span><?php if (!empty($user[0]['type'])) echo $user[0]['type'] ?></span>
+                </div>
+            </form>
+        <?php } else { ?>
+            <div class="alert alert-success" role="alert">
+                User not found!
+            </div>
+        <?php } ?>
+    </div>
 </body>
 
 </html>

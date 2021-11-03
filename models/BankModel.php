@@ -1,23 +1,8 @@
 <?php
-require_once 'BaseModel.php';
+require_once 'models/BaseModel.php';
 class BankModel extends BaseModel
 {
-    /**
-     * Delete bank by id
-     * @param $id
-     * @return mixed
-     */
-    public function deleteBankById($id)
-    {
-        $sql = "DELETE FROM banks WHERE id =" . $id ;
-        return $this->delete($sql);
-    }
-
-    public function getBankByUserId($id){
-        $sql = "SELECT * FROM banks WHERE id =". $id;
-        return $this->select($sql);
-    }
-
+    //method getInstance() 
     public static function getInstance()
     {
         if (self::$_instance !== null) {
@@ -26,4 +11,65 @@ class BankModel extends BaseModel
         self::$_instance = new self();
         return self::$_instance;
     }
+
+    public function insertBank($input)
+    {
+        $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
+            "'" . $input['user_id'] . "', '" . $input['cost'] . "')";
+
+        $user = $this->insert($sql);
+
+        return $user;
+    }
+
+    public function updateBank($input)
+    {
+        $sql = 'UPDATE banks SET 
+                 user_id = ' . $input['user_id'] . ', 
+                 cost = ' . $input['cost'] . '
+                WHERE id = ' . $input['id'];
+
+        $bank = $this->update($sql);
+
+        return $bank;
+    }
+
+    /**
+     * Delete user by id
+     * @param $id
+     * @return mixed
+     */
+    public function deleteBankById($id)
+    {
+        $sql = 'DELETE FROM banks WHERE id = ' . $id;
+        return $this->delete($sql);
+    }
+
+   
+    public function findBankById($id)
+    {
+        $sql = 'SELECT * FROM banks WHERE id = ' . $id;
+        $bank = $this->select($sql);
+
+        return $bank;
+    }
+    /**
+     * Search users
+     * @param array $params
+     * @return array
+     */
+    public function getBanks($params = [])
+    {
+        //Keyword
+        if (!empty($params['keyword'])) {
+            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] . '%"';
+        } else {
+            $sql = 'SELECT * FROM banks';
+        }
+
+        $users = $this->select($sql);
+
+        return $users;
+    }
+
 }

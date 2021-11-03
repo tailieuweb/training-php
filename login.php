@@ -2,11 +2,8 @@
 // Start the session
 session_start();
 
-require_once 'models/FactoryPattern.php';
+require_once 'models/UserModel.php';
 
-$factory = new FactoryPattern();
-
-$userModel = $factory->make('user');
 
 
 if (!empty($_POST['submit'])) {
@@ -15,9 +12,9 @@ if (!empty($_POST['submit'])) {
         'password' => $_POST['password']
     ];
     $user = NULL;
-    if ($user = $userModel->auth($users['username'], $users['password'])) {
+    if ($user =UserModel::getInstance()->auth($users['username'], $users['password'])) {
         //Login successful
-        $_SESSION['uid'] = $user[0]['uid'];
+        $_SESSION['id'] = $user[0]['id'];
 
         $_SESSION['message'] = 'Login successful';
         header('location: list_users.php');
