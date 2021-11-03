@@ -138,4 +138,31 @@ class UserModelTest extends TestCase
          $this->assertFalse(false);
       }
     }
+    /**
+     * Test case deleteUserByIdOk
+     */
+    public function testDeleteUserByIdOk(){
+      $userModel = new UserModel();
+      $userId = 4;
+      $deleteUserById = $userModel->deleteUserById($userId);
+
+      if(empty($deleteUserById)){
+          $this->assertTrue(true);
+       }else{
+          $this->assertFalse(false);
+       }
+  }
+
+  // test function deleteUserById not good
+  public function testDeleteBankByIdNg(){
+      $userModel = new UserModel();
+      $userId = 4;
+      $deleteUserkById = $userModel->deleteUserById($userId);
+
+      if(empty($deleteUserById) != 4){
+          $this->assertFalse(false);
+       }else{
+          $this->assertTrue(true);
+       }
+  }
 }
