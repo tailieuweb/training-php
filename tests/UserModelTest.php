@@ -74,6 +74,41 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
+    //
+    public function testFindUserByIdOk2() {
+        $userModel = new UserModel();
+
+        $id = 8;
+        $mongDoiUsername = 'asdf';
+
+        $user = $userModel->findUserById($id);
+
+        $this->assertEquals($mongDoiUsername, $user[0]['name']);
+
+    }
+
+    public function testFindUserByIdStr() {
+        $userModel = new UserModel();
+
+        $id = 'asdf';
+
+
+        $expected = 'error';
+        $actual = $userModel->findUserById($id);
+
+        $this->assertEquals($expected, $actual);
+
+    }
+
+    public function testFindUserByIdNull() {
+        $userModel = new UserModel();
+        $id = '';
+        $expected = 'error';
+        $actual = $userModel->findUserById($id);
+
+        $this->assertEquals($expected, $actual);
+
+    }
 
     //test getUser
     public function testInsertUserOk()
@@ -95,22 +130,22 @@ class UserModelTest extends TestCase
         }
     }
 
-    public function testInsertUserNotG()
-    {
-        $userModel = new UserModel();
-        $user = array(
-            'id' => 14,
-            'name' => 'abc',
-            'fullname'=>'', //full name rỗng
-            'type' => 'admin',
-            'email'=> 'hhhhh@gmail.com',
-            'password'=> '123456'
-        );
-        $actual = $userModel->insertUser($user);
-        if($actual == false){
-            $this->assertTrue(true);
-        }else{
-            $this->assertTrue(false);
-        }
-    }
+    // public function testInsertUserNotG()
+    // {
+    //     $userModel = new UserModel();
+    //     $user = array(
+    //         'id' => 14,
+    //         'name' => 'abc',
+    //         'fullname'=>'', //full name rỗng
+    //         'type' => 'admin',
+    //         'email'=> 'hhhhh@gmail.com',
+    //         'password'=> '123456'
+    //     );
+    //     $actual = $userModel->insertUser($user);
+    //     if($actual == false){
+    //         $this->assertTrue(true);
+    //     }else{
+    //         $this->assertTrue(false);
+    //     }
+    // }
 }
