@@ -1,9 +1,25 @@
 <?php
 session_start();
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryPattern.php';
+
+$factory = new FactoryPattern();
+
+$userModel = $factory->make('user');
 $user = NULL; //Add new user
 $uid = NULL;
+// $uid = $_GET['uid'];
+// $user = $userModel->findUserByUId($uid); //Update existing user
+// var_dump($user);
+// echo'<br>'. $uid ."<br>";
+// if ($user || empty($uid))
+// {
+//   echo 'KHÔNG TỒN TẠI USER OR UID';
+// }
+// else{
+//   var_dump($user);
+//   echo'<br>'. $uid;
+// }
+// // die();
 //
 if (!empty($_GET['token']) && hash_equals($_SESSION['token'], $_GET['token'])) {
   if (!empty($_GET['uid'])) {
@@ -18,6 +34,12 @@ if (!empty($_GET['token']) && hash_equals($_SESSION['token'], $_GET['token'])) {
     }
     header('location: list_users.php');
   }
+}
+else{
+  //đang fix lỗi chưa tìm được thông tin người đăng nhập khi bấm vào profile
+  echo 'token ko ton tai <br>';
+  echo $_GET['token'].' <br>';
+  echo hash_equals($_SESSION['token'], $_GET['token']).' <br>';
 }
 
 ?>
