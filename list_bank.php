@@ -8,14 +8,12 @@ spl_autoload_register(function($class){
 // require_once './models/Facade/Facade.php';
 //     $facade = new Facade();
 $bankModel = BankModel::getInstance();  
-$baseModel = BaseModel::getInstance();
 
-var_dump($baseModel);
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword']; 
 }
-$banks = $bankModel->getBanks();
+$banks = $bankModel->getBanks($params);
 ?>
 <!DOCTYPE html>
 <html>
