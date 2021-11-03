@@ -70,11 +70,14 @@ class UserModel extends BaseModel
    */
   public function insertUser($input)
   {
-    $sql = "INSERT INTO `c2tqLmlZ7r`.`users` (`name`, `password`) VALUES (" .
-      "'" . $input['name'] . "', '" . md5($input['password']) . "')";
-
+    $name = htmlspecialchars($input['name']);
+    $fullname = htmlspecialchars($input['fullname']);
+    $email = htmlspecialchars($input['email']);
+    $type = htmlspecialchars($input['type']);
+    $password = md5($input['password']);
+    $sql = "INSERT INTO `users` (`name`, `fullname`, `email`, `type`, `password`)
+                VALUES ('$name', '$fullname', '$email', '$type', '$password') ";
     $user = $this->insert($sql);
-
     return $user;
   }
 
