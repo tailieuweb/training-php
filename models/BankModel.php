@@ -12,6 +12,9 @@ class BankModel extends BaseModel
     private function __wakeup()
     {
     }
+    private function __construct()
+    {
+    }
 
     public static function getInstance() {
         if(self::$_instance !== null) {

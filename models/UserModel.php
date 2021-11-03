@@ -10,6 +10,10 @@ class UserModel extends BaseModel
     {
     }
 
+    private function __construct()
+    {
+    }
+
     private function __wakeup()
     {
     }
