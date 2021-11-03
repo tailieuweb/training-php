@@ -43,7 +43,15 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
+<<<<<<< HEAD
         $sql = "UPDATE `users` SET name = " . "'" . $input['name'] . "', fullname = " . "'" . $input['fullname'] . "', email = " . "'" . $input['email'] . "', type = " . "'" . $input['type'] . "', password = " . "'" . md5($input['password']) . "' WHERE id = " . "'" . $input['id'] . "'";
+=======
+        $sql = 'UPDATE users SET 
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
+                 password="'. md5($input['password']) .'"
+                WHERE id = ' . $input['id'];
+
+>>>>>>> 2-php-202109/2-groups/2-B/master
         $user = $this->update($sql);
         return $user;
     }
@@ -77,5 +85,13 @@ class UserModel extends BaseModel {
         $users = $this->select($sql);
 
         return $users;
+    }
+
+    public static function getInstance() {
+        if (self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
     }
 }

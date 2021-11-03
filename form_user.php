@@ -33,7 +33,11 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
+<<<<<<< HEAD
             <?php if ($user || empty($id)) { ?>
+=======
+            <?php if ($user || !isset($_id)) { ?>
+>>>>>>> 2-php-202109/2-groups/2-B/master
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
@@ -41,7 +45,7 @@ if (!empty($_POST['submit'])) {
                     <input type="hidden" name="id" value="<?php echo $user[0]['id'] ?>">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
