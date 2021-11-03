@@ -3,7 +3,7 @@
 session_start();
 
 require_once 'models/UserModel.php';
-
+$userModel = new UserModel();
 
 
 if (!empty($_POST['submit'])) {
@@ -12,7 +12,7 @@ if (!empty($_POST['submit'])) {
         'password' => $_POST['password']
     ];
     $user = NULL;
-    if ($user =UserModel::getInstance()->auth($users['username'], $users['password'])) {
+    if ($user = $userModel->auth($users['username'], $users['password'])) {
         //Login successful
         $_SESSION['id'] = $user[0]['id'];
 
