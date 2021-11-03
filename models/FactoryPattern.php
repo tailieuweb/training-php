@@ -17,11 +17,11 @@ class FactoryPattern
     {
     }
 
-    public static function make($model)
+    public static function make($model_string)
     {
-        if ($model === 'user') {
+        if ($model_string === 'user') {
             return UserModel::getInstance();
-        } else if ($model === 'bank') {
+        } else if ($model_string === 'bank') {
             return BankModel::getInstance();
         }
 
