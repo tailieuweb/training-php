@@ -1,11 +1,19 @@
 # php-training
-* Repository: https://github.com/tailieuweb/training-php
 
-## System requirements
-* Apache: 2.4
-* MySQL: 5.7 ; MariaDB: 10.x
-* PHP: 7.x, 8.x
-* Wamp/Xampp
+- Nhom G.
+- Thanh Vien:
+  - Le Anh Vu
+- Branch: 2-php-202109/2-groups/7-G/1-37-Vu
 
-# Features
-- CRUD user
+<hr />
+
+## Cong Viec:
+- [x] Loi bao mat IDOR (Insecure Direct Object References)
+  - [x] xoa nguoi dung. 
+  - [x] them nguoi dung. 
+  - [x] xem nguoi dung. 
+  - [x] chinh sua nguoi dung. 
+- [x] Optimistic locking.
+- [x] Cross Site Request Forgery (CSRF or XSRF) - Giả mạo request.
+- [x] XSS - Cross-Site Scripting. <!-- htmlspecialchars() or strip_tags() -->
+- [xx] 
