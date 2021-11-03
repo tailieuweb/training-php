@@ -8,8 +8,8 @@ class FactoryPattern{
         return UserModel::getInstance();
         } else if($model == 'bank'){
             return BankModel::getInstance();
-        } else {
-            return null;
+        } else if ($model == 'repository'){
+            return Repository::getInstance();
         }
     }
 }

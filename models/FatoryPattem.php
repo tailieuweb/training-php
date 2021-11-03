@@ -5,5 +5,8 @@ class FatoryPattem{
         if ($model == 'user'){
             return new UserModel();
         }else if ($model == 'bank');
+        else if ($model == 'repository'){
+            return Repository::getInstance();
+        }
     }
 }
