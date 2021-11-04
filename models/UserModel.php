@@ -17,6 +17,7 @@ class UserModel extends BaseModel {
 
         return $user;
     }
+    
 
     /**
      * Authentication user
