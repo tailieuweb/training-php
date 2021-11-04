@@ -2,8 +2,10 @@
 // Start the session
 session_start();
 
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryPattern.php';
+$factory = FactoryPattern::getInstance();
+
+$userModel = $factory->make('user');
 
 
 if (!empty($_POST['submit'])) {
