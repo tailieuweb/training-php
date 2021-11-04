@@ -19,19 +19,12 @@
             <file>./tests/SingletonPatternTest.php</file>
         </testsuite>
     </testsuites>
-<<<<<<< HEAD
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./models</directory>
-        </whitelist>
-    </filter>
-=======
+
     <filter>				
         <whitelist processUncoveredFilesFromWhitelist="false">				
         <directory suffix=".php">./models</directory>				
         </whitelist>				
-    </filter>				
->>>>>>> origin/1-php-202109/2-groups/9-I/master-phpunit
+    </filter>
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>

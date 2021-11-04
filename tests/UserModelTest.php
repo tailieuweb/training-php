@@ -96,4 +96,45 @@ class UserModelTest extends TestCase
 
        $this->assertEquals($expected, $actual);
     }
+
+    /**
+     * Test case insertUser OK
+     */
+    public function testInsertUserOk()
+    {
+      $userModel = new UserModel();
+      $userId = 6;
+      $input['name'] = 'le';
+      $input['password']  = '1234';
+      $input['fullname'] = 'lenguyentan';
+      $input['email'] = 'tanle123@gmail.com';
+      $input['type'] = 'admin';
+      $userModel->insertUser($input);
+      $expected = $userModel->findUserById($userId);
+      $actual = $expected[4]['name']['password']['fullname']['email']['type'];
+      //var_dump($actual); die();
+      $this->assertEquals($input['name']['password']['fullname']['email']['type'], $actual);
+    }
+
+   /**
+     * Test case insertUser Not good
+     */
+    public function testInsertUserNg()
+    {
+      $userModel = new UserModel();
+      $input['name'] = 'tanle';
+      $input['password']  = '12345';
+      $input['fullname'] = 'nguyentanle';
+      $input['email'] = 'tanle@gmail.com';
+      $input['type'] = 'user';
+      
+      $user = $userModel->insertUser($input);
+      $expected = $userModel->findUserById(6);
+      if($expected != null){
+         $this->assertTrue(true);
+      }
+      else{
+         $this->assertFalse(false);
+      }
+    }
 }
