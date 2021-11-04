@@ -59,7 +59,7 @@ class BankModel extends BaseModel {
     //
     public static function getInstance() {
         if (!isset(self::$_instance)){
-            self::$_instance = new BankModel();
+            self::$_instance = new self();
         }
         return self::$_instance;
     }

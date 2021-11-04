@@ -81,7 +81,7 @@ class UserModel extends BaseModel {
     //
     public static function getInstance() {
         if (!isset(self::$_instance)){
-            self::$_instance = new UserModel();
+            self::$_instance = new self();
         }
         return self::$_instance;
     }
