@@ -58,7 +58,7 @@ if (!empty($_POST['submit'])) {
 >>>>>>> origin/2-php-202109/2-groups/2-B/1-2-Chung-phpunit
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
