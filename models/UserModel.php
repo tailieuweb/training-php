@@ -4,15 +4,34 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
+    // Singleton pattern:
+    public static function getInstance() {
+        if (self::$_user_instance !== null) {
+            return self::$_user_instance;
+        }
+        self::$_user_instance = new self();
+        return self::$_user_instance;
+    }
+    
+    // Get the lastest user id:
+    public function getTheID()
+    {
+        $sql = 'SELECT MAX(id) as user_id FROM users';
+        $user = $this->select($sql);
 
+        return $user[0]["user_id"];
+    }
+
+    // Get user by id:
     public function findUserById($id)
     {
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
-        $user = $this->select($sql)[0];
+        $user = $this->select($sql);
 
         return $user;
     }
 
+    // Get user by keyword:
     public function findUser($keyword)
     {
         $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
@@ -31,16 +50,8 @@ class UserModel extends BaseModel
     {
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
-        $user = $this->select($sql)[0];
 
-        return $user;
-    }
-
-    public function getUserByID($id) {
-        if($id == null) return null;
-        $sql = 'SELECT * FROM users WHERE id = ' . $id;
-
-        $user = $this->select($sql)[0];
+        $user = $this->select($sql);
         return $user;
     }
 
@@ -60,25 +71,23 @@ class UserModel extends BaseModel
      * @param $input
      * @return mixed
      */
-
-    // Le Tuan Liem 25/09/2021 15:00
-    //  update param Type from select form type for updateUser func
     public function updateUser($input)
     {
+        // Get time:
         $tz_object = new DateTimeZone('Asia/Ho_Chi_Minh');
         $datetime = new DateTime();
         $datetime->setTimezone($tz_object);
 
         $sql = 'UPDATE users SET 
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name'])  . '", 
-                 updated_at = "' . $datetime->format('Y\-m\-d\ h:i:sa') . '", 
+                 updated_at = "' . $datetime->format('Y\-m\-d\ h:i:sa') . '",
+                 version = ' . ($input['ver'] + 1) . ',
                  fullname="' . ($input['fullname']) . '",
                  email="' . ($input['email']) . '",
                  password="' . (md5($input['password'])) . '",
                  type="' . $input['type'] . '"
 
-                WHERE id = ' . base64_decode($input['id']);
-
+                WHERE id = ' . ($input['id']);
         $user = $this->update($sql);
 
         return $user;
@@ -88,18 +97,18 @@ class UserModel extends BaseModel
      * Insert user
      * @param $input
      * @return mixed
-     * Sĩ Hùng update thêm các parameter: fullname, email, type
-     * 25/09/2021
      */
-
     public function insertUser($input)
     {
+        $id = intval($this->getTheID()) + 1;
+
         $tz_object = new DateTimeZone('Asia/Ho_Chi_Minh');
         $datetime = new DateTime();
         $datetime->setTimezone($tz_object);
 
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`, `updated_at`,`fullname`,`email`,`type`) VALUES (" .
-            "'" .  mysqli_real_escape_string(self::$_connection, $input['name']) . "', '"
+        $sql = "INSERT INTO `app_web1`.`users` (`id`, `name`, `password`, `updated_at`,`fullname`,`email`,`type`) VALUES (" .
+            "'" .  $id . "', '"
+            . mysqli_real_escape_string(self::$_connection, $input['name']) . "', '"
             . md5($input['password']) . "', '"
             . $datetime->format('Y\-m\-d\ h:i:sa') . "', '"
             . $input['fullname'] . "', '"
@@ -112,7 +121,6 @@ class UserModel extends BaseModel
         return $user;
     }
 
-
     /**
      * Search users
      * @param array $params
@@ -122,15 +130,13 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
-
+            $sql = 'SELECT * FROM users 
+            WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection,$params['keyword']) . '%"';
             //Keep this line to use Sql Injection
             //Don't change
-            //Example keyword: "abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
-
-            // Comment line above and uncomment following line if you want this function work normally
-            // $users = $this->select($sql);
+            //Example keyword: abcef%";TRUNCATE banks;##
+            //$users = self::$_connection->multi_query($sql);
+            $users = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);

@@ -4,28 +4,76 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel
 {
+    // Singleton pattern:
+    public static function getInstance() {
+        if (self::$_bank_instance !== null) {
+            return self::$_bank_instance;
+        }
+        self::$_bank_instance = new self();
+        return self::$_bank_instance;
+    }
+
     /**
-     * Get bank account
+     * Get bank accounts
      * @param array $params
      * @return array
      */
-    public function getBank($params = [])
+    public function getBankAccounts($params = [])
     {
-        $sql = "SELECT * FROM `banks` INNER JOIN users ON banks.user_id=users.id";
+        //Keyword
+        if (!empty($params['keyword'])) {
+            $sql = 'SELECT users.*, banks.id AS bank_id, banks.cost AS cost 
+                FROM users 
+                INNER JOIN banks 
+                ON banks.user_id = users.id 
+                WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection,$params['keyword']) . '%"'
+                . ' ORDER BY id ASC';
+            $banks = $this->select($sql);
+        } else {
+            $sql = "SELECT users.*, banks.id AS bank_id, banks.cost AS cost 
+                FROM users 
+                INNER JOIN banks 
+                ON banks.user_id = users.id 
+                ORDER BY id ASC";
+            $banks = $this->select($sql);
+        }
+        return $banks;
+    }
+
+    /**
+     * Get bank account by user id
+     * @param array $user_id
+     * @return array
+     */
+    public function getBankAccountByUserID($user_id)
+    {
+        //Keyword
+        $sql = 'SELECT users.*, banks.id AS bank_id, banks.cost AS cost 
+            FROM users 
+            INNER JOIN banks 
+            ON banks.user_id = users.id 
+            WHERE users.id LIKE ' . $user_id
+            . ' ORDER BY id ASC';
         $banks = $this->select($sql);
         return $banks;
     }
+
     /**
      * Delete bank account balance
      * @param $id
      * @return mixed
      */
-    public function deleteBalanceById($id)
+    public function deleteBalanceByUserId($id)
     {
         $sql = 'UPDATE `banks` SET `cost`="0" WHERE `user_id` ='  . $id;
         return $this->update($sql);
     }
 
+    /**
+     * Get bank account info by bank id:
+     * @param $id
+     * @return mixed
+     */
     public function findBankInfoById($id)
     {
         $sql = 'SELECT * FROM banks WHERE id = ' . $id;
@@ -34,6 +82,11 @@ class BankModel extends BaseModel
         return $items;
     }
 
+    /**
+     * Get bank account info by user id:
+     * @param $id
+     * @return mixed
+     */
     public function findBankInfoByUserID($user_id)
     {
         $sql = 'SELECT * FROM banks WHERE user_id = ' . $user_id;
@@ -43,7 +96,7 @@ class BankModel extends BaseModel
     }
 
     /**
-     * Update bank info
+     * Update bank account info
      * @param $input
      * @return mixed
      */
@@ -58,7 +111,7 @@ class BankModel extends BaseModel
     }
 
     /**
-     * Insert bank info
+     * Insert bank account
      * @param $input
      * @return mixed
      */
@@ -73,25 +126,5 @@ class BankModel extends BaseModel
         $item = $this->insert($sql);
 
         return $item;
-    }
-
-    /**
-     * Search users
-     * @param array $params
-     * @return array
-     */
-    public function getBanksInfo($params = [])
-    {
-        //Keyword
-        if (!empty($params['user_id'])) {
-            $sql = 'SELECT * FROM banks 
-            WHERE user_id = ' . $params['user_id'];
-            $items = $this->select($sql);
-        } else {
-            $sql = 'SELECT * FROM banks';
-            $items = $this->select($sql);
-        }
-
-        return $items;
     }
 }

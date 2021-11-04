@@ -5,8 +5,7 @@ session_start();
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
-$userModel = $factory->make('user');
-
+$userRepository = $factory->make('UserRepository');
 $params = [];
 
 if (!empty($_GET['keyword'])) {
@@ -19,7 +18,8 @@ if (!empty($_GET['keyword'])) {
     // }
 }
 
-$users = $userModel->getUsers($params);
+$userAccounts = $userRepository->getBankAccounts($params);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,17 +34,9 @@ $users = $userModel->getUsers($params);
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-        <!-- Đoạn này thêm vào để test Reflected XSS -->
-        <?php if (!empty($params['keyword'])) { ?>
-            <div class="alert alert-warning" role="alert">
-                <h1>Search Result for <?php echo htmlentities($params['keyword']) ?></h1>
-            </div>
-        <?php } ?>
-        <?php if (!empty($users)) { ?>
-            <div class="alert alert-warning" role="alert">
-                List of users! <br>
-                Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
-            </div>
+        <a href="index.php">Home</a>
+
+        <?php if (!empty($userAccounts)) { ?>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -53,38 +45,45 @@ $users = $userModel->getUsers($params);
                         <th scope="col">Fullname</th>
                         <th scope="col">Email</th>
                         <th scope="col">Type</th>
+                        <th scope="col">Cost</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user) { ?>
+                    <?php foreach ($userAccounts as $userAcc) { ?>
                         <tr>
                             <!-- Sử dụng htmlentities để ngăn chặn việc thực thi code khi in dữ liệu ra màn hình -->
-                            <th scope="row"><?php echo htmlentities($user['id']) ?></th>
+                            <th scope="row"><?php echo htmlentities($userAcc['id']) ?></th>
                             <td>
-                                <?php echo htmlentities($user['name']) ?>
+                                <?php echo htmlentities($userAcc['name']) ?>
                             </td>
                             <td>
-                                <?php echo htmlentities($user['fullname']) ?>
+                                <?php echo htmlentities($userAcc['fullname']) ?>
                             </td>
                             <td>
-                                <?php echo $user['email']?>
+                                <?php echo $userAcc['email']?>
                             </td>
                             <td>
-                                <?php echo $user['type']?>
+                                <?php echo $userAcc['type']?>
+                            </td>
+                            <td>
+                                <?php echo $userAcc['cost']?>
                             </td>
                             <td>
                                 <!-- Encode id with random number -->
-                                <a href="form_user.php?id=<?php echo rand(10000,99999).$user['id'].rand(10000,99999) ?>">
+                                <a href="form_user.php?id=<?php echo rand(10000,99999).$userAcc['id'].rand(10000,99999) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <!-- Encode id with random number -->
-                                <a href="view_user.php?id=<?php echo rand(10000,99999).$user['id'].rand(10000,99999) ?>">
+                                <a href="view_user.php?id=<?php echo rand(10000,99999).$userAcc['id'].rand(10000,99999) ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
                                 <!-- Encode id with random number -->
-                                <a href="delete_user.php?id=<?php echo rand(10000,99999).$user['id'].rand(10000,99999) ?>">
+                                <a href="delete_bank.php?id=<?php echo rand(10000,99999).$userAcc['id'].rand(10000,99999) ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
+                                </a>
+                                <a href="form_bank.php?id=<?php echo rand(10000,99999).$userAcc['id'].rand(10000,99999) ?>">
+                                    <span aria-hidden="true" title="Update bank account">&#9998;</span>
                                 </a>
                             </td>
                         </tr>

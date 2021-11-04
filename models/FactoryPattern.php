@@ -1,13 +1,25 @@
 <?php
-require_once 'models/UserModel.php';
+require_once(realpath($_SERVER["DOCUMENT_ROOT"]) .'/training-php/repositories/UserRepository.php');
+
 class FactoryPattern {
 
-    public function make($model) {
+    public function make($model)
+    {
         if ($model == 'user') {
-            return new UserModel();
+            // Singleton pattern:
+            return UserModel::getInstance();
+
+            // Normal:
+            // return new UserModel();
         } else if ($model == 'bank') {
-            //
+            // Singleton pattern:
+            return BankModel::getInstance();
+
+            // Normal:
+            // return new BankModel();
+        } else if ($model == 'UserRepository') {
+            // Singleton pattern:
+            return UserRepository::getInstance();
         }
     }
-
 }
