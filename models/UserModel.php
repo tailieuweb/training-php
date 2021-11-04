@@ -67,16 +67,25 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
-                 fullname = "' .  mysqli_real_escape_string(self::$_connection, $input['fullname']) .'", 
-                 email = "' . strip_tags($input['email']) .'", 
-                 type = "' . $input['type'] .'", 
-                 password="'. md5($input['password']) .'"
-                WHERE id = ' . $input['id'];
-        $user = $this->update($sql);
+        //create var BankModel
+        $bankModel = new BankModel();
+        //update PROXY bank
+        if($input['user_id'] != null){
+            $bankModel -> updateBank($input);
+        }
+        else{
 
-        return $user;
+                $sql = 'UPDATE users SET 
+                        name = "' . $input['name'] .'", 
+                        fullname = "' .  mysqli_real_escape_string(self::$_connection, $input['fullname']) .'", 
+                        email = "' . strip_tags($input['email']) .'", 
+                        type = "' . $input['type'] .'", 
+                        password="'. md5($input['password']) .'"
+                        WHERE id = ' . $input['id'];
+                $user = $this->update($sql);
+        
+                return $user;
+        }
         
     }
 
@@ -85,14 +94,23 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
+    // sql injection
     public function insertUser($input) {
+        //create var BankModel
+        $bankModel = new BankModel();
+        //insert PROXY bank
+        if($input['user_id'] != null){
+            $bankModel->insertBank($input);
+        }
+        else{
 
-        $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`,`email`,`type`,`password`) 
-        VALUES (" . "'" . $input['name'] . "', '".mysqli_real_escape_string(self::$_connection,$input['fullname']). "', '" . strip_tags($input['email']) . "', '" . $input['type'] . "','".md5($input['password']) . "')";
-
-        $user = $this->insert($sql);
-
-        return $user;
+            $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`,`email`,`type`,`password`) 
+            VALUES (" . "'" . $input['name'] . "', '".mysqli_real_escape_string(self::$_connection,$input['fullname']). "', '" . strip_tags($input['email']) . "', '" . $input['type'] . "','".md5($input['password']) . "')";
+    
+            $user = $this->insert($sql);
+    
+            return $user;
+        }
     }
     // end strip_tags
     // SQL Injection -> search -> fix

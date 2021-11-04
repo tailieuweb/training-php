@@ -6,8 +6,8 @@ abstract class BaseModel {
     protected static $_connection;
     //singleton pattern protected
     //Prevent
-    protected static $_user_instance;
-    protected static $_bank_instance;
+    //protected static $_user_instance;
+    //protected static $_bank_instance;
     //
     public function __construct() {
 

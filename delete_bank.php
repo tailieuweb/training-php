@@ -1,6 +1,10 @@
 <?php
-require_once 'models/BankModel.php';
-$bankModel = new BankModel();
+//require_once 'models/BankModel.php';
+require_once 'models/FactoryPattern.php';
+//$bankModel = new BankModel();
+$factory = new FactoryPattern();
+//factory make bank
+$bankModel  = $factory->make('bank');
 
 $bank = NULL; //Add new user
 $id = NULL;

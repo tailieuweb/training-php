@@ -16,7 +16,7 @@ $banks = $bankmodel->getBanks($params);
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home</title>
+    <title>Home Bank</title>
     <?php include 'views/meta.php' ?>
 </head>
 <body>
@@ -24,7 +24,7 @@ $banks = $bankmodel->getBanks($params);
     <div class="container">
         <?php if (!empty($banks)) {?>
             <div class="alert alert-warning" role="alert">
-                List of users! <br>
+                List of Bank! <br>
                 Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
             </div>
             <table class="table table-striped">

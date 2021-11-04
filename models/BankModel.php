@@ -19,6 +19,12 @@ class BankModel extends BaseModel {
 
         return $bank;
     }
+    // public function findBankById($id) {
+    //     $sql = 'SELECT * FROM banks WHERE id = '.$id;
+    //     $user = $this->select($sql);
+
+    //     return $user;
+    // }
     //get user
     public function getUsers($params = []) {
         $sql = 'SELECT * FROM users';
@@ -39,10 +45,11 @@ class BankModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteBankById($id)
-    {
-        $sql = "DELETE FROM banks WHERE id =" . $id ;
+    public function deleteBankById($id) {
+      
+        $sql = 'DELETE FROM banks WHERE id = '.$id;
         return $this->delete($sql);
+
     }
 
 
@@ -54,10 +61,7 @@ class BankModel extends BaseModel {
      */
    
     public function updateBank($input) {
-        $sql = 'UPDATE banks SET 
-                 user_id = "' . $input['user_id'] .'", 
-                 cost = "' . $input['cost'] .'" 
-                WHERE id = ' . $input['id'];
+        $sql = 'UPDATE banks SET user_id ="'.$input['user_id'].'", cost = "'.$input['cost'].'" WHERE id = "'.$input['id'].'"';  
         $bank = $this->update($sql);
         return $bank;
     }   
@@ -68,8 +72,7 @@ class BankModel extends BaseModel {
      */
     public function insertBank($input) {
 
-        $sql = "INSERT INTO banks (`user_id`,`cost`) VALUES (" .
-        "'" . $input['user_id'] . "', '".$input['cost']."')";
+        $sql = 'INSERT INTO app_web1.banks (user_id,cost) VALUES ('.$input['user_id'].', '.$input['cost'].')';
 
         $bank = $this->insert($sql);
 
@@ -91,7 +94,8 @@ class BankModel extends BaseModel {
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $banks = self::$_connection->multi_query($sql);
+            // $banks = self::$_connection->multi_query($sql);
+            $banks = $this->select($sql);
             
         } else {
             //$sql = 'SELECT * FROM banks';

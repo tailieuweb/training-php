@@ -1,10 +1,13 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/BankModel.php';
-$bankModel = new BankModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+//$bankModel = new BankModel();
+//proxy make bank & user
+$bankModel = $factory->make('bank');
+$userModel = $factory->make('users');
 $user = $bankModel->getUsers();
-
 $bank = NULL; //Add new user
 $_id = NULL;
 
@@ -13,17 +16,17 @@ if (!empty($_GET['id'])) {
     $bank = $bankModel->findBankById($_id);//Update existing user
 }
 
-
+//note 4/11 Proxy lien ket
 if (!empty($_POST['submit'])) {
 
     if (!empty($_id)) {
-        $bankModel->updateBank($_POST);
+        //$userModel->updateUser($_POST,$bankModel);
+        $userModel->updateUser($_POST);
     } else {
-        $bankModel->insertBank($_POST);
-    }
-    header('location: list_bank.php');
+       $userModel->insertUser($_POST);
+    }  
+    header('location: list_bank.php');   
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,11 +46,11 @@ if (!empty($_POST['submit'])) {
                     Bank form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $_id ?>">
+                    <input type="hidden" name="id" value="<?php if (!empty($bank[0]['id'])) echo $bank[0]['id']?>">
 
                     
                     <div class="form-group">
-                        <label for="type">User</label>
+                        <label for="user_id">User</label>
                         <select name="user_id" class="form-control">
                             <?php
                             foreach($user as $value) {
@@ -61,7 +64,7 @@ if (!empty($_POST['submit'])) {
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="name">cost</label>
+                        <label for="cost">cost</label>
                         <input class="form-control" name="cost" placeholder="Cost" value='<?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?>'>
                     </div>                 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
