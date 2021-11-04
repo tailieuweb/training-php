@@ -8,6 +8,10 @@ $keyword = '';
 if(!empty($_GET['keyword'])) {
     $keyword = $_GET['keyword'];
 }
+if(!empty($_SERVER['PHP_SELF'])){
+    $pageUrl = $_SERVER['PHP_SELF'];
+}
+
 ?>
 <div class="container">
     <nav class="navbar navbar-icon-top navbar-default">
@@ -20,19 +24,30 @@ if(!empty($_GET['keyword'])) {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="list_users.php">App Web 1</a>
+                <?php if($pageUrl == '/list_bank.php'|| $pageUrl == '/form_bank.php'){?>
+                    <a class="navbar-brand" href="list_bank.php">App Web 1</a>
+                <?php } if ($pageUrl == '/list_users.php'|| $pageUrl == '/form_users.php'){?>
+                    <a class="navbar-brand" href="list_users.php">App Web 1</a>
+                <?php } ?>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="form_user.php">Add new user</a></li>
-
+                <?php if($pageUrl == '/list_bank.php'){?>
+                        <li><a href="form_bank.php">Add new bank</a></li>
+                    <?php } else {?>
+                        <li><a href="form_user.php">Add new user</a></li>
+                    <?php } ?>
                 </ul>
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                        <input type="text" name="keyword" class="form-control" placeholder="Search users"
-                               value="<?php echo $keyword ?>"
-                        >
+                    <?php if($pageUrl == '/list_bank.php' || $pageUrl=='/form_bank.php'){?>
+                            <input type="text" name="keyword" class="form-control" placeholder="Search bank"
+                               value="<?php echo $keyword ?>">
+                        <?php } else {?>
+                            <input type="text" name="keyword" class="form-control" placeholder="Search users"
+                               value="<?php echo $keyword ?>">
+                        <?php } ?>
                     </div>
                     <button type="submit" class="btn btn-default">Search</button>
                 </form>

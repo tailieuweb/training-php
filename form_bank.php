@@ -1,71 +1,54 @@
 <?php
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
 
-$user = NULL; //Add new user
+$bankModel = $factory->make('bank');
+$userModel = $factory->make('user');
+
+$bank = NULL; //Add new user
 $id = NULL;
-$keyCode = "aomU87239dadasdasd";
 
 if (!empty($_GET['id'])) {
-    $id = base64_decode($_GET['id']);
-    $newid = substr($id,23);
-    $user = $userModel->findUserById($newid);//Update existing user
+    $id = $_GET['id'];
+    $bank = $bankModel->findBankById($id);//Update existing user
+    //$bank = $userModel->findUserById($id);
 }
 
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
+        //$userModel->updateUser($_POST,$bankModel);
         $userModel->updateUser($_POST);
     } else {
-        $userModel->insertUser($_POST); 
-        header('location: list_users.php');  
-    }   
+       $userModel->insertUser($_POST);
+    }  
+    header('location: list_bank.php');   
 }
 
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User form</title>
+    <title>Bank form</title>
     <?php include 'views/meta.php' ?>
 </head>
 <body>
     <?php include 'views/header.php'?>
     <div class="container">
-
-    <?php if ($user || !isset($_id)) { ?>
+            <?php if ( $bank || isset($id)) { ?>
                 <div class="alert alert-warning" role="alert">
-                    User form
+                    Bank form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php if(!empty($newid)){echo $newid;}else{echo $id;}?>">
-                    <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo base64_encode($keyCode.$user[0]['version'])?>">
+                    <input type="hidden" name="id" value="<?php if (!empty($bank[0]['id'])) echo $bank[0]['id']?>">
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+                        <label for="user_id">User ID</label>
+                        <input class="form-control" name="user_id" placeholder="User ID" value="<?php if (!empty($bank[0]['user_id'])) echo $bank[0]['user_id'] ?>" require>
                     </div>
                     <div class="form-group">
-                        <label for="fullname">Full Name</label>
-                        <input class="form-control" name="fullname" placeholder="FullName" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+                        <label for="cost">Cost</label>
+                        <input class="form-control" name="cost" placeholder="cost" value="<?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?>" require>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input class="form-control" name="email" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="type">Type</label>
-                        <select class="form-control" name="type" value="1" placeholder="Type">
-                            <option value="admin" <?php if (!empty($user[0]['type'])&&$user[0]['type'] =='admin') echo "selected=\"selected\""; ?>>Admin</option>
-                            <option value="user" <?php if (!empty($user[0]['type'])&&$user[0]['type'] =='user') echo "selected=\"selected\"";?> >User</option>
-                            <option value="guest" <?php if (!empty($user[0]['type'])&& $use[0]['type']=='guest') echo "selected=\"selected\"";?>>Guest</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                    </div>
-
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
             <?php } else { ?>
@@ -73,7 +56,6 @@ if (!empty($_POST['submit'])) {
                     User not found!
                 </div>
             <?php } ?>
-    </div>
     </div>
 </body>
 </html>

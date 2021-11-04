@@ -24,7 +24,7 @@ $banks = $bankmodel->getBanks($params);
     <div class="container">
         <?php if (!empty($banks)) {?>
             <div class="alert alert-warning" role="alert">
-                List of users! <br>
+                List of Bank! <br>
                 Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
             </div>
             <table class="table table-striped">
@@ -33,7 +33,6 @@ $banks = $bankmodel->getBanks($params);
                         <th scope="col">ID</th>
                         <th scope="col">User ID</th>
                         <th scope="col">Cost</th>
-                        <th scope="col">Bank</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -48,13 +47,10 @@ $banks = $bankmodel->getBanks($params);
                                 <?php echo $bank['cost']?>
                             </td>
                             <td>
-                                <?php echo $bank['bank']?>
-                            </td>
-                            <td>
                                 <a href="form_bank.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_bank.php?id=<?php echo $bank['id'] ?>">
+                                <a href="view_user.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
                                 <a href="delete_bank.php?id=<?php echo $bank['id']?>">
