@@ -3,7 +3,7 @@
 session_start();
 
 require_once 'models/FactoryPattern.php';
-$factory = new FactoryPattern();
+$factory = FactoryPattern::getInstance();
 
 $userModel = $factory->make('user');
 
@@ -41,6 +41,8 @@ $token = md5(rand(0, 7777777) . "TEAMJ");
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">Fullname</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Cost</th>
                         <th scope="col">Type</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -54,6 +56,12 @@ $token = md5(rand(0, 7777777) . "TEAMJ");
                             </td>
                             <td>
                                 <?php echo $user['fullname'] ?>
+                            </td>
+                            <td>
+                                <?php echo $user['email'] ?>
+                            </td>
+                            <td>
+                                <?= number_format(9999).' $' ?>
                             </td>
                             <td>
                                 <?php echo $user['type'] ?>
