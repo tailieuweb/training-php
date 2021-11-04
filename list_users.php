@@ -3,6 +3,7 @@
 session_start();
 
 require_once 'models/UserModel.php';
+$factory = new FactoryPattern();
 $userModel = new UserModel();
 
 $params = [];

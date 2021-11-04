@@ -1,7 +1,10 @@
 <?php
 
 require_once 'BaseModel.php';
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
 
+$userModel = $factory->make('user');
 class UserModel extends BaseModel {
 
     public function findUserById($id) {
