@@ -5,7 +5,7 @@ session_start();
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 $bankModel = $factory->make('bank');
-//feature 1-a
+//
 $banks = $bankModel->getBanks();
 ?>
 <!DOCTYPE html>

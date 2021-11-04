@@ -3,7 +3,7 @@
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
-
+    //
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
@@ -78,12 +78,11 @@ class UserModel extends BaseModel {
 
         return $users;
     }
-
+    //
     public static function getInstance() {
-        if (self::$_instance !== null){
-            return self::$_instance;
+        if (!isset(self::$_instance)){
+            self::$_instance = new UserModel();
         }
-        self::$_instance = new self();
         return self::$_instance;
     }
 }

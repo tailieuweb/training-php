@@ -3,14 +3,13 @@
 require_once 'BaseModel.php';
 
 class BankModel extends BaseModel {
-
+    //
     public function findBankById($id) {
         $sql = 'SELECT * FROM banks WHERE id = '.$id;
         $bank = $this->select($sql);
 
         return $bank;
     }
-
     /**
      * Delete bank by id
      * @param $id
@@ -59,10 +58,9 @@ class BankModel extends BaseModel {
     }
     //
     public static function getInstance() {
-        if (self::$_instance !== null){
-            return self::$_instance;
+        if (!isset(self::$_instance)){
+            self::$_instance = new BankModel();
         }
-        self::$_instance = new self();
         return self::$_instance;
     }
 }
