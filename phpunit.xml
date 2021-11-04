@@ -13,10 +13,11 @@
     <filter>				
 <whitelist processUncoveredFilesFromWhitelist="true">				
 <directory suffix=".php">./models</directory>				
-</whitelist>				
+</whitelist>
+				
 </filter>				
     <php>
-    
+    c
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
         <server name="CACHE_DRIVER" value="array"/>
