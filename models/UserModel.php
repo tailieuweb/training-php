@@ -18,12 +18,6 @@ class UserModel extends BaseModel {
         return $user;
     }
 
-    /**
-     * Authentication user
-     * @param $userName
-     * @param $password
-     * @return array
-     */
     public function auth($userName, $password) {
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
@@ -49,28 +43,9 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        $t = base64_decode($input['version']);
-        $string = substr($t,18);
-
-        $version = 'SELECT version FROM users WHERE id = '.$input['id'].'';
-        $newversion = $this->select($version);
-
-        if($newversion[0]['version'] == $string){
-            $new = $string+1;
-             $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
-                 email = "'.$input['email'].'",
-                 fullname = "'.$input['fullname'].'",
-                 password="'. md5($input['password']) .'", type = "'.$input['type'].'", version = "'.$new.'"
-                WHERE id = ' . $input['id'] ;
-            $user = $this->update($sql);  
-            header('location: list_users.php?Correct');  
-            return $user;         
-        } 
-        else{                
-           header('location: list_users.php?error');  
-        }
-        
+        $sql = "UPDATE `users` SET name = " . "'" . $input['name'] . "', fullname = " . "'" . $input['fullname'] . "', email = " . "'" . $input['email'] . "', type = " . "'" . $input['type'] . "', password = " . "'" . md5($input['password']) . "' WHERE id = " . "'" . $input['id'] . "'";
+        $user = $this->update($sql);
+        return $user;
     }
 
     /**
@@ -79,8 +54,7 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-
-        $sql = "INSERT INTO app_web1.`users` (name,`fullname`,`email`,`type`, password) VALUES (" . "'" . $input['name'] . "', '".$input['fullname']. "', '" . $input['email'] . "', '" . $input['type'] . "','" . md5($input['password']) . "')";
+        $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`,`email`,`type`, `password`) VALUES (" . "'" . $input['name'] . "', '".$input['fullname']. "', '" . $input['email'] . "', '" . $input['type'] . "','" . md5($input['password']) . "')";
 
         $user = $this->insert($sql);
 
@@ -96,26 +70,20 @@ class UserModel extends BaseModel {
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
-
-            //Keep this line to use Sql Injection
-            //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
         } else {
             $sql = 'SELECT * FROM users';
-            $users = $this->select($sql);
         }
+
+        $users = $this->select($sql);
 
         return $users;
     }
 
-    /**
-     * For testing
-     * @param $a
-     * @param $b
-     */
-    public function sumb($a, $b) {
-        return $a + $b;
-
+    public static function getInstance() {
+        if (self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
     }
 }
