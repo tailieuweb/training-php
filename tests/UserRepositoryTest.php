@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class RepositoryTest extends TestCase
+class UserRepositoryTest extends TestCase
 {
     /**
      * Test testUpdateUserOk Function in Factoryrepository - 'Lập' do this

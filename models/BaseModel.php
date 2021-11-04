@@ -84,25 +84,4 @@ abstract class BaseModel
     {
         return str_replace(array("'", '"', "''"), array('&quot;', '&quot;'), $str);
     }
-
-    /**
-     * Decrypt id
-     */
-    protected function decryptID($md5Id, $arr = [])
-    {
-        if (!is_numeric($md5Id) && !is_string($md5Id)) {
-            return null;
-        }
-        if (is_numeric($md5Id)) {
-            if ($md5Id <= 0) {
-                return $md5Id;
-            }
-        }
-        foreach ($arr as $item) {
-            if (md5($item['id'] . 'TeamJ-TDC') == $md5Id) {
-                return $item['id'];
-            }
-        }
-        return NULL;
-    }
 }
