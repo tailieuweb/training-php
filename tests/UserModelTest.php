@@ -108,4 +108,31 @@ class UserModelTest extends TestCase
 
     }
 
+    public function testgetUsersNotParamOK(){
+        $userModel = new UserModel();
+
+        $actual = $userModel->getUsers();
+
+        if($actual != null){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+      
+    }
+    public function testgetUsersParamOK(){
+        $userModel = new UserModel();
+        $key = "a";
+        $actual = $userModel->getUsers($key);
+
+        if($actual != null){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+        
+    }
+
 }
