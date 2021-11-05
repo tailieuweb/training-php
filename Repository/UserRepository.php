@@ -21,8 +21,8 @@ class UserRepository extends BaseModel {
     }
     
     public function create_Bank($input) {
-        $bankModel = new BankModel();
-        return $bankModel->insertBank($input);
+        $userModel = new UserModel();
+        return $userModel->create_Bank($input);
     }
 
     // Update user and bank
@@ -32,8 +32,8 @@ class UserRepository extends BaseModel {
     }
 
     public function update_Bank($input) {
-        $bankModel = new BankModel();
-        return $bankModel->updateBank($input);
+        $userModel = new UserModel();
+        return $userModel->update_Bank($input);
     }
     // Delete user and bank
     public function delete_User($input) {
@@ -42,14 +42,14 @@ class UserRepository extends BaseModel {
     }
 
     public function delete_Bank($input) {
-        $bankModel = new BankModel();
-        return $bankModel->deleteBankById($input);
+        $userModel = new UserModel();
+        return $userModel->delete_Bank($input);
     }
 
     // Get the list of bank :
     public function getListBank($params = []) {
-        $bankModel = new BankModel();
-        return $bankModel->getBanks($params);
+        $userModel = new UserModel();
+        return $userModel->getListBank($params);
     }
 
     // Get a bank by id:
