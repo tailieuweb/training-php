@@ -1,22 +1,21 @@
 <?php
 require_once 'models/UserModel.php';
-$userModel = new UserModel();
 
 $user = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+    $user = UserModel::getInstance()->findUserById($id);//Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
-        $userModel->updateUser($_POST);
+        UserModel::getInstance()->updateUser($_POST);
     } else {
-        $userModel->insertUser($_POST);
+        UserModel::getInstance()->insertUser($_POST);
     }
     header('location: list_users.php');
 }

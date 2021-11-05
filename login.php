@@ -2,23 +2,22 @@
 // Start the session
 session_start();
 require_once 'models/UserModel.php';
-$userModel = new UserModel();
 
 $user = NULL; //Add new user
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
-    $user = $userModel->findUserById($_id);//Update existing user
+    $user = $UserModel::getInstance()->findUserById($_id);//Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
 
     if (!empty($_id)) {
-        $userModel->updateUser($_POST);
+        $UserModel::getInstance()->updateUser($_POST);
     } else {
-        $userModel->insertUser($_POST);
+        $UserModel::getInstance()->insertUser($_POST);
     }
     header('location: list_users.php');
 }

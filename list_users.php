@@ -3,14 +3,13 @@
 session_start();
 
 require_once 'models/UserModel.php';
-$userModel = new UserModel();
 
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
 
-$users = $userModel->getUsers($params);
+$users = UserModel::getInstance()->getUsers($params);
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,10 +21,6 @@ $users = $userModel->getUsers($params);
     <?php include 'views/header.php'?>
     <div class="container">
         <?php if (!empty($users)) {?>
-            <div class="alert alert-warning" role="alert">
-                List of users! <br>
-                Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
-            </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
