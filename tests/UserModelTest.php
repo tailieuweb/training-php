@@ -92,7 +92,9 @@ class UserModelTest extends TestCase
         $this->assertEquals($userName, $actual);
     }
 
-    // Test case insertUserOk 
+    
+    
+    // Test  insertUserOk 
     public function testInsertUserOK()
     {
         $userModel = new UserModel();
@@ -103,6 +105,28 @@ class UserModelTest extends TestCase
         $input['type'] = 0;
         $input['password'] = "12345";
       
+        $actual = $userModel->insertUser( $input);
+        if($actual != true)
+        {
+            $this->assertTrue(false); 
+        }
+        else
+        {
+            $this->assertTrue(true); 
+        }
+    }
+    // Test  testInsertUserWidthIdNull
+    public function testInsertUserWidthIdNull()
+    {
+        $userModel = new UserModel();
+        $input = [];
+        $input['id'] = null;
+        $input['name'] = "Sang";
+        $input['fullname'] = "Minh Sang";
+        $input['email'] = "sang@gmail.com";
+        $input['type'] = 0;
+        $input['password'] = "1234";
+
         $actual = $userModel->insertUser( $input);
         if($actual != true)
         {
