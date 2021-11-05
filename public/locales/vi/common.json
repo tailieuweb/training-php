@@ -1,8 +1,9 @@
 {
-    "h1": "Ein einfaches Beispiel",
-    "change-locale": "Wechseln Locale",
-    "to-second-page": "Zur zweiten Seite",
-    "error-with-status": "Auf dem Server ist ein Fehler ({{statusCode}}) aufgetreten",
-    "error-without-status": "Auf dem Server ist ein Fehler aufgetreten",
-    "title": "Hauptseite | next-i18next"
+    "app.lang": "Ngôn Ngữ",
+    "app.lang.english": "English",
+    "app.lang.vietnamese": "Tiếng Việt",
+    
+    "app.post.new": "Tạo Mới Confessions",
+    "app.post.newDescription": "Chia sẻ với chúng tôi những câu chuyện của riêng bạn và những người khác.",
+    "app.post.newSuggestLogin": "Vui lòng đăng nhập để có thể chỉnh sửa bài viết hoặc bạn có thể đăng bài ẩn danh."
 }

@@ -4,7 +4,6 @@ import { actLoadSignInUser } from "../redux/actions/authActions";
 import Footer from "./Footer";
 import Header from "./Header";
 import Posts from "./Posts";
-import Loading from "../components/Base/Loading";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -20,7 +19,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Header isLoading={isLoading}/>
+      <Header isLoading={isLoading} />
       <div className="container">
         <Posts />
       </div>
