@@ -1,14 +1,14 @@
 <?php
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
-$bankModel = $factory->make('bank');
+$repository = $factory->make('Repository');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
 
-$banks = $bankModel->getBanks($params);
+$banks = $repository->getListBank($params);
 ?>
 <!DOCTYPE html>
 <html>

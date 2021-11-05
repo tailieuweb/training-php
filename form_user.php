@@ -3,8 +3,12 @@
 session_start();
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
+<<<<<<< HEAD
 $userModel = $factory->make('user');
 $banksModel = $factory->make('user');
+=======
+$repository = $factory->make('Repository');
+>>>>>>> 2-php-202109/2-groups/4-D/master
 
 $user = NULL; //Add new user
 $_id = NULL;
@@ -13,19 +17,29 @@ $bank = NULL; //Add new user
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
+<<<<<<< HEAD
     $user = $userModel->findUserById($_id); //Update existing user
     $bank = $banksModel->findBankById($_id);
+=======
+    $user = $repository->getUserID($_id); //Update existing user
+>>>>>>> 2-php-202109/2-groups/4-D/master
 }
 
 
 if (!empty($_POST['submit'])) {
 
     if (!empty($_id)) {
+<<<<<<< HEAD
         $userModel->updateUser($_POST);
         $banksModel->updateBank($_POST);
     } else {
         $userModel->insertUser($_POST);
         $banksModel->insertBank($_POST);
+=======
+        $repository->update_User($_POST);
+    } else {
+        $repository->create_User($_POST);
+>>>>>>> 2-php-202109/2-groups/4-D/master
     }
     header('location: list_users.php');
 }
