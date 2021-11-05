@@ -74,10 +74,9 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public static function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`type`,`email`) VALUES (" .
-        "'" . $input['name'] ."', '".md5($input['password'])."','".$input['fullname']."','".$input['type']."','".$input['email']. "')";
-
+    public function insertUser($input) {
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`type`,`email`,`version`) VALUES (" .
+        "'" . $input['name'] ."', '".md5($input['password'])."','".$input['fullname']."','".$input['type']."','".$input['email']. "','0.0')";
         $user = $this->insert($sql);
 
         return $user;
