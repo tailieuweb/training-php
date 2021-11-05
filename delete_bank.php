@@ -1,6 +1,7 @@
 <?php
-require_once 'models/BankModel.php';
-$bankModel = new BankModel();
+require_once 'models/FactoryPattent.php';
+$factory = new FactoryPattent();
+$bankModel = $factory->make('bank');
 $id_bank = NULL;
 if (!empty($_GET['bank_id'])) {
     $id_bank = $_GET['bank_id'];

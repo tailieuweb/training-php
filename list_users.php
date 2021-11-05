@@ -1,11 +1,8 @@
 <?php
 // Start the session
 session_start();
-
-
 require_once 'models/UserModel.php';
 require_once 'models/FactoryPattent.php';
-// $userModel = new UserModel();
 $factory = new FactoryPattent();
 $userModel = $factory->make('user');
 $params = [];
