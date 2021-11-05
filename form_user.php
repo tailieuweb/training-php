@@ -7,6 +7,7 @@ $repository = $factory->make('Repository');
 
 $user = NULL; //Add new user
 $_id = NULL;
+$bank = NULL; //Add new user
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];

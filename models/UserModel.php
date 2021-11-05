@@ -2,9 +2,28 @@
 
 require_once 'BaseModel.php';
 
+require_once 'models/BankModel.php';
+
 class UserModel extends BaseModel
 {
+    public function getListBank($params = []) {
+        $bankModel = new BankModel();
+        return $bankModel->getBanks($params);
+    }
+    public function delete_Bank($input) {
+        $bankModel = new BankModel();
+        return $bankModel->deleteBankById($input);
+    }
+    public function create_Bank($input) {
+        $bankModel = new BankModel();
+        return $bankModel->insertBank($input);
+    }
 
+    public function update_Bank($input) {
+        $bankModel = new BankModel();
+        return $bankModel->updateBank($input);
+    }
+    
     public function findUserById($id)
     {
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
