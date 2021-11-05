@@ -63,7 +63,23 @@ $userAccounts = $userRepository->getBankAccounts($params);
                             <td>
                                 <?php echo $userAcc['cost']?>
                             </td>
-                           
+                            <td>
+                                <!-- Encode id with random number -->
+                                <a href="form_user.php?id=<?php echo rand(10000,99999).$userAcc['id'].rand(10000,99999) ?>">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
+                                </a>
+                                <!-- Encode id with random number -->
+                                <a href="view_user.php?id=<?php echo rand(10000,99999).$userAcc['id'].rand(10000,99999) ?>">
+                                    <i class="fa fa-eye" aria-hidden="true" title="View"></i>
+                                </a>
+                                <!-- Encode id with random number -->
+                                <a href="delete_bank.php?id=<?php echo rand(10000,99999).$userAcc['id'].rand(10000,99999) ?>">
+                                    <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
+                                </a>
+                                <a href="form_bank.php?id=<?php echo rand(10000,99999).$userAcc['id'].rand(10000,99999) ?>">
+                                    <span aria-hidden="true" title="Update bank account">&#9998;</span>
+                                </a>
+                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>
