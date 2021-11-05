@@ -1,10 +1,10 @@
 <?php
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'DesignPattern/FactoryPattern.php';
+$factory = new FactoryPattern();
+$userModel = $factory->make('user');
 
 $user = NULL; //Add new user
-$id = NULL;
-
+$_id = NULL;
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];

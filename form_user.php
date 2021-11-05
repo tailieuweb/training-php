@@ -1,8 +1,9 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'DesignPattern/FactoryPattern.php';
+$factory = new FactoryPattern();
+$userModel = $factory->make('user');
 
 $user = NULL; //Add new user
 $id = NULL;
@@ -49,6 +50,7 @@ if (!empty($_POST['submit'])) {
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
+                <p><?php if(isset($user[0]['version'])) echo 'Version: ' . $user[0]['version'] ?></p>
                 <form method="POST">
                     <input type="hidden" name="id" value="<?php echo $id ?>">
                     <div class="form-group">
