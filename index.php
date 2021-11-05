@@ -2,7 +2,7 @@
 // Start the session
 session_start();
 
-require_once './DesignPattern/FactoryPattern.php';
+require_once 'DesignPattern/FactoryPattern.php';
 $factory = new FactoryPattern();
 
 $userRepository = $factory->make('UserRepository');
