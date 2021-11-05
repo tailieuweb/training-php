@@ -1,9 +1,11 @@
 <?php
 // Start the session
 session_start();
+require_once 'models/FactoryPattern.php';
 
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+$factory = new FactoryPattern();
+
+$userModel = $factory->make('user');
 
 
 if (!empty($_POST['submit'])) {

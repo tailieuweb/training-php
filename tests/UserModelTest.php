@@ -98,4 +98,16 @@ class UserModelTest extends TestCase
         $actual = $userModel->sumb($a, $b);
         $this->assertEquals($expected, $actual);
     }
+
+    // function testGetUsers
+    public function testGetUsers()
+    {
+        $userModel = new UserModel();
+        $params = [];
+
+        $expected = 1;
+        $arrUsers = $userModel->getUsers($params);
+        $actual = $arrUsers;
+        $this->assertEquals($expected, $actual);
+    }
 }

@@ -1,9 +1,11 @@
 <?php
 // Start the session
 session_start();
+require_once 'models/FactoryPattern.php';
 
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+$factory = new FactoryPattern();
+
+$userModel = $factory->make('user');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
@@ -11,6 +13,8 @@ if (!empty($_GET['keyword'])) {
 }
 
 $users = $userModel->getUsers($params);
+var_dump($users);
+
 ?>
 <!DOCTYPE html>
 <html>
