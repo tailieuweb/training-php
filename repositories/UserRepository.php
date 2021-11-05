@@ -1,8 +1,7 @@
 <?php
 
-require_once 'BaseModel.php';
-
-class UserModel extends BaseModel
+require_once 'models/BaseModel.php';
+class UserRepository extends BaseModel
 {
   public function findUserById($id)
   {
