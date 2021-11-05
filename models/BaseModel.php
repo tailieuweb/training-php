@@ -4,7 +4,11 @@ require_once 'configs/database.php';
 abstract class BaseModel {
     // Database connection
     protected static $_connection;
-    protected static $_instance;
+
+    // Singleton pattern:
+    protected static $_user_instance;
+    protected static $_bank_instance;
+    protected static $_userRepo_instance;
 
     public function __construct() {
 
