@@ -109,17 +109,6 @@ class UserModel extends BaseModel
         return $users;
     }
 
-<<<<<<< HEAD
-    /**
-     * For testing
-     * @param $a
-     * @param $b
-     */
-    public function sumb($a, $b) {
-        return $a + $b;
-    }
-}
-=======
     public static function getInstance()
     {
         if (self::$_instance !== null) {
@@ -129,4 +118,3 @@ class UserModel extends BaseModel
         return self::$_instance;
     }
 }
->>>>>>> 2-php-202109/2-groups/4-D/master
