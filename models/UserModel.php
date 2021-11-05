@@ -2,9 +2,10 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel
+require_once 'models/BankModel.php';
+$bankModel = new BankModel();
+class UserModel extends BankModel
 {
-
     public function findUserById($id)
     {
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
