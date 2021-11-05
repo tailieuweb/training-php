@@ -1,27 +1,30 @@
 <?php
 // Start the session
 session_start();
+
 require_once 'DesignPattern/FactoryPattern.php';
 $factory = new FactoryPattern();
-$userModel = $factory->make('user');
+
+$userRepository = $factory->make('UserRepository');
 
 $user = NULL; //Add new user
-$id = NULL;
-$params = [];
-if (!empty($_GET['keyword'])) {
-    $params['keyword'] = $_GET['keyword'];
-    
-}
-$users = $userModel->getUsers($params);
+$_id = NULL;
 
 if (!empty($_GET['id'])) {
-    foreach ($users as $user1) {
-        if($_GET['id'] == md5($user1['id'])){                      
-            $id = $user1['id'];    
-        }
-    }  
-    $user = $userModel->findUserById($id);//Update existing user$_id = NULL;
+    $_id = $_GET['id'];
 
+  //Lấy số đầu tiên 
+    $start = substr($_id, 0, 5);
+
+  //Lấy số cuối
+    $end = substr($_id, -5);
+
+    //thay thế số đầu bằng null
+    $_id = str_replace($start, "", $_id);
+
+    //thay thế số cuối bằng null
+    $_id = str_replace($end, "", $_id);
+    $user = $userRepository->getBankAccountByUserID($_id); //Update existing user
 }
 
 
@@ -38,12 +41,14 @@ if (!empty($_POST['submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>User form</title>
     <?php include 'views/meta.php' ?>
 </head>
+
 <body>
-    <?php include 'views/header.php'?>
+    <?php include 'views/header.php' ?>
     <div class="container">
 
             <?php if ($user || !isset($id)) { ?>
@@ -86,4 +91,5 @@ if (!empty($_POST['submit'])) {
             <?php } ?>
     </div>
 </body>
+
 </html>
