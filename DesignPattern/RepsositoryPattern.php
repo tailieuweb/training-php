@@ -1,2 +1,2 @@
-<?php
-require_once './models/UserModel.php';
+<!-- <?php
+require_once './models/UserModel.php'; -->
