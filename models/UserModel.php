@@ -1,9 +1,18 @@
 <?php
 
+use function PHPUnit\Framework\isEmpty;
+
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
+
+    public function truncateUsers()
+    {
+        $sql = 'TRUNCATE TABLE users';
+        $user = $this->query($sql);
+        return $user;
+    }
 
     public function findUserById($id)
     {
@@ -54,6 +63,10 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
+        if (empty($input['id'])) {
+            return "Error";
+        }
+
         $sql = 'UPDATE users SET 
                  name = "' . $input['name'] . '", 
                  fullname = "' . $input['fullname'] . '", 
@@ -73,6 +86,11 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
+
+        if (empty($input['name']) || empty($input['fullname']) || empty($input['email']) || empty($input['password'] || empty($input['type']))) {
+            return "Error";
+        }
+
         $password = md5($input['password']);
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
             "'" . $input['name'] . "', '" . $password . "', '" . $input['fullname'] . "', '" . $input['email'] . "', '" . $input['type'] . "')";
@@ -93,7 +111,7 @@ class UserModel extends BaseModel
         $users = null;
         if (!empty($params['keyword'])) {
             $stmt = self::$_connection->prepare("SELECT * FROM users WHERE name LIKE CONCAT('%',?,'%')");
-            if($stmt) {
+            if ($stmt) {
                 $stmt->bind_param("s", $params['keyword']);
                 $stmt->execute();
                 $users = array();
@@ -114,7 +132,13 @@ class UserModel extends BaseModel
      * @param $a
      * @param $b
      */
-    public function sumb($a, $b) {
+    public function sumb($a, $b)
+    {
+
+        if (!is_numeric($a) || !is_numeric($b)) {
+            return "Error";
+        }
+
         return $a + $b;
     }
     public static function getInstance()

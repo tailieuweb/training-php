@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
@@ -9,14 +10,19 @@ class UserModelTest extends TestCase
      */
     public function testSumOk()
     {
-       $userModel = new UserModel();
-       $a = 1;
-       $b = 2;
-       $expected = 3;
+        $userModel = new UserModel();
 
-       $actual = $userModel->sumb($a,$b);
+        $actual = $userModel->sumb(1, 2);
+        $this->assertEquals(3, $actual);
 
-       $this->assertEquals($expected, $actual);
+        $actual = $userModel->sumb(-1, -2);
+        $this->assertEquals(-3, $actual);
+
+        $actual = $userModel->sumb(1, -2);
+        $this->assertEquals(-1, $actual);
+
+        $actual = $userModel->sumb(2.1, 2.3);
+        $this->assertEquals(4.4, $actual);
     }
 
     /**
@@ -25,90 +31,100 @@ class UserModelTest extends TestCase
     public function testSumNg()
     {
         $userModel = new UserModel();
-        $a = 1;
-        $b = 2;
 
-        $actual = $userModel->sumb($a,$b);
+        $actual = $userModel->sumb(1, "aaa");
+        $this->assertEquals("Error", $actual);
 
-        if ($actual != 3) {
-            $this->assertTrue(false);
-        } else {
-            $this->assertTrue(true);
-        }
+        $actual = $userModel->sumb("aaa", "bbb");
+        $this->assertEquals("Error", $actual);
+
+        $actual = $userModel->sumb(1, true);
+        $this->assertEquals("Error", $actual);
+
+        $actual = $userModel->sumb(true, false);
+        $this->assertEquals("Error", $actual);
     }
 
-    /**
-     * Test case Okie
-     */
-    public function testSum2()
+
+    public function testSumGetUsersOk()
     {
         $userModel = new UserModel();
-        $a = -1;
-        $b = -2;
-        $expected = -3;
 
-        $actual = $userModel->sumb($a, $b);
+        // truncate
+        $userModel->truncateUsers();
 
-        $this->assertEquals($expected, $actual);
+        // create user
+        $userModel->insertUser([
+            "name" => "tronghieu60s", "fullname" => "Hieu", "email" => "tronghieu60s@gmail.com", "password" => "123", "type" => "admin",
+        ]);
+
+        $actual = $userModel->getUsers();
+        $this->assertEquals("tronghieu60s", $actual[0]["name"]);
+
+        $keyword = "tronghieu60s";
+        $actual2 = $userModel->getUsers(["keyword" => $keyword]);
+        $this->assertEquals(strtolower($keyword), strtolower($actual2[0]["name"]));
     }
 
-    /**
-     * Test case Okie
-     */
-    public function testSum3()
+    public function testSumInsertUserOk()
     {
         $userModel = new UserModel();
-        $a = -1;
-        $b = 2;
-        $expected = 1;
+        $input = [
+            "name" => "Hieu",
+            "fullname" => "Hieu",
+            "email" => "tronghieu60s@gmail.com",
+            "password" => "123",
+            "type" => "admin",
+        ];
 
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
+        $actual = $userModel->insertUser($input);
+        $this->assertIsBool($actual);
     }
 
-    /**
-     * Test case Okie
-     */
-    public function testSum4()
+    public function testSumInsertUserNg()
     {
         $userModel = new UserModel();
-        $a = 1.5;
-        $b = 2.1;
-        $expected = 3.6;
+        $input = [
+            "name" => "",
+            "fullname" => "",
+            "email" => "tronghieu60s@gmail.com",
+            "password" => "123",
+            "type" => "admin",
+        ];
 
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
+        $actual = $userModel->insertUser($input);
+        $this->assertEquals($actual, "Error");
     }
 
-    /**
-     * Test case Okie
-     */
-    public function testSum5()
+    public function testSumUpdateUserOk()
     {
         $userModel = new UserModel();
-        $a = 1;
-        $b = "2";
-        $expected = 3;
+        $input = [
+            "id" => "2",
+            "name" => "Hieu",
+            "fullname" => "Naruto",
+            "email" => "tronghieu60s@gmail.com",
+            "password" => "123",
+            "type" => "admin",
+        ];
 
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
+        $actual = $userModel->updateUser($input);
+        $this->assertIsBool($actual);
     }
 
-    /**
-     * Test case Okie
-     */
-    public function testSum6()
+    public function testSumUpdateUserNg()
     {
         $userModel = new UserModel();
-        $a = "1";
-        $b = "2";
-        $expected = 3;
+        $input = [
+            "id" => "",
+            "name" => "Hieu",
+            "fullname" => "Hieu",
+            "email" => "tronghieu60s@gmail.com",
+            "password" => "123",
+            "type" => "admin",
+        ];
 
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
+        $actual = $userModel->updateUser($input);
+        $this->assertEquals($actual, "Error");
     }
 }
