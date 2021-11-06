@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 const getFlagByLocale = (locale) => {
   switch (locale) {
     case "en":
-      return "/united-kingdom.png";
+      return "/united.png";
     case "vi":
       return "/vietnam.png";
   }
