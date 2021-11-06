@@ -14,7 +14,7 @@ class BankModel extends BaseModel {
 
     // find bank id
     public function findBankById($id) {
-        $sql = 'SELECT * FROM banks WHERE id = '.$id;
+        $sql = 'SELECT * FROM banks WHERE user_id = '.$id;
         $bank = $this->select($sql);
 
         return $bank;

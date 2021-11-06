@@ -7,12 +7,14 @@ $factory = new FactoryPattern();
 //proxy make bank & user
 $bankModel = $factory->make('bank');
 $userModel = $factory->make('users');
+
 $user = $bankModel->getUsers();
+
 $bank = NULL; //Add new user
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
-    $_id = $_GET['id'];
+    $_id = $_GET['id'] * 1;
     $bank = $bankModel->findBankById($_id);//Update existing user
 }
 
@@ -20,8 +22,9 @@ if (!empty($_GET['id'])) {
 if (!empty($_POST['submit'])) {
 
     if (!empty($_id)) {
-        //$userModel->updateUser($_POST,$bankModel);
         $userModel->updateUser($_POST);
+        //no update proxy post,bank
+        //          $userModel->updateUser($_POST,$bankModel);
     } else {
        $userModel->insertUser($_POST);
     }  
@@ -38,8 +41,7 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
-
-            <?php if ($bank || empty($_id)) { ?>
+            <?php  if ($bank || empty($_id)) { ?>
    
 
                 <div class="alert alert-warning" role="alert">
