@@ -50,7 +50,7 @@ if (!empty($_POST['submit'])) {
 
         <?php if ($bank || empty($_id) || $users) { ?>
             <div class="alert alert-warning" role="alert">
-                User form
+                Bank form
 
             </div>
             <?php if (isset($a)) { ?>
@@ -63,7 +63,7 @@ if (!empty($_POST['submit'])) {
                 <input type="hidden" name="id" value="<?php echo $_id ?>">
                 <input type="hidden" name="version" value="<?php if (!empty($bank[0]['version'])) echo md5($bank[0]['version'] . "chuyen-de-web-1") ?>">
                 <div class="form-group">
-                    <label for="type">Type</label>
+                    <label for="type">User Name</label>
                     <select name="user_id">
                         <?php
                         foreach ($users as $user) {
@@ -82,7 +82,7 @@ if (!empty($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label for="cost">Cost</label>
-                    <input type="number" name="cost" class="form-control" placeholder="Email" value="<?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?>">
+                    <input type="number" name="cost" class="form-control" placeholder="10" value="<?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?>">
                 </div>
                 <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
             </form>
