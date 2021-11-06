@@ -1,8 +1,8 @@
 <?php
-require_once 'models/FactoryPattern.php';
-$factory = new FactoryPattern();
+require_once 'models/SingletonPattern.php';
+$singleton = new SingletonPattern();
 
-$userModel = $factory->make('user');
+$userModel = $singleton->make('user');
 
 $user = NULL; //Add new user
 $id = NULL;
