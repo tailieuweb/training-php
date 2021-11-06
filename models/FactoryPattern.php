@@ -9,4 +9,5 @@ class FactoryPattern {
             return BankModel::getInstance();
         }
     }
+    
 }
