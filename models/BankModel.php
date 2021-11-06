@@ -62,6 +62,7 @@ class BankModel extends BaseModel
         $result = ResultClass::getInstance();
         $id = $this->decryptID($input['id'], $this->getBanks());
         $temp = $this->getBankById($input['id']);
+
         if (count($temp) > 0) {
             if ($temp[0]['version'] == $input['version']) {
                 $sql = 'UPDATE `banks` SET 

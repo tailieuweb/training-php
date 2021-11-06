@@ -59,12 +59,18 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
-        $result = ResultClass::getInstance();
-        $id = $this->decryptID($input['id'], $this->getUsers());
-        $temp = $this->findUserById($input['id']);
-        if (count($temp) > 0) {
-            if ($temp[0]['version'] == $input['version']) {
-                $sql = 'UPDATE `users` SET 
+        var_dump($input);
+        die();
+        if (isset($input['user_id'])) {
+            $bankModel = new BankModel();
+            $bankModel->updateBank($input);
+        } else {
+            $result = ResultClass::getInstance();
+            $id = $this->decryptID($input['id'], $this->getUsers());
+            $temp = $this->findUserById($input['id']);
+            if (count($temp) > 0) {
+                if ($temp[0]['version'] == $input['version']) {
+                    $sql = 'UPDATE `users` SET 
                 name = "' . $this->BlockSQLInjection($input['name']) . '", 
                  fullname="' . $this->BlockSQLInjection($input['fullname']) . '",
                  email="' . $this->BlockSQLInjection($input['email']) . '",
@@ -72,19 +78,20 @@ class UserModel extends BaseModel
                  password="' . md5($input['password']) . '",
                  version="' . ($input['version'] + 1) . '"
                  WHERE id = ' . $id;
-                $user = $this->update($sql);
-                if ($user == true) {
-                    $result->setData("Đã update thành công");
+                    $user = $this->update($sql);
+                    if ($user == true) {
+                        $result->setData("Đã update thành công");
+                    } else {
+                        $result->setError("Lỗi");
+                    }
                 } else {
-                    $result->setError("Lỗi");
+                    $result->setError("Dữ liệu đã được cập nhật trước đó! Xin hãy reload lại trang");
                 }
             } else {
-                $result->setError("Dữ liệu đã được cập nhật trước đó! Xin hãy reload lại trang");
+                $result->setError("Không tìm thấy id của user");
             }
-        } else {
-            $result->setError("Không tìm thấy id của user");
+            return $result;
         }
-        return $result;
     }
 
     /**
@@ -94,13 +101,18 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
-        $password = md5($input['password']);
-        // SQL
-        $sql = "INSERT INTO `users`(`name`, `fullname`, `email`, `type`, `password`) 
+        if (isset($input['user_id'])) {
+            $bankModel = new BankModel();
+            $bankModel->insertBank($input);
+        } else {
+            $password = md5($input['password']);
+            // SQL
+            $sql = "INSERT INTO `users`(`name`, `fullname`, `email`, `type`, `password`) 
         VALUES ('" . $this->BlockSQLInjection($input['name']) . "','" . $this->BlockSQLInjection($input['fullname']) . "','" . $this->BlockSQLInjection($input['email']) . "','" . $this->BlockSQLInjection($input['type']) . "','" . $this->BlockSQLInjection($password) . "')";
-        $user = $this->insert($sql);
+            $user = $this->insert($sql);
 
-        return $user;
+            return $user;
+        }
     }
 
     /**

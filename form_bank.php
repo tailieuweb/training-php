@@ -16,14 +16,18 @@ if (!empty($_GET['id'])) {
 if (!empty($_POST['submit'])) {
     if (!empty($id)) {
         //Update bank
-        $temp = $bankModel->updateBank($_POST);
+        // $temp = $bankModel->updateBank($_POST);
+        $temp = $userModel->updateUser($_POST);
+        var_dump($temp);
+        die();
         if ($temp->isSuccess == true) {
             echo "<script>alert('$temp->data');window.location.href='./list_bank.php'</script>";
         } else {
             echo "<script>alert('$temp->error');</script>";
         }
     } else {
-        $bankModel->insertBank($_POST);
+        $userModel->insertUser($_POST);
+        // $bankModel->insertBank($_POST);
         header('location: list_bank.php');
     }
     // header('location: form_bank.php');
