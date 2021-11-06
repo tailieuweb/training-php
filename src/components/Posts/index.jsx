@@ -22,7 +22,7 @@ const inputPost = { id: "", title: "", description: "" };
 export default function Posts() {
   // Next
   const router = useRouter();
-  const { pageNum = 1 } = router.query;
+  const { page = 1 } = router.query;
 
   // Redux
   const dispatch = useDispatch();
@@ -46,11 +46,11 @@ export default function Posts() {
 
   useEffect(() => {
     const postsData = [...postsBase].splice(
-      (pageNum - 1) * ITEM_PER_PAGE,
+      (page - 1) * ITEM_PER_PAGE,
       ITEM_PER_PAGE
     );
     setPosts(postsData);
-  }, [pageNum, postsBase]);
+  }, [page, postsBase]);
 
   // Functions
   const onChange = (e) => {
@@ -116,7 +116,7 @@ export default function Posts() {
         onEditPost={onEditPost}
       />
       <PostsDelete postSelected={postSelected} onDeletePost={onDeletePost} />
-      {parseInt(pageNum) === 1 && (
+      {parseInt(page) === 1 && (
         <div className="col-md-6">
           <PostsAddItem user={user} />
         </div>
