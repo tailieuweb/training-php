@@ -4,14 +4,14 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel{
 
-    protected static $_instance;
+    // protected static $_instance;
     
     public static function getInstance() {
-        if (self::$_instance !== null){
-            return self::$_instance;
+        if (self::$_bank_instance !== null){
+            return self::$_bank_instance;
         }
-        self::$_instance = new self();
-        return self::$_instance;
+        self::$_bank_instance = new self();
+        return self::$_bank_instance;
     }
 
     //Create token for user
