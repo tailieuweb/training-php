@@ -1,29 +1,28 @@
 <?php
 require_once 'models/FactoryPattern.php';
+
 $factory = FactoryPattern::getInstance();
-
-$userModel = $factory->make('user');
-
+$userRepository = $factory-> make('user-repository');
 $user = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $userModel->findUserById($id); //Update existing user
+    $user = $userRepository->findById($id); //Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
     if (!empty($id)) {
-        $temp = $userModel->updateUser($_POST);
+        $temp = $userRepository->updateUserWithBank($_POST);
         if ($temp->isSuccess == true) {
             echo "<script>alert('$temp->data');window.location.href='./list_users.php'</script>";
         } else {
             echo "<script>alert('$temp->error');</script>";
         }
     } else {
-        $userModel->insertUser($_POST);
-        header('location: list_users.php');
+        $userRepository->insertUser($_POST);
+       header('location: list_users.php');
     }
 }
 
@@ -83,6 +82,12 @@ if (!empty($_POST['submit'])) {
                                                 } ?>>Guest</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <?php if(isset($user['cost'])){ ?>
+                    <label for="cost">Cost</label>
+                    <input class="form-control" type="number" name="cost" placeholder="cost" value="<?php echo strip_tags($user['cost']) ?>" required>
+                </div>
+                <?php } ?>
                 <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
             </form>
         <?php } else { ?>
