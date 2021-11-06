@@ -4,15 +4,12 @@ session_start();
 
 require_once 'models/FactoryPattern.php';
 $factory = FactoryPattern::getInstance();
-
-$userModel = $factory->make('user');
-
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
-
-$users = $userModel->getUsers($params);
+$repository = $factory->make('user-repository');
+$users = $repository -> getUsersWithBank($params);
 
 $token = md5(rand(0, 7777777) . "TEAMJ");
 
@@ -61,7 +58,7 @@ $token = md5(rand(0, 7777777) . "TEAMJ");
                                 <?php echo $user['email'] ?>
                             </td>
                             <td>
-                                <?= number_format(9999).' $' ?>
+                                <?= number_format($user['cost']).' $' ?>
                             </td>
                             <td>
                                 <?php echo $user['type'] ?>
