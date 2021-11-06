@@ -25,6 +25,7 @@ if (!empty($_POST['submit'])) {
 
     if (!empty($_id)) {
 
+        
         $userModel->updateUser($_POST,$BankModel);
     } else {
         $userModel->insertUser($_POST,$BankModel);

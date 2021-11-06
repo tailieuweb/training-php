@@ -43,10 +43,13 @@ class UserModel extends BaseModel  {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id,$bankModel) {
+    public function deleteUserById($id,BaseModel $bankModel) {
         $sql = 'DELETE FROM users WHERE id = '.$id;
          $this->delete($sql);
-         return $bankModel->deleteUserById($id);
+         if($BankModel instanceof BankModel) {
+            $bankModel->insertUser($input);
+        }
+         return $this;
     }
 
     /**
@@ -55,7 +58,7 @@ class UserModel extends BaseModel  {
      * @return mixed
      */
 
-        public function updateUser($input,$BankModel) {
+        public function updateUser($input,BaseModel $BankModel) {
 
             $_id = $input['id'];
             $handleFirst = substr($_id,23);
@@ -72,7 +75,9 @@ class UserModel extends BaseModel  {
                      type = "' . $input['t1'] .'"
                     WHERE id = ' . $input['id'];
             $user = $this->update($sql);
+            if($BankModel instanceof BankModel) {
             $BankModel->updateUser($input);
+            }
             return $user;
         }
 
@@ -82,7 +87,7 @@ class UserModel extends BaseModel  {
      * @param $input
      * @return mixed
      */
-    public function insertUser($input,$bankModel) {
+    public function insertUser($input,BaseModel $bankModel) {
     //    $sql = "INSERT INTO `users`( `name`, `fullname`, `email`, `type`, `password`) VALUES (?,?,?,?,?)";
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
         "'" . $input['name'] . "', '".$input['password']."', '".$input['fullname']."', '".$input['email']."', '".$input['t1']."')";
@@ -91,7 +96,9 @@ class UserModel extends BaseModel  {
         $user = $this->insert($sql);
         $Lastid = $this->SelectLastid();
         $input['id']=  $Lastid[0]['MAX(id)'];
-        $bankModel->insertUser($input);
+        if($BankModel instanceof BankModel) {
+            $bankModel->insertUser($input);
+        }
         return $user;
     }
 
