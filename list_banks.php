@@ -13,10 +13,6 @@ $banks = $bankModel->getBanks();
     <?php include 'views/header.php'?>
     <div class="container">
         <?php if (!empty($banks)) {?>
-            <div class="alert alert-warning" role="alert">
-                List of users! <br>
-                Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
-            </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
