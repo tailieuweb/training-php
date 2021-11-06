@@ -13,10 +13,9 @@ $token = NULL;
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     $token = $_GET['token'];
-    if ($token==$_SESSION['_token']) {
+    if ($token == $_SESSION['_token']) {
         $userModel->deleteUserById($id); //Delete existing user
     }
-  
 }
 
 header('location: list_users.php');
