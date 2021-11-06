@@ -1,9 +1,12 @@
 <?php
 require_once 'models/FactoryPattern.php';
+require_once 'models/BaseModel.php';
+
 $factory = new FactoryPattern();
 
 $bankModel = $factory->make('bank');
 $userModel = $factory->make('user');
+
 
 $bank = NULL; //Add new user
 $id = NULL;
@@ -22,6 +25,7 @@ if (!empty($_POST['submit'])) {
     }  
     header('location: list_bank.php');   
 }
+
 
 ?>
 <!DOCTYPE html>

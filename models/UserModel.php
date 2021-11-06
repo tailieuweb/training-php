@@ -1,5 +1,7 @@
 <?php
 
+use phpDocumentor\Reflection\DocBlock\Tags\BaseTag;
+
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
@@ -50,11 +52,10 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function updateUser($input, $bankModel) { 
-        if(isset($bankModel)){
-            $bankModel->updateBank($input);
+    public function updateUser($input, BaseModel $bankModel) { 
+        if($bankModel instanceof BankModel){
+            $bankModel->updateBank($input);                             
         }
-        else{
             $t = base64_decode($input['version']);
             $str = substr($t,18);
 
@@ -75,7 +76,6 @@ class UserModel extends BaseModel {
             else{                
             header('location: list_users.php?err');  
             }    
-        }
            
     }
 
@@ -84,11 +84,10 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function insertUser($input, $bankModel) {
-        if(isset($bankModel)){
-            $bankModel->insertBank($input);
-        }
-        else{
+    public function insertUser($input,BaseModel $bankModel) {
+        if($bankModel instanceof BankModel){
+            $bankModel->updateBank($input);                             
+        }      
             $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`,`version`) VALUES (" .
             "'" . $input['name'] . "', '"
             . md5($input['password']) . "', '"
@@ -99,8 +98,8 @@ class UserModel extends BaseModel {
             . 1
             . "')";   
             $user = $this->insert($sql);
-            return $user;
-        }      
+             return $user;
+             
                  
     }
 
