@@ -134,5 +134,22 @@ class UserModelTest extends TestCase
         }
         
     }
+    
+    public function testgetUsersParamNotOK(){
+        $userModel = new UserModel();
+       // $key = "<script>alert('hello world')</scrip>";
+        $key = "a";
+        $actual = $userModel->getUsers($key);
+        $excute = [];
+        var_dump($actual);
+        die();
+        // if($actual != null){
+        //     $this->assertTrue(true);
+        // }
+        // else{
+        //     $this->assertTrue(false);
+        // }
+        
+    }
 
 }
