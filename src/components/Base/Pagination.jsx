@@ -4,12 +4,15 @@ import { getPaginate } from "../../utils/commonFunctions";
 
 export default function Pagination(props) {
   const router = useRouter();
-  const pageNum = parseInt(router.query.pageNum) || 1;
+  const pageNum = parseInt(router.query.page) || 1;
 
   const { baseUrl = "", maxSize = 1000, itemSize = 50 } = props;
   const paginate = getPaginate(maxSize, pageNum, itemSize);
 
-  const passUrl = (page) => ({ pathname: `${baseUrl}/${page}` });
+  const passUrl = (page) => ({
+    pathname: baseUrl,
+    query: { ...router.query, page },
+  });
 
   const isDisableLeft = () => (pageNum <= 1 ? " disabled" : "");
   const isDisableRight = () =>

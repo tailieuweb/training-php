@@ -1,17 +1,26 @@
+import Link from 'next/link';
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actLogoutUser } from "../../redux/actions/authActions";
+import { actLoadSignInUser, actLogoutUser } from "../../redux/actions/authActions";
 import Auth from "../Auth";
 import HeaderAuth from "./HeaderAuth";
 import HeaderLanguages from "./HeaderLanguages";
 import HeaderSearch from "./HeaderSearch";
 
-export default function Header(props) {
-  const { isLoading } = props;
+export default function Header() {
+  const [isLoading, setIsLoading] = useState(true);
   const authSelector = useSelector((state) => state.auth);
   const user = authSelector?.user;
 
   // Redux
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    (async () => {
+      await dispatch(actLoadSignInUser());
+      setIsLoading(false);
+    })();
+  }, []);
 
   const onLogout = () => {
     dispatch(actLogoutUser());
@@ -24,9 +33,9 @@ export default function Header(props) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
-        <a className="navbar-brand" href="#">
-          React Confessions
-        </a>
+        <Link href="/">
+          <a className="navbar-brand">React Confessions</a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"

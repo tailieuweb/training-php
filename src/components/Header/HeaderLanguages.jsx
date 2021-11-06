@@ -10,7 +10,7 @@ export default function HeaderLanguages() {
         <img
           className="mr-2"
           style={{ width: "22px" }}
-          src="/united-kingdom.png"
+          src="/united.png"
         />
         Languages
       </a>
@@ -20,7 +20,7 @@ export default function HeaderLanguages() {
             <img
               className="mr-2"
               style={{ width: "22px" }}
-              src="/united-kingdom.png"
+              src="/united.png"
             />
             English
           </a>
