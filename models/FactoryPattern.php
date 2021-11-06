@@ -10,5 +10,6 @@ class FactoryPattern extends BaseModel{
             return new BankModel();
         }
     }
+    
 
 }
