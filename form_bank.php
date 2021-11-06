@@ -19,11 +19,21 @@ if (!empty($_GET['id'])) {
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
-        $userModel->updateUser($_POST,$bankModel);
-    } else {
-        $userModel->insertUser($_POST, $bankModel);
+        try{
+            $userModel->updateUser($_POST,$bankModel);
+        }
+        catch (Throwable $e) {
+            
+        }       
+    } else {        
+        try{
+            $userModel->insertUser($_POST, $bankModel);
+        }
+        catch (Throwable $e) {
+            
+        }  
     }  
-    header('location: list_bank.php');   
+    header('location: list_bank.php');
 }
 
 

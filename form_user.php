@@ -18,10 +18,21 @@ if (!empty($_GET['id'])) {
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
-        $userModel->updateUser($_POST,$bankModel);
+        try{
+            $userModel->updateUser($_POST,$bankModel);
+        }
+        catch (Throwable $e) {
+            
+        }       
     } else {
-        $userModel->insertUser($_POST,$bankModel); 
-        header('location: list_users.php');  
+        try{
+            $userModel->insertUser($_POST, $bankModel);
+            header('location: list_users.php');  
+        }
+        catch (Throwable $e) {
+            
+        }  
+       
     }   
 }
 
