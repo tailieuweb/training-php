@@ -1,6 +1,8 @@
 <?php
 require_once 'models/BankModel.php';
+require_once 'models/UserModel.php';
 $bankModel = new BankModel();
+$userModel = new UserModel();
 
 $bank = NULL; //Add new user
 $id = NULL;
@@ -14,9 +16,9 @@ if (!empty($_GET['id'])) {
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
-        $bankModel->updateBank($_POST);
+        $userModel->updateUser($_POST);
     } else {
-        $bankModel->insertBank($_POST);
+        $userModel->insertUser($_POST);
     }
     header('location: list_banks.php');
 }

@@ -34,9 +34,7 @@ if (!empty($_POST['submit'])) {
     <div class="container">
 
             <?php if ($user || empty($id)) { ?>
-=======
-            <?php if ($user || !isset($_id)) { ?>
->>>>>>> origin/1-php-202109/2-design-pattern
+            
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
