@@ -18,7 +18,7 @@ if (!empty($_POST['submit'])) {
     if (!empty($_id)) {
         $bankModel->updateBank($_POST);
     } else {
-        // $bankModel->insertBank($_POST);
+        $bankModel->insertBank($_POST);
     }
     header('location: list_banks.php');
 }

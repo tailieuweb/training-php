@@ -19,4 +19,7 @@ class RedShapeDecorator extends ShapeDecorator
     private function setRedBorder(Shape $decoratedShape){
         echo "Border Color: Red";
     }
+    public function width(){
+        echo $this->decoratedShape->width() . "20px";
+    }
 }

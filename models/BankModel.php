@@ -3,8 +3,9 @@
 use function PHPSTORM_META\type;
 
 require_once 'BaseModel.php';
+require_once 'IModel.php';
 
-class BankModel extends BaseModel {
+class BankModel extends BaseModel implements IModel {
 
     public function findBankById($id) {
         $sql = 'SELECT * FROM banks WHERE id = '.$id;
@@ -69,13 +70,13 @@ class BankModel extends BaseModel {
     //  * @param $input
     //  * @return mixed
     //  */
-    // public function insertUser($input) {
-    //     $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" . "'" . $input['name'] . "', '".md5($input['password'])."')";
+    public function insertBank($input) {
+        $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" . "'" . $input['id_user'] . "', '" . $input['cost'] . "')";
 
-    //     $user = $this->insert($sql);
+        $user = $this->insert($sql);
 
-    //     return $user;
-    // }
+        return $user;
+    }
 
     /**
      * Search users
@@ -85,7 +86,7 @@ class BankModel extends BaseModel {
     public function getBanks($params = []) {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM `banks` , `users` WHERE `users`.`id` = `banks`.`user_id` AND name LIKE "%' . $params['keyword'] .'%"';
+            $sql = 'SELECT * FROM `banks` , `users` WHERE `users`.`id` = `banks`.`user_id` AND name LIKE "%' .  mysqli_real_escape_string(self::$_connection, $params['keyword']) .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
@@ -104,5 +105,22 @@ class BankModel extends BaseModel {
         }
         self::$_instance = new self();
         return self::$_instance;
+    }
+    public function selectData($params = [])
+    {
+        $result = $this->getBanks($params = []);
+        return $result;
+    }
+    public function insertData($input)
+    {
+        $this->insertBank($input);
+    }
+    public function updateData($input)
+    {
+        $this->updateUser($input);
+    }
+    public function deleteData($id)
+    {
+        $this->deleteBankById($id);
     }
 }

@@ -1,12 +1,12 @@
 <?php
 // Start the session
 session_start();
-
+// require_once 'models/BankModel.php';
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
 $bankModel = $factory->make('bank');
-
+// $bankModel = new BankModel();
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
