@@ -7,12 +7,20 @@ require_once 'BaseModel.php';
 class UserModel extends BaseModel
 {
 
-    public function findUserById($id)
+    public function findUserById($id, BaseModel $bankModel)
     {
-        $sql = 'SELECT * FROM users WHERE id = ' . $id;
-        $user = $this->select($sql);
-
-        return $user;
+        if ($bankModel instanceof BankModel) {
+           
+            if (!empty( $bankModel->findBankById($id))) {
+               return $bankModel->findBankById($id);
+            } 
+            else{
+                $sql = 'SELECT * FROM users WHERE id = ' . $id;
+                $user = $this->select($sql);
+                return $user;
+            }
+        }
+      
     }
 
     public function findUser($keyword)
@@ -42,14 +50,18 @@ class UserModel extends BaseModel
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id)
+    public function deleteUserById($id, BankModel $bankModel)
     {
 
-        $sql = 'DELETE FROM users WHERE id = ' . $id;
-        return $this->delete($sql);
+        if ($bankModel instanceof BankModel) {
+            if (!empty($bankModel->findBankById($id))) {
+                $bankModel->deleteBankById($id);
+            } else {
+                    $sql = 'DELETE FROM users WHERE id = ' . $id;
+                    return $this->delete($sql);
+            }
+        }
     }
-
-
 
     /**
      * Update user
@@ -119,15 +131,10 @@ class UserModel extends BaseModel
     public function getUsers($params = [])
     {
         //Keyword
-
         if (!empty($params['keyword'])) {
 
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
-
-            //Keep this line to use Sql Injection
-            //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+            $users = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);

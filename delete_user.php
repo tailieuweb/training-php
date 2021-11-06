@@ -1,7 +1,8 @@
 <?php
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
-
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+$bankModel = $factory->make('bank');
+$userModel = $factory->make('user');
 
 //23-4
 
@@ -11,7 +12,13 @@ $id = NULL;
 if (!empty($_GET['id'])) {
     $id = base64_decode($_GET['id']);
     $newid = substr($id,23);
-    $userModel->deleteUserById($newid);//Delete existing user
+    try{
+        $userModel->deleteUserById($newid, $bankModel);//Delete existing user
+    }
+    catch(Throwable $e){
+
+    }
+    
 }
 header('location: list_users.php');
 ?>

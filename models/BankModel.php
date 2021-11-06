@@ -4,11 +4,10 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel {
 
-    public function findBankById($id) {
+    public function findBankById($id) {  
         $sql = 'SELECT * FROM banks WHERE id = '.$id;
-        $user = $this->select($sql);
-
-        return $user;
+        $bank = $this->select($sql);    
+        return $bank;
     }
 
     public function findUser($keyword) {
@@ -80,12 +79,8 @@ class BankModel extends BaseModel {
         //Keyword
         if (!empty($params['keyword'])) {
            
-            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] .'%"';
-
-            //Keep this line to use Sql Injection
-            //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
-            $banks = self::$_connection->multi_query($sql);
+            $sql = 'SELECT * FROM banks WHERE cost LIKE "%' . $params['keyword'] .'%"';
+            $banks = $this->select($sql);
             
         } else {
             $sql = 'SELECT * FROM banks';

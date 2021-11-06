@@ -5,6 +5,7 @@ require_once './models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
 $bankmodel = $factory->make('bank');
+$userModel = $factory->make('user');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
@@ -12,6 +13,7 @@ if (!empty($_GET['keyword'])) {
 }
 
 $banks = $bankmodel->getBanks($params);
+
 ?>
 <!DOCTYPE html>
 <html>

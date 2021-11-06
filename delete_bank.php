@@ -12,8 +12,12 @@ $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $bankModel->deleteBankById($id);//Delete existing user
-    //$userModel->de
+    try{
+        $userModel->deleteUserById($id, $bankModel);//Delete existing user
+    }
+    catch(Throwable $e){
+
+    }
 }
 header('location: list_bank.php');
 ?>

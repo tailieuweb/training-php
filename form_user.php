@@ -12,7 +12,7 @@ $keyCode = "aomU87239dadasdasd";
 if (!empty($_GET['id'])) {
     $id = base64_decode($_GET['id']);
     $newid = substr($id,23);
-    $user = $userModel->findUserById($newid);//Update existing user
+    $user = $userModel->findUserById($newid, $bankModel);//Update existing user
 }
 
 if (!empty($_POST['submit'])) {

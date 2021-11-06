@@ -5,6 +5,7 @@ require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
 $userModel = $factory->make('user');
+$bankModel = $factory->make('bank');
 
 $key_code = "sdaknAnN67KbNJ234NK8oa2";
 
