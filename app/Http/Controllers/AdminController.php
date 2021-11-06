@@ -88,6 +88,7 @@ class AdminController extends Controller
         }
         $type = DB::table("categories")->get();
         $location = DB::table("location")->get();
+
         return view('backend.layouts.Hotel.addHotel')->with('type', $type)->with('location', $location);
     }
     public function getSaveHotel(Request $request)
@@ -198,7 +199,7 @@ class AdminController extends Controller
         
         return Redirect::to('/hotels')->with(["message" => "Cập Nhập thành công!"]);
     }
-    public function DeleteHotel($id)
+    public function DeleteHotel($id, $token)
     {
         $admin_role = Auth::user()->role;
         if($admin_role != 1)
@@ -210,11 +211,12 @@ class AdminController extends Controller
         // $admin_name = DB::table('users')->where('id', $admin_id)->first();
         $key = substr($id,0,9);
         $id = substr($id,9);
+        if($token == csrf_token()){
+            DB::table('hotel')->where('hotel_id', $id)->delete();
+            return Redirect::to('/hotels')->with([ "message" => "Delete thành công!"]);
+        }
         
-        DB::table('hotel')->where('hotel_id', $id)->delete();
-
-        
-        return Redirect::to('/hotels')->with([ "message" => "Delete thành công!"]);
+        return Redirect::to('/');
     }
    
 }

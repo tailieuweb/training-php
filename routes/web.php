@@ -35,14 +35,16 @@ Route::group(['module' => 'dashboard', 'middleware' => 'web', 'namespace' => "Ap
 // })->name('dashboard');
         //Dashboard
         Route::get("/", ["as" => "admin.dashboard.index", "uses" => "AdminController@getIndexAdmin"]);
+        Route::get("logout-checkout", ["as" => "admin.hotels.logout", "uses" => "AdminController@LogoutAdmin"]);
         });
 
         Route::group(["prefix" => "hotels"], function() {
             Route::get("/", ["as" => "admin.hotels", "uses" => "AdminController@getAllHotel"]);
             Route::get("addhotel", ["as" => "admin.hotels.add", "uses" => "AdminController@AddHotel"]);
             Route::post("savehotel", ["as" => "admin.hotels.add", "uses" => "AdminController@getSaveHotel"]);
-            Route::get("deletehotel/{id}", ["as" => "admin.hotels.edit", "uses" => "AdminController@DeleteHotel"]);
+            Route::get("deletehotel/{id}/{token}", ["as" => "admin.hotels.edit", "uses" => "AdminController@DeleteHotel"]);
             Route::get("edithotel/{id}", ["as" => "admin.hotels.edit", "uses" => "AdminController@EditHotel"]);
+            
             Route::post("updatehotel/{id}", ["as" => "admin.hotels.eidt", "uses" => "AdminController@UpdateHotel"]);
         });
 

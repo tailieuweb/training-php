@@ -56,7 +56,11 @@
                     <h3>{{$hotel->name}}</h3>
                     <div class="d-flex">
                         <div class="w-50">
-                            <p class="tm-date">{{$hotel->created_at}}</p>
+                        <p class="tm-date"><?php
+                                $date = date_create($hotel->created_at);
+                                echo date_format($date, 'Y-m-d');
+                                
+                            ?></p>
                         </div>
                         <div class="w-50 text-right">
                             <div class="wrapper">

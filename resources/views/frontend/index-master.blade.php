@@ -13,6 +13,7 @@
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
+      <meta name="csrf-token" content="{{ csrf_token() }}">
       <!-- bootstrap css -->
       <link rel="stylesheet" href="{{url('frontend/css/bootstrap.min.css')}}">
       <!-- style css -->

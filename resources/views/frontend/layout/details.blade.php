@@ -48,11 +48,15 @@
                   foreach($hotel_search as $value) { ?>
                   <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 col-xxs-12 mb-5">
                      <div class="tm-home-box-2">						
-                        <img src="{{asset('')}}frontend/images/{{$value->image}}" alt="image" class="img-responsive">
+                        <img src="{{asset('')}}img/hotel/{{$value->image}}  " alt="image" class="img-responsive">
                         <h3><?= $value->name?></h3>
                         <div class="d-flex">
                            <div class="w-50">
-                              <p class="tm-date"><?= $value->created_at ?></p>
+                           <p class="tm-date"><?php
+                                $date = date_create($value->created_at);
+                                echo date_format($date, 'Y-m-d');
+                                
+                            ?></p>
                            </div>
                            <div class="w-50 text-right">
                               <div class="wrapper">
@@ -72,7 +76,7 @@
                         </div>
                         <div class="location">
                            <i class="fa fa-map-marker" aria-hidden="true"></i>
-                           <?= $value->location ?>
+                           <?= $value->address?>
                         </div>
                         <div class="tm-home-box-2-container">
                            <a href="#" class="tm-home-box-2-link"><i class="fa fa-heart tm-home-box-2-icon border-right"></i></a>

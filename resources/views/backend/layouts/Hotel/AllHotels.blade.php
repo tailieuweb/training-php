@@ -123,7 +123,7 @@
                           <td >
                           <div class="fa-hover col-md-3 col-sm-4  "><a href="{{URL::to('/hotels/edithotel/'.$key.$hotel->hotel_id)}}"><i class="fa fa-wrench"></i></a>
                             
-                              <div class="fa-hover col-md-3 col-sm-4  "><a onclick="return comfirm('Bạn có chắc muốn xóa sản phẩm này không?')" href="{{URL::to('/hotels/deletehotel/'.$key.$hotel->hotel_id)}}"><i class="fa fa-trash"></i></a>
+                              <div class="fa-hover col-md-3 col-sm-4  "><a onclick="return comfirm('Bạn có chắc muốn xóa sản phẩm này không?')" href="{{URL::to('/hotels/deletehotel/'.$key.$hotel->hotel_id.'/'.csrf_token())}}"><i class="fa fa-trash"></i></a>
                         </div>
                          
                         </td>
