@@ -43,7 +43,6 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
-        $bankModel = new BankModel();
         //Lấy id của tất cả user 
         $sql1 = 'SELECT id FROM users';
         $allUser = $this->select($sql1);
@@ -53,7 +52,6 @@ class UserModel extends BaseModel
             if ($md5 == $id) {
                 $sql = 'DELETE FROM users WHERE id = ' . $key['id'];
                 return $this->delete($sql);
-                $bankModel->delete($id);
             }
         }
     }

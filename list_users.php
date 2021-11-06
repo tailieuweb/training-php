@@ -5,11 +5,9 @@ require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 $userModel = $factory->make('user');
 $params = [];
-
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
-
 $users = $userModel->getUsers($params);
 
 ?>
