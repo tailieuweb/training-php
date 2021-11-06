@@ -54,6 +54,9 @@ export default function PostsEdit(props) {
                 required
               ></textarea>
             </div>
+            <small className="card-text d-block mt-3">
+              Share with us your own stories and others.
+            </small>
           </div>
           <div className="modal-footer">
             <button

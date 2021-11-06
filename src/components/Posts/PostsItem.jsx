@@ -10,14 +10,14 @@ export default function PostsItem(props) {
       <div className="card-body">
         <div className="d-flex justify-content-between">
           <div className="d-flex align-items-center">
-            <a href="#!" className="avatar rounded-circle">
+            <a className="avatar rounded-circle">
               <img
                 alt="Image placeholder"
                 src="https://ui-avatars.com/api/?name=Unknown"
               />
             </a>
             <div className="ml-3">
-              <a href="">
+              <a>
                 <h5 className="card-title mb-0">Unknown User</h5>
               </a>
               <small className="card-text">{props.post.created_at}</small>
