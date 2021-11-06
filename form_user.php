@@ -12,17 +12,18 @@ $_id = NULL;
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
+    //Decode id param
 
-  //Lấy số đầu tiên 
+    //Get first number
     $start = substr($_id, 0, 5);
 
-  //Lấy số cuối
+    //Get last number
     $end = substr($_id, -5);
 
-    //thay thế số đầu bằng null
+    //Replace first number with null
     $_id = str_replace($start, "", $_id);
 
-    //thay thế số cuối bằng null
+    //Replace last number with null
     $_id = str_replace($end, "", $_id);
     $user = $userRepository->getBankAccountByUserID($_id); //Update existing user
 }
@@ -30,12 +31,32 @@ if (!empty($_GET['id'])) {
 
 if (!empty($_POST['submit'])) {
 
-    if (!empty($id)) {
-        $userModel->updateUser($_POST);
+    if (!empty($_id)) {
+        //Optimistic Locking:
+        if (count($user) > 0) {
+            //Decrypt version number:
+            $currentVer = $_POST["ver"];
+            $start = substr($_POST["ver"], 0, 5);
+            $end = substr($_POST["ver"], -5);
+            $currentVer = str_replace($start, "", $currentVer);
+            $currentVer = str_replace($end, "", $currentVer);
+
+            //Be able to update or be locked:
+            if ($user[0]['version'] == intval($currentVer)) {
+                $_POST["ver"] = intval($currentVer);
+                $userRepository->update_UserAndBankAccount($_POST);
+                header('location: index.php');
+            } else {
+                echo '<h5 style="text-align:center;">THÔNG TIN ĐÃ BỊ THAY ĐỔI TRƯỚC ĐÓ!
+                <br>Tải lại trang để xem cập nhật mới nhất!</h5>';
+            }
+        }
     } else {
-        $userModel->insertUser($_POST);
+        // $userModel->insertUser($_POST);
+        // header('location: list_users.php');
+        $userRepository->create_UserAndBankAccount($_POST);
+        header('location: index.php');
     }
-    header('location: list_users.php');
 }
 
 ?>
@@ -51,44 +72,57 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php' ?>
     <div class="container">
 
-            <?php if ($user || !isset($id)) { ?>
-                <div class="alert alert-warning" role="alert">
-                    User form
+        <?php if ($user || empty($_id)) { ?>
+            <div class="alert alert-warning" role="alert">
+                User form
+            </div>
+            <form method="POST">
+                <input type="hidden" name="id" value="<?php echo $_id ?>">
+                <input type="hidden" name="bank_id" value="<?php echo $user[0]['bank_id'] ?>">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
                 </div>
-                <p><?php if(isset($user[0]['version'])) echo 'Version: ' . $user[0]['version'] ?></p>
-                <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $id ?>">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
-                    </div>
-                    <div class="form-group">
-
-                        <label for="email">Email</label>
-                        <input class="form-control" name="email" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
-                        <label for="type">Type</label>
-                        <select class="form-control" name="type" value="1" placeholder="Type">
-                            <option value="admin" <?php if (!empty($user[0]['type'])&&$user[0]['type'] =='admin') echo "selected=\"selected\""; ?>>Admin</option>
-                            <option value="user" <?php if (!empty($user[0]['type'])&&$user[0]['type'] =='user') echo "selected=\"selected\"";?> >User</option>
-                            <option value="guest" <?php if (!empty($user[0]['type'])&& $user[0]['type']=='guest') echo "selected=\"selected\"";?>>Guest</option>
-                        </select>
-                        <label for="fullname">Full Name</label>
-                        <input class="form-control" name="fullname" placeholder="FullName" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
-                        <label for="email">Email</label>
-                        <input class="form-control" name="email" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                    </div>
-
-                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
-                </form>
-            <?php } else { ?>
-                <div class="alert alert-success" role="alert">
-                    User not found!
+                <!-- Add fullname and email fields -->
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input class="form-control" name="fullname" placeholder="Full Name" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
                 </div>
-            <?php } ?>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input class="form-control" name="email" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
+                </div>
+                <!-- Add type option field -->
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <select class="form-control" aria-label="Default select example" name="type">
+                        <option value="admin">ADMIN</option>
+                        <option value="user" selected>USER</option>
+                        <option value="guess">GUESS</option>
+                    </select>
+                </div>
+                <!-- Add password field -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Password" value="admin">
+                </div>
+                <!-- Add bank account balance field -->
+                <div class="form-group">
+                    <label for="name">Account balance</label>
+                    <input class="form-control" name="cost" placeholder="Amount of money" value="<?php if( isset($_id) ) { echo $user[0]['cost']; } else { echo '0'; } ?>">
+                </div>
+                <!-- Hidden version field: -->
+                <div class="form-group">
+                    <input type="hidden" name="ver" value="<?php echo rand(10000,99999).$user[0]['version'].rand(10000,99999) ?>">
+                </div>
+
+                <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+            </form>
+        <?php } else { ?>
+            <div class="alert alert-success" role="alert">
+                User not found!
+            </div>
+        <?php } ?>
     </div>
 </body>
 
