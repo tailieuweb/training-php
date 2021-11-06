@@ -1,8 +1,9 @@
+import Link from "next/link";
 import { useState } from "react";
 
 export default function PostsItem(props) {
   const { user, post, onSelectPost } = props;
-  const [isReadMore, setIsReadMore] = useState(post.description.length < 400);
+  const [isReadMore] = useState(post.description.length < 350);
 
   return (
     <div className="card">
@@ -45,20 +46,25 @@ export default function PostsItem(props) {
             </div>
           )}
         </div>
-        <h3 className="text-primary my-4"># {post.title}</h3>
+        <Link href={`/posts/${post.id}`}>
+          <a>
+            <h3 className="text-primary my-4"># {post.title}</h3>
+          </a>
+        </Link>
         <p className="card-text">
           {isReadMore
             ? post.description
-            : `${post.description.slice(0, 400)}...`}
+            : `${post.description.slice(0, 350)}...`}
           {!isReadMore && (
-            <span
-              style={{ fontSize: 12, cursor: "pointer" }}
-              className="font-weight-bold"
-              onClick={() => setIsReadMore(true)}
-            >
-              {" "}
-              Read more
-            </span>
+            <Link href={`/posts/${post.id}`}>
+              <a
+                style={{ fontSize: 12, color: "#000" }}
+                className="font-weight-bold"
+              >
+                {" "}
+                Read more
+              </a>
+            </Link>
           )}
         </p>
       </div>
