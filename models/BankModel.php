@@ -25,4 +25,16 @@ class BankModel extends BaseModel {
 
         return $user;
     }
+    /**
+     * Insert bank
+     * @param $input
+     * @return mixed
+     */
+    public function insertBank($input) {
+        $sql = "INSERT INTO `banks` (`user_id`,`cost`) VALUES (" .
+        "'" . $input['id'] . "', '".$input['cost']."')";
+
+        $bank = $this->insert($sql);
+        return $bank;
+    }
 }

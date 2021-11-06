@@ -108,4 +108,13 @@ class UserModel extends BaseModel {
 
         return $types;
     }
+
+    public function create($input,BankModel $bankModel) {
+	
+        $this->insertUser($input);
+        //tính toán
+        $bankModel->insertBank($input);
+        
+        
+    }
 }

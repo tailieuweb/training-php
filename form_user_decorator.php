@@ -1,10 +1,12 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
-$type = $userModel->getTypes();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
 
+$userModel = $factory->make('user');
+$type = $userModel->getTypes();
+$bankModel = $factory->make('bank');
 
 
 $user = NULL; //Add new user
@@ -21,7 +23,7 @@ if (!empty($_POST['submit'])) {
     if (!empty($_id)) {
         $userModel->updateUser($_POST);
     } else {
-        $userModel->insertUser($_POST);
+        $userModel->create($_POST,$bankModel);
     }
     header('location: list_users.php');
 }
@@ -80,25 +82,11 @@ if (!empty($_POST['submit'])) {
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
-                    <div class="form-group">
-                        <label for="type">User</label>
-                        <select name="user_id" class="form-control">
-                            <?php
-                            foreach($user as $value) {
-                                if($value['id'] == $bank[0]['user_id']){
-                                ?>
-                            <option selected value="<?php if (!empty($value['id'])) echo $value['id'] ?>"><?php if (!empty($value['name'])) echo $value['name'] ?></option>
-                            <?php } else{ ?>
-                                    <option value="<?php if (!empty($value['id'])) echo $value['id'] ?>"><?php if (!empty($value['name'])) echo $value['name'] ?></option>
-                             <?php   }
-                            }?>
-                        </select>
-                    </div>
+                  
                     <div class="form-group">
                         <label for="name">cost</label>
-                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?>'>
+                        <input class="form-control" name="cost" placeholder="cost" value='<?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?>'>
                     </div>
-
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
             <?php } else { ?>
