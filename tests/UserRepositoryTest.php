@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class FactoryPatternTest extends TestCase
+class UserRepositoryTest extends TestCase
 {
     /**
      * Test testUpdateUserOk Function in Factoryrepository - 'Lập' do this
@@ -59,6 +59,7 @@ class FactoryPatternTest extends TestCase
         $actual = true;
         $this->assertEquals($check, $actual);
     }
+
     /**
      * Test insertUserWithId Function in repository - 'Lập' do this
      */
@@ -302,6 +303,7 @@ class FactoryPatternTest extends TestCase
         $check = false;
         $this->assertEquals($check, $result);
     }
+<<<<<<< HEAD:tests/FactoryPatternTest.php
     /**
      * Test DeleteUserById Function in Repository - 'Danh' do this
      */
@@ -370,5 +372,187 @@ class FactoryPatternTest extends TestCase
         } else {
             $this->assertTrue(false);
         }
+=======
+
+    /**
+     * Test getBanks Function in Repository - 'Hiếu Cao' do this
+     */
+    // Test case Get All Banks Ok 
+    public function testGetAllBanksOk()
+    {
+        $repository = new Repository();
+        $id = -1;
+
+        $repository->insertBankWithId($id, 3, 3);
+        $users = $repository->getBanks();
+        $repository->deleteBankById($id);
+
+        $check = !empty($users);
+        $actual = true;
+        $this->assertEquals($check, $actual);
+    }
+    // Test case Get All Banks Not Good 
+    public function testGetAllBanksNg()
+    {
+        $repository = new Repository();
+        $id = -1;
+
+        $repository->insertBankWithId($id, 3, 3);
+        $users = $repository->getBanks();
+        $repository->deleteBankById($id);
+
+        $check = empty($users);
+        $actual = false;
+        $this->assertEquals($check, $actual);
+    }
+    // Test case Get Banks By User Id Ok 
+    public function testGetBanksByUserIdOk()
+    {
+        $repository = new Repository();
+        $userId = -1;
+        $param = ['user-id' => $userId];
+
+        $repository->insertUserWithId($userId, 'UserName', 'UserFullName', 'UserEmail@gmail.com', 'admin', '123');
+        $repository->insertBankWithId(-1, $userId, 123);
+        $repository->insertBankWithId(-2, $userId, 456);
+        $repository->insertBankWithId(-3, $userId, 789);
+        $usersByUser = $repository->getBanks($param);
+        $repository->deleteBankById(-1);
+        $repository->deleteBankById(-2);
+        $repository->deleteBankById(-3);
+
+        $check = is_array($usersByUser);
+        if ($check) {
+            if (count($usersByUser) >= 3) {
+                foreach ($usersByUser as $user) {
+                    if ($user['user_id'] !=  $userId) {
+                        $check = false;
+                        var_dump('Here');
+                        break;
+                    }
+                }
+            } else {
+                $check = false;
+            }
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
+    }
+    // Test case Get Banks By User Id String 
+    public function testGetBanksByUserIdString()
+    {
+        $repository = new Repository();
+        $param = ['user-id' => 'abc'];
+
+        $usersByUser = $repository->getBanks($param);
+        $allUser = $repository->getBanks();
+
+        $check = true;
+        if(count($usersByUser) == count($allUser)){
+            for ($i=0; $i < count($usersByUser); $i++) { 
+                if($usersByUser[$i] !== $allUser[$i]){
+                    $check = false;
+                    break;
+                }
+            }
+        }else{
+            $check = false;
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
+    }
+    // Test case Get Banks By User Id Null 
+    public function testGetBanksByUserIdNull()
+    {
+        $repository = new Repository();
+        $param = ['user-id' => NULL];
+
+        $usersByUser = $repository->getBanks($param);
+        $allUser = $repository->getBanks();
+
+        $check = true;
+        if(count($usersByUser) == count($allUser)){
+            for ($i=0; $i < count($usersByUser); $i++) { 
+                if($usersByUser[$i] !== $allUser[$i]){
+                    $check = false;
+                    break;
+                }
+            }
+        }else{
+            $check = false;
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
+    }
+    // Test case Get Banks By User Id Object 
+    public function testGetBanksByUserIdObject()
+    {
+        $repository = new Repository();
+        $result = new ResultClass();
+        $param = ['user-id' => $result];
+
+        $usersByUser = $repository->getBanks($param);
+        $allUser = $repository->getBanks();
+
+        $check = true;
+        if(count($usersByUser) == count($allUser)){
+            for ($i=0; $i < count($usersByUser); $i++) { 
+                if($usersByUser[$i] !== $allUser[$i]){
+                    $check = false;
+                    break;
+                }
+            }
+        }else{
+            $check = false;
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
+    }
+    // Test case Get Banks By User Id True 
+    public function testGetBanksByUserIdTrue()
+    {
+        $repository = new Repository();
+        $param = ['user-id' => true];
+
+        $usersByUser = $repository->getBanks($param);
+        $allUser = $repository->getBanks();
+
+        $check = true;
+        if(count($usersByUser) == count($allUser)){
+            for ($i=0; $i < count($usersByUser); $i++) { 
+                if($usersByUser[$i] !== $allUser[$i]){
+                    $check = false;
+                    break;
+                }
+            }
+        }else{
+            $check = false;
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
+    }
+    // Test case Get Banks By User Id False 
+    public function testGetBanksByUserIdFalse()
+    {
+        $repository = new Repository();
+        $param = ['user-id' => false];
+
+        $usersByUser = $repository->getBanks($param);
+        $allUser = $repository->getBanks();
+
+        $check = true;
+        if(count($usersByUser) == count($allUser)){
+            for ($i=0; $i < count($usersByUser); $i++) { 
+                if($usersByUser[$i] !== $allUser[$i]){
+                    $check = false;
+                    break;
+                }
+            }
+        }else{
+            $check = false;
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
+>>>>>>> 1-php-202109/2-groups/10-J/master-phpunit:tests/UserRepositoryTest.php
     }
 }

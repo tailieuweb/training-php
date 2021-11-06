@@ -118,6 +118,7 @@ class BankModelTest extends TestCase
         $check = false;
         $this->assertEquals($check, $result);
     }
+<<<<<<< HEAD
     /**
      * Test DeleteBankById Function in BankModel - 'Danh' do this
      */
@@ -151,5 +152,188 @@ class BankModelTest extends TestCase
         } else {
             $this->assertTrue(false);
         }
+=======
+
+    /**
+     * Test getBanks Function in BankModel - 'Hiếu Cao' do this
+     */
+    // Test case Get All Banks Ok 
+    public function testGetAllBanksOk()
+    {
+        $bankModel = new BankModel();
+        $id = -1;
+
+        $bankModel->insertBankWithId($id, 3, 3);
+        $users = $bankModel->getBanks();
+        $bankModel->deleteBankById($id);
+
+        $check = !empty($users);
+        $actual = true;
+        $this->assertEquals($check, $actual);
+    }
+    // Test case Get All Banks Not Good 
+    public function testGetAllBanksNg()
+    {
+        $bankModel = new BankModel();
+        $id = -1;
+
+        $bankModel->insertBankWithId($id, 3, 3);
+        $users = $bankModel->getBanks();
+        $bankModel->deleteBankById($id);
+
+        $check = empty($users);
+        $actual = false;
+        $this->assertEquals($check, $actual);
+    }
+    // Test case Get Banks By User Id Ok 
+    public function testGetBanksByUserIdOk()
+    {
+        $bankModel = new BankModel();
+        $userModel = new UserModel();
+        $userId = -1;
+        $param = ['user-id' => $userId];
+
+        $userModel->insertUserWithId($userId, 'UserName', 'UserFullName', 'UserEmail@gmail.com', 'admin', '123');
+        $bankModel->insertBankWithId(-1, $userId, 123);
+        $bankModel->insertBankWithId(-2, $userId, 456);
+        $bankModel->insertBankWithId(-3, $userId, 789);
+        $usersByUser = $bankModel->getBanks($param);
+        $bankModel->deleteBankById(-1);
+        $bankModel->deleteBankById(-2);
+        $bankModel->deleteBankById(-3);
+
+        $check = is_array($usersByUser);
+        if ($check) {
+            if (count($usersByUser) >= 3) {
+                foreach ($usersByUser as $user) {
+                    if ($user['user_id'] !=  $userId) {
+                        $check = false;
+                        var_dump('Here');
+                        break;
+                    }
+                }
+            } else {
+                $check = false;
+            }
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
+    }
+    // Test case Get Banks By User Id String 
+    public function testGetBanksByUserIdString()
+    {
+        $bankModel = new BankModel();
+        $param = ['user-id' => 'abc'];
+
+        $usersByUser = $bankModel->getBanks($param);
+        $allUser = $bankModel->getBanks();
+
+        $check = true;
+        if(count($usersByUser) == count($allUser)){
+            for ($i=0; $i < count($usersByUser); $i++) { 
+                if($usersByUser[$i] !== $allUser[$i]){
+                    $check = false;
+                    break;
+                }
+            }
+        }else{
+            $check = false;
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
+    }
+    // Test case Get Banks By User Id Null 
+    public function testGetBanksByUserIdNull()
+    {
+        $bankModel = new BankModel();
+        $param = ['user-id' => NULL];
+
+        $usersByUser = $bankModel->getBanks($param);
+        $allUser = $bankModel->getBanks();
+
+        $check = true;
+        if(count($usersByUser) == count($allUser)){
+            for ($i=0; $i < count($usersByUser); $i++) { 
+                if($usersByUser[$i] !== $allUser[$i]){
+                    $check = false;
+                    break;
+                }
+            }
+        }else{
+            $check = false;
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
+    }
+    // Test case Get Banks By User Id Object 
+    public function testGetBanksByUserIdObject()
+    {
+        $bankModel = new BankModel();
+        $result = new ResultClass();
+        $param = ['user-id' => $result];
+
+        $usersByUser = $bankModel->getBanks($param);
+        $allUser = $bankModel->getBanks();
+
+        $check = true;
+        if(count($usersByUser) == count($allUser)){
+            for ($i=0; $i < count($usersByUser); $i++) { 
+                if($usersByUser[$i] !== $allUser[$i]){
+                    $check = false;
+                    break;
+                }
+            }
+        }else{
+            $check = false;
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
+    }
+    // Test case Get Banks By User Id True 
+    public function testGetBanksByUserIdTrue()
+    {
+        $bankModel = new BankModel();
+        $param = ['user-id' => true];
+
+        $usersByUser = $bankModel->getBanks($param);
+        $allUser = $bankModel->getBanks();
+
+        $check = true;
+        if(count($usersByUser) == count($allUser)){
+            for ($i=0; $i < count($usersByUser); $i++) { 
+                if($usersByUser[$i] !== $allUser[$i]){
+                    $check = false;
+                    break;
+                }
+            }
+        }else{
+            $check = false;
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
+    }
+    // Test case Get Banks By User Id False 
+    public function testGetBanksByUserIdFalse()
+    {
+        $bankModel = new BankModel();
+        $param = ['user-id' => false];
+
+        $usersByUser = $bankModel->getBanks($param);
+        $allUser = $bankModel->getBanks();
+
+        $check = true;
+        if(count($usersByUser) == count($allUser)){
+            for ($i=0; $i < count($usersByUser); $i++) { 
+                if($usersByUser[$i] !== $allUser[$i]){
+                    $check = false;
+                    break;
+                }
+            }
+        }else{
+            $check = false;
+        }
+        $actual = true;
+        $this->assertEquals($check, $actual);
+>>>>>>> 1-php-202109/2-groups/10-J/master-phpunit
     }
 }

@@ -48,7 +48,7 @@ if (!empty($_POST['submit'])) {
                 <input type="hidden" name="id" value="<?php echo $id ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo strip_tags($user[0]['name']) ?>" required>
+                    <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user['name'])) echo strip_tags($user['name']) ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
@@ -56,28 +56,28 @@ if (!empty($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label for="name">Full Name</label>
-                    <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo $user[0]['version'] ?>">
-                    <input class="form-control" name="fullname" placeholder="Full Name" value="<?php if (!empty($user[0]['fullname'])) echo strip_tags($user[0]['fullname']) ?>" required>
+                    <input type="hidden" name="version" value="<?php if (!empty($user['version'])) echo $user['version'] ?>">
+                    <input class="form-control" name="fullname" placeholder="Full Name" value="<?php if (!empty($user['fullname'])) echo strip_tags($user['fullname']) ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input class="form-control" type="email" name="email" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo strip_tags($user[0]['email']) ?>" required>
+                    <input class="form-control" type="email" name="email" placeholder="Email" value="<?php if (!empty($user['email'])) echo strip_tags($user['email']) ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="type">Type</label>
                     <select class="form-control" name="type">
-                        <option value="admin" <?php if (!empty($user[0]['type'])) {
-                                                    if ($user[0]['type'] == 'admin') {
+                        <option value="admin" <?php if (!empty($user['type'])) {
+                                                    if ($user['type'] == 'admin') {
                                                         echo "selected";
                                                     }
                                                 } ?>>Admin</option>
-                        <option value="user" <?php if (!empty($user[0]['type'])) {
-                                                    if ($user[0]['type'] == 'user') {
+                        <option value="user" <?php if (!empty($user['type'])) {
+                                                    if ($user['type'] == 'user') {
                                                         echo "selected";
                                                     }
                                                 } ?>>User</option>
-                        <option value="guest" <?php if (!empty($user[0]['type'])) {
-                                                    if ($user[0]['type'] == 'guest') {
+                        <option value="guest" <?php if (!empty($user['type'])) {
+                                                    if ($user['type'] == 'guest') {
                                                         echo "selected";
                                                     }
                                                 } ?>>Guest</option>
