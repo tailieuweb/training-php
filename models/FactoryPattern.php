@@ -1,7 +1,7 @@
 <?php
 require_once 'UserModel.php';
 require_once 'BankModel.php';
-require_once 'Repository.php';
+require_once 'UserRepository.php';
 class FactoryPattern
 {
     protected static $_instance;
@@ -12,8 +12,8 @@ class FactoryPattern
             return UserModel::getInstance();
         } else if ($model == 'bank') {
             return BankModel::getInstance();
-        } else if ($model == 'repository') {
-            return Repository::getInstance();
+        } else if ($model == 'user-repository') {
+            return UserRepository::getInstance();
         }
     }
     // Singleton Design Pattern
