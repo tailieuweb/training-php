@@ -19,9 +19,6 @@ class FrontendController extends Controller
 {
     public function AuthLogin()
     {
-      
-        
-     
         
         if (Auth::check()) {
             $admin_role = Auth::user()->role;
@@ -49,7 +46,6 @@ class FrontendController extends Controller
         return View('Frontend.layout.login.login');
     }
     public function getProfile(){
-        
         
         return View('Frontend.layout.Account.profile');
     }
