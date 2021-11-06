@@ -1,26 +1,13 @@
 <?php
-require_once 'models/FactoryPattern.php';
-$factory = new FactoryPattern();
+require_once 'models/BankModel.php';
+$bankModel = new BankModel();
 
-$bankModel = $factory->make('bank');
-
+$bank = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    //Decode id param
-
-    //Get first number
-    $start = substr($id, 0, 5);
-
-    //Get last number
-    $end = substr($id, -5);
-
-    //Replace first number with null
-    $id = str_replace($start, "", $id);
-
-    //Replace last number with null
-    $id = str_replace($end, "", $id);
-    $bankModel->deletebankById($id);
+    $bankModel->deleteBankById($id);//Delete existing user
 }
-header('location: list_bank.php');
+header('location: list_banks.php');
+?>

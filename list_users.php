@@ -1,19 +1,25 @@
 <?php
-// Start the session
 session_start();
-//1-b
+//FactoryPattern
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
-
 $userModel = $factory->make('user');
-
 $params = [];
+
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
-//feature 1-a
 $users = $userModel->getUsers($params);
 
+if (isset($_GET['Correct'])) {
+    echo "<script>alert('!!! Cập nhật thành công !!!')</script>";
+    echo "<script>window.location.href = 'list_users.php'</script>";
+}
+
+if (isset($_GET['error'])) {
+    echo "<script>alert('Dữ liệu của bạn đã củ ,vui lòng tải lại để cập nhập!')</script>";
+    echo "<script>window.location.href = 'list_users.php'</script>";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,6 +42,7 @@ $users = $userModel->getUsers($params);
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
+                        <th scope="col">Fullname</th>
                         <th scope="col">Type</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -43,38 +50,30 @@ $users = $userModel->getUsers($params);
                 <tbody>
                     <?php foreach ($users as $user) { ?>
                         <tr>
-                            <th scope="row"><?php echo htmlentities($user['id']) ?></th>
+                            <th scope="row"><?php echo $user['id'] ?></th>
                             <td>
-                                <?php echo htmlentities($user['name']) ?>
+                                <?php echo $user['name'] ?>
                             </td>
                             <td>
-                                <?php echo  $user['type'] ?>
-                            </td>
-                            <td>
-
-                                <a href="form_user.php?id=<?php echo rand(10000, 99999) . base64_encode($user['id'] . rand(9999, 99999)) ?>">
-
-
-                                <?php echo $user['email'] ?>
-
-                                <?php echo $user['email']?>
-                            </td>
-                            <td>
-                                <?php echo $user['type']?>
-
+                                <?php echo $user['fullname'] ?>
                             </td>
                             <td>
                                 <?php echo $user['type'] ?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo base64_encode($user['id']) ?>">
-
+                                <a href="form_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo rand(10000, 99999) . base64_encode($user['id'] . rand(9999, 99999)) ?>">
+                                <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo rand(10000, 99999) . base64_encode($user['id'] . rand(9999, 99999)) ?>">
+                                <?php
+                                $permitted_chars = '+-*/\=0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                                $string1 = substr(str_shuffle($permitted_chars), 0, 36);
+                                $string2 = substr(str_shuffle($permitted_chars), 0, 36);
+                                $result = $string1 . base64_encode($user['id']) . $string2
+                                ?>
+                                <a href="delete_user.php?id=<?php echo $result ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

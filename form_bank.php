@@ -1,84 +1,56 @@
 <?php
-// Start the session
-session_start();
+require_once 'models/BankModel.php';
+$bankModel = new BankModel();
 
-require_once 'models/FactoryPattern.php';
-$factory = new FactoryPattern();
-
-$bankModel = $factory->make('bank');
-
-$bankInfo = NULL; //Add new bank
-$_id = NULL;
+$bank = NULL; //Add new user
+$id = NULL;
 
 if (!empty($_GET['id'])) {
-    $_id = $_GET['id'];
-    //Decode id param
-
-    //Get first number
-    $start = substr($_id, 0, 5);
-
-    //Get last number
-    $end = substr($_id, -5);
-
-    //Replace first number with null
-    $_id = str_replace($start, "", $_id);
-
-    //Replace last number with null
-    $_id = str_replace($end, "", $_id);
-    $bankInfo = $bankModel->findBankInfoByUserID($_id); //Update existing bank info
+    $id = $_GET['id'];
+    $bank = $bankModel->findBankById($id);//Update existing user
 }
-
-
 if (!empty($_POST['submit'])) {
 
-    if (!empty($_id)) {
-        if (count($bankInfo) > 0) {
-            $bankModel->updateBankInfo($_POST);
-            header('location: list_bank.php');
-        }
+    if (!empty($id)) {
+        $bankModel->updateBank($_POST);
     } else {
-        $bankModel->insertBankInfo($_POST);
-        header('location: list_bank.php');
+        $bankModel->insertBank($_POST);
     }
+    header('location: list_banks.php');
 }
 
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Form</title>
+    <title>User form</title>
     <?php include 'views/meta.php' ?>
 </head>
-
 <body>
-    <?php include 'views/header.php' ?>
+    <?php include 'views/header.php'?>
     <div class="container">
 
-        <?php if ($bankInfo || empty($_id)) { ?>
-            <div class="alert alert-warning" role="alert">
-                Bank Form
-            </div>
-            <form method="POST">
-                <input type="hidden" name="id" value="<?php echo $_id ?>">
-                <div class="form-group">
-                    <label for="name">User ID</label>
-                    <input class="form-control" name="user_id" placeholder="User id" value="<?php if (!empty($bankInfo[0]['user_id'])) echo $bankInfo[0]['user_id'] ?>">
+            <?php if ($bank || empty($id)) { ?>
+                <div class="alert alert-warning" role="alert">
+                    Bank form
                 </div>
-                <div class="form-group">
-                    <label for="fullname">Cost</label>
-                    <input class="form-control" name="cost" placeholder="Cost" value="<?php if (!empty($bankInfo[0]['cost'])) echo $bankInfo[0]['cost'] ?>">
+                <form method="POST">
+                    <input type="hidden" name="id" value="<?php echo $bank[0]['id'] ?>">
+                    <div class="form-group">
+                        <label for="user_id">User Id</label>
+                        <input class="form-control" name="user_id" placeholder="User Id" value="<?php if (!empty($bank[0]['user_id'])) echo $bank[0]['user_id'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="cost">Cost</label>
+                        <input type="text" name="cost" class="form-control" placeholder="Cost">
+                    </div>        
+                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+                </form>
+            <?php } else { ?>
+                <div class="alert alert-success" role="alert">
+                    Banks not found!
                 </div>
-                <!-- Hidden version field: -->
-
-                <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
-            </form>
-        <?php } else { ?>
-            <div class="alert alert-success" role="alert">
-                BankInfo not found!
-            </div>
-        <?php } ?>
+            <?php } ?>
     </div>
 </body>
-
 </html>

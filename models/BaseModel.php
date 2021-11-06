@@ -4,6 +4,10 @@ require_once 'configs/database.php';
 abstract class BaseModel {
     // Database connection
     protected static $_connection;
+<<<<<<< HEAD
+=======
+    protected static $_instance;
+>>>>>>> origin/1-php-202109/2-groups/11-K/2-56-Tien
 
     public function __construct() {
 
