@@ -8,12 +8,14 @@ cacheResult ="false"
 <testsuites>									
 <testsuite name="SqlWsContractImport">									
 <file>./Tests/UserModelTest.php</file>	
-<file>./Tests/BankModelTest.php</file>									
+<file>./Tests/BankModelTest.php</file>	
+<file>./Tests/RepositoryTest.php</file>								
 </testsuite>									
 </testsuites>	
 	<filter>				
 	<whitelist processUncoveredFilesFromWhitelist="true">				
-	<directory suffix=".php">./models</directory>				
+	<directory suffix=".php">./models</directory>
+	<directory suffix=".php">./Repository</directory>				
 	</whitelist>				
 	</filter>										
 <php>									

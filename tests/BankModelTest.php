@@ -20,7 +20,7 @@ class BankModelTest extends TestCase{
      /**
      * Test case nhập user id và cost không phải là kiểu int
      */
-    public function testInsertBankNg(){
+    public function testInsertBankStringNg(){
         $bankModel = new BankModel();
         $bank = array(
             'user_id' => 'v',
@@ -33,6 +33,41 @@ class BankModelTest extends TestCase{
             $this->assertTrue(true);
         }   
     }
+    /**
+     * Test case nhập user id và cost null
+     */
+    public function testInsertBankNullNg(){
+        $bankModel = new BankModel();
+        $bank = array(
+            'user_id' => '',
+            'cost' => 4423
+        ); 
+         $bankModel->insertBank($bank);
+        if(empty($bank['user_id']) || empty($bank['cost'])){          
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
+    /**
+     * Test case nhập user id hoặc cost là Object
+     */
+    public function testInsertBankObjectNg(){
+        $bankModel = new BankModel();
+        $ob = (object)'12';
+        $bank = array(
+            'user_id' => $ob,
+            'cost' => 4423
+        );        
+        if(is_object($bank['user_id']) || is_object($bank['cost'])){          
+            $bank['user_id'] = null;
+            $bankModel->insertBank($bank);
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
+
      /**
      * Test case Okie
      */
@@ -83,6 +118,32 @@ class BankModelTest extends TestCase{
             $this->assertTrue(true);
         }   
     }
+
+    /**
+     * Test case nhập user id và cost rỗng
+     */
+    public function testUpdateBankNgObject(){
+        $bankModel = new BankModel();
+        $ob = (object)'12';
+        $bank = array(
+            'id' => 74,
+            'user_id' => $ob,
+            'cost' => '4264'
+        );
+   
+        if(is_object($bank['user_id']) || is_object($bank['cost'])){  
+            $bank['user_id'] = null;
+            $bankModel->updateBank($bank);
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
+
+
+
+
+
      /**
      * Test case find user_id
      */

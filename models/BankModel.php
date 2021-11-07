@@ -59,5 +59,17 @@ class BankModel extends BaseModel {
         return $banks;
     }
 
+    public function deleteBankByUserId($user_id) {
+      
+        $sql = 'DELETE FROM banks WHERE user_id = '.$user_id;
+        return $this->delete($sql);
 
+    }
+    // public static function getInstance() {
+    //     if (self::$_instance !== null){
+    //         return self::$_instance;
+    //     }
+    //     self::$_instance = new self();
+    //     return self::$_instance;
+    // }
 }

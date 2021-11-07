@@ -117,4 +117,10 @@ class UserModel extends BaseModel {
     public function sumb($a, $b) {
         return $a + $b;
     }
+
+    public function getID(){
+        $sql = "SELECT id FROM `users` ORDER BY id DESC LIMIT 1";
+        $user = $this->select($sql);
+        return $user;
+    }
 }
