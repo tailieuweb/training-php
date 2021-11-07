@@ -7,6 +7,7 @@ require_once 'BaseModel.php';
 class BankModel extends BaseModel {
 
     public function findBankById($id) {
+        $id = $this->hashToId($id);
         $sql = 'SELECT * FROM banks WHERE id = '.$id;
         $bank = $this->select($sql);
 
@@ -51,6 +52,7 @@ class BankModel extends BaseModel {
      * @return mixed
      */
     public function updateBank($input) {
+
         $sql = 'UPDATE banks SET 
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
                  password="'. md5($input['password']) .'",
@@ -96,5 +98,16 @@ class BankModel extends BaseModel {
         }
 
         return $banks;
+    }
+
+    private function hashToId($hashId){
+        $hashId = substr($hashId, 3, -3);
+        $banks = $this->getBanks();
+        foreach($banks as $bank){
+            if (md5($bank['id']) == $hashId) {
+                return $bank['id'];
+            }
+        }
+        return null;
     }
 }
