@@ -1,8 +1,15 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+
+
+//sua bat dau tu 3 dong nay
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+$userModel = $factory->make('user');
+
+
+
 if (empty($_SESSION['token'])) {
     $_SESSION['token'] = bin2hex(random_bytes(32));
 }
