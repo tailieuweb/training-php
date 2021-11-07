@@ -96,7 +96,7 @@ class UserModel extends BaseModel {
             // var_dump($users).die();
         } else {
 
-            $sql = 'SELECT * FROM users join types on users.type = types.type_id';
+            $sql = 'SELECT * FROM users join types on users.type = types.type_id order by `users`.`id` DESC';
             $users = $this->select($sql);
 
         }

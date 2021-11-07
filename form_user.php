@@ -83,14 +83,23 @@ if (!empty($_POST['submit'])) {
                     <input type="password" name="password" class="form-control" placeholder="Password">
                 </div>
                 <?php
-                if(isset($user[0]['user_id'])){
+                if($_id != null){
                     if($user[0]['id'] == $user[0]['user_id'] ){
                 ?>
                 <div class="form-group">
                     <label for="cost">Cost</label>
                     <input type="number" name="cost" class="form-control" value="<?php if (!empty($user[0]['cost'])) echo $user[0]['cost'] ?>" placeholder="Cost">
                 </div>
-                <?php }} ?>
+                <?php }} 
+                else {?>
+
+                <div class="form-group">
+                    <label for="cost">Cost</label>
+                    <input type="number" name="cost" class="form-control" value=0 placeholder="Cost">
+                </div>
+                <?php 
+                }
+                ?>
                 <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
             </form>
         <?php } else { ?>

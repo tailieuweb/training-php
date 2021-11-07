@@ -28,7 +28,7 @@ $users = $userModel->getUsers($params);
 <body>
     <?php include 'views/header.php'?>
     <div class="container">
-        <?php if (!empty($users)) {?>
+        <?php if (!empty($users)) { ?>
             <div class="alert alert-warning" role="alert">
                 List of users! <br>
                 Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
