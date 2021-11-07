@@ -54,7 +54,7 @@ class BankModel extends BaseModel {
     public function updateBank($input) {
         $userModel = new UserModel();
         if($input['name'] != null){
-            $bankModel->insertUser($input);
+            $bankModel->updateUser($input);
         }else{
             
         $sql = 'UPDATE banks SET user_id ="'.$input['user_id'].'", cost = "'.$input['cost'].'" WHERE id = "'.$input['id'].'"';
