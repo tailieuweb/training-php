@@ -2,12 +2,14 @@
 // Start the session
 session_start();
 require_once 'models/FactoryPattern.php';
+require_once 'models/DecoratorPattern.php';
 $factory = new FactoryPattern();
 
 $userModel = $factory->make('user');
 $type = $userModel->getTypes();
 $bankModel = $factory->make('bank');
 
+$userModel_decorator = new DecoratorPattern();
 
 $user = NULL; //Add new user
 $_id = NULL;
@@ -23,7 +25,7 @@ if (!empty($_POST['submit'])) {
     if (!empty($_id)) {
         $userModel->updateUser($_POST);
     } else {
-        $userModel->create($_POST,$bankModel);
+        $userModel_decorator->create($_POST,$bankModel);
     }
     header('location: list_users.php');
 }
