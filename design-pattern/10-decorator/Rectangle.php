@@ -9,6 +9,6 @@ class Rectangle implements Shape
         echo "Shape: Rectangle";
     }
     public function width(){
-        echo "100px";
+        return 100;
     }
 }

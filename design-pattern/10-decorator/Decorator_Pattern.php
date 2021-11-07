@@ -15,7 +15,7 @@ $redRectangle = new RedShapeDecorator(new Rectangle());
 echo "Rectangle of red border: ";
 $redRectangle->draw();
 echo "<br>";
-$redRectangle->width();
+// $redRectangle->width();
 echo "<br>";
 echo "<br>";
 
@@ -24,7 +24,7 @@ echo "Circle of red border: ";
 $redCircle = new RedShapeDecorator(new Circle());
 $redCircle->draw();
 echo "<br>";
-$redCircle->width();
+// $redCircle->width();
 echo "<br>";
 echo "<br>";
 

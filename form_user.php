@@ -1,24 +1,30 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
-
+// require_once 'models/UserModel.php';
+require_once 'models/FactoryPattern.php';
+require_once("models/UserModelDecorator.php");
+// $userModel = new UserModel();
+$factory = new FactoryPattern();
+$bankModel = new UserModelDecorator($factory->make('bank'));
+$userModel = new UserModelDecorator($factory->make('user'));
 $user = NULL; //Add new user
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
-    $user = $userModel->findUserById($_id);//Update existing user
+    // $user = $userModel->findUserById($_id);//Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
 
     if (!empty($_id)) {
-        $userModel->updateUser($_POST);
+        $userModel->updateData($_POST);
+        // $bankModel->updateData($_POST);
     } else {
-        $userModel->insertUser($_POST);
+        $userModel->insertData($_POST);
+        // $bankModel->insertData($_POST);
     }
     header('location: list_users.php');
 }

@@ -1,16 +1,23 @@
 <?php
 require_once("models/BankModel.php");
 require_once("models/UserModel.php");
-// require_once("models/UserModelDecorator.php");
+require_once("models/UsageModelDecorator.php");
 $result = [];
-$banks = new BankModel();
+// $banks = new BankModel();
+$banks = new UsageModelDecorator(new BankModel());
+$users = new UsageModelDecorator(new UserModel());
 echo "Information bank: ";
-$result = $banks->selectData("test1");
-$banks->deleteData(4);
-var_dump($result);
-// foreach ($result as $value) {
-//     echo $value['id'] . $value['cost'];
-// }
+$result1 = $banks->selectData("test1");
+$result2 = $users->selectData("test1");
+var_dump($result1);
+echo "<br>";
+echo "<br>";
+var_dump($result2);
+foreach ($result as $value) {
+    // var_dump($value); 
+    echo "<br>" . $value['id'] . "<br>" .$value['name'] . "<br>" . $value['cost'];
+    echo "<br>";
+}
 // echo "\n";
 // $users = new UserModel();
 // echo "Information user: ";

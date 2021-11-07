@@ -2,23 +2,27 @@
 // Start the session
 session_start();
 require_once 'models/BankModel.php';
-$bankModel = new BankModel();
+require_once 'models/FactoryPattern.php';
+require_once("models/UsageModelDecorator.php");
+$factory = new FactoryPattern();
+$banks = new UsageModelDecorator($factory->make('bank'));
+
 
 $bank = NULL; //Add new bank
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
-    $bank = $bankModel->findBankById($_id);//Update existing bank
+    $bank = $banks->findBankById($_id);//Update existing bank
 }
 
 
 if (!empty($_POST['submit'])) {
 
     if (!empty($_id)) {
-        $bankModel->updateBank($_POST);
+        $banks->updateData($_POST);
     } else {
-        $bankModel->insertBank($_POST);
+        $banks->insertData($_POST);
     }
     header('location: list_banks.php');
 }
@@ -39,7 +43,7 @@ if (!empty($_POST['submit'])) {
                     Bank form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $_id ?>">
+                    <input type="hidden" name="user_id" value="<?php echo $_id ?>">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($bank[0]['name'])) echo $bank[0]['name'] ?>'>

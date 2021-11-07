@@ -1,11 +1,14 @@
 <?php
 // Start the session
 session_start();
-// require_once 'models/BankModel.php';
+require_once 'models/BankModel.php';
+require_once 'models/UsageModelDecorator.php';
 require_once 'models/FactoryPattern.php';
+
 $factory = new FactoryPattern();
 
-$bankModel = $factory->make('bank');
+// $bankModel = $factory->make('bank');
+$banks = new UsageModelDecorator($factory->make('bank'));
 // $bankModel = new BankModel();
 $params = [];
 if (!empty($_GET['keyword'])) {
@@ -13,7 +16,7 @@ if (!empty($_GET['keyword'])) {
 }
 
 // $users = $userModel->getUsers($params);
-$banks = $bankModel->getBanks($params);
+$result = $banks->selectData($params);
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,7 +44,7 @@ $banks = $bankModel->getBanks($params);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($banks as $bank) {?>
+                    <?php foreach ($result as $bank) {?>
                         <tr>
                             <th scope="row"><?php echo $bank['id']?></th>
                             <td>

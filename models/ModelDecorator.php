@@ -2,24 +2,24 @@
 
 require_once("IModel.php");
 
-abstract class ModelDecorator extends IModel
+abstract class ModelDecorator implements IModel
 {
     protected $decoratedModel;
 
     function __construct(IModel $decoratedModel){
         $this->decoratedModel = $decoratedModel;
     }
-    public function select($params = [], IModel $decoratedModel)
+    public function selectData($params = [])
     {
-        $this->decoratedModel->select();
+        $this->decoratedModel->selectData($params = []);
     }
-    public function delete($id){
-        $this->decoratedModel->delete();
+    public function deleteData($id){
+        $this->decoratedModel->deleteData($id);
     }
-    public function insert($datas, IModel $decoratedModel){
-
+    public function insertData($inputs){
+        $this->decoratedModel->insertData($inputs);
     }
-    // private function setRedBorder(Shape $decoratedShape){
-    //     echo "Border Color: Red";
-    // }
+    public function updateData($inputs){
+        $this->decoratedModel->updateData($inputs);
+    }
 }

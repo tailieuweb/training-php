@@ -14,4 +14,7 @@ abstract class ShapeDecorator implements Shape
     {
         echo "Shape: Rectangle";
     }
+    public function width(){
+        return 40;
+    }
 }

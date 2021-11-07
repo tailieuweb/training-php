@@ -108,8 +108,8 @@ class UserModel extends BaseModel implements IModel
         // $users = self::$_connection->multi_query($sql);
         } 
         else {
-            // $sql = 'SELECT * FROM users';
-            // $users = $this->select($sql);
+            $sql = 'SELECT * FROM users';
+            $users = $this->select($sql);
         }
         // var_dump($users);
         return $users;
@@ -130,11 +130,11 @@ class UserModel extends BaseModel implements IModel
     }
     public function insertData($input)
     {
-        // $this->insertUser($input);
+        $this->insertUser($input);
     }
     public function updateData($input)
     {
-        // $this->updateUser($input);
+        $this->updateUser($input);
     }
     public function deleteData($id)
     {

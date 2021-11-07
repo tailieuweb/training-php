@@ -8,7 +8,7 @@ require_once 'IModel.php';
 class BankModel extends BaseModel implements IModel {
 
     public function findBankById($id) {
-        $sql = 'SELECT * FROM banks WHERE id = '.$id;
+        $sql = 'SELECT * FROM banks WHERE user_id = ' . $id;
         $bank = $this->select($sql);
 
         return $bank;
@@ -71,7 +71,8 @@ class BankModel extends BaseModel implements IModel {
     //  * @return mixed
     //  */
     public function insertBank($input) {
-        $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" . "'" . $input['id_user'] . "', '" . $input['cost'] . "')";
+        $user_id = $input['id'];
+        $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" . "'" . $user_id . "', '" . $input['cost'] . "')";
 
         $user = $this->insert($sql);
 
@@ -81,12 +82,12 @@ class BankModel extends BaseModel implements IModel {
     /**
      * Search users
      * @param array $params
-     * @return array
+     * @return array , `users` WHERE `users`.`id` = `banks`.`user_id`
      */
     public function getBanks($params = []) {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM `banks` , `users` WHERE `users`.`id` = `banks`.`user_id` AND name LIKE "%' .  mysqli_real_escape_string(self::$_connection, $params['keyword']) .'%"';
+            $sql = 'SELECT * FROM `banks` , `users` WHERE `users`.`id` = `banks`.`user_id` AND `users`.`name` LIKE "%' .  mysqli_real_escape_string(self::$_connection, $params['keyword']) .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
@@ -117,7 +118,7 @@ class BankModel extends BaseModel implements IModel {
     }
     public function updateData($input)
     {
-        $this->updateUser($input);
+        $this->updateBank($input);
     }
     public function deleteData($id)
     {
