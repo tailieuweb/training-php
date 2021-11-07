@@ -5,6 +5,9 @@ require_once 'BaseModel.php';
 class UserModel extends BaseModel
 {
 
+    // Singleton pattern:
+    protected static $_instance;
+
     public function findUserById($id)
     {
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
@@ -122,4 +125,13 @@ class UserModel extends BaseModel
         else
             return 'error';
     }
+     // Singleton pattern:
+     public static function getInstance()
+     {
+         if (self::$_instance !== null) {
+             return self::$_instance;
+         }
+         self::$_instance = new self();
+         return self::$_instance;
+     }
 }
