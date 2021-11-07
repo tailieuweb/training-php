@@ -4,15 +4,20 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
+    protected static $_user_instance;
+    // CODE FOR TESTING SINGLETON DESIGN PATTERN
+    public $test = 10;
+
     // Singleton pattern:
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (self::$_user_instance !== null) {
             return self::$_user_instance;
         }
         self::$_user_instance = new self();
         return self::$_user_instance;
     }
-    
+
     // Get the lastest user id:
     public function getTheID()
     {
@@ -131,7 +136,7 @@ class UserModel extends BaseModel
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users 
-            WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection,$params['keyword']) . '%"';
+            WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection, $params['keyword']) . '%"';
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
