@@ -6,7 +6,10 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
 
+    protected static $_instance;
+
     public function findUserById($id) {
+        $id = $this->hashToId($id);
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
 
@@ -40,6 +43,7 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function deleteUserById($id) {
+        $id = $this->hashToId($id);
         $sql = 'DELETE FROM users WHERE id = '.$id;
         return $this->delete($sql);
 
@@ -94,5 +98,25 @@ class UserModel extends BaseModel {
         }
 
         return $users;
+    }
+
+    public static function getInstance(){
+        if (self::$_instance != null) {
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }
+
+    private function hashToId($hashId){
+        $hashId = substr($hashId, 4, -4);
+        $users = $this->getUsers();
+
+        foreach($users as $user){
+            if (crc32($user['id']) == $hashId) {
+                return $user['id'];
+            }
+        }
+        return null;
     }
 }

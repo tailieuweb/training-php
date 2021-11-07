@@ -6,6 +6,9 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel {
 
+    protected static $_instance;
+
+
     public function findBankById($id) {
         $id = $this->hashToId($id);
         $sql = 'SELECT * FROM banks WHERE id = '.$id;
@@ -14,37 +17,37 @@ class BankModel extends BaseModel {
         return $bank;
     }
 
-    // public function findUser($keyword) {
-    //     $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
-    //     $user = $this->select($sql);
+    public function findUser($keyword) {
+        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
+        $user = $this->select($sql);
 
-    //     return $user;
-    // }
-
-    // /**
-    //  * Authentication user
-    //  * @param $userName
-    //  * @param $password
-    //  * @return array
-    //  */
-    // public function auth($userName, $password) {
-    //     $md5Password = md5($password);
-    //     $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
-
-    //     $user = $this->select($sql);
-    //     return $user;
-    // }
+        return $user;
+    }
 
     /**
-    //  * Delete user by id
-    //  * @param $id
-    //  * @return mixed
-    //  */
-    // public function deleteUserById($id) {
-    //     $sql = 'DELETE FROM users WHERE id = '.$id;
-    //     return $this->delete($sql);
+     * Authentication user
+     * @param $userName
+     * @param $password
+     * @return array
+     */
+    public function auth($userName, $password) {
+        $md5Password = md5($password);
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
 
-    // }
+        $user = $this->select($sql);
+        return $user;
+    }
+
+    /**
+     * Delete user by id
+     * @param $id
+     * @return mixed
+     */
+    public function deleteUserById($id) {
+        $sql = 'DELETE FROM users WHERE id = '.$id;
+        return $this->delete($sql);
+
+    }
 
     /**
      * Update user
@@ -65,18 +68,18 @@ class BankModel extends BaseModel {
         return $user;
     }
 
-    // /**
-    //  * Insert user
-    //  * @param $input
-    //  * @return mixed
-    //  */
-    // public function insertUser($input) {
-    //     $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" . "'" . $input['name'] . "', '".md5($input['password'])."')";
+    /**
+     * Insert user
+     * @param $input
+     * @return mixed
+     */
+    public function insertUser($input) {
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" . "'" . $input['name'] . "', '".md5($input['password'])."')";
 
-    //     $user = $this->insert($sql);
+        $user = $this->insert($sql);
 
-    //     return $user;
-    // }
+        return $user;
+    }
 
     /**
      * Search users
@@ -109,5 +112,14 @@ class BankModel extends BaseModel {
             }
         }
         return null;
+    }
+
+    
+    public static function getInstance(){
+        if (self::$_instance != null) {
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
     }
 }
