@@ -94,4 +94,9 @@ class UserModel extends BaseModel {
 
         return $users;
     }
+    public function getID(){
+        $sql = "SELECT id FROM `users` ORDER BY id DESC LIMIT 1";
+        $user = $this->select($sql);
+        return $user;
+    }
 }

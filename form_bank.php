@@ -1,24 +1,26 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/BankModel.php';
-$bankModel = new BankModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+$bankRepository = $factory->make('repository');
+
 
 $bank = NULL; //Add new user
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
-    $bank = $bankModel->findBankById($_id);//Update existing user
+    $bankRepository->findBankById($_id);//Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
 
     if (!empty($_id)) {
-        $bankModel->updateUser_id($_POST);
+        $bankRepository->updateBank($_POST);
     } else {
-        $bankModel->insertUser_id($_POST);
+        $bankRepository->insertBank($_POST);
     }
     header('location: list_banks.php');
 }

@@ -1,22 +1,24 @@
 <?php
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+$userRepository = $factory-> make('repository');
 
 $user = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+    //Sử dụng repository tìm id
+    $userRepository ->findUserById($id);
 }
 
 
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
-        $userModel->updateUser($_POST);
+        $userRepository->updateUser($_POST);
     } else {
-        $userModel->insertUser($_POST);
+        $userRepository->insertUser($_POST);
     }
     header('location: list_users.php');
 }

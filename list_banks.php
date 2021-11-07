@@ -4,15 +4,15 @@ session_start();
 
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
+$bankRepository = $factory->make('repository');
 
-$bankModel = $factory->make('bank');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
 
-$banks = $bankModel->getBanks($params);
+$bankRepository->getBanks($params);
 ?>
 <!DOCTYPE html>
 <html>

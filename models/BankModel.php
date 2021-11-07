@@ -42,13 +42,19 @@ class BankModel extends BaseModel {
         return $this->delete($sql);
 
     }
+    public function deleteBankByUserId($user_id) {
+      
+        $sql = 'DELETE FROM banks WHERE user_id = '.$user_id;
+        return $this->delete($sql);
+
+    }
 
     /**
      * Update user
      * @param $input
      * @return mixed
      */
-    public function updateUser_id($input) {
+    public function updateBank($input) {
         $sql = 'UPDATE banks SET 
                  user_id = "' . mysqli_real_escape_string(self::$_connection, $input['user_id']) .'", 
                  Cost="'. $input['cost'] .'"
@@ -65,7 +71,7 @@ class BankModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function insertUser_id($input) {
+    public function insertBank($input) {
         $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
                 "'" . $input['user_id'] . "', '".$input['cost']."')";
 
@@ -79,18 +85,22 @@ class BankModel extends BaseModel {
      * @param array $params
      * @return array
      */
+    
     public function getBanks($params = []) {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM banks WHERE id LIKE "%' . $params['keyword'] .'%"';
+            $key = str_replace('"','',$params['keyword']);
+            $sql = 'SELECT * FROM banks WHERE cost LIKE "%' . $key .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
             $banks = self::$_connection->multi_query($sql);
         } else {
-            $sql = 'SELECT * FROM banks';
+
+            $sql = 'SELECT * FROM banks join users on users.id = banks.user_id';
             $banks = $this->select($sql);
+
         }
 
         return $banks;

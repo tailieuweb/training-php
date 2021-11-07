@@ -4,15 +4,15 @@ session_start();
 
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
+$userRepository = $factory->make('repository');
 
-$userModel = $factory->make('user');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
 
-$users = $userModel->getUsers($params);
+$userRepository->getUsers($params);
 ?>
 <!DOCTYPE html>
 <html>
