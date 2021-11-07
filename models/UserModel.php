@@ -73,6 +73,16 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
+        if (
+            is_numeric(($input['ver'])) == false || $input['ver'] == 'e'
+            || is_numeric(($input['id'])) == false || $input['id'] == 'e'
+            || is_string($input['name']) == false || is_string($input['fullname']) == false || is_string($input['email']) == false
+            || is_string($input['type']) == false || is_string($input['password']) == false
+            || strlen($input['name']) == 0 || strlen($input['fullname']) == 0 || strlen($input['email']) == 0
+            || strlen($input['type']) == 0 || strlen($input['password']) == 0) {
+            return 0;
+        }
+
         // Get time:
         $tz_object = new DateTimeZone('Asia/Ho_Chi_Minh');
         $datetime = new DateTime();
@@ -155,5 +165,14 @@ class UserModel extends BaseModel
         if (!is_numeric($b)) return 'NaN exception!';
         
         return $a + $b;
+    }
+
+    // Get version of data:
+    public function getVersionByUserID($user_id)
+    {
+        $sql = 'SELECT version FROM users WHERE id = ' . $user_id;
+        $user = $this->select($sql);
+
+        return $user[0]["version"];
     }
 }
