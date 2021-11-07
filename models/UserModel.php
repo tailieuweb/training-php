@@ -4,7 +4,7 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
 
-    private static $_instace;//dong nay
+    protected static $_instance;//dong nay
 
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
