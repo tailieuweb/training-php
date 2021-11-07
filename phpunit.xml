@@ -7,7 +7,7 @@
 >
     <testsuites>
         <testsuite name="SqlWsContractImport">
-            <file>./Tests/UserModelPhuTest.php</file>
+            <file>./Tests/UserModelHaiTest.php</file>
         </testsuite>
     </testsuites>
      <filter>				

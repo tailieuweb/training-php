@@ -1,7 +1,7 @@
 <?php
 // Start the session
 session_start();
-
+// Factory pattern:
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
