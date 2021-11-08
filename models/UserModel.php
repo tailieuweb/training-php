@@ -128,6 +128,9 @@ class UserModel extends BaseModel{
             return self::$_instance;
         }
         self::$_instance = new self();
+         if (!empty(self::$code) && (self::$code == 400)){         
+            return 400;
+        }
         return self::$_instance;
     }
     public function getID(){

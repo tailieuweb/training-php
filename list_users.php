@@ -6,13 +6,23 @@ require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
 $userModel = $factory->make('user');
+//var_dump($userModel);die();
+
 
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword']; 
 }
 $token = md5(uniqid());
-$users = $userModel->getUsers($params);
+if(!is_object($userModel)){
+    if($userModel == 400){     
+        $conectFail = 1;     
+    }
+}else{
+   $users = $userModel->getUsers($params);
+}
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -77,7 +87,11 @@ $users = $userModel->getUsers($params);
             </table>
         <?php }else { ?>
             <div class="alert alert-dark" role="alert">
+              <?php  if($conectFail == 1){?>
+                   <p style="color:red;font-size:20rem;text-align:center;">Conect Fail</p> 
+               <?php }else{ ?>              
                 This is a dark alert—check it out!
+              <?php }?>
             </div>
         <?php } ?>
     </div>
