@@ -1,6 +1,5 @@
 <?php
 require_once 'configs/database.php';
-
 abstract class BaseModel {
     // Database connection
     protected static $_connection;
@@ -10,15 +9,22 @@ abstract class BaseModel {
     //protected static $_bank_instance;
     //
     public function __construct() {
-
         if (!isset(self::$_connection)) {
-            self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+            try{
+                mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+                self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+            
+            }catch(mysqli_sql_exception $e){
+                echo 'Caught exception: ',  $e->getMessage(), "\n";
+            } 
+            finally{
+                //var_dump(12345);die();
+            }
             if (self::$_connection->connect_errno) {
                 printf("Connect failed");
                 exit();
             }
-        }
-
+        } 
     }
 
     /**
