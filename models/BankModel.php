@@ -11,8 +11,41 @@ class BankModel extends BaseModel {
      * @param $id
      * @return mixed
      */
+    
+
+    public function findBankByUserId($id) {
+        $sql = 'SELECT * FROM banks WHERE user_id = '.$id;
+        $bank = $this->select($sql);
+        return $bank;
+    }
+
+    public function findBankById($id) {
+        $sql = 'SELECT * FROM banks WHERE id = '.$id;
+        $bank = $this->select($sql);
+        return $bank;
+    }
+
+    public function insertBank($input) {
+
+        $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
+                "'" . $input['user_id'] . "', '".$input['cost']. "')";
+
+        $bank = $this->insert($sql);
+
+        return $bank;
+    }
+    
+    public function updateBank($input) {
+        $sql = 'UPDATE banks SET 
+                 cost = "'. $input['cost'] .'",
+                 user_id = "' . $input['user_id']. '"
+                 WHERE user_id = ' . $input['user_id'];
+                 $bank = $this->update($sql);
+              return $bank;
+           }
+           
     public function deleteBankById($id) {
-        $sql = 'DELETE FROM banks WHERE id = '.$id;
+        $sql = 'DELETE FROM banks WHERE user_id = '.$id;
         return $this->delete($sql);
 
     }

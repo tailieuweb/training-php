@@ -4,10 +4,10 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
     protected static $_instance;
+
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
-
         return $user;
     }
 
@@ -63,6 +63,7 @@ class UserModel extends BaseModel {
                  $user = $this->update($sql);
               return $user;
            }
+     
     /**
      * Insert user
      * @param $input
@@ -78,6 +79,13 @@ class UserModel extends BaseModel {
         return $user;
     }
 
+    public function getUserId()
+    {
+        $sql = 'SELECT MAX(id) as user_id FROM users';
+        $user = $this->select($sql);
+
+        return $user[0]["user_id"];
+    }
     /**
      * Search users
      * @param array $params

@@ -1,7 +1,9 @@
 <?php
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
 
+require_once 'proxypattern/User.php';
+require_once 'proxypattern/RealUser.php';
+require_once 'proxypattern/UserProxy.php';
+$userModel = new UserProxy();
 $user = NULL; //Add new user
 $id = NULL;
 
@@ -18,7 +20,7 @@ if (!empty(strip_tags($_GET['id']))) {
     for ($i=0; $i <strlen($handleFirst)-9 ; $i++) { 
         $idx.=$handleFirst[$i];
     }    
-    $userModel->deleteUserById($id);//Delete existing user
+     $userModel->deleteUserandBank($id);//Delete existing user
 }
 header('location: list_users.php');
 }
