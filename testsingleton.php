@@ -1,6 +1,6 @@
 
 <?php
-$factory = new Factory();
+$factory = new Singleton();
 $user = $factory -> make('user');
 $bank = $factory -> make('bank');
 $user->print();
@@ -45,7 +45,7 @@ class Bank extends Base
     }
 }
 
-class Factory
+class Singleton
 {
     public function make($model) {
         // Singleton pattern:
