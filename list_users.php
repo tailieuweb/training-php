@@ -1,23 +1,35 @@
 <?php
+
 // Start the session
 session_start();
 
 require_once 'models/FactoryPattern.php';
 
 $factory = new FactoryPattern();
-
+// var_dump(123);die();
 $userModel = $factory->make('user');
+
 // $userModel = new UserModel();
-$token = $userModel->createToken();
 
 
-$params = [];
-if (!empty($_GET['keyword'])) {
-    
-    $params['keyword'] = $_GET['keyword'];
+if(is_numeric($userModel)){
+    if($userModel == 400){
+        //Query
+    }
+}
+else{
+    $token = $userModel->createToken();
+    $params = [];
+    if (!empty($_GET['keyword'])) {
+        
+        $params['keyword'] = $_GET['keyword'];
+    }
+    $users = [];
+    $users = $userModel->getUsers($params);
 }
 
-$users = $userModel->getUsers($params);
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -75,7 +87,7 @@ $users = $userModel->getUsers($params);
             </table>
         <?php }else { ?>
             <div class="alert alert-dark" role="alert">
-                This is a dark alert—check it out!
+                Database disconnect
             </div>
         <?php } ?>
     </div>
