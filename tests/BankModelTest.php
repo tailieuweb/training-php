@@ -75,7 +75,7 @@ class BankModelTest extends TestCase
     public function testDeleteUserByNull(){
         //Vĩnh
         $bankModel = BankModel::getInstance();
-        $delete = $bankModel->deleteUserById(NULL);
+        $delete = $bankModel->deleteUserById();
         $expected = false;
         $this->assertEquals($expected,$delete);
     }
