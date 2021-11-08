@@ -148,6 +148,9 @@ class UserModel extends BaseModel
             return self::$_instance;
         }
         self::$_instance = new self();
+        if(self::$_404 == 500){
+            return 500;
+        }
         return self::$_instance;
     }
 }

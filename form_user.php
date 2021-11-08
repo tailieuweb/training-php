@@ -9,10 +9,16 @@ $user = NULL; //Add new user
 $id = NULL;
 $keyCode = "aomU87239dadasdasd";
 
+$err = 0;
 if (!empty($_GET['id'])) {
     $id = base64_decode($_GET['id']);
     $newid = substr($id,23);
-    $user = $userModel->findUserById($newid, $bankModel);//Update existing user
+    try {
+        $user = $userModel->findUserById($newid, $$bankModel);//Update existing user
+    } catch (Throwable $e) {
+        $err = 1;
+    }
+  
 }
 
 if (!empty($_POST['submit'])) {
@@ -22,7 +28,7 @@ if (!empty($_POST['submit'])) {
             $userModel->updateUser($_POST,$bankModel);
         }
         catch (Throwable $e) {
-            
+            $err = 1;
         }       
     } else {
         try{
@@ -30,7 +36,7 @@ if (!empty($_POST['submit'])) {
             header('location: list_users.php');  
         }
         catch (Throwable $e) {
-            
+            $err = 2;
         }  
        
     }   
@@ -46,6 +52,25 @@ if (!empty($_POST['submit'])) {
 <body>
     <?php include 'views/header.php'?>
     <div class="container">
+        <?php if ($err == 1) { ?>
+            <div style="text-align: center; margin-top: 30px; color: #aa1212;">
+                <hr>
+                <h1 style="font-size: 5rem;">404 | Not Update</h1>
+                <hr>
+            </div>
+            <p>Các hạ từ xa đến đây gặp phải vấn đề này là lỗi của tại hạ !</p>
+            <p>Xin mời các hạ lần sau hãy ghé qua !! Xin cáo từ.</p>
+            <a href="list_bank.php"><< Go home</a>
+        <?php }else if($err == 2){?>
+            <div style="text-align: center; margin-top: 30px; color: #aa1212;">
+                <hr>
+                <h1 style="font-size: 5rem;">404 | Not Insert</h1>
+                <hr>
+            </div>
+            <p>Các hạ từ xa đến đây gặp phải vấn đề này là lỗi của tại hạ !</p>
+            <p>Xin mời các hạ lần sau hãy ghé qua !! Xin cáo từ.</p>
+            <a href="list_bank.php"><< Go home</a>
+        <?php } else { ?>
             <?php if ($user || !isset($newsid)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
@@ -84,6 +109,7 @@ if (!empty($_POST['submit'])) {
                     User not found!
                 </div>
             <?php } ?>
+        <?php } ?>
     </div>
 </body>
 </html>

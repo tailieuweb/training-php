@@ -54,7 +54,9 @@ class BankModel extends BaseModel {
         $sql = 'UPDATE banks SET user_id ="'.$input['user_id'].'", cost = "'.$input['cost'].'" WHERE id = "'.$input['id'].'"';
 
         $bank = $this->update($sql);
+        header('location: list_bank.php');
         return $bank;
+        
     }
 
     /**

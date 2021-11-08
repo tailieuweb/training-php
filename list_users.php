@@ -5,6 +5,7 @@ require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
 $userModel = $factory->make('user');
+
 $bankModel = $factory->make('bank');
 
 $key_code = "sdaknAnN67KbNJ234NK8oa2";
@@ -23,7 +24,24 @@ if(isset($_GET['err'])){
     echo "<script>alert('Có vẻ như dữ liệu của bạn đã được thay đổi trước đó rồi!!! Vui lòng kiểm tra lại dữ liệu')</script>";
     echo "<script>window.location.href = 'list_users.php'</script>";
 }
-$users = $userModel->getUsers($params);
+
+$error = null;
+
+if(!is_object($userModel)){
+    if($userModel == 500){     
+        $error = 1;     
+    }
+}else{
+   $users = $userModel->getUsers($params);
+}
+
+// if($userModel == 500){
+//     $users =  [];
+// }
+// else{
+//     $users = $userModel->getUsers($params);
+// }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -83,9 +101,16 @@ $users = $userModel->getUsers($params);
                 </tbody>
             </table>
         <?php }else { ?>
-            <div class="alert alert-dark" role="alert">
-                This is a dark alert—check it out!
-            </div>
+            <?php if($error == 1){?>
+                <div style="text-align: center; font-weight: bold; color: red;">
+                   <p>>>> Connect Fail <<<</p>
+                   <h3 style="font-size: 10rem;">404 | Data - Error</h3>
+                </div>
+            <?php } else {?>
+                <div class="alert alert-dark" role="alert">
+                    This is a dark alert—check it out!
+                </div>
+            <?php } ?>
         <?php } ?>
     </div>
 </body>
