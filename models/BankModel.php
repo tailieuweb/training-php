@@ -4,7 +4,7 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel
 {
-    protected static $_instance;
+    private static $_instance;
     public function findBankById($id)
     {
         $sql1 = 'SELECT id FROM banks';
@@ -47,16 +47,20 @@ class BankModel extends BaseModel
     public function deleteBankById($id)
     {
         //Lấy id của tất cả user 
-        $sql1 = 'SELECT id FROM banks';
-        $allUser = $this->select($sql1);
+        // $sql1 = 'SELECT id FROM banks';
+        // $allUser = $this->select($sql1);
 
-        foreach ($allUser as $key) {
-            $md5 = md5($key['id'] . "chuyen-de-web-1");
-            if ($md5 == $id) {
-                $sql = 'DELETE FROM banks WHERE id = ' . $key['id'];
-                return $this->delete($sql);
-            }
-        }
+        // foreach ($allUser as $key) {
+        //     $md5 = md5($key['id'] . "chuyen-de-web-1");
+        //     if ($md5 == $id) {
+        //         $sql = 'DELETE FROM banks WHERE id = ' . $key['id'];
+        //         return $this->delete($sql);
+        //     }
+        // }
+        $sql = 'DELETE FROM banks WHERE id_bank = ' . $id;
+        // var_dump($sql);
+        // die();
+        return $this->delete($sql);
     }
 
     /**
@@ -104,21 +108,34 @@ class BankModel extends BaseModel
      */
     public function insertBanks($input)
     {
-        $allBanks = $this->getAllBanks($input['user_id']);
-        if (empty($allBanks)) {
+        // $allBanks = $this->getAllBanks($input['user_id']);
+        // if (empty($allBanks)) {
+        //     $sql = "INSERT INTO `banks` (`user_id`, `cost` ) VALUES (" .
+        //         "'" . $input['user_id'] . "','" . $input['cost'] . "')";
+        //     $bank = $this->insert($sql);
+        //     return $bank;
+        // } else {
+        //     $cost = $allBanks[0]['cost'] + $input['cost'];
+        //     $sql = 'UPDATE banks SET 
+        //     cost = "' . $cost . '"
+        //     WHERE id = ' . $allBanks[0]['id'];
+
+        //     $user = $this->update($sql);
+        //     return $user;
+        // }
+        $regex_not_special_sign = "/^[a-zA-Z0-9]+$/";
+        if (
+            $input['user_id'] != null && $input['cost'] != null && is_numeric($input['user_id']) && is_numeric($input['cost']) &&
+            preg_match($regex_not_special_sign, $input['cost'])
+        ) {
             $sql = "INSERT INTO `banks` (`user_id`, `cost` ) VALUES (" .
-                "'" . $input['user_id'] . "','" . $input['cost'] . "')";
+                "'" . $input['user_id'] . "', '" . $input['cost'] . "')";
+            // var_dump($sql);
+            // die();
             $bank = $this->insert($sql);
-            // $users = self::$_connection->multi_query($sql);
             return $bank;
         } else {
-            $cost = $allBanks[0]['cost'] + $input['cost'];
-            $sql = 'UPDATE banks SET 
-            cost = "' . $cost . '"
-            WHERE id = ' . $allBanks[0]['id'];
-
-            $user = $this->update($sql);
-            return $user;
+            return false;
         }
     }
 
@@ -166,8 +183,10 @@ class BankModel extends BaseModel
     public static function getInstance()
     {
         if (self::$_instance !== null) {
+            var_dump('returning instance bank');
             return self::$_instance;
         }
+        var_dump('creating instance bank');
         self::$_instance = new self();
         return self::$_instance;
     }

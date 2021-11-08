@@ -1,8 +1,10 @@
 <?php
-require_once 'models/BankModel.php';
-require_once 'models/UserModel.php';
-$bankModel = new BankModel();
-$userModel = new UserModel();
+// require_once 'models/BankModel.php';
+// require_once 'models/UserModel.php';
+require_once 'models/FactoryModel.php';
+$factory = new FactoryPattern();
+$bankModel = $factory->make('bank');
+$userModel = $factory->make('user');
 
 $bank = NULL; //Add new bank
 $_id = NULL;
@@ -37,7 +39,7 @@ $banks = $bankModel->getBanks($params);
 // }
 if (!empty($_POST['submit'])) {
 
-    if (isset($_GET['id'])) {
+    if (isset($_GET['id_bank'])) {
         $bankModel->updateBank($_POST);
     } else {
         $bankModel->insertBanks($_POST);

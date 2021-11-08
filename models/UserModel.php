@@ -4,7 +4,7 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
-    protected static $_instance;
+    private static $_instance;
     public function findUserById($id)
     {
         if (is_numeric($id)) {
@@ -20,12 +20,15 @@ class UserModel extends BaseModel
 
     public function findUser($keyword)
     {
-        $sql = 'SELECT * FROM users WHERE name LIKE "%' . $keyword . '%"' . 'OR email LIKE "%' . $keyword . '%"';
-        // var_dump($sql);
-        // die();
-        $user = $this->select($sql);
-
-        return $user;
+        if ($keyword != null) {
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $keyword . '%"' . 'OR email LIKE "%' . $keyword . '%"';
+            // var_dump($sql);
+            // die();
+            $user = $this->select($sql);
+            return $user;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -61,21 +64,30 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
-        $sql = 'UPDATE users SET 
-
+        $regex_email = "/^[A-Za-z0-9_.]{6,32}@([a-zA-Z0-9]{2,12})(.[a-zA-Z]{2,12})+$/";
+        $regex_not_special_sign = "/^[a-zA-Z0-9*\s]+$/";
+        // var_dump($input['type']);
+        // die();
+        if (
+            $input['id'] != null && $input['name'] != null && $input['fullname'] != null && $input['email'] != null && $input['type'] != null && $input['password'] != null && preg_match($regex_email, $input['email']) && preg_match($regex_not_special_sign, $input['name']) && preg_match($regex_not_special_sign, $input['fullname']) &&
+            $input['type'] == 'user' or $input['type'] == 'admin'
+        ) {
+            $sql = 'UPDATE users SET 
                  name = "' . $input['name'] . '", 
                  fullname = "' . $input['fullname'] . '",
                  email = "' . $input['email'] . '",
                  type = "' . $input['type'] . '",
-
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '", 
-
                  password="' . $input['password'] . '"
                 WHERE id = ' . $input['id'];
-
-        $user = $this->update($sql);
-
-        return $user;
+            // var_dump($sql);
+            // die();
+            $user = $this->update($sql);
+            return $user;
+        } else {
+            var_dump(preg_match($regex_not_special_sign, $input['fullname']));
+            die();
+            return false;
+        }
     }
 
     /**
@@ -120,10 +132,10 @@ class UserModel extends BaseModel
     public static function getInstance()
     {
         if (self::$_instance !== null) {
-            // var_dump('returning instance');
+            var_dump('returning instance user');
             return self::$_instance;
         }
-        // var_dump('creating instance');
+        var_dump('creating instance user');
         self::$_instance = new self();
         return self::$_instance;
     }
@@ -139,6 +151,17 @@ class UserModel extends BaseModel
             return false;
         } else {
             return $a + $b;
+        }
+    }
+
+    public function test()
+    {
+        $pattern = '/[a-z]/';
+        $string = 'Học lập trình web online tại toidicode.com';
+        if (preg_match($pattern, $string)) {
+            echo 'chuỗi chứa toàn chữ';
+        } else {
+            echo 'chuỗi không chứa hết chữ';
         }
     }
 }

@@ -11,6 +11,10 @@ if (!empty($_SESSION['id'])) {
 $keyword = '';
 if (!empty($_GET['keyword'])) {
     $keyword = $_GET['keyword'];
+    $search = ['/', '//', ';', '%'];
+    $replace = '';
+    $result = str_replace($search, $replace, $_GET['keyword']);
+    $keyword = $result;
 }
 ?>
 <div class="container">
