@@ -96,7 +96,7 @@ class UserModel extends BaseModel  {
         $user = $this->insert($sql);
         $Lastid = $this->SelectLastid();
         $input['id']=  $Lastid[0]['MAX(id)'];
-        if($BankModel instanceof BankModel) {
+        if($bankModel instanceof BankModel) {
             $bankModel->insertUser($input);
         }
         return $user;
