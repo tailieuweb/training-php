@@ -13,7 +13,7 @@ abstract class BaseModel {
         try{
                 self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
         }catch(mysqli_sql_exception $e){  
-            header('location: form_Loi.php');
+            header('location: form_error.php');
         }finally{
             // echo "<script type='text/javascript'>alert('End');</script>";
         }
