@@ -36,4 +36,15 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
+    
+    public function testFindUserByIdOk(){
+        $userModel= new UserModel();
+        $userId = 1;
+        $userName = 'test1';
+
+        $user = $userModel->findUserById($userId);
+        $actual = $user[0]['name'];
+        
+        $this->assertEquals($userName, $actual);
+    }
 }
