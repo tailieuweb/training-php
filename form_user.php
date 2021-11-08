@@ -3,17 +3,17 @@
 session_start();
 // require_once 'models/UserModel.php';
 require_once 'models/FactoryPattern.php';
-require_once("models/UserModelDecorator.php");
+require_once("models/UsageModelDecorator.php");
 // $userModel = new UserModel();
 $factory = new FactoryPattern();
-$bankModel = new UserModelDecorator($factory->make('bank'));
-$userModel = new UserModelDecorator($factory->make('user'));
+// $bankModel = new UsageModelDecorator($factory->make('bank'));
+$userModel = new UsageModelDecorator($factory->make('user'));
 $user = NULL; //Add new user
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
-    // $user = $userModel->findUserById($_id);//Update existing user
+    $user = $userModel->findDataById($_id);//Update existing user
 }
 
 
@@ -57,11 +57,11 @@ if (!empty($_POST['submit'])) {
                     <div class="form-group">
                     <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo $user[0]['version'] ?>">
                         <label for="fullname">Full Name</label>
-                        <input type="fullname" name="fullname" class="form-control" placeholder="Fullname">
+                        <input type="fullname" name="fullname" value='<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>' class="form-control" placeholder="Fullname">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" class="form-control" placeholder="Email">
+                        <input type="email" name="email" value='<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>' class="form-control" placeholder="Email">
                     </div>
                     <div class="form-group">
                     <label for="type">Type</label>

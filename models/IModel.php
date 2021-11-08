@@ -4,4 +4,5 @@ interface IModel{
     public function insertData($input);
     public function updateData($input);
     public function deleteData($id);
+    public function findDataById($id);
 }

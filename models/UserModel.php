@@ -140,4 +140,9 @@ class UserModel extends BaseModel implements IModel
     {
         $this->deleteUserById($id);
     }
+    public function findDataById($id){
+        $result = $this->findUserById($id);
+        return $result;
+    }
+
 }

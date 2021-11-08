@@ -124,4 +124,7 @@ class BankModel extends BaseModel implements IModel {
     {
         $this->deleteBankById($id);
     }
+    public function findDataById($id){
+        $this->findBankById($id);
+    }
 }

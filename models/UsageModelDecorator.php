@@ -28,7 +28,10 @@ class UsageModelDecorator extends ModelDecorator {
     public function updateData($inputs){
         $this->decoratedModel->updateData($inputs);
     }
-
+    public function findDataById($id){
+        $result = $this->decoratedModel->findDataById($id);
+        return $result;
+    }
     // public function selectData($model)
     // {
     //     $this->decoratedShape->draw();

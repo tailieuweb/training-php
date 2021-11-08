@@ -22,4 +22,7 @@ abstract class ModelDecorator implements IModel
     public function updateData($inputs){
         $this->decoratedModel->updateData($inputs);
     }
+    public function findDataById($inputs){
+        $this->decoratedModel->findDataById($inputs);
+    }
 }
