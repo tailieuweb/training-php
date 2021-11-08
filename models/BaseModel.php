@@ -9,7 +9,14 @@ abstract class BaseModel {
     public function __construct() {
 
         if (!isset(self::$_connection)) {
-            self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+            mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+        try{
+                self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+        }catch(mysqli_sql_exception $e){  
+            header('location: form_Loi.php');
+        }finally{
+            // echo "<script type='text/javascript'>alert('End');</script>";
+        }
             if (self::$_connection->connect_errno) {
                 printf("Connect failed");
                 exit();
