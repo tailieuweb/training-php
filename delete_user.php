@@ -10,7 +10,7 @@ $id = NULL;
 $token = NULL;
 
 
-if (!empty($_GET['id'])) {
+if (!empty($_GET['id']) && !isset($_SESSION['error'])) {
     $id = $_GET['id'];
     $token = $_GET['token'];
     if ($token == $_SESSION['_token']) {

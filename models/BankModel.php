@@ -11,6 +11,9 @@ class BankModel extends BaseModel
      */
     public function getBankById($id)
     {
+        if(!$this->_error){
+            return false;
+        }
         $id = is_numeric($id) ? $id : NULL;
         $sql = 'SELECT * FROM `banks` WHERE `id` = ' . $id;
         $bank = $this->select($sql);

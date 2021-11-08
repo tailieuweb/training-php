@@ -5,22 +5,25 @@ $factory = FactoryPattern::getInstance();
 $repository = $factory->make('user-repository');
 $user = NULL; //Add new user
 $id = NULL;
-if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-    $user = $repository->findById($id);
-}
-if (!empty($_POST['submit'])) {
-
-    if (!empty($id)) {
-        $repository->updateUser($_POST);
-    } else {
-        $repository->insertUser($_POST);
+if (!$_SESSION['error']) {
+    if (!empty($_GET['id'])) {
+        $id = $_GET['id'];
+        $user = $repository->findById($id);
     }
-    header('location: list_users.php');
+    if (!empty($_POST['submit'])) {
+
+        if (!empty($id)) {
+            $repository->updateUser($_POST);
+        } else {
+            $repository->insertUser($_POST);
+        }
+        header('location: list_users.php');
+    }
+    if (isset($_GET['keyword'])) {
+        header('location: ./list_users.php?keyword=' . $_GET['keyword']);
+    }
 }
-if(isset($_GET['keyword'])){
-    header('location: ./list_users.php?keyword='.$_GET['keyword']);
-}
+
 
 ?>
 <!DOCTYPE html>
@@ -34,8 +37,12 @@ if(isset($_GET['keyword'])){
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-
-        <?php if ($user || empty($id)) { ?>
+        <?php
+        if (isset($_SESSION['error'])) { ?>
+            <div class="alert alert-warning" role="alert">
+                <?= $_SESSION['error']; ?>
+            </div>
+        <?php } else if ($user || empty($id)) { ?>
             <div class="alert alert-warning" role="alert">
                 User profile
             </div>
@@ -63,7 +70,7 @@ if(isset($_GET['keyword'])){
                 </div>
                 <div class="form-group">
                     <label for="password">Cost : </label>
-                    <span><?php if (!empty($user['cost'])) echo number_format(htmlentities($user['cost'])).' $' ?></span>
+                    <span><?php if (!empty($user['cost'])) echo number_format(htmlentities($user['cost'])) . ' $' ?></span>
                 </div>
             </form>
         <?php } else { ?>
