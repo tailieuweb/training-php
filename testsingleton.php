@@ -1,13 +1,13 @@
 
 <?php
-$factory = new Singleton();
-$user = $factory -> make('user');
-$bank = $factory -> make('bank');
+$singleton = new Singleton    ();
+$bank = $singleton->make('bank');
+$user = $singleton->make('user');
 $user->print();
 $bank->print();
-// var_dump($user);
-// $user->print();
-// $bank->print();
+var_dump($user);
+$user->print();
+$bank->print();
 abstract class Base {
 
     const Bank = 'bank';
