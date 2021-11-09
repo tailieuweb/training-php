@@ -6,13 +6,23 @@ require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
 $userModel = $factory->make('user');
+//var_dump($userModel);die();
+
 
 $params = [];
 if (!empty($_GET['keyword'])) {
-    $params['keyword'] = $_GET['keyword'];
+    $params['keyword'] = $_GET['keyword']; 
+}
+$token = md5(uniqid());
+if(!is_object($userModel)){
+    if($userModel == 400){     
+        $conectFail = 1;     
+    }
+}else{
+   $users = $userModel->getUsers($params);
 }
 
-$users = $userModel->getUsers($params);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,11 +50,14 @@ $users = $userModel->getUsers($params);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user) {?>
+
+                    <?php 
+                     foreach ($users as $user) {?>
                         <tr>
                             <th scope="row"><?php echo $user['id']?></th>
                             <td>
-                                <?php echo $user['name']?>
+                                <?php echo $user['name'];?>
+
                             </td>
                             <td>
                                 <?php echo $user['fullname']?>
@@ -56,13 +69,15 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['type']?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="form_user.php?id=<?php echo base64_encode(rand(100,999).$user['id'].rand(10,99)) ?>&version=<?php echo $user['version']?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $user['id']?>">
+                                <a href="delete_user.php?id=<?php echo base64_encode(rand(100,999).$user['id'].rand(10,99))?>&token=<?php echo $token?>">                              
+                                <?php $_SESSION['token'] = $token;
+                                // var_dump($_SESSION['token']);var_dump($token);?>
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
@@ -72,7 +87,11 @@ $users = $userModel->getUsers($params);
             </table>
         <?php }else { ?>
             <div class="alert alert-dark" role="alert">
+              <?php  if($conectFail == 1){?>
+                   <p style="color:red;font-size:20rem;text-align:center;">Conect Fail</p> 
+               <?php }else{ ?>              
                 This is a dark alert—check it out!
+              <?php }?>
             </div>
         <?php } ?>
     </div>

@@ -2,7 +2,7 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel {
+class UserModel extends BaseModel{
 
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
@@ -28,6 +28,7 @@ class UserModel extends BaseModel {
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
         $user = $this->select($sql);
+		//var_dump($sql);die();
         return $user;
     }
 
@@ -37,8 +38,7 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function deleteUserById($id) {
-      
-        $sql = 'DELETE FROM users WHERE id = '.$id;
+        $sql = 'DELETE FROM users WHERE id = '.$id;     
         return $this->delete($sql);
 
     }
@@ -52,12 +52,14 @@ class UserModel extends BaseModel {
      */
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 password="'. md5($input['password']) .'"
-                WHERE id = ' . $input['id'];
+        email = "'.$input['email'].'",
+         name = "'.$input['name'].'",
+          fullname = "'.$input['fullname'].'",
+          password="'. md5($input['password']) .'",
+           type = "'.$input['type'].'"
+         WHERE id = ' . $input['id'];
 
         $user = $this->update($sql);
-      
         return $user;
     }
 
@@ -67,15 +69,16 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`,`version`) VALUES (" .
         "'" . $input['name'] . "', '"
         . md5($input['password']) . "', '"
         . $input['fullname'] . "', '"
         . $input['email'] . "', '"
         . $input['type']
-        . "')";
+        . "', '"
+        . 1
+        . "')";   
         $user = $this->insert($sql);
-      
         return $user;
                 
     }
@@ -85,21 +88,39 @@ class UserModel extends BaseModel {
      * @param array $param
      * @return array
      */
+    public function updateVersion($input){
+        $version = $input['version'] + 1;
+        $sql = 'UPDATE users SET              
+        version = "'.$version.'"
+       WHERE id = ' . $input['id'];
+        $user = $this->update($sql);
+        //var_dump($input['version']); die(); 
+        return $user;
+    }
+    public function getVersion($id){
+        $sql = 'SELECT version FROM users WHERE id = ' . $id;
+        $users = $this->select($sql);
+       // var_dump($users[0]['version']);die();
+        return $users[0]['version'];
+    }
     public function getUsers($params = []) {
         //Keyword
+       
         if (!empty($params['keyword'])) {
+           
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
             $users = self::$_connection->multi_query($sql);
+            
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
-
         return $users;
+       
     }
 
     public static function getInstance() {
@@ -107,14 +128,14 @@ class UserModel extends BaseModel {
             return self::$_instance;
         }
         self::$_instance = new self();
+         if (!empty(self::$code) && (self::$code == 400)){         
+            return 400;
+        }
         return self::$_instance;
     }
-    /**
-     * For testing
-     * @param $a
-     * @param $b
-     */
-    public function sumb($a, $b) {
-        return $a + $b;
+    public function getID(){
+        $sql = "SELECT id FROM `users` ORDER BY id DESC LIMIT 1";
+        $user = $this->select($sql);
+        return $user;
     }
 }
