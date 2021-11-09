@@ -255,18 +255,19 @@
         </div>
     </div>
     <div class="col-md-4">
-        <form method="GET" action="{{asset('')}}payment/{{$all_hotel->hotel_id}}" class="form_book detail" style="margin-top: 0!important;padding: 20px !important;border: 1px solid #000;">
-            <div class="w-100">
+        <form method="POST" action="{{asset('')}}payment/{{$all_hotel->hotel_id}}" class="form_book detail" style="margin-top: 0!important;padding: 20px !important;border: 1px solid #000;">
+        @csrf    
+        <div class="w-100">
                 <label class="date">ARRIVAL DATE</label>
-                <input class="book_n" type="date" required>
+                <input class="book_n" type="date" name="date_begin" required>
             </div>
             <div class="w-100 mt-3">
                 <label class="date">DEPARTURE DATE</label>
-                <input class="book_n" type="date" required>
+                <input class="book_n" type="date" name="date_exit" required>
             </div>
             <div class="w-100 mt-3">
                 <label class="date">PERSON</label>
-                <input class="book_n" placeholder="{{$all_hotel->person}}" type="type" name="{{$all_hotel->person}}" disabled>
+                <input class="book_n" placeholder="2" type="type" type="type" name="{{$all_hotel->person}}" disabled>
             </div>
             <div class="w-100 mt-4">
                 <button class="book_btn" type="submit" style="margin: 0 auto;display: block;">Book Now</button>
