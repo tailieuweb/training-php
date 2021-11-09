@@ -9,9 +9,9 @@ if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
 
-
 $repository = $factory->make('user-repository');
-if ($repository->userModel == !400) {
+
+if ($repository->userModel != "400") {
     $users = $repository->getUsersWithBank($params);
 } else {
     $mes = "Sai mật khẩu Database..!";
@@ -38,7 +38,9 @@ $token = md5(rand(0, 7777777) . "TEAMJ");
         <div class="alert alert-warning" role="alert">
 
             List of users! <br>
-            <?php echo $mes ?>
+            <?php if (!empty($mes)) {
+                echo $mes;
+            } ?>
         </div>
         <?php if (!empty($users)) { ?>
         <table class="table table-striped">
