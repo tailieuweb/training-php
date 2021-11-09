@@ -1,7 +1,7 @@
 <?php
 require_once 'configs/database.php';
 
-abstract class BaseModel
+abstract class BaseModel implements iModel
 {
     // Database connection
     protected static $_connection;
@@ -31,7 +31,7 @@ abstract class BaseModel
      * Query in database
      * @param $sql
      */
-    protected function query($sql)
+    public function query($sql)
     {
 
         $result = self::$_connection->query($sql);
@@ -42,7 +42,7 @@ abstract class BaseModel
      * Select statement
      * @param $sql
      */
-    protected function select($sql)
+    public function select($sql)
     {
         $result = $this->query($sql);
         $rows = [];
@@ -59,7 +59,7 @@ abstract class BaseModel
      * @param $sql
      * @return mixed
      */
-    protected function delete($sql)
+    public function delete($sql)
     {
         $result = $this->query($sql);
         return $result;
@@ -70,7 +70,7 @@ abstract class BaseModel
      * @param $sql
      * @return mixed
      */
-    protected function update($sql)
+    public function update($sql)
     {
         $result = $this->query($sql);
         return $result;
@@ -80,7 +80,8 @@ abstract class BaseModel
      * Insert statement
      * @param $sql
      */
-    protected function insert($sql)
+    // @Override
+    public function insert($sql)
     {
         $result = $this->query($sql);
         return $result;
@@ -88,7 +89,7 @@ abstract class BaseModel
     /**
      * Block SQL Injection
      */
-    protected function BlockSQLInjection($str)
+    public function BlockSQLInjection($str)
     {
         return str_replace(array("'", '"', "''"), array('&quot;', '&quot;'), $str);
     }
