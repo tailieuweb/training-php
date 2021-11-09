@@ -8,15 +8,16 @@ abstract class BaseModel {
     protected static $bankInstance;
 
     public function __construct() {
+        //Try catch exception:
 
-        if (!isset(self::$_connection)) {
+        try{
+            mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
             self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-            if (self::$_connection->connect_errno) {
-                printf("Connect failed");
-                exit();
-            }
         }
-
+       catch(mysqli_sql_exception $e)
+       {
+        print "Connection error";
+       }
     }
 
     /**
