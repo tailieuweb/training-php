@@ -22,8 +22,7 @@ class UserModel extends BaseModel
     {
         $sql = 'SELECT * FROM users WHERE email ="' . $email . '"';
         $user = $this->select($sql);
-       return isset($user[0]) ? $user[0] : false;
-      
+        return isset($user[0]) ? $user[0] : false;
     }
 
     /**
@@ -98,7 +97,7 @@ class UserModel extends BaseModel
     {
         $checkEmailStyle = $this->checkEmailStyle($input['email']);
         $checkEmailExist = $this->checkEmailExist($input['email']);
-        if($checkEmailExist || !$checkEmailStyle){
+        if ($checkEmailExist || !$checkEmailStyle) {
             return false;
         }
         $password = md5($input['password']);
@@ -119,7 +118,7 @@ class UserModel extends BaseModel
     {
         $checkEmailStyle = $this->checkEmailStyle($email);
         $checkEmailExist = $this->checkEmailExist($email);
-        if($checkEmailExist || !$checkEmailStyle){
+        if ($checkEmailExist || !$checkEmailStyle) {
             return false;
         }
         $id = $this->decryptID($id);
@@ -225,10 +224,14 @@ class UserModel extends BaseModel
 
     public static function getInstance()
     {
+
         if (self::$_instance != null) {
             return self::$_instance;
         }
         self::$_instance = new self();
+        if (!empty(self::$code) && (self::$code == 400)) {
+            return 400;
+        }
         return self::$_instance;
     }
 }
