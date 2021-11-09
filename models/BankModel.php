@@ -1,16 +1,33 @@
 <?php
 
 require_once 'BaseModel.php';
-require_once 'UserModel.php';
-class BankModel extends BaseModel {
-	// get Bank by id($id)
-	public function getBankById($id)
-    {
-        $id = $this->decryptID($id);
-        $sql = 'SELECT `banks`.*, `users`.* FROM `users` INNER JOIN `banks` WHERE `users`.`id` = `banks`.`user_id` AND `banks`.`id` = '. $id;
-        $bank = $this->select($sql);
 
-        return $bank;
+
+class BankModel extends BaseModel
+{
+    protected static $_instance;
+    /**
+     *  Get Bank By Id
+     */
+    public function getBankById($id)
+    {
+        $id = is_numeric($id) ? $id : NULL;
+        $sql = 'SELECT * FROM `banks` WHERE `id` = ' . $id;
+        $bank = $this->select($sql);
+        return isset($bank[0]) ? $bank[0] : false;
+    }
+    /**
+     *  Get Bank By User Id
+     */
+    public function getBankByUserId($userId)
+    {
+        $userId = is_numeric($userId) ? $userId : NULL;
+        $sql = 'SELECT `banks`.*
+        FROM `users`,`banks` 
+        WHERE `users`.`id` = `banks`.`user_id` 
+        AND `users`.`id` = ' . $userId;
+        $bank = $this->select($sql);
+        return isset($bank[0]) ? $bank[0] : false;
     }
 
     /**
@@ -18,57 +35,81 @@ class BankModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function insertBank($input) {
-        //$password = md5($input['password']);
-        // SQL
-        $sql = "INSERT INTO `banks`(`user_id`, `cost`) 
-        VALUES ('".$input['user_id']."','".$input['cost']."')";
-        $bank = $this->insert($sql);
-
-        return $bank;
+    public function insertBank($userId, $cost)
+    {
+        if (is_numeric($userId) && is_numeric($cost)) {
+            // SQL
+            $sql = "INSERT INTO `banks`(`user_id`, `cost`) 
+                    VALUES ('" . $this->BlockSQLInjection($userId) . "','" . $this->BlockSQLInjection($cost) . "')";
+            $bank = $this->insert($sql);
+            return $bank;
+        }
+        return false;
     }
 
-    
-	/**
+    /**
+     * Insert bank with id
+     * @param $input
+     * @return mixed
+     */
+    public function insertBankWithId($bankId, $userId, $cost)
+    {
+        if (is_numeric($bankId) && is_numeric($userId) && is_numeric($cost)) {
+            $sql = "INSERT INTO `banks`(`id`, `user_id`, `cost`) 
+            VALUES ('" . $this->BlockSQLInjection($bankId) . "','" . $this->BlockSQLInjection($userId) . "','" . $this->BlockSQLInjection($cost) . "')";
+            $bank = $this->insert($sql);
+            return $bank;
+        }
+        return false;
+    }
+
+    /**
+     * Update user
+     * @param $input
+     * @return mixed
+     */
+    public function updateBank($userId,$cost)
+    {
+        if ( is_numeric($userId) && is_numeric($cost)) {
+            $bank = $this->getBankByUserId($userId);
+            if ($bank) {
+                $sql = 'UPDATE `banks`
+                        SET `cost` = "' . $cost . '"
+                        WHERE `user_id` = ' . $userId;
+                 return $this->update($sql);
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * Delete bank by id
      * @param $id
      * @return mixed
      */
-	public function deleteBankById($id) {
-        $id = $this->decryptID($id);
-        $sql = 'DELETE FROM banks WHERE id = '.$id;
+    public function deleteBankByUserId($id)
+    {
+        $id = is_numeric($id) ? $id :  NULL;
+        $sql = 'DELETE FROM `banks` WHERE `user_id` = ' . $id;
         return $this->delete($sql);
-
     }
     /**
-     * Get Banks follow User Id
      * Get all Banks
      */
-    public function getBanks($params = []) {
-         if (!empty($params['user-id'])) {
-            $userModel = new UserModel();
-            $user = $userModel->findUserById($params['user-id']);
-            $userId = NULL;
-            if(!empty($user)){
-                $userId = $user[0]['id'];
-            }
-            $sql = 'SELECT * FROM `users`,`banks` WHERE `users`.`id` = `banks`.`user_id` AND `banks`.`user_id` = '.$userId;
-            $banks = $this->select($sql);
-        } else{
-            $sql = 'SELECT * FROM `users`,`banks` WHERE `users`.`id` = `banks`.`user_id`';
-            $banks = $this->select($sql);
-        }
+    public function getBanks()
+    {
+        $sql = 'SELECT * FROM `banks`';
+        $banks = $this->select($sql);
         return $banks;
     }
-    // Decrypt id
-    private function decryptID($md5Id){
-        $banks = $this->getBanks();
-        foreach($banks as $bank){
-            if(md5($bank['id'].'TeamJ-TDC') == $md5Id){
-                return $bank['id'];
-            }
+
+    public static function getInstance()
+    {
+        if (self::$_instance != null) {
+            return self::$_instance;
         }
-        return NULL;
+        self::$_instance = new self();
+        return self::$_instance;
     }
-    
 }
