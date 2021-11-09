@@ -49,6 +49,7 @@ if (!empty($_POST['submit'])) {
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
                     <div class="form-group">
+                    <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo $user[0]['version'] ?>">
                         <label for="fullname">Full Name</label>
                         <input type="fullname" name="fullname" class="form-control" placeholder="Fullname">
                     </div>
