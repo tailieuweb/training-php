@@ -9,7 +9,7 @@ class FactoryPattern {
         }
         else if($model === 'bank'){
             //Singleton
-            return BankModel::getInstance();
+            return BankModel::getInstance();    
         }
     }
 }
