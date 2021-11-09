@@ -45,8 +45,24 @@ if (!empty($_POST['submit'])) {
                         <input class="form-control" name="name" placeholder="User_id" value='<?php if (!empty($user_id[0]['name'])) echo $user_id[0]['name'] ?>'>
                     </div>
                     <div class="form-group">
-                        <label for="cost">Cost</label>
-                        <input name="cost" class="form-control" placeholder="cost">
+                        <label for="fullname">Full name</label>
+                        <input name="fullname" class="form-control" placeholder="full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="sdt">SDT</label>
+                        <input name="sdt" class="form-control" placeholder="sdt">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input name="email" class="form-control" placeholder="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="stk">Stk</label>
+                        <input name="stk" class="form-control" placeholder="stk">
+                    </div>
+                    <div class="form-group">
+                        <label for="soDu">Số Dư</label>
+                        <input name="soDu" class="form-control" placeholder="so du">
                     </div>
 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>

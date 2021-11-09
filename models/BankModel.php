@@ -1,8 +1,11 @@
 <?php
 
 require_once 'BaseModel.php';
+$ds       = DIRECTORY_SEPARATOR;
+$base_dir = realpath(dirname(__FILE__).$ds.'..').$ds;
+require_once("{$base_dir}models{$ds}Bank.php");
 
-class BankModel extends BaseModel {
+class BankModel extends BaseModel implements Bank {
     public static function getInstance()
     {
         if(self::$_instance !== null){
@@ -51,9 +54,6 @@ class BankModel extends BaseModel {
 
     }
 
-   
-    
-
     /**
      * Insert user
      * @param $input
@@ -68,6 +68,18 @@ class BankModel extends BaseModel {
         return $user;
     }
 
+    public function updateUser($input) {
+        $sql = 'UPDATE banks SET 
+                 name = "' . $input['name'] .'", 
+                 fullname = "'. $input['fullname'].'",
+                 email = "' . $input['sdt'] .'", 
+                 sdt = "' . $input['email'] .'", 
+                 stk="'. $input['stk'].'"
+                WHERE id = ' . $input['id'];
+        $user = $this->updateUser($sql);
+
+        return $user;
+    }
     /**
      * Search users
      * @param array $params
@@ -88,5 +100,10 @@ class BankModel extends BaseModel {
         }
 
         return $banks;
+    }
+
+    public function cost()
+    {
+        return $this->getBanks(null);
     }
 }

@@ -4,6 +4,7 @@ session_start();
 
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
+require_once 'models/InterestRate.php';
 
 $bankModel = $factory->make('bank');
 
@@ -12,7 +13,11 @@ if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
 
-$banks = $bankModel->getBanks($params);
+//$banks = $bankModel->getBanks($params);
+$bmd = new BankModel();
+$iRate = new InterestRate();
+$iRate->setbank($bmd);
+$banks = $iRate->cost();
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,10 +34,12 @@ $banks = $bankModel->getBanks($params);
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">User_ID</th>
-                <th scope="col">Cost</th>
+                <th scope="col">Full Name</th>
                 <th scope="col">SDT</th>
                 <th scope="col">Email</th>
                 <th scope="col">Stk</th>
+                <th scope="col">Số Dư</th>
+                <th scope="col">Lãi Xuất</th>
             </tr>
             </thead>
             <tbody>
@@ -43,7 +50,7 @@ $banks = $bankModel->getBanks($params);
                         <?php echo $bank['user_id']?>
                     </td>
                     <td>
-                        <?php echo $bank['cost']?>
+                        <?php echo $bank['fullname']?>
                     </td>
                     <td>
                         <?php  echo $bank['sdt'] ?>
@@ -53,6 +60,13 @@ $banks = $bankModel->getBanks($params);
                     </td>
                     <td>
                         <?php echo $bank['stk'] ?>
+                    </td>
+                    <td>
+                        <?php echo number_format($bank['soDu']) ?>
+                    </td>
+
+                    <td>
+                        <?php echo number_format($bank['laiXuat']) ?>
                     </td>
                     <td>
                         <a href="form_banks.php?user_id=<?php echo $bank['user_id'] ?>">
