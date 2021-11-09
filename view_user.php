@@ -1,13 +1,19 @@
 <?php
 require_once 'models/UserModel.php';
+require_once 'models/FactoryPattern.php';
 $userModel = new UserModel();
+$factory = new FactoryPattern();
+//Require model Repository và tạo mới
+require_once 'design-pattern/repository/UseRepository.php';
+$repository = $factory-> make('repository');
 
 $user = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+    //Sử dụng repository tìm id
+    $user = $repository ->findUserById($id);
 }
 
 
