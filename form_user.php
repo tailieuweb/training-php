@@ -4,7 +4,7 @@ require_once 'models/FactoryPattern.php';
 $factory = FactoryPattern::getInstance();
 
 $bankModel = $factory->make('bank');
-// $userRepository = $factory->make('user-repository');
+$userRepository = $factory->make('user-repository');
 $userDecorator = $factory->make('user-decorator');
 $user = NULL; //Add new user
 $id = NULL;
@@ -17,7 +17,7 @@ if (!empty($_GET['id'])) {
 
 if (!empty($_POST['submit'])) {
     if (!empty($id)) {
-        $temp = $userRepository->updateUserWithBank($_POST);
+        $temp = $userDecorator->updateUser($_POST, $bankModel);
         if ($temp->isSuccess == true) {
             echo "<script>alert('$temp->data');window.location.href='./list_users.php'</script>";
         } else {

@@ -38,6 +38,55 @@ class UserDecorator extends BaseModel
         return $result;
     }
 
+    public function updateUser($input, $bankMode)
+    {
+
+        $result = ResultClass::getInstance();
+        $id = $this->decryptID($input['id']);
+        $user = $this->findUserById($input['id']);
+
+        if ($user) {
+            if ($user['version'] == $input['version']) {
+                $sql = 'UPDATE `users` SET 
+                name = "' . $this->BlockSQLInjection($input['name']) . '", 
+                 fullname="' . $this->BlockSQLInjection($input['fullname']) . '",
+                 email="' . $this->BlockSQLInjection($input['email']) . '",
+                 type="' . $this->BlockSQLInjection($input['type']) . '",
+                 password="' . md5($input['password']) . '",
+                 version="' . ($input['version'] + 1) . '"
+                 WHERE id = ' . $id;
+                $user = $this->update($sql);
+                if ($user == true) {
+                    $bank = $bankMode->updateBank($id, $input['cost']);
+                    if ($bank == true) {
+                        $result->setData("Đã update thành công");
+                    }
+                } else {
+                    $result->setError("Lỗi");
+                }
+            } else {
+                $result->setError("Dữ liệu đã được cập nhật trước đó! Xin hãy reload lại trang");
+            }
+        } else {
+            $result->setError("Không tìm thấy id của user");
+        }
+        return $result;
+    }
+    public function deleteUser($id, $bankModel)
+    {
+        $result = false;
+        $id = $this->decryptID($id);
+        $sql = 'DELETE FROM users WHERE id = ' . $id;
+        $user =  $this->delete($sql);
+        if ($user) {
+            $bank = $bankModel->deleteBankByUserId($id);
+            if ($bank) {
+                $result = true;
+            }
+        }
+        return $result;
+    }
+
     /**
      * Search users
      * @param array $params
@@ -92,6 +141,36 @@ class UserDecorator extends BaseModel
         }
         return false;
     }
+    // Find User By id
+    public function findUserById($id)
+    {
+        $id = $this->decryptID($id);
+        $sql = 'SELECT * FROM users WHERE id = ' . $id;
+        $user = $this->select($sql);
+
+        return isset($user[0]) ? $user[0] : false;
+    }
+    /**
+     * Decrypt id
+     */
+    private function decryptID($md5Id)
+    {
+        if (!is_numeric($md5Id) && !is_string($md5Id)) {
+            return null;
+        }
+        if (is_numeric($md5Id)) {
+            if ($md5Id <= 0) {
+                return $md5Id;
+            }
+        }
+        foreach ($this->getUsers() as $item) {
+            if (md5($item['id'] . 'TeamJ-TDC') == $md5Id) {
+                return $item['id'];
+            }
+        }
+        return NULL;
+    }
+
     public static function getInstance()
     {
 

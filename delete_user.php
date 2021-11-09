@@ -2,7 +2,8 @@
 session_start();
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
-$repository = $factory -> make('user-repository');
+$bankModel = $factory->make('bank');
+$userDecorator = $factory->make('user-decorator');
 
 $user = NULL; //Add new user
 $id = NULL;
@@ -11,10 +12,10 @@ $token = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    
+
     $token = $_GET['token'];
     if ($token == $_SESSION['_token']) {
-        $repository->deleteUser($id); //Delete existing user
+        $userDecorator->deleteUser($id, $bankModel); //Delete existing user
     }
 }
 
