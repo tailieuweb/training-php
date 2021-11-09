@@ -7,6 +7,8 @@ $factory = new FactoryPattern();
 
 $userModel = $factory->make('user');
 
+// var_dump($userModel); die();
+
 $params = [];
 
 if (!empty($_GET['keyword'])) {
@@ -19,7 +21,15 @@ if (!empty($_GET['keyword'])) {
     // }
 }
 
-$users = $userModel->getUsers($params);
+if (is_numeric($userModel)) {
+    if ($userModel == 400) {
+        // Do nothing!
+    }
+}
+else {
+    $users = $userModel->getUsers($params);
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -91,6 +101,10 @@ $users = $userModel->getUsers($params);
                     <?php } ?>
                 </tbody>
             </table>
+        <?php } else if ($userModel == 400) { ?>
+            <div class="alert alert-warning" role="alert">
+                Unable to connect to the database!
+            </div>
         <?php } else { ?>
             <div class="alert alert-dark" role="alert">
                 This is a dark alert—check it out!

@@ -6,10 +6,16 @@ class UserModel extends BaseModel
 {
     // Singleton pattern:
     public static function getInstance() {
+
         if (self::$_user_instance !== null) {
             return self::$_user_instance;
         }
         self::$_user_instance = new self();
+
+        if (!empty(self::$_isConnected) && (self::$_isConnected == 400)) {
+            return 400;
+        }
+        
         return self::$_user_instance;
     }
     

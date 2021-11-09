@@ -10,14 +10,27 @@ abstract class BaseModel {
     protected static $_bank_instance;
     protected static $_userRepo_instance;
 
+    // Check if this app connect to database successfully:
+    protected static $_isConnected = 200;
+
     public function __construct() {
 
         if (!isset(self::$_connection)) {
-            self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-            if (self::$_connection->connect_errno) {
-                printf("Connect failed");
-                exit();
+            
+            try {
+                mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+                self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+
+                if (self::$_connection->connect_errno) {
+                    printf("Connect failed");
+                    exit();
+                }
+                
+            } catch (mysqli_sql_exception $e) {
+                // var_dump($e); die();
+                self::$_isConnected = 400;
             }
+
         }
 
     }
@@ -27,6 +40,14 @@ abstract class BaseModel {
      * @param $sql
      */
     protected function query($sql) {
+        // $result = null;
+        // if (!empty(self::$_isConnected) && (self::$_isConnected == 400)) {
+        //     // Do nothing if this app can not connect to database server.
+        // }
+        // else {
+        //     $result = self::$_connection->query($sql);
+        // }
+        // return $result;
 
         $result = self::$_connection->query($sql);
         return $result;
