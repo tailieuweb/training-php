@@ -31,15 +31,15 @@
                      <div class="row">
                         <div class="col-md-3">
                            <label class="date">ARRIVAL DATE</label>
-                           <input class="book_n" type="date" name="pick-up">
+                           <input class="book_n" type="date" name="pick-up" required>
                         </div>
                         <div class="col-md-3">
                            <label class="date">DEPARTURE DATE</label>
-                           <input class="book_n" type="date" name="drop-off">
+                           <input class="book_n" type="date" name="drop-off" required>
                         </div>
                         <div class="col-md-3">
                            <label class="date">PERSON</label>
-                           <input class="book_n" placeholder="2" type="type" name="person">
+                           <input class="book_n" placeholder="0" type="type" name="person" required>
                         </div>
                         <div class="col-md-3">
                            <button class="book_btn" type="submit">Book Now</button>

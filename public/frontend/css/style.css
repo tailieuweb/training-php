@@ -116,6 +116,8 @@ ol {
      list-style: none;
 }
 
+
+
 p {
      margin: 0px;
      font-weight: 500;
@@ -959,8 +961,8 @@ button {
      letter-spacing: 1.5px;
 }
 .hotel-details{
-     box-shadow: 0 5px 10px rgb(56, 56, 55);
-     border-radius: 40px;
+     /* box-shadow: 0 5px 10px rgb(56, 56, 55);
+     border-radius: 40px; */
 }
 .hotel-details ul li, .hotel-details ul li img{
      border-radius: 40px;
