@@ -51,19 +51,12 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
-        //Lay ra tat ca cac user
         $user = $this->getUsers();
-
-        // Noi chuoi ma hoa truoc ID, chi nguoi code biet nen hacker se khong the thuc hien tan cong duoc
-        $idAuth = md5(1234) .$id;
-        //Duyet mang user
+        
         foreach ($user as $value) {
-
-            //Kiem tra user nao co id trung voi id truyen vao va co doan ma trung voi doan duoc noi them vao thi moi thuc hien xoa
-            if (md5('1234').md5($value['id']) == $idAuth) {
+            if (($value['id']).md5("monweb1") == $id) {
                 // var_dump($id);
-                // var_dump($idAuth);
-                // var_dump(md5('1234').md5($value['id']));
+                // var_dump($value['id'].md5("monweb1"));
                 // die();
                 $sql = 'DELETE FROM users WHERE id = ' . $value['id'];
                 return $this->delete($sql);
