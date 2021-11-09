@@ -8,6 +8,9 @@ $factory = new FactoryPattern();
 $userRepository = $factory->make('UserRepository');
 $params = [];
 
+// var_dump($userRepository::isConnected()); die();
+
+// Get URL parameters:
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
     //Kiểm tra keyword bằng regex trong PHP
@@ -18,7 +21,11 @@ if (!empty($_GET['keyword'])) {
     // }
 }
 
-$userAccounts = $userRepository->getBankAccounts($params);
+// Check if this app is able to connect to the database:
+if ($userRepository::isConnected() == 200) {
+    $userAccounts = $userRepository->getBankAccounts($params);
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -90,6 +97,10 @@ $userAccounts = $userRepository->getBankAccounts($params);
                     <?php } ?>
                 </tbody>
             </table>
+        <?php } else if ($userRepository::isConnected() == 400) { ?>
+            <div class="alert alert-warning" role="alert">
+                Unable to connect to the database!
+            </div>
         <?php } else { ?>
             <div class="alert alert-dark" role="alert">
                 This is a dark alert—check it out!

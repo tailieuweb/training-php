@@ -5,6 +5,11 @@ require_once('./models/BankModel.php');
 
 class UserRepository extends BaseModel {
 
+    // Check if this app is able to connect to the database:
+    public static function isConnected() {
+        return self::$_isConnected;
+    }
+
     // Singleton pattern:
     public static function getInstance() {
         if (self::$_userRepo_instance !== null) {
