@@ -266,7 +266,7 @@
             </div>
             <div class="w-100 mt-3">
                 <label class="date">PERSON</label>
-                <input class="book_n" placeholder="2" type="type" name="2" required>
+                <input class="book_n" placeholder="{{$all_hotel->person}}" type="type" name="{{$all_hotel->person}}" disabled>
             </div>
             <div class="w-100 mt-4">
                 <button class="book_btn" type="submit" style="margin: 0 auto;display: block;">Book Now</button>
