@@ -1,12 +1,15 @@
 <?php
+require_once 'models/UserModel.php';
+require_once 'models/FactoryPattern.php';
 $id = '';
 if(!empty($_SESSION['id'])) {
     $id = $_SESSION['id'];
 }
 
 $keyword = '';
+
 if(!empty($_GET['keyword'])) {
-    $keyword = $_GET['keyword'];
+    $keyword = FactoryPattern::clean($_GET['keyword']);
 }
 ?>
 <div class="container">
@@ -25,8 +28,7 @@ if(!empty($_GET['keyword'])) {
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="form_user.php">Add new user</a></li>
-
+                    <li><a href="form_user.php?type=user">Add new user</a></li>
                 </ul>
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
