@@ -5,6 +5,14 @@ session_start();
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
+// $bank = $factory->make('bank');
+// // CODE FOR TESTING SINGLETON DESIGN PATTERN
+// $bank1 = $factory->make('bank');
+// if ($bank == $bank1) {
+//     var_dump('2 Objects banks are the same instance');
+// }
+// die();
+
 $userRepository = $factory->make('UserRepository');
 $params = [];
 

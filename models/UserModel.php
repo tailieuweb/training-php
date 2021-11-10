@@ -4,9 +4,7 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
-    protected static $_user_instance;
-    // CODE FOR TESTING SINGLETON DESIGN PATTERN
-    public $test = 10;
+    private static $_user_instance;
 
     // Singleton pattern:
     public static function getInstance()

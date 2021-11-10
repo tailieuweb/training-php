@@ -7,10 +7,11 @@ $factory = new FactoryPattern();
 
 $userModel = $factory->make('user');
 // CODE FOR TESTING SINGLETON DESIGN PATTERN
-// $userModel->test = 100;
-// var_dump($userModel->test);
 // $userModel1 = $factory->make('user');
-// var_dump($userModel1->test);die();
+// if ($userModel == $userModel1) {
+//     var_dump('2 Objects are the same instance');
+// }
+// die();
 
 $params = [];
 
