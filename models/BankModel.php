@@ -4,9 +4,7 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel
 {
-    protected static $_bank_instance;
-    // CODE FOR TESTING SINGLETON DESIGN PATTERN
-    public $test = 10;
+    private static $_bank_instance;
 
     // Singleton pattern:
     public static function getInstance()
