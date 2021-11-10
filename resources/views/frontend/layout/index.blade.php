@@ -21,6 +21,7 @@
       </section>
       <!-- end banner -->
       <!-- form_lebal -->
+      <!-- UI form date-pick, date-drop hotel, show hot hotel -->
       <section>
          <div class="container">
             <div class="row">
@@ -50,6 +51,7 @@
             </div>
          </div>
       </section>
+      
       <!-- end form_lebal -->
       <!-- choose  section -->
       <div class="choose">
