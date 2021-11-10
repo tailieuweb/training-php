@@ -1,26 +1,28 @@
 <?php
-// Start the session
-session_start();
-require_once 'models/BankModel.php';
-$bankModel = new BankModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+
+$bankModel = $factory->make('bank');
+$userModel = $factory->make('user');
 
 $bank = NULL; //Add new user
-$_id = NULL;
+$id = NULL;
 
 if (!empty($_GET['id'])) {
-    $_id = $_GET['id'];
-    $bank = $bankModel->findBankById($_id);//Update existing user
+    $id = $_GET['id'];
+    $bank = $bankModel->findBankById($id);//Update existing user
+    //$bank = $userModel->findUserById($id);
 }
-
 
 if (!empty($_POST['submit'])) {
 
-    if (!empty($_id)) {
-        $bankModel->updateUser_id($_POST);
+    if (!empty($id)) {
+        //$userModel->updateUser($_POST,$bankModel);
+        $userModel->updateUser($_POST);
     } else {
-        $bankModel->insertUser_id($_POST);
-    }
-    header('location: list_banks.php');
+       $userModel->insertUser($_POST);
+    }  
+    header('location: list_bank.php');   
 }
 
 ?>
@@ -33,27 +35,25 @@ if (!empty($_POST['submit'])) {
 <body>
     <?php include 'views/header.php'?>
     <div class="container">
-
-            <?php if ($bank || !isset($_id)) { ?>
+            <?php if ( $bank || isset($id)) { ?>
                 <div class="alert alert-warning" role="alert">
-                    User form
+                    Bank form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $_id ?>">
+                    <input type="hidden" name="id" value="<?php if (!empty($bank[0]['id'])) echo $bank[0]['id']?>">
                     <div class="form-group">
-                        <label for="name">User_ID</label>
-                        <input class="form-control" name="user_id" placeholder="User_id" value='<?php if (!empty($bank[0]['user_id'])) echo $bank[0]['user_id'] ?>'>
+                        <label for="user_id">User ID</label>
+                        <input class="form-control" name="user_id" placeholder="User ID" value="<?php if (!empty($bank[0]['user_id'])) echo $bank[0]['user_id'] ?>" require>
                     </div>
                     <div class="form-group">
-                    <label for="name">Cost</label>
-                        <input class="form-control" name="cost" placeholder="Cost" value='<?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?>'>
+                        <label for="cost">Cost</label>
+                        <input class="form-control" name="cost" placeholder="cost" value="<?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?>" require>
                     </div>
-
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
             <?php } else { ?>
                 <div class="alert alert-success" role="alert">
-                    Bank not found!
+                    User not found!
                 </div>
             <?php } ?>
     </div>

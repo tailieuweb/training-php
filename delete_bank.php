@@ -1,13 +1,17 @@
 <?php
-require_once 'models/BankModel.php';
-$BankModel = new BankModel();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+$bankModel = $factory->make('bank');
 
-$id = NULL; //Add new user
-$user_id = NULL;
+
+//23-4
+
+$user = NULL; //Add new user
+$id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $BankModel->deleteBanksById($id);//Delete existing user
+    $bankModel->deleteBankById($id);//Delete existing user
 }
-header('location: list_banks.php');
+header('location: list_bank.php');
 ?>

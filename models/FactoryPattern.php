@@ -1,7 +1,7 @@
 <?php
 require_once 'models/UserModel.php';
 require_once 'models/BankModel.php';
-class FactoryPattern extends BaseModel{
+class FactoryPattern {
 
     public function make($model) {
         if ($model == 'user') {
