@@ -25,6 +25,11 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <!--
+               * Show hotel in option -- Home --
+               * Search hotel with person
+               * Branch filterHotel
+               */-->
                   <form method="POST" action="{{asset('details')}}" class="form_book">
                      <!-- Add csrf token -->
                      @csrf

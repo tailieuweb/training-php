@@ -206,6 +206,8 @@ class FrontendController extends Controller
 
     /**
      * Show hotel in option -- Home --
+     * Search hotel with person
+     * Branch filterHotel
      */
     public function rentalHotelOption(Request $request){
         $this->AuthLogin();
@@ -217,7 +219,6 @@ class FrontendController extends Controller
         return view('frontend.layout.details')->with('hotel_search', $hotel);
 
     }
-
     function postSearchAjax(Request $request)
     {
         $this->AuthLogin();
