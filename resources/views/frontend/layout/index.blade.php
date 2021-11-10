@@ -51,7 +51,7 @@
             </div>
          </div>
       </section>
-      
+
       <!-- end form_lebal -->
       <!-- choose  section -->
       <div class="choose">
@@ -144,6 +144,7 @@
       <!-- end choose  section -->
 
       <!-- feature  section -->
+      <!-- Hot hotel start -->
       <div class="choose">
          <div class="container">
             <div class="row">
