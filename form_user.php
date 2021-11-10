@@ -39,14 +39,31 @@ if (!empty($_POST['submit'])) {
                 </div>
                 <form method="POST">
                     <input type="hidden" name="id" value="<?php echo $_id ?>">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                    </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+                </div>
+                <div class="form-group">
+                    <label for="fullname">Fullname</label>
+                    <input type="text" name="fullname" class="form-control" placeholder="Fullname" value="<?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?>">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="Email" value="<?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?>">
+                </div>
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <select name="type" value="<?php if (!empty($user[0]['type'])) echo $user[0]['type'] ?>">
+                        <option value="">-</option>
+                        <option <?php if (!empty($user[0]['type']))  echo $user[0]['type'] == 'admin' ? 'selected' : '' ?> value="admin">Admin</option>
+                        <option <?php if (!empty($user[0]['type']))  echo $user[0]['type'] == 'user' ? 'selected' : '' ?> value="user">User</option>
+                        <option <?php if (!empty($user[0]['type']))  echo $user[0]['type'] == 'guest' ? 'selected' : '' ?> value="guest">Guest</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Password">
+                </div>
 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>

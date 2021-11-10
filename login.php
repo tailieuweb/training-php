@@ -8,16 +8,16 @@ $_id = NULL;
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
-    $user = $UserModel::getInstance()->findUserById($_id);//Update existing user
+    $user = UserModel::getInstance()->findUserById($_id);//Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
 
     if (!empty($_id)) {
-        $UserModel::getInstance()->updateUser($_POST);
+        UserModel::getInstance()->updateUser($_POST);
     } else {
-        $UserModel::getInstance()->insertUser($_POST);
+        UserModel::getInstance()->insertUser($_POST);
     }
     header('location: list_users.php');
 }

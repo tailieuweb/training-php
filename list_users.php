@@ -1,14 +1,14 @@
 <?php
 // Start the session
-session_start();
-
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
 require_once 'models/UserModel.php';
-
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
-
 $users = UserModel::getInstance()->getUsers($params);
 ?>
 <!DOCTYPE html>
@@ -20,7 +20,10 @@ $users = UserModel::getInstance()->getUsers($params);
 <body>
     <?php include 'views/header.php'?>
     <div class="container">
-        <?php if (!empty($users)) {?>
+    <?php if (!empty($users)) { ?>
+            <div class="alert alert-warning" role="alert">
+                List of users!
+            </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -32,17 +35,17 @@ $users = UserModel::getInstance()->getUsers($params);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user) {?>
+                    <?php foreach ($users as $user) { ?>
                         <tr>
-                            <th scope="row"><?php echo $user['id']?></th>
+                            <th scope="row"><?php echo $user['id'] ?></th>
                             <td>
-                                <?php echo $user['name']?>
+                                <?php echo $user['name'] ?>
                             </td>
                             <td>
-                                <?php echo $user['fullname']?>
+                                <?php echo $user['fullname'] ?>
                             </td>
                             <td>
-                                <?php echo $user['type']?>
+                                <?php echo $user['type'] ?>
                             </td>
                             <td>
                                 <a href="form_user.php?id=<?php echo $user['id'] ?>">
@@ -51,15 +54,16 @@ $users = UserModel::getInstance()->getUsers($params);
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="list_users.php?id=<?php echo $user['id'] ?>&token=<?php echo $token ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
+                                    <input type="hidden" name="token" value="<?php echo $token ?>">
                                 </a>
                             </td>
                         </tr>
                     <?php } ?>
                 </tbody>
             </table>
-        <?php }else { ?>
+        <?php } else { ?>
             <div class="alert alert-dark" role="alert">
                 This is a dark alert—check it out!
             </div>
