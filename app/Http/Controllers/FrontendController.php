@@ -20,9 +20,6 @@ class FrontendController extends Controller
     public function AuthLogin()
     {
       
-        
-     
-        
         if (Auth::check()) {
             $admin_role = Auth::user()->role;
             if ($admin_role == '1') {
