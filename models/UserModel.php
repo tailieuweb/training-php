@@ -6,7 +6,15 @@ class UserModel extends BaseModel
 {
 
     // Singleton pattern:
-    protected static $_instance;
+    private static $_instance;
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }
 
     public function findUserById($id)
     {
@@ -125,13 +133,5 @@ class UserModel extends BaseModel
         else
             return 'error';
     }
-     // Singleton pattern:
-     public static function getInstance()
-     {
-         if (self::$_instance !== null) {
-             return self::$_instance;
-         }
-         self::$_instance = new self();
-         return self::$_instance;
-     }
+     
 }

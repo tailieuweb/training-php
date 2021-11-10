@@ -6,7 +6,15 @@ class BankModel extends BaseModel {
 
 
     // Singleton pattern:
-    protected static $_instance;
+    private static $_instance;
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }
     
     public function findBankById($id) {
         $sql = 'SELECT * FROM banks WHERE id = '.$id;
@@ -100,13 +108,5 @@ class BankModel extends BaseModel {
         return $banks;
     }
 
-     // Singleton pattern:
-     public static function getInstance()
-     {
-         if (self::$_instance !== null) {
-             return self::$_instance;
-         }
-         self::$_instance = new self();
-         return self::$_instance;
-     }
+   
 }

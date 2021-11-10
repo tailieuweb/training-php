@@ -2,10 +2,10 @@
 // Start the session
 session_start();
 
-require_once 'models/FactoryPattern.php';
-$factory = new FactoryPattern();
+require_once 'models/SingletonPattern.php';
+$singleton = new SingletonPattern();
 
-$bankModel = $factory->make('bank');
+$bankModel = $singleton->make('bank');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
