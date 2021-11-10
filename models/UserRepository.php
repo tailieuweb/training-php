@@ -34,6 +34,7 @@ class UserRepository
     }
 
     /**
+     * Proxy
      * Insert User
      */
     public function insertUser($input)
@@ -50,6 +51,7 @@ class UserRepository
         }
     }
     /**
+     * Proxy
      * Get  All User Or User By Keyword
      */
     public function getUsersWithBank($params = [])
@@ -84,6 +86,7 @@ class UserRepository
         $this->bankModel->deleteBankByUserId($userId);
     }
     /**
+     * Proxy
      * Update  User With Bank
      */
     public function updateUserWithBank($input)
