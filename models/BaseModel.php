@@ -1,4 +1,7 @@
 <?php
+
+use function PHPUnit\Framework\throwException;
+
 require_once 'configs/database.php';
 
 class BaseModel
@@ -14,7 +17,13 @@ class BaseModel
 
     public function connectDatabase()
     {
-        $this->connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT) or die('Connection Failed' or mysqli_connect_error());
+        mysqli_report(MYSQLI_REPORT_STRICT);
+        try{
+            $this->connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+        }
+        catch(mysqli_sql_exception $e){
+            echo "Connected wrong";exit();
+        }
         return $this->connection;
     }
 
@@ -25,11 +34,6 @@ class BaseModel
         }
         return self::$instance;
     }
-
-
-    // public static function connectDatabase(){
-    //     return self::$_connection;
-    // }
 
     /**
      * Query in database

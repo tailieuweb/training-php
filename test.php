@@ -24,5 +24,5 @@
 
     var_dump($test1); echo '</br>';
     var_dump($test2); echo '</br>';
-    var_dump($test3);echo '</br>';
+    var_dump($test3); echo '</br>';
 ?>
