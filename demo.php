@@ -1,6 +1,8 @@
 <?php
 
-require_once './models/RepositoryUser.php';
-$repositoryUser = new RepositoryUser();
-
-var_dump($repositoryUser->read());
+require_once './models/FactoryPattern.php';
+$factory = new FactoryPattern();
+$userModel = $factory->make("user");
+$bankModel = $factory->make("bank");
+var_dump($userModel->read());
+var_dump($bankModel->read());

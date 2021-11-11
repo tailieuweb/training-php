@@ -2,7 +2,7 @@
 
 use SebastianBergmann\FileIterator\Factory;
 
-require_once './models/FactoryPattern.php';
+require_once './models/UserModel.php';
 require_once './models/RepositoryInterface.php';
 
 class RepositoryUser implements RepositoryInterface{
@@ -10,8 +10,7 @@ class RepositoryUser implements RepositoryInterface{
 
     function __construct()
     {
-        $factory = new FactoryPattern();
-        self::$userModel = $factory->make('user');
+        self::$userModel = UserModel::getInstance();
     }
     
     public function read() {
@@ -25,6 +24,15 @@ class RepositoryUser implements RepositoryInterface{
     }
     public function delete($id) {
         return self::$userModel->deleteUserById($id);
+    }
+    public function find($id) {
+        return self::$userModel->findUserById($id);
+    }
+    public function search($params) {
+        return self::$userModel->getUsers($params);
+    }
+    public function auth($userName, $password) {
+        return self::$userModel->auth($userName, $password);
     }
 }
 

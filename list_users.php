@@ -9,7 +9,7 @@ $factory = new FactoryPattern();
 $type = "user";
 $params = [];
 if (!empty($_GET['keyword'])) {
-    $params['keyword'] =  $keyword; 
+    $params['keyword'] =  $_GET['keyword']; 
 }
 
 if (!empty($_GET['type'])) {
@@ -17,7 +17,7 @@ if (!empty($_GET['type'])) {
 }
 $userModel = $factory->make("user");
 
-$users = $userModel->getUsers($params);
+$users = $userModel->search($params);
 ?>
 <!DOCTYPE html>
 <html>

@@ -15,19 +15,20 @@ $prevCost = 0;
 if (!empty($_GET['id'])) { 
     //Update SQL Injection - convert id -> int -> string
     $_id = isset($_GET['id'])?(string)(int)$_GET['id']:null;
-    $user =  $userModel->findUserById($_id);//Update existing user
+    $user =  $userModel->find($_id);//Update existing user
     $params['user_id'] =  $_id; 
-    $bank = $bankModel->getBanksInfo($params);
+    $bank = $bankModel->search($params);
 }
 
 
 if (!empty($_POST['submit'])) {
-    if (!empty($_id) && $bank) {
-       $bankModel->updateBankInfo($_POST);
+    if (!empty($_id) && !empty($bank)) {
+       $bankModel->update($_POST);
     } else {
-       $bankModel->insertBankInfo($_POST);
+       $params['cost'] = $_POST['cost'];
+       $bankModel->insert($params);
     }
-    header('location: list_users.php');
+    //header('location: list_users.php');
 }
 ?>
 <!DOCTYPE html>
@@ -66,7 +67,7 @@ if (!empty($_POST['submit'])) {
                     value='<?php if (!empty($user[0]['name'])) echo $bank[0]['cost'] ?>' required>
                 <?php } else {?>
                 <input class="form-control" name="cost" placeholder="cost"
-                    value='<?= 0?>' required>
+                    value='<?php (!empty($bank)) ? $bank['cost'] : 0?>' required>
                 <?php }?>        
             </div>
             <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>

@@ -14,15 +14,15 @@ $prevCost = 0;
 if (!empty($_GET['id'])) { 
     //Update SQL Injection - convert id -> int -> string
     $_id = isset($_GET['id'])?(string)(int)$_GET['id']:null;
-    $user = $userModel->findUserById($_id);//Update existing user
+    $user = $userModel->find($_id);//Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
     if (!empty($_id)) {
-       $userModel->updateUser($_POST);
+       $userModel->update($_POST);
     } else {
-       $userModel->insertUser($_POST);
+       $userModel->insert($_POST);
     }
     header('location: list_users.php');
 }

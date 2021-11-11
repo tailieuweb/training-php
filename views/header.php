@@ -9,7 +9,7 @@ if(!empty($_SESSION['id'])) {
 $keyword = '';
 
 if(!empty($_GET['keyword'])) {
-    $keyword = FactoryPattern::clean($_GET['keyword']);
+    $keyword = $_GET['keyword'];
 }
 ?>
 <div class="container">
