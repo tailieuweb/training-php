@@ -3,16 +3,19 @@
 session_start();
 //1-b
 require_once 'models/FactoryPattern.php';
+require_once("models/UsageModelDecorator.php");
 $factory = new FactoryPattern();
 
-$userModel = $factory->make('user');
-
+// $userModel = $factory->make('user');
+$users = new UsageModelDecorator($factory->make('user'));
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
 //feature 1-a
-$users = $userModel->getUsers($params);
+// $users = $userModel->getUsers($params);
+// var_dump($users);
+$result = $users->selectData($params);
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,7 +43,7 @@ $users = $userModel->getUsers($params);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user) {?>
+                    <?php foreach ($result as $user) {?>
                         <tr>
                             <th scope="row"><?php echo $user['id']?></th>
                             <td>

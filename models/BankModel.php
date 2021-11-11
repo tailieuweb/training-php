@@ -3,11 +3,12 @@
 use function PHPSTORM_META\type;
 
 require_once 'BaseModel.php';
+require_once 'IModel.php';
 
-class BankModel extends BaseModel {
+class BankModel extends BaseModel implements IModel {
 
     public function findBankById($id) {
-        $sql = 'SELECT * FROM banks WHERE id = '.$id;
+        $sql = 'SELECT * FROM banks WHERE user_id = ' . $id;
         $bank = $this->select($sql);
 
         return $bank;
@@ -69,8 +70,9 @@ class BankModel extends BaseModel {
     //  * @param $input
     //  * @return mixed
     //  */
-    public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" . "'" . $input['name'] . "', '".md5($input['password'])."')";
+    public function insertBank($input) {
+        $user_id = $input['id'];
+        $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" . "'" . $user_id . "', '" . $input['cost'] . "')";
 
         $user = $this->insert($sql);
 
@@ -80,12 +82,12 @@ class BankModel extends BaseModel {
     /**
      * Search users
      * @param array $params
-     * @return array
+     * @return array , `users` WHERE `users`.`id` = `banks`.`user_id`
      */
     public function getBanks($params = []) {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM `banks` , `users` WHERE `users`.`id` = `banks`.`user_id` AND name LIKE "%' . $params['keyword'] .'%"';
+            $sql = 'SELECT * FROM `banks` , `users` WHERE `users`.`id` = `banks`.`user_id` AND `users`.`name` LIKE "%' .  mysqli_real_escape_string(self::$_connection, $params['keyword']) .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
@@ -97,5 +99,32 @@ class BankModel extends BaseModel {
         }
 
         return $banks;
+    }
+    public static function getInstance() {
+        if (self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }
+    public function selectData($params = [])
+    {
+        $result = $this->getBanks($params = []);
+        return $result;
+    }
+    public function insertData($input)
+    {
+        $this->insertBank($input);
+    }
+    public function updateData($input)
+    {
+        $this->updateBank($input);
+    }
+    public function deleteData($id)
+    {
+        $this->deleteBankById($id);
+    }
+    public function findDataById($id){
+        $this->findBankById($id);
     }
 }

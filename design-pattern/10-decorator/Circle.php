@@ -7,4 +7,7 @@ class Circle implements Shape
     {
         echo "Shape: Circle";
     }
+    public function width(){
+        return 80;
+    }
 }
