@@ -115,7 +115,7 @@ Route::group(['module' => 'dashboard', 'middleware' => 'web', 'namespace' => "Ap
     Route::get("/profile", ["as" => "frontend.dashboard.index.profile", "uses" => "FrontendController@getProfile"]);
 
     //Payment hotel
-    Route::get("/payment/{id}", ["as" => "frontend.dashboard.index.payment", "uses" => "FrontendController@paymentHotelById"]);
+    Route::post("/payment/{id}", ["as" => "frontend.dashboard.index.payment", "uses" => "FrontendController@paymentHotelById"]);
     Route::get("/payment-success/{id}", ["as" => "frontend.dashboard.index.payment-success", "uses" => "FrontendController@payment_succsess"]);
 });
 
