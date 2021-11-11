@@ -46,9 +46,11 @@ class UserRepository
             $user = $this->userModel->findUserByEmail($input['email']);
             $userId = $user['id'];
             $cost = 1000;
-            $insertbank = $this->bankModel->insertBank($userId, $cost);
-            // $insertUser = $this->userModel->insertUser($userId, $cost);
-            return $insertbank;
+            var_dump(123);
+            die();
+            // $insertbank = $this->bankModel->insertBank($userId, $cost);
+            $insertUser = $this->userModel->insertUser($input);
+            return $insertUser;
         }
     }
     /**
@@ -84,8 +86,8 @@ class UserRepository
         }
         $userId = $findUser['id'];
         $this->userModel->deleteUserById($id);
-        $this->bankModel->deleteBankByUserId($userId);
-        // $this->userModel->deleteUserById($userId);
+        // $this->bankModel->deleteBankByUserId($userId);
+        $this->userModel->deleteUserById($userId);
     }
     /**
      * Proxy
