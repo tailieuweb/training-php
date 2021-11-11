@@ -5,25 +5,38 @@ abstract class BaseModel {
     // Database connection
 
     protected static $_connection;
-    // Life of session, 3600 = 1h
-    private $_csrf_time_live = 3600;
+    protected static $code = 123;
+    
     private $_csrf_value = '';
+    private $_csrf_time_live = 3600;
 
     public function __construct() {
 
         if (!isset(self::$_connection)) {
-            self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-            // Create token
-            // $token = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+            try{
+                mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+                // var_dump(123);die();
+                self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+                $token = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
 
 
-            // setcookie($token, time() + $this->_csrf_time_live);
-            // $this->_csrf_value = $token;
+                setcookie($token, time() + $this->_csrf_time_live);
+                $this->_csrf_value = $token;
 
-            if (self::$_connection->connect_errno) {
-                printf("Connect failed");
-                exit();
+                if (self::$_connection->connect_errno) {
+                    printf("Connect failed");
+                    exit();
+                }
             }
+            catch(mysqli_sql_exception $e){
+                // var_dump(123233);die();
+                self::$code = 400;
+                return 400;
+            }
+            
+            // self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+            // Create token
+            
 //            var_dump($token);
         }
 

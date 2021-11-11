@@ -17,7 +17,7 @@ class UserModel extends BaseModel {
         
         //$keyword = htmlentities($keyword, ENT_QUOTES, "UTF-8");
         
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
+        $sql = 'SELECT * FROM users WHERE name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
         $user = $this->select($sql);
 
         return $user;
@@ -73,8 +73,9 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
+        $md5Password = md5($input['password']);
         $sql = "INSERT INTO `users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
-            "'" . $input['name'] . "', '".$input['fullname']."', '".$input['email']."', '".$input['type']."', '".$input['password']."')";
+            "'" . $input['name'] . "', '".$input['fullname']."', '".$input['email']."', '".$input['type']."', '".$md5Password."')";
 
 
         $user = $this->insert($sql);
@@ -95,13 +96,14 @@ class UserModel extends BaseModel {
             $users = $this->select($sql);
             // var_dump($users).die();
         } else {
-            $sql = 'SELECT * FROM users join types on users.type = types.type_id';
+
+            $sql = 'SELECT * FROM users join types on users.type = types.type_id order by `users`.`id` DESC';
             $users = $this->select($sql);
         }
 
         return $users;
     }
-    public function getTypes($params = []) {
+    public function getTypes() {
         $sql = 'SELECT * FROM types';
         $types = $this->select($sql);
 
@@ -114,10 +116,16 @@ class UserModel extends BaseModel {
     }
     
     public static function getInstance() {
+        
         if (self::$_instance !== null){
             return self::$_instance;
         }
         self::$_instance = new self();
+        
+        if (!empty(self::$code) && (self::$code == 400)){
+            return 400;
+        }
+        
         return self::$_instance;
     }
     //
@@ -126,22 +134,19 @@ class UserModel extends BaseModel {
      * @param $a
      * @param $b
      */
-    public function sumb($a, $b) {
-        if(!is_numeric($a) || !is_numeric($b))
-        {
-            return false;
-        }
-        else{
-            return $a + $b;
-        }
-        
+    public function sumb($a ,$b){
+        if(!is_numeric($a)) return 'error';
+        if(!is_numeric($b)) return 'error';
+        return $a + $b;
     }
     //Check string have work specical
     public function checkString($field){
         if(filter_var($field, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
             return true;
-        } else{
-            return FALSE;
+        } 
+        else if(is_int($field)){
+            return true;
         }
+        return false;
     }
 }
