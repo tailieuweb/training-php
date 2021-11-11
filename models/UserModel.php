@@ -20,10 +20,10 @@ class UserModel extends BaseModel
     // Find User By Email
     public function findUserByEmail($email)
     {
-        $sql = 'SELECT * FROM users WHERE email = ' . $email;
+        $sql = 'SELECT * FROM users WHERE email ="' . $email . '"';
         $user = $this->select($sql);
-
-        return isset($user[0]) ? $user[0] : false;
+       return isset($user[0]) ? $user[0] : false;
+      
     }
 
     /**
