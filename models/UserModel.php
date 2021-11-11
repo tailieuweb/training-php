@@ -48,9 +48,16 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
-        $id = $this->decryptID($id);
-        $sql = 'DELETE FROM users WHERE id = ' . $id;
-        return $this->delete($sql);
+        if (isset($input['user_id'])) {
+            $findUser = $this->userModel->findUserById($id);
+            $userId = $findUser['id'];
+            $bankModel = new BankModel();
+            $bankModel->deleteBankByUserId($userId);
+        } else {
+            $id = $this->decryptID($id);
+            $sql = 'DELETE FROM users WHERE id = ' . $id;
+            return $this->delete($sql);
+        }
     }
 
 
@@ -96,24 +103,24 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
-        if (isset($input['user_id'])) {
-            $cost = $input['cost'];
-            $bankModel = new BankModel();
-            $bankModel->updateBank($input, $cost);
-        } else {
-            $checkEmailStyle = $this->checkEmailStyle($input['email']);
-            $checkEmailExist = $this->checkEmailExist($input['email']);
-            if ($checkEmailExist || !$checkEmailStyle) {
-                return false;
-            }
-            $password = md5($input['password']);
-            // SQL
-            $sql = "INSERT INTO `users`(`name`, `fullname`, `email`, `type`, `password`) 
-        VALUES ('" . $this->BlockSQLInjection($input['name']) . "','" . $this->BlockSQLInjection($input['fullname']) . "','" . $this->BlockSQLInjection($input['email']) . "','" . $this->BlockSQLInjection($input['type']) . "','" . $this->BlockSQLInjection($password) . "')";
-            $user = $this->insert($sql);
-
-            return $user;
+        // if (isset($input['user_id'])) {
+        //     $cost = $input['cost'];
+        //     $bankModel = new BankModel();
+        //     $bankModel->updateBank($input, $cost);
+        // } else {
+        $checkEmailStyle = $this->checkEmailStyle($input['email']);
+        $checkEmailExist = $this->checkEmailExist($input['email']);
+        if ($checkEmailExist || !$checkEmailStyle) {
+            return false;
         }
+        $password = md5($input['password']);
+        // SQL
+        $sql = "INSERT INTO `users`(`name`, `fullname`, `email`, `type`, `password`) 
+        VALUES ('" . $this->BlockSQLInjection($input['name']) . "','" . $this->BlockSQLInjection($input['fullname']) . "','" . $this->BlockSQLInjection($input['email']) . "','" . $this->BlockSQLInjection($input['type']) . "','" . $this->BlockSQLInjection($password) . "')";
+        $user = $this->insert($sql);
+
+        return $user;
+        // }
     }
 
     /**
