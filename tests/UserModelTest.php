@@ -123,13 +123,17 @@ class UserModelTest extends TestCase
      * Test DeleteUserById Function in UserModel - 'Danh' do this
      */
     // Test case testDeleteUserById
-    public function testDeleteUserById()
+    public function testDeleteUserByIdOK()
     {
         $userModel = new UserModel();
         $id = -1;
         $userModel->insertUserWithId($id, 'Danh', 'Nguyen Khac Danh', 'nguyenkhacdanh@gmail.com', 'guest', '12345');
         $check = $userModel->deleteUserById($id);
         $findUser = $userModel->findUserById($id);
+<<<<<<< HEAD
+=======
+        var_dump($findUser);
+>>>>>>> 1-php-202109/2-groups/10-J/master-phpunit
         if (
             $check == true &&
             count($findUser) == 0
@@ -140,7 +144,11 @@ class UserModelTest extends TestCase
         }
     }
     // Test case testDeleteUserById1 Just Check
+<<<<<<< HEAD
     public function testDeleteUserById1()
+=======
+    public function testDeleteUserByIdNg()
+>>>>>>> 1-php-202109/2-groups/10-J/master-phpunit
     {
         $userModel = new UserModel();
         $id = -1;
