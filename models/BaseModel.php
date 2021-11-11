@@ -1,6 +1,6 @@
 <?php
 require_once 'configs/database.php';
-
+require_once 'iModel.php';
 abstract class BaseModel implements iModel
 {
     // Database connection
