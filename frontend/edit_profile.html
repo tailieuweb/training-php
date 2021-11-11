@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,shrink-to-fit=no">
+	<!-- Option Css/Bootstrap -->
+	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+	<link href="https://unpkg.com/bootstrap@4.0.0/dist/css/bootstrap.css" rel="stylesheet" />
+	<link href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="./css/profile_edit.css">
+	<!-- End css -->
+
+	<title>Profile Edit User</title>
+</head>
+
+<body>
+	<div class="container">
+		<div class="main-body">
+			<!-- header inner -->
+			<div class="header">
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+							<div class="full">
+								<div class="center-desk">
+									<div class="logo">
+										<a href="index.html"><img src="images/logo.png" alt="#" /></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+							<nav class="navigation navbar navbar-expand-md navbar-dark ">
+								<button class="navbar-toggler" type="button" data-toggle="collapse"
+									data-target="#navbarsExample04" aria-controls="navbarsExample04"
+									aria-expanded="false" aria-label="Toggle navigation">
+									<span class="navbar-toggler-icon"></span>
+								</button>
+								<div class="collapse navbar-collapse" id="navbarsExample04">
+									<ul class="navbar-nav mr-auto">
+										<li class="nav-item">
+											<a class="nav-link" href="index.html">Home</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="search.html">Hotel</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#about">About</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#contact">Contact us</a>
+										</li>
+										<li class="nav-item dropdown">
+											<a class="dropdown-toggle nav-link" href="#" type="button" id="language"
+												data-toggle="collapse" data-target="#navbarsExample05"
+												aria-controls="navbarsExample05" aria-expanded="false"
+												aria-label="Toggle navigation"> English</a>
+											<div class="dropdown-menu" aria-labelledby="language" id="navbarsExample05">
+												<a class="dropdown-item"
+													onclick="doGTranslate('en|en');document.querySelector('#language').textContent='English';"
+													href="#">
+													<span class="flag-icon flag-icon-us"></span> English</a>
+												<a class="dropdown-item"
+													onclick="doGTranslate('en|ja');document.querySelector('#language').textContent='Japan'"
+													href="#"><span class="flag-icon flag-icon-jp"></span> Japanese</a>
+												<a class="dropdown-item"
+													onclick="doGTranslate('en|vi');document.querySelector('#language').textContent='Việt Nam'"
+													href="#"><span class="flag-icon flag-icon-vn"></span> Vietnamese</a>
+												<a class="dropdown-item"
+													onclick="doGTranslate('en|zh-CN');document.querySelector('#language').textContent='Chinese'"
+													href="#"><span class="flag-icon flag-icon-cn"></span> Chinese</a>
+											</div>
+											<div id="google_translate_element2"></div>
+										</li>
+									</ul>
+									<div class="sign_btn"><a href="#">Sign in</a></div>
+								</div>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end header inner -->
+			<!-- Change Information User -->
+			<div class="row edit-change-sm">
+				<div class="col-lg-4">
+					<div class="card">
+						<div class="card-body">
+							<div class="d-flex flex-column align-items-center text-center">
+								<img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin"
+									class="rounded-circle p-1 bg-primary" width="110">
+								<div class="mt-3">
+									<h4>Van Anh</h4>
+									<p class="text-secondary mb-1">0987654321</p>
+									<p class="text-muted font-size-sm">Quan 9, Thanh pho Ho Chi Minh</p>
+									<button class="btn btn-outline-primary"
+										style="background-color:#FF9900; color: #fff;">Home</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-8">
+					<div class="card">
+						<div class="card-body">
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Full Name</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<input type="text" class="form-control" value="Van Anh">
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Email</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<input type="text" class="form-control" value="admin@admin.com">
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Phone</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<input type="text" class="form-control" value="0987654321">
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Date Of Birth</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<input type="text" class="form-control" value="23/10/2002">
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Address</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<input type="text" class="form-control" value="Quan9, Thanh Pho Ho Chi Minh">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3"></div>
+								<div class="col-sm-9 text-secondary">
+									<input type="button" class="btn btn-primary px-4" value="Save">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End change User -->
+		</div>
+	</div>
+	<!-- carousel-slider -->
+	<div class="container">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner row w-100 mx-auto">
+				<div class="carousel-item col-md-4 active">
+					<div class="card" style="width: 18rem;">
+						<img class="card-img-top" src="./images/person_1.jpg" alt="Card image cap">
+						<div class="card-body">
+							<h4 class="card-title">Card 1</h4>
+							<p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis impedit, ratione numquam obcaecati dignissimos quis!</p>
+							<p class="card-text">
+								<a href="#" class="btn btn-primary">See</a>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item col-md-4">
+					<div class="card" style="width: 18rem;">
+						<img class="card-img-top" src="./images/person_1.jpg" alt="Card image cap">
+						<div class="card-body">
+							<h4 class="card-title">Card 2</h4>
+							<p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, illum voluptatibus atque explicabo nostrum earum!</p>
+							<p class="card-text">
+								<a href="#" class="btn btn-primary">See</a>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item col-md-4">
+					<div class="card" style="width: 18rem;">
+						<img class="card-img-top" src="./images/person_1.jpg" alt="Card image cap">
+						<div class="card-body">
+							<h5 class="card-title">Card title3</h5>
+							<p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, illum voluptatibus atque explicabo nostrum earum!</p>
+							<a href="#" class="btn btn-primary">See</a>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item col-md-4">
+					<div class="card" style="width: 18rem;">
+						<img class="card-img-top" src="./images/person_1.jpg" alt="Card image cap">
+						<div class="card-body">
+							<h5 class="card-title">Card title4</h5>
+							<p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, illum voluptatibus atque explicabo nostrum earum!</p>
+							<a href="#" class="btn btn-primary">See</a>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item col-md-4">
+					<div class="card" style="width: 18rem;">
+						<img class="card-img-top" src="./images/person_1.jpg" alt="Card image cap">
+						<div class="card-body">
+							<h5 class="card-title">Card title5</h5>
+							<p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, illum voluptatibus atque explicabo nostrum earum!</p>
+							<a href="#" class="btn btn-primary">See</a>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item col-md-4">
+					<div class="card" style="width: 18rem;">
+						<img class="card-img-top" src="./images/person_1.jpg" alt="Card image cap">
+						<div class="card-body">
+							<h5 class="card-title">Card title6</h5>
+							<p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, illum voluptatibus atque explicabo nostrum earum!</p>
+							<a href="#" class="btn btn-primary">See</a>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item col-md-4">
+					<div class="card" style="width: 18rem;">
+						<img class="card-img-top" src="./images/person_1.jpg" alt="Card image cap">
+						<div class="card-body">
+							<h5 class="card-title">Card title7</h5>
+							<p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, illum voluptatibus atque explicabo nostrum earum!</p>
+							<a href="#" class="btn btn-primary">See</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-12 text-center mt-4">
+						<a class="btn btn-outline-secondary mx-1 prev" href="javascript:void(0)" title="Previous">
+							<i class="fa fa-lg fa-chevron-left"></i>
+						</a>
+						<a class="btn btn-outline-secondary mx-1 next" href="javascript:void(0)" title="Next">
+							<i class="fa fa-lg fa-chevron-right"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Optional JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="https://unpkg.com/popper.js@1.12.9/dist/umd/popper.js"></script>
+	<script src="https://unpkg.com/bootstrap@4.0.0/dist/js/bootstrap.js"></script>
+	<script src="./js/profile.js"></script>
+	<!-- add script -->
+</body>
+
+</html>
