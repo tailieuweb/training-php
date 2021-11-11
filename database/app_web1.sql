@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th9 25, 2021 lúc 08:37 AM
--- Phiên bản máy phục vụ: 10.4.13-MariaDB
--- Phiên bản PHP: 7.4.9
+-- Host: 127.0.0.1:3306
+-- Generation Time: Oct 24, 2021 at 01:18 AM
+-- Server version: 5.7.26
+-- PHP Version: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,55 +19,60 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `app_web1`
+-- Database: `app_web1`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `types`
+-- Table structure for table `banks`
 --
 
-DROP TABLE IF EXISTS `types`;
-CREATE TABLE IF NOT EXISTS `types` (
+DROP TABLE IF EXISTS `banks`;
+CREATE TABLE IF NOT EXISTS `banks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name_type` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `cost` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `types`
+-- Dumping data for table `banks`
 --
 
-INSERT INTO `types` (`id`, `name_type`) VALUES
-(1, 'admin'),
-(2, 'user'),
-(3, 'guest');
+INSERT INTO `banks` (`id`, `user_id`, `cost`) VALUES
+(1, 1, 1111),
+(2, 2, 1111),
+(3, 3, 1111),
+(4, 4, 1111),
+(5, 5, 1111);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `users`
+-- Table structure for table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
+  `name` text NOT NULL,
   `fullname` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `type` int(11) NOT NULL,
+  `type` varchar(100) NOT NULL,
   `password` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
--- Đang đổ dữ liệu cho bảng `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`) VALUES
-(11, 'Trung Hiáº¿u', 'hello', 'nguyenhieutrung0412@gmail.com', 1, '1'),
-(12, 'a', 'Trung', 'admin@gmail.com', 2, '1');
+(2, 'test2', '', '', '', 'ad0234829205b9033196ba818f7a872b'),
+(3, 'hackerasfasf', '', '', '', '6a204bd89f3c8348afd5c77c717a097a'),
+(5, 'test3', 'test3', 'test3@gmail.com', 'user', '8ad8757baa8564dc136c1e07507f4a98'),
+(6, 'test4', 'test4', 'teo@gmail.com', 'admin', '86985e105f79b95d6bc918fb45ec7727');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

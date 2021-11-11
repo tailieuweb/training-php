@@ -1,44 +1,37 @@
 <?php
-
-require_once 'BaseModel.php';
-
-class BankModel extends BaseModel{
-
-    // protected static $_instance;
-    
-    public static function getInstance() {
-        if (self::$_bank_instance !== null){
-            return self::$_bank_instance;
+require_once 'models/BaseModel.php';
+class BankModel extends BaseModel
+{
+    //method getInstance() 
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
+            return self::$_instance;
         }
-        self::$_bank_instance = new self();
-        return self::$_bank_instance;
+        self::$_instance = new self();
+        return self::$_instance;
     }
 
-    //Create token for user
-    public function createToken(){
-        $token = $this->get_token_value();
-        return $token;
+    public function insertBank($input)
+    {
+        $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
+            "'" . $input['user_id'] . "', '" . $input['cost'] . "')";
+
+        $user = $this->insert($sql);
+
+        return $user;
     }
 
-    //Get bank
-    public function getBanks($params = []) {
-        //Keyword
-        if (!empty($params['keyword'])) {
-            $key = str_replace('"','',$params['keyword']);
-            $sql = 'SELECT * FROM banks WHERE cost LIKE "%' . $key .'%"';
+    public function updateBank($input)
+    {
+        $sql = 'UPDATE banks SET 
+                 user_id = ' . $input['user_id'] . ', 
+                 cost = ' . $input['cost'] . '
+                WHERE id = ' . $input['id'];
 
-            //Keep this line to use Sql Injection
-            //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
-            $banks = self::$_connection->multi_query($sql);
-        } else {
+        $bank = $this->update($sql);
 
-            $sql = 'SELECT * FROM banks join users on users.id = banks.user_id';
-            $banks = $this->select($sql);
-
-        }
-
-        return $banks;
+        return $bank;
     }
 
     /**
@@ -46,54 +39,37 @@ class BankModel extends BaseModel{
      * @param $id
      * @return mixed
      */
-    public function deleteBankById($id, $token) {
-        $sql = 'DELETE FROM banks WHERE bank_id = '.$id;
-        return $this->delete($sql, $token);
-
+    public function deleteBankById($id)
+    {
+        $sql = 'DELETE FROM banks WHERE id = ' . $id;
+        return $this->delete($sql);
     }
 
-    //Find bank by id
-    public function findBankById($id) {
-        $sql = 'SELECT * FROM banks WHERE bank_id = '.$id;
+   
+    public function findBankById($id)
+    {
+        $sql = 'SELECT * FROM banks WHERE id = ' . $id;
         $bank = $this->select($sql);
 
         return $bank;
     }
-
-    public function getUser() {
-        $sql = 'SELECT * FROM users';
-        $user = $this->select($sql);
-
-        return $user;
-    }
     /**
-     * Update user
-     * @param $input
-     * @return mixed
+     * Search users
+     * @param array $params
+     * @return array
      */
-    public function insertBank($input) {
-        $sql = "INSERT INTO `banks` (`user_id`,`cost`) VALUES (" .
-        "'" . $input['id'] . "', '".$input['cost']."')";
+    public function getBanks($params = [])
+    {
+        //Keyword
+        if (!empty($params['keyword'])) {
+            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] . '%"';
+        } else {
+            $sql = 'SELECT * FROM banks';
+        }
 
-        $bank = $this->insert($sql);
-        return $bank;
-    }
-    /**
-     * Update user
-     * @param $input
-     * @return mixed
-     */
-    public function updateBank($input) {
-        $sql = 'UPDATE banks SET 
-              
-                 user_id = "' . $input['user_id'] .'", 
-                
-               
-                 cost="'. $input['cost'] .'"
-                WHERE bank_id = ' . $input['bank_id'];
-        $bank = $this->update($sql);
+        $users = $this->select($sql);
 
-        return $bank;
+        return $users;
     }
 
 }

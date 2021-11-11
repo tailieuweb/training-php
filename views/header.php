@@ -6,7 +6,6 @@ if(!empty($_SESSION['id'])) {
 
 $keyword = '';
 if(!empty($_GET['keyword'])) {
-    $keywordchanges = htmlentities($_GET['keyword'], ENT_QUOTES, "UTF-8");
     $keyword = $_GET['keyword'];
 }
 ?>
@@ -27,7 +26,6 @@ if(!empty($_GET['keyword'])) {
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="form_user.php">Add new user</a></li>
-                    <li><a href="form_bank.php">Add new bank</a></li>
                 </ul>
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
