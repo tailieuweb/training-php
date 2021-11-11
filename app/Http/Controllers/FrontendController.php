@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\Users_web;
+use App\Models\User;
 
 use Illuminate\Support\Facades\Redirect;
 
@@ -54,15 +55,22 @@ class FrontendController extends Controller
         return View('Frontend.layout.Account.profile');
     }
     public function postLogin(Request $request){
-        $arr = [
-            'email' => $request->email,
+        //Query SQL injection and prevent --in login
+        $user = User::whereRaw("username = :email and password = :password")
+        ->setBindings([
+            //'email' =>'required|unique:email,' .$request->email,
+            'email' =>$request->email,
             'password' => $request->password,
-        ];
-       
+        ])->first();
+        $array= ['email' =>$request->email,
+        'password' => $request->password,];
+        $user = $array;
+        //var_dump($user); die();
         // $check = DB::table('users_web')
         // ->where('username','=',$request['username'])
         // ->where('password','=',md5($request['password']))->first();        
         if(Auth::attempt(['email' =>  $request->email, 'password' => $request->password]))
+        // if($user == true)
         {
             $admin_role = Auth::user()->role;
             $very = Auth::user()->very_email;
@@ -80,9 +88,12 @@ class FrontendController extends Controller
                 }
                
             }
+            // return  $user;
+            // var_dump($user); die();
         }
         else{
             return Redirect::route('frontend.login.index');
+            //return "ERROR!!";
         }
 
        
@@ -230,6 +241,7 @@ class FrontendController extends Controller
             $data = DB::table('hotel')
                 ->where('name', 'LIKE', "%{$query}%")->orWhere('hotel_info', 'LIKE', "%{$query}%")
                 ->get();
+                
             // $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
             foreach ($data as $row) {
                 $output = '
