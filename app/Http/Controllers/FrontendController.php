@@ -174,6 +174,7 @@ class FrontendController extends Controller
     public function getDetailHotel($id)
     {
         $this->AuthLogin();
+        $id = substr($id,9);
         $all_hotel = DB::table('hotel')
         ->join('location','location.location_id','=','hotel.location')
         ->where('hotel.hotel_id',$id)
@@ -257,14 +258,19 @@ class FrontendController extends Controller
     /**
      * Payment hotel by id
      */
-    public function paymentHotelById($id){
+    public function paymentHotelById($id,Request $request){
         $this->AuthLogin();
         $hotel = DB::table('hotel')
         ->join('location','location.location_id','=','hotel.location')
         ->select('hotel.*','location.*')
         ->where('hotel_id', $id)->get();
-
-        return view('frontend.layout.payment')->with('hotel', $hotel);
+        $data = array();
+        $data['date_begin'] = $request->date_begin;
+        $data['date_exit'] = $request->date_exit;
+        $data['person'] = $request->person;
+        
+        
+        return view('frontend.layout.payment')->with('hotel', $hotel)->with('data', $data);
     }
     public function payment_succsess($id){
         $this->AuthLogin();
