@@ -1,18 +1,17 @@
 <?php
-// require_once 'models/UserModel.php';
-require_once 'models/FactoryPattern.php';
-require_once 'models/UsageModelDecorator.php';
-// $bankModel = new BankModel();
-$factory = new FactoryPattern();
-$userModel = new UsageModelDecorator($factory->make('user'));
-// $userModel = new UserModel();
+require_once 'models/UserModel.php';
+$userModel = new UserModel();
+//Require model Repository và tạo mới
+require_once 'design-pattern/repository/UseRepository.php';
+$repository = $userModel;
 
 $user = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $userModel->deleteData($id);//Delete existing user
+    //Sử dụng repository xoá user id
+    $user = $repository ->deleteUserById($id);
 }
 header('location: list_users.php');
 ?>
