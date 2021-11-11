@@ -46,8 +46,9 @@ class UserRepository
             $user = $this->userModel->findUserByEmail($input['email']);
             $userId = $user['id'];
             $cost = 1000;
-            $insertbank = $this->bankModel->insertBank($userId, $cost);
-            return $insertbank;
+            // $insertbank = $this->bankModel->insertBank($userId, $cost);
+            $insertUser = $this->userModel->insertUser($userId, $cost);
+            return $insertUser;
         }
     }
     /**
