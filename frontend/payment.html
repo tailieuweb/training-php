@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Search</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+        media="screen">
+    <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="css/search.css">
+    <!-- alert sweet 2 -->
+    <link rel="stylesheet" href="./css/sweetalert2.css">
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<!-- body -->
+
+<body class="main-layout">
+    <!-- loader  -->
+    <div class="loader_bg">
+        <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+    </div>
+    <!-- end loader -->
+    <!-- header -->
+    <header>
+        <!-- header inner -->
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                        <div class="full">
+                            <div class="center-desk">
+                                <div class="logo">
+                                    <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                        <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarsExample04">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="index.html">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="search.html">Hotel</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#about">About</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#contact">Contact us</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="dropdown-toggle nav-link" href="#" type="button" id="language"
+                                            data-toggle="collapse" data-target="#navbarsExample05"
+                                            aria-controls="navbarsExample05" aria-expanded="false"
+                                            aria-label="Toggle navigation"> English</a>
+                                        <div class="dropdown-menu" aria-labelledby="language" id="navbarsExample05">
+                                            <a class="dropdown-item"
+                                                onclick="doGTranslate('en|en');document.querySelector('#language').textContent='English';"
+                                                href="#">
+                                                <span class="flag-icon flag-icon-us"></span> English</a>
+                                            <a class="dropdown-item"
+                                                onclick="doGTranslate('en|ja');document.querySelector('#language').textContent='Japan'"
+                                                href="#"><span class="flag-icon flag-icon-jp"></span> Japanese</a>
+                                            <a class="dropdown-item"
+                                                onclick="doGTranslate('en|vi');document.querySelector('#language').textContent='Việt Nam'"
+                                                href="#"><span class="flag-icon flag-icon-vn"></span> Vietnamese</a>
+                                            <a class="dropdown-item"
+                                                onclick="doGTranslate('en|zh-CN');document.querySelector('#language').textContent='Chinese'"
+                                                href="#"><span class="flag-icon flag-icon-cn"></span> Chinese</a>
+                                        </div>
+                                        <div id="google_translate_element2"></div>
+                                    </li>
+                                </ul>
+                                <div class="sign_btn"><a href="#">Sign in</a></div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end header inner -->
+    <!-- end header -->
+    <!-- banner -->
+    <section class="banner_payment">
+
+    </section>
+    <!-- end banner -->
+    <section class="payment">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="info-left">
+                        <img src="images/img4.jpg" class="img-fluid" alt="">
+                        <h3>Name hotel</h3>
+                        <div class="time-rent">
+                            <div class="d-flex w-100">
+                                <div class="pick">Pick-up date:</div>
+                                <div class="info-pick">20/11/2021</div>
+                            </div>
+                            <div class="d-flex w-100 mt-1">
+                                <div class="pick">Drop-off date:</div>
+                                <div class="info-pick">25/11/2021</div>
+                            </div>
+                            <div class="d-flex w-100 mt-1">
+                                <div class="pick">Amount people:</div>
+                                <div class="info-pick">4</div>
+                            </div>
+                        </div>
+                        <div class="time-rent">
+                            <div class="d-flex w-100">
+                                <div class="pick">Cost for 1 day:</div>
+                                <div class="info-pick">50$</div>
+                            </div>
+                            <div class="d-flex w-100 mt-1">
+                                <div class="pick">Rental days:</div>
+                                <div class="info-pick">3 day</div>
+                            </div>
+                            <div class="d-flex w-100 mt-1">
+                                <div class="pick">Taxes are incurred:</div>
+                                <div class="info-pick">2$</div>
+                            </div>
+                            <div class="total d-flex w-100 mt-1">
+                                <div class="pick">Total:</div>
+                                <div class="info-pick">200$</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="info-right">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="payment-select request-form ftco-animate">
+                                    <h4 class="">Select your payment method <span style="font-size: 16px;">(Click one
+                                            option
+                                            below)</span></h4>
+                                    <div class="row payment-visa">
+                                        <div class="col">
+                                            <nav class="choose-payment">
+                                                <div class="nav nav-pills nav-underline mb-3 animated"
+                                                    data-animation="fadeInUpShorter" data-animation-delay="0.5s"
+                                                    id="myTab" role="tablist">
+                                                    <a href="#ico" class="nav-item nav-link active" id="ico-tab"
+                                                        data-toggle="tab" aria-controls="ico" aria-selected="false"
+                                                        role="tab">Credit Card</a>
+                                                    <a href="#token" class="nav-item nav-link" id="token-tab"
+                                                        data-toggle="tab" aria-controls="token" aria-selected="false"
+                                                        role="tab">
+                                                        <img src="images/vn-pay.png" alt="VN Pay" class="img-fluid"
+                                                            width="40px" height="20px">
+                                                        VNPay</a>
+                                                </div>
+                                            </nav>
+                                            <div class="tab-content" id="myTabContent">
+
+                                                <div class="tab-pane fade" id="token" role="tabpanel"
+                                                    aria-labelledby="token-tab">
+                                                    <!-- <div id="token-accordion"
+                                                        class="collapse-icon accordion-icon-rotate">
+                                                        <div class="card">
+                                                            <div class="vn-pay-item">
+                                                                <div class="row">
+                                                                    <div class="col-md-3 col-sm-4 col-576-3">
+                                                                        <img src="images/vietcombanklogo.png"
+                                                                            class="img-fluid p-2" alt="VietcomBank"
+                                                                            onclick="this.style.border = '1px solid #000';">
+                                                                    </div>
+                                                                    <div class="col-md-3 col-sm-4 col-576-3">
+                                                                        <img src="images/ACB-bank.png"
+                                                                            class="img-fluid p-2" alt="ACB">
+                                                                    </div>
+                                                                    <div class="col-md-3 col-sm-4 col-576-3">
+                                                                        <img src="images/vp-bank.png"
+                                                                            class="img-fluid p-2" alt="VP Bank">
+                                                                    </div>
+                                                                    <div class="col-md-3 col-sm-4 col-576-3">
+                                                                        <img src="images/SacombankLogo.png"
+                                                                            class="img-fluid p-2" alt="Sacombank">
+                                                                    </div>
+
+                                                                    <div class="col-md-3 col-sm-4 col-576-3">
+                                                                        <img src="images/angibak.png"
+                                                                            class="img-fluid p-2" alt="Agribank">
+                                                                    </div>
+                                                                    <div class="col-md-3 col-sm-4 col-576-3">
+                                                                        <img src="images/abbank.jpg"
+                                                                            class="img-fluid p-2" alt="ABBank">
+                                                                    </div>
+                                                                    <div class="col-md-3 col-sm-4 col-576-3">
+                                                                        <img src="images/techcombank.jpg
+                                                                    " class="img-fluid p-2" alt="Techcombank">
+                                                                    </div>
+                                                                    <div class="col-md-3 col-sm-4 col-576-3">
+                                                                        <img src="images/baovietbank-amp.jpg"
+                                                                            class="img-fluid p-2" alt="Bao Viet Bank">
+                                                                    </div>
+                                                                    <div class="col-md-3 col-sm-4 col-576-3">
+                                                                        <img src="images/SHB-bank.jpg"
+                                                                            class="img-fluid p-2" alt="SHB Bank">
+                                                                    </div>
+
+                                                                    <div class="col-md-3 col-sm-4 col-576-3">
+                                                                        <img src="images/HSBC.jpg" class="img-fluid p-2"
+                                                                            alt="HSBC Bank">
+                                                                    </div>
+                                                                    <div class="col-md-3 col-sm-4 col-576-3">
+                                                                        <img src="images/BIDV.jpg" class="img-fluid p-2"
+                                                                            alt="BIDV">
+                                                                    </div>
+                                                                    <div class="col-md-3 col-sm-4 col-576-3">
+                                                                        <img src="images/MB-bank.png"
+                                                                            class="img-fluid p-2" alt="MB Bank">
+                                                                    </div>
+                                                                    <div class="col-md-3 col-sm-4 col-576-3">
+                                                                        <img src="images/lien-viet-bank.png"
+                                                                            class="img-fluid p-2"
+                                                                            alt="Lien Viet Post Bank">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                                <div class="tab-pane fade show active" id="ico" role="tabpanel"
+                                                    aria-labelledby="ico-tab">
+                                                    <div id="ico-accordion" class="collapse-icon accordion-icon-rotate">
+                                                        <div class="card">
+                                                            <div class="credit-card-item">
+                                                                <img src="images/visa-mastercard.png" alt="Master card"
+                                                                    class="img-fluid" width="150px" height="35px">
+
+                                                                <form action="#" class="request-form ftco-animate mt-2">
+                                                                    <div id="errorText"></div>
+                                                                        <div class="form-group">
+                                                                            <label for="" class="label">Card
+                                                                                number</label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="cardNumber" required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="" class="label">Name of
+                                                                                card</label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="nameCard" required>
+                                                                        </div>
+                                                                        <div class="d-flex" style="width: 100%;">
+                                                                            <div class="form-group"
+                                                                                style="width: 59%;margin-right: 15px;">
+                                                                                <label for=""
+                                                                                    class="label">Expiration</label>
+                                                                                <input type="text" class="form-control"
+                                                                                    id="ExpCard" required>
+                                                                            </div>
+                                                                            <div class="form-group" style="width: 39%;">
+                                                                                <label for=""
+                                                                                    class="label">CCV/CVV</label>
+                                                                                <input type="text" class="form-control"
+                                                                                    id="CCVCard" required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row mt-4">
+                                                                            <div class="col-12 pay">
+                                                                                <input onclick="paymentClick()"
+                                                                                    type="submit" class="pay-now"
+                                                                                    value="Pay Now">
+
+                                                                            </div>
+                                                                        </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="info-right mt-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="payment-select request-form ftco-animate">
+                                    <h4 class="border-bt mb-3">Rental terms </h4>
+                                    <span style="color: #db6315;">By completing this booking, you agree to the Booking
+                                        Conditions, Terms and Conditions, and Privacy Policy.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- form submit -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--  footer -->
+    <footer id="contact">
+        <div class="footer mt-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="titlepage">
+                            <h2>Contact Us</h2>
+                        </div>
+                        <div class="cont">
+                            <h3>Free download Landing page Felicity Hotel </h3>
+                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                                suffered alteration in some form, by injected humour,</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>Copyright 2019 All Right Reserved By <a href="https://html.design/"> Group C</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+    <!-- Javascript files-->
+    <script src="js/translate.js"></script>
+    <script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit2"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <script src="js/plugin.js"></script>
+    <!-- sidebar -->
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script src="js/search.js"></script>
+    <!-- sweet alert click -->
+    <script src="js/sweetalert2.all.min.js"></script>
+    <script src="js/alert-payment.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script src="./js/sweetalert2.js"></script>
+</body>
+
+</html>
