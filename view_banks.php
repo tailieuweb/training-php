@@ -37,7 +37,7 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/meta.php' ?>
 </head>
 <body>
-<?php include 'views/header.php'?>
+<?php include 'views/banks.php'?>
 <div class="container">
 
     <?php if ($user || empty($id)) { ?>

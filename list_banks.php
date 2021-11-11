@@ -22,7 +22,7 @@ $banks = $bankModel->getBanks($params);
     <?php include 'views/meta.php' ?>
 </head>
 <body>
-    <?php include 'views/header.php'?>
+    <?php include 'views/banks.php'?>
     <div class="container">
         <?php if (!empty($banks)) {?>
             <div class="alert alert-warning" role="alert">

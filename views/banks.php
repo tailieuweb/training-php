@@ -25,10 +25,7 @@ if(!empty($_GET['keyword'])) {
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="list_banks.php">List Bank </a></li>
-                
-                    <li><a href="form_user.php">Add new user</a></li>
-                    
+                    <li><a href="form_bank.php">Add new bank</a></li>
 
                 </ul>
                 <form class="navbar-form navbar-left">
