@@ -15,7 +15,7 @@ $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $bankModel->findUserById($id);//Update existing user
+    $user = $bankModel->findBankById($id);//Update existing user
 }
 
 
