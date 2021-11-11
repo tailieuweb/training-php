@@ -82,9 +82,12 @@
                         {{$hotel->address}}
                     </div>
                     <div class="tm-home-box-2-container">
+                            <?php $key = rand(111111111,999999999);
+                          
+                          ?>
                         <a href="#" class="tm-home-box-2-link"><i class="fa fa-heart tm-home-box-2-icon border-right"></i></a>
-                        <a href="{{asset('')}}detail/{{$hotel->hotel_id}}" class="tm-home-box-2-link"><span class="tm-home-box-2-description">Travel</span></a>
-                        <a href="{{asset('')}}detail/{{$hotel->hotel_id}}" class="tm-home-box-2-link"><i class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
+                        <a href="{{asset('')}}detail/{{$key.$hotel->hotel_id}}" class="tm-home-box-2-link"><span class="tm-home-box-2-description">Travel</span></a>
+                        <a href="{{asset('')}}detail/{{$key.$hotel->hotel_id}}" class="tm-home-box-2-link"><i class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
                     </div>
                 </div>
             </div>
