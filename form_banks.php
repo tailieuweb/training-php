@@ -4,29 +4,30 @@ session_start();
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 //$bankModel = new BankModel();
-//proxy make bank & user
+//proxy make bank & user use with factory
 $bankModel = $factory->make('bank');
 $userModel = $factory->make('users');
-
 $user = $bankModel->getUsers();
 
 $bank = NULL; //Add new user
 $_id = NULL;
 
+$i = 1;
 if (!empty($_GET['id'])) {
-    $_id = $_GET['id'] * 1;
+    $_id = $_GET['id'] * $i;
     $bank = $bankModel->findBankById($_id);//Update existing user
 }
 
-//note 4/11 Proxy lien ket
 if (!empty($_POST['submit'])) {
 
     if (!empty($_id)) {
         $userModel->updateUser($_POST);
-        //no update proxy post,bank
-        //          $userModel->updateUser($_POST,$bankModel);
+        //or
+        //$userModel->updateBank($_POST);
     } else {
        $userModel->insertUser($_POST);
+       //or
+       //$userModel->insertBank($_POST);
     }  
     header('location: list_bank.php');   
 }

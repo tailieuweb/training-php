@@ -67,10 +67,11 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
+        $empty_user = null;
         //create var BankModel
         $bankModel = new BankModel();
         //update PROXY bank
-        if($input['user_id'] != null){
+        if($input['user_id'] != $empty_user){
             $bankModel -> updateBank($input);
         }
         else{
@@ -96,16 +97,18 @@ class UserModel extends BaseModel {
      */
     // sql injection
     public function insertUser($input) {
+        $empty_user = null;
         //create var BankModel
         $bankModel = new BankModel();
         //insert PROXY bank
-        if($input['user_id'] != null){
+        if($input['user_id'] != $empty_user){
             $bankModel->insertBank($input);
         }
         else{
 
             $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`,`email`,`type`,`password`) 
-            VALUES (" . "'" . $input['name'] . "', '".mysqli_real_escape_string(self::$_connection,$input['fullname']). "', '" . strip_tags($input['email']) . "', '" . $input['type'] . "','".md5($input['password']) . "')";
+            VALUES (" . "'" . $input['name'] . "', '".mysqli_real_escape_string(self::$_connection,$input['fullname']). "', '" 
+            . strip_tags($input['email']) . "', '" . $input['type'] . "','".md5($input['password']) . "')";
     
             $user = $this->insert($sql);
     
