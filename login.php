@@ -14,7 +14,7 @@ if (!empty($_POST['submit'])) {
         'password' => htmlentities($_POST['password'])
     ];
     $user = NULL;
-    if ($user = $userModel->auth($users['username'], $users['password'])) {
+    if ($user = $userModel->disConnetion($users['username'], $users['password'])) {
         //Login successful
         $_SESSION['id'] = $user[0]['id'];
         $_SESSION['username'] =$username;
