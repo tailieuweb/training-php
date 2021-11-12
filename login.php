@@ -3,7 +3,10 @@
 session_start();
 
 require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once 'models/FactoryPattent.php';
+// $userModel = new UserModel();
+$factory = new FactoryPattent();
+$userModel = $factory->make('user');
 
 
 if (!empty($_POST['submit'])) {
@@ -15,7 +18,6 @@ if (!empty($_POST['submit'])) {
     if ($user = $userModel->auth($users['username'], $users['password'])) {
         //Login successful
         $_SESSION['id'] = $user[0]['id'];
-
         $_SESSION['message'] = 'Login successful';
         header('location: list_users.php');
     }else {
@@ -28,14 +30,17 @@ if (!empty($_POST['submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>User form</title>
     <?php include 'views/meta.php' ?>
 </head>
+
 <body>
 <?php include 'views/header.php'?>
 
     <div class="container">
+        
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             <div class="panel panel-info" >
                 <div class="panel-heading">
@@ -84,4 +89,5 @@ if (!empty($_POST['submit'])) {
     </div>
 
 </body>
+
 </html>
