@@ -7,13 +7,6 @@ require_once 'BaseModel.php';
 class UserModel extends BaseModel
 {
 
-    public function truncateUsers()
-    {
-        $sql = 'TRUNCATE TABLE users';
-        $user = $this->query($sql);
-        return $user;
-    }
-
     public function findUserById($id)
     {
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
@@ -38,6 +31,10 @@ class UserModel extends BaseModel
      */
     public function auth($userName, $password)
     {
+        if (empty($userName) || empty($password)) {
+            return 'Error';
+        }
+
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
 
@@ -64,6 +61,10 @@ class UserModel extends BaseModel
     public function updateUser($input)
     {
         if (empty($input['id'])) {
+            return "Error";
+        }
+
+        if (is_null($input['name']) || is_null($input['fullname']) || is_null($input['email']) || is_null($input['password'] || is_null($input['type']))) {
             return "Error";
         }
 
@@ -141,6 +142,7 @@ class UserModel extends BaseModel
 
         return $a + $b;
     }
+
     public static function getInstance()
     {
         if (self::$_instance !== null) {

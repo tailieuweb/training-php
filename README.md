@@ -9,3 +9,11 @@
 
 # Features
 - CRUD user
+
+# Command Test
+```
+$ phpunnit
+$ phpunit --coverage-html coverage
+$ phpunit --testdox
+$ phpunit --filter testSumOk
+```
