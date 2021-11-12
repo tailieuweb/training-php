@@ -32,15 +32,6 @@ class UserModel extends BaseModel
 
     /**
      * Authentication user
-<<<<<<< HEAD
-     * @param $userName
-     * @param $password
-     * @return array
-     */
-    public function auth($userName, $password) {
-        $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
-=======
      * @param $
      * @param $password
      * @return array
@@ -49,8 +40,6 @@ class UserModel extends BaseModel
     {
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
->>>>>>> 2-php-202109/2-groups/8-H/master
-
         $user = $this->select($sql);
         return $user;
     }
@@ -111,18 +100,11 @@ class UserModel extends BaseModel
      * @param $input
      * @return mixed
      */
-<<<<<<< HEAD
-    public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".md5($input['password'])."')";
-=======
     public function insertUser($input)
     {
         $password = md5($input['password']);
         $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
             "'" . $input['name'] . "', '" . $input['full-name'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
->>>>>>> 2-php-202109/2-groups/8-H/master
-
         $user = $this->insert($sql);
 
         return $user;
@@ -137,11 +119,7 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
-<<<<<<< HEAD
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
-=======
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
->>>>>>> 2-php-202109/2-groups/8-H/master
 
             //Keep this line to use Sql Injection
             //Don't change
@@ -154,7 +132,6 @@ class UserModel extends BaseModel
 
         return $users;
     }
-<<<<<<< HEAD
 
     /**
      * For testing
@@ -165,6 +142,4 @@ class UserModel extends BaseModel
         return $a + $b;
     }
 }
-=======
-}
->>>>>>> 2-php-202109/2-groups/8-H/master
+
