@@ -1,12 +1,10 @@
 <?php
 require_once 'configs/database.php';
-require_once 'OptionUser.php';
 
-abstract class BaseModel implements OptionUser{
+abstract class BaseModel {
     // Database connection
     protected static $_connection;
     protected static $_instance;
-
     public function __construct() {
 
         if (!isset(self::$_connection)) {
@@ -16,6 +14,7 @@ abstract class BaseModel implements OptionUser{
                 exit();
             }
         }
+
     }
 
     /**
@@ -71,4 +70,5 @@ abstract class BaseModel implements OptionUser{
         $result = $this->query($sql);
         return $result;
     }
+
 }

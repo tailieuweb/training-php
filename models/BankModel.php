@@ -36,23 +36,49 @@ class BankModel extends BaseModel
         return $user;
         
     }
-
-    public function findUser($keyword)
+    // Find id banks pass design pattern
+    public function findBankByIdVersionTwo($id) {
+        $sql = 'SELECT * FROM banks WHERE id = '.$id;
+        $bank = $this->select($sql);
+        return $bank;
+    }
+    // Find user_id trong table banks
+    public function findUserByIdTableBank($user_id)
     {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
+        $sql = 'SELECT * FROM banks WHERE user_id = '.$user_id;
+        $bank = $this->select($sql);
+        return $bank;
+    }
+   
+    // Get id user new : 
+    public function getUserByIdNew()
+    {
+        $sql = "SELECT MAX(id) as user_id FROM users";
         $user = $this->select($sql);
-
         return $user;
     }
-
-    public function auth($userName, $password)
+    // Insers banks khi create user : 
+    public function insertUserAndBanks()
     {
-        $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
-
-        $user = $this->select($sql);
-        return $user;
+        $user = $this->getUserByIdNew();
+        $sql = "INSERT INTO `php_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
+        "'" . $user[0]['user_id'] . "','" . 500 . "')";
+        $bank = $this->insert($sql);
+        return $bank;
     }
+    public function updateBank2($input)
+    {   
+        $tong = $input['cost'] - 100;
+
+        $user = $this->getUserByIdNew();
+        $sql = 'UPDATE banks SET 
+            user_id = "' . $user[0]['user_id'] . '", 
+            cost = "' . $tong . '", 
+            WHERE id = ' . $input['id'];
+        $bank = $this->update($sql);
+        return $bank;
+    }
+    
 
     /**
      * Delete user by id
@@ -84,7 +110,7 @@ class BankModel extends BaseModel
      */
 
 
-    public function updateBank($input, $version)
+    public function updateBank($input)
     {
         $sql1 = 'SELECT id FROM banks';
         $error = false;
@@ -111,38 +137,17 @@ class BankModel extends BaseModel
             $sql = 'UPDATE banks SET 
             user_id = "' . $input['user_id'] . '", 
             cost = "' . $input['cost'] . '", 
-            version = "' . $time1 . '"
-            WHERE id = ' . $id;
-            $user = $this->update($sql);
-            return $user;
-        } else {
-            return $error;
-        }
+            WHERE id = ' . $input['id'];
+        $bank = $this->update($sql);
+        return $bank;
     }
-
-    /**
-     * Insert user
-     * @param $input
-     * @return mixed
-     */
+    
     public function insertBanks($input)
     {
-        $allBanks = $this->getAllBanks($input['user_id']);
-        if (empty($allBanks)) {
-            $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
-                "'" . $input['user_id'] . "','" . $input['cost'] . "')";
-            $bank = $this->insert($sql);
-            // $users = self::$_connection->multi_query($sql);
-            return $bank;
-        } else {
-            $cost = $allBanks[0]['cost'] + $input['cost'];
-            $sql = 'UPDATE banks SET 
-            cost = "' . $cost . '"
-            WHERE id = ' . $allBanks[0]['id'];
-
-            $user = $this->update($sql);
-            return $user;
-        }
+        $sql = "INSERT INTO `php_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
+        "'" . $input['user_id'] . "','" . $input['cost'] . "')";
+        $bank = $this->insert($sql);
+        return $bank;
     }
 
     /**
@@ -171,7 +176,7 @@ class BankModel extends BaseModel
             //Example keyword: abcef%";TRUNCATE banks;##
             $banks = self::$_connection->multi_query($sql);
         } else {
-            $sql = 'SELECT banks.id as bank_id,users.name,users.fullname,users.email,banks.cost,users.type,users.id,banks.user_id,banks.version 
+            $sql = 'SELECT banks.id as bank_id,users.name,users.fullname,users.email,banks.cost,users.type,users.id,banks.user_id
             FROM `banks`,`users` 
             WHERE banks.user_id = users.id';
             $banks = $this->select($sql);

@@ -35,6 +35,8 @@ $banks = $bankModel->getBanks($params);
                         <th scope="col">Bank ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">Fullname</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Type</th>
                         <th scope="col">Cost</th>
                         <th scope="col">Version</th>
                     </tr>
@@ -56,9 +58,8 @@ $banks = $bankModel->getBanks($params);
                             <td>
                                 <?php echo $bank['cost'] ?>
                             </td>
-
                             <td>
-                                <a href="form_bank.php?id=<?php echo rand(100, 999) . md5($bank['bank_id'] . "chuyen-de-web-1") . rand(100, 999) ?>">
+                                <a href="form_bank.php?id=<?= $bank['bank_id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <a href="view_bank.php?id=<?php echo rand(100, 999) . md5($bank['bank_id'] . "chuyen-de-web-1") . rand(100, 999)  ?>">

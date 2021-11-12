@@ -108,7 +108,7 @@ class UserModel extends BaseModel
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '"
                 ,`fullname`="' . $input['full-name'] . '"
                 ,email="' . $input['email'] . '"
-                ,type="' . $input['type'] . '"
+                ,type="' . $input['type'] . '"      
                 ,password="' . md5($input['password']) . '"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
@@ -166,7 +166,7 @@ class UserModel extends BaseModel
     public function insertUser($input)
     {
         $password = md5($input['password']);
-        $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
+        $sql = "INSERT INTO `php_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
             "'" . $input['name'] . "', '" . $input['full-name'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
 
         $user = $this->insert($sql);
@@ -224,6 +224,7 @@ class UserModel extends BaseModel
         return $users;
     }
 
+
    
   
 
@@ -234,15 +235,23 @@ class UserModel extends BaseModel
         }
         return $a + $b;
     }
-    public static function getInstance()
+
+    //Just find user_id and just id with bank
+     public function findTwoTable($id)
     {
-        if (self::$_instance !== null) {
+        $sql = 'SELECT * FROM users , banks WHERE id = '.$id.' AND banks.id = '.$id;
+        $user = $this->select($sql);
+        return $user;
+    }
+    public static function getInstance(){
+        if(self::$_instance != null){
 
             return self::$_instance;
         }
         self::$_instance = new self();
         return self::$_instance;
     }
+
 
     // Get id user new : tam
     public function getUserByIdNew()
