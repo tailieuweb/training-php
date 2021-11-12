@@ -4,11 +4,11 @@ require_once 'models/BaseModel.php';
 
 class Repository extends BaseModel {
     
-    public function insertRepository($data)
+    public function insertRepository($data,$bank)
     {
         //Application pass Factory
         $factory = new FactoryPattent();
-        $insertUser = $factory->make('user')->insertUser($data);
+        $insertUser = $factory->make('user')->insertUserDecorator($data,$bank);
         // Check cost rong khong.
         // Neu rong thì them vao khi tao user moi
         if(empty($data['cost'])) {

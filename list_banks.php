@@ -61,7 +61,7 @@ $banks = $bankModel->getBanks($params);
                                 <?php echo $bank['cost'] ?>
                             </td>
                             <td>
-                                <a href="form_bank.php?id=<?= $bank['bank_id'] ?>">
+                                <a href="form_bank.php?id=<?= rand(100, 999) . md5($bank['bank_id'] . "chuyen-de-web-1") . rand(100, 999) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <a href="view_bank.php?id=<?php echo rand(100, 999) . md5($bank['bank_id'] . "chuyen-de-web-1") . rand(100, 999)  ?>">

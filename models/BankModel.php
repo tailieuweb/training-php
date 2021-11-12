@@ -5,7 +5,7 @@ require_once 'BaseModel.php';
 class BankModel extends BaseModel
 {
     protected static $_instance;
-    
+
     public function getUserID()
     {
         return $this->user_id;
@@ -34,22 +34,22 @@ class BankModel extends BaseModel
             }
         }
         return $user;
-        
     }
     // Find id banks pass design pattern
-    public function findBankByIdVersionTwo($id) {
-        $sql = 'SELECT * FROM banks WHERE id = '.$id;
+    public function findBankByIdVersionTwo($id)
+    {
+        $sql = 'SELECT * FROM banks WHERE id = ' . $id;
         $bank = $this->select($sql);
         return $bank;
     }
     // Find user_id trong table banks
     public function findUserByIdTableBank($user_id)
     {
-        $sql = 'SELECT * FROM banks WHERE user_id = '.$user_id;
+        $sql = 'SELECT * FROM banks WHERE user_id = ' . $user_id;
         $bank = $this->select($sql);
         return $bank;
     }
-   
+
     // Get id user new : 
     public function getUserByIdNew()
     {
@@ -62,12 +62,12 @@ class BankModel extends BaseModel
     {
         $user = $this->getUserByIdNew();
         $sql = "INSERT INTO `php_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
-        "'" . $user[0]['user_id'] . "','" . 500 . "')";
+            "'" . $user[0]['user_id'] . "','" . 500 . "')";
         $bank = $this->insert($sql);
         return $bank;
     }
     public function updateBank2($input)
-    {   
+    {
         $tong = $input['cost'] - 100;
 
         $user = $this->getUserByIdNew();
@@ -78,7 +78,7 @@ class BankModel extends BaseModel
         $bank = $this->update($sql);
         return $bank;
     }
-    
+
 
     /**
      * Delete user by id
@@ -89,7 +89,7 @@ class BankModel extends BaseModel
     {
         $sql1 = 'SELECT id FROM banks';
         $allUser = $this->select($sql1);
-        
+
         $_id = $id;
         $id_start = substr($_id, 3);
         $id_end = substr($id_start, 0, -3);
@@ -110,12 +110,13 @@ class BankModel extends BaseModel
      */
 
 
-    public function updateBank($input)
+    public function updateBank($input, $version)
     {
         $sql1 = 'SELECT id FROM banks';
         $error = false;
         $allUser = $this->select($sql1);
         $id = 0;
+        $userById = null;
 
         $_id = $input['id'];
         $id_start = substr($_id, 3);
@@ -123,9 +124,7 @@ class BankModel extends BaseModel
 
         foreach ($allUser as $key) {
             $a = md5($key['id'] . "chuyen-de-web-1");
-            $md5_start = substr($a, 3);
-            $md5_end = substr($md5_start, 0, -3);
-            if ($md5_end == $id_end) {
+            if ($a == $id_end) {
                 $id = $key['id'];
                 $sql = 'SELECT * FROM banks WHERE id = ' . $key['id'];
                 $userById = $this->select($sql);
@@ -136,16 +135,18 @@ class BankModel extends BaseModel
             $time1 = (int)$oldTime + 1;
             $sql = 'UPDATE banks SET 
             user_id = "' . $input['user_id'] . '", 
-            cost = "' . $input['cost'] . '", 
-            WHERE id = ' . $input['id'];
-        $bank = $this->update($sql);
-        return $bank;
+            cost = "' . $input['cost'] . '",
+            version = "'.$time1.'"
+            WHERE id = ' . $id;
+            $bank = $this->update($sql);
+            return $bank;
+        }
     }
-    
+
     public function insertBanks($input)
     {
-        $sql = "INSERT INTO `php_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
-        "'" . $input['user_id'] . "','" . $input['cost'] . "')";
+        $sql = "INSERT INTO `tranning_php`.`banks` (`user_id`, `cost` ) VALUES (" .
+            "'" . $input['user_id'] . "','" . $input['cost'] . "')";
         $bank = $this->insert($sql);
         return $bank;
     }

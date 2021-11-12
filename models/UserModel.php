@@ -6,25 +6,17 @@ class UserModel extends BaseModel
 {
     protected static $_instance;
 
-    
+
     public function findUserByIdNew($id)
     {
-        
+
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
-
     }
 
-    public function insertUserDecorator($data,$bank)
-    {   
-        $this->insertUser($data);
-        $lastUserId = $this->lastUserId();
-        $inputBank = [
-            'user_id' => $lastUserId,
-            'cost' => $bank->getCost()
-        ];
-        $d = $bank->insertBanks($inputBank);
-        return $d;
+    public function insertUserDecorator($data, $bank)
+    {
+        return  $this->insertUser($data);
     }
 
     public function lastUserId()
@@ -72,10 +64,10 @@ class UserModel extends BaseModel
      * @return mixed
      */
     public function deleteUserById($id)
-    {   
+    {
         $isAuth = $this->getUsers();
         foreach ($isAuth as $item) {
-            if (md5($item['id']) == $id) {
+            if (md5($item['id'] . "chuyen-de-web-1") == $id) {
                 $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
                 return $this->delete($sql);
             }
@@ -83,7 +75,7 @@ class UserModel extends BaseModel
     }
     // Delete user by id : Step 2 cuar tam
     public function dropUserById($id)
-    {   
+    {
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
     }
@@ -92,8 +84,8 @@ class UserModel extends BaseModel
      * @param $id
      * @return mixed
      */
- 
-    
+
+
 
 
     /**
@@ -113,7 +105,6 @@ class UserModel extends BaseModel
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
         return $user;
-        
     }
 
     public function updateUser($input, $version)
@@ -126,7 +117,6 @@ class UserModel extends BaseModel
         $error = false;
         $allUser = $this->select($sql1);
         $id = 0;
-
         foreach ($allUser as $key) {
             $md5 = md5($key['id'] . "chuyen-de-web-1");
             $md5_start = substr($md5, 3);
@@ -138,7 +128,6 @@ class UserModel extends BaseModel
                 $userById = $this->select($sql);
             }
         }
-
         $oldTime = $userById[0]['version'] . "chuyen-de-web-1";
 
         if (md5($oldTime) == $version) {
@@ -166,8 +155,8 @@ class UserModel extends BaseModel
     public function insertUser($input)
     {
         $password = md5($input['password']);
-        $sql = "INSERT INTO `php_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
-            "'" . $input['name'] . "', '" . $input['full-name'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
+        $sql = "INSERT INTO `tranning_php`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
+            "'" . $input['name'] . "', '" . $input['fullname'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
 
         $user = $this->insert($sql);
 
@@ -198,8 +187,8 @@ class UserModel extends BaseModel
         if (!empty($params['keyword'])) {
 
             $mysqli = mysqli_connect("localhost", "root", "", "app_web1");
-            $key = isset($params['keyword'])?(string)(int)$params['keyword']:false;
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . mysqli_real_escape_string($mysqli,$key) . '%"';
+            $key = isset($params['keyword']) ? (string)(int)$params['keyword'] : false;
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . mysqli_real_escape_string($mysqli, $key) . '%"';
             // $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
 
             $params['keyword'] = str_replace(
@@ -225,8 +214,8 @@ class UserModel extends BaseModel
     }
 
 
-   
-  
+
+
 
     public function sumb($a, $b)
     {
@@ -237,14 +226,15 @@ class UserModel extends BaseModel
     }
 
     //Just find user_id and just id with bank
-     public function findTwoTable($id)
+    public function findTwoTable($id)
     {
-        $sql = 'SELECT * FROM users , banks WHERE id = '.$id.' AND banks.id = '.$id;
+        $sql = 'SELECT * FROM users , banks WHERE id = ' . $id . ' AND banks.id = ' . $id;
         $user = $this->select($sql);
         return $user;
     }
-    public static function getInstance(){
-        if(self::$_instance != null){
+    public static function getInstance()
+    {
+        if (self::$_instance != null) {
 
             return self::$_instance;
         }
@@ -258,8 +248,7 @@ class UserModel extends BaseModel
     {
         $sql = "SELECT MAX(id) as user_id FROM users";
         $user = $this->select($sql);
-        
+
         return $user;
     }
-
 }

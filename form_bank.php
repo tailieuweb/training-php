@@ -36,7 +36,7 @@ if (!empty($_GET['id'])) {
 if (!empty($_POST['submit'])) {
     $version = $_POST['version'];
     if (!empty($id_end)) {
-        $a = $bankModel->updateBank($_POST, $version);
+        $a = $bankModel->updateBank($_POST, $_POST['version']);
         if ($a == false) {
             $a = "Updating Error! Pleade Try Again";
         } else {
@@ -76,7 +76,7 @@ if (!empty($_POST['submit'])) {
 
         <form method="POST">
             <input type="hidden" name="id" value="<?php echo $_id ?>">
-           
+            <input type="hidden" name="version" value="<?php echo md5($bank[0]['version']."chuyen-de-web-1");  ?>">
             <div class="form-group">
                 <label for="type">Type</label>
                 <select name="user_id">
