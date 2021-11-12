@@ -30,11 +30,9 @@ if (!empty($_GET['id'])) {
 }
 
 if (!empty($_POST['submit'])) {
-    // 
     $version = $_POST['version'];
     if (!empty($id_end)) {
         $a = $bankModel->updateBank($_POST, $version);
-        
         if ($a == false) {
             $a = "Updating Error! Pleade Try Again";
         } else {

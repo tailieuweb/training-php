@@ -1,5 +1,6 @@
 <?php
-require_once 'models/UserModel.php';
+// Start the session
+session_start();
 require_once 'models/FactoryPattent.php';
 require_once 'models/Repository.php';
 $factory = new FactoryPattent();
