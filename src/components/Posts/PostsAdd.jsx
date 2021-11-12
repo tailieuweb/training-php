@@ -1,5 +1,9 @@
+import { useTranslation } from "react-i18next";
+
 export default function PostsAdd(props) {
   const { postSelected, onChange, onAddPost } = props;
+  const { t } = useTranslation("common");
+
   return (
     <div
       className="modal fade"
@@ -55,7 +59,7 @@ export default function PostsAdd(props) {
               ></textarea>
             </div>
             <small className="card-text d-block mt-3">
-              Share with us your own stories and others.
+              {t("app.post.newDescription")}
             </small>
           </div>
           <div className="modal-footer">

@@ -1,9 +1,60 @@
 {
     "app.lang": "Ngôn Ngữ",
-    "app.lang.english": "English",
+    "app.lang.english": "Tiếng Anh",
     "app.lang.vietnamese": "Tiếng Việt",
-    
-    "app.post.new": "Tạo Mới Confessions",
-    "app.post.newDescription": "Chia sẻ với chúng tôi những câu chuyện của riêng bạn và những người khác.",
-    "app.post.newSuggestLogin": "Vui lòng đăng nhập để có thể chỉnh sửa bài viết hoặc bạn có thể đăng bài ẩn danh."
+
+    "app.common.unknown": "Ẩn Danh",
+    "app.common.profile": "Thông Tin Của Tôi",
+
+    "app.auth.signOut": "Đăng Xuất",
+    "app.auth.signIn": "Đăng Nhập",
+    "app.auth.signInTitle": "Đăng Nhập",
+    "app.auth.signInInputEmail": "Email",
+    "app.auth.signInInputEmailPlaceholder": "Nhập email của bạn...",
+    "app.auth.signInInputPassword": "Mật Khẩu",
+    "app.auth.signInInputPasswordPlaceholder": "Nhập mật khẩu của bạn...",
+
+    "app.auth.signUp": "Đăng Ký",
+    "app.auth.signUpUsername": "Tên Người Dùng",
+    "app.auth.signUpInputEmail": "Email",
+    "app.auth.signUpInputEmailPlaceholder": "Nhập email của bạn...",
+    "app.auth.signUpInputPassword": "Mật Khẩu",
+    "app.auth.signUpInputPasswordPlaceholder": "Nhập mật khẩu của bạn...",
+    "app.auth.signUpInputRePassword": "Nhập Lại Mật Khẩu",
+    "app.auth.signUpInputRePasswordPlaceholder": "Xác nhận mật khẩu của bạn...",
+    "app.auth.signUpDescription": "Bằng cách nhấp vào nút đăng ký, bạn đồng ý với ",
+    "app.auth.signUpDescriptionAnd": " và ",
+    "app.auth.signUpDescriptionTerm": "điều khoản và điều kiện",
+    "app.auth.signUpDescriptionPolicy": "chính sách bảo mật",
+
+    "app.auth.buttonClose": "Đóng",
+    "app.auth.buttonSignIn": "Đăng Nhập",
+    "app.auth.buttonSignUp": "Đăng Ký",
+
+    "app.post.newTitle": "Tạo Mới Confession",
+    "app.post.newDescription": "Chia sẻ với chúng tôi câu chuyện của bạn và những người khác.",
+    "app.post.newSuggestLogin": "Vui lòng đăng nhập để có thể chỉnh sửa bài viết hoặc bạn có thể đăng bài ẩn danh.",
+    "app.post.newButton": "Tạo Mới Confession",
+    "app.post.newButtonClose": "Đóng",
+    "app.post.newButtonSubmit": "Đăng Bài Viết",
+    "app.post.newInputTitle": "Tiêu Đề",
+    "app.post.newInputTitlePlaceholder": "Nhập một tiêu đề tuyệt vời...",
+    "app.post.newInputContent": "Nội Dung",
+    "app.post.newInputContentPlaceholder": "Chia sẻ với chúng tôi câu chuyện của bạn và những người khác.",
+
+    "app.post.editTitle": "Chỉnh Sửa Confession",
+    "app.post.editDescription": "Chia sẻ với chúng tôi câu chuyện của bạn và những người khác.",
+    "app.post.editButton": "Sửa",
+    "app.post.editButtonClose": "Đóng",
+    "app.post.editButtonSubmit": "Sửa Bài Viết",
+    "app.post.editInputTitle": "Tiêu Đề",
+    "app.post.editInputTitlePlaceholder": "Nhập một tiêu đề tuyệt vời..",
+    "app.post.editInputContent": "Nội Dung",
+    "app.post.editInputContentPlaceholder": "Chia sẻ với chúng tôi câu chuyện của bạn và những người khác.",
+
+    "app.post.deleteTitle": "Xóa Confession",
+    "app.post.deleteDescription": "Không thể khôi phục hành động này bằng bất cứ thứ gì. Bạn có muốn xóa confession này không?",
+    "app.post.deleteButton": "Xóa",
+    "app.post.deleteButtonClose": "Đóng",
+    "app.post.deleteButtonSubmit": "Xóa Bài Viết"
 }

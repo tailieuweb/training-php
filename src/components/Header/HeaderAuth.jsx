@@ -36,7 +36,7 @@ export default function HeaderAuth(props) {
                 onClick={onLogout}
                 style={{ cursor: "pointer" }}
               >
-                <i className="fa fa-sign-out" aria-hidden="true"></i>
+                <i className="fa fa-sign-out" aria-hidden="true" style={{marginRight: "0.75em"}}></i>
                 Logout
               </a>
             </li>

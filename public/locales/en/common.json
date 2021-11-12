@@ -1,9 +1,60 @@
 {
     "app.lang": "Languages",
     "app.lang.english": "English",
-    "app.lang.vietnamese": "Tiếng Việt",
+    "app.lang.vietnamese": "Vietnamese",
 
-    "app.post.new": "New Your Confessions",
+    "app.common.unknown": "Unknown User",
+    "app.common.profile": "My Profile",
+
+    "app.auth.signOut": "Sign Out",
+    "app.auth.signIn": "Sign In",
+    "app.auth.signInTitle": "Sign In",
+    "app.auth.signInInputEmail": "Email",
+    "app.auth.signInInputEmailPlaceholder": "Type your email...",
+    "app.auth.signInInputPassword": "Password",
+    "app.auth.signInInputPasswordPlaceholder": "Type your password...",
+    
+    "app.auth.signUp": "Sign Up",
+    "app.auth.signUpUsername": "Username",
+    "app.auth.signUpInputEmail": "Email",
+    "app.auth.signUpInputEmailPlaceholder": "Type your email...",
+    "app.auth.signUpInputPassword": "Password",
+    "app.auth.signUpInputPasswordPlaceholder": "Type your password...",
+    "app.auth.signUpInputRePassword": "Re Password",
+    "app.auth.signUpInputRePasswordPlaceholder": "Type your confirm password...",
+    "app.auth.signUpDescription": "By clicking the sign up button, you agree to our",
+    "app.auth.signUpDescriptionAnd": "and",
+    "app.auth.signUpDescriptionTerm": "terms and conditions",
+    "app.auth.signUpDescriptionPolicy": "privacy policy",
+    
+    "app.auth.buttonClose": "Close",
+    "app.auth.buttonSignIn": "Sign In",
+    "app.auth.buttonSignUp": "Sign Up",
+
+    "app.post.newTitle": "Write Your Confessions",
     "app.post.newDescription": "Share with us your own stories and others.",
-    "app.post.newSuggestLogin": "Please login to be able to edit posts or you can post anonymously."
+    "app.post.newSuggestLogin": "Please login to be able to edit posts or you can post anonymously.",
+    "app.post.newButton": "New Your Confessions",
+    "app.post.newButtonClose": "Close",
+    "app.post.newButtonSubmit": "Post Your Confessions",
+    "app.post.newInputTitle": "Title",
+    "app.post.newInputTitlePlaceholder": "Type a awesome title...",
+    "app.post.newInputContent": "Content",
+    "app.post.newInputContentPlaceholder": "Share with us your own stories and others.",
+
+    "app.post.editTitle": "Edit Your Confessions",
+    "app.post.editDescription": "Share with us your own stories and others.",
+    "app.post.editButton": "Edit",
+    "app.post.editButtonClose": "Close",
+    "app.post.editButtonSubmit": "Edit Your Confessions",
+    "app.post.editInputTitle": "Title",
+    "app.post.editInputTitlePlaceholder": "Type a awesome title...",
+    "app.post.editInputContent": "Content",
+    "app.post.editInputContentPlaceholder": "Share with us your own stories and others.",
+
+    "app.post.deleteTitle": "Delete Confession",
+    "app.post.deleteDescription": "This action cannot be restored by anything. Do you want to delete this confession?",
+    "app.post.deleteButton": "Delete",
+    "app.post.deleteButtonClose": "Close",
+    "app.post.deleteButtonSubmit": "Delete Your Confessions"
 }
