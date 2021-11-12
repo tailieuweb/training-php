@@ -157,8 +157,7 @@ class UserModelTest extends TestCase
       $expected = 'error';
       $actual = $userModel->findUserById($id);
       
-      $this->assertEquals($expected, $actual);
-      
+      $this->assertEquals($expected, $actual);   
       }
       
       
@@ -168,8 +167,7 @@ class UserModelTest extends TestCase
       $expected = 'error';
       $actual = $userModel->findUserById($id);
       
-      $this->assertEquals($expected, $actual);
-      
+      $this->assertEquals($expected, $actual);   
       }
       
       public function testFindUserByIdObject() {
