@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function PostsItem(props) {
   const { user, post, onSelectPost } = props;
   const [isReadMore] = useState(post.description.length < 350);
+  const { t } = useTranslation("common");
 
   return (
     <div className="card">
@@ -18,7 +20,7 @@ export default function PostsItem(props) {
             </a>
             <div className="ml-3">
               <a>
-                <h5 className="card-title mb-0">Unknown User</h5>
+                <h5 className="card-title mb-0">{t("app.common.unknown")}</h5>
               </a>
               <small className="card-text">{props.post.created_at}</small>
             </div>
@@ -32,7 +34,7 @@ export default function PostsItem(props) {
                 data-target="#editModal"
                 onClick={onSelectPost}
               >
-                Sửa
+                {t("app.post.editButton")}
               </button>
               <button
                 type="button"
@@ -41,7 +43,7 @@ export default function PostsItem(props) {
                 data-target="#deleteModal"
                 onClick={onSelectPost}
               >
-                Xóa
+                {t("app.post.deleteButton")}
               </button>
             </div>
           )}
@@ -62,7 +64,7 @@ export default function PostsItem(props) {
                 className="font-weight-bold"
               >
                 {" "}
-                Read more
+                {t("app.common.readMore")}
               </a>
             </Link>
           )}

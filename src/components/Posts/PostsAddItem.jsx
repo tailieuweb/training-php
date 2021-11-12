@@ -21,7 +21,7 @@ export default function PostsAddItem({ user }) {
               }}
             >
               <i className="fa fa-plus mr-1" aria-hidden="true"></i>
-              {t("app.post.new")}
+              {t("app.post.newTitle")}
             </button>
           </div>
         </div>

@@ -4,6 +4,7 @@
     "app.lang.vietnamese": "Vietnamese",
 
     "app.common.unknown": "Unknown User",
+    "app.common.readMore": "Read more",
     "app.common.profile": "My Profile",
 
     "app.auth.signOut": "Sign Out",

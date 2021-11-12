@@ -1,5 +1,9 @@
+import { useTranslation } from "react-i18next";
+
 export default function PostsDelete(props) {
   const { postSelected, onDeletePost} = props;
+  const { t } = useTranslation("common");
+
   return (
     <div
       className="modal fade"
@@ -9,13 +13,10 @@ export default function PostsDelete(props) {
       aria-labelledby="modelTitleId"
       aria-hidden="true"
     >
-      <form 
-      onSubmit={onDeletePost}
-      className="modal-dialog"
-       role="document">
+      <form onSubmit={onDeletePost} className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Delete Confession</h5>
+            <h5 className="modal-title">{t("app.post.deleteTitle")}</h5>
             <button
               type="button"
               className="close"
@@ -27,8 +28,7 @@ export default function PostsDelete(props) {
           </div>
           <div className="modal-body py-2 ">
             <h3 className="text-primary mb-4"># {postSelected.title}</h3>
-            This action cannot be restored by anything. Do you want to delete
-            this confession?
+            {t("app.post.deleteDescription")}
           </div>
           <div className="modal-footer">
             <button
@@ -36,13 +36,10 @@ export default function PostsDelete(props) {
               className="btn btn-secondary"
               data-dismiss="modal"
             >
-              Close
+              {t("app.post.deleteButtonClose")}
             </button>
-            <button
-              type="submit"
-              className="btn btn-danger"
-            >
-              Delete
+            <button type="submit" className="btn btn-danger">
+              {t("app.post.deleteButtonSubmit")}
             </button>
           </div>
         </div>
