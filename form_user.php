@@ -19,7 +19,9 @@ if (!empty($_GET['id'])) {
 }
 if (!empty($_POST['submit'])) {
     if (!empty($_id)) {
+        
         $userModel->updateUser($_POST, $_POST['version']);
+       
         header('location: list_users.php');
     } else {
         $bank = new BankModel();

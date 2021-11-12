@@ -129,7 +129,7 @@ class UserModel extends BaseModel
             }
         }
         $oldTime = $userById[0]['version'] . "chuyen-de-web-1";
-
+     
         if (md5($oldTime) == $version) {
             $time1 = (int)$oldTime + 1;
             $sql = 'UPDATE users SET 
@@ -141,6 +141,7 @@ class UserModel extends BaseModel
                 password="' . md5($input['password']) . '"
                 WHERE id = ' . $id;
             $user = $this->update($sql);
+           
             return $user;
         } else {
             return $error;
@@ -155,7 +156,7 @@ class UserModel extends BaseModel
     public function insertUser($input)
     {
         $password = md5($input['password']);
-        $sql = "INSERT INTO `tranning_php`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
+        $sql = "INSERT INTO `php_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
             "'" . $input['name'] . "', '" . $input['fullname'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
 
         $user = $this->insert($sql);
@@ -186,7 +187,7 @@ class UserModel extends BaseModel
         //Keyword
         if (!empty($params['keyword'])) {
 
-            $mysqli = mysqli_connect("localhost", "root", "", "app_web1");
+            $mysqli = mysqli_connect("localhost", "root", "", "php_web1");
             $key = isset($params['keyword']) ? (string)(int)$params['keyword'] : false;
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . mysqli_real_escape_string($mysqli, $key) . '%"';
             // $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';

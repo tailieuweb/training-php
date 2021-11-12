@@ -145,7 +145,7 @@ class BankModel extends BaseModel
 
     public function insertBanks($input)
     {
-        $sql = "INSERT INTO `tranning_php`.`banks` (`user_id`, `cost` ) VALUES (" .
+        $sql = "INSERT INTO `php_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
             "'" . $input['user_id'] . "','" . $input['cost'] . "')";
         $bank = $this->insert($sql);
         return $bank;
