@@ -1,40 +1,28 @@
 <?php
-// Start the session
-session_start();
-
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
-$params = [];
-if (!empty($_GET['keyword'])) {
-    $params['keyword'] = $_GET['keyword'];
-}
-
-$users = $userModel->getUsers($params);
-
+$users = $userModel->getUsers();
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Home</title>
     <?php include 'views/meta.php' ?>
 </head>
-
 <body>
     <?php include 'views/header.php'?>
     <div class="container">
         <?php if (!empty($users)) {?>
             <div class="alert alert-warning" role="alert">
-                List of users! <br>
-                Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
+                List of users!
             </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
-                        <th scope="col">Fullname</th>
+                        <th scope="col">Full name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Type</th>
                         <th scope="col">Actions</th>
@@ -57,7 +45,7 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['type']?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="edit_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
@@ -73,10 +61,9 @@ $users = $userModel->getUsers($params);
             </table>
         <?php }else { ?>
             <div class="alert alert-dark" role="alert">
-                This is a dark alert—check it out!
+                This is a dark alert check it out!
             </div>
         <?php } ?>
     </div>
 </body>
-
 </html>

@@ -1,14 +1,22 @@
 <?php
+require_once 'models/BankModel.php';
+$bankModel = new BankModel();
 
-require_once 'models/FactoryPattern.php';
+$bank = NULL; //Add new bank
+$id = NULL;
 
-$bankModel = FactoryPattern::make('bank');
-
-if (!empty($_GET['bank_id'])) {
-    $bank_id = $_GET['bank_id'];
-    $bank = $bankModel->findBankById($bank_id);
+if (!empty($_GET['id'])) {
+    $id = $_GET['id'];
+    //Xử lý chuỗi đầu
+    $string_first = substr($id, 0, 4);
+    //Xử lý chuỗi sau
+    $string_last = substr($id, -4);
+    //Thay thể chuỗi đầu = null
+    $id = str_replace($string_first, "", $id);
+    //Thay thế chuỗi sau = null
+    $id = str_replace($string_last, "", $id);
+    $bank = $bankModel->findBankById($id);//Update existing user
 }
-
 
 ?>
 <!DOCTYPE html>
@@ -21,22 +29,31 @@ if (!empty($_GET['bank_id'])) {
 <?php include 'views/header.php'?>
 <div class="container">
 
-    <?php if ($bank || empty($uuid)) { ?>
+    <?php if ($bank || empty($id)) { ?>
         <div class="alert alert-warning" role="alert">
-            User profile
+            LIST BANK
         </div>
         <form method="POST">
+            <input type="hidden" name="id" value="<?php echo $id ?>">
             <div class="form-group">
-                <label for="name">ID:</label>
-                <span><?php if (!empty($bank[0]['id'])) echo $bank[0]['id'] ?></span>
+                <label for="name">Name: </label>
+                <span><?php if (!empty($bank[0]['name'])) echo $bank[0]['name'] ?></span>
             </div>
             <div class="form-group">
-                <label for="password">User ID:</label>
-                <span><?php if (!empty($bank[0]['user_id'])) echo $bank[0]['user_id'] ?></span>
+                <label for="fullname">Fullname:</label>
+                <span><?php if (!empty($bank[0]['fullname'])) echo $bank[0]['fullname'] ?></span>
             </div>
             <div class="form-group">
-                <label for="password">Cost:</label>
-                <span><?php if (!empty($bank[0]['cost'])) echo $bank[0]['cost'] ?></span>
+                <label for="sdt">Số Điện Thoại: </label>
+                <span><?php if (!empty($bank[0]['sdt'])) echo $bank[0]['sdt'] ?></span>
+            </div>
+            <div class="form-group">
+                <label for="email">Email: </label>
+                <span><?php if (!empty($bank[0]['email'])) echo $bank[0]['email'] ?></span>
+            </div>
+            <div class="form-group">
+                <label for="stk">Số Tài Khoản: </label>
+                <span><?php if (!empty($bank[0]['stk'])) echo $bank[0]['stk'] ?></span>
             </div>
         </form>
     <?php } else { ?>
