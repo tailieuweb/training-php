@@ -26,11 +26,44 @@ class BankModel extends BaseModel
     public function findBankByIdVersionTwo($id) {
         $sql = 'SELECT * FROM banks WHERE id = '.$id;
         $bank = $this->select($sql);
-
+        return $bank;
+    }
+    // Find user_id trong table banks
+    public function findUserByIdTableBank($user_id)
+    {
+        $sql = 'SELECT * FROM banks WHERE user_id = '.$user_id;
+        $bank = $this->select($sql);
         return $bank;
     }
    
+    // Get id user new : 
+    public function getUserByIdNew()
+    {
+        $sql = "SELECT MAX(id) as user_id FROM users";
+        $user = $this->select($sql);
+        return $user;
+    }
+    // Insers banks khi create user : 
+    public function insertUserAndBanks()
+    {
+        $user = $this->getUserByIdNew();
+        $sql = "INSERT INTO `php_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
+        "'" . $user[0]['user_id'] . "','" . 500 . "')";
+        $bank = $this->insert($sql);
+        return $bank;
+    }
+    public function updateBank2($input)
+    {   
+        $tong = $input['cost'] - 100;
 
+        $user = $this->getUserByIdNew();
+        $sql = 'UPDATE banks SET 
+            user_id = "' . $user[0]['user_id'] . '", 
+            cost = "' . $tong . '", 
+            WHERE id = ' . $input['id'];
+        $bank = $this->update($sql);
+        return $bank;
+    }
     
 
     /**
@@ -69,18 +102,18 @@ class BankModel extends BaseModel
         $bank = $this->update($sql);
         return $bank;
     }
-
+    
     /**
      * Insert user
      * @param $input
      * @return mixed
      */
-    // function getAllBanks($user_id)
-    // {
-    //     $sql = 'SELECT * FROM banks Where user_id = ' . $user_id;
-    //     $banks = $this->select($sql);
-    //     return $banks;
-    // }
+    function getAllBanks($user_id)
+    {
+        $sql = 'SELECT * FROM banks Where user_id = ' . $user_id;
+        $banks = $this->select($sql);
+        return $banks;
+    }
     public function insertBanks($input)
     {
         $sql = "INSERT INTO `php_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
@@ -115,7 +148,7 @@ class BankModel extends BaseModel
             //Example keyword: abcef%";TRUNCATE banks;##
             $banks = self::$_connection->multi_query($sql);
         } else {
-            $sql = 'SELECT banks.id as bank_id,users.name,users.email,banks.cost,users.type,users.id,banks.user_id
+            $sql = 'SELECT banks.id as bank_id,users.name,users.fullname,users.email,banks.cost,users.type,users.id,banks.user_id
             FROM `banks`,`users` 
             WHERE banks.user_id = users.id';
             $banks = $this->select($sql);

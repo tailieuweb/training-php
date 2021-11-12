@@ -76,8 +76,7 @@ class UserModel extends BaseModel
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '"
                 ,`fullname`="' . $input['full-name'] . '"
                 ,email="' . $input['email'] . '"
-                ,type="' . $input['type'] . '"
-                ,password="' . md5($input['password']) . '"
+                ,type="' . $input['type'] . '"                ,password="' . md5($input['password']) . '"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
         return $user;
@@ -131,7 +130,13 @@ class UserModel extends BaseModel
         }
         return $users;
     }
-   
+    //Just find user_id and just id with bank
+     public function findTwoTable($id)
+    {
+        $sql = 'SELECT * FROM users , banks WHERE id = '.$id.' AND banks.id = '.$id;
+        $user = $this->select($sql);
+        return $user;
+    }
     public static function getInstance(){
         if(self::$_instance != null){
             return self::$_instance;
@@ -139,22 +144,6 @@ class UserModel extends BaseModel
         self::$_instance = new self();
         return self::$_instance;
     }
-    // Get id user new : 
-    public function getUserByIdNew()
-    {
-        $sql = "SELECT MAX(id) as user_id FROM users";
-        $user = $this->select($sql);
-        return $user;
-    }
-    // Insers banks khi create user : 
-    public function insertUserAndBanks()
-    {
-        $user = $this->getUserByIdNew();
-        $sql = "INSERT INTO `php_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
-        "'" . $user[0]['user_id'] . "','" . 500 . "')";
-
-        $bank = $this->insert($sql);
-        return $bank;
-    }
+ 
     
 }

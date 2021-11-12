@@ -4,10 +4,12 @@ session_start();
 require_once 'models/UserModel.php';
 require_once 'models/FactoryPattent.php';
 require_once 'models/Repository.php';
-$factory = new FactoryPattent();
+// $factory = new FactoryPattent();
+// $userModel = $factory->make('user');
+
 $reponsitory = new Repository();
 
-$userModel = $factory->make('user');
+
 
 $user = NULL; //Add new user
 $_id = NULL;
@@ -23,17 +25,15 @@ if (!empty($_GET['id'])) {
     //Thay thế chuỗi sau = null
     $_id = str_replace($string_last, "", $_id);
     var_dump($_id);
-    $user = $userModel->findUserById($_id);
+    $user = $reponsitory->findRepository($_id);
 }
 
 if (!empty($_POST['submit'])) {
     if (!empty($_id)) {
-        $userModel->updateUser($_POST);
+        $reponsitory->updateRepositoty($_POST);
     } else {
-      $reponsitory->createAppUser($_POST);
-      
+      $reponsitory->insertRepository($_POST);
     }
-  
     header('location: list_users.php');
 }
 ?>
@@ -93,7 +93,7 @@ if (!empty($_POST['submit'])) {
                     <option>
                 </select>
             </div>
-
+           
             <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
         </form>
         <?php } else { ?>

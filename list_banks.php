@@ -33,6 +33,9 @@ $banks = $bankModel->getBanks($params);
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
+                        <th scope="col">Fullname</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Type</th>
                         <th scope="col">Cost</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -46,9 +49,17 @@ $banks = $bankModel->getBanks($params);
                                 <?php echo $bank['name'] ?>
                             </td>
                             <td>
+                                <?php echo $bank['fullname'] ?>
+                            </td>
+                            <td>
+                                <?php echo $bank['email'] ?>
+                            </td>
+                            <td>
+                                <?php echo $bank['type'] ?>
+                            </td>
+                            <td>
                                 <?php echo $bank['cost'] ?>
                             </td>
-
                             <td>
                                 <a href="form_bank.php?id=<?= $bank['bank_id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
