@@ -4,12 +4,10 @@ require_once './models/BankModel.php';
 class FactoryPattern {
     public function make($model){
         if($model === 'user'){
-            //Singleton
-            return UserModel::getInstance();
+            return new UserModel();
         }
         else if($model === 'bank'){
-            //Singleton
-            return BankModel::getInstance();    
+            return new BankModel();    
         }
     }
 }
