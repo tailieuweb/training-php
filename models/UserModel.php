@@ -7,7 +7,7 @@ class UserModel extends BaseModel
     protected static $_instance;
 
     
-    public function findUserById($id)
+    public function findUserByIdNew($id)
     {
         
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
@@ -102,7 +102,7 @@ class UserModel extends BaseModel
      * @return mixed
      */
 
-    public function updateUser($input)
+    public function updateUserNew($input)
     {
         $sql = 'UPDATE users SET 
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '"
