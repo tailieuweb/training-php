@@ -2,17 +2,29 @@
 
 require_once 'BaseModel.php';
 
-class UserModel extends BaseModel {
+class UserModel extends BaseModel
+{
+    public static function getInstance()
+    {
+        if(self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }
 
-    public function findUserById($id) {
-        $sql = 'SELECT * FROM users WHERE id = '.$id;
+    public function findUserById($id)
+    {
+        
+        $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
 
         return $user;
     }
 
-    public function findUser($keyword) {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
+    public function findUser($keyword)
+    {
+        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
         $user = $this->select($sql);
 
         return $user;
@@ -20,6 +32,7 @@ class UserModel extends BaseModel {
 
     /**
      * Authentication user
+<<<<<<< HEAD
      * @param $userName
      * @param $password
      * @return array
@@ -27,6 +40,16 @@ class UserModel extends BaseModel {
     public function auth($userName, $password) {
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+=======
+     * @param $
+     * @param $password
+     * @return array
+     */
+    public function auth($userName, $password)
+    {
+        $md5Password = md5($password);
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
+>>>>>>> 2-php-202109/2-groups/8-H/master
 
         $user = $this->select($sql);
         return $user;
@@ -37,35 +60,68 @@ class UserModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id) {
-        $sql = 'DELETE FROM users WHERE id = '.$id;
-        return $this->delete($sql);
-
+    public function deleteUserById($id)
+    {   
+        $isAuth = $this->getUsers();
+        foreach ($isAuth as $item) {
+            if (md5($item['id']) == $id) {
+                $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
+                return $this->delete($sql);
+            }
+        }
     }
+    // Delete user by id : Step 2
+    public function dropUserById($id)
+    {   
+        $sql = 'DELETE FROM users WHERE id = ' . $id;
+        return $this->delete($sql);
+    }
+    /**
+     * Delete user by id
+     * @param $id
+     * @return mixed
+     */
+    // public function deleteUserById($id)
+    // {
+    //     $sql = 'DELETE FROM users WHERE id = ' . $id;
+    //     return $this->delete($sql);
+    // }
 
     /**
      * Update user
      * @param $input
      * @return mixed
      */
-    public function updateUser($input) {
+    public function updateUser($input)
+    {
         $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
-                 password="'. md5($input['password']) .'"
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '"
+                ,`fullname`="' . $input['full-name'] . '"
+                ,email="' . $input['email'] . '"
+                ,type="' . $input['type'] . '"
+                ,password="' . md5($input['password']) . '"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
-
         return $user;
     }
+
 
     /**
      * Insert user
      * @param $input
      * @return mixed
      */
+<<<<<<< HEAD
     public function insertUser($input) {
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
                 "'" . $input['name'] . "', '".md5($input['password'])."')";
+=======
+    public function insertUser($input)
+    {
+        $password = md5($input['password']);
+        $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
+            "'" . $input['name'] . "', '" . $input['full-name'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
+>>>>>>> 2-php-202109/2-groups/8-H/master
 
         $user = $this->insert($sql);
 
@@ -77,10 +133,15 @@ class UserModel extends BaseModel {
      * @param array $params
      * @return array
      */
-    public function getUsers($params = []) {
+    public function getUsers($params = [])
+    {
         //Keyword
         if (!empty($params['keyword'])) {
+<<<<<<< HEAD
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+=======
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
+>>>>>>> 2-php-202109/2-groups/8-H/master
 
             //Keep this line to use Sql Injection
             //Don't change
@@ -93,6 +154,7 @@ class UserModel extends BaseModel {
 
         return $users;
     }
+<<<<<<< HEAD
 
     /**
      * For testing
@@ -103,3 +165,6 @@ class UserModel extends BaseModel {
         return $a + $b;
     }
 }
+=======
+}
+>>>>>>> 2-php-202109/2-groups/8-H/master
