@@ -76,17 +76,30 @@ if (!empty($_POST['submit'])) {
                 <div class="form-group">
                     <label for="type">Type</label>
                     <select name="type">
-                        <option value="0" <?php if ($user[0]['type'] == '0') {
-                                                echo "selected";
+                        <option value="0" <?php if (isset($user[0]['type'])) {
+                                                if ($user[0]['type'] == '0') {
+                                                    echo "selected";
+                                                }
                                             } ?>>---</option>
-                    <option value="admin" <?php if (!empty($user[0]['type']) == 'admin') {
-                                                    echo "selected";
-                                                } ?>>Admin</option>
-                    <option value="user" <?php if (!empty($user[0]['type']) == 'user') {
-                                                    echo "selected";
-                                                } ?>>User</option>
-                    <option value="guest" <?php if (!empty($user[0]['type']) == 'guest') {
-                                                    echo "selected";
+                        <option value="admin" <?php
+                                                if (isset($user[0]['type'])) {
+                                                    if ($user[0]['type'] == 'admin') {
+                                                        echo "selected";
+                                                    }
+                                                }
+                                                ?>>Admin</option>
+                        <option value="user" <?php
+                                                if (isset($user[0]['type'])) {
+                                                    if ($user[0]['type'] == 'user') {
+                                                        echo "selected";
+                                                    }
+                                                }
+                                                ?>>User</option>
+                        <option value="guest" <?php
+                                                if (isset($user[0]['type'])) {
+                                                    if ($user[0]['type'] == 'guest') {
+                                                        echo "selected";
+                                                    }
                                                 } ?>>Guest</option>
                     </select>
                 </div>

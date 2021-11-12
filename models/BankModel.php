@@ -5,6 +5,19 @@ require_once 'BaseModel.php';
 class BankModel extends BaseModel
 {
     protected static $_instance;
+    
+    public function getUserID()
+    {
+        return $this->user_id;
+    }
+    public function getCost()
+    {
+        return $this->cost = 1000;
+    }
+    public function insertUserDecorator($data, $banks)
+    {
+        echo "bankModel";
+    }
 
     public function findBankById($id)
     {
@@ -13,7 +26,7 @@ class BankModel extends BaseModel
         $user = null;
         foreach ($allUser as $key) {
             $md5 = md5($key['id'] . "chuyen-de-web-1");
-            if ($md5 == $id) {
+            if ($md5 == $id && !is_bool($id)) {
                 $sql = 'SELECT banks.id as bank_id,users.name,users.email,banks.cost,users.type,users.id,banks.user_id,banks.version 
                 FROM `banks`,`users` 
                 WHERE banks.user_id = users.id AND banks.id = ' . $key['id'];
@@ -165,15 +178,21 @@ class BankModel extends BaseModel
         }
         return $banks;
     }
+    function getAll()
+    {
+        $sql = 'SELECT * FROM banks ';
+        $banks = $this->select($sql);
+        return $banks;
+    }
     function getAllBanks($user_id)
     {
         $sql = 'SELECT * FROM banks Where user_id = ' . $user_id;
         $banks = $this->select($sql);
         return $banks;
     }
-    
-    public static function getInstance(){
-        if(self::$_instance != null){
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
             return self::$_instance;
         }
         self::$_instance = new self();

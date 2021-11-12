@@ -1,7 +1,8 @@
 <?php
 require_once 'configs/database.php';
+require_once 'OptionUser.php';
 
-abstract class BaseModel {
+abstract class BaseModel implements OptionUser{
     // Database connection
     protected static $_connection;
     protected static $_instance;

@@ -1,10 +1,11 @@
 <?php
 require_once 'BaseModel.php';
 require_once 'BankModel.php';
+
 class UserModel extends BaseModel
 {
     protected static $_instance;
-<<<<<<< HEAD
+
     
     public function findUserById($id)
     {
@@ -12,7 +13,27 @@ class UserModel extends BaseModel
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
 
-=======
+    }
+
+    public function insertUserDecorator($data,$bank)
+    {   
+        $this->insertUser($data);
+        $lastUserId = $this->lastUserId();
+        $inputBank = [
+            'user_id' => $lastUserId,
+            'cost' => $bank->getCost()
+        ];
+        $d = $bank->insertBanks($inputBank);
+        return $d;
+    }
+
+    public function lastUserId()
+    {
+        $sql = "SELECT MAX(id) FROM users";
+        $id = $this->select($sql);
+        return $id[0]['MAX(id)'];
+    }
+    // Cua tien
     public function findUserById($id)
     {
         $sql1 = 'SELECT id FROM users';
@@ -25,7 +46,7 @@ class UserModel extends BaseModel
                 $user = $this->select($sql);
             }
         }
->>>>>>> 2-php-202109/2-groups/5-E/3-27-Tien
+
         return $user;
     }
 
@@ -51,7 +72,6 @@ class UserModel extends BaseModel
      * @return mixed
      */
     public function deleteUserById($id)
-<<<<<<< HEAD
     {   
         $isAuth = $this->getUsers();
         foreach ($isAuth as $item) {
@@ -61,7 +81,7 @@ class UserModel extends BaseModel
             }
         }
     }
-    // Delete user by id : Step 2
+    // Delete user by id : Step 2 cuar tam
     public function dropUserById($id)
     {   
         $sql = 'DELETE FROM users WHERE id = ' . $id;
@@ -73,28 +93,15 @@ class UserModel extends BaseModel
      * @return mixed
      */
  
-=======
-    {
-        //Lấy id của tất cả user 
-        $sql1 = 'SELECT id FROM users';
-        $allUser = $this->select($sql1);
+    
 
-        foreach ($allUser as $key) {
-            $md5 = md5($key['id'] . "chuyen-de-web-1");
-            if ($md5 == $id) {
-                $sql = 'DELETE FROM users WHERE id = ' . $key['id'];
-                return $this->delete($sql);
-            }
-        }
-    }
->>>>>>> 2-php-202109/2-groups/5-E/3-27-Tien
 
     /**
      * Update user
      * @param $input
      * @return mixed
      */
-<<<<<<< HEAD
+
     public function updateUser($input)
     {
         $sql = 'UPDATE users SET 
@@ -108,15 +115,6 @@ class UserModel extends BaseModel
         return $user;
         
     }
-    public  function generateRandomString($length) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
-=======
 
     public function updateUser($input, $version)
     {
@@ -140,6 +138,7 @@ class UserModel extends BaseModel
                 $userById = $this->select($sql);
             }
         }
+
         $oldTime = $userById[0]['version'] . "chuyen-de-web-1";
 
         if (md5($oldTime) == $version) {
@@ -157,7 +156,6 @@ class UserModel extends BaseModel
         } else {
             return $error;
         }
->>>>>>> 2-php-202109/2-groups/5-E/3-27-Tien
     }
 
     /**
@@ -170,10 +168,7 @@ class UserModel extends BaseModel
         $password = md5($input['password']);
         $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
             "'" . $input['name'] . "', '" . $input['full-name'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
-<<<<<<< HEAD
 
-=======
->>>>>>> 2-php-202109/2-groups/5-E/3-27-Tien
         $user = $this->insert($sql);
 
         $getLastID = $this->getLastID();
@@ -201,13 +196,11 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
-<<<<<<< HEAD
+
             $mysqli = mysqli_connect("localhost", "root", "", "app_web1");
             $key = isset($params['keyword'])?(string)(int)$params['keyword']:false;
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . mysqli_real_escape_string($mysqli,$key) . '%"';
             // $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
-
-=======
 
             $params['keyword'] = str_replace(
                 array(
@@ -218,7 +211,7 @@ class UserModel extends BaseModel
                 $params['keyword']
             );
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
->>>>>>> 2-php-202109/2-groups/5-E/3-27-Tien
+
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
@@ -230,22 +223,28 @@ class UserModel extends BaseModel
         }
         return $users;
     }
-<<<<<<< HEAD
+
    
-    public static function getInstance(){
-        if(self::$_instance != null){
-=======
+  
+
+    public function sumb($a, $b)
+    {
+        if (!is_numeric($a)) {
+            return "Not number";
+        }
+        return $a + $b;
+    }
     public static function getInstance()
     {
         if (self::$_instance !== null) {
->>>>>>> 2-php-202109/2-groups/5-E/3-27-Tien
+
             return self::$_instance;
         }
         self::$_instance = new self();
         return self::$_instance;
     }
-<<<<<<< HEAD
-    // Get id user new : 
+
+    // Get id user new : tam
     public function getUserByIdNew()
     {
         $sql = "SELECT MAX(id) as user_id FROM users";
@@ -253,7 +252,5 @@ class UserModel extends BaseModel
         
         return $user;
     }
-    
-=======
+
 }
->>>>>>> 2-php-202109/2-groups/5-E/3-27-Tien

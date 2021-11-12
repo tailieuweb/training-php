@@ -58,7 +58,7 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php' ?>
     <div class="container">
 
-        <?php if ($bank || empty($_id) || $users) { ?>
+        <?php if ($bank || empty($id_end) || $users) { ?>
             <div class="alert alert-warning" role="alert">
                 Bank form
 
