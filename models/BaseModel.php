@@ -15,7 +15,6 @@ abstract class BaseModel {
                 exit();
             }
         }
-
     }
 
     /**
@@ -71,5 +70,4 @@ abstract class BaseModel {
         $result = $this->query($sql);
         return $result;
     }
-
 }

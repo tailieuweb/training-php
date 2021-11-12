@@ -2,12 +2,10 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-
 $id = '';
 if (!empty($_SESSION['id'])) {
     $id = $_SESSION['id'];
 }
-
 $keyword = '';
 if (!empty($_GET['keyword'])) {
     $keyword = $_GET['keyword'];
@@ -49,15 +47,7 @@ if (!empty($_GET['keyword'])) {
                         Account <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <?php 
-                         
-                            $userModel = new UserModel();
-                            $rand_string = $userModel->generateRandomString(10);
-                           
-                        ?>
-                        <li><a
-                                href="view_user.php?id=<?= $rand_string . $id . mt_rand(10000 , 99999)?>">Profile</a>
-                        </li>
+                        <li><a href="view_user.php?id=<?php echo rand(100, 999) . md5($id . "list-user") . rand(100, 999) ?>">Profile</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="login.php">Login</a></li>
                         <li><a href="logout.php">Logout</a></li>

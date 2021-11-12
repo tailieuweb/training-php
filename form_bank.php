@@ -27,9 +27,10 @@ if (!empty($_GET['id'])) {
     $id_end = substr($id_start, 0, -3);
     
     $bank = $bankModel->findBankById($id_end); //Update existing user
-    
 }
+
 if (!empty($_POST['submit'])) {
+    // 
     $version = $_POST['version'];
     if (!empty($id_end)) {
         $a = $bankModel->updateBank($_POST, $version);
@@ -61,7 +62,7 @@ if (!empty($_POST['submit'])) {
 
         <?php if ($bank || empty($_id) || $users) { ?>
             <div class="alert alert-warning" role="alert">
-                User form
+                Bank form
 
             </div>
             <?php if (isset($a)) { ?>

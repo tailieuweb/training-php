@@ -21,6 +21,7 @@ class BankModel extends BaseModel
             }
         }
         return $user;
+        
     }
 
     public function findUser($keyword)
@@ -47,9 +48,12 @@ class BankModel extends BaseModel
      */
     public function deleteBankById($id)
     {
-        //Lấy id của tất cả user 
         $sql1 = 'SELECT id FROM banks';
         $allUser = $this->select($sql1);
+        
+        $_id = $id;
+        $id_start = substr($_id, 3);
+        $id_end = substr($id_start, 0, -3);
 
         foreach ($allUser as $key) {
             $md5 = md5($key['id'] . "chuyen-de-web-1");
@@ -73,36 +77,23 @@ class BankModel extends BaseModel
         $error = false;
         $allUser = $this->select($sql1);
         $id = 0;
-<<<<<<< HEAD
-        foreach ($allUser as $key) {
-            $md5 = md5($key['id'] . "chuyen-de-web-1");
-            if ($md5 == $input['id']) {
-=======
 
         $_id = $input['id'];
         $id_start = substr($_id, 3);
         $id_end = substr($id_start, 0, -3);
 
         foreach ($allUser as $key) {
-            $md5 = md5($key['id'] . "chuyen-de-web-1");
-            $md5_start = substr($md5, 3);
+            $a = md5($key['id'] . "chuyen-de-web-1");
+            $md5_start = substr($a, 3);
             $md5_end = substr($md5_start, 0, -3);
-
             if ($md5_end == $id_end) {
->>>>>>> 2-php-202109/2-groups/5-E/1-20-Tam
                 $id = $key['id'];
                 $sql = 'SELECT * FROM banks WHERE id = ' . $key['id'];
                 $userById = $this->select($sql);
             }
         }
-<<<<<<< HEAD
         $oldTime = $userById[0]['version'] . "chuyen-de-web-1";
         if (md5($oldTime) == $version) {
-=======
-        $oldTime = $userById[0]['version'];
-       
-        if ($oldTime != $version) {
->>>>>>> 2-php-202109/2-groups/5-E/1-20-Tam
             $time1 = (int)$oldTime + 1;
             $sql = 'UPDATE banks SET 
             user_id = "' . $input['user_id'] . '", 
@@ -121,28 +112,13 @@ class BankModel extends BaseModel
      * @param $input
      * @return mixed
      */
-<<<<<<< HEAD
     public function insertBanks($input)
     {
-=======
-    function getAllBanks($user_id)
-    {
-        $sql = 'SELECT * FROM banks Where user_id = ' . $user_id;
-        $banks = $this->select($sql);
-        return $banks;
-    }
-    public function insertBanks($input)
-    {
->>>>>>> 2-php-202109/2-groups/5-E/1-20-Tam
         $allBanks = $this->getAllBanks($input['user_id']);
         if (empty($allBanks)) {
             $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
                 "'" . $input['user_id'] . "','" . $input['cost'] . "')";
-<<<<<<< HEAD
-                $bank = self::$_connection->multi_query($sql);
-=======
             $bank = $this->insert($sql);
->>>>>>> 2-php-202109/2-groups/5-E/1-20-Tam
             // $users = self::$_connection->multi_query($sql);
             return $bank;
         } else {
@@ -154,10 +130,6 @@ class BankModel extends BaseModel
             $user = $this->update($sql);
             return $user;
         }
-<<<<<<< HEAD
-        
-=======
->>>>>>> 2-php-202109/2-groups/5-E/1-20-Tam
     }
 
     /**
@@ -186,24 +158,17 @@ class BankModel extends BaseModel
             //Example keyword: abcef%";TRUNCATE banks;##
             $banks = self::$_connection->multi_query($sql);
         } else {
-<<<<<<< HEAD
             $sql = 'SELECT banks.id as bank_id,users.name,users.fullname,users.email,banks.cost,users.type,users.id,banks.user_id,banks.version 
-=======
-            $sql = 'SELECT banks.id as bank_id,users.name,users.email,banks.cost,users.type,users.id,banks.user_id,banks.version 
->>>>>>> 2-php-202109/2-groups/5-E/1-20-Tam
             FROM `banks`,`users` 
             WHERE banks.user_id = users.id';
             $banks = $this->select($sql);
         }
-<<<<<<< HEAD
         return $banks;
     }
     function getAllBanks($user_id)
     {
         $sql = 'SELECT * FROM banks Where user_id = ' . $user_id;
         $banks = $this->select($sql);
-=======
->>>>>>> 2-php-202109/2-groups/5-E/1-20-Tam
         return $banks;
     }
     

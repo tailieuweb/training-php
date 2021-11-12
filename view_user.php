@@ -1,7 +1,12 @@
 <?php
+<<<<<<< HEAD
 require_once 'models/UserModel.php';
 require_once 'models/FactoryPattent.php';
 $factory = new FactoryPattent();
+=======
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+>>>>>>> 2-php-202109/2-groups/5-E/3-27-Tien
 $userModel = $factory->make('user');
 
 $user = NULL; //Add new user
@@ -9,6 +14,7 @@ $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
+<<<<<<< HEAD
     //Xử lý chuỗi đầu
     $string_first = substr($id, 0, 10);
     //Xử lý chuỗi sau
@@ -18,6 +24,11 @@ if (!empty($_GET['id'])) {
     //Thay thế chuỗi sau = null
     $id = str_replace($string_last, "", $id);
     $user = $userModel->findUserById($id);//Update existing user
+=======
+    $id_start = substr($id,3);
+    $id_end=substr($id_start,0,-3);
+    $user = $userModel->findUserById($id_end);//Update existing user
+>>>>>>> 2-php-202109/2-groups/5-E/3-27-Tien
 }
 
 ?>
