@@ -12,8 +12,15 @@ if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword']; 
 }
 
-$banks = $bankmodel->getBanks($params);
+$error = null;
 
+if(!is_object($userModel)){
+    if($userModel == 500){     
+        $error = 1;     
+    }
+}else{
+    $banks = $bankmodel->getBanks($params);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -64,9 +71,16 @@ $banks = $bankmodel->getBanks($params);
                 </tbody>
             </table>
         <?php }else { ?>
-            <div class="alert alert-dark" role="alert">
-                This is a dark alert—check it out!
-            </div>
+            <?php if($error == 1){?>
+                <div style="text-align: center; font-weight: bold; color: red;">
+                   <p>>>> Connect Fail <<<</p>
+                   <h3 style="font-size: 10rem;">404 | Data - Error</h3>
+                </div>
+            <?php } else {?>
+                <div class="alert alert-dark" role="alert">
+                    This is a dark alert—check it out!
+                </div>
+            <?php } ?>
         <?php } ?>
     </div>
 </body>

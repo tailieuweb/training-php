@@ -14,7 +14,7 @@ $err = 0;
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     try {
-        $bank = $userModel->findUserById($id, $bankModel);
+        $bank = $userModel->findUserById($id, 111);
     } catch (Throwable $e) {
         $err = 1;
     }
@@ -50,19 +50,10 @@ if (!empty($_POST['submit'])) {
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-        <?php if ($err == 1) { ?>
+        <?php if ($err == 1 || $err == 2) { ?>
             <div style="text-align: center; margin-top: 30px; color: #aa1212;">
                 <hr>
-                <h1 style="font-size: 5rem;">404 | Not Update</h1>
-                <hr>
-            </div>
-            <p>Các hạ từ xa đến đây gặp phải vấn đề này là lỗi của tại hạ !</p>
-            <p>Xin mời các hạ lần sau hãy ghé qua !! Xin cáo từ.</p>
-            <a href="list_bank.php"><< Go home</a>
-        <?php }else if($err == 2){?>
-            <div style="text-align: center; margin-top: 30px; color: #aa1212;">
-                <hr>
-                <h1 style="font-size: 5rem;">404 | Not Insert</h1>
+                <h1 style="font-size: 5rem;">404 | <?php if($err == 1){?>Not Update<?php }else {?> Not Insert <?php }?></h1>
                 <hr>
             </div>
             <p>Các hạ từ xa đến đây gặp phải vấn đề này là lỗi của tại hạ !</p>

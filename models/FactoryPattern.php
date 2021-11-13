@@ -7,7 +7,8 @@ class FactoryPattern {
         if ($model == 'user') {
             return UserModel::getInstance();
         } else if ($model == 'bank') {
-            return new BankModel();
+            //return new BankModel();
+            return BankModel::getInstance();
         }
     }
 
