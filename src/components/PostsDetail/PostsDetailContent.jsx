@@ -1,4 +1,8 @@
-export default function PostsDetailContent() {
+import Link from "next/link";
+import { useState } from "react";
+export default function PostsDetailContent(props) {
+  const { post } = props;
+  const [isReadMore] = useState(post.description.length < 350);
   return (
     <div className="card bg-white rounded-lg p-4">
       <div className="card-body py-2">
@@ -14,16 +18,30 @@ export default function PostsDetailContent() {
               <a>
                 <h5 className="card-title mb-0">Unknown User</h5>
               </a>
-              <small className="card-text">10/10/2021</small>
+              <small className="card-text">{props.post.created_at}</small>
             </div>
           </div>
         </div>
-        <h2 className="text-primary my-4"># Post Title</h2>
+        <Link href={`/posts/${post.id}`}>
+          <a>
+            <h2 className="text-primary my-4"># {post.title}</h2>
+          </a>
+        </Link>
         <p className="card-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod
-          voluptatibus reprehenderit doloribus quasi quisquam beatae placeat
-          nemo enim, recusandae optio! Nesciunt dolor praesentium dignissimos,
-          temporibus nemo voluptatum similique ad quod?
+        {isReadMore
+            ? post.description
+            : `${post.description.slice(0, 350)}...`}
+          {!isReadMore && (
+            <Link href={`/posts/${post.id}`}>
+              <a
+                style={{ fontSize: 12, color: "#000" }}
+                className="font-weight-bold"
+              >
+                {" "}
+                Read more
+              </a>
+            </Link>
+          )}
         </p>
       </div>
     </div>
