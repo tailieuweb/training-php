@@ -1,11 +1,14 @@
-export default function HeaderSearch() {
+export default function HeaderSearch(props) {
+  const { onSearch, inputSearch, setInputSearch } = props;
   return (
-    <form action="/search" className="d-flex">
+    <form onSubmit={onSearch} action="/search" className="d-flex">
       <input
         name="q"
         type="text"
         className="form-control form-control-sm py-2 mr-2"
         placeholder="Type a keyword...."
+        value={inputSearch}
+        onChange={(e) => setInputSearch(e.target.value)}
         required
       />
       <button
