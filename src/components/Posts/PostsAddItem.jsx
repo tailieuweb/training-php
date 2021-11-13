@@ -16,7 +16,7 @@ export default function PostsAddItem({ user }) {
               data-target="#addModal"
               onClick={() => {
                 if (!user) {
-                  toast.info(t("app.post.newSuggestLogin"));
+                  toast.info(t("app.toast.suggestLogin"));
                 }
               }}
             >

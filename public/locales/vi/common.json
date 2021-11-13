@@ -7,6 +7,9 @@
     "app.common.readMore": "Đọc thêm",
     "app.common.profile": "Thông Tin Của Tôi",
 
+    "app.toast.requiredInput": "Vui lòng nhập đầy đủ thông tin.",
+    "app.toast.suggestLogin": "Vui lòng đăng nhập để có thể chỉnh sửa bài viết hoặc bạn có thể đăng bài ẩn danh.",
+
     "app.auth.signIn": "Đăng Nhập",
     "app.auth.signInInputEmail": "Email",
     "app.auth.signInInputEmailPlaceholder": "Nhập email của bạn...",
@@ -37,7 +40,6 @@
 
     "app.post.newTitle": "Tạo Mới Confession",
     "app.post.newDescription": "Chia sẻ câu chuyện của bạn và những người khác.",
-    "app.post.newSuggestLogin": "Vui lòng đăng nhập để có thể chỉnh sửa bài viết hoặc bạn có thể đăng bài ẩn danh.",
     "app.post.newButton": "Tạo Mới Confession",
     "app.post.newButtonClose": "Đóng",
     "app.post.newButtonSubmit": "Đăng Bài Viết",

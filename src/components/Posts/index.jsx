@@ -62,7 +62,7 @@ export default function Posts() {
     e.preventDefault();
     const { title, description } = postSelected;
     if (title.length === 0 || description.length === 0) {
-      return toast.warning("Please enter the full information.");
+      return toast.warning(t("app.toast.requiredInput"));
     }
 
     // request and close modal
@@ -80,7 +80,7 @@ export default function Posts() {
 
     const { title, description } = postSelected;
     if (title.length === 0 || description.length === 0) {
-      return toast.warning("Please enter the full information.");
+      return toast.warning(t("app.toast.requiredInput"));
     }
 
     // request and close modal

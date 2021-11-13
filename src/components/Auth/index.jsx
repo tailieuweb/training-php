@@ -31,7 +31,7 @@ export default function Auth() {
   const signIn = () => {
     const { email, password } = inputForm;
     if (email.length === 0 || password.length === 0) {
-      return toast.warning("Please enter the full information.");
+      return toast.warning(t("app.toast.requiredInput"));
     }
 
     dispatch(
@@ -52,7 +52,7 @@ export default function Auth() {
       name.length === 0 ||
       confirm_password.length === 0
     ) {
-      return toast.warning("Please enter the full information.");
+      return toast.warning(t("app.toast.requiredInput"));
     }
     if (password !== confirm_password) {
       return toast.warning("Re password is incorrect!");

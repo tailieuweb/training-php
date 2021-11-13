@@ -7,6 +7,9 @@
     "app.common.readMore": "Read more",
     "app.common.profile": "My Profile",
 
+    "app.toast.requiredInput": "Please enter the full information.",
+    "app.toast.suggestLogin": "Please login to be able to edit posts or you can post anonymously.",
+
     "app.auth.signIn": "Sign In",
     "app.auth.signInInputEmail": "Email",
     "app.auth.signInInputEmailPlaceholder": "Type your email...",
@@ -37,7 +40,6 @@
 
     "app.post.newTitle": "Write Your Confessions",
     "app.post.newDescription": "Share with us your own stories and others.",
-    "app.post.newSuggestLogin": "Please login to be able to edit posts or you can post anonymously.",
     "app.post.newButton": "New Your Confessions",
     "app.post.newButtonClose": "Close",
     "app.post.newButtonSubmit": "Post Your Confessions",
