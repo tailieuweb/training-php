@@ -20,7 +20,7 @@ if (!empty($_POST['submit'])) {
     } else {
         $userModel->insertUser($_POST);
     }
-    header('location: list_users.php');
+    header('location: list_banks.php');
 }
 
 ?>
@@ -36,7 +36,7 @@ if (!empty($_POST['submit'])) {
 <?php include 'views/header.php'?>
 <div class="container">
 
-    <?php  if ($user || isset($_id)) { ?>
+    <?php  if ($user || !isset($_id)) { ?>
 
         <div class="alert alert-warning" role="alert">
             User form

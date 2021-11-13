@@ -9,6 +9,11 @@ $user = NULL; //Add new user
 $_id = NULL;
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
+    // var_dump($_id);
+    // var_dump(substr($_id, 4, 1));
+    $_id_int = substr($_id, 4, 1);
+    $_id = (int) $_id_int;
+    // var_dump($_id);
     $user = $user_bankModel->findBankById($_id);//Update existing user
 }
 if (!empty($_POST['submit'])) {
