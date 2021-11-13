@@ -7,7 +7,9 @@ import {
 } from "../../redux/actions/postsActions";
 import { shuffleArr } from "../../utils/commonFunctions";
 import PostsDetailContent from "./PostsDetailContent";
+import PostsDetailContentSkeleton from "./PostsDetailContentSkeleton";
 import PostsDetailRelate from "./PostsDetailRelate";
+import PostsDetailRelateSkeleton from "./PostsDetailRelateSkeleton";
 
 export default function PostsDetail() {
   const router = useRouter();
@@ -18,16 +20,21 @@ export default function PostsDetail() {
   const postsBase = selectorPosts?.posts;
 
   //UseState
+  const [isLoading, setIsLoading] = useState(true);
+  const [post, setPost] = useState(null);
   const [posts, setPosts] = useState([]);
-  const [post, setPost] = useState();
 
   //UseEffect
   useEffect(() => {
     if (id === 0) {
       return;
     }
+
     (async () => {
       const post = await dispatch(actLoadPostById(id));
+      if (!post) {
+        return router.back();
+      }
       setPost(post);
     })();
   }, [id]);
@@ -35,21 +42,24 @@ export default function PostsDetail() {
   useEffect(() => {
     (async () => {
       await dispatch(actLoadPosts());
+      setIsLoading(false);
     })();
   }, []);
 
   useEffect(() => {
-    const postsData = shuffleArr(postsBase).splice(0, 3);
+    const postsData = shuffleArr(postsBase).splice(0, 5);
     setPosts(postsData);
   }, [postsBase]);
 
   return (
     <div className="row mt-4">
       <div className="col-12 col-md-8">
-        <PostsDetailContent post={post} />
+        {post && <PostsDetailContent post={post} />}
+        {!post && <PostsDetailContentSkeleton />}
       </div>
       <div className="col-12 col-md-4">
         <PostsDetailRelate posts={posts} />
+        {isLoading && <PostsDetailRelateSkeleton />}
       </div>
     </div>
   );

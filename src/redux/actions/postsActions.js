@@ -22,11 +22,14 @@ export const actLoadPosts = () => {
 
 export const actLoadPostById = (id) => {
   return () => {
-    return apiCaller(`products/${id}`, "GET", null).then((res) => {
-      if (res.success) {
-        return res.data;
-      }
-    });
+    return apiCaller(`products/${id}`, "GET", null)
+      .then((res) => {
+        if (res.success) {
+          return res.data;
+        }
+        return null;
+      })
+      .catch(() => null);
   };
 };
 

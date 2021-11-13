@@ -1,4 +1,4 @@
-import { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -14,9 +14,9 @@ import PostsAddItem from "./PostsAddItem";
 import PostsDelete from "./PostsDelete";
 import PostsEdit from "./PostsEdit";
 import PostsItem from "./PostsItem";
-import PostsSkeleton from "./PostsSkeleton";
+import PostsItemSkeleton from "./PostsItemSkeleton";
 
-const ITEM_PER_PAGE = 5;
+const ITEM_PER_PAGE = 6;
 const inputPost = { id: "", title: "", description: "" };
 
 export default function Posts() {
@@ -62,7 +62,7 @@ export default function Posts() {
     e.preventDefault();
     const { title, description } = postSelected;
     if (title.length === 0 || description.length === 0) {
-      return toast.warning("Please enter the full information.");
+      return toast.warning(t("app.toast.requiredInput"));
     }
 
     // request and close modal
@@ -80,7 +80,7 @@ export default function Posts() {
 
     const { title, description } = postSelected;
     if (title.length === 0 || description.length === 0) {
-      return toast.warning("Please enter the full information.");
+      return toast.warning(t("app.toast.requiredInput"));
     }
 
     // request and close modal
@@ -118,14 +118,14 @@ export default function Posts() {
       <PostsDelete postSelected={postSelected} onDeletePost={onDeletePost} />
       {q === ""
         ? parseInt(page) === 1 && (
-            <div className="col-md-6">
+            <div className="col-md-12">
               <PostsAddItem user={user} />
             </div>
           )
         : null}
       {[...Array(5).keys()].map((item) => (
         <div key={item} className={`col-md-6 ${isLoading ? "" : "d-none"}`}>
-          <PostsSkeleton />
+          <PostsItemSkeleton />
         </div>
       ))}
       {posts.map((post) => (

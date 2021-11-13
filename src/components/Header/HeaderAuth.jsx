@@ -1,7 +1,9 @@
-import Link from 'next/link';
+import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 export default function HeaderAuth(props) {
   const { isLoading, user, onLogout } = props;
+  const { t } = useTranslation("common");
 
   if (isLoading) {
     return null;
@@ -26,7 +28,7 @@ export default function HeaderAuth(props) {
               <Link href="/profile">
                 <a className="dropdown-item d-flex align-items-center">
                   <i className="fa fa-user" aria-hidden="true"></i>
-                  My Profile
+                  {t("app.common.profile")}
                 </a>
               </Link>
             </li>
@@ -36,8 +38,12 @@ export default function HeaderAuth(props) {
                 onClick={onLogout}
                 style={{ cursor: "pointer" }}
               >
-                <i className="fa fa-sign-out" aria-hidden="true"></i>
-                Logout
+                <i
+                  className="fa fa-sign-out"
+                  aria-hidden="true"
+                  style={{ marginRight: "0.75em" }}
+                ></i>
+                {t("app.auth.buttonSignOut")}
               </a>
             </li>
           </ul>
@@ -50,7 +56,7 @@ export default function HeaderAuth(props) {
           data-toggle="modal"
           data-target="#authModal"
         >
-          <i className="fa fa-sign-in" /> Sign In
+          <i className="fa fa-sign-in" /> {t("app.auth.buttonSignIn")}
         </button>
       )}
     </div>
