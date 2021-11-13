@@ -1,5 +1,7 @@
 <?php
-require_once 'configs/database.php';
+$ds       = DIRECTORY_SEPARATOR;
+$base_dir = realpath(dirname(__FILE__).$ds.'..').$ds;
+require("{$base_dir}configs{$ds}database.php");
 
 abstract class BaseModel {
     // Database connection
