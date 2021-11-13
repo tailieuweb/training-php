@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { toast } from "react-toastify";
 import apiCaller from "../../utils/apiCaller";
+import { startLoading, stopLoading } from "./commonActions";
 
 const APP_JWT_TOKEN = process.env.NEXT_PUBLIC_APP_JWT_TOKEN;
 
@@ -41,6 +42,7 @@ export const actLoadSignInUser = () => {
 
 export const actSignInUser = (user, callback) => {
   return (dispatch) => {
+    dispatch(startLoading());
     const { email, password } = user;
     const data = { email, password };
     return apiCaller(`api/login`, "POST", data)
@@ -53,12 +55,14 @@ export const actSignInUser = (user, callback) => {
           callback();
         }
       })
-      .catch(() => toast.warning("Your email or password is incorrect!"));
+      .catch(() => toast.warning("Your email or password is incorrect!"))
+      .finally(() => dispatch(stopLoading()));
   };
 };
 
 export const actSignUpUser = (user, callback) => {
-  return () => {
+  return (dispatch) => {
+    dispatch(startLoading());
     const { name, email, password, confirm_password } = user;
     const data = { name, email, password, confirm_password };
     return apiCaller(`api/register`, "POST", data)
@@ -71,7 +75,8 @@ export const actSignUpUser = (user, callback) => {
           callback();
         }
       })
-      .catch(() => toast.error("An error occurred!"));
+      .catch(() => toast.error("An error occurred!"))
+      .finally(() => dispatch(stopLoading()));
   };
 };
 
