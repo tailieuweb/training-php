@@ -1,16 +1,16 @@
 <?php
-// Start the session
-session_start();
-require_once 'models/UserModel.php';
+require_once 'models/BankModel.php';
 require_once 'models/FactoryPattent.php';
+
 $factory = new FactoryPattent();
-$userModel = $factory->make('user');
+$bankModel = $factory->make('bank');
+
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
-$users = $userModel->getUsers($params);
 
+$banks = $bankModel->getBanks($params);
 
 ?>
 <!DOCTYPE html>
@@ -23,11 +23,10 @@ $users = $userModel->getUsers($params);
 
 <body>
     <?php include 'views/header.php' ?>
-    <div class=" container">
-        <?php if (!empty($users)) { ?>
+    <div class="container">
+        <?php if (!empty($banks)) { ?>
             <div class="alert alert-warning" role="alert">
-                List of users! <br>
-                Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
+                List of users!
             </div>
             <table class="table table-striped">
                 <thead>
@@ -37,33 +36,38 @@ $users = $userModel->getUsers($params);
                         <th scope="col">Fullname</th>
                         <th scope="col">Email</th>
                         <th scope="col">Type</th>
+                        <th scope="col">Cost</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user) { ?>
+                    <?php foreach ($banks as $bank) { ?>
+
                         <tr>
-                            <th scope="row"><?php echo $user['id'] ?></th>
+                            <th scope="row"><?php echo $bank['bank_id'] ?></th>
                             <td>
-                                <?php echo $user['name'] ?>
+                                <?php echo $bank['name'] ?>
                             </td>
                             <td>
-                                <?php echo $user['fullname'] ?>
+                                <?php echo $bank['fullname'] ?>
                             </td>
                             <td>
-                                <?php echo $user['email'] ?>
+                                <?php echo $bank['email'] ?>
                             </td>
                             <td>
-                                <?php echo $user['type'] ?>
+                                <?php echo $bank['type'] ?>
                             </td>
                             <td>
-                            <a href="form_user.php?id=<?php echo rand(100, 999) . md5($user['id'] . "chuyen-de-web-1") . rand(100, 999) ?>">
+                                <?php echo $bank['cost'] ?>
+                            </td>
+                            <td>
+                                <a href="form_bank.php?id=<?= rand(100, 999) . md5($bank['bank_id'] . "chuyen-de-web-1") . rand(100, 999) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo rand(100, 999) . md5($user['id'] . "chuyen-de-web-1") . rand(100, 999)  ?>">
+                                <a href="view_bank.php?id=<?php echo rand(100, 999) . md5($bank['bank_id'] . "chuyen-de-web-1") . rand(100, 999)  ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo rand(100, 999) . md5($user['id'] . "chuyen-de-web-1") . rand(100, 999) ?>">
+                                <a href="delete_bank.php?id=<?php echo rand(100, 999) . md5($bank['bank_id'] . "chuyen-de-web-1") . rand(100, 999) ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
@@ -72,17 +76,11 @@ $users = $userModel->getUsers($params);
                 </tbody>
             </table>
         <?php } else { ?>
-        <!-- Test Reflected XSS bằng htmlspecialchars -->
-        <?php if (!empty($params['keyword'])) { ?>
-        <div class="alert alert-warning" role="alert">
-            <?php echo htmlspecialchars($params['keyword']) ?>
-        </div>
-        <?php } ?>
+            <div class="alert alert-dark" role="alert">
+                This is a dark alert—check it out!
+            </div>
         <?php } ?>
     </div>
-    <!-- <script>document.cookie</script> -->
-    <!-- <script src="./public/js/csrf.js"></script> -->
 </body>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-<script src="public/js/xss.js"></script>
+
 </html>
