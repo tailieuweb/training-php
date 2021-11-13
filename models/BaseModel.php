@@ -10,26 +10,23 @@ abstract class BaseModel {
 
     public function __construct() {
         if (!isset(self::$_connection)) {
-            try{
+            try {
                 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
                 self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-           
-            }catch(mysqli_sql_exception $ex){
-                
-                echo("Không thể kết nối csdl ...");die();
-           
-            }finally{
-
-                // var_dump(123);die();
-            
-            }
-            
+            }catch(mysqli_sql_exception $e)
+                {
+                 // var_dump("loi du lieu");
+                 header('location: errordb.php');
+                 die();
+                }
+                finally{
+                }
             if (self::$_connection->connect_errno) {
                 printf("Connect failed");
                 exit();
             }
         }
-
+       
     }
 
     /**
