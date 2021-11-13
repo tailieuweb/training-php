@@ -110,7 +110,7 @@ class UserModelTest extends TestCase
     /**
      * Test case:
      * Get id of latest inserted user.
-     * Check if the result is valid number.
+     * Check if the result is valid version value.
      */
     public function testGetTheIdOk()
     {
@@ -120,7 +120,7 @@ class UserModelTest extends TestCase
 
         $actual = $userModel->getTheID();
 
-        print_r("\t=> Actual result: " . $actual . "\n");
+        print_r("\t=> Actual: " . $actual . "\n");
 
         if (gettype($actual) == 'integer' && $actual > 0) {
             $this->assertTrue(false);
@@ -129,6 +129,36 @@ class UserModelTest extends TestCase
         }
     }
 
+    /**
+     * Test case:
+     * Get id of latest inserted user.
+     * Check if the result is correct.
+     */
+    public function testGetTheIdOkCorrectValue()
+    {
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+
+        $list_of_users = $userModel->getUsers();
+        $actual = $userModel->getTheID();
+        $expected = -1;
+
+        foreach ($list_of_users as $user) {
+            if ($expected < $user['id']) {
+                $expected = $user['id'];
+            }
+        }
+
+        print_r("\t=> Expected: " . $expected . "\n");
+        print_r("\t=> Actual: " . $actual . "\n");
+
+        if ($actual == $expected) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
 
     // ____________________________________________________________________________________________________
     /**
@@ -157,7 +187,7 @@ class UserModelTest extends TestCase
         $actual = $userModel->insertUser($param);
         $expected = 1;
 
-        print_r("\t=> Actual result: " . $actual  . "\n");
+        print_r("\t=> Actual: " . $actual  . "\n");
 
         $this->assertEquals($expected, $actual);
     }
@@ -192,7 +222,7 @@ class UserModelTest extends TestCase
         $actual = $userModel->updateUser($param);
         $expected = 1;
 
-        print_r("\t=> Actual result: " . $actual  . "\n");
+        print_r("\t=> Actual: " . $actual  . "\n");
 
         $this->assertEquals($expected, $actual);
     }
@@ -223,7 +253,7 @@ class UserModelTest extends TestCase
         $actual = $userModel->updateUser($param);
         $expected = 0;
 
-        print_r("\t=> Actual result: " . $actual  . "\n");
+        print_r("\t=> Actual: " . $actual  . "\n");
 
         $this->assertEquals($expected, $actual);
     }
@@ -256,7 +286,7 @@ class UserModelTest extends TestCase
         $actual = $userModel->updateUser($param);
         $expected = 0;
 
-        print_r("\t=> Actual result: " . $actual  . "\n");
+        print_r("\t=> Actual: " . $actual  . "\n");
 
         $this->assertEquals($expected, $actual);
     }
@@ -289,7 +319,7 @@ class UserModelTest extends TestCase
         $actual = $userModel->updateUser($param);
         $expected = 0;
 
-        print_r("\t=> Actual result: " . $actual  . "\n");
+        print_r("\t=> Actual: " . $actual  . "\n");
 
         $this->assertEquals($expected, $actual);
     }
@@ -322,7 +352,7 @@ class UserModelTest extends TestCase
         $actual = $userModel->updateUser($param);
         $expected = 0;
 
-        print_r("\t=> Actual result: " . $actual  . "\n");
+        print_r("\t=> Actual: " . $actual  . "\n");
 
         $this->assertEquals($expected, $actual);
     }
