@@ -88,7 +88,7 @@ if(!is_object($userModel)){
         <?php }else { ?>
             <div class="alert alert-dark" role="alert">
               <?php  if($conectFail == 1){?>
-                   <p style="color:red;font-size:20rem;text-align:center;">Conect Fail</p> 
+                   <p style="color:red;font-size:10rem;text-align:center;">Database disconnected</p> 
                <?php }else{ ?>              
                 This is a dark alert—check it out!
               <?php }?>
