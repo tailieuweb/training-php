@@ -44,11 +44,11 @@ if (!empty($_POST['submit'])) {
             //Be able to update or be locked:
             if ($user[0]['version'] == intval($currentVer)) {
                 $_POST["ver"] = intval($currentVer);
-                echo '<pre>';
-                var_dump($_POST);
-                echo '</pre>';
-                // $userRepository->update_UserAndBankAccount($_POST);
-                // header('location: index.php');
+                // echo '<pre>';
+                // var_dump($_POST);
+                // echo '</pre>';
+                $userRepository->update_UserAndBankAccount($_POST);
+                header('location: index.php');
             } else {
                 echo '<h5 style="text-align:center;">THÔNG TIN ĐÃ BỊ THAY ĐỔI TRƯỚC ĐÓ!
                 <br>Tải lại trang để xem cập nhật mới nhất!</h5>';
