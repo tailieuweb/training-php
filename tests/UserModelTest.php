@@ -2,6 +2,8 @@
 
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\equalTo;
+
 class UserModelTest extends TestCase
 {
 
@@ -86,13 +88,29 @@ class UserModelTest extends TestCase
         
         $this->assertEquals($expected, $actual);
     }
+    
+    public function testFindUserByIdObject() {
+        $userModel = new UserModel();
+        $object = (object)'123';
 
+        if(is_object($object)){
+            $object = 14;
+           
+            $actual = $userModel->findUserById($object);
+            $expected = $actual[0]['name'];
+            $userName = 'abc';
+            $this->assertEquals($userName, $expected);
+
+        }else{
+            $this->assertTrue(false);
+        }
+    }
+    
     //test getUser
     public function testInsertUserOk() 
     {
         $userModel = new UserModel();
         $user = array(
-            'id' => 14,
             'name' => 'abc',
             'fullname'=>'vitcon',
             'type' => 'admin',
@@ -111,7 +129,6 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $user = array(
-            'id' => [],
             'name' => '',
             'fullname'=>'',
             'type' => '',
@@ -119,11 +136,49 @@ class UserModelTest extends TestCase
             'password'=> ''
         );
 
-        $expected = false;
-
         $actual = $userModel->insertUser($user);
           
-        if($actual == false){
+        if(!empty($user['name']) || !empty($user['fullname']) || !empty($user['type']) || !empty($user['email']) || !empty($user['password'])){
+            $this->assertTrue(false);
+        }else{
+            $this->assertTrue(true);
+        }
+    }
+
+    public function testInsertUserNameIsNumber()
+    {
+        $userModel = new UserModel();
+        $user = array(
+            'name' => '123',
+            'fullname'=>'',
+            'type' => '',
+            'email'=> '',
+            'password'=> ''
+        );
+
+        $userModel->insertUser($user);
+          
+        if(!is_numeric($user['name'])){
+            $this->assertTrue(false);
+        }else{
+            $this->assertTrue(true);
+        }
+    }
+
+    public function testInsertUserTypeNotG()
+    {
+        $userModel = new UserModel();
+        $user = array(
+            'name' => '',
+            'fullname'=>'',
+            'type' => 'abc',
+            'email'=> '',
+            'password'=> ''
+        );
+
+        $userModel->insertUser($user);
+          
+        if($user['type'] == "admin" || $user['type'] == "user" || $user['type'] == "guest"){
             $this->assertTrue(false);
         }else{
             $this->assertTrue(true);
@@ -146,7 +201,6 @@ class UserModelTest extends TestCase
         $expected = new UserModel();
         $actual = $factory->make('');
 
-       
         if($actual == null){
             $this->assertTrue(true);
         }else{
@@ -154,4 +208,12 @@ class UserModelTest extends TestCase
         }
     }
 
+    public function testMakeValueNotG(){
+        $factory = new FactoryPattern();
+        $object = (object)'abc123';
+        $expected = null;
+        $actual = $factory->make($object);
+
+        $this->assertEquals($actual,$expected);   
+    }
 }
