@@ -6,6 +6,12 @@ require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
 $userModel = $factory->make('user');
+// CODE FOR TESTING SINGLETON DESIGN PATTERN
+// $userModel1 = $factory->make('user');
+// if ($userModel == $userModel1) {
+//     var_dump('2 Objects are the same instance');
+// }
+// die();
 
 $params = [];
 
@@ -68,22 +74,22 @@ $users = $userModel->getUsers($params);
                                 <?php echo htmlentities($user['fullname']) ?>
                             </td>
                             <td>
-                                <?php echo $user['email']?>
+                                <?php echo $user['email'] ?>
                             </td>
                             <td>
-                                <?php echo $user['type']?>
+                                <?php echo $user['type'] ?>
                             </td>
                             <td>
                                 <!-- Encode id with random number -->
-                                <a href="form_user.php?id=<?php echo rand(10000,99999).$user['id'].rand(10000,99999) ?>">
+                                <a href="form_user.php?id=<?php echo rand(10000, 99999) . $user['id'] . rand(10000, 99999) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <!-- Encode id with random number -->
-                                <a href="view_user.php?id=<?php echo rand(10000,99999).$user['id'].rand(10000,99999) ?>">
+                                <a href="view_user.php?id=<?php echo rand(10000, 99999) . $user['id'] . rand(10000, 99999) ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
                                 <!-- Encode id with random number -->
-                                <a href="delete_user.php?id=<?php echo rand(10000,99999).$user['id'].rand(10000,99999) ?>">
+                                <a href="delete_user.php?id=<?php echo rand(10000, 99999) . $user['id'] . rand(10000, 99999) ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

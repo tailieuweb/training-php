@@ -4,8 +4,11 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel
 {
+    private static $_bank_instance;
+
     // Singleton pattern:
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (self::$_bank_instance !== null) {
             return self::$_bank_instance;
         }
@@ -26,7 +29,7 @@ class BankModel extends BaseModel
                 FROM users 
                 INNER JOIN banks 
                 ON banks.user_id = users.id 
-                WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection,$params['keyword']) . '%"'
+                WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection, $params['keyword']) . '%"'
                 . ' ORDER BY id ASC';
             $banks = $this->select($sql);
         } else {
@@ -117,11 +120,11 @@ class BankModel extends BaseModel
      */
     public function insertBankInfo($input)
     {
-        $sql = "INSERT INTO `banks` VALUES (" . 
+        $sql = "INSERT INTO `banks` VALUES (" .
             0 . ", "
             . $input['user_id'] . ", "
             . $input['cost']
-         . ")";
+            . ")";
 
         $item = $this->insert($sql);
 
