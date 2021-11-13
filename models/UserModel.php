@@ -121,24 +121,5 @@ class UserModel extends BaseModel {
         return self::$_instance;
     }
     //
-   /**
-     * For testing
-     * @param $a
-     * @param $b
-     */
-    public function sumb($a ,$b){
-        if(!is_numeric($a)) return 'error';
-        if(!is_numeric($b)) return 'error';
-        return $a + $b;
-    }
-    //Check string have work specical
-    public function checkString($field){
-        if(filter_var($field, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
-            return true;
-        } 
-        else if(is_int($field)){
-            return true;
-        }
-        return false;
-    }
+
 }

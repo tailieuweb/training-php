@@ -7,13 +7,12 @@ class UserModelTest extends TestCase {
     /**
      * Test function findUserById
      */
-    public function testFindUserById(){
+    public function testFindUserByIdOk(){
         $user = new UserModel();
-        $userId = 26;
+        $userId = 2;
 
-        $expected = "LE VAN LAM";
+        $expected = "test2";
         $actual = $user->findUserById($userId);
-
         $this->assertEquals($expected,$actual[0]['name']);
     }
     /**
@@ -30,7 +29,6 @@ class UserModelTest extends TestCase {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
-        // $this->assertEquals($expected,$actual[0]['name']);
     }
     /**
      * Test function findUserById with id is string
@@ -61,6 +59,22 @@ class UserModelTest extends TestCase {
 
     }
     /**
+     * Test function findUserById with id is array
+     */
+    public function testFindUserByIdArray() {
+        $userModel = new UserModel();
+
+        $id = [
+            'name','email'
+        ];
+
+        $expected = ['error'];
+        $actual = $userModel->findUserById($id[0]);
+        // var_dump($actual);die();
+        $this->assertEquals($expected, $actual);
+
+    }
+    /**
      * Test function findUserById with id is object
      */
     public function testFindUserByIdObject() {
@@ -69,8 +83,8 @@ class UserModelTest extends TestCase {
         $id = new BankModel();
 
         $expected = 'error';
-        $actual = $userModel->findUserById($id);
-
+        $actual = $userModel->findUserById($id->createToken());
+        // var_dump($id->createToken());die();
         $this->assertEquals($expected, $actual);
 
     }
@@ -78,19 +92,20 @@ class UserModelTest extends TestCase {
     /**
      * Test function findUser
      */
-    public function testFindUsers(){
+    public function testFindUsersOk(){
         $user = new UserModel();
         $keys = "a";
         // $expected = "LE VAN LAM";
         $actual = $user->findUser($keys);
-        if(!empty($actual)){
+        //  var_dump($actual);die();
+        if(empty($actual)){
             $this->assertTrue(true);
         }
         else{
             $this->assertTrue(false);
         }
         
-        // var_dump($actual);die();
+       
     }
     /**
      * Test function findUser with key not exits
@@ -129,26 +144,139 @@ class UserModelTest extends TestCase {
 
         $this->assertEquals($expected, $actual);
     }
+    /**
+     * Test function findUser with key is number
+     */
+    public function testFindUserNumber(){
+        $user = new UserModel();
+        $keys = 123;
+
+        $expected = [];
+        $actual = $user->findUser($keys);
+
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test function findUser with key is object
+     */
+    public function testFindUserObject(){
+        $user = new UserModel();
+        $keys = new BankModel();
+
+        $expected = [];
+        $actual = $user->findUser($keys->createToken());
+
+        $this->assertEquals($expected, $actual);
+    }
 
     /**
-     * Test function findUserById
+     * Test function auth is right
      */
-    public function testAuth(){
+    public function testAuthOk(){
         $user = new UserModel();
-        $name = "Le LAM";
-        $pass = "12345";
+        $name = "Le LAM 22";
+        $pass = "11111";
 
         // $expected = "LE VAN LAM";
         $actual = $user->auth($name, $pass);
-        
-        if($name == $actual[0]['name'] && $pass == $actual[0]['password']){
+        // var_dump(md5($pass));die();
+        if($name == $actual[0]['name'] && md5($pass) == $actual[0]['password']){
             $this->assertTrue(true); 
         }
         else{
             $this->assertTrue(false); 
         }
     }
+    /**
+     * Test function auth with name worng
+     */
+    public function testAuthNameNg(){
+        $user = new UserModel();
+        $name = "Le LAM 22";
+        $pass = "11111";
 
+        $actual = $user->auth($name, $pass);
+
+        var_dump($actual[0]['name']);die();
+        if($name == $actual[0]['name'] && md5($pass) == $actual[0]['password']){
+            $this->assertTrue(true); 
+        }
+        else{
+            $this->assertTrue(false); 
+        }
+    }
+    /**
+     * Test function auth with password worng
+     */
+    public function testAuthPassNg(){
+        $user = new UserModel();
+        $name = "Le LAM 9x";
+        $pass = "111119999";
+
+        // $expected = "LE VAN LAM";
+        $actual = $user->auth($name, $pass);
+        // var_dump(md5($pass));die();
+        if($name == $actual[0]['name'] && md5($pass) == $actual[0]['password']){
+            $this->assertTrue(true); 
+        }
+        else{
+            $this->assertTrue(false); 
+        }
+    }
+    /**
+     * Test function auth with name is number
+     */
+    public function testAuthNameNumber(){
+        $user = new UserModel();
+        $name = 123;
+        $pass = "111119999";
+
+        // $expected = "LE VAN LAM";
+        $actual = $user->auth($name, $pass);
+        // var_dump(md5($pass));die();
+        if($name == $actual[0]['name'] && md5($pass) == $actual[0]['password']){
+            $this->assertTrue(true); 
+        }
+        else{
+            $this->assertTrue(false); 
+        }
+    }
+    /**
+     * Test function auth with password is number
+     */
+    public function testAuthPassNumberOk(){
+        $user = new UserModel();
+        $name = "Le LAM 22";
+        $pass = 11111;
+
+        // $expected = "LE VAN LAM";
+        $actual = $user->auth($name, $pass);
+        // var_dump(md5($pass));die();
+        if($name == $actual[0]['name'] && md5($pass) == $actual[0]['password']){
+            $this->assertTrue(true); 
+        }
+        else{
+            $this->assertTrue(false); 
+        }
+    }
+    /**
+     * Test function auth with password is number
+     */
+    public function testAuthPassNumberNg(){
+        $user = new UserModel();
+        $name = "Le LAM 22";
+        $pass = 11999;
+
+        // $expected = "LE VAN LAM";
+        $actual = $user->auth($name, $pass);
+        // var_dump(md5($pass));die();
+        if($name == $actual[0]['name'] && md5($pass) == $actual[0]['password']){
+            $this->assertTrue(true); 
+        }
+        else{
+            $this->assertTrue(false); 
+        }
+    }
     /**
      * Test function create token
      */
@@ -240,191 +368,4 @@ class UserModelTest extends TestCase {
         return $this->assertTrue(false);
     }
 
-
-
-
-
-
-
-    /**
-     * Eg: Test function Sum a, b
-     * Test characters
-     */
-    public function testSumOk()
-    {
-        $userModel = new UserModel();
-        $a = 1;
-        $b = 2;
-        $expected = 3;
-
-        $actual = $userModel->sumb($a,$b);
-        $this->assertEquals($expected,$actual);
-    }
-    public function testSumDuong()
-    {
-        $userModel = new UserModel();
-        $a = 1;
-        $b = 2;
-        $actual = $userModel->sumb($a,$b);
-
-      if($actual != 3)
-      {
-          $this->assertTrue(false); 
-      }
-      else
-      {
-          $this->assertTrue(true); 
-      }
-    }
-    public function testSumAm()
-    {
-        $userModel = new UserModel();
-        $a = -1;
-        $b = -2;
-        $actual = $userModel->sumb($a,$b);
-
-      if($actual != -3)
-      {
-          $this->assertTrue(false); 
-      }
-      else
-      {
-          $this->assertTrue(true); 
-      }
-      
-    }
-    public function testSumAmAndDuong()
-    {
-          $userModel = new UserModel();
-          $a = -1;
-          $b = 2;
-          $actual = $userModel->sumb($a,$b);
-  
-        if($actual != 1)
-        {
-            $this->assertTrue(false); 
-        }
-        else
-        {
-            $this->assertTrue(true); 
-        }
-    }
-    public function testSumThucDuong()
-    {
-          $userModel = new UserModel();
-          $a = 1.5;
-          $b = 1.5;
-          $actual = $userModel->sumb($a,$b);
-  
-        if($actual != 3)
-        {
-            $this->assertTrue(false); 
-        }
-        else
-        {
-            $this->assertTrue(true); 
-        }
-        
-    }
-    public function testSumThucAm()
-    {
-        $userModel = new UserModel();
-        $a = -1.5;
-        $b = -1.5;
-        $actual = $userModel->sumb($a,$b);
-
-        if($actual != -3)
-        {
-            $this->assertTrue(false); 
-        }
-        else
-        {
-            $this->assertTrue(true); 
-        }
-    }
-    public function testSumThucAmAndDuong()
-    {
-        $userModel = new UserModel();
-        $a = -1.5;
-        $b = 1.5;
-        $actual = $userModel->sumb($a,$b);
-
-        if($actual != 0)
-        {
-            $this->assertTrue(false); 
-        }
-        else
-        {
-            $this->assertTrue(true); 
-        }
-    }
-    
-    public function testSumChuoiAndSo()
-    {
-        $userModel = new UserModel();
-        $a = 'a';
-        $b = 1.5;
-        $actual = $userModel->sumb($a,$b);
-
-        if($actual != 'error')
-        {
-            $this->assertTrue(false); 
-        }
-        else
-        {
-            $this->assertTrue(true); 
-        }
-    }
-    public function testSumChuoiAndChuoi()
-    {
-        $userModel = new UserModel();
-        $a = 'a';
-        $b = 'a';
-        $actual = $userModel->sumb($a,$b);
-
-        if($actual != 'error')
-        {
-            $this->assertTrue(false); 
-        }
-        else
-        {
-            $this->assertTrue(true); 
-        }
-    }
-    /**
-     * Check string
-     */
-    public function testCheckString(){
-        $userModel = new UserModel();
-        $str = "jksfhsalfsa";
-        $check = $userModel->checkString($str);
-        if($check == true){
-            $this->assertTrue(true);
-        }
-        else{
-            $this->assertTrue(false);
-        }
-    }
-    public function testCheckStringF(){
-        $userModel = new UserModel();
-        $str = "jksfhsa%lfsa";
-        $check = $userModel->checkString($str);
-        if($check == true){
-            $this->assertTrue(false);
-        }
-        else{
-            $this->assertTrue(true);
-        }
-    }
-    public function testCheckStringNg(){
-        $userModel = new UserModel();
-        $str = 2;
-        $check = $userModel->checkString($str);
-        if($check == true){
-            $this->assertTrue(true);
-        }
-        else{
-            $this->assertTrue(false);
-        }
-    }
 }
