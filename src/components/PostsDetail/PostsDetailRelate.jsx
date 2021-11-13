@@ -1,11 +1,15 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function PostsDetailRelate(props) {
   const { posts } = props;
+  const { t } = useTranslation("common");
+
   return (
     <div>
-      <h3 className="text-center capitalize mb-4">Maybe You Are Interested</h3>
+      <h3 className="text-center text-capitalize mb-4">
+        {t("app.common.relate")}
+      </h3>
       {posts.map((post) => {
         const isReadMore = post.description.length < 150;
         return (
@@ -27,7 +31,7 @@ export default function PostsDetailRelate(props) {
                       className="font-weight-bold"
                     >
                       {" "}
-                      Read more
+                      {t("app.common.readMore")}
                     </a>
                   </Link>
                 )}

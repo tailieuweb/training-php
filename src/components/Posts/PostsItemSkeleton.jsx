@@ -1,6 +1,6 @@
 import Skeleton from "react-loading-skeleton";
 
-export default function PostsSkeleton() {
+export default function PostsItemSkeleton() {
   return (
     <div className="card">
       <div className="card-body">
@@ -13,7 +13,7 @@ export default function PostsSkeleton() {
               />
             </Skeleton>
             <div className="ml-3">
-              <Skeleton width={200}>Unknown User</Skeleton>
+              <Skeleton width={200}></Skeleton>
               <Skeleton width={200}></Skeleton>
             </div>
           </div>

@@ -1,6 +1,10 @@
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
+
 export default function PostsDetailContent(props) {
   const { post } = props;
+  const { t } = useTranslation("common");
+
   return (
     <div className="card bg-white rounded-lg p-4">
       <div className="card-body py-2">
@@ -14,7 +18,7 @@ export default function PostsDetailContent(props) {
             </a>
             <div className="ml-3">
               <a>
-                <h5 className="card-title mb-0">Unknown User</h5>
+                <h5 className="card-title mb-0">{t("app.common.unknown")}</h5>
               </a>
               <small className="card-text">{post?.created_at}</small>
             </div>

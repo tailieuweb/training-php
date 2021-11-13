@@ -6,6 +6,8 @@
     "app.common.unknown": "Unknown User",
     "app.common.readMore": "Read more",
     "app.common.profile": "My Profile",
+    "app.common.inputSearchPlaceholder": "Type a keyword...",
+    "app.common.relate": "Maybe you are interested",
 
     "app.toast.requiredInput": "Please enter the full information.",
     "app.toast.suggestLogin": "Please login to be able to edit posts or you can post anonymously.",
