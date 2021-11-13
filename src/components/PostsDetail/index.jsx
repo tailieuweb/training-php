@@ -1,11 +1,17 @@
+import { useRouter } from "next/dist/client/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actLoadPosts } from "../../redux/actions/postsActions";
+import {
+  actLoadPosts,
+  actLoadPostById,
+} from "../../redux/actions/postsActions";
 import { shuffleArr } from "../../utils/commonFunctions";
 import PostsDetailContent from "./PostsDetailContent";
 import PostsDetailRelate from "./PostsDetailRelate";
 
 export default function PostsDetail() {
+  const router = useRouter();
+  const { id = 0 } = router.query;
   //Redux
   const dispatch = useDispatch();
   const selectorPosts = useSelector((state) => state.posts);
@@ -13,8 +19,19 @@ export default function PostsDetail() {
 
   //UseState
   const [posts, setPosts] = useState([]);
+  const [post, setPost] = useState();
 
   //UseEffect
+  useEffect(() => {
+    if (id === 0) {
+      return;
+    }
+    (async () => {
+      const post = await dispatch(actLoadPostById(id));
+      setPost(post);
+    })();
+  }, [id]);
+
   useEffect(() => {
     (async () => {
       await dispatch(actLoadPosts());
@@ -29,7 +46,7 @@ export default function PostsDetail() {
   return (
     <div className="row mt-4">
       <div className="col-12 col-md-8">
-        <PostsDetailContent />
+        <PostsDetailContent post={post} />
       </div>
       <div className="col-12 col-md-4">
         <PostsDetailRelate posts={posts} />

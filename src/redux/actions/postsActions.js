@@ -20,6 +20,16 @@ export const actLoadPosts = () => {
   };
 };
 
+export const actLoadPostById = (id) => {
+  return () => {
+    return apiCaller(`products/${id}`, "GET", null).then((res) => {
+      if (res.success) {
+        return res.data;
+      }
+    });
+  };
+};
+
 export const actAddPost = (post) => {
   return (dispatch) => {
     dispatch(startLoading());
