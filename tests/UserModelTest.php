@@ -10,7 +10,10 @@ class UserModelTest extends TestCase
      */
     public function testSumOk()
     {
-        $userModel = new UserModel();
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+
         $a = 1;
         $b = 2;
         $expected = 3;
@@ -26,7 +29,10 @@ class UserModelTest extends TestCase
      */
     public function testSumNg()
     {
-        $userModel = new UserModel();
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+
         $a = 1;
         $b = 2;
 
@@ -46,7 +52,10 @@ class UserModelTest extends TestCase
      */
     public function testSum_StringAndNum()
     {
-        $userModel = new UserModel();
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+
         $a = 1;
         $b = 'a';
 
@@ -63,7 +72,10 @@ class UserModelTest extends TestCase
      */
     public function testSum_StringAndString()
     {
-        $userModel = new UserModel();
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+
         $a = 'a';
         $b = 'b';
 
@@ -80,7 +92,10 @@ class UserModelTest extends TestCase
      */
     public function testSum_FloatingPointNumbers()
     {
-        $userModel = new UserModel();
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+
         $a = 2.3;
         $b = 3.5;
 
@@ -99,7 +114,9 @@ class UserModelTest extends TestCase
      */
     public function testGetTheIdOk()
     {
-        $userModel = new UserModel();
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->getTheID();
 
@@ -120,7 +137,9 @@ class UserModelTest extends TestCase
      */
     public function testInsertUserOk()
     {
-        $userModel = new UserModel();
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $param = array(
             "id" => "",
@@ -151,7 +170,9 @@ class UserModelTest extends TestCase
      */
     public function testUpdateUserOk()
     {
-        $userModel = new UserModel();
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $currentDataVerion = $userModel->getVersionByUserID(1);
 
@@ -182,7 +203,9 @@ class UserModelTest extends TestCase
      */
     public function testUpdateUserNgNull()
     {
-        $userModel = new UserModel();
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $param = array(
             "id" => null,
@@ -211,7 +234,9 @@ class UserModelTest extends TestCase
      */
     public function testUpdateUserNgNan()
     {
-        $userModel = new UserModel();
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $nan = 'e';
 
@@ -242,7 +267,9 @@ class UserModelTest extends TestCase
      */
     public function testUpdateUserNgEmptyString()
     {
-        $userModel = new UserModel();
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $currentDataVerion = $userModel->getVersionByUserID(1);
 
@@ -273,7 +300,9 @@ class UserModelTest extends TestCase
      */
     public function testUpdateUserNgObject()
     {
-        $userModel = new UserModel();
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $obj = new stdClass();
 
