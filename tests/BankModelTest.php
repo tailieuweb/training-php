@@ -36,4 +36,30 @@ class BankModelTest extends TestCase
             $this->assertTrue(true);
          }
     }
+
+    // test function deleteBankById string
+    public function testDeleteByIdString(){
+        $bankModel = new BankModel();
+        $idBank = 'quyen';
+        $deleteBankById = $bankModel->deleteBankById($idBank);
+        
+        if(empty($deleteBankById)){
+            $this->assertFalse(false);
+        }else{
+            $this->assertTrue(True);
+        }
+    }
+
+    // test function deleteBankById null
+    public function testDeleteByIdNull(){
+        $bankModel = new BankModel();
+        $idBank = null;
+        $deleteBankById = $bankModel->deleteBankById($idBank);
+        
+        if(empty($deleteBankById)){
+            $this->assertTrue(true);
+        }else{
+            $this->assertFalse(false);
+        }
+    }
 }

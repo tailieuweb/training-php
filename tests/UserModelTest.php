@@ -164,4 +164,17 @@ class UserModelTest extends TestCase
          $this->assertFalse(false);
       }
    }
+
+   // test function getUsers when search null
+   public function testGetUsersWhenSearchNull(){
+      $userModel = new UserModel();
+      $param['keyword'] = Null;
+
+      $user = $userModel->getUsers($param);
+      if(empty($user) == $param){
+         $this->assertTrue(true);
+      }else{
+         $this->assertFalse(false);
+      }
+   }
 }
