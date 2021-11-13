@@ -24,6 +24,9 @@ $users = $userRepository->getUsers($params);
     <?php include 'views/header.php' ?>
     <div class="container">
         <?php if (!empty($users)) { ?>
+            <div class="alert alert-success" role="alert">
+                Connect to db success
+            </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
