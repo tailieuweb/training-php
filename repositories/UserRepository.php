@@ -70,7 +70,7 @@ class UserRepository extends BaseModel
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make('bank');
-        $bankModel = new BankModel();
+        // $bankModel = new BankModel();
         return $bankModel->getBankAccountByUserID($user_id);
     }
 }
