@@ -83,6 +83,22 @@ class UserModelTest extends TestCase
     $actual = $user->findUserById();
     $this->assertEquals($expected, $actual);
   }
+  //*--------------------------------------------------------------
+  public function testFindUserByIdWithSpecialCharactersNotGood()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->findUserById('&"<>', "&'<>");
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
+  public function testFindUserByIdWithSQLInjectionNotGood()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->findUserById('" or ""="');
+    $this->assertEquals($expected, $actual);
+  }
   // auth()
   //*--------------------------------------------------------------
   public function testAuthWithUserNamePasswordStringOk()
@@ -98,14 +114,6 @@ class UserModelTest extends TestCase
     ];
     $actual = $user->auth("admin", "admin");
     $this->assertEquals($expected, $actual[0]);
-  }
-  //*--------------------------------------------------------------
-  public function testAuthWithUserNamePasswordStringDoesNotExistNotGood()
-  {
-    $user = new UserModel();
-    $expected = [];
-    $actual = $user->auth("sgf", "345345");
-    $this->assertEquals($expected, $actual);
   }
   //*--------------------------------------------------------------
   public function testAuthWithEmtpyUserNamePasswordNotGood()
@@ -169,6 +177,22 @@ class UserModelTest extends TestCase
     $user = new UserModel();
     $expected = [];
     $actual = $user->auth();
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
+  public function testAuthWithUserNamePasswordSpecialCharactersNotGood()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth('&"<>', "&'<>");
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
+  public function testAuthWithSQLInjectionNotGood()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth('" or ""="', '" or ""="');
     $this->assertEquals($expected, $actual);
   }
 }

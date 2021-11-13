@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 23, 2021 at 08:23 AM
--- Server version: 10.4.19-MariaDB-log
--- PHP Version: 8.0.7
+-- Host: localhost
+-- Generation Time: Nov 13, 2021 at 04:48 PM
+-- Server version: 8.0.13-4
+-- PHP Version: 7.2.24-0ubuntu0.18.04.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -20,8 +21,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `c2tqLmlZ7r`
 --
-CREATE DATABASE IF NOT EXISTS `c2tqLmlZ7r` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `c2tqLmlZ7r`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `banks`
+--
+
+CREATE TABLE `banks` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `cost` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `banks`
+--
+
+INSERT INTO `banks` (`id`, `user_id`, `cost`) VALUES
+(1, 1, 1111),
+(2, 2, 1111),
+(3, 3, 1111),
+(4, 4, 1111),
+(5, 5, 1111);
 
 -- --------------------------------------------------------
 
@@ -29,7 +51,6 @@ USE `c2tqLmlZ7r`;
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -44,12 +65,19 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`) VALUES
-(1, 'admin', 'Admin', 'admin1@gmail.com', 'admin', 'd41d8cd98f00b204e9800998ecf8427e'),
-(2, 'user1', 'User1', 'user1@gmail.com', 'user', '24c9e15e52afc47c225b757e7bee1f9d');
+(10, 'aaaaa', 'aaa', 'aaa@mail.com', 'user', '47bce5c74f589f4867dbd57e9ca9f808'),
+(2, 'user1', 'User1', 'user1@gmail.com', 'user', '47bce5c74f589f4867dbd57e9ca9f808'),
+(11, 'admin', 'admin', 'admin@mail.com', 'admin', '21232f297a57a5a743894a0e4a801fc3');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `banks`
+--
+ALTER TABLE `banks`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -62,10 +90,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `banks`
+--
+ALTER TABLE `banks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

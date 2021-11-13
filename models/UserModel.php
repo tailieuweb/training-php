@@ -12,14 +12,16 @@ class UserModel extends BaseModel
     return $user; //return array
   }
   //--------------------------------------------------------------
+  //user admin , pass admin
   public function auth($userName = "", $password = "")
   {
-    if (
-      empty($userName) || empty($password) ||
-      !is_string($userName) || !is_string($password)
-    ) return [];
-    $md5Password = md5($password);
-    $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
+    //not string -> fail
+    if (!is_string($userName) || !is_string($password)) return [];
+    $userName = trim($userName);
+    $userName = stripcslashes($userName);
+    $userName = htmlspecialchars($userName);
+    $encodePassword = md5($password);
+    $sql = "SELECT * FROM users WHERE name = '$userName' AND password = '$encodePassword'";
     $user = $this->select($sql);
     return $user; //return array
   }
