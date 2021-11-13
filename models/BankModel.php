@@ -17,11 +17,10 @@ class BankModel extends BaseModel implements IBank
     
     public function findBankById($id)
     {
-        substr($id, 4,1);
         
-        $sql = 'SELECT * FROM bank WHERE id = ' . substr($id, 4,1);
+        $sql = 'SELECT * FROM bank WHERE id = ' . $id;
         $banks = $this->select($sql);
-        //var_dump($banks);
+
         return $banks;
     }
 

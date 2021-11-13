@@ -103,9 +103,8 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
-        $password = md5($input['password']);
         $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
-            "'" . $input['name'] . "', '" . $input['full-name'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
+            "'" . $input['name'] . "', '" . $input['full-name'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . md5($input['password']) . "')";
 
         $user = $this->insert($sql);
 
@@ -133,14 +132,5 @@ class UserModel extends BaseModel
         }
 
         return $users;
-    }
-
-    /**
-     * For testing
-     * @param $a
-     * @param $b
-     */
-    public function sumb($a, $b) {
-        return $a + $b;
     }
 }

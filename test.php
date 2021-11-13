@@ -65,3 +65,4 @@ $factory = new Factory();
 $bank = $factory->make('bank');
 $user = $factory->make('user');
 $user->print();
+$bank->print();
