@@ -113,8 +113,18 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
+        if (
+            is_string($input['name']) == false || is_string($input['fullname']) == false || is_string($input['email']) == false
+            || is_string($input['type']) == false || is_string($input['password']) == false
+            || strlen($input['name']) == 0 || strlen($input['fullname']) == 0 || strlen($input['email']) == 0
+            || strlen($input['type']) == 0 || strlen($input['password']) == 0) {
+            return 0;
+        }
+
+        // Specify the id to assign to the new user:
         $id = intval($this->getTheID()) + 1;
 
+        // Get time:
         $tz_object = new DateTimeZone('Asia/Ho_Chi_Minh');
         $datetime = new DateTime();
         $datetime->setTimezone($tz_object);

@@ -192,6 +192,137 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * Test case:
+     * Add new user to database with duplicate ID.
+     * Expected result: The new user is inserted with different ID.
+     */
+    public function testInsertUserNgDuplicateId()
+    {
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+
+        $existing_id = $userModel->getTheID();
+
+        $param = array(
+            "id" => $existing_id,
+            "bank_id" => 0,
+            "name" => "user99",
+            "fullname" => "user99",
+            "email" => "user99@mail.com",
+            "type" => "user",
+            "password" => "admin",
+            "cost" => "0",
+            "ver" => "",
+            "submit" => "submit"
+        );
+
+        $userModel->insertUser($param);
+        $actual = $userModel->getTheID();
+        $expected = $existing_id + 1;
+
+        print_r("\t=> The last ID before: " . $existing_id  . "\n");
+        print_r("\t=> The last ID after: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case:
+     * Add new user to database with null values.
+     */
+    public function testInsertUserNgNull()
+    {
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+
+        $param = array(
+            "id" => "",
+            "bank_id" => 0,
+            "name" => null,
+            "fullname" => "user99",
+            "email" => "user99@mail.com",
+            "type" => "user",
+            "password" => "admin",
+            "cost" => "0",
+            "ver" => "",
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->insertUser($param);
+        $expected = 0;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case:
+     * Add new user to database with empty string values.
+     */
+    public function testInsertUserNgEmptyString()
+    {
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+
+        $param = array(
+            "id" => "",
+            "bank_id" => 0,
+            "name" => "",
+            "fullname" => "",
+            "email" => "",
+            "type" => "",
+            "password" => "",
+            "cost" => "0",
+            "ver" => "",
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->insertUser($param);
+        $expected = 0;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case:
+     * Add new user to database with with object values.
+     */
+    public function testInsertUserNgObject()
+    {
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+
+        $obj = new stdClass();
+
+        $param = array(
+            "id" => "",
+            "bank_id" => 0,
+            "name" => $obj,
+            "fullname" => $obj,
+            "email" => $obj,
+            "type" => $obj,
+            "password" => $obj,
+            "cost" => "0",
+            "ver" => "",
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->insertUser($param);
+        $expected = 0;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+
 
     // ____________________________________________________________________________________________________
     /**
