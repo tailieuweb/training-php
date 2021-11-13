@@ -16,7 +16,7 @@ export default function HeaderAuth(props) {
             data-toggle="dropdown"
             id="navbarDropdownMenuLink2"
           >
-            <i className="fa fa-user mr-1" aria-hidden="true"></i> John Doe
+            <i className="fa fa-user mr-1" aria-hidden="true"></i> {user.name}
           </a>
           <ul
             className="dropdown-menu"
