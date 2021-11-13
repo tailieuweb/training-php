@@ -108,6 +108,7 @@ class UserModelTest extends TestCase
 
     }
 
+    //Test hàm getUser khi không có dữ liệu
     public function testgetUsersNotParamOK(){
         $userModel = new UserModel();
 
@@ -121,6 +122,8 @@ class UserModelTest extends TestCase
         }
       
     }
+
+    //Test hàm getUser khi có truyền vào dữ liệu
     public function testgetUsersParamOK(){
         $userModel = new UserModel();
         $key = "a";
@@ -135,21 +138,5 @@ class UserModelTest extends TestCase
         
     }
     
-    public function testgetUsersParamNotOK(){
-        $userModel = new UserModel();
-       // $key = "<script>alert('hello world')</scrip>";
-        $key = "a";
-        $actual = $userModel->getUsers($key);
-        $excute = [];
-        var_dump($actual);
-        die();
-        // if($actual != null){
-        //     $this->assertTrue(true);
-        // }
-        // else{
-        //     $this->assertTrue(false);
-        // }
-        
-    }
 
 }
