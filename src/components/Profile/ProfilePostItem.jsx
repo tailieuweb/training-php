@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function ProfilePostItem(props) {
   const { post, onSelectPost } = props;
+  const { t } = useTranslation("common");
   const [isReadMore] = useState(post.description.length < 150);
 
   return (
@@ -22,7 +24,7 @@ export default function ProfilePostItem(props) {
               data-target="#editModal"
               onClick={onSelectPost}
             >
-              Sửa
+              {t("app.post.editButton")}
             </button>
             <button
               type="button"
@@ -31,7 +33,7 @@ export default function ProfilePostItem(props) {
               data-target="#deleteModal"
               onClick={onSelectPost}
             >
-              Xóa
+              {t("app.post.deleteButton")}
             </button>
           </div>
         </div>
@@ -46,7 +48,7 @@ export default function ProfilePostItem(props) {
                 className="font-weight-bold"
               >
                 {" "}
-                Read more
+                {t("app.common.readMore")}
               </a>
             </Link>
           )}
