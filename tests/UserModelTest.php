@@ -3,7 +3,47 @@ use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
 {
+    /**
+     * Test case Okie
+     */
+    public function testFindUserOk() {
+        $userModel = new UserModel();
+        $keyword = 'user1';
+        $expected = 'user1';
 
+        $user = $userModel->findUser($keyword);
+        $actual = $keyword;
+
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test case Okie
+     */
+    public function  testFindUserByIdOk() {
+        $userModel = new UserModel();
+        $userId = 2;
+        $expected = 'user1';
+
+        $user = $userModel->findUserById($userId);
+        $actual = $user[0]['name'];
+
+        $this->assertEquals($expected, $actual);
+    }
+     /**
+     * Test case Not good
+     */
+    public function  testFindUserByIdNg() {
+        $userModel = new UserModel();
+        $userId = 999;
+
+        $user = $userModel->findUserById($userId);
+
+        if(empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
     /**
      * Test case Okie
      */
