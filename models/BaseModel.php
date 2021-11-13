@@ -4,11 +4,24 @@ require_once 'configs/database.php';
 abstract class BaseModel {
     // Database connection
     protected static $_connection;
+    protected static $_instance;
 
     public function __construct() {
-
         if (!isset(self::$_connection)) {
-            self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+            try{
+                mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+                self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+           
+            }catch(mysqli_sql_exception $ex){
+                
+                echo("Không thể kết nối csdl ...");die();
+           
+            }finally{
+
+                // var_dump(123);die();
+            
+            }
+            
             if (self::$_connection->connect_errno) {
                 printf("Connect failed");
                 exit();
@@ -22,7 +35,6 @@ abstract class BaseModel {
      * @param $sql
      */
     protected function query($sql) {
-
         $result = self::$_connection->query($sql);
         return $result;
     }
