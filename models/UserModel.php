@@ -4,15 +4,18 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
+    private static $_user_instance;
+
     // Singleton pattern:
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (self::$_user_instance !== null) {
             return self::$_user_instance;
         }
         self::$_user_instance = new self();
         return self::$_user_instance;
     }
-    
+
     // Get the lastest user id:
     public function getTheID()
     {
@@ -131,7 +134,7 @@ class UserModel extends BaseModel
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users 
-            WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection,$params['keyword']) . '%"';
+            WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection, $params['keyword']) . '%"';
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
@@ -145,12 +148,13 @@ class UserModel extends BaseModel
         return $users;
     }
 
-    /**
-     * For testing
-     * @param $a
-     * @param $b
-     */
-    public function sumb($a, $b) {
-        return $a + $b;
+    // Get version of data:
+    public function getVersionByUserID($user_id)
+    {
+        $sql = 'SELECT version FROM users WHERE id = ' . $user_id;
+        $user = $this->select($sql);
+
+        return $user[0]["version"];
     }
 }
+
