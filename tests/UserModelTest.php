@@ -2,7 +2,7 @@
 use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
-{
+{ 
 
     /**
      * Test case Okie
@@ -35,5 +35,23 @@ class UserModelTest extends TestCase
         } else {
             $this->assertTrue(true);
         }
+    }
+    public function testFindUserbyIdOk()
+    {
+        $userModel = new UserModel();
+        $userId = 1;
+        $userName = 'abc';
+        $user = $userModel->findUserById($userId);
+       
+        $actual = $user[0]['name'];
+        $this->assertEquals($userName, $actual);
+    }
+    public function testAuthOk()
+    {
+        $userModel = new UserModel();
+        $user = $userModel->auth("username", "passsword");
+        $isValid = ValidateUser("username", "password");
+        $actual = $user[0]['name'];
+        $this->assertEquals.IsFalse(isValid);
     }
 }
