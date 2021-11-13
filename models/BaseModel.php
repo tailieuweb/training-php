@@ -1,5 +1,7 @@
 <?php
-require_once 'configs/database.php';
+$ds       = DIRECTORY_SEPARATOR;
+$base_dir = realpath(dirname(__FILE__).$ds.'..').$ds;
+require("{$base_dir}configs{$ds}database.php");
 
 abstract class BaseModel {
     // Database connection
@@ -7,26 +9,27 @@ abstract class BaseModel {
     protected static $_instance;
 
     public function __construct() {
+        if (!isset(self::$_connection)) {
+            try{
+                mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+                self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+           
+            }catch(mysqli_sql_exception $ex){
+                
+                echo("Không thể kết nối csdl ...");die();
+           
+            }finally{
 
-        // if (!isset(self::$_connection)) {
-        //     self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-        //     if (self::$_connection->connect_errno) {
-        //         printf("Connect failed");
-        //         exit();
-        //     }
-        // }
-        try{
-            mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-            self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+                // var_dump(123);die();
+            
+            }
+            
+            if (self::$_connection->connect_errno) {
+                printf("Connect failed");
+                exit();
+            }
         }
-       catch(mysqli_sql_exception $e)
-       {
-        // var_dump("loi du lieu");
-        header('location: errordb.php');
-        die();
-       }
-       finally{
-       }
+
     }
 
     /**
@@ -34,7 +37,6 @@ abstract class BaseModel {
      * @param $sql
      */
     protected function query($sql) {
-
         $result = self::$_connection->query($sql);
         return $result;
     }
