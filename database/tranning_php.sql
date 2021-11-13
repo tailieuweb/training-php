@@ -2,8 +2,8 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th10 16, 2021 lúc 01:13 PM
+-- Máy chủ: 127.0.0.1:3309
+-- Thời gian đã tạo: Th10 31, 2021 lúc 04:11 AM
 -- Phiên bản máy phục vụ: 5.7.31
 -- Phiên bản PHP: 7.3.21
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `app_web1`
+-- Cơ sở dữ liệu: `tranning_php`
 --
 
 -- --------------------------------------------------------
@@ -32,24 +32,25 @@ CREATE TABLE IF NOT EXISTS `banks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `cost` float NOT NULL,
-  `version` int(11) NOT NULL DEFAULT '0',
+  `version` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `banks`
 --
 
 INSERT INTO `banks` (`id`, `user_id`, `cost`, `version`) VALUES
-(1, 1, 11, 0),
-(2, 1, 11, 0),
-(3, 2, 11, 0),
-(4, 33, 102, 10),
-(8, 4, 16, 1),
-(9, 3, 222, 3),
-(10, 31, 11, 0),
-(11, 32, 22, 1),
-(13, 34, 2, 0);
+(14, 6, 153, 1),
+(15, 7, 30, 2),
+(16, 9, 2471, 1),
+(18, 13, 123125, 1),
+(19, 10, 13, 1),
+(20, 16, 123, 1),
+(21, 50, 2000, 1),
+(22, 51, 2000, 1),
+(23, 52, 2000, 1),
+(24, 53, 2000, 1);
 
 -- --------------------------------------------------------
 
@@ -65,19 +66,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `version` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`) VALUES
-(3, 'ad', 'tam ngoc', '', '0', '6cda6088340bee4207e440021e294123'),
-(4, 'Test3', 'Test3', '', '0', '0e41c75a03a63eb168614430bdffd21b'),
-(33, 'Tam Tran', 'Tam Tran', 'a@gmail.com', 'guest', 'd1d16c28c7674cfc5e269dbe1209f552'),
-(34, 'anh', 'anh nguyen', 'anh@gmail.com', 'user', '698d51a19d8a121ce581499d7b701668'),
-(32, 'admin', 'Tam', 'admin@gmail.com', 'admin', 'b59c67bf196a4758191e42f76670ceba');
+INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`, `version`) VALUES
+(53, 'ThÃ¡i NgÃ´', 'ThÃ¡i NgÃ´', 'ngothai653@gmail.com', 'admin', '4297f44b13955235245b2497399d7a93', 1),
+(52, 'NgÃ´ ThÃ nh ThÃ¡i', 'NgÃ´ ThÃ nh ThÃ¡i', 'ngothai653@gmail.com', 'admin', '4297f44b13955235245b2497399d7a93', 1),
+(42, 'thai', 'ngothanhthai', 'ngo@gmail.com', 'admin', '2a933becf339fa60b659dc742c8ca3eb', 1),
+(41, 'thai', 'ngothanhthai', 'ngo@gmail.com', 'admin', '2a933becf339fa60b659dc742c8ca3eb', 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

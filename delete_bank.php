@@ -1,17 +1,18 @@
 <?php
-require_once 'models/UserModel.php';
+require_once 'models/BankModel.php';
 require_once 'models/FactoryPattent.php';
 
 $factory = new FactoryPattent();
-$userModel = $factory->make('user');
+$bankModel = $factory->make('bank');
 
-$user = NULL; //Add new user
+$bank = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     $id_start = substr($id,3);
     $id_end=substr($id_start,0,-3);
-    $userModel->deleteUserById($id_end);//Delete existing user
+    $bankModel->deleteBankById($id_end);//Delete existing user
 }
-header('location: list_users.php');
+header('location: list_banks.php');
+?>
