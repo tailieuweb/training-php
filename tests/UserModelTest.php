@@ -49,9 +49,11 @@ class UserModelTest extends TestCase
     public function testAuthOk()
     {
         $userModel = new UserModel();
-        $user = $userModel->auth("username", "passsword");
-        $isValid = ValidateUser("username", "password");
-        $actual = $user[0]['name'];
-        $this->assertEquals.IsFalse(isValid);
+        $userName = 'abc';
+        $userPassword = '123';
+        $user = $userModel->auth($userName);
+
+        $actual = $user[4]['passsword'];
+        $this->assertEquals($userPassword, $actual);
     }
 }
