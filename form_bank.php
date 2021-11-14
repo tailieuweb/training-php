@@ -13,11 +13,12 @@ $id = NULL;
 $err = 0;
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    try {
-        $bank = $userModel->findUserById($id, 111);
-    } catch (Throwable $e) {
-        $err = 1;
-    }
+    // try {
+    //     $bank = $userModel->findUserById($id, $bankModel);
+    // } catch (Throwable $e) {
+    //     $err = 1;
+    // }
+    $bank = $userModel->findUserById($id, $bankModel);
 }
 
 if (!empty($_POST['submit'])) {

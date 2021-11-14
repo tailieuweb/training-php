@@ -10,7 +10,6 @@ class UserModel extends BaseModel
     public function findUserById($id, BaseModel $bankModel)
     {
         if ($bankModel instanceof BankModel) {
-           
             if (!empty( $bankModel->findBankById($id))) {
                return $bankModel->findBankById($id);
             } 
