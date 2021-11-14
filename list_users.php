@@ -3,14 +3,14 @@
 session_start();
 require_once 'models/FactoryPattern.php';
 $factory = FactoryPattern::getInstance();
-$userModel = $factory->make('user');
+$userRepository = $factory->make('user-repository');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
 if (!isset($_SESSION['error'])) {
-    $users = $userModel->getUsers($params);
+    $users = $userRepository->getUsersWithBank($params);
 
     $token = md5(rand(0, 7777777) . "TEAMJ");
 }

@@ -1,11 +1,12 @@
 <?php
+session_start();
 require_once 'models/FactoryPattern.php';
 require_once 'models/UserRepository.php';
 $factory = FactoryPattern::getInstance();
 $repository = $factory->make('user-repository');
 $user = NULL; //Add new user
 $id = NULL;
-if (!$_SESSION['error']) {
+if (!isset($_SESSION['error'])) {
     if (!empty($_GET['id'])) {
         $id = $_GET['id'];
         $user = $repository->findById($id);

@@ -84,6 +84,12 @@ if (!empty($_POST['submit'])) {
                                                     } ?>>Guest</option>
                         </select>
                     </div>
+                    <?php if(isset($user['cost'])){ ?>
+                    <div class="form-group">
+                        <label for="cost">Cost</label>
+                        <input class="form-control" type="number" name="cost" placeholder="cost" value="<?php echo strip_tags($user['cost']) ?>" required>
+                    </div>
+                    <?php }?>
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                 </form>
             <?php } else { ?>
