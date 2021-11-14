@@ -323,6 +323,72 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * Test case:
+     * Add new user to database with with array values.
+     */
+    public function testInsertUserNgArray()
+    {
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+
+        $arr = [1, 2, 3];
+
+        $param = array(
+            "id" => "",
+            "bank_id" => 0,
+            "name" => $arr,
+            "fullname" => $arr,
+            "email" => $arr,
+            "type" => $arr,
+            "password" => $arr,
+            "cost" => "0",
+            "ver" => "",
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->insertUser($param);
+        $expected = 0;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case:
+     * Add new user to database with with boolean values.
+     */
+    public function testInsertUserNgBoolean()
+    {
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+
+        $boolean = true;
+
+        $param = array(
+            "id" => "",
+            "bank_id" => 0,
+            "name" => $boolean,
+            "fullname" => $boolean,
+            "email" => $boolean,
+            "type" => $boolean,
+            "password" => $boolean,
+            "cost" => "0",
+            "ver" => "",
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->insertUser($param);
+        $expected = 0;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+
 
     // ____________________________________________________________________________________________________
     /**
@@ -477,6 +543,72 @@ class UserModelTest extends TestCase
             "password" => $obj,
             "cost" => $obj,
             "ver" => $obj,
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->updateUser($param);
+        $expected = 0;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case:
+     * Update existing user in database with array values.
+     */
+    public function testUpdateUserNgArray()
+    {
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+
+        $arr = [1, 2, 3];
+
+        $param = array(
+            "id" => $arr,
+            "bank_id" => $arr,
+            "name" => $arr,
+            "fullname" => $arr,
+            "email" => $arr,
+            "type" => $arr,
+            "password" => $arr,
+            "cost" => $arr,
+            "ver" => $arr,
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->updateUser($param);
+        $expected = 0;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case:
+     * Update existing user in database with boolean values.
+     */
+    public function testUpdateUserNgBoolean()
+    {
+        // $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+
+        $boolean = true;
+
+        $param = array(
+            "id" => $boolean,
+            "bank_id" => $boolean,
+            "name" => $boolean,
+            "fullname" => $boolean,
+            "email" => $boolean,
+            "type" => $boolean,
+            "password" => $boolean,
+            "cost" => $boolean,
+            "ver" => $boolean,
             "submit" => "submit"
         );
 
