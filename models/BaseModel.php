@@ -5,17 +5,28 @@ abstract class BaseModel
 {
     // Database connection
     protected static $_connection;
+    public $_error;
     abstract static function getInstance();
 
     public function __construct()
     {
 
         if (!isset(self::$_connection)) {
-            self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-            if (self::$_connection->connect_errno) {
-                printf("Connect failed");
-                exit();
+            try {
+                mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+                self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+            } catch (mysqli_sql_exception $ex) {
+                // $_SESSION['error'] = $ex->getMessage();
+                $_SESSION['error'] = 'Database connection failed';
+                $this->error = true;
             }
+            if (self::$_connection && isset($_SESSION['error'])) {
+                unset($_SESSION['error']);
+            }
+            // if (!self::$_connection) {
+            //     printf("Connect failed");
+            //     exit();
+            // }
         }
     }
 
