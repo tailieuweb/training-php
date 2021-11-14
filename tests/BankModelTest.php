@@ -1,18 +1,47 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 class BankModelTest extends TestCase
 {
+
     /**
-     * Test case:
+     * Test case Ok
      */
-    public function testGetInstance()
+    public function testGetInstanceOk()
     {
-        $obj = UserModel::getInstance();
+        // Check if methods of object are able to use:
+        $expected = 'array';
+        $actual = gettype(UserModel::getInstance()->getUsers());
 
-        // $expected = 'NaN exception!';
-        // $actual = $userModel->sumb($a, $b);
+        print_r("\t=> Actual: " . $actual  . "\n");
 
-        // $this->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
-} 
+
+    /**
+     * Test case Ok
+     */
+    public function testGetInstanceOkObject()
+    {
+        $expected = 'object';
+        $actual = gettype(UserModel::getInstance());
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case Ok
+     */
+    public function testGetInstanceOkCorrectInstance()
+    {
+        $expected = true;
+        $actual = UserModel::getInstance() instanceof UserModel;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+}
