@@ -90,73 +90,36 @@
         <div class="review-parent pills pt-3">
             <div class="row">
                 <div class="col-md-7">
-                    <h3 class="head">23 Reviews</h3>
-                    <div class="review d-flex">
-                        <div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
-                        <div class="desc">
-                            <h4>
-                                <span class="text-left">Jacob Webb</span>
-                                <span class="text-right">14 March 2018</span>
-                            </h4>
-                            <p class="star">
-                                <span>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                </span>
-                                <span class="text-right"><a href="#" class="reply">
-                                        <ion-icon name="arrow-undo-outline"></ion-icon>
-                                    </a></span>
-                            </p>
-                            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+                    <h3 class="head">{{ $total_comment }} Reviews</h3>
+                    @foreach($comment as $value)
+                        <div class="review d-flex">
+                            <div class="user-img" style="background-image: url({{asset('')}}frontend/images/person_1.jpg)"></div>
+                            <div class="desc">
+                                <h4>
+                                    <span class="text-left">{{$value->username}}</span>
+                                    <span class="text-right">{{ $value->time_cmt }}</span>
+                                </h4>
+                                <p class="star">
+                                    <span>
+                                        <?php
+                                            $rate = 5 - $value->rating;
+                                            for($i=0; $i<$value->rating; $i++){ ?>
+                                            <i class="ion-ios-star"></i>
+                                        <?php } 
+                                            for($j=0; $j<$rate; $j++){
+                                        ?>
+                                            <i class="ion-ios-star disable"></i>
+                                        <?php } ?>
+                                    </span>
+                                    <span class="text-right"><a href="#" class="reply">
+                                            <ion-icon name="arrow-undo-outline"></ion-icon>
+                                        </a></span>
+                                </p>
+                                <p>{{$value->content}}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="review d-flex">
-                        <div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
-                        <div class="desc">
-                            <h4>
-                                <span class="text-left">Jacob Webb</span>
-                                <span class="text-right">14 March 2018</span>
-                            </h4>
-                            <p class="star">
-                                <span>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                </span>
-                                <span class="text-right"><a href="#" class="reply">
-                                        <ion-icon name="arrow-undo-outline"></ion-icon>
-                                    </a></span>
-                            </p>
-                            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-                        </div>
-                    </div>
-                    <div class="review d-flex">
-                        <div class="user-img" style="background-image: url(images/person_3.jpg)"></div>
-                        <div class="desc">
-                            <h4>
-                                <span class="text-left">Jacob Webb</span>
-                                <span class="text-right">14 March 2018</span>
-                            </h4>
-                            <p class="star">
-                                <span>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                </span>
-                                <span class="text-right"><a href="#" class="reply">
-                                        <ion-icon name="arrow-undo-outline"></ion-icon>
-                                    </a></span>
-                            </p>
-                            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-                        </div>
-                    </div>
+                    @endforeach
+                    
                     <?php if(!empty(Session::get('user_id'))){ ?>
                     <div class="review d-flex">
                         <div class="desc w-100">
@@ -173,19 +136,47 @@
                                 <label for="demo-5">5 stars</label>
 
                                 <div class="stars">
-                                    <label for="demo-1" aria-label="1 star" title="1 star"></label>
-                                    <label for="demo-2" aria-label="2 stars" title="2 stars"></label>
-                                    <label for="demo-3" aria-label="3 stars" title="3 stars"></label>
-                                    <label for="demo-4" aria-label="4 stars" title="4 stars"></label>
-                                    <label for="demo-5" aria-label="5 stars" title="5 stars"></label>
+                                    <label id="rating1" for="demo-1" aria-label="1 stars" title="1 stars"></label>
+                                    <label id="rating2" for="demo-2" aria-label="2 stars" title="2 stars"></label>
+                                    <label id="rating3" for="demo-3" aria-label="3 stars" title="3 stars"></label>
+                                    <label id="rating4" for="demo-4" aria-label="4 stars" title="4 stars"></label>
+                                    <label id="rating5" for="demo-5" aria-label="5 stars" title="5 stars"></label>
                                 </div>
 
                             </fieldset>
-                            <form id="user-comment" action="#" class="request-form">
-                                <div class="forn-group">
-                                    <textarea class="form-control" cols="30" rows="10" placeholder="Comment here..."></textarea>
+                            <!-- {{asset('')}}detail/{{$all_hotel->hotel_id}} -->
+                            <form id="user-comment" method="POST" action="#" class="request-form">
+                                @csrf
+                                <div class="form-group">
+                                    <input id="rating" type="hidden" value="" name="rating">
+                                    <input type="hidden" value="{{$all_hotel->hotel_id}}" name="hotel">
+                                    <textarea class="form-control" name="content" cols="30" rows="10" placeholder="Comment here..."></textarea>
                                 </div>
+                                <button name="" type="submit" class="btn btn-primary">Submit</button>
                             </form>
+                            <script>
+                                const rating1 = document.querySelector('#rating1');
+                                const rating2 = document.querySelector('#rating2');
+                                const rating3 = document.querySelector('#rating3');
+                                const rating4 = document.querySelector('#rating4');
+                                const rating5 = document.querySelector('#rating5');
+                                const main = document.querySelector('#rating');
+                                rating1.addEventListener('click', function () {
+                                    main.value = 1;
+                                })
+                                rating2.addEventListener('click', function () {
+                                    main.value = 2;
+                                })
+                                rating3.addEventListener('click', function () {
+                                    main.value = 3;
+                                })
+                                rating4.addEventListener('click', function () {
+                                    main.value = 4;
+                                })
+                                rating5.addEventListener('click', function () {
+                                    main.value = 5;
+                                })
+                            </script>
                         </div>
                     </div>
                     <?php } ?>

@@ -175,22 +175,25 @@ class FrontendController extends Controller
             ->where('hotel.hotel_id', $id)
             ->get();
         $rating_number = $this->getRatingHotelId($id);
+        //Get comment
+        $comment = DB::table('user_comment')
+            ->join('users_web', 'users_web.id', '=', 'user_comment.user_id')
+            ->select('user_comment.*', 'users_web.*')
+            ->where('hotel_id', $id)
+            ->orderBy('rating', 'DESC')->limit(3)->get();
         // var_dump(Auth::user()->id);die();
-        if(isset(Auth::user()->id)){
-            if($this->checkRentalHotel($all_hotel[0]->hotel_id, Auth::user()->id) == true){
+        if (isset(Auth::user()->id)) {
+            if ($this->checkRentalHotel($all_hotel[0]->hotel_id, Auth::user()->id) == true) {
                 Session::put('user_id', Auth::user()->id);
-
-            }
-            else{
+            } else {
                 Session::put('user_id', null);
-                
             }
-        }
-        else{
+        } else {
             Session::put('user_id', null);
         }
+        $total_comment = $this->getTotalComment($id);
         // var_dump($this->checkRentalHotel($all_hotel[0]->hotel_id, Auth::user()->id));die();
-        return View('Frontend.layout.hotel.detail', compact('all_hotel', 'rating_number'));
+        return View('Frontend.layout.hotel.detail', compact('all_hotel', 'rating_number', 'comment', 'total_comment'));
     }
     public function getRatingHotelId($id)
     {
@@ -291,18 +294,66 @@ class FrontendController extends Controller
         return view('frontend.layout.payment')->with('hotel', $hotel);
     }
     //Check user rental this hotel?
-    public function checkRentalHotel($hotel_id, $user_id){
+    public function checkRentalHotel($hotel_id, $user_id)
+    {
         $this->AuthLogin();
         $hotel = DB::table('user_rental')
             ->select('user_rental.*')
             ->where('user_id', $user_id)
             ->where('hotel_id', $hotel_id)->get();
         // var_dump($hotel[0]);die();
-        if(isset($hotel[0])){
-            if(!empty($hotel)){
+        if (isset($hotel[0])) {
+            if (!empty($hotel)) {
                 return true;
             }
         }
         return false;
+    }
+    //Post comment of user
+    public function postComment($id, Request $request){
+        $this->AuthLogin();
+        
+        $comment = array();
+        $comment['user_id'] = Auth::user()->id;
+        $comment['hotel_id'] = $id;
+        $comment['rating'] = $request->rating;
+        $comment['content'] = $request->content;
+        $date = date('Y/m/d', time());
+        $comment['time_cmt'] = $date;
+        DB::table('user_comment')->insert($comment);
+
+        //Get detail of hotel
+        $all_hotel = DB::table('hotel')
+            ->join('location', 'location.location_id', '=', 'hotel.location')
+            ->where('hotel.hotel_id', $id)
+            ->get();
+        $rating_number = $this->getRatingHotelId($id);
+        //Get comment
+        $comment = DB::table('user_comment')
+            ->join('users_web', 'users_web.id', '=', 'user_comment.user_id')
+            ->select('user_comment.*', 'users_web.*')
+            ->where('hotel_id', $id)
+            ->orderBy('rating', 'DESC')->limit(3)->get();
+        // var_dump(Auth::user()->id);die();
+        if (isset(Auth::user()->id)) {
+            if ($this->checkRentalHotel($all_hotel[0]->hotel_id, Auth::user()->id) == true) {
+                Session::put('user_id', Auth::user()->id);
+            } else {
+                Session::put('user_id', null);
+            }
+        } else {
+            Session::put('user_id', null);
+        }
+        $total_comment = $this->getTotalComment($id);
+        // var_dump($this->checkRentalHotel($all_hotel[0]->hotel_id, Auth::user()->id));die();
+        return View('Frontend.layout.hotel.detail', compact('all_hotel', 'rating_number', 'comment', 'total_comment'));
+    }
+    //Get total user comment for 1 hotel
+    public function getTotalComment($id){
+        $comment = DB::table('user_comment')
+        ->join('users_web', 'users_web.id', '=', 'user_comment.user_id')
+        ->select('user_comment.*', 'users_web.*')
+        ->where('hotel_id', $id)->get();
+        return count($comment);
     }
 }

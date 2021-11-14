@@ -1198,6 +1198,9 @@ color: #FFC107;
  .pills .review .desc .star i {
      color: #01d28e;
  }
+ .pills .review .desc .star i.disable {
+     color: gray !important;
+ }
  .ion-ios-star:before {
      content: "★";
      display: inline-block;
