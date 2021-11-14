@@ -157,6 +157,7 @@
                             <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
                         </div>
                     </div>
+                    <?php if(!empty(Session::get('user_id'))){ ?>
                     <div class="review d-flex">
                         <div class="desc w-100">
                             <fieldset class="rating">
@@ -187,6 +188,7 @@
                             </form>
                         </div>
                     </div>
+                    <?php } ?>
                 </div>
 
                 <div class="col-md-5">
