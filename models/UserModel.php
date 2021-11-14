@@ -65,6 +65,13 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
+        if (!isset($id)) {
+            return false;
+        }
+        if (!is_numeric($id)) {
+            return false;
+        }
+
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
     }
