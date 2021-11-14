@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 23, 2021 at 08:23 AM
--- Server version: 10.4.19-MariaDB-log
--- PHP Version: 8.0.7
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th10 13, 2021 lúc 05:11 AM
+-- Phiên bản máy phục vụ: 10.4.21-MariaDB
+-- Phiên bản PHP: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,18 +18,45 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `app_web1`
+-- Cơ sở dữ liệu: `app_web1`
 --
-CREATE DATABASE IF NOT EXISTS `app_web1` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `app_web1`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `bank`
 --
 
-DROP TABLE IF EXISTS `users`;
+CREATE TABLE `bank` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fullname` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sdt` int(11) NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stk` int(11) NOT NULL,
+  `SoDu` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `bank`
+--
+
+INSERT INTO `bank` (`id`, `name`, `fullname`, `sdt`, `email`, `stk`, `SoDu`) VALUES
+(1, 'Vũ', 'Phan Hoàng Vũ', 1343, '19211tt1343@mail.tdc.edu.vn', 129021286, 0),
+(2, 'Hậu', 'Phạm Nguyễn Trung Hậu', 4361, '18211tt4361@mail.tdc.edu.vn', 1111111111, 0),
+(3, 'Tuấn', 'Huỳnh Quốc Tuấn', 2313, '19211tt2313@mail.tdc.edu.vn', 222222222, 0),
+(4, 'Tình', 'Nguyễn Trọng Tình', 1111, 'trongtinh2k@gmail.com', 333333333, 0),
+(5, 'Trí', 'Trần Phước Minh Trí', 2222, 'tranphuocminhtri.tdc2019@gmail.com', 55555555, 0),
+(6, 'Hau', 'Nguyen Trong Tinhnjmmmmmmmmmmmmmmmmmmmmmmmmm', 123123, 'trongtinh2k@gmail.com', 1222, 0),
+(7, 'Test Them', 'Test Them', 123456, 'ajshdjas@mailaaaaaaaaaaa', 12332123, 0),
+(8, 'aaaaaaa', 'aaaa', 333333, 'trongtinh2k@gmailc.om', 11111111, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `users`
+--
+
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -40,32 +67,45 @@ CREATE TABLE `users` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`) VALUES
-(1, 'admin', 'Admin', 'admin1@gmail.com', 'admin', 'd41d8cd98f00b204e9800998ecf8427e'),
-(2, 'user1', 'User1', 'user1@gmail.com', 'user', '24c9e15e52afc47c225b757e7bee1f9d');
+(17, 'user', 'user', 'user@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b'),
+(18, 'admin', 'admin', 'admin@gmail.com', 'admin', 'c4ca4238a0b923820dcc509a6f75849b'),
+(19, 'hacker', 'hacker', 'hacker@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b');
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `users`
+-- Chỉ mục cho bảng `bank`
+--
+ALTER TABLE `bank`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT cho bảng `bank`
+--
+ALTER TABLE `bank`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
