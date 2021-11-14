@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2021 at 05:03 AM
+-- Generation Time: Sep 23, 2021 at 08:23 AM
 -- Server version: 10.4.19-MariaDB-log
 -- PHP Version: 8.0.7
 
@@ -26,37 +26,13 @@ USE `app_web1`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `banks`
---
-
-DROP TABLE IF EXISTS `banks`;
-CREATE TABLE `banks` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `cost` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `banks`
---
-
-INSERT INTO `banks` (`id`, `user_id`, `cost`) VALUES
-(1, 1, 1111),
-(2, 2, 1111),
-(3, 3, 1111),
-(4, 4, 1111),
-(5, 5, 1111);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `name` text NOT NULL,
+  `name` varchar(100) NOT NULL,
   `fullname` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `type` varchar(100) NOT NULL,
@@ -68,18 +44,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`) VALUES
-(2, 'test2', '', '', '', 'ad0234829205b9033196ba818f7a872b'),
-(3, 'hackerasfasf', '', '', '', '6a204bd89f3c8348afd5c77c717a097a');
+(1, 'admin', 'Admin', 'admin1@gmail.com', 'admin', 'd41d8cd98f00b204e9800998ecf8427e'),
+(2, 'user1', 'User1', 'user1@gmail.com', 'user', '24c9e15e52afc47c225b757e7bee1f9d');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `banks`
---
-ALTER TABLE `banks`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -92,16 +62,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `banks`
---
-ALTER TABLE `banks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
