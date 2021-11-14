@@ -72,13 +72,13 @@ class SingletonPatternTest extends TestCase
         $user = 'user';
         $bank = 'bank';
 
-        if($singleton->make('user') == $userModel && $singleton->make('bank') == $bankModel)
+        if($singleton->make('user') != $userModel && $singleton->make('bank') != $bankModel)
         {
-            $this->assertTrue(true);
+            $this->assertFalse(false);
         }
         else
         {
-            $this->assertFalse(false);
+            $this->assertTrue(true);
         }
      }
 }
