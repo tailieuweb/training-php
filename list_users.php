@@ -33,8 +33,6 @@ if(isset($_GET['error'])){
     <div class="container">
         <?php if (!empty($users)) {?>
             <div class="alert alert-warning" role="alert">
-                List of users! <br>
-                Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
             </div>
             <table class="table table-striped">
                 <thead>
@@ -66,7 +64,13 @@ if(isset($_GET['error'])){
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $user['id'] ?>">
+                                <?php
+                                $permitted_chars = '+-*/\=0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                                $string1 = substr(str_shuffle($permitted_chars), 0, 36);
+                                $string2 = substr(str_shuffle($permitted_chars), 0, 36);
+                                $result = $string1 . base64_encode($user['id']) . $string2
+                                ?>
+                                <a href="delete_user.php?id=<?php echo $result ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
