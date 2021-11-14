@@ -1,5 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
+require './models/BankModel.php';
 
 class UserModelTest extends TestCase
 {
@@ -36,6 +37,32 @@ class UserModelTest extends TestCase
         $this->assertEquals($excute, $actual);   
     }
 
+    public function testauthFieldsUserNull(){
+        $userModel = new UserModel();
+        $user = "";
+        $pass = "123814";
+        $excute = "Required User";
+
+        $actual =  $userModel->auth($user,$pass);  
+        if($actual == []){
+            $actual = "Required User";
+        }
+        $this->assertEquals($excute,$actual);
+    }
+
+    public function testauthFieldsPasswordNull(){
+        $userModel = new UserModel();
+        $user = "admin";
+        $pass = "";
+        $excute = "Required Password";
+
+        $actual =  $userModel->auth($user,$pass);  
+        if($actual == []){
+            $actual = "Required Password";
+        }
+        $this->assertEquals($excute,$actual);
+    }
+
     public function testauthUserPassEmpty(){
         //Test trường hợp người dùng không nhập gì cả
         $userModel = new UserModel();
@@ -45,12 +72,8 @@ class UserModelTest extends TestCase
         $excute = []; // kết quả mong đợi sẽ trả về mảng rỗng
 
         $actual =  $userModel->auth($user,$pass);  
-        // var_dump($actual);
-        // die();
         $this->assertEquals($excute, $actual);   
     }
-
-
 
     /**
      * Test case good
@@ -108,6 +131,38 @@ class UserModelTest extends TestCase
 
     }
 
+    public function testDecoratorPatternInsertUserOK(){
+        $userModel = new UserModel();
+        $bankModel = null;
+        $user = array(
+            'name' => 'test',
+            'fullname'=>'testUser',
+            'type' => 'user',
+            'email'=> 'test@gmail.com',
+            'password'=> '12345'
+        );
+        $excute = true;
+
+        $actual = $userModel->insertUser($user,$bankModel);
+       $this->assertEquals($excute,$actual);
+    }
+
+    public function testDecoratorPatternInsertUserNotOK(){
+        $userModel = new UserModel();
+        $bankModel = null;
+        $user = array(
+            'name' => 'test',
+            'fullname'=>'testUser',
+            'type' => 'user',
+            'email'=> 'test@gmail.com',
+            'password'=> '12345'
+        );
+        $excute = false;
+
+        $actual = $userModel->insertUser($user,"adas");
+       $this->assertEquals($excute,$actual);
+    }
+
     //Test hàm getUser khi không có dữ liệu
     public function testgetUsersNotParamOK(){
         $userModel = new UserModel();
@@ -124,19 +179,12 @@ class UserModelTest extends TestCase
     }
 
     //Test hàm getUser khi có truyền vào dữ liệu
-    public function testgetUsersParamOK(){
-        $userModel = new UserModel();
-        $key = "a";
-        $actual = $userModel->getUsers($key);
+    // public function testgetUsersParamOK(){
+    //     $userModel = new UserModel();
+    //     $key = "admin";
+    //     $actual = $userModel->getUsers($key);
 
-        if($actual != null){
-            $this->assertTrue(true);
-        }
-        else{
-            $this->assertTrue(false);
-        }
-        
-    }
+    // }
     
 
 }
