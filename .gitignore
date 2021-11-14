@@ -14,7 +14,7 @@ bin-release/
 *.apk
 
 # Others
-/vendor/
+/coverage/
 /project_web1/
 
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`

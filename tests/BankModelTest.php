@@ -12,7 +12,7 @@ class BankModelTest extends TestCase
     {
         // Check if methods of object are able to use:
         $expected = 'array';
-        $actual = gettype(UserModel::getInstance()->getUsers());
+        $actual = gettype(BankModel::getInstance()->getBankAccounts());
 
         print_r("\t=> Actual: " . $actual  . "\n");
 
@@ -25,7 +25,7 @@ class BankModelTest extends TestCase
     public function testGetInstanceOkObject()
     {
         $expected = 'object';
-        $actual = gettype(UserModel::getInstance());
+        $actual = gettype(BankModel::getInstance());
 
         print_r("\t=> Actual: " . $actual  . "\n");
 
@@ -38,7 +38,7 @@ class BankModelTest extends TestCase
     public function testGetInstanceOkCorrectInstance()
     {
         $expected = true;
-        $actual = UserModel::getInstance() instanceof UserModel;
+        $actual = BankModel::getInstance() instanceof BankModel;
 
         print_r("\t=> Actual: " . $actual  . "\n");
 
