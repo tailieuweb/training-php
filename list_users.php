@@ -6,10 +6,12 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $params = [];
-if (!empty($_GET['keyword'])) {
+if (isset($_GET['keyword']) && $_GET['keyword'] != '') {
     $params['keyword'] = $_GET['keyword'];
+    $users = $userModel->findUser($params['keyword']);
+} else {
+    $users = $userModel->getUsers($params);
 }
-$users = $userModel->getUsers($params);
 ?>
 <!DOCTYPE html>
 <html>
