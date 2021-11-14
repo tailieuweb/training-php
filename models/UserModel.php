@@ -98,13 +98,4 @@ class UserModel extends BaseModel {
 
         return $users;
     }
-
-    /**
-     * For testing
-     * @param $a
-     * @param $b
-     */
-    public function sumb($a, $b) {
-        return $a + $b;
-    }
 }
