@@ -53,16 +53,6 @@ class BankModel extends BaseModel {
     public function getBanks() {
         $sql = 'SELECT * FROM banks';
         $banks = $this->select($sql);
-
         return $banks;
     }
-    //
-    public static function getInstance() {
-        if (self::$_instance !== null){
-            return self::$_instance;
-        }
-        self::$_instance = new self();
-        return self::$_instance;
-    }
-
 }

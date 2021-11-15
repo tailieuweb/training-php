@@ -1,13 +1,15 @@
 <?php
+// Start the session
 session_start();
-require_once 'models/FactoryPattern.php';
-$factory = new FactoryPattern();
-$userModel = $factory->make('user');
-$params = [];
 
+require_once 'models/UserModel.php';
+$userModel = new UserModel();
+
+$params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
+
 $users = $userModel->getUsers($params);
 
 if(isset($_GET['Correct'])){
