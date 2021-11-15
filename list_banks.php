@@ -1,8 +1,13 @@
 <?php
+<<<<<<< HEAD
 session_start();
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 $bankModel = $factory->make('bank');
+=======
+require_once 'models/BankModel.php';
+$bankModel = new BankModel();
+>>>>>>> 2-php-202109/2-groups/2-B/1-2-Chung-phpunit
 $banks = $bankModel->getBanks();
 ?>
 <!DOCTYPE html>

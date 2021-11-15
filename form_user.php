@@ -4,7 +4,6 @@ $userModel = new UserModel();
 
 $user = NULL; //Add new user
 $id = NULL;
-$keyCode = "aoma87939dadasddsd";
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
@@ -23,7 +22,6 @@ if (!empty($_POST['submit'])) {
     }
    
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,8 +38,18 @@ if (!empty($_POST['submit'])) {
                     User form
                 </div>
                 <form method="POST">
+<<<<<<< HEAD
                     <input type="hidden" name="id" value="<?php echo $user[0]['id'] ?>">
                     <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo base64_encode($keyCode.$user[0]['version'])?>">
+=======
+                    <input type="hidden" name="id" value="<?php echo $_id ?>">
+
+                    <input type="hidden" name="id" value="<?php echo $user[0]['id'] ?>">
+                    <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo base64_encode($keyCode.$user[0]['version'])?>">
+
+                    <input type="hidden" name="id" value="<?php echo $user[0]['id'] ?>">
+
+>>>>>>> 2-php-202109/2-groups/2-B/1-2-Chung-phpunit
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>

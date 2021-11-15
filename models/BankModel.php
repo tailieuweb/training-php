@@ -45,7 +45,10 @@ class BankModel extends BaseModel {
 
         return $bank;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2-php-202109/2-groups/2-B/1-2-Chung-phpunit
     /**
      * Search banks
      * @param array $params
@@ -54,6 +57,7 @@ class BankModel extends BaseModel {
     public function getBanks() {
         $sql = 'SELECT * FROM banks';
         $banks = $this->select($sql);
+<<<<<<< HEAD
 
         return $banks;
     }
@@ -65,4 +69,8 @@ class BankModel extends BaseModel {
         self::$_instance = new self();
         return self::$_instance;
     }
+=======
+        return $banks;
+    }
+>>>>>>> 2-php-202109/2-groups/2-B/1-2-Chung-phpunit
 }

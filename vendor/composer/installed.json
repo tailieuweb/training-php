@@ -1,5 +1,16 @@
 {
+<<<<<<< HEAD:vendor/composer/installed.json
     "packages": [
+=======
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "74c313aff085f3bb86d80a1e5affde3b",
+    "packages": [],
+    "packages-dev": [
+>>>>>>> 2-php-202109/2-groups/2-B/1-2-Chung-phpunit:composer.lock
         {
             "name": "doctrine/instantiator",
             "version": "1.4.0",
@@ -550,6 +561,7 @@
         },
         {
             "name": "phpunit/php-code-coverage",
+<<<<<<< HEAD:vendor/composer/installed.json
 <<<<<<< HEAD
             "version": "9.2.8",
             "version_normalized": "9.2.8.0",
@@ -565,27 +577,39 @@
 =======
             "version": "9.2.7",
             "version_normalized": "9.2.7.0",
+=======
+            "version": "9.2.8",
+>>>>>>> 2-php-202109/2-groups/2-B/1-2-Chung-phpunit:composer.lock
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "d4c798ed8d51506800b441f7a13ecb0f76f12218"
+                "reference": "cf04e88a2e3c56fc1a65488afd493325b4c1bc3e"
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD:vendor/composer/installed.json
                 "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/d4c798ed8d51506800b441f7a13ecb0f76f12218",
                 "reference": "d4c798ed8d51506800b441f7a13ecb0f76f12218",
 >>>>>>> origin/2-php-202109/2-groups/2-B/4-23-Thang
+=======
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/cf04e88a2e3c56fc1a65488afd493325b4c1bc3e",
+                "reference": "cf04e88a2e3c56fc1a65488afd493325b4c1bc3e",
+>>>>>>> 2-php-202109/2-groups/2-B/1-2-Chung-phpunit:composer.lock
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-libxml": "*",
                 "ext-xmlwriter": "*",
+<<<<<<< HEAD:vendor/composer/installed.json
 <<<<<<< HEAD
                 "nikic/php-parser": "^4.13.0",
 =======
                 "nikic/php-parser": "^4.12.0",
 >>>>>>> origin/2-php-202109/2-groups/2-B/4-23-Thang
+=======
+                "nikic/php-parser": "^4.13.0",
+>>>>>>> 2-php-202109/2-groups/2-B/1-2-Chung-phpunit:composer.lock
                 "php": ">=7.3",
                 "phpunit/php-file-iterator": "^3.0.3",
                 "phpunit/php-text-template": "^2.0.2",
@@ -640,11 +664,15 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
+<<<<<<< HEAD:vendor/composer/installed.json
 <<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.8"
 =======
                 "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.7"
 >>>>>>> origin/2-php-202109/2-groups/2-B/4-23-Thang
+=======
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.8"
+>>>>>>> 2-php-202109/2-groups/2-B/1-2-Chung-phpunit:composer.lock
             },
             "funding": [
                 {
@@ -652,7 +680,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD:vendor/composer/installed.json
             "install-path": "../phpunit/php-code-coverage"
+=======
+            "time": "2021-10-30T08:01:38+00:00"
+>>>>>>> 2-php-202109/2-groups/2-B/1-2-Chung-phpunit:composer.lock
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2222,6 +2254,7 @@
             "install-path": "../webmozart/assert"
         }
     ],
+<<<<<<< HEAD:vendor/composer/installed.json
     "dev": true,
     "dev-package-names": [
         "doctrine/instantiator",
@@ -2259,4 +2292,14 @@
         "theseer/tokenizer",
         "webmozart/assert"
     ]
+=======
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.1.0"
+>>>>>>> 2-php-202109/2-groups/2-B/1-2-Chung-phpunit:composer.lock
 }
