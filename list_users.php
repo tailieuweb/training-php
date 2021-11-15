@@ -12,7 +12,7 @@ if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
 
-$input = true;
+$input = 1;
 // $input['name'] = 'testnoname1';
 
 // $input['fullname'] = 'testnoname';
@@ -26,18 +26,26 @@ $input = true;
 // }
 // else echo 'add failed';
 
-if(empty($input)){
-    echo 'input rỗng';
-  }
-  else{
-      echo 'input ko rỗng';
-  }
 
-  if (!empty($input['password']) && !empty($input['name']) && !empty($input['type'])) {
-    echo 'input is not empty';
-  }else{
-      echo 'input is empty';
-  }
+// $input['name'] = 'thuong2';
+// $input['fullname'] = 'tpthuong';
+// $input['email'] = 'email';
+// $input['type'] = 'user';
+// $input['password'] = "123";
+
+$insert = $userModel->insertUser($input);
+// if(empty($input)){
+//     echo 'input rỗng';
+//   }
+//   else{
+//       echo 'input ko rỗng';
+//   }
+
+//   if (!empty($input['password']) && !empty($input['name']) && !empty($input['type'])) {
+//     echo 'input is not empty';
+//   }else{
+//       echo 'input is empty';
+//   }
 die();
 
 

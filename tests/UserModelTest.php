@@ -4,103 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
 {
-
-  /**
-   * Test case Okie
-   */
-  public function testSumOk()
-  {
-    $userModel = new UserModel();
-    $a = 1;
-    $b = 2;
-    $expected = 3;
-    $actual = $userModel->sumb($a, $b);
-    $this->assertEquals($expected, $actual);
-  }
-
-  /**
-   * Test case Not good
-   */
-  public function testSumNg()
-  {
-    $userModel = new UserModel();
-    $a = 1;
-    $b = 2;
-    $actual = $userModel->sumb($a, $b);
-    if ($actual != 3) {
-      $this->assertTrue(false);
-    } else {
-      $this->assertTrue(true);
-    }
-  }
-
-  /**
-   * Test case Okie
-   */
-  public function testSumMinus()
-  {
-    $userModel = new UserModel();
-    $a = -1;
-    $b = -2;
-    $expected = -3;
-    $actual = $userModel->sumb($a, $b);
-    $this->assertEquals($expected, $actual);
-  }
-
-  /**
-   * Test case Okie
-   */
-  public function testSumMinusAndPositive()
-  {
-    $userModel = new UserModel();
-    $a = -1;
-    $b = 2;
-    $expected = 1;
-    $actual = $userModel->sumb($a, $b);
-    $this->assertEquals($expected, $actual);
-  }
-
-  /**
-   * Test case Okie
-   */
-  public function testSumFloat()
-  {
-    $userModel = new UserModel();
-    $a = 1.5;
-    $b = 2.1;
-    $expected = 3.6;
-    $actual = $userModel->sumb($a, $b);
-    $this->assertEquals($expected, $actual);
-  }
-
-  /**
-   * Test case Okie
-   */
-  public function testSumNumberAndString()
-  {
-    $userModel = new UserModel();
-    $a = 1;
-    $b = "2";
-    $expected = 3;
-    $actual = $userModel->sumb($a, $b);
-    $this->assertEquals($expected, $actual);
-  }
-
-  /**
-   * Test case Okie
-   */
-  public function testSumString()
-  {
-    $userModel = new UserModel();
-    $a = "1";
-    $b = "2";
-    $expected = 3;
-    $actual = $userModel->sumb($a, $b);
-    $this->assertEquals($expected, $actual);
-  }
-
   // * getuser function start
-
 
   // * function testGetUsers string (finish)
   public function testGetUsersString()
@@ -108,11 +12,12 @@ class UserModelTest extends TestCase
     $userModel = new UserModel();
     $params = [];
     $params['keyword'] = 'a';
-    $expected = 24;
+    $expected = 2;
     $arrUsers = $userModel->getUsers($params);
     $actual = count($arrUsers);
     $this->assertEquals($expected, $actual);
   }
+
   // * function testGetUsers null (finish)
   public function testGetUsersNull()
   {
@@ -155,7 +60,6 @@ class UserModelTest extends TestCase
     $userModel = new UserModel();
     $params = [];
     $params['keyword'] = ['true'];
-    // $params['keyword2'] = false;
     $expected = 'error';
     $arrUsers = $userModel->getUsers($params);
     $actual = $arrUsers;
@@ -168,28 +72,27 @@ class UserModelTest extends TestCase
     $userModel = new UserModel();
     $params = [];
     $params['keyword'] = '';
-    // $params['keyword2'] = false;
-    $expected = 47;
+    $expected = 7;
     $arrUsers = $userModel->getUsers($params);
     $actual = count($arrUsers);
     $this->assertEquals($expected, $actual);
   }
   // * getuser function end
 
-  // todo: fuction insertUser start
+  // * fuction insertUser start
   /**
    * th đầy đủ thông tin và thông tin hợp lệ
+   * th user đã tồn tại
    * th input rỗng
    * th thiếu thông tin 
    * th thông tin không hợp lệ (boolean, null, array)
-   * 
    */
   // * fuction insertUser input valid
   public function testInsertUserInputValid()
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'thuong';
+    $input['name'] = 'thuong7';
     $input['fullname'] = 'tpthuong';
     $input['email'] = 'email';
     $input['type'] = 'user';
@@ -201,12 +104,29 @@ class UserModelTest extends TestCase
     $this->assertEquals($expected, $actual);
   }
 
+  // * fuction insertUser input exist
+  public function testInsertUserInputIsExist()
+  {
+    $userModel = new UserModel();
+    $input = [];
+    $input['name'] = 'thuong3';
+    $input['fullname'] = 'tpthuong';
+    $input['email'] = 'email';
+    $input['type'] = 'user';
+    $input['password'] = "123";
+
+    $expected = false;
+
+    $actual = $userModel->insertUser($input);
+    $this->assertEquals($expected, $actual);
+  }
+
   // * fuction insertUser password had white space
   public function testInsertUserPasswordWithSpaces()
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'thuong';
+    $input['name'] = 'thuong1';
     $input['fullname'] = 'tpthuong';
     $input['email'] = 'email';
     $input['type'] = 'user';
@@ -223,7 +143,7 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'thuong';
+    $input['name'] = 'thuong4';
     $input['fullname'] = 'tpthuong';
     $input['email'] = 'email';
     $input['type'] = 'user';
@@ -240,7 +160,7 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'thuong';
+    $input['name'] = 'thuong5';
     $input['fullname'] = 'tpthuong';
     $input['email'] = 'email';
     $input['type'] = 'user';
@@ -257,7 +177,7 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'thuong';
+    $input['name'] = 'thuong6';
     $input['fullname'] = 'tpthuong';
     $input['email'] = 'email';
     $input['type'] = 'user';
@@ -274,11 +194,28 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'thuong';
+    $input['name'] = 'thuong7';
     $input['fullname'] = 'tpthuong';
     $input['email'] = 'email';
     $input['type'] = 'user';
     $input['password'] = $userModel;
+
+    $expected = false;
+
+    $actual = $userModel->insertUser($input);
+    $this->assertEquals($expected, $actual);
+  }
+
+  // * fuction insertUser password is number
+  public function testInsertUserPasswordIsNumber()
+  {
+    $userModel = new UserModel();
+    $input = [];
+    $input['name'] = 'thuong8';
+    $input['fullname'] = 'tpthuong';
+    $input['email'] = 'email';
+    $input['type'] = 'user';
+    $input['password'] = 1;
 
     $expected = false;
 
@@ -354,7 +291,7 @@ class UserModelTest extends TestCase
     $this->assertEquals($expected, $actual);
   }
 
-  // * fuction insertUser without type (finish)
+  // * fuction insertUser without type and email (finish)
   public function testInsertUserWithoutTypeAndEmail()
   {
     $userModel = new UserModel();
@@ -406,16 +343,43 @@ class UserModelTest extends TestCase
     $actual = $userModel->insertUser($input);
     $this->assertEquals($expected, $actual);
   }
-  // if (!empty($input['password']) && !empty($input['name']) && !empty($input['type'])) {
-  //   $password = md5($input['password']);
-  //   $name = htmlspecialchars($input['name']);
-  //   $fullname = htmlspecialchars($input['fullname']);
-  //   $email = htmlspecialchars($input['email']);
-  //   $type = htmlspecialchars($input['type']);
-  // }
-  // else{
-  //   return 'error';
-  // }
+
+  // * fuction insertUser with input is number (finish)
+  public function testInsertUserWithInputIsNumber()
+  {
+    $userModel = new UserModel();
+    $input = 1;
+
+    $expected = false;
+
+    $actual = $userModel->insertUser($input);
+    $this->assertEquals($expected, $actual);
+  }
+
+  // * fuction insertUser with input is Object (finish)
+  public function testInsertUserWithInputIsObject()
+  {
+    $userModel = new UserModel();
+    $input = $userModel;
+
+    $expected = false;
+
+    $actual = $userModel->insertUser($input);
+    $this->assertEquals($expected, $actual);
+  }
+
+  // * fuction insertUser with input is String (finish)
+  public function testInsertUserWithInputIsString()
+  {
+    $userModel = new UserModel();
+    $input = 'hello';
+
+    $expected = false;
+
+    $actual = $userModel->insertUser($input);
+    $this->assertEquals($expected, $actual);
+  }
+
   // * fuction insertUser end
 
 }

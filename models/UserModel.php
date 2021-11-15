@@ -40,48 +40,40 @@ class UserModel extends BaseModel
   //--------------------------------------------------------------
   public function insertUser($input)
   {
-    // $name = htmlspecialchars($input['name']);
-    // $fullname = htmlspecialchars($input['fullname']);
-    // $email = htmlspecialchars($input['email']);
-    // $type = htmlspecialchars($input['type']);
-    // $password = md5($input['password']);
-
     $user = null;
 
-    if(empty($input)){
+    if (empty($input) || is_numeric($input) || is_object($input) || is_string($input)) {
       return false;
     }
     if (!empty($input['password']) && !empty($input['name']) && !empty($input['type'])) {
-      if (is_string($input['password']) && !preg_match("/(\s)/i", $input['password'])) {
-        $password = md5($input['password']);
+
+      $result = $this->query('SELECT name FROM users WHERE name = "' . $input['name'] . '"');
+      if ($result->num_rows == 0) {
+        // row not found, do stuff...
+        if (is_string($input['password']) && !preg_match("/(\s)/i", $input['password'])) {
+          $password = md5($input['password']);
+        } else {
+          return false;
+        }
+        $name = htmlspecialchars($input['name']);
+        $fullname = '';
+        if (isset($input['fullname'])) {
+          $fullname = htmlspecialchars($input['fullname']);
+        }
+  
+        $email = '';
+        if (isset($input['email'])) {
+          $email = htmlspecialchars($input['email']);
+        }
+  
+        $type = htmlspecialchars($input['type']);
+  
+        $sql = "INSERT INTO `users` (`name`, `fullname`, `email`, `type`, `password`)
+                    VALUES ('$name', '$fullname', '$email', '$type', '$password') ";
+        $user = $this->insert($sql);
       } else {
         return false;
       }
-      $name = htmlspecialchars($input['name']);
-      $fullname = '';
-      if (isset($input['fullname'])) {
-        $fullname = htmlspecialchars($input['fullname']);
-      }
-
-      $email = '';
-      if (isset($input['email'])) {
-        $email = htmlspecialchars($input['email']);
-      }
-
-      // $type = '';
-      // if (isset($input['type'])) {
-        $type = htmlspecialchars($input['type']);
-      // } else {
-      //   // var_dump($user);
-      //   // die();
-      //   // echo 'thiếu type';
-      //   // die();
-      //   return $user = false;
-      // }
-
-      $sql = "INSERT INTO `users` (`name`, `fullname`, `email`, `type`, `password`)
-                  VALUES ('$name', '$fullname', '$email', '$type', '$password') ";
-      $user = $this->insert($sql);
     } else {
       return false;
     }
