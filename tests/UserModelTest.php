@@ -204,17 +204,29 @@ class UserModelTest extends TestCase
         }
         return $this->assertTrue(false);
     }
-    public function testFindUserWithSpecialSign()
+    public function testFindUserWithNameSpecialSign()
     {
         $user = new UserModel();
-        $keys = "%em#@";
+        $keys = "test2//";
         $actual = $user->findUser($keys);
         // var_dump($actual);
         // die();
         if (!empty($actual)) {
-            return $this->assertTrue(false);
+            return $this->assertTrue(true);
         }
-        return $this->assertTrue(true);
+        return $this->assertTrue(false);
+    }
+    public function testFindUserWithEmailSpecialSign()
+    {
+        $user = new UserModel();
+        $keys = "fxnam@gmail";
+        $actual = $user->findUser($keys);
+        // var_dump($actual);
+        // die();
+        if (!empty($actual)) {
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
     }
     /* ***************************
     End Test function FindUser

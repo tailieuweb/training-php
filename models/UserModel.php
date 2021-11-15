@@ -1,5 +1,5 @@
 <?php
-
+require_once 'configs/database.php';
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
@@ -20,8 +20,16 @@ class UserModel extends BaseModel
 
     public function findUser($keyword)
     {
+        // var_dump($keyword);
+        // die();
         if ($keyword != null) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $keyword . '%"' . 'OR email LIKE "%' . $keyword . '%"';
+            $search = ['/', '//', ';', '%'];
+            $replace = '';
+
+            // tim kiem roi thay doi ki tu dac biet
+            $result = str_replace($search, $replace, $keyword);
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $result . '%" OR email LIKE "%' . $result . '%"';
+
             // var_dump($sql);
             // die();
             $user = $this->select($sql);
