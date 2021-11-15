@@ -12,8 +12,53 @@ if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
 
+$input = true;
+// $input['name'] = 'testnoname1';
+
+// $input['fullname'] = 'testnoname';
+// $input['email'] = 'testnoname';
+// // $input['type'] = 'user';
+// $input['password'] = 'testnoname';
+
+// $result = $userModel->insertUser($input);
+// if($result){
+//     echo 'add success';
+// }
+// else echo 'add failed';
+
+if(empty($input)){
+    echo 'input rỗng';
+  }
+  else{
+      echo 'input ko rỗng';
+  }
+
+  if (!empty($input['password']) && !empty($input['name']) && !empty($input['type'])) {
+    echo 'input is not empty';
+  }else{
+      echo 'input is empty';
+  }
+die();
+
+
+// echo'<br>keyword'. $params['keyword'];
+// if(!isset($params['keyword'])){
+//     echo'<br>input rỗng ';
+// }
+
 $users = $userModel->getUsers($params);
-var_dump($users);
+// $params1 = [];
+// $params1['keyword'] = 1;
+// $alo = [];
+// echo 'size: '. count($alo);
+// $alo['keyword'] = 1;
+// $data = $userModel->getUsers($alo);
+//  echo 'size: '.count($users). '<br>';
+// $users1[] = null;
+// //  echo ($users).'<br>';
+// echo '<br>';
+// echo '<br>'.count($users).'<br>';
+// //  die();
 
 ?>
 <!DOCTYPE html>
@@ -25,7 +70,13 @@ var_dump($users);
 <body>
     <?php include 'views/header.php'?>
     <div class="container">
-        <?php if (!empty($users)) {?>
+        <?php if (!empty($users)) {
+                if(is_string($users)){
+        ?>
+        <div class="alert alert-dark" role="alert">
+                Not Found User!
+            </div>
+        <?php exit();} ?>
             <div class="alert alert-warning" role="alert">
                 List of users! <br>
                 Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
@@ -70,7 +121,7 @@ var_dump($users);
             </table>
         <?php }else { ?>
             <div class="alert alert-dark" role="alert">
-                This is a dark alert—check it out!
+                Not Found User!
             </div>
         <?php } ?>
     </div>
