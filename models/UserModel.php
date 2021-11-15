@@ -43,11 +43,6 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-<<<<<<< HEAD
-        $sql = "UPDATE `users` SET name = " . "'" . $input['name'] . "', fullname = " . "'" . $input['fullname'] . "', email = " . "'" . $input['email'] . "', type = " . "'" . $input['type'] . "', password = " . "'" . md5($input['password']) . "' WHERE id = " . "'" . $input['id'] . "'";
-        $user = $this->update($sql);
-        return $user;
-=======
         $t = base64_decode($input['version']);
         $string = substr($t,18);
 
@@ -71,7 +66,6 @@ class UserModel extends BaseModel {
         }
         
 
->>>>>>> 2-php-202109/2-groups/2-B/1-2-Chung-phpunit
     }
 
     /**
@@ -80,12 +74,6 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-<<<<<<< HEAD
-        $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`,`email`,`type`, `password`) VALUES (" . "'" . $input['name'] . "', '".$input['fullname']. "', '" . $input['email'] . "', '" . $input['type'] . "','" . md5($input['password']) . "')";
-
-        $user = $this->insert($sql);
-=======
->>>>>>> 2-php-202109/2-groups/2-B/1-2-Chung-phpunit
 
         $sql = "INSERT INTO app_web1.`users` (name,`fullname`,`email`,`type`, password) VALUES (" . "'" . $input['name'] . "', '".$input['fullname']. "', '" . $input['email'] . "', '" . $input['type'] . "','" . md5($input['password']) . "')";
     }
@@ -102,20 +90,7 @@ class UserModel extends BaseModel {
         } else {
             $sql = 'SELECT * FROM users';
         }
-<<<<<<< HEAD
 
-        $users = $this->select($sql);
-
-        return $users;
-    }
-
-    public static function getInstance() {
-        if (self::$_instance !== null){
-            return self::$_instance;
-        }
-        self::$_instance = new self();
-        return self::$_instance;
-=======
         return $users;
     }
 
@@ -127,6 +102,5 @@ class UserModel extends BaseModel {
     public function sumb($a, $b) {
        true; 
         return $a + $b;
->>>>>>> 2-php-202109/2-groups/2-B/1-2-Chung-phpunit
     }
 }

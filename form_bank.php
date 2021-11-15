@@ -9,11 +9,8 @@ if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     $bank = $bankModel->findBankById($id);//Update existing user
 }
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 2-php-202109/2-groups/2-B/1-2-Chung-phpunit
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
