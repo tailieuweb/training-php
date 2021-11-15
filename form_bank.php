@@ -62,7 +62,7 @@ if (!empty($_POST['submit'])) {
 
         <?php if ($bank || empty($id_end) || $users) { ?>
             <div class="alert alert-warning" role="alert">
-                User bank
+                Bank form
             </div>
             <?php if (isset($a)) { ?>
                 <div class="alert alert-danger" role="alert">
