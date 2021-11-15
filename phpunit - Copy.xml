@@ -10,11 +10,6 @@
             <file>./tests/UserModelTest.php</file>
         </testsuite>
     </testsuites>
-	<filter>
-		<whitelist processUncoveredFilesFromWhitelist="true">
-			<directory suffix=".php">./models</directory>
-		</whitelist>
-	</filter>
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
