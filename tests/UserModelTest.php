@@ -133,7 +133,7 @@ class UserModelTest extends TestCase
     {
         $user = new UserModel();
         $keys = "test1";
-        // $expected = "LE VAN LAM";
+        // $expected = "";
         $actual = $user->findUser($keys);
         // var_dump($actual);
         // die();
@@ -147,7 +147,7 @@ class UserModelTest extends TestCase
         $user = new UserModel();
         $params = [];
         $params['keyword'] = 'chien';
-        // $expected = "LE VAN LAM";
+        // $expected = "chien";
         $actual = $user->getUsers($params);
         // var_dump($actual);
         // die();
@@ -160,7 +160,7 @@ class UserModelTest extends TestCase
     {
         $user = new UserModel();
         $keys = "";
-        // $expected = "LE VAN LAM";
+        // $expected = "chien";
         $actual = $user->getUsers($keys);
         // var_dump($actual);
         // die();
@@ -194,7 +194,7 @@ class UserModelTest extends TestCase
     public function testUpdateUserGood()
     {
         $user = new UserModel();
-        $input = array('id' => '2', 'name' => 'gia nam', 'fullname' => 'nguyen Ngoc Chien', 'email' => 'example@gmail.com', 'type' => 'admin', 'password' => '123');
+        $input = array('id' => '2', 'name' => 'test2', 'fullname' => 'nguyen Ngoc Chien', 'email' => 'example@gmail.com', 'type' => 'admin', 'password' => '123');
         $actual = $user->updateUser($input);
         // var_dump($actual);
         // die();
