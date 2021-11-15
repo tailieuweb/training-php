@@ -92,6 +92,7 @@ class UserModel extends BaseModel {
         }
 
         return $users;
+        //
     }
 
     /**
