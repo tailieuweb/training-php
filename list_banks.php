@@ -1,6 +1,8 @@
 <?php
-require_once 'models/BankModel.php';
-$bankModel = new BankModel();
+session_start();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+$bankModel = $factory->make('bank');
 $banks = $bankModel->getBanks();
 ?>
 <!DOCTYPE html>

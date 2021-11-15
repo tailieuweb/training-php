@@ -9,8 +9,6 @@ if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     $bank = $bankModel->findBankById($id);//Update existing user
 }
-
-
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
