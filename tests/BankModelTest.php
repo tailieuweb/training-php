@@ -199,6 +199,7 @@ class BankModelTest extends TestCase
             return $this->assertTrue(false);
         }
     }
+    
     // Test id không tồn tại
     public function testgetAllBanksWithIdIsNotExist()
     {
@@ -229,5 +230,7 @@ class BankModelTest extends TestCase
         $actual = $bankModel->deleteBankById($idBank);
         $this->assertEquals($expected, $actual);
     }
+
+    
     // End Chien lam
 }

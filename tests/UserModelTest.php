@@ -203,7 +203,6 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $actual2);
     }
 
-
     // Chien lam test GetUsers
     public function testGetUsersGood()
     {

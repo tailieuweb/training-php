@@ -92,8 +92,6 @@ class UserModel extends BaseModel
         return $user;
     }
 
-    
-
 
     /**
      * Search users

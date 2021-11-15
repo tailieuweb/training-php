@@ -163,6 +163,7 @@ class BankModel extends BaseModel
         }
         return $banks;
     }
+    
     function getAllBanks($id)
     {
         if( is_object($id) || $id<0 || is_string($id) || is_double($id) || is_array($id) 
