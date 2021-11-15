@@ -18,13 +18,13 @@ class BankModelTest extends TestCase{
         $this->assertEquals($actual,$expected);   
     }
      /**
-     * Test case nhập user id và cost không phải là kiểu int
+     * Test case nhập user id và cost là không phải kiểu int
      */
     public function testInsertBankStringNg(){
         $bankModel = new BankModel();
         $bank = array(
-            'user_id' => 'v',
-            'cost' => 4423
+            'user_id' => 'vv',
+            'cost' => '#$'
         ); 
          $bankModel->insertBank($bank);
         if(is_numeric($bank['user_id']) && is_numeric($bank['cost'])){          
@@ -68,6 +68,7 @@ class BankModelTest extends TestCase{
         }   
     }
 
+
      /**
      * Test case Okie
      */
@@ -102,7 +103,7 @@ class BankModelTest extends TestCase{
      /**
      * Test case nhập user id và cost rỗng
      */
-    public function testUpdateBankNgEmpty(){
+    public function testUpdateBankNgNull(){
         $bankModel = new BankModel();
         $bank = array(
             'id' => 74,
@@ -189,14 +190,5 @@ class BankModelTest extends TestCase{
             $this->assertTrue(false);
         }
     }
-    // public function testGetBanksUserNg(){
-    //     $bankModel = new BankModel();    
-    //     $actual =  $bankModel->getBanks();
-       
-    //     if(!empty($actual)){          
-    //         $this->assertTrue(false);
-    //     }else{
-    //         $this->assertTrue(true);
-    //     }
-    // }
+
 }

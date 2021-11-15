@@ -105,24 +105,85 @@ class RepositoryTest extends TestCase{
            $this->assertTrue(false);
         }     
     }
-
-    public function testDeleteUser(){
+    /*
+        test create user NOT GOOD
+    */
+    public function testCreateUserArrayNg(){
         $repository = new Repository();
-        $expected = true;
-        $actual = $repository->deleteUser(167);
-        $this->assertEquals($expected, $actual);
+        $arr = array();
+        $user = array(
+            'name' => $arr,
+            'fullname' => 'nguyen van a',
+            'email' => 'a@gmail.com',
+            'type' => 'abc',
+            'password' => 'mmmm'
+        );
+       if(is_array($user['name']) || is_array($user['fullname']) || is_array($user['email']) || is_array($user['type']) || is_array($user['password'])){
+        $user['name'] = "abc";
+           $repository->createUser($user);
+           $this->assertTrue(true);
+       }else{
+            $this->assertTrue(false);
+       }
+    }
+    /*
+        test create user NOT GOOD
+    */
+    public function testCreateUserSpecialcharactersNG(){
+        $repository = new Repository();
+        $pattern = '/[A-Za-z0-9]/';
+        $user = array(
+            'name' => '@%#',
+            'fullname' => 'nguyen van a',
+            'email' => 'a@gmail.com',
+            'type' => 'abc',
+            'password' => 'mmmm'
+        );
+        $repository->createUser($user);
+       if(!preg_match($pattern, $user['name'])){
+           $this->assertTrue(true);
+       }else{
+            $this->assertTrue(false);
+       }
     }
 
-    public function testDeleteUserStringNg(){
+     /*
+        test create user NOT GOOD
+    */
+    public function testCreateUserBoolNg(){
         $repository = new Repository();
-        $expected = false;
-        $actual = $repository->deleteUser('b');
-        $this->assertEquals($expected, $actual);        
+        $user = array(
+            'name' => false,
+            'fullname' => 'nguyen van a',
+            'email' => 'a@gmail.com',
+            'type' => 'abc',
+            'password' => 'mmmm'
+        );
+        $repository->createUser($user);
+       if(is_bool($user['name']) || is_bool($user['fullname']) || is_bool($user['email']) || is_bool($user['type'])|| is_bool($user['password'])){
+           $this->assertTrue(true);
+       }else{
+            $this->assertTrue(false);
+       }
     }
-    public function testDeleteUserNullNg(){
-        $repository = new Repository();
-        $expected = false;
-        $actual = $repository->deleteUser('');
-        $this->assertEquals($expected, $actual);        
-    }
+
+    // public function testDeleteUser(){
+    //     $repository = new Repository();
+    //     $expected = true;
+    //     $actual = $repository->deleteUser(167);
+    //     $this->assertEquals($expected, $actual);
+    // }
+
+    // public function testDeleteUserStringNg(){
+    //     $repository = new Repository();
+    //     $expected = false;
+    //     $actual = $repository->deleteUser('b');
+    //     $this->assertEquals($expected, $actual);        
+    // }
+    // public function testDeleteUserNullNg(){
+    //     $repository = new Repository();
+    //     $expected = false;
+    //     $actual = $repository->deleteUser('');
+    //     $this->assertEquals($expected, $actual);        
+    // }
 }
