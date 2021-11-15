@@ -5,6 +5,12 @@ $userModel = new UserModel();
 $user = NULL; //Add new user
 $id = NULL;
 
+$user = UserModel::getInstance();
+$obje = new stdClass();
+$a = $user->findUserById($obje);
+var_dump($a);
+die();
+
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     //Decode id param
