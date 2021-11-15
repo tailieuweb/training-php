@@ -46,17 +46,23 @@ class BankModel extends BaseModel
      */
     public function deleteBankById($id)
     {
-        //Lấy id của tất cả user 
-        $sql1 = 'SELECT id FROM banks';
-        $allUser = $this->select($sql1);
-
-        foreach ($allUser as $key) {
-            $md5 = md5($key['id'] . "chuyen-de-web-1");
-            if ($md5 == $id) {
-                $sql = 'DELETE FROM banks WHERE id = ' . $key['id'];
-                return $this->delete($sql);
-            }
+        if( is_object($id) || $id<0 || is_string($id) || is_double($id) || is_array($id) 
+        ||  empty($id) || !is_numeric($id)){
+            return 'Not invalid';
         }
+        //Lấy id của tất cả user 
+        // $sql1 = 'SELECT id FROM banks';
+        // $allUser = $this->select($sql1);
+
+        // foreach ($allUser as $key) {
+        //     $md5 = md5($key['id']);
+        //     if ($md5 == $id) {
+        //         $sql = 'DELETE FROM banks WHERE id = ' . $key['id'];
+        //         return $this->delete($sql);
+        //     }
+        // }
+        $sql = 'DELETE FROM banks WHERE id = ' .$id;
+        return $this->delete($sql);
     }
 
     /**
@@ -157,9 +163,13 @@ class BankModel extends BaseModel
         }
         return $banks;
     }
-    function getAllBanks($user_id)
+    function getAllBanks($id)
     {
-        $sql = 'SELECT * FROM banks Where user_id = ' . $user_id;
+        if( is_object($id) || $id<0 || is_string($id) || is_double($id) || is_array($id) 
+        ||  empty($id) || !is_numeric($id)){
+            return 'Not invalid';
+        }
+        $sql = 'SELECT * FROM banks Where user_id = ' . $id;
         $banks = $this->select($sql);
         return $banks;
     }

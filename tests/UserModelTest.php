@@ -142,44 +142,19 @@ class UserModelTest extends TestCase
         }
         return $this->assertTrue(false);
     }
-    public function testGetUserGoodWithString()
-    {
-        $user = new UserModel();
-        $params = [];
-        $params['keyword'] = 'chien';
-        // $expected = "chien";
-        $actual = $user->getUsers($params);
-        // var_dump($actual);
-        // die();
-        if (!empty($actual)) {
-            return $this->assertTrue(true);
-        }
-        return $this->assertTrue(false);
-    }
-    public function testGetUserGoodWithNull()
-    {
-        $user = new UserModel();
-        $keys = "";
-        // $expected = "chien";
-        $actual = $user->getUsers($keys);
-        // var_dump($actual);
-        // die();
-        if (!empty($actual)) {
-            return $this->assertTrue(true);
-        }
-        return $this->assertTrue(false);
-    }
-    public function testAuthGood()
-    {
-        $user = new UserModel();
-        $username = 'chien';
-        $password = '123';
-        $actual = $user->auth($username, $password);
-        if (!empty($actual)) {
-            return $this->assertTrue(true);
-        }
-        return $this->assertTrue(false);
-    }
+
+
+    // public function testAuthGood()
+    // {
+    //     $user = new UserModel();
+    //     $username = 'chien';
+    //     $password = '123';
+    //     $actual = $user->auth($username, $password);
+    //     if (!empty($actual)) {
+    //         return $this->assertTrue(true);
+    //     }
+    //     return $this->assertTrue(false);
+    // }
     public function testDeleteUserByIdGood()
     {
         $user = new UserModel();
@@ -227,4 +202,127 @@ class UserModelTest extends TestCase
         $expected = 'UserModel';
         $this->assertEquals($expected, $actual2);
     }
+
+
+    // Chien lam test GetUsers
+    public function testGetUsersGood()
+    {
+        $userModel = new UserModel();
+        $keyword = 'test1';
+        $expected = 'test1';
+        $user = $userModel->getUsers($keyword);
+        $actual = $user[0]['name'];
+        $this->assertEquals($expected, $actual);
+    }
+    // Test trường hợp sai
+    public function testGetUsersNg()
+    {
+        $userModel = new UserModel();
+        $keyword = 'chien';
+        $actual = $userModel->getUsers($keyword);
+        if ($actual != false) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
+    // Test keyword là số
+    public function testGetUsersByIsNum()
+    {
+        $userModel = new UserModel();
+        $keyword = 12;
+        $expected = 'test1';
+        $user = $userModel->getUsers($keyword);
+        $actual = $user[0]['name'];
+        $this->assertEquals($expected, $actual);
+    }
+    // Test keyword là số âm
+    public function testGetUsersIsNegativeNum()
+    {
+        $userModel = new UserModel();
+        $keyword = -5;
+        $expected = 'test1';
+        $user = $userModel->getUsers($keyword);
+        $actual = $user[0]['name'];
+        $this->assertEquals($expected, $actual);
+    }
+    // Test keyword là số thuc
+    public function testGetUsersIsDouble()
+    {
+        $userModel = new UserModel();
+        $keyword = 10.5;
+        $expected = 'test1';
+        $user = $userModel->getUsers($keyword);
+        $actual = $user[0]['name'];
+        $this->assertEquals($expected, $actual);
+    }
+    // Test keyword là mảng
+    public function testGetUsersIsArray()
+    {
+        $userModel = new UserModel();
+        $keyword = ['chien'];
+        $expected = 'test1';
+        $user = $userModel->getUsers($keyword);
+        $actual = $user[0]['name'];
+        $this->assertEquals($expected, $actual);
+    }
+    // Test keyword là null
+    public function testGetUsersIsNull()
+    {
+        $userModel = new UserModel();
+        $keyword = null;
+        $expected = 'test1';
+        $user = $userModel->getUsers($keyword);
+        $actual = $user[0]['name'];
+        $this->assertEquals($expected, $actual);
+    }
+    // Test keyword là boolean(true/false)
+    public function testGetUsersIsBoolean()
+    {
+        $userModel = new UserModel();
+        $keyword = true;
+        $user = $userModel->getUsers($keyword);
+        if ($user != false) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
+    // Test keyword không tồn tại
+    public function testGetUsersIsNotExist()
+    {
+        $userModel = new UserModel();
+        $keyword = 'chien';
+        $user = $userModel->getUsers($keyword);
+        if ($user != false) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
+    // Test keyword có 1 khoảng trắng
+    public function testGetUsersIsOneSpace()
+    {
+        $userModel = new UserModel();
+        $keyword = 'gia nam';
+        $user = $userModel->getUsers($keyword);
+        if ($user != false) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
+    // Test keyword có từ 2 khoảng trắng
+    public function testGetUsersIsMoreSpace()
+    {
+        $userModel = new UserModel();
+        $keyword = 'gia  nam';
+        $user = $userModel->getUsers($keyword);
+        if ($user != false) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
+    // End chien lam
 }
