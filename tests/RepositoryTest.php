@@ -27,7 +27,7 @@ class RepositoryTest extends TestCase{
     /*
         test create user NOT GOOD
     */
-    public function testCreateUserNull(){
+    public function testCreateUserNullNg(){
         $repository = new Repository();
         $user = array(
             'name' => '',
@@ -129,7 +129,7 @@ class RepositoryTest extends TestCase{
     /*
         test create user NOT GOOD
     */
-    public function testCreateUserSpecialcharactersNG(){
+    public function testCreateUserSpecialcharactersNg(){
         $repository = new Repository();
         $pattern = '/[A-Za-z0-9]/';
         $user = array(
@@ -166,24 +166,25 @@ class RepositoryTest extends TestCase{
             $this->assertTrue(false);
        }
     }
+     /*
+    test create user NOT GOOD
+    */
+    public function testCreateUserNumberNg(){
+        $repository = new Repository();
+        $user = array(
+            'name' => 123.7,
+            'fullname' => 'nguyen van a',
+            'email' => 'a@gmail.com',
+            'type' => 'abc',
+            'password' => 'mmmm'
+        );
+        $repository->createUser($user);;
+       if(is_numeric($user['name']) || is_numeric($user['fullname']) || is_numeric($user['email']) || is_numeric($user['type'])|| is_numeric($user['password'])){
+           $this->assertTrue(true);
+       }else{
+            $this->assertTrue(false);
+       }
+    }
 
-    // public function testDeleteUser(){
-    //     $repository = new Repository();
-    //     $expected = true;
-    //     $actual = $repository->deleteUser(167);
-    //     $this->assertEquals($expected, $actual);
-    // }
-
-    // public function testDeleteUserStringNg(){
-    //     $repository = new Repository();
-    //     $expected = false;
-    //     $actual = $repository->deleteUser('b');
-    //     $this->assertEquals($expected, $actual);        
-    // }
-    // public function testDeleteUserNullNg(){
-    //     $repository = new Repository();
-    //     $expected = false;
-    //     $actual = $repository->deleteUser('');
-    //     $this->assertEquals($expected, $actual);        
-    // }
+    
 }

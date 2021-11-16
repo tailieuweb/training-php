@@ -54,7 +54,7 @@ class BankModelTest extends TestCase{
      */
     public function testInsertBankObjectNg(){
         $bankModel = new BankModel();
-        $ob = (object)'12';
+        $ob = new DateTime;
         $bank = array(
             'user_id' => $ob,
             'cost' => 4423
@@ -68,6 +68,60 @@ class BankModelTest extends TestCase{
         }   
     }
 
+    /**
+     * Test case nhập user id hoặc cost là Object
+     */
+    public function testInsertBankBooltNg(){
+        $bankModel = new BankModel();
+        $bank = array(
+            'user_id' => true,
+            'cost' => 4423
+        );        
+           $bankModel->insertBank($bank);
+        if(is_bool($bank['user_id']) || is_bool($bank['cost'])){          
+         
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
+
+    /**
+     * Test case nhập user id hoặc cost là Object
+     */
+    public function testInsertBankDoubleNg(){
+        $bankModel = new BankModel();
+        $bank = array(
+            'user_id' => 12.23,
+            'cost' => 4423
+        );        
+           $bankModel->insertBank($bank);
+        if(is_double($bank['user_id']) || is_double($bank['cost'])){          
+         
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
+
+    /**
+     * Test case nhập user id hoặc cost là Object
+     */
+    public function testInsertSpecialcharactersNg(){
+        $bankModel = new BankModel();
+        $pattern = '/[0-9]/';
+        $bank = array(
+            'user_id' => '@$@$',
+            'cost' => 4423
+        );        
+           $bankModel->insertBank($bank);
+        if(!preg_match($pattern, $bank['user_id'])){          
+         
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
 
      /**
      * Test case Okie
@@ -123,7 +177,7 @@ class BankModelTest extends TestCase{
     /**
      * Test case nhập user id và cost rỗng
      */
-    public function testUpdateBankNgObject(){
+    public function testUpdateBankObjectNg(){
         $bankModel = new BankModel();
         $ob = (object)'12';
         $bank = array(
@@ -141,9 +195,63 @@ class BankModelTest extends TestCase{
         }   
     }
 
+    /**
+     * Test case nhập user id và cost rỗng
+     */
+    public function testUpdateBankBoolNg(){
+        $bankModel = new BankModel();
+        $bank = array(
+            'id' => 74,
+            'user_id' => true,
+            'cost' => '4264'
+        );
+        $bankModel->updateBank($bank);
+        if(is_bool($bank['user_id']) || is_bool($bank['cost'])){  
+            
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
 
+    /**
+     * Test case nhập user id và cost rỗng
+     */
+    public function testUpdateBankDoubleNg(){
+        $bankModel = new BankModel();
+        $bank = array(
+            'id' => 74,
+            'user_id' => 23.55,
+            'cost' => '4264'
+        );
+        $bankModel->updateBank($bank);
+        if(is_double($bank['user_id']) || is_double($bank['cost'])){  
+            
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
 
-
+    /**
+     * Test case nhập user id và cost rỗng
+     */
+    public function testUpdateBankSpecialcharactersNg(){
+        $bankModel = new BankModel();
+        $pattern = '/[0-9]/';
+        $bank = array(
+            'id' => 74,
+            'user_id' => '@%@%#',
+            'cost' => '4264'
+        );
+        $bankModel->updateBank($bank);
+        if(!preg_match($pattern, $bank['user_id'])){  
+            
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
 
      /**
      * Test case find user_id
