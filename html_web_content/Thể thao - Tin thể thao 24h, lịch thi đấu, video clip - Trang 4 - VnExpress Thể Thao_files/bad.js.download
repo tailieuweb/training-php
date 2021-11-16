@@ -1,0 +1,1 @@
+window.adblock=2;
