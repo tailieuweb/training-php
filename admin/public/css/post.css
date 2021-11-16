@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  background: #f7f7f9;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+.header {
+  background: #0e3746;
+  height: 70px;
+}
+.header .header-menu ul {
+  display: flex;
+  padding: 15px 0;
+  margin: 0;
+}
+.header .header-menu ul li {
+  padding: 0 10px;
+}
+.header .header-menu ul li a {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 20px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+.header .header-menu ul li a:hover {
+  color: rgba(184, 184, 184, 0.5);
+}
+.body .title h1 {
+  color: #be2623;
+  text-align: center;
+}
+.body .wrapper form .form__input {
+  display: flex;
+  margin: 10px 0;
+}
+.body .wrapper form .form__input .title {
+  width: 200px;
+  font-size: 20px;
+}
+.body .wrapper form .form__input textarea {
+  width: 90%;
+}
+.body .wrapper form .form__button {
+  text-align: center;
+}
+.body .wrapper form .form__button input {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: rgb(34, 207, 57);
+  color: white;
+  transition: 0.3s;
+}
+.body .wrapper form .form__button input:hover {
+  background: rgb(103, 207, 117);
+}
+.body .wrapper form .back {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: #be2623;
+  color: white;
+  transition: 0.3s;
+}
+
+/* Post view */
+
+.body table {
+  background: #fff;
+}
+.body .link {
+  width: auto;
+}
+.body .link a {
+  font-size: 20px;
+  color: #be2623;
+}
+
+.body table tr th {
+  padding: 20px;
+  text-align: center;
+}
+.body table tr td {
+  padding: 20px;
+}
+.body table tr .icon {
+  padding: 8px;
+}
+.body table tr .icon a i {
+  color: #be2623;
+}

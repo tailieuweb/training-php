@@ -1,14 +1,20 @@
 <?php
-require 'models/UserModel.php';
-require 'models/BankModel.php';
-class FactoryPattern {
+require_once 'Post.php';
+require_once 'Category.php';
+require_once 'Comment.php';
 
-    public function make($model) {
-        if ($model == 'user') {
-            return new UserModel();
-        } else if ($model == 'bank') {
-            return new BankModel();
+class FactoryPattern{
+    public function make($model){
+        $object = null;
+        if($model === 'post'){
+            $object = new Post();
+        }else if($model === 'cate'){
+            $object = new Category();
+        }else if($model === 'comment'){
+            $object = new Comment();
         }
+        return $object;
     }
-
 }
+
+?>
