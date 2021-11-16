@@ -25,9 +25,14 @@ class UserModel extends BaseModel {
      * @return array
      */
     public function auth($userName, $password) {
-        $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
-        $user = $this->select($sql);
+        if(is_string($userName) || is_string($password)){
+            $md5Password = md5($password);
+            $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+            $user = $this->select($sql);
+        }
+        else{
+            $user = [];
+        }
         return $user;
     }
 
@@ -37,10 +42,15 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function deleteUserById($id) {
-
-        if(is_numeric($id)){
-            $sql = 'DELETE FROM users WHERE id = '.$id;
-            return $this->delete($sql);
+        if(is_numeric($id)){    
+            if(is_float($id)){
+                return false;
+            }   
+            else{
+                $sql = 'DELETE FROM users WHERE id = '.$id;
+                return $this->delete($sql);
+            }   
+           
         } 
         else{
             return false;
@@ -55,13 +65,12 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input, $bankModel) { 
-        if(isset($bankModel)){
+        if(isset($input['user_id'])){
             $bankModel->updateBank($input);
         }
         else{
             $t = base64_decode($input['version']);
             $str = substr($t,18);
-
             $temp = 'SELECT version FROM users WHERE id = '.$input['id'].'';
             $newTemp = $this->select($temp);
             if($newTemp[0]['version'] == $str){
@@ -73,11 +82,12 @@ class UserModel extends BaseModel {
                     password="'. md5($input['password']) .'", type = "'.$input['type'].'", version = "'.$newV.'"
                     WHERE id = ' . $input['id'] ;
                 $user = $this->update($sql);  
-                header('location: list_users.php?success');  
-                return $user;         
+                //header('location: list_users.php?success');
+                return $user;           
             } 
             else{                
-            header('location: list_users.php?err');  
+                //header('location: list_users.php?err');  
+                return false;
             }    
         }
            
@@ -89,7 +99,7 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input, $bankModel) {
-        if(isset($bankModel)){
+        if(isset($input['user_id'])){
             $bankModel->insertBank($input);
         }
         else{
@@ -116,7 +126,6 @@ class UserModel extends BaseModel {
     public function getUsers($params = []) {
         //Keyword
         if (!empty($params['keyword'])) {
-           
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
            
             //Keep this line to use Sql Injection
@@ -126,6 +135,7 @@ class UserModel extends BaseModel {
             // $users = self::$_connection->multi_query($sql);
             
         } else {
+           
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }

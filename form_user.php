@@ -18,7 +18,13 @@ if (!empty($_GET['id'])) {
 if (!empty($_POST['submit'])) {
 
     if (!empty($id)) {
-        $userModel->updateUser($_POST,$bankModel);
+        $ref = $userModel->updateUser($_POST,$bankModel);
+        if($ref == true){
+             header('location: list_users.php?success');
+        }
+        else{
+            header('location: list_users.php?err');  
+        }
     } else {
         $userModel->insertUser($_POST,$bankModel); 
         header('location: list_users.php');  
