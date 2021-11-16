@@ -4,15 +4,17 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel
 {
+    protected static $_instance;
+    
     public static function getInstance()
     {
+        
         if(self::$_instance !== null){
             return self::$_instance;
         }
         self::$_instance = new self();
         return self::$_instance;
     }
-    
     public function findBankById($id)
     {
         substr($id, 4,1);

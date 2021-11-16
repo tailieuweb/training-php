@@ -1,5 +1,13 @@
 <?php
+// try {
+//     throw new Throwable ('test');
+//     }
+//     catch (Exception $e) {
+//     var_dump('111');die();
+//     }
 // Start the session
+ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../session'));
+
 session_start();
 
 require_once 'models/FactoryPattern.php';

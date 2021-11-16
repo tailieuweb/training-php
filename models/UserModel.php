@@ -2,16 +2,19 @@
 
 require_once 'BaseModel.php';
 
+
 class UserModel extends BaseModel
 {
+    private static $_instance;
     public static function getInstance()
     {
-        if(self::$_instance !== null){
+        if (self::$_instance !== null) {
             return self::$_instance;
         }
         self::$_instance = new self();
         return self::$_instance;
     }
+
 
     public function findUserById($id)
     {
@@ -51,7 +54,7 @@ class UserModel extends BaseModel
      * @return mixed
      */
     public function deleteUserById($id)
-    {   
+    {
         $id = $this->Giaima($id);
         $isAuth = $this->getUsers();
         foreach ($isAuth as $item) {
@@ -63,7 +66,7 @@ class UserModel extends BaseModel
     }
     // Delete user by id : Step 2
     public function dropUserById($id)
-    {   
+    {
         $id = $this->Giaima($id);
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
@@ -97,7 +100,7 @@ class UserModel extends BaseModel
         $user = $this->update($sql);
         return $user;
     }
-
+    
 
     /**
      * Insert user
@@ -137,8 +140,15 @@ class UserModel extends BaseModel
 
         return $users;
     }
-    private function Giaima($id){
+    private function Giaima($id)
+    {
         $string = substr($id, 3, -3);
         return $string;
     }
+
+    public function sumb($a, $b)
+    {
+        return $a + $b;
+    }
+    
 }
