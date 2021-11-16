@@ -11,8 +11,7 @@ abstract class BaseModel
       mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
       self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
     } catch (mysqli_sql_exception $e) {
-      echo "Can't connect to DB, pls check again config";
-      die();
+      return $e->getMessage();
     }
   }
   //--------------------------------------------------------------
