@@ -4,9 +4,11 @@ session_start();
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
-//sua bat dau tu 3 dong nay
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
+
+$userModel = $factory->make('user');
+$userModel = $factory->make('user');
 $userModel = $factory->make('user');
 
 if (empty($_SESSION['token'])) {

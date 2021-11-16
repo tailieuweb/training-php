@@ -3,9 +3,9 @@
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
-
-    protected static $_instance;//dong nay
-
+    
+    protected static $_instance;
+    
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
@@ -97,10 +97,8 @@ class UserModel extends BaseModel {
 
         return $users;
     }
-    //cai nay
     public static function getInstance(){
         if(self::$_instance !== null){
-            var_dump('tao moi');
             return self::$_instance;
         }
         self::$_instance = new self();

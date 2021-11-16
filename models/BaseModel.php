@@ -4,7 +4,7 @@ require_once 'configs/database.php';
 abstract class BaseModel {
     // Database connection
     protected static $_connection;
-    //da xoa 1 dong cho nay
+    
     public function __construct() {
 
         if (!isset(self::$_connection)) {

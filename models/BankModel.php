@@ -1,8 +1,11 @@
 <?php
 
-require_once 'BaseModel.php';
 require_once 'UserModel.php';
+
 class BankModel extends BaseModel {
+
+    protected static $_instance;
+
 	// get Bank by id($id)
 	public function getBankById($id)
     {
