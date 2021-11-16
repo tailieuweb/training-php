@@ -7,10 +7,9 @@
     <testsuites>
         <testsuite name="SqlWsContractImport">
             <file>./Tests/UserModelTest.php</file>
-        </testsuite>
-          <testsuite name="SqlWsContractImport">
             <file>./Tests/BankModelTest.php</file>
         </testsuite>
+         
     </testsuites>
     <filter>												
 <whitelist processUncoveredFilesFromWhitelist="true">

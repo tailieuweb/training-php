@@ -123,7 +123,7 @@ class BankModelTest extends TestCase
     {
         $Bank = new BankModel();
         $id = 3;
-        $actual = $Bank->deleteBankById($id);
+        $actual = $Bank->getAllBanks($id);
         if ($actual != false) {
             return $this->assertTrue(true);
         } else {
@@ -135,8 +135,8 @@ class BankModelTest extends TestCase
     {
         $Bank = new BankModel();
         $id = 18;
-        $actual = $Bank->deleteBankById($id);
-        if ($actual != false) {
+        $actual = $Bank->getAllBanks($id);
+        if (empty($actual)) {
             return $this->assertTrue(true);
         } else {
             return $this->assertTrue(false);
@@ -148,7 +148,7 @@ class BankModelTest extends TestCase
         $bankModel = new BankModel();
         $expected = 'Not invalid';
         $idBank = -10;
-        $actual = $bankModel->deleteBankById($idBank);
+        $actual = $bankModel->getAllBanks($idBank);
         $this->assertEquals($expected, $actual);
     }
     // Test id là số thuc
@@ -157,7 +157,7 @@ class BankModelTest extends TestCase
         $bankModel = new BankModel();
         $expected = 'Not invalid';
         $idBank = 2.5;
-        $actual = $bankModel->deleteBankById($idBank);
+        $actual = $bankModel->getAllBanks($idBank);
         $this->assertEquals($expected, $actual);
     }
     // Test id là chuỗi
@@ -166,7 +166,7 @@ class BankModelTest extends TestCase
         $bankModel = new BankModel();
         $expected = 'Not invalid';
         $idBank = 'hi';
-        $actual = $bankModel->deleteBankById($idBank);
+        $actual = $bankModel->getAllBanks($idBank);
         $this->assertEquals($expected, $actual);
     }
     // Test id là mảng
@@ -175,7 +175,7 @@ class BankModelTest extends TestCase
         $bankModel = new BankModel();
         $expected = 'Not invalid';
         $idBank = [10];
-        $actual = $bankModel->deleteBankById($idBank);
+        $actual = $bankModel->getAllBanks($idBank);
         $this->assertEquals($expected, $actual);
     }
     // Test id là null
@@ -184,7 +184,7 @@ class BankModelTest extends TestCase
         $bankModel = new BankModel();
         $expected = 'Not invalid';
         $idBank = null;
-        $actual = $bankModel->deleteBankById($idBank);
+        $actual = $bankModel->getAllBanks($idBank);
         $this->assertEquals($expected, $actual);
     }
     // Test id là boolean(true/false)
@@ -192,7 +192,7 @@ class BankModelTest extends TestCase
     {
         $bankModel = new BankModel();
         $id = true;
-        $actual = $bankModel->deleteBankById($id);
+        $actual = $bankModel->getAllBanks($id);
         if ($actual != false) {
             return $this->assertTrue(true);
         } else {
@@ -205,8 +205,8 @@ class BankModelTest extends TestCase
     {
         $bankModel = new BankModel();
         $id = 25;
-        $actual = $bankModel->deleteBankById($id);
-        if ($actual != false) {
+        $actual = $bankModel->getAllBanks($id);
+        if (empty($actual)) {
             return $this->assertTrue(true);
         } else {
             return $this->assertTrue(false);
@@ -218,7 +218,7 @@ class BankModelTest extends TestCase
         $bankModel = new BankModel();
         $expected = 'Not invalid';
         $idBank = '@@';
-        $actual = $bankModel->deleteBankById($idBank);
+        $actual = $bankModel->getAllBanks($idBank);
         $this->assertEquals($expected, $actual);
     }
     // Test id là object
@@ -227,7 +227,7 @@ class BankModelTest extends TestCase
         $bankModel = new BankModel();
         $idBank = new UserModel();
         $expected ='Not invalid';
-        $actual = $bankModel->deleteBankById($idBank);
+        $actual = $bankModel->getAllBanks($idBank);
         $this->assertEquals($expected, $actual);
     }
 
