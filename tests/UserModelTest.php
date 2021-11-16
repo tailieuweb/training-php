@@ -110,12 +110,17 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
+    /* ***************************
+    Start Test function FindUser
+    ***************************** */
     public function testFindUserByIdWithInteger()
     {
         $user = new UserModel();
         $id = '6';
         $expected = 'test2';
         $actual = $user->findUserById($id);
+        // var_dump($actual);
+        // die();
         $this->assertEquals($expected, $actual[0]['name']);
     }
     public function testFindUserByIdWithString()
@@ -129,9 +134,6 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-    /* ***************************
-    Start Test function FindUser
-    ***************************** */
     public function testFindUserGoodWithName()
     {
         $user = new UserModel();
@@ -228,6 +230,30 @@ class UserModelTest extends TestCase
         }
         return $this->assertTrue(false);
     }
+    public function testFindUserWithSpace()
+    {
+        $user = new UserModel();
+        $keys = " ";
+        $actual = $user->findUser($keys);
+        // var_dump($actual);
+        // die();
+        if (!empty($actual)) {
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    public function testFindUserWithAllSpecialSign()
+    {
+        $user = new UserModel();
+        $keys = "%;%;%;";
+        $actual = $user->findUser($keys);
+        // var_dump($actual);  
+        // die();
+        if (!empty($actual)) {
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
     /* ***************************
     End Test function FindUser
     ***************************** */
@@ -301,7 +327,7 @@ class UserModelTest extends TestCase
         $user = new UserModel();
         $input = array('id' => '', 'name' => 'gia nam', 'fullname' => 'nguyen gia name', 'email' => 'example@gmail.com', 'type' => 'admin', 'password' => '1234');
         $actual = $user->updateUser($input);
-        // var_dump($actual);
+        // var_dump($input);
         // die();
         if ($actual != true) {
             return $this->assertTrue(true);
@@ -325,7 +351,7 @@ class UserModelTest extends TestCase
     public function testUpdateUserWithFullNameNull()
     {
         $user = new UserModel();
-        $input = array('id' => '6', 'name' => 'test3', 'fullname' => '', 'email' => 'example@gmail.com', 'type' => 'admin', 'password' => '1234');
+        $input = array('id' => '6', 'name' => 'test2', 'fullname' => '', 'email' => 'example@gmail.com', 'type' => 'admin', 'password' => '1234');
         $actual = $user->updateUser($input);
         // var_dump($actual);
         // die();
@@ -338,7 +364,9 @@ class UserModelTest extends TestCase
     public function testUpdateUserWithEmailNull()
     {
         $user = new UserModel();
-        $input = array('id' => '6', 'name' => 'test3', 'fullname' => '', 'email' => '', 'type' => 'admin', 'password' => '1234');
+        $input = array('id' => '6', 'name' => 'test2', 'fullname' => 'thanh nam', 'email' => '', 'type' => 'admin', 'password' => '1234');
+        // var_dump($input);
+        // die();
         $actual = $user->updateUser($input);
         // var_dump($actual);
         // die();
@@ -445,7 +473,7 @@ class UserModelTest extends TestCase
     public function testInsertUserGood()
     {
         $user = new UserModel();
-        $input = array('name' => 'gia nam', 'fullname' => 'nguyen gia name', 'email' => 'example@gmail.com', 'type' => 'admin', 'password' => '1234');
+        $input = array('name' => 'gia nam', 'fullname' => 'nguyen gia name', 'email' => 'example4@gmail.com', 'type' => 'admin', 'password' => '1234');
         $actual = $user->insertUser($input);
         // var_dump($actual);
         // die();

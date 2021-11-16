@@ -1,5 +1,4 @@
 <?php
-require_once 'configs/database.php';
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
@@ -20,13 +19,10 @@ class UserModel extends BaseModel
 
     public function findUser($keyword)
     {
-        // var_dump($keyword);
-        // die();
         if ($keyword != null) {
             $search = ['/', '//', ';', '%'];
             $replace = '';
 
-            // tim kiem roi thay doi ki tu dac biet
             $result = str_replace($search, $replace, $keyword);
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $result . '%" OR email LIKE "%' . $result . '%"';
 
@@ -74,12 +70,12 @@ class UserModel extends BaseModel
     {
         $regex_email = "/^[A-Za-z0-9_.]{6,32}@([a-zA-Z0-9]{2,12})(.[a-zA-Z]{2,12})+$/";
         $regex_not_special_sign = "/^[a-zA-Z0-9*\s]+$/";
-        // var_dump($input['type']);
+        // var_dump($input['email']);
         // die();
         if (
-            $input['id'] != null && $input['name'] != null && $input['fullname'] != null && $input['email'] != null && $input['type'] != null && $input['password'] != null && preg_match($regex_email, $input['email']) && preg_match($regex_not_special_sign, $input['name']) && preg_match($regex_not_special_sign, $input['fullname']) &&
-            $input['type'] == 'user' or $input['type'] == 'admin'
-        ) {
+            $input['id'] != null and $input['name'] != null and $input['fullname'] != null and $input['email'] != null and $input['type'] != null and $input['password'] != null and preg_match($regex_not_special_sign, $input['fullname'])
+            and preg_match($regex_not_special_sign, $input['name']) and preg_match($regex_email, $input['email'])
+        ) if ($input['type'] == 'user' or $input['type'] == 'admin') {
             $sql = 'UPDATE users SET 
                  name = "' . $input['name'] . '", 
                  fullname = "' . $input['fullname'] . '",
@@ -88,12 +84,13 @@ class UserModel extends BaseModel
                  password="' . $input['password'] . '"
                 WHERE id = ' . $input['id'];
             // var_dump($sql);
+            // var_dump(preg_match($regex_not_special_sign, $input['fullname']));
             // die();
             $user = $this->update($sql);
             return $user;
         } else {
-            var_dump(preg_match($regex_not_special_sign, $input['fullname']));
-            die();
+            // var_dump(preg_match($regex_not_special_sign, $input['fullname']));
+            // die();
             return false;
         }
     }
@@ -162,14 +159,14 @@ class UserModel extends BaseModel
         }
     }
 
-    public function test()
-    {
-        $pattern = '/[a-z]/';
-        $string = 'Học lập trình web online tại toidicode.com';
-        if (preg_match($pattern, $string)) {
-            echo 'chuỗi chứa toàn chữ';
-        } else {
-            echo 'chuỗi không chứa hết chữ';
-        }
-    }
+    // public function test()
+    // {
+    //     $pattern = '/[a-z]/';
+    //     $string = 'Học lập trình web online tại toidicode.com';
+    //     if (preg_match($pattern, $string)) {
+    //         echo 'chuỗi chứa toàn chữ';
+    //     } else {
+    //         echo 'chuỗi không chứa hết chữ';
+    //     }
+    // }
 }

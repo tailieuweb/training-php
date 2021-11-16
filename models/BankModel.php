@@ -124,9 +124,10 @@ class BankModel extends BaseModel
         //     return $user;
         // }
         $regex_not_special_sign = "/^[a-zA-Z0-9]+$/";
+        $regex_id = "/^[0-9]+$/";
         if (
             $input['user_id'] != null && $input['cost'] != null && is_numeric($input['user_id']) && is_numeric($input['cost']) &&
-            preg_match($regex_not_special_sign, $input['cost'])
+            preg_match($regex_not_special_sign, $input['cost']) && preg_match($regex_id, $input['user_id'])
         ) {
             $sql = "INSERT INTO `banks` (`user_id`, `cost` ) VALUES (" .
                 "'" . $input['user_id'] . "', '" . $input['cost'] . "')";

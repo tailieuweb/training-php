@@ -85,6 +85,32 @@ class BankModelTest extends TestCase
       return $this->assertTrue(true);
     }
   }
+  public function testInsertBankWithIdDifferenceFormat()
+  {
+    $bank = new BankModel();
+    $input = array('user_id' => 'AH$', 'cost' => 'hai% tram@');
+    $actual = $bank->insertBanks($input);
+    // var_dump($actual);
+    // die();
+    if ($actual != false) {
+      return $this->assertTrue(false);
+    } else {
+      return $this->assertTrue(true);
+    }
+  }
+  public function testInsertBankWithIdNotExit()
+  {
+    $bank = new BankModel();
+    $input = array('user_id' => '100', 'cost' => 'hai% tram@');
+    $actual = $bank->insertBanks($input);
+    var_dump($actual);
+    die();
+    if ($actual != false) {
+      return $this->assertTrue(false);
+    } else {
+      return $this->assertTrue(true);
+    }
+  }
   /* ***************************
     End Test function InsertBank
     ***************************** */
