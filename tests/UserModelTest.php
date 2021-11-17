@@ -23,25 +23,19 @@ class UserModelTest extends TestCase {
         $userId = 1;
 
         $actual = $user->findUserById($userId);
-
-        // var_dump($actual);die();
-        if(empty($actual)){
-            return $this->assertTrue(true);
-        }
-        return $this->assertTrue(false);
+        $expected = 'error';
+        $this->assertEquals($expected,$actual);
     }
     /**
      * Test function findUserById with id is string
      */
     public function testFindUserByIdStr() {
         $userModel = new UserModel();
-
         $id = 'asdf';
 
-        $expected = [];
         $actual = $userModel->findUserById($id);
-
-        $this->assertEquals($expected, $actual);
+        $expected = 'error';
+        $this->assertEquals($expected,$actual);
 
     }
     /**
@@ -52,10 +46,9 @@ class UserModelTest extends TestCase {
 
         $id = null;
 
-        $expected = [];
         $actual = $userModel->findUserById($id);
-
-        $this->assertEquals($expected, $actual);
+        $expected = 'error';
+        $this->assertEquals($expected,$actual);
 
     }
     /**
@@ -68,10 +61,10 @@ class UserModelTest extends TestCase {
             'name','email'
         ];
 
-        $expected = ['error'];
         $actual = $userModel->findUserById($id[0]);
-        // var_dump($actual);die();
-        $this->assertEquals($expected, $actual);
+        // $this->assertEquals($expected, $actual);
+        $expected = 'error';
+        $this->assertEquals($expected,$actual);
 
     }
     /**
@@ -82,11 +75,10 @@ class UserModelTest extends TestCase {
 
         $id = new BankModel();
 
-        $expected = 'error';
         $actual = $userModel->findUserById($id->createToken());
-        // var_dump($id->createToken());die();
-        $this->assertEquals($expected, $actual);
-
+        // $this->assertEquals($expected, $actual);
+        $expected = 'error';
+        $this->assertEquals($expected,$actual);
     }
 
     /**
@@ -104,8 +96,6 @@ class UserModelTest extends TestCase {
         else{
             $this->assertTrue(false);
         }
-        
-       
     }
     /**
      * Test function findUser with key not exits
@@ -114,23 +104,20 @@ class UserModelTest extends TestCase {
         $user = new UserModel();
         $keys = "45125215sad";
 
-        $expected = [];
         $actual = $user->findUser($keys);
-
-        $this->assertEquals($expected, $actual);
-        // var_dump($actual);die();
+        $expected = 'error';
+        $this->assertEquals($expected,$actual);
     }
     /**
      * Test function findUser with key is array
      */
     public function testFindUserArray(){
         $user = new UserModel();
-        $keys = ["dsad"];
+        $keys = [1];
 
+        $actual = $user->findUser($keys[0]);
         $expected = 'error';
-        $actual = $user->findUser($keys);
-
-        $this->assertEquals($expected, $actual);
+        $this->assertEquals($expected,$actual);
     }
     /**
      * Test function findUser with key is null
@@ -139,10 +126,9 @@ class UserModelTest extends TestCase {
         $user = new UserModel();
         $keys = null;
 
-        $expected = [];
         $actual = $user->findUser($keys);
-
-        $this->assertEquals($expected, $actual);
+        $expected = 'error';
+        $this->assertEquals($expected,$actual);
     }
     /**
      * Test function findUser with key is number
@@ -151,10 +137,9 @@ class UserModelTest extends TestCase {
         $user = new UserModel();
         $keys = 123;
 
-        $expected = [];
         $actual = $user->findUser($keys);
-
-        $this->assertEquals($expected, $actual);
+        $expected = 'error';
+        $this->assertEquals($expected,$actual);
     }
     /**
      * Test function findUser with key is object
@@ -163,10 +148,10 @@ class UserModelTest extends TestCase {
         $user = new UserModel();
         $keys = new BankModel();
 
-        $expected = [];
         $actual = $user->findUser($keys->createToken());
 
-        $this->assertEquals($expected, $actual);
+        $expected = 'error';
+        $this->assertEquals($expected,$actual);
     }
 
     /**
@@ -179,8 +164,8 @@ class UserModelTest extends TestCase {
 
         // $expected = "LE VAN LAM";
         $actual = $user->auth($name, $pass);
-        // var_dump(md5($pass));die();
-        if($name == $actual[0]['name'] && md5($pass) == $actual[0]['password']){
+
+        if($actual == true){
             $this->assertTrue(true); 
         }
         else{
@@ -192,36 +177,26 @@ class UserModelTest extends TestCase {
      */
     public function testAuthNameNg(){
         $user = new UserModel();
-        $name = "Le LAM 22";
+        $name = "Le LAM 11";
         $pass = "11111";
 
         $actual = $user->auth($name, $pass);
-
-        var_dump($actual[0]['name']);die();
-        if($name == $actual[0]['name'] && md5($pass) == $actual[0]['password']){
-            $this->assertTrue(true); 
-        }
-        else{
-            $this->assertTrue(false); 
-        }
+        $expected = true;
+        $this->assertEquals($expected, $actual);
     }
     /**
      * Test function auth with password worng
      */
     public function testAuthPassNg(){
         $user = new UserModel();
-        $name = "Le LAM 9x";
+        $name = "Le LAM 22";
         $pass = "111119999";
 
         // $expected = "LE VAN LAM";
         $actual = $user->auth($name, $pass);
         // var_dump(md5($pass));die();
-        if($name == $actual[0]['name'] && md5($pass) == $actual[0]['password']){
-            $this->assertTrue(true); 
-        }
-        else{
-            $this->assertTrue(false); 
-        }
+        $expected = true;
+        $this->assertEquals($expected, $actual);
     }
     /**
      * Test function auth with name is number
@@ -234,12 +209,8 @@ class UserModelTest extends TestCase {
         // $expected = "LE VAN LAM";
         $actual = $user->auth($name, $pass);
         // var_dump(md5($pass));die();
-        if($name == $actual[0]['name'] && md5($pass) == $actual[0]['password']){
-            $this->assertTrue(true); 
-        }
-        else{
-            $this->assertTrue(false); 
-        }
+        $expected = true;
+        $this->assertEquals($expected, $actual);
     }
     /**
      * Test function auth with password is number
@@ -251,13 +222,8 @@ class UserModelTest extends TestCase {
 
         // $expected = "LE VAN LAM";
         $actual = $user->auth($name, $pass);
-        // var_dump(md5($pass));die();
-        if($name == $actual[0]['name'] && md5($pass) == $actual[0]['password']){
-            $this->assertTrue(true); 
-        }
-        else{
-            $this->assertTrue(false); 
-        }
+        $expected = true;
+        $this->assertEquals($expected, $actual);
     }
     /**
      * Test function auth with password is number
@@ -269,18 +235,92 @@ class UserModelTest extends TestCase {
 
         // $expected = "LE VAN LAM";
         $actual = $user->auth($name, $pass);
-        // var_dump(md5($pass));die();
-        if($name == $actual[0]['name'] && md5($pass) == $actual[0]['password']){
-            $this->assertTrue(true); 
-        }
-        else{
-            $this->assertTrue(false); 
-        }
+        $expected = true;
+        $this->assertEquals($expected, $actual);
     }
+    /**
+     * Test function auth with name is null
+     */
+    public function testAuthNameNull(){
+        $user = new UserModel();
+        $name = null;
+        $pass = "11111";
+
+        // $expected = "LE VAN LAM";
+        $actual = $user->auth($name, $pass);
+        // var_dump(md5($pass));die();
+        $expected = true;
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test function auth with pass is null
+     */
+    public function testAuthPassNull(){
+        $user = new UserModel();
+        $name = "Le LAM 22";
+        $pass = null;
+
+        $actual = $user->auth($name, $pass);
+        $expected = true;
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test function auth with name is array
+     */
+    public function testAuthNameArray(){
+        $user = new UserModel();
+        $name = ['Le Lam 22'];
+        $pass = '2222';
+
+        $actual = $user->auth($name[0], $pass);
+
+        $expected = true;
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test function auth with pass is array
+     */
+    public function testAuthPassArray(){
+        $user = new UserModel();
+        $name = 'Le Lam 22';
+        $pass = ['1111', '22222'];
+
+        $actual = $user->auth($name, $pass[1]);
+
+        $expected = true;
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test function auth with name is object
+     */
+    public function testAuthNameObject(){
+        $user = new UserModel();
+        $name = new BankModel();
+        $pass = '2222';
+
+        $actual = $user->auth($name->createToken(), $pass);
+        $expected = true;
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test function auth with pass is array
+     */
+    public function testAuthPassObject(){
+        $user = new UserModel();
+        $name = 'Le Lam 22';
+        $pass = new BankModel();
+
+        $actual = $user->auth($name, $pass->createToken());
+
+        $expected = true;
+        $this->assertEquals($expected, $actual);
+    }
+
+
     /**
      * Test function create token
      */
-    public function testCreateToken(){
+    public function testCreateTokenOk(){
         $user = new UserModel();
         $name = "Le LAM";
         $pass = "12345";
@@ -310,14 +350,6 @@ class UserModelTest extends TestCase {
         $user = new UserModel();
         //Create user 2
         $user2 = new UserModel();
-        $input = [];
-        $input['id'] = 11;
-        $input['name'] = "Test update";
-        $input['fullname'] = "Test update change";
-        $input['email'] = "testUpdate@gmail.com";
-        $input['type'] = 3;
-        $input['password'] = "12345";
-        $update = $user->updateUser($input);
         
         $actual = $user2->getInstance();
         if($user == $actual){
@@ -330,7 +362,7 @@ class UserModelTest extends TestCase {
     /**
      * Test get type user right
      */
-    public function testUpdateUser(){
+    public function testUpdateUserOk(){
         $user = new UserModel();
         $input = [];
         $input['id'] = 11;
@@ -349,11 +381,12 @@ class UserModelTest extends TestCase {
     }
     /**
      * Test get type user wrong
+     * id not exist
      */
-    public function testUpdateUserNg(){
+    public function testUpdateUserIdNotExist(){
         $user = new UserModel();
         $input = [];
-        $input['id'] = 1;//id user not exits
+        $input['id'] = 999;//id user not exist
         $input['name'] = "Test update";
         $input['fullname'] = "Test update wrong";
         $input['email'] = "testUpdate@gmail.com";
@@ -367,5 +400,285 @@ class UserModelTest extends TestCase {
         }
         return $this->assertTrue(false);
     }
+    /**
+     * Test get type user wrong
+     * id is null
+     */
+    public function testUpdateUserIdNull(){
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = null;
+        $input['name'] = "Test update";
+        $input['fullname'] = "Test update ok";
+        $input['email'] = "testUpdate@gmail.com";
+        $input['type'] = 3;
+        $input['password'] = "12345";
+        $actual = $user->updateUser($input);
 
+        // var_dump($actual);die();
+        if($actual == true){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+
+    /**
+     * Test get type user right
+     * Name is null
+     */
+    public function testUpdateUserNameNull(){
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = 11;
+        $input['name'] = null;
+        $input['fullname'] = "Test update ok";
+        $input['email'] = "testUpdate@gmail.com";
+        $input['type'] = 3;
+        $input['password'] = "12345";
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        if($actual == true){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    /**
+     * Test get type user right
+     * fullname is null
+     */
+    public function testUpdateUserFullNameNull(){
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = 11;
+        $input['name'] = "Test update";
+        $input['fullname'] = null;
+        $input['email'] = "testUpdate@gmail.com";
+        $input['type'] = 3;
+        $input['password'] = "12345";
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        if($actual == true){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    /**
+     * Test get type user right
+     * Email is null
+     */
+    public function testUpdateUserEmailNull(){
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = 11;
+        $input['name'] = "Test update";
+        $input['fullname'] = "Test user update with email null";
+        $input['email'] = null;
+        $input['type'] = 3;
+        $input['password'] = "12345";
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        if($actual == true){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    /**
+     * Test get type user right
+     * Type is null
+     */
+    public function testUpdateUserTypeNull(){
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = 11;
+        $input['name'] = "Test update";
+        $input['fullname'] = "Test user update with email null";
+        $input['email'] = "testUpdate@gmail.com";
+        $input['type'] = null;
+        $input['password'] = "12345";
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        if($actual == true){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    /**
+     * Test get type user right
+     * Pass is null
+     */
+    public function testUpdateUserPassNull(){
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = 11;
+        $input['name'] = "Test update";
+        $input['fullname'] = "Test user update with email null";
+        $input['email'] = "testUpdate@gmail.com";
+        $input['type'] = 3;
+        $input['password'] = null;
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        if($actual == true){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    /**
+     * Test get type user wrong
+     * ID is string
+     */
+    public function testUpdateUserIdStr(){
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = '11';
+        $input['name'] = "Test update";
+        $input['fullname'] = "Test user update with email null";
+        $input['email'] = "testUpdate@gmail.com";
+        $input['type'] = 3;
+        $input['password'] = '12345';
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        $expected = false;
+        if($actual == $expected){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    /**
+     * Test get type user right
+     * type is string
+     */
+    public function testUpdateUserTypeStr(){
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = '11';
+        $input['name'] = "Test update";
+        $input['fullname'] = "Test user update with email null";
+        $input['email'] = "testUpdate@gmail.com";
+        $input['type'] = 3;
+        $input['password'] = '12345';
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        $expected = false;
+        if($actual == $expected){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    /**
+     * Test get type user right
+     * type is string
+     */
+    public function testUpdateUserNameNum(){
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = 11;
+        $input['name'] = 123;
+        $input['fullname'] = "Test user update with email null";
+        $input['email'] = "testUpdate@gmail.com";
+        $input['type'] = 3;
+        $input['password'] = '12345';
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        if($actual == true){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    /**
+     * Test get type user right
+     * Fullname is int
+     */
+    public function testUpdateUserFullNameNum(){
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = 11;
+        $input['name'] = 123;
+        $input['fullname'] = 123;
+        $input['email'] = "testUpdate@gmail.com";
+        $input['type'] = 3;
+        $input['password'] = '12345';
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        if($actual == true){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    /**
+     * Test get type user right
+     * email is int
+     */
+    public function testUpdateUserEmailNum(){
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = 11;
+        $input['name'] = 123;
+        $input['fullname'] = 123;
+        $input['email'] = 123;
+        $input['type'] = 3;
+        $input['password'] = '12345';
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        $expected = false;
+        if($actual == $expected){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    /**
+     * Test get type user right
+     * pass is int
+     */
+    public function testUpdateUserPassNum(){
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = 11;
+        $input['name'] = 123;
+        $input['fullname'] = 123;
+        $input['email'] = 123;
+        $input['type'] = 3;
+        $input['password'] = 12345;
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        // $expected = false;
+        if($actual == true){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    /**
+     * Test get type user right
+     * id is array
+     */
+    public function testUpdateUserIdArray(){
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = [1,11];
+        $input['name'] = "Test update";
+        $input['fullname'] = "Test user update with email null";
+        $input['email'] = "testUpdate@gmail.com";
+        $input['type'] = 3;
+        $input['password'] = '12345';
+
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        $expected = false;
+        if($actual == $expected){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    
 }
