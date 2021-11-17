@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+head
+<body>
+header_part
+topHeaderMenu
+StartTopSerch
+SidebarMenu
+BEGIN CONTENT (Main)
+Footer
+Script
+</body>
+
+</html>
