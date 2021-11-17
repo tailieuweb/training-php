@@ -41,16 +41,23 @@ class BankModelTest extends TestCase
         $this->assertEquals($expected, $actual);
 
     }
-    public function testFindBankByIdObjectOk(){
+    public function testFindBankByIdObject(){
         $bankModel = new BankModel();
-        $ob = (object)'15';
-        $bank = array(
-            'id' => $ob,
-            'cost' => 388
-        );        
-        if(is_object($bank['id']) || is_object($bank['cost'])){          
-            $bank['id'] = null;
-            $bankModel->findBankById($bank);
+        $ob = (object)'1';     
+        if(is_object($ob)){          
+            $ob = '';
+            $bankModel->findBankById($ob);
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
+    public function testFindBankByIdCharacters(){
+        $bankModel = new BankModel();
+        $cha = '/[0-9A-Za-z]/';
+        $id = '%';     
+        $bankModel->findBankById($id);
+        if(!preg_match($cha, $id)){          
             $this->assertTrue(true);
         }else{
             $this->assertTrue(false);
@@ -61,10 +68,14 @@ class BankModelTest extends TestCase
     //Test findBank
     public function testFindBankOk() {
         $bankModel = new BankModel();    
-        $keyword = 6;
-        $expected = array( '22233');
-        $actual =  $bankModel->findBank($keyword);
-        $this->assertEquals($actual[0],['user_id'],$expected);
+        $id = 1;      
+        $bank = $bankModel->findBank($id);
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+
     }
     // public function testFindBankNg() {
     //     $bankModel = new BankModel();
@@ -104,16 +115,23 @@ class BankModelTest extends TestCase
         $this->assertEquals($expected, $actual);
 
     }
-    public function testFindBankObjectOk(){
+    public function testFindBankObject(){
         $bankModel = new BankModel();
-        $ob = (object)'2';
-        $bank = array(
-            'user_id' => $ob,
-            'cost' => 388
-        );        
-        if(is_object($bank['user_id']) || is_object($bank['cost'])){          
-            $bank['user_id'] = null;
-            $bankModel->findBank($bank);
+        $ob = (object)'1';     
+        if(is_object($ob)){          
+            $ob = '';
+            $bankModel->findBank($ob);
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
+    public function testFindBankCharacters(){
+        $bankModel = new BankModel();
+        $cha = '/[0-9A-Za-z]/';
+        $keyword = '%';     
+        $bankModel->findBank($keyword);
+        if(!preg_match($cha, $keyword)){          
             $this->assertTrue(true);
         }else{
             $this->assertTrue(false);
@@ -135,7 +153,7 @@ class BankModelTest extends TestCase
 public function testGetBanksFindNg(){
         $bankModel = new BankModel();      
         $bank = array(
-            'keyword' => 388
+            'keyword' => 6
         );
         $actual =  $bankModel->getBanks($bank);
         if(!empty($actual)){
