@@ -122,4 +122,9 @@ class UserModel extends BaseModel {
         self::$userInstance = new self();
         return self::$userInstance;
     }
+    // Sum test
+     public function sumb($a,$b)
+    {
+        return $a + $b;
+    }
 }
