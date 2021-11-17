@@ -1,3 +1,13 @@
+##<VirtualHost *:80>
+	##ServerName wordpress.local
+	##DocumentRoot C:\wamp64\www\CMS
+	##<Directory  "C:\wamp64\www\CMS">
+		##Options +Indexes +Includes +FollowSymLinks +MultiViews
+		##AllowOverride All
+		##Require local
+	##</Directory>
+##</VirtualHost>
+
 <?php
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
@@ -47,8 +57,16 @@ if (!empty($_POST['submit'])) {
                 <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
             </div>
             <div class="form-group">
-                <label for="password">Email</label>
-                <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
+                <label for="email">Email</label>
+                <span><?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <span><?php if (!empty($user[0]['password'])) echo $user[0]['password'] ?></span>
+            </div>
+            <div class="form-group">
+                <label for="type">Type</label>
+                <span><?php if (!empty($user[0]['type'])) echo $user[0]['type'] ?></span>
             </div>
         </form>
     <?php } else { ?>
