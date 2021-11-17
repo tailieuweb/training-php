@@ -1,18 +1,33 @@
 <?php
 // Start the session
 session_start();
+require_once 'models/UserModel.php';
+$userModel = new UserModel();
 
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
 $userModel = $factory->make('user');
+$userModel = $factory->make('user');
+$userModel = $factory->make('user');
 
+if (empty($_SESSION['token'])) {
+    $_SESSION['token'] = bin2hex(random_bytes(32));
+}
+$token = $_SESSION['token'];
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
-
 $users = $userModel->getUsers($params);
+if (!empty($_GET['token'])) {
+    if (hash_equals($_SESSION['token'], $_GET['token'])) {
+        if (!empty($_GET['id'])) {
+            $id = $_GET['id'];
+            $userModel->deleteUserById($id); //Delete existing user
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,6 +35,7 @@ $users = $userModel->getUsers($params);
     <title>Home</title>
     <?php include 'views/meta.php' ?>
 </head>
+
 <body>
     <?php include 'views/header.php'?>
     <div class="container">
@@ -43,7 +59,7 @@ $users = $userModel->getUsers($params);
                     <?php foreach ($users as $user) {?>
                         <tr>
                             <th scope="row"><?php echo $user['id']?></th>
-                            <td>
+                            <td>                            
                                 <?php echo $user['name']?>
                             </td>
                             <td>
@@ -52,7 +68,7 @@ $users = $userModel->getUsers($params);
                             <td>
                                 <?php echo $user['email']?>
                             </td>
-                            <td>
+                            <td >
                                 <?php echo $user['type']?>
                             </td>
                             <td>
@@ -62,11 +78,25 @@ $users = $userModel->getUsers($params);
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="list_users.php?id=<?php echo $user['id'] ?>&token=<?php echo $token ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
+                                    <input type="hidden" name="token" value="<?php echo $token ?>">
                                 </a>
+                            <!-- <td style="display:flex">
+                            <a href="form_user.php?id=<?php echo $user['id'] ?>" style="width:18px;">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
+                                </a>
+                                <a href="view_user.php?id=<?php echo $user['id'] ?>">
+                                    <i class="fa fa-eye" aria-hidden="true" title="View"></i>
+                                </a>
+                            <form action="delete_user.php" method="GET" style="width:16px;">
+                                    <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?? '' ?>">
+                                    <input type="hidden" name="id" value="<?php echo $user['id']?>">
+                                    <button type="submit" value="delete" class="fa fa-eraser" 
+                                    style="color: #337ab7;background: none;border: none;outline:none;">
+                                    </button>
+                            </form> -->
                             </td>
-
                         </tr>
                     <?php } ?>
                 </tbody>

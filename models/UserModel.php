@@ -3,7 +3,9 @@
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel {
-
+    
+    protected static $_instance;
+    
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
@@ -50,13 +52,14 @@ class UserModel extends BaseModel {
      */
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 password="'. md5($input['password']) .'"
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '"
+                ,`fullname`="' . mysqli_real_escape_string(self::$_connection, $input['fullname'])  . '"
+                ,email="' . $input['email'] . '"
+                ,type="' . $input['type'] . '"
+                ,password="' . md5($input['password']) . '"
                 WHERE id = ' . $input['id'];
-
-        $user = $this->update($sql);
-
-        return $user;
+            $user = $this->update($sql);
+            return $user;
     }
 
     /**
@@ -65,18 +68,8 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-<<<<<<< HEAD
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`type`,`email`) VALUES (" .
                 "'" . $input['name'] ."', '".md5($input['password'])."','".$input['fullname']."','".$input['type']."','".$input['email']. "')";
-=======
-<<<<<<< HEAD
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`type`) VALUES (" .
-                "'" . $input['name'] ."', '".md5($input['password'])."','".$input['fullname']."','".$input['type']. "')";
-=======
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`type`,`email`) VALUES (" .
-                "'" . $input['name'] ."', '".md5($input['password'])."','".$input['fullname']."','".$input['type']."','".$input['email']. "')";
->>>>>>> 1-php-202109/2-groups/8-H/1-19-Huynh
->>>>>>> origin/1-php-202109/2-groups/8-H/master
 
         $user = $this->insert($sql);
 
@@ -104,13 +97,11 @@ class UserModel extends BaseModel {
 
         return $users;
     }
-
-    /**
-     * For testing
-     * @param $a
-     * @param $b
-     */
-    public function sumb($a, $b) {
-        return $a + $b;
+    public static function getInstance(){
+        if(self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
     }
 }
