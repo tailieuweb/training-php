@@ -34,7 +34,7 @@ class BankModel extends BaseModel {
     //     return $user;
     // }
 
-    /**
+    // /**
     //  * Delete user by id
     //  * @param $id
     //  * @return mixed
@@ -69,9 +69,8 @@ class BankModel extends BaseModel {
     //  * @param $input
     //  * @return mixed
     //  */
-    public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" . "'" . $input['name'] . "', '".md5($input['password'])."')";
-
+    public function insertBank($input) {
+        $sql = "INSERT INTO `app_web1`.`banks`(`id`, `user_id`, `cost`) VALUES (" . "'" . $input['id'] . "', '".$input['user_id']."', '".$input['cost']."')";
         $user = $this->insert($sql);
 
         return $user;
