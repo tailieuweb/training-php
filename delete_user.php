@@ -3,7 +3,7 @@ session_start();
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
-$userRepository = $factory->make('repository');
+$userRepository = $factory->make('user');
 
 
 //23-4
@@ -16,7 +16,7 @@ if (!empty($_GET['id']) && !empty($_GET['token'])) {
    if($_GET['token'] == $_SESSION['token']){
         $id = base64_decode($_GET['id']);
         $newid = substr($id,3,-2);
-        $userRepository->deleteUser($newid);//Delete existing user
+        $userRepository->deleteUserById($newid);//Delete existing user
     }
     
   

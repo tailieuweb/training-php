@@ -18,15 +18,4 @@ class Repository{
         $bankModel->insertBank($bank);//tặng 500 vào user vừa tạo
         return $user;
     }
-    /*
-        Xóa user và bank tương ứng
-    */ 
-    public function deleteUser($id){
-        $userModel = new UserModel();
-        $bankModel = new BankModel();
-
-        $user =  $userModel->deleteUserById($id);
-        $bankModel->deleteBankByUserId($id);
-        return $user;
-    }
 }
