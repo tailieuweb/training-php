@@ -6,7 +6,10 @@
          cacheResult ="false">
     <testsuites>
         <testsuite name="SqlWsContractImport">
-            <file>./Tests/UserModelTest.php</file>
+            <file>./tests/UserModelTest.php</file>
+        </testsuite>
+        <testsuite name="SqlWsContractImport">
+            <file>./tests/BankModelTest.php</file>
         </testsuite>
     </testsuites>
     <filter>												

@@ -1,5 +1,5 @@
 <?php
-require_once 'models/FactoryModel.php';
+require_once 'models/FactoryPattern.php';
 $factoryModel = new FactoryPattern();
 
 $userModel = $factoryModel->make('user');

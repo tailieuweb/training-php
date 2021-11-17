@@ -19,6 +19,17 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
+    public function testSumBad()
+    {
+        $userModel = new UserModel();
+        $a = 1;
+        $b = 2;
+        $expected = 3;
+
+        $actual = $userModel->sumb($a, $b);
+
+        $this->assertEquals($expected, $actual);
+    }
     /**
      * Test case Not good
      */
@@ -110,91 +121,269 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
-    public function testFindUserByIdWithInteger()
+    
+    
+   // Huynh lam test findUserById
+    // Test truong hop thanh cong
+    public function testFindUserByIdOk()
     {
-        $user = new UserModel();
-        $id = '1';
+        $userModel = new UserModel();
+        $idUser = 12;
         $expected = 'test1';
-        $actual = $user->findUserById($id);
-        $this->assertEquals($expected, $actual[0]['name']);
+        $user = $userModel->findUserById($idUser);
+        $actual = $user[0]['name'];
+        $this->assertEquals($expected, $actual);
     }
-    public function testFindUserByIdWithString()
+    // Test truong hop sai
+    public function testFindUserByIdNg()
     {
-        $user = new UserModel();
-        $id = 'hai';
-        $actual = $user->findUserById($id);
-        if ($actual == false) {
+        $userModel = new UserModel();
+        $userId = 222;
+        $user = $userModel->findUserById($userId);
+        if (empty($user)) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
         }
     }
-    public function testFindUserGoodWithString()
+    // Test truong hop id la chuoi
+    public function testFindUserByIdIsString()
     {
-        $user = new UserModel();
-        $keys = "test1";
-        // $expected = "LE VAN LAM";
-        $actual = $user->findUser($keys);
-        // var_dump($actual);
-        // die();
-        if (!empty($actual)) {
-            return $this->assertTrue(true);
-        }
-        return $this->assertTrue(false);
+        $userModel = new UserModel();
+        $userId = '123';
+        $expected = 'Not invalid';
+        $actual = $userModel->findUserById($userId);
+        $this->assertEquals($expected, $actual);
     }
-    public function testGetUserGoodWithString()
+    // Test trường hợp id là số âm
+    public function testFindUserByIdIsNegativeNumber()
     {
-        $user = new UserModel();
-        $params = [];
-        $params['keyword'] = 'huynh';
-        // $expected = "LE VAN LAM";
-        $actual = $user->getUsers($params);
-        // var_dump($actual);
-        // die();
-        if (!empty($actual)) {
-            return $this->assertTrue(true);
-        }
-        return $this->assertTrue(false);
+        $userModel = new UserModel();
+        $userId = -10;
+        $expected = 'Not invalid';
+        $actual = $userModel->findUserById($userId);
+        $this->assertEquals($expected, $actual);
     }
-    public function testGetUserGoodWithNull()
+    // Test trường hợp id là số thực
+    public function testFindUserByIdIsDoubleNumber()
     {
-        $user = new UserModel();
-        $keys = "";
-        // $expected = "LE VAN LAM";
-        $actual = $user->getUsers($keys);
-        // var_dump($actual);
-        // die();
-        if (!empty($actual)) {
-            return $this->assertTrue(true);
-        }
-        return $this->assertTrue(false);
+        $userModel = new UserModel();
+        $userId = 2.5;
+        $expected = 'Not invalid';
+        $actual = $userModel->findUserById($userId);
+        $this->assertEquals($expected, $actual);
     }
-    public function testAuthGood()
+    // Test trường hợp id là null
+    public function testFindUserByIdIsNull()
     {
-        $user = new UserModel();
-        $username = 'huynh';
-        $password = '123';
-        $actual = $user->auth($username, $password);
-        if (!empty($actual)) {
-            return $this->assertTrue(true);
-        }
-        return $this->assertTrue(false);
+        $userModel = new UserModel();
+        $userId = null;
+        $expected = 'Not invalid';
+        $actual = $userModel->findUserById($userId);
+        $this->assertEquals($expected, $actual);
     }
-    public function testDeleteUserByIdGood()
+    // Test trường hợp id là boolean(true/false)
+    public function testFindUserByIdIsBoolean()
     {
-        $user = new UserModel();
-        $id = '3';
-        $actual = $user->deleteUserById($id);
-        if ($actual != false) {
-            return $this->assertTrue(true);
+        $userModel = new UserModel();
+        $userId = true;
+        $actual = $userModel->findUserById($userId);
+        if (empty($actual)) {
+            $this->assertTrue(true);
         } else {
-            return $this->assertTrue(false);
+            $this->assertTrue(false);
         }
     }
+    // Test trường hợp id là mảng
+    public function testFindUserByIdIsArray()
+    {
+        $userModel = new UserModel();
+        $userId = null;
+        $expected = 'Not invalid';
+        $actual = $userModel->findUserById($userId);
+        $this->assertEquals($expected, $actual);
+    }
+    // Test trường hợp id là 1 object
+    public function testFindUserByIdIsObject()
+    {
+        $userModel = new UserModel();
+        $userId = new BankModel();
+        $expected = 'Not invalid';
+        $actual = $userModel->findUserById($userId);
+        $this->assertEquals($expected, $actual);
+    }
+    // Test trường hợp id không tồn tại
+    public function testFindUserByIdNotExist()
+    {
+        $userModel = new UserModel();
+        $userId = 50;
+        $user = $userModel->findUserById($userId);
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test trường hợp id là kí tự
+    public function testFindUserByIdIsCharacters()
+    {
+        $userModel = new UserModel();
+        $userId = '@11';
+        $expected = 'Not invalid';
+        $actual = $userModel->findUserById($userId);
+        $this->assertEquals($expected, $actual);
+    }
+    // End test findUserById
+    // Huynh lam test cho function DeleteUserById
+    // Test truong hop thanh cong
+    public function testDeleteUserByIdOk()
+    {
+        $userModel = new UserModel();
+        $idUser = 1;
+        $user = $userModel->deleteUserById($idUser);
+        if (!empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test truong hop sai
+    public function testDeleteUserByIdNg()
+    {
+        $userModel = new UserModel();
+        $idUser = 100;
+        $user = $userModel->deleteUserById($idUser);
+        if (!empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test truong hop id la chuoi
+    public function testDeleteUserByIdIsString()
+    {
+        $userModel = new UserModel();
+        $idUser = '1';
+        $user = $userModel->deleteUserById($idUser);
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test trường hợp id là số âm
+    public function testDeleteUserByIdIsNegativeNumber()
+    {
+        $userModel = new UserModel();
+        $idUser = -5;
+        $user = $userModel->deleteUserById($idUser);
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test trường hợp id là số thực
+    public function testDeleteUserByIdIsDoubleNumber()
+    {
+        $userModel = new UserModel();
+        $idUser = 5.5;
+        $user = $userModel->deleteUserById($idUser);
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test trường hợp id là null
+    public function testDeleteUserByIdIsNull()
+    {
+        $userModel = new UserModel();
+        $idUser = null;
+        $user = $userModel->deleteUserById($idUser);
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test trường hợp id là boolean(true/false)
+    public function testDeleteUserByIdIsBoolean()
+    {
+        $userModel = new UserModel();
+        $idUser = true;
+        $user = $userModel->deleteUserById($idUser);
+        if (!empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test trường hợp id là mảng
+    public function testDeleteUserByIdIsArray()
+    {
+        $userModel = new UserModel();
+        $idUser = [];
+        $user = $userModel->deleteUserById($idUser);
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test trường hợp id là 1 object
+    public function testDeleteUserByIdIsObject()
+    {
+        $userModel = new UserModel();
+        $idUser = new BankModel();
+        $user = $userModel->deleteUserById($idUser);
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test trường hợp id không tồn tại
+    public function testDeleteUserByIdNotExist()
+    {
+        $userModel = new UserModel();
+        $idUser = 100;
+        $user = $userModel->deleteUserById($idUser);
+        if (!empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test trường hợp id là kí tự
+    public function testDeleteUserByIdIsCharacters()
+    {
+        $userModel = new UserModel();
+        $idUser ='%%';
+        $user = $userModel->deleteUserById($idUser);
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // End test DeleteUserById
+    // public function testAuthGood()
+    // {
+    //     $user = new UserModel();
+    //     $username = 'huynh';
+    //     $password = '123';
+    //     $actual = $user->auth($username, $password);
+    //     if (!empty($actual)) {
+    //         return $this->assertTrue(true);
+    //     }
+    //     return $this->assertTrue(false);
+    // }
+    
     public function testUpdateUserGood()
     {
         $user = new UserModel();
-        $input = array('id' => '2', 'name' => 'maihuynh', 'fullname' => 'huynh mai xuan', 'email' => 'example@gmail.com', 'type' => 'admin', 'password' => '1234');
+        $input = array('id' => '15', 'name' => 'maihuynh', 'fullname' => 'huynh mai xuan', 'email' => 'example@gmail.com', 'type' => 'admin', 'password' => '1234');
         $actual = $user->updateUser($input);
         // var_dump($actual);
         // die();
@@ -227,4 +416,5 @@ class UserModelTest extends TestCase
         $expected = 'UserModel';
         $this->assertEquals($expected, $actual2);
     }
+    
 }

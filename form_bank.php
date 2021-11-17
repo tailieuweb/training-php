@@ -15,12 +15,12 @@ if (!empty($_GET['keyword'])) {
 $users = $userModel->getUsers($params);
 $banks = $bankModel->getBanks($params);
 
-// if (!empty($_GET['id'])) {
-//     $_id = $_GET['id'];
-//     $id_start = substr($_id, 3);
-//     $id_end = substr($id_start, 0, -3);
-//     $bank = $bankModel->findBankById($id_end); //Update existing user
-// }
+if (!empty($_GET['id'])) {
+    $_id = $_GET['id'];
+    // $id_start = substr($_id, 3);
+    // $id_end = substr($id_start, 0, -3);
+    $bank = $bankModel->findBankById($_id); //Update existing user
+}
 // if (!empty($_POST['submit'])) {
 //     $version = $_POST['version'];
 //     if (!empty($id_end)) {

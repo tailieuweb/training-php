@@ -7,6 +7,10 @@ class UserModel extends BaseModel
     protected static $_instance;
     public function findUserById($id)
     {
+        if(is_object($id) || is_string($id) || $id<0 || is_double($id) || empty($id)
+        || is_array($id)){
+            return 'Not invalid';
+        }
         if (is_numeric($id)) {
             $sql = 'SELECT * FROM users WHERE id = ' . $id;
             // var_dump($sql);
@@ -50,8 +54,14 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
-        $sql = 'DELETE FROM users WHERE id = ' . $id;
-        return $this->delete($sql);
+        if(is_object($id) || is_string($id) || $id<0 || is_double($id) || empty($id)
+        || is_array($id)){
+            return false;
+        }
+        else{
+            $sql = 'DELETE FROM users WHERE id = ' . $id;
+            return $this->delete($sql);
+        }
     }
 
     /**

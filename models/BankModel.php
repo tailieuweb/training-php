@@ -7,19 +7,16 @@ class BankModel extends BaseModel
     protected static $_instance;
     public function findBankById($id)
     {
-        $sql1 = 'SELECT id FROM banks';
-        $allUser = $this->select($sql1);
-        $user = null;
-        foreach ($allUser as $key) {
-            $md5 = md5($key['id'] . "chuyen-de-web-1");
-            if ($md5 == $id) {
-                $sql = 'SELECT banks.id as bank_id,users.name,users.email,banks.cost,users.type,users.id,banks.user_id,banks.version 
-                FROM `banks`,`users` 
-                WHERE banks.user_id = users.id AND banks.id = ' . $key['id'];
-                $user = $this->select($sql);
-            }
+        if(is_object($id) || is_string($id) || $id<0 || is_double($id) || empty($id)
+        || is_array($id)){
+            return 'Not invalid';
+        }else{
+            $sql = 'SELECT banks.id as bank_id,users.name,users.email,banks.cost,users.type,users.id,banks.user_id,banks.version 
+                    FROM `banks`,`users` 
+                    WHERE banks.user_id = users.id AND banks.id = ' . $id;
+            $user = $this->select($sql);
+            return $user;
         }
-        return $user;
     }
 
     public function findUser($keyword)
