@@ -8,8 +8,6 @@ require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
 $userModel = $factory->make('user');
-$userModel = $factory->make('user');
-$userModel = $factory->make('user');
 
 if (empty($_SESSION['token'])) {
     $_SESSION['token'] = bin2hex(random_bytes(32));
