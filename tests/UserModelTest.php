@@ -132,7 +132,7 @@ class UserModelTest extends TestCase
       
       $user = $userModel->insertUser($input);
       $expected = $userModel->findUserById(6);
-      if($expected != null){
+      if($user != null){
          $this->assertTrue(true);
       }
       else{
