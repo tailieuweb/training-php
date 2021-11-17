@@ -1,17 +1,16 @@
 <?php
-
 use SebastianBergmann\FileIterator\Factory;
 
-require_once './models/FactoryPattern.php';
 require_once './models/repository/RepositoryInterface.php';
+require_once './models/UserModel.php';
 
 class RepositoryUser implements RepositoryInterface{
     protected static $userModel;
 //constructor:
     function __construct()
     {
-        $factory = new FactoryPattern();
-        self::$userModel = $factory->make('user');
+        // $factory = new FactoryPattern();
+        self::$userModel = UserModel::getInstance();
     }
     //read
     public function read() {
@@ -28,6 +27,16 @@ class RepositoryUser implements RepositoryInterface{
     //delete
     public function delete($id) {
         return self::$userModel->deleteUserById($id);
+    }
+    //find
+    public function search($params)
+    {
+        return self::$userModel->getUsers($params);
+    }
+    //auth
+    public  function auth($userName,$password)
+    {
+    return self::$userModel->auth($userName,$password);
     }
 }
 
