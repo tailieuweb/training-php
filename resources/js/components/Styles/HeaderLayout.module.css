@@ -1,0 +1,39 @@
+.header {
+  background: orangered;
+}
+
+.home_container {
+  max-width: 1400px;
+  margin: auto;
+  padding: 0 25px;
+}
+
+.header_account {
+  padding: 5px 0;
+  color: white;
+  float: right;
+  margin-top: 25px;
+}
+
+.header_account .avt {
+  margin-right: 10px;
+}
+
+.cart-link {
+  position: relative;
+  top: 20px;
+  color: white;
+  padding: 50px 0;
+  justify-content: center;
+}
+
+.cart-link span {
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+
+.cart-icon {
+  position: relative;
+  font-size: 30px;
+  top: 5px;
+}

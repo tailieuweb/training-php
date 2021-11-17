@@ -1,0 +1,13 @@
+.home-page .products-section .list-of-products .ant-pagination-item-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* __________________________________________________ */
+@media screen and (max-width: 992px) {
+    /* .home-page .banners-section .banner__left-section .ant-carousel .slick-slide img {
+        width: 100%;
+        height: auto;
+    } */
+}

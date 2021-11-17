@@ -1,0 +1,12 @@
+.cart-list {
+    padding: 0 20px;
+    background: white;
+    margin-bottom: 40px;
+    overflow-x: auto;
+}
+
+@media screen and (max-width: 440px) {
+    .cart-list-quantity {
+        width: 40px;
+    }
+}

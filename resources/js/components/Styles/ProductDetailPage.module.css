@@ -1,0 +1,35 @@
+.product__sellingInfo .product-name {
+    display: block;
+    font-size: 25px;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.product__sellingInfo .product-price {
+    display: inline-block;
+    font-size: 24px;
+    color: #cc0018;
+    vertical-align: middle;
+    text-shadow: 0px 0px 1px #cc0018;
+    margin-bottom: 10px;
+}
+
+.product__sellingInfo .buy-btn {
+    display: block;
+    background: cornflowerblue;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.product__sellingInfo .buy-btn:hover {
+    background-color: #cc0018;
+    color: gold;
+}

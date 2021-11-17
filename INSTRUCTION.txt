@@ -1,0 +1,4 @@
+npm install antd
+npm install react-router-dom
+npm install moment
+npm install react-id-generator

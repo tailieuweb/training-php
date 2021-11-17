@@ -1,0 +1,100 @@
+.footer-wrapper {
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    padding: 0 0 30px 0;
+}
+
+.footer-wrapper .footer-body {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.footer-wrapper .block .block-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    border-left: 5px solid steelblue;
+    padding: 0 0 0 15px;
+    color: steelblue;
+}
+
+.footer-wrapper .block .block-content {
+    padding: 0 10px 0 0;
+}
+
+/* LINKS: */
+.footer-wrapper .block .block-content ul.list-of-links {
+    list-style-type: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-wrapper .block .block-content ul.list-of-links li.link {
+    transition: all 0.1s ease;
+}
+
+.footer-wrapper .block .block-content ul.list-of-links li.link:hover {
+    transform: translateX(5px);
+}
+
+.footer-wrapper .paragraph-highlighted {
+    font-weight: 500;
+    font-size: 15px;
+    color: steelblue;
+}
+
+@media screen and (max-width: 768px) {
+    .footer-wrapper .block {
+        margin-bottom: 30px;
+    }
+
+    .footer-wrapper .footer-body {
+        margin-bottom: 0;
+    }
+}
+
+/* ICONS: */
+.footer-wrapper .block .block-content ul.list-of-icons {
+    list-style-type: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer-wrapper .block .block-content ul.list-of-icons li.icon {
+    padding: 0 10px 10px 0;
+}
+
+.footer-wrapper .block .block-content ul.list-of-icons li.icon:last-child {
+    padding: 0;
+}
+
+/* FOOTER TOP: */
+.footer-wrapper .footer-top {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.footer-wrapper .footer-top .block-moreinfo:first-child {
+    border-right: 1px solid #eee;
+}
+
+.footer-wrapper .footer-top .block-moreinfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-wrapper .footer-top .block-moreinfo .info {
+    display: inline-block;
+}
+
+.footer-wrapper .footer-top .block-moreinfo .info .hotline {
+    color: #cc0018;
+    font-weight: 500;
+    font-size: 15px;
+}

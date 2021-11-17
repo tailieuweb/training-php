@@ -1,0 +1,66 @@
+.modal-productdetail .product-img-wrapper .product-img {
+    width: 100%;
+    height: auto;
+}
+
+.modal-productdetail .product__quickInfo {
+    padding: 0 10px;
+}
+
+.modal-productdetail .product__quickInfo .product-name,
+.modal-productdetail .product__quickInfo .product-name a {
+    cursor: pointer;
+    text-decoration: none;
+    padding: 5px 0;
+    color: #294d6a;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.modal-productdetail .product-description {
+    padding: 20px 10px;
+    /* Limit text length and lines: */
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.8;
+    padding-bottom: 0;
+}
+
+.modal-productdetail .product__quickInfo .product-name:hover {
+    text-decoration: underline;
+}
+
+.modal-productdetail .product__quickInfo .product-price {
+    font-size: 15px;
+    font-weight: 500;
+    color: #cc0018;
+    margin-bottom: 5px;
+}
+
+.modal-productdetail .product__quickInfo .list-of-controls {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.modal-productdetail .product__quickInfo .list-of-controls .readmore-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 5px;
+    background-color: #294d6a;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-productdetail .product__quickInfo .list-of-controls .readmore-btn .readmore-btn__title {
+    margin-right: 5px;
+}
+
+.modal-productdetail .product__quickInfo .list-of-controls .readmore-btn:hover {
+    text-decoration: underline;
+}

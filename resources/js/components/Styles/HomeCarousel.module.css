@@ -1,0 +1,25 @@
+.home_container {
+  max-width: 1400px;
+  margin: auto;
+  padding: 0 25px;
+}
+
+.ant-carousel .slick-prev,
+.ant-carousel .slick-next {
+  color: orangered;
+  font-size: unset;
+  transition: .5s linear ease-in;
+}
+
+.ant-carousel .slick-prev:hover,
+.ant-carousel .slick-next:hover,
+.ant-carousel .slick-prev:focus,
+.ant-carousel .slick-next:focus {
+  color: orangered;
+
+}
+
+.ant-carousel:hover .slick-prev,
+.ant-carousel:hover .slick-next {
+  font-size: 25px;
+}

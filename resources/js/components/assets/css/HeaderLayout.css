@@ -1,0 +1,306 @@
+.header {
+  /* background: #585858; */
+  background: #294d6a;
+}
+
+.header .header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+
+/* Left: */
+.header .header__left-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header .header__left-section .logo-wrapper {
+  display: inline-block;
+}
+
+.header .header__left-section .logo-wrapper .logo {
+  /* width: 130px;
+  height: auto; */
+  width: 100px;
+  height: auto;
+  padding: 5px 0;
+}
+
+
+/* Controls: */
+.header .header__controls-section {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding: 0 30px 0 10px;
+}
+
+.header .header__controls-section .search-box {
+  width: 100%;
+}
+
+.header .header__controls-section .search-box button {
+  background: #89a552;
+  border: 1px solid #89a552;
+}
+
+.header .header__controls-section .search-box button:hover {
+  background: #7a9349;
+  border: 1px solid #7a9349;
+}
+
+.header .header__controls-section .search-btn {
+  font-size: 18px;
+  line-height: 0.8;
+  font-weight: bold;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #eee;
+  cursor: pointer;
+  display: none;
+}
+
+.header .header__controls-section .search-btn .mega-menu {
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0px #888;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  color: #000;
+  font-weight: lighter;
+  font-size: 15px;
+  z-index: 50;
+  width: 100%;
+  /* display: none; */
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: transform linear 0.3s, opacity linear 0.3s;
+}
+
+.header .header__controls-section .search-btn:hover {
+  background: #eee;
+  color: #000;
+}
+
+.header .header__controls-section .search-btn-wrapper {
+  margin: 0;
+}
+
+.header .header__controls-section .search-btn .overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: none;
+  margin: 0;
+  z-index: 20;
+}
+
+.header .header__controls-section .search-btn #checkbox-for-MegaMenu {
+  display: none;
+}
+
+.header .header__controls-section .search-btn #checkbox-for-MegaMenu:checked ~ .overlay {
+  display: block;
+}
+
+.header .header__controls-section .search-btn #checkbox-for-MegaMenu:checked ~ .mega-menu {
+  /* display: block; */
+  transform: translateY(0px);
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/* Hamburger button: */
+.header .header__controls-section .bars-btn {
+  margin: 0 10px 0 0;
+  padding: 0;
+}
+
+.header .header__controls-section .hamburger-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  cursor: pointer;
+  padding: 10px 0;
+}
+
+.header .header__controls-section .hamburger-btn .bar {
+  position: relative;
+  width: 2rem;
+  height: 3px;
+  background-color: #fff;
+  transition: all 0.5s;
+}
+
+.header .header__controls-section .hamburger-btn .bar::before,
+.header .header__controls-section .hamburger-btn .bar::after {
+  content: "";
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  background-color: #fff;
+  transition: all 0.5s;
+}
+
+.header .header__controls-section .hamburger-btn .bar::before {
+  transform: translateY(-10px);
+}
+
+.header .header__controls-section .hamburger-btn .bar::after {
+  transform: translateY(10px);
+}
+
+
+/* Right: */
+.header .header__right-section {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header .header__right-section .account-btn {
+  color: #fff;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 0 0 15px;
+}
+
+.header .header__right-section .account-btn .account-btn__title {
+  margin: 0 5px;
+}
+
+.header .header__right-section .account-btn:hover .account-btn__title {
+  text-decoration: underline;
+}
+
+.header .header__right-section .account-btn .user-icon {
+  color: #000;
+  background: #eee;
+}
+
+.header .header__right-section .cart-btn {
+  color: #fff;
+  font-size: 15px;
+  background-color: #1b3245;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+}
+
+.header .header__right-section .cart-btn:hover {
+  /* color: gold; */
+  /* background-color: #cc0018; */
+  background-color: #000;
+}
+
+.header .header__right-section .cart-btn .cart-btn__title {
+  white-space: nowrap;
+}
+
+.header .header__right-section .cart-btn .cart-icon {
+  font-size: 30px;
+  margin-right: 2px;
+  margin-right: 5px;
+}
+
+
+/* __________________________________________________ */
+@media screen and (max-width: 992px) {
+  .header .header__right-section .cart-btn .cart-btn__title {
+    display: none;
+  }
+  
+  .header .header__right-section .account-btn .account-btn__title {
+    display: none;
+  }
+
+  .header .header__right-section .account-btn .user-icon {
+    margin-right: 5px;
+  }
+  
+  .header .header__left-section .logo-wrapper .logo {
+    width: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header .header__controls-section .search-box:not(.mega-menu .search-box) {
+    display: none;
+  }
+  
+  .header .header__controls-section .search-btn {
+    display: inline-block;
+  }
+
+  .header .header__controls-section .hamburger-btn {
+    width: 1.8rem;
+  }
+  
+  .header .header__controls-section .hamburger-btn .bar {
+    width: 1.8rem;
+    height: 2px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .header .header__controls-section .hamburger-btn {
+    width: 1.5rem;
+  }
+  
+  .header .header__controls-section .hamburger-btn .bar {
+    width: 1.5rem;
+    height: 2px;
+  }
+
+  .header .header__controls-section .search-btn {
+    font-size: 15px;
+    padding: 5px 8px;
+  }
+
+  .header .header__right-section .cart-btn {
+    padding: 10px;
+  }
+
+  .header .header__right-section .cart-btn .cart-icon {
+    font-size: 25px;
+    margin-right: 2px;
+  }
+
+  .header .header__right-section .account-btn {
+    padding: 0 0 0 10px;
+  }
+
+  .header .header__controls-section {
+    padding: 0 10px 0 10px;
+  }
+
+  .header .header__left-section .logo-wrapper .logo {
+    width: 80px;
+  }
+
+  .header .header__controls-section .hamburger-btn .bar::before {
+    transform: translateY(-8px);
+  }
+  
+  .header .header__controls-section .hamburger-btn .bar::after {
+    transform: translateY(8px);
+  }
+}

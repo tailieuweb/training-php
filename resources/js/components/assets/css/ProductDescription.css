@@ -1,0 +1,19 @@
+.product-description {
+    background: white;
+    padding: 20px;
+}
+
+.product-description .title {
+    padding: 0 20px;
+    position: relative;
+}
+
+.product-description .title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 99%;
+    bottom: 0;
+    background: rgba(70, 130, 180, 0.8);
+}

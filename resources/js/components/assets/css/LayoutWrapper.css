@@ -1,0 +1,112 @@
+.layout-wrapper {
+    background-color: #eee;
+}
+
+.layout-wrapper .banners-section {
+    padding: 30px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.layout-wrapper .banners-section .banner__left-section {
+    width: calc(100% - 210px);
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 5px;
+}
+
+.layout-wrapper .banners-section .banner__right-section {
+    display: block;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.layout-wrapper .banners-section .banner__right-section:hover {
+    box-shadow: 0px 0px 5px 0px #a0a0a0;
+}
+
+.layout-wrapper .body-section {
+    margin-bottom: 30px;
+}
+
+.layout-wrapper .body-section .body-content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+/* __________________________________________________ */
+.layout-wrapper .body-section .body-content .category-menu {
+    /* Position: */
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    /* Display: */
+    width: 350px;
+    max-width: 100%;
+    z-index: 100;
+    background-color: #fff;
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: transform linear 0.3s, opacity linear 0.3s;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.layout-wrapper .body-section .body-content #checkbox-for-Menu {
+    display: none;
+}
+
+.layout-wrapper .body-section .body-content .overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    margin: 0;
+    z-index: 20;
+}
+
+.layout-wrapper .body-section .body-content #checkbox-for-Menu:checked ~ .overlay {
+    display: block;
+}
+
+.layout-wrapper .body-section .body-content #checkbox-for-Menu:checked ~ .category-menu {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.layout-wrapper .body-section .body-content .content {
+    width: 100%;
+}
+
+
+/* __________________________________________________ */
+.layout-wrapper .body-section .body-content .category-menu::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+
+/* __________________________________________________ */
+@media screen and (max-width: 992px) {
+    .layout-wrapper .banners-section .banner__left-section {
+        width: 100%;
+    }
+    
+    .layout-wrapper .banners-section .banner__right-section {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .layout-wrapper .body-section .body-content .category-menu {
+        width: 100%;
+    }
+}

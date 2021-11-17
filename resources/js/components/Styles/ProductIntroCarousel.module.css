@@ -1,0 +1,111 @@
+.product__carousel {
+    max-width: 650px;
+    height: auto;
+    user-select: none;
+    position: relative;
+}
+
+.product__carousel .thumbnail-number {
+    position: absolute;
+    bottom: 82.25px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 50;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.product__carousel .carousel-control-prev,
+.product__carousel .carousel-control-next {
+    background-color: #d6d6d6;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    height: 50px;
+}
+
+.product__carousel .carousel-control-prev {
+    top: 50%;
+    left: 0;
+    transform: translate(0%, -50%);
+    border-radius: 0 10px 10px 0;
+}
+
+.product__carousel .carousel-control-next {
+    top: 50%;
+    right: 0;
+    transform: translate(0%, -50%);
+    border-radius: 10px 0 0 10px;
+}
+
+.product__carousel .owl-carousel {
+    overflow: hidden;
+    position: relative;
+}
+
+.product__carousel .owl-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    padding: 5px 0;
+    transform: translateX(0);
+    transition: transform 0.5s ease;
+}
+
+.product__carousel .owl-items .owl-item {
+    height: auto;
+    cursor: pointer;
+    border: 3px solid #eee;
+    margin-right: 5px;
+}
+
+.product__carousel .owl-items .owl-item.choosed {
+    border: 3px solid cornflowerblue;
+}
+
+.product__carousel .owl-item .owl-item__img {
+    width: 100px;
+    height: auto;
+}
+
+
+
+/* Buttons: */
+.product__carousel .owl-carousel .btn-left,
+.product__carousel .owl-carousel .btn-right {
+    position: absolute;    
+    width: 25px;
+    height: 25px;
+    background-color: #cc0018;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.product__carousel .owl-carousel .btn-left {
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+}
+
+.product__carousel .owl-carousel .btn-right {
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+}
+
+.product__carousel .owl-carousel .btn-left:not(.disabled):hover,
+.product__carousel .owl-carousel .btn-right:not(.disabled):hover {
+    color: gold;
+}
+
+.product__carousel .owl-carousel .btn-left.disabled,
+.product__carousel .owl-carousel .btn-right.disabled {
+    display: none;
+}

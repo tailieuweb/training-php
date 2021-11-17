@@ -1,0 +1,51 @@
+.home_container {
+  max-width: 1400px;
+  margin: auto;
+  padding: 0 25px;
+}
+
+.nav {
+  width: 100%;
+}
+
+.nav .nav-title {
+  background: #1b3245;
+  color: white;
+  text-transform: uppercase;
+  font-size: 12px;
+  text-align: center;
+  padding: 15px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.nav .nav-title .title {
+  margin-right: 5px;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.nav .nav-title .nav-icon {
+  font-size: 15px;
+}
+
+.nav .nav-title .close-btn {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translate(0%, -50%);
+  font-size: 15px;
+  padding: 0 3px;
+  cursor: pointer;
+}
+
+.nav .nav-title .close-btn:hover {
+  color: #cc0018;
+}
+
+.ant-menu-submenu-arrow {
+  display: none;
+}

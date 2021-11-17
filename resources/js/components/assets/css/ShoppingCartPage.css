@@ -1,0 +1,13 @@
+.shopping-cart-page-title {
+    padding-top: 20px;
+    font-size: 2em;
+    text-transform: uppercase;
+    font-weight: 700;
+   
+}
+
+ .cart-list .ant-pagination-item-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

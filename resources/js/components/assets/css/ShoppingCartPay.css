@@ -1,0 +1,61 @@
+.place-of-delivery {
+    background: white;
+    padding: 20px;
+}
+
+.place-of-delivery .heading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.place-of-delivery .heading .title-place {
+    font-weight: 700;
+}
+
+.place-of-delivery .heading .change-button {
+    color: blue;
+    cursor: pointer;
+}
+
+.place-of-delivery .heading .change-button:hover {
+    color: aqua;
+}
+
+.place-of-delivery .title {
+    display: flex;
+}
+
+.place-of-delivery .title p {
+    font-weight: 700;
+    padding-right: 20px;
+}
+
+.place-of-delivery .title .user-name {
+    border-right: 2px solid gray;
+}
+
+.place-of-delivery .title .user-number {
+    padding-left: 20px;
+}
+
+.prices-total {
+    background: white;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.prices-total .total-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.prices-total .total-box .total-title {
+    font-weight: 700;
+    color: red;
+    font-size: 1em;
+}
+
+.prices-total .total-box .total-field {
+    font-weight: 700;
+    font-size: 1em;
+}
