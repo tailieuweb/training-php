@@ -53,11 +53,11 @@ class UserModel extends BaseModel
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id)
-    {
-
-        $sql = 'DELETE FROM users WHERE id = ' . $id;
+    public function deleteUserById($id) {
+        
+        $sql = 'DELETE FROM users WHERE id = '.$id;
         return $this->delete($sql);
+
     }
 
 
@@ -67,33 +67,34 @@ class UserModel extends BaseModel
      * @param $input
      * @return mixed
      */
-    public function updateUser($input)
-    {
-
-        $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] . '", 
-                 email = "' . $input['email'] . '",
-                 fullname = "' . $input['fullname'] . '",
-               password="' . md5($input['password']) . '", type = "' . $input['type'] . '"
-                WHERE id = ' . $input['id'];
-
-        $user = $this->update($sql);
-        // $str_replace = $this->matchRegexInput($input);
-        $sql = $this->connectDatabase()->prepare('UPDATE users SET users.name = ?, users.email = ?,users.fullname = ?
-        , users.password = ?  ,users.type = ? WHERE users.id = ?');
-
-        // $sql->bind_param("sssssi",$str_replace['name'],$str_replace['email']
-        //         ,$str_replace['fullname'],md5($str_replace['password']),$str_replace['type'],$str_replace['id']);
-        $sql->bind_param(
-            "sssssi",
-            $input['name'],
-            $input['email'],
-            $input['fullname'],
-            md5($input['password']),
-            $input['type'],
-            $input['id']
-        );
-        return $sql->execute();
+    public function updateUser($input) {
+        $bankModel = new BankModel();
+        if($input['user_id'] != null){
+            $bankModel->updateBank($input);
+        }else{
+             $t = base64_decode($input['version']);
+            $str = substr($t,18);
+            $temp = 'SELECT version FROM users WHERE id = '.$input['id'].'';
+            $newTemp = $this->select($temp);
+            if($newTemp[0]['version'] == $str){
+                $newV = $str+1;
+                $sql = 'UPDATE users SET 
+                    name = "' . $input['name'] .'", 
+                    email = "'.$input['email'].'",
+                    fullname = "'.$input['fullname'].'",
+                    password="'. md5($input['password']) .'", type = "'.$input['type'].'", version = "'.$newV.'"
+                    WHERE id = ' . $input['id'] ;
+                $user = $this->update($sql);  
+                header('location: list_users.php?success');  
+                return $user;         
+            } 
+            else{                
+            header('location: list_users.php?err');  
+            }
+        }
+       
+        
+        
     }
 
     /**
@@ -101,23 +102,24 @@ class UserModel extends BaseModel
      * @param $input
      * @return mixed
      */
-
-    //fix add new user
-    public function insertUser($input)
-    {
-        $password = md5($input['password']);
-        $str_replace = $this->matchRegexInput($input);
-        $sql = $this->connectDatabase()->prepare('INSERT INTO `users` (`name`,`fullname`, `email`, `type`, `password`) 
-                VALUES(?,?,?,?,?)');
-        $sql->bind_param(
-            "sssss",
-            $str_replace['name'],
-            $str_replace['fullname'],
-            $str_replace['email'],
-            $str_replace['type'],
-            $password
-        );
-        return $sql->execute();
+    public function insertUser($input) {
+        $bankModel = new BankModel();
+        if($input['user_id'] != null){
+            $bankModel->insertBank($input);
+        }else{
+              $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`,`version`) VALUES (" .
+        "'" . $input['name'] . "', '"
+        . md5($input['password']) . "', '"
+        . $input['fullname'] . "', '"
+        . $input['email'] . "', '"
+        . $input['type']
+        . "', '"
+        . 1
+        . "')";   
+        $user = $this->insert($sql);
+        return $user;
+        }     
+                
     }
 
     /**
@@ -128,15 +130,24 @@ class UserModel extends BaseModel
     public function getUsers($params = [])
     {
         //Keyword
-        if (!empty($params['keyword'])) {
-            $str_keyword = $this->matchRegexInput($params);
-            $str_keyword =  "%" . $params['keyword'] . "%";
-            $sql = BaseModel::connectDatabase()->prepare('SELECT * FROM users WHERE name LIKE ?');
-            $sql->bind_param('s',  $str_keyword);
+        if (!empty($params['keyword'])) { // <script>alert('hack')</script>
+            $params['keyword'] = $this->removeSpecialCharacter($params['keyword']);
+            //var_dump($params['keyword']);
+             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+            //Keep this line to use Sql Injection
+            //Don't change
+            //Example keyword: abcef%";TRUNCATE banks;##
+             //$users = self::$_connection->multi_query($sql);
+             $users = $this->select($sql);
+
         } else {
             $sql = BaseModel::connectDatabase()->prepare('SELECT * FROM users');
         }
-        $result = BaseModel::select_result($sql) ? BaseModel::select_result($sql) : [];
-        return $result;
+         return  $users;
+    }
+    public function removeSpecialCharacter($string){
+        $array = ["'",'"',"<",">","*","","!","/","%",";","#"];
+        $string = str_replace($array,'',$string);
+        return $string;
     }
 }

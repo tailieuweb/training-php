@@ -73,6 +73,7 @@ if (!empty($_POST['submit'])) {
             </div>
         <?php } ?>
     </div>
+    </div>
 </body>
 
 </html>
