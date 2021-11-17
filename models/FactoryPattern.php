@@ -1,13 +1,7 @@
 <?php
-require_once 'models/UserModel.php';
-class FactoryPattern {
-
-    public function make($model) {
-        if ($model == 'user') {
-            return UserModel::getInstance();
-        } else if ($model == 'bank') {
-            //return new BankModel();
-        }
-    }
-
+// require 'models/UserModel.php';
+// require 'models/BankModel.php';
+require './models/TestModel.php';
+class FactoryPattern extends TestModel{
+    
 }

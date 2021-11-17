@@ -1,30 +1,47 @@
 <?php
+
+use function PHPUnit\Framework\throwException;
+
 require_once 'configs/database.php';
 
-abstract class BaseModel {
+class BaseModel
+{
     // Database connection
-    protected static $_connection;
-    protected static $_instance;
+    private $connection;
+    private static $instance = NULL;
 
-    public function __construct() {
+    private function __construct()
+    {
+        return $this->connection;
+    }
 
-        if (!isset(self::$_connection)) {
-            self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-            if (self::$_connection->connect_errno) {
-                printf("Connect failed");
-                exit();
-            }
+    public function connectDatabase()
+    {
+        mysqli_report(MYSQLI_REPORT_STRICT);
+        try{
+            $this->connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
         }
+        catch(mysqli_sql_exception $e){
+            echo "Connected wrong";exit();
+        }
+        return $this->connection;
+    }
 
+    public static function getInstance(): BaseModel
+    {
+        if (self::$instance == NULL) {
+            self::$instance = new BaseModel();
+        }
+        return self::$instance;
     }
 
     /**
      * Query in database
      * @param $sql
      */
-    protected function query($sql) {
-
-        $result = self::$_connection->query($sql);
+    protected function query($sql)
+    {
+        $result =   $this->connectDatabase()->query($sql);
         return $result;
     }
 
@@ -32,8 +49,9 @@ abstract class BaseModel {
      * Select statement
      * @param $sql
      */
-    protected function select($sql) {
-        $result = $this->query($sql);
+    protected function select($sql)
+    {
+        $result = $this->connectDatabase()->query($sql);
         $rows = [];
         if (!empty($result)) {
             while ($row = $result->fetch_assoc()) {
@@ -43,12 +61,22 @@ abstract class BaseModel {
         return $rows;
     }
 
+    public function select_result($sql)
+    {
+        $sql->execute();
+        $item = array();
+        $item = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $item;
+    }
+
+
     /**
      * Delete statement
      * @param $sql
      * @return mixed
      */
-    protected function delete($sql) {
+    protected function delete($sql)
+    {
         $result = $this->query($sql);
         return $result;
     }
@@ -58,7 +86,8 @@ abstract class BaseModel {
      * @param $sql
      * @return mixed
      */
-    protected function update($sql) {
+    protected function update($sql)
+    {
         $result = $this->query($sql);
         return $result;
     }
@@ -67,9 +96,19 @@ abstract class BaseModel {
      * Insert statement
      * @param $sql
      */
-    protected function insert($sql) {
+    protected function insert($sql)
+    {
         $result = $this->query($sql);
         return $result;
     }
 
+
+    protected  function matchRegexInput($param)
+    {
+        $array_replace = array("'", '"', "<", ">");
+        $str = str_replace($array_replace, '', $param);
+        return $str;
+    }
+    // protected abstract function CreateProduct1();
+    // protected abstract function CreateProduct2();
 }
