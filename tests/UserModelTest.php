@@ -94,16 +94,17 @@ class UserModelTest extends TestCase
 
     
     
-    // Test  insertUserOk 
+    // Test  testinsertUserOk 
     public function testInsertUserOK()
     {
         $userModel = new UserModel();
         $input = [];
         $input['name'] = 'Sang';
+        $input['password'] = "12345";
         $input['fullname'] = "TM Sang";
         $input['email'] = "sang@gmail.com";
         $input['type'] = 0;
-        $input['password'] = "12345";
+        
       
         $actual = $userModel->insertUser( $input);
         if($actual != true)
@@ -115,18 +116,91 @@ class UserModelTest extends TestCase
             $this->assertTrue(true); 
         }
     }
+
+    public function testInsertUserIdNg()
+    {
+        $userModel = new UserModel();
+        $input = [];
+        $input['id'] = -999991;
+        $input['name'] = 'Sang111';
+        $input['password'] = "12345";
+        $input['fullname'] = "TM Sang";
+        $input['email'] = "sang@gmail.com";
+        $input['type'] = 0;
+        
+      
+        $actual = $userModel->insertUser( $input);
+        if($actual != true)
+        {
+            $this->assertTrue(false); 
+        }
+        else
+        {
+            $this->assertTrue(true); 
+        }
+    }
+
+    
+
+    //Test testInsertUserWithId
+   
     // Test  testInsertUserWidthIdNull
     public function testInsertUserWidthIdNull()
     {
         $userModel = new UserModel();
         $input = [];
         $input['id'] = null;
-        $input['name'] = "Sang";
+        $input['name'] = "Deep123";
+        $input['password'] = "1234";
         $input['fullname'] = "Minh Sang";
         $input['email'] = "sang@gmail.com";
         $input['type'] = 0;
-        $input['password'] = "1234";
+        
+        $actual = $userModel->insertUser( $input);
+        if($actual != true)
+        {
+            $this->assertTrue(false); 
+        }
+        else
+        {
+            $this->assertTrue(true); 
+        }
+    }
 
+    // Test  testInsertUserWidthIdNull
+    public function testInsertUserNull()
+    {
+        $userModel = new UserModel();
+        $input = [];
+        $input['id'] = null;
+        $input['name'] = null;
+        $input['password'] = null;
+        $input['fullname'] = null;
+        $input['email'] = null;
+        $input['type'] = null;
+        
+        $actual = $userModel->insertUser( $input);
+        if($actual != true)
+        {
+            $this->assertTrue(false); 
+        }
+        else
+        {
+            $this->assertTrue(true); 
+        }
+    }
+
+    public function testInsertUserWidthKey()
+    {
+        $userModel = new UserModel();
+        $input = [];
+        $input['id'] = "***";
+        $input['name'] = 111;
+        $input['password'] = "1234";
+        $input['fullname'] =  001;
+        $input['email'] = "sang@gmail.com";
+        $input['type'] = 0;
+        
         $actual = $userModel->insertUser( $input);
         if($actual != true)
         {
