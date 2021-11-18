@@ -24,10 +24,8 @@ class UserModel extends BaseModel
     $stmt = self::$_connection->prepare($sql);
     $stmt->bind_param("ss", $userName, $encodePassword);
     $stmt->execute();
-    $result = $stmt->get_result();
-    while ($user = $result->fetch_assoc()) {
-      $rows[] = $row;
-    }
-    return $user; //return array
+    $users=[];
+    $users = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $users; //return array
   }
 }

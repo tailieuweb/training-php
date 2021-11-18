@@ -124,11 +124,43 @@ class UserModelTest extends TestCase
     $this->assertEquals($expected, $actual);
   }
   //*--------------------------------------------------------------
+  public function testAuthWithEmtpyUserNamePasswordNotGood1()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth("admin", "");
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
+  public function testAuthWithEmtpyUserNamePasswordNotGood2()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth("", "admin");
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
   public function testAuthWithUserNamePasswordIntegerNotGood()
   {
     $user = new UserModel();
     $expected = [];
     $actual = $user->auth(1, -1);
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
+  public function testAuthWithUserNamePasswordIntegerNotGood1()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth("admin", -1);
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
+  public function testAuthWithUserNamePasswordIntegerNotGood2()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth(1, "admin");
     $this->assertEquals($expected, $actual);
   }
   //*--------------------------------------------------------------
@@ -140,11 +172,43 @@ class UserModelTest extends TestCase
     $this->assertEquals($expected, $actual);
   }
   //*--------------------------------------------------------------
+  public function testAuthWithUserNamePasswordFloatNotGood1()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth("admin", -1.1);
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
+  public function testAuthWithUserNamePasswordFloatNotGood2()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth(1.1, "admin");
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
   public function testAuthWithUserNamePasswordArrayNotGood()
   {
     $user = new UserModel();
     $expected = [];
-    $actual = $user->auth([], ["aaaa"]);
+    $actual = $user->auth([123], ["aaaa"]);
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
+  public function testAuthWithUserNamePasswordArrayNotGood1()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth("admin", ["aaaa"]);
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
+  public function testAuthWithUserNamePasswordArrayNotGood2()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth([123], "admin");
     $this->assertEquals($expected, $actual);
   }
   //*--------------------------------------------------------------
@@ -156,6 +220,22 @@ class UserModelTest extends TestCase
     $this->assertEquals($expected, $actual);
   }
   //*--------------------------------------------------------------
+  public function testAuthWithUserNamePasswordObjectNotGood1()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth("admin", new stdClass);
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
+  public function testAuthWithUserNamePasswordObjectNotGood2()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth(new stdClass, "admin");
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
   public function testAuthWithUserNamePasswordNullNotGood()
   {
     $user = new UserModel();
@@ -164,11 +244,43 @@ class UserModelTest extends TestCase
     $this->assertEquals($expected, $actual);
   }
   //*--------------------------------------------------------------
+  public function testAuthWithUserNamePasswordNullNotGood1()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth("admin", null);
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
+  public function testAuthWithUserNamePasswordNullNotGood2()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth(null, "admin");
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
   public function testAuthWithUserNamePasswordBoolNotGood()
   {
     $user = new UserModel();
     $expected = [];
     $actual = $user->auth(true, false);
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
+  public function testAuthWithUserNamePasswordBoolNotGood1()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth("admin", false);
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
+  public function testAuthWithUserNamePasswordBoolNotGood2()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth(true, "admin");
     $this->assertEquals($expected, $actual);
   }
   //*--------------------------------------------------------------
@@ -188,11 +300,43 @@ class UserModelTest extends TestCase
     $this->assertEquals($expected, $actual);
   }
   //*--------------------------------------------------------------
+  public function testAuthWithUserNamePasswordSpecialCharactersNotGood1()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth("admin", "&'<>");
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
+  public function testAuthWithUserNamePasswordSpecialCharactersNotGood2()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth('&"<>', "admin");
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
   public function testAuthWithSQLInjectionNotGood()
   {
     $user = new UserModel();
     $expected = [];
     $actual = $user->auth('" or ""="', '" or ""="');
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
+  public function testAuthWithSQLInjectionNotGood1()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth("admin", '" or ""="');
+    $this->assertEquals($expected, $actual);
+  }
+  //*--------------------------------------------------------------
+  public function testAuthWithSQLInjectionNotGood11()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth('" or ""="', "admin");
     $this->assertEquals($expected, $actual);
   }
 }
