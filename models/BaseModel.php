@@ -7,12 +7,7 @@ abstract class BaseModel
   //--------------------------------------------------------------
   public function __construct()
   {
-    try {
-      mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-      self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-    } catch (mysqli_sql_exception $e) {
-      return $e->getMessage();
-    }
+    self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
   }
   //--------------------------------------------------------------
   protected function query($sql)
