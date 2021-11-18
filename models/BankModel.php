@@ -48,16 +48,11 @@ class BankModel extends BaseModel implements IBank
     }
 
     public function insertUser_bank($input) {
-        var_dump($input);
         $sql = "INSERT INTO `bank` (`name`, `fullname`, `sdt`, `email`, `stk`) VALUES (" .
             "'" . $input['name'] . "', '".$input['fullname']."','".$input['sdt']."', '".$input['email']."','".$input['stk']."')";
 
-        $user = $this->insert_bank($sql);
+        $user = $this->insert($sql);
         return $user;
-    }
-    protected function insert_bank($sql) {
-        $result = $this->query($sql);
-        return $result;
     }
 
     public function updateUser_bank($input) {
