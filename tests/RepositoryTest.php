@@ -172,7 +172,7 @@ class RepositoryTest extends TestCase{
     public function testCreateUserNumberNg(){
         $repository = new Repository();
         $user = array(
-            'name' => 123.7,
+            'name' => 123,
             'fullname' => 'nguyen van a',
             'email' => 'a@gmail.com',
             'type' => 'abc',
