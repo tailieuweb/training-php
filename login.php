@@ -2,6 +2,31 @@
 // Start the session
 session_start();
 
+
+
+require_once 'models/UserModel.php';
+$userModel = new UserModel();
+
+$user = NULL; //Add new user
+$_id = NULL;
+
+if (!empty($_GET['id'])) {
+    $_id = $_GET['id'];
+    $user = $userModel->findUserById($_id);//Update existing user
+}
+
+
+if (!empty($_POST['submit'])) {
+
+    if (!empty($_id)) {
+        $userModel->updateUser($_POST);
+    } else {
+        $userModel->insertUser($_POST);
+    }
+    header('location: list_users.php');
+
+
+
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
@@ -18,7 +43,7 @@ if (!empty($_POST['submit'])) {
 
         $_SESSION['message'] = 'Login successful';
         header('location: list_users.php');
-    }else {
+    } else {
         //Login failed
         $_SESSION['message'] = 'Login failed';
     }
@@ -28,22 +53,59 @@ if (!empty($_POST['submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>User form</title>
     <?php include 'views/meta.php' ?>
 </head>
+
 <body>
+
+
+
+
+    <?php include 'views/header.php'?>
+    <div class="container">
+
+            <?php if ($user || !isset($_id)) { ?>
+                <div class="alert alert-warning" role="alert">
+                    User form
+                </div>
+                <form method="POST">
+                    <input type="hidden" name="id" value="<?php echo $_id ?>">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                    </div>
+
+                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+                </form>
+            <?php } else { ?>
+                <div class="alert alert-success" role="alert">
+                    User not found!
+                </div>
+            <?php } ?>
+    </div>
+
 <?php include 'views/header.php'?>
+
+
+<body>
+    <?php include 'views/header.php' ?>
 
     <div class="container">
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-            <div class="panel panel-info" >
+            <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="panel-title">Login</div>
                     <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
                 </div>
 
-                <div style="padding-top:30px" class="panel-body" >
+                <div style="padding-top:30px" class="panel-body">
                     <form method="post" class="form-horizontal" role="form">
 
                         <div class="margin-bottom-25 input-group">
@@ -71,10 +133,10 @@ if (!empty($_POST['submit'])) {
 
                         <div class="form-group">
                             <div class="col-md-12 control">
-                                    Don't have an account!
-                                    <a href="form_user.php">
-                                        Sign Up Here
-                                    </a>
+                                Don't have an account!
+                                <a href="form_user.php">
+                                    Sign Up Here
+                                </a>
                             </div>
                         </div>
                     </form>
@@ -83,5 +145,7 @@ if (!empty($_POST['submit'])) {
         </div>
     </div>
 
+
 </body>
+
 </html>

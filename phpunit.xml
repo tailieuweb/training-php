@@ -7,15 +7,16 @@
 >
     <testsuites>
         <testsuite name="SqlWsContractImport">
-            <file>./Tests/UserModelTest.php</file>
-            <file>./Tests/BankModelTest.php</file>
+            <file>./tests/UserModelTest.php</file>
         </testsuite>
     </testsuites>
-    <filter>
-    <whitelist processUncoveredFilesFromWhitelist="true">
-    <directory suffix=".php">./models</directory>
-    </whitelist>
-    </filter>
+    <filter>				
+
+<whitelist processUncoveredFilesFromWhitelist="true">				
+<directory suffix=".php">./models</directory>				
+</whitelist>				
+</filter>				
+>>>>>>> 1-php-202109/2-groups/11-K/1-29-Luong-phpunit
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
