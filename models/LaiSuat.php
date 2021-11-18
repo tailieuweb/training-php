@@ -12,6 +12,6 @@ class LaiSuat extends DecoratorBank {
     }
     public  function  tilephantram()
     {
-        return 0.3;
+        return abs(0.3);
     }
 }

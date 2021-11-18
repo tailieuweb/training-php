@@ -5,6 +5,9 @@ cacheResult ="false">
         <testsuite name="SqlWsContractImport">
             <file>./tests/UserModelTest.php</file>
         </testsuite>
+        <testsuite name="SqlWsContractImport">
+            <file>./tests/LaiSuatTest.php</file>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
