@@ -7,7 +7,7 @@
   </coverage>
   <testsuites>
     <testsuite name="SqlWsContractImport">
-      <file>./tests/UserModelTest.php</file>
+      <file>./tests/BankModelTest.php</file>
     </testsuite>
   </testsuites>
   <php>

@@ -136,7 +136,7 @@ class BankModel extends BaseModel
             $sql = 'UPDATE banks SET 
             user_id = "' . $input['user_id'] . '", 
             cost = "' . $input['cost'] . '",
-            version = "'.$time1.'"
+            version = "' . $time1 . '"
             WHERE id = ' . $id;
             $bank = $this->update($sql);
             return $bank;
@@ -145,10 +145,21 @@ class BankModel extends BaseModel
 
     public function insertBanks($input)
     {
-        $sql = "INSERT INTO `tranning_php`.`banks` (`user_id`, `cost` ) VALUES (" .
-            "'" . $input['user_id'] . "','" . $input['cost'] . "')";
-        $bank = $this->insert($sql);
-        return $bank;
+
+        if (isset($input) && is_array($input)) {
+            if (isset($input['user_id']) && isset($input['cost'])) {
+                if (!is_string($input['user_id']) || !is_string($input['cost'])  || $input['user_id'] < 0 || $input['cost'] < 0) {
+                    return false;
+                }
+                $sql = "INSERT INTO `php_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
+                    "'" . $input['user_id'] . "','" . $input['cost'] . "')";
+                $bank = $this->insert($sql);
+                return $bank;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
     /**

@@ -33,12 +33,11 @@ class UserModel extends BaseModel
         $user = null;
         foreach ($allUser as $key) {
             $md5 = md5($key['id'] . "chuyen-de-web-1");
-            if ($md5 == $id) {
+            if ($md5 == $id && !is_bool($id)) {
                 $sql = 'SELECT * FROM users WHERE id = ' . $key['id'];
                 $user = $this->select($sql);
             }
         }
-
         return $user;
     }
 
@@ -109,39 +108,42 @@ class UserModel extends BaseModel
 
     public function updateUser($input, $version)
     {
-        $id = $input['id'];
-        $id_start = substr($id, 3);
-        $id_end = substr($id_start, 0, -3);
-
-        $sql1 = 'SELECT id FROM users';
         $error = false;
-        $allUser = $this->select($sql1);
-        $id = 0;
-        foreach ($allUser as $key) {
-            $md5 = md5($key['id'] . "chuyen-de-web-1");
-            $md5_start = substr($md5, 3);
-            $md5_end = substr($md5_start, 0, -3);
-
-            if ($md5_end == $id_end) {
-                $id = $key['id'];
-                $sql = 'SELECT * FROM users WHERE id = ' . $key['id'];
-                $userById = $this->select($sql);
-            }
+        if (!is_array($input) || !is_string($input['name'])|| !is_string($input['email'])|| !is_string($input['password'])|| !is_string($input['type'])|| !is_string($input['fullname'])) {
+            return $error;
         }
-        $oldTime = $userById[0]['version'] . "chuyen-de-web-1";
-
-        if (md5($oldTime) == $version) {
-            $time1 = (int)$oldTime + 1;
-            $sql = 'UPDATE users SET 
-                name = "' . $input['name'] . '", 
-                email = "' . $input['email'] . '", 
-                fullname = "' . $input['fullname'] . '", 
-                type = "' . $input['type'] . '", 
-                version = "' . $time1 . '", 
-                password="' . md5($input['password']) . '"
-                WHERE id = ' . $id;
-            $user = $this->update($sql);
-            return $user;
+        if (isset($input['id'])) {
+            $id = $input['id'];
+            $sql1 = 'SELECT id FROM users';
+            $allUser = $this->select($sql1);
+            foreach ($allUser as $key) {
+                $md5 = md5($key['id'] . "chuyen-de-web-1");
+                if ($md5 == $id && !is_bool($id)) {
+                    $id = $key['id'];
+                    $sql = 'SELECT * FROM users WHERE id = ' . $key['id'];
+                    $userById = $this->select($sql);
+                }
+            }
+            if (isset($userById)) {
+                $oldTime = $userById[0]['version'] . "chuyen-de-web-1";
+                if (!is_bool($version) && md5($oldTime) == $version) {
+                    if (isset($input['name']) && isset($input['email']) &&  isset($input['fullname']) && isset($input['email']) && isset($input['type']) && isset($input['password'])) {
+                        $time1 = (int)$oldTime + 1;
+                        $sql = 'UPDATE users SET 
+                            name = "' . $input['name'] . '", 
+                            email = "' . $input['email'] . '", 
+                            fullname = "' . $input['fullname'] . '", 
+                            type = "' . $input['type'] . '", 
+                            version = "' . $time1 . '", 
+                            password="' . md5($input['password']) . '"
+                            WHERE id = ' . $id;
+                        $user = $this->update($sql);
+                        return $user;
+                    }else{
+                        return $error;
+                    }
+                }
+            }
         } else {
             return $error;
         }
@@ -155,11 +157,9 @@ class UserModel extends BaseModel
     public function insertUser($input)
     {
         $password = md5($input['password']);
-        $sql = "INSERT INTO `tranning_php`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
+        $sql = "INSERT INTO `php_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
             "'" . $input['name'] . "', '" . $input['fullname'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
-
         $user = $this->insert($sql);
-
         $getLastID = $this->getLastID();
         $insertBanks = [
             'user_id' => $getLastID[0]['MAX(id)'],
