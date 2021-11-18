@@ -116,5 +116,103 @@ class BankModelTest extends TestCase
         }
     }
     // End test getBanks
+    
+    //  Test id nhap vao là ki tu dac biet
+    public function testUpdateBankIdIsCharacters()
+    {
+        $bank = new BankModel();
+        $input = array('id' => '@','user_id' => '1', 'cost' => 100);
+        $actual = $bank->updateBank($input);
+        if ($actual == false) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertFalse(true);
+        }
+    }
+    // New
+     //  Test cost nhap vao la chuoi
+     public function testUpdateBankCostIsString()
+     {
+         $bank = new BankModel();
+         $input = array('id' => 4,'user_id' => '1', 'cost' => '100');
+         $actual = $bank->updateBank($input);
+         if ($actual == false) {
+             return $this->assertTrue(true);
+         } else {
+             return $this->assertFalse(true);
+         }
+     }
+     //  Test cost nhap vao la số âm
+     public function testUpdateBankCostIsNegNum()
+     {
+         $bank = new BankModel();
+         $input = array('id' => 4,'user_id' => '1', 'cost' => -100);
+         $actual = $bank->updateBank($input);
+         if ($actual == false) {
+             return $this->assertTrue(true);
+         } else {
+             return $this->assertFalse(true);
+         }
+     }
+     //  Test cost nhap vao la số thực
+     public function testUpdateBankCostIsDoubleNum()
+     {
+         $bank = new BankModel();
+         $input = array('id' => '1.5','user_id' => '1', 'cost' => 150.5);
+         $actual = $bank->updateBank($input);
+         if ($actual == false) {
+             return $this->assertTrue(true);
+         } else {
+             return $this->assertFalse(true);
+         }
+     }
+     //  Test cost nhap vao là null
+     public function testUpdateBankCostIsNull()
+     {
+         $bank = new BankModel();
+         $input = array('id' => 4,'user_id' => '1', 'cost' => null);
+         $actual = $bank->updateBank($input);
+         if ($actual == false) {
+             return $this->assertTrue(true);
+         } else {
+             return $this->assertFalse(true);
+         }
+     }
+     //  Test cost nhap vao là object
+     public function testUpdateBankCostIsObject()
+     {
+         $bank = new BankModel();
+         $input = array('id' => 4,'user_id' => '1', 'cost' => new BankModel());
+         $actual = $bank->updateBank($input);
+         if ($actual == false) {
+             return $this->assertTrue(true);
+         } else {
+             return $this->assertFalse(true);
+         }
+     }
+     //  Test cost nhap vao là kiểu boolean
+     public function testUpdateBankCostIsBoolean()
+     {
+         $bank = new BankModel();
+         $input = array('id' => 4,'user_id' => '1', 'cost' => true);
+         $actual = $bank->updateBank($input);
+         if ($actual == false) {
+             return $this->assertTrue(true);
+         } else {
+             return $this->assertFalse(true);
+         }
+     }
+     //  Test cost nhap vao là ki tu dac biet
+     public function testUpdateBankCostIsCharacters()
+     {
+         $bank = new BankModel();
+         $input = array('id' => 4,'user_id' => '1', 'cost' => '@');
+         $actual = $bank->updateBank($input);
+         if ($actual == false) {
+             return $this->assertTrue(true);
+         } else {
+             return $this->assertFalse(true);
+         }
+     }
 
 }
