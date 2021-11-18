@@ -113,24 +113,24 @@ class BankModelTest extends TestCase {
         }
     }
     //test thêm mới và kiểm tra cost có phải là kiểu chuoi so hay không
-    // public function testInsertBankNg2(){
-    //     $bankModel = new BankModel();
-    //     $input = [];
-    //     $input['id'] = 41;
-    //     $input['cost'] = 3000000000;
-    //     $checkCost = is_numeric($input['cost']);
-    //     //kiểm tra số nhập vào có phải là kiểu số hay không
-    //      $actual = $bankModel -> insertBank($input, $checkCost);
-    //     //var_dump($actual);die();
-    //     if($actual != true)
-    //     {
-    //         $this->assertTrue(false); 
-    //     }
-    //     else
-    //     {
-    //         $this->assertTrue(true); 
-    //     }
-    // }
+    public function testInsertBankNg2(){
+        $bankModel = new BankModel();
+        $input = [];
+        $input['id'] = 41;
+        $input['cost'] = 3000000000;
+        $checkCost = is_numeric($input['cost']);
+        //kiểm tra số nhập vào có phải là kiểu số hay không
+         $actual = $bankModel -> insertBank($input, $checkCost);
+        //var_dump($actual);die();
+        if($actual != true)
+        {
+            $this->assertTrue(false); 
+        }
+        else
+        {
+            $this->assertTrue(true); 
+        }
+    }
         /**
       * test function FindBankById 1
       *(sreach banks by id -> test OK)
@@ -241,16 +241,16 @@ class BankModelTest extends TestCase {
     }
     //kiem tra gia tri tim kiem trong mang da duocj nhap chưa
     //isset T or empty F
-    // public function testGetBanksByKeyWordOk2()
-    // {
-    //     $bankModel = new BankModel();
-    //     $params= [];
-    //     $params['keyword'] = '123';
-    //     $count_array = 8;
-    //     $actual = $bankModel->getBanks($params);
-    //      //ham insset kiem tra bien da dược tạo trong bộ nhớ máy hay chưa
-    //     $this->assertEquals($count_array,isset($actual));
-    // }
+    public function testGetBanksByKeyWordOk2()
+    {
+        $bankModel = new BankModel();
+        $params= [];
+        $params['keyword'] = '22';
+        $count_array = 8;
+        $actual = $bankModel->getBanks($params);
+         //ham insset kiem tra bien da dược tạo trong bộ nhớ máy hay chưa
+        $this->assertEquals($count_array,isset($actual));
+    }
     // test nhập giá trị value và tìm kiếm giá trị trong mảng
     public function testGetBanksByKeyWordNg1(){
         $bankModel = new BankModel();
