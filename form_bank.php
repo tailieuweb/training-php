@@ -28,7 +28,7 @@ if (!empty($_POST['submit'])) {
        $params['cost'] = $_POST['cost'];
        $bankModel->insert($params);
     }
-    //header('location: list_users.php');
+    header('location: list_users.php');
 }
 ?>
 <!DOCTYPE html>

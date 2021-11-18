@@ -5,7 +5,6 @@ class FactoryPattern {
 
     public function make($model) {
         if ($model == 'user') {
-            //Singleton
             return new RepositoryUser();
         } else if ($model == 'bank') {
             return new RepositoryBank();

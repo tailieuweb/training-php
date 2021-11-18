@@ -25,6 +25,9 @@ class RepositoryBank implements RepositoryInterface{
     public function delete($id) {
         return self::$bankModel->deleteBalanceById($id);
     }
+    public function find($id) {
+        return self::$bankModel->findBankInfoById($id);
+    }
     public function search($params) {
         return self::$bankModel->getBanksInfo($params);
     }

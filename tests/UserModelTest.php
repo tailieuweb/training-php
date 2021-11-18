@@ -3,50 +3,64 @@ use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
 {
-    public function testGetUserById() {
+    /*
+    File: UserModel.
+    Function: getAll().
+    Author: Phuong Nguyen
+    */
+    public function testGetAll() {
         $userModel = new UserModel();
-        $expected = ["id"=>2];
-        //$actual : ["id" => "2",.....]
-        $actual = $userModel->findUserById(2);
-        /*
-            if ($expected["id"](2) === $actual["id"](?)) {
-                return true
-            } else {
-                return false
-            }
-        */
-        $this->assertEquals($expected["id"],$actual[0]["id"]);
-    }
-    /**
-     * Test case Okie
-     */
-    public function testSumOk()
-    {
-       $userModel = new UserModel();
-       $a = 1;
-       $b = 2;
-       $expected = 3;
+        $expected = [
+            ["id" => "2", 
+            "name" => "test2", 
+            "fullname" => "", 
+            "email" => "", 
+            "type" => "", 
+            "password" => "202cb962ac59075b964b07152d234b70"],
+        ] ;
 
-       $actual = $userModel->sumb($a,$b);
-
-       $this->assertEquals($expected, $actual);
+        $actual = $userModel->getAll();
+        $this->assertEquals($expected[0], $actual[0]);
     }
 
-    /**
-     * Test case Not good
-     */
-    public function testSumNg()
-    {
+    
+    /*
+    File: UserModel.
+    Function: auth(username, password)
+    Desc: Test auth ok
+    author: Phuong Nguyen
+    */
+    public function testAuthOk() {
         $userModel = new UserModel();
-        $a = 1;
-        $b = 2;
+        $username = "test2";
+        $password = "123";
 
-        $actual = $userModel->sumb($a,$b);
+        $expected = true;
 
-        if ($actual != 3) {
-            $this->assertTrue(false);
-        } else {
-            $this->assertTrue(true);
-        }
+        $actual = $userModel->auth($username, $password);
+        $this->assertEquals($expected, $actual);
+    }
+
+    /*
+    File: UserModel.
+    Function: auth(username, password).
+    Desc: Test if input is special characters -> unaffected to data of another(bank) model 
+    Author: Phuong Nguyen.
+    */
+    public function testAuth_SpecialChars_AffectedToAnotherModel() {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make("user");
+        $bankModel = new BankModel();
+
+        $username = 'test2%";TRUNCATE banks;##';
+        $password = '202cb962ac59075b964b07152d234b70';
+        $actionAuth = $userModel->auth($username, $password);
+
+        //Array
+        $actual = $bankModel->getAll();
+        $this->assertEmpty(
+            $actual,
+            "actual is empty"
+        );
     }
 }
