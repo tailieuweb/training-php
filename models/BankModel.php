@@ -12,7 +12,7 @@ class BankModel extends BaseModel {
     }
 
     public function findBank($keyword) {
-        $sql = 'SELECT * FROM banks WHERE cost LIKE %'.$keyword.'%'. ' OR user_id LIKE %'.$keyword.'%' ;
+        $sql = 'SELECT * FROM banks WHERE user_id LIKE %'.$keyword.'%' ;
         $user = $this->select($sql);
 
         return $user;

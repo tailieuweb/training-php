@@ -1,48 +1,48 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-class UserModelTest extends TestCase
-{
+// class UserModelTest extends TestCase
+// {
 
-    /**
-     * Test case Okie
-     */
-    public function testSumOk()
-    {
-       $userModel = new UserModel();
-       $a = 1;
-       $b = 2;
-       $expected = 3;
+//     /**
+//      * Test case Okie
+//      */
+//     public function testSumOk()
+//     {
+//        $userModel = new UserModel();
+//        $a = 1;
+//        $b = 2;
+//        $expected = 3;
 
-       $actual = $userModel->sumb($a,$b);
+//        $actual = $userModel->sumb($a,$b);
 
-       $this->assertEquals($expected, $actual);
-    }
+//        $this->assertEquals($expected, $actual);
+//     }
 
-    /**
-     * Test case Not good
-     */
-    public function testSumNg()
-    {
-        $userModel = new UserModel();
-        $a = 1;
-        $b = 2;
+//     /**
+//      * Test case Not good
+//      */
+//     public function testSumNg()
+//     {
+//         $userModel = new UserModel();
+//         $a = 1;
+//         $b = 2;
 
-        $actual = $userModel->sumb($a,$b);
+//         $actual = $userModel->sumb($a,$b);
 
-        if ($actual != 3) {
-            $this->assertTrue(false);
-        } else {
-            $this->assertTrue(true);
-        }
-    }
-    public function testSumStr(){
-        $userModel = new UserModel();
+//         if ($actual != 3) {
+//             $this->assertTrue(false);
+//         } else {
+//             $this->assertTrue(true);
+//         }
+//     }
+//     public function testSumStr(){
+//         $userModel = new UserModel();
 
-        $a = 1;
-        $b = "a";
+//         $a = 1;
+//         $b = "a";
 
-        $userModel->sumb($a,$b);
-        $this->assertTrue(true);
-    }
-}
+//         $userModel->sumb($a,$b);
+//         $this->assertTrue(true);
+//     }
+// }
