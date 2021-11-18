@@ -5,6 +5,8 @@ require_once 'BaseModel.php';
 class UserModel extends BaseModel
 {
 
+    protected static $_instance;
+
     public function findUserById($id)
     {
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
@@ -93,22 +95,32 @@ class UserModel extends BaseModel
      */
     public function getUsers($params = [])
     {
-        //Keyword
-        if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
-
+         //Keyword
+         if (!empty($params['keyword'])) {
+            $keyword = $params['keyword'];
+            $sql = 'SELECT * 
+                    FROM `users` 
+                    WHERE `name` LIKE "%' . $keyword . '%"' . ' OR `fullname` LIKE "%' . $keyword . '%" OR `email` LIKE "%' . $keyword . '%"';
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+            //$users = self::$_connection->multi_query($sql);
+            $users = $this->select($sql);
         } else {
-            $sql = 'SELECT * FROM users';
+            $sql = 'SELECT * FROM `users` ORDER BY `id`';
             $users = $this->select($sql);
         }
 
         return $users;
     }
-
+    public static function getInstance()
+    {
+        if (self::$_instance != null) {
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }
     /**
      * For testing
      * @param $a

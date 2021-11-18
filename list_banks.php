@@ -3,7 +3,7 @@
 session_start();
 
 require_once 'models/FactoryPattern.php';
-$factory = new FactoryPattern();
+$factory = FactoryPattern::getInstance();
 
 $bankModel = $factory->make('bank');
 
@@ -25,6 +25,9 @@ $banks = $bankModel->getBanks($params);
 <div class="container">
     <?php if (!empty($banks)) {?>
         <table class="table table-striped">
+        <div class="alert alert-warning" role="alert">
+                List of bank! <br>
+            </div>
             <thead>
             <tr>
                 <th scope="col">ID</th>

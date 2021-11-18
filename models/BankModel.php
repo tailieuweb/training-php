@@ -2,45 +2,74 @@
 
 require_once 'BaseModel.php';
 
-class BankModel extends BaseModel {
 
-    public function findBankById($id) {
-        $sql = 'SELECT * FROM banks WHERE id = '.$id;
-        $bank = $this->select($sql);
-
-        return $bank;
-    }
-
-    public function findUser_id($keyword) {
-        $sql = 'SELECT * FROM banks WHERE user_id LIKE %'.$keyword.'%'. ' OR cost LIKE %'.$keyword.'%';
-        $bank = $this->select($sql);
-
-        return $bank;
-    }
-
+class BankModel extends BaseModel
+{
+    protected static $_instance;
     /**
-     * Authentication user
-     * @param $userName
-     * @param $password
-     * @return array
+     *  Get Bank By Id
      */
-    public function auth($id, $user_id) {
-        $md5user_id = md5($user_id);
-        $sql = 'SELECT * FROM users WHERE name = "' . $id . '" AND password = "'.$$md5user_id.'"';
+    public function getBankById($id)
+    {
 
+        $id = is_numeric($id) ? $id : NULL;
+        $sql = 'SELECT * FROM `banks` WHERE `id` = ' . $id;
         $bank = $this->select($sql);
+        return isset($bank[0]) ? $bank[0] : false;
+    }
+    /**
+     *  Get Bank By User Id
+     */
+    public function getBankByUserId($userId)
+    {
+        $userId = is_numeric($userId) ? $userId : NULL;
+        $sql = 'SELECT `banks`.*
+        FROM `users`,`banks` 
+        WHERE `users`.`id` = `banks`.`user_id` 
+        AND `users`.`id` = ' . $userId;
+        $bank = $this->select($sql);
+        return isset($bank[0]) ? $bank[0] : false;
+    }
+    /**
+     *  Find User Id
+     */
+    public function findUserBankById($id)
+    {
+        $sql = 'SELECT * FROM banks WHERE id = ' . $id;
+        $bank = $this->select($sql);
+
         return $bank;
     }
 
     /**
-     * Delete user by id
-     * @param $id
+     * Insert bank
+     * @param $input
      * @return mixed
      */
-    public function deleteBanksById($id) {
-        $sql = 'DELETE FROM banks WHERE id = '.$id;
-        return $this->delete($sql);
+    public function insertBank($input)
+    {
+        // SQL
+        $sql = "INSERT INTO `banks`(`user_id`, `cost`) 
+        VALUES ('" . $input['user_id'] . "','" . $input['cost'] . "')";
+        $bank = $this->insert($sql);
 
+        return $bank;
+    }
+
+    /**
+     * Insert bank with id
+     * @param $input
+     * @return mixed
+     */
+    public function insertBankWithId($bankId, $userId, $cost)
+    {
+        if (is_numeric($bankId) && is_numeric($userId) && is_numeric($cost)) {
+            $sql = "INSERT INTO `banks`(`id`, `user_id`, `cost`) 
+            VALUES ('" . $bankId . "','" . $userId . "','" . $cost . "')";
+            $bank = $this->insert($sql);
+            return $bank;
+        }
+        return false;
     }
 
     /**
@@ -48,51 +77,59 @@ class BankModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function updateUser_id($input) {
-        $sql = 'UPDATE banks SET 
-                 user_id = "' . mysqli_real_escape_string(self::$_connection, $input['user_id']) .'", 
-                 Cost="'. $input['cost'] .'"
-                WHERE id = ' . $input['id'];
+    public function updateBank($input)
+    {
 
+        $sql = 'UPDATE banks SET 
+                user_id = "' . $input['user_id']  . '",
+                cost = "' . $input['cost']  . '"
+                WHERE id = ' . ($input['id']);
         $bank = $this->update($sql);
 
         return $bank;
     }
-    
+
 
     /**
-     * Insert user
-     * @param $input
+     * Delete user by id
+     * @param $id
      * @return mixed
      */
-    public function insertUser_id($input) {
-        $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
-                "'" . $input['user_id'] . "', '".$input['cost']."')";
-
-        $bank = $this->insert($sql);
+    public function deleteBankById($id)
+    {
+        $sql = 'DELETE FROM banks WHERE id = ' . $id;
+        return $this->delete($sql);
+    }
+    /**
+     * Get all Banks
+     */
+    public function getBanks()
+    {
+        //Keyword
+        if (!empty($params['keyword'])) {
+            $keyword = $params['keyword'];
+            $sql = 'SELECT * 
+                    FROM `banks` 
+                    WHERE `user_id` LIKE "%' . $keyword . '%"' . ' OR `cost` LIKE "%';
+            //Keep this line to use Sql Injection
+            //Don't change
+            //Example keyword: abcef%";TRUNCATE banks;##
+            //$users = self::$_connection->multi_query($sql);
+            $banks = $this->select($sql);
+        } else {
+            $sql = 'SELECT * FROM `banks` ORDER BY `id`';
+            $bank = $this->select($sql);
+        }
 
         return $bank;
     }
 
-    /**
-     * Search users
-     * @param array $params
-     * @return array
-     */
-    public function getBanks($params = []) {
-        //Keyword
-        if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM banks WHERE id LIKE "%' . $params['keyword'] .'%"';
-
-            //Keep this line to use Sql Injection
-            //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
-            $banks = self::$_connection->multi_query($sql);
-        } else {
-            $sql = 'SELECT * FROM banks';
-            $banks = $this->select($sql);
+    public static function getInstance()
+    {
+        if (self::$_instance != null) {
+            return self::$_instance;
         }
-
-        return $banks;
+        self::$_instance = new self();
+        return self::$_instance;
     }
 }

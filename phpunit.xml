@@ -10,6 +10,11 @@
             <file>./Tests/UserModelPhuTest.php</file>
         </testsuite>
     </testsuites>
+     <testsuites>
+        <testsuite name="SqlWsContractImport">
+            <file>./Tests/BankModelPhuTest.php</file>
+        </testsuite>
+    </testsuites>
      <filter>				
 <whitelist processUncoveredFilesFromWhitelist="true">				
 <directory suffix=".php">./models</directory>				

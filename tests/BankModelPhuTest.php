@@ -9,7 +9,7 @@ class BankModelPhuTest extends TestCase
         $user_id = new BankModel();
         $keys = "2";
         // $expected = "1";
-        $actual = $user_id->findUser_id($keys);
+        $actual = $user_id->getBankByUserId($keys);
 
         if(!empty($actual)){
             return $this->assertTrue(true);

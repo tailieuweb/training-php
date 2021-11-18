@@ -7,7 +7,7 @@ $user_id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $BankModel->deleteBanksById($id);//Delete existing user
+    $BankModel->deleteBankById($id);//Delete existing user
 }
 header('location: list_banks.php');
 ?>
