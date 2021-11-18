@@ -312,7 +312,7 @@ class BankModelTest extends TestCase
           $actual = null;
   
           $keyword = array(
-              'keyword' => 'select * from users',
+              'keyword' => 'select * from banks',
           );
           $actual = $bankModel->getBanks($keyword);
           $excute = [];
@@ -326,7 +326,7 @@ class BankModelTest extends TestCase
           $actual = null;
   
           $keyword = array(
-              'keyword' => '<script>alert("Hello world")</script>',
+              'keyword' => "<script>alert('hello')</script>"
           );
           $actual = $bankModel->getBanks($keyword);
           $excute = [];
