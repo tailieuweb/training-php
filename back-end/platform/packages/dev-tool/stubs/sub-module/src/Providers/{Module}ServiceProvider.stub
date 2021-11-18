@@ -1,0 +1,19 @@
+// Add into function register()
+$this->app->bind(\Botble\{Module}\Repositories\Interfaces\{Name}Interface::class, function () {
+    return new \Botble\{Module}\Repositories\Caches\{Name}CacheDecorator(
+        new \Botble\{Module}\Repositories\Eloquent\{Name}Repository(new \Botble\{Module}\Models\{Name})
+    );
+});
+// Add after this line: if (defined('LANGUAGE_MODULE_SCREEN_NAME')) {
+\Language::registerModule([\Botble\{Module}\Models\{Name}::class]);
+
+// Add after this line: Event::listen(RouteMatched::class, function () {
+dashboard_menu()->registerItem([
+    'id'          => 'cms-{types}-{-name}',
+    'priority'    => 0,
+    'parent_id'   => 'cms-{types}-{-module}',
+    'name'        => '{types}/{-module}::{-name}.name',
+    'icon'        => null,
+    'url'         => route('{-name}.index'),
+    'permissions' => ['{-name}.index'],
+]);

@@ -1,0 +1,40 @@
+/* Footer */
+.footer{
+    max-width: 100%;
+    padding: 20px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.col-4{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 33%;
+}
+
+.row{
+    display: flex;
+}
+.footer .row .col-4 h1{
+    font-size: 25px;
+    color: #f1356d;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.footer .row .col-4 a{
+    color: #000;
+  margin-bottom: 5px;
+  font-size: 20px;
+  text-decoration: none;
+}
+.footer .row .col-4 a:hover{
+    color: #f1356d;
+    transition: 200ms ease-in;
+}

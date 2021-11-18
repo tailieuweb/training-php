@@ -1,0 +1,15 @@
+{
+    "name": "Ripple",
+    "namespace": "Theme\\Ripple\\",
+    "description": "Ripple is default theme for Botble since v2.0",
+    "author": "Botble Technologies",
+    "version": "5.17",
+    "required_plugins": [
+        "blog",
+        "contact",
+        "gallery",
+        "language",
+        "block",
+        "member"
+    ]
+}
