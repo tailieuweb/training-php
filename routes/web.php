@@ -81,9 +81,9 @@ Route::group(['module' => 'dashboard', 'middleware' => 'web', 'namespace' => "Ap
             Route::get("edit/{id}", ["as" => "admin.users.edit", "uses" => "UsersController@EditUser"]);
             Route::post("update/{id}", ["as" => "admin.users.eidt", "uses" => "UsersController@UpdateUser"]);
         });
-        Route::group(["prefix" => "favorite"], function () {
-            Route::get("/", ["as" => "admin.favorite", "uses" => "UsersController@getFavorite"]);
-        });
+        // Route::group(["prefix" => "favorite"], function () {
+        //     Route::get("/", ["as" => "admin.favorite", "uses" => "UsersController@getFavorite"]);
+        // });
     });
 });
 /*
@@ -114,5 +114,7 @@ Route::group(['module' => 'dashboard', 'middleware' => 'web', 'namespace' => "Ap
 
     //Payment hotel
     Route::post("/payment/{id}", ["as" => "frontend.dashboard.index.payment", "uses" => "FrontendController@paymentHotelById"]);
-    Route::get("/payment-success/{id}", ["as" => "frontend.dashboard.index.payment-success", "uses" => "FrontendController@payment_succsess"]);
+    Route::post("/receip/{id}", ["as" => "frontend.dashboard.index.receip", "uses" => "FrontendController@addReceipForUser"]);
+    //
+    Route::get("/favorite", ["as" => "frontend.dashboard.index.favorite", "uses" => "FrontendController@getAllHotelFavorite"]);
 });

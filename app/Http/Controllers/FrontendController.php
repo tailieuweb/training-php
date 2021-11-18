@@ -162,7 +162,20 @@ class FrontendController extends Controller
 
         $all_hotel = $all_hotel->orderBy("hotel.hotel_id", "DESC");
         $all_hotel = $all_hotel->paginate(15);
-
+        $array_favorite = array();
+        if(isset(Auth::user()->id)){
+            $array_favorite = $all_hotel;
+            $favorite = DB::table('favorite')
+                ->select('favorite.*')->get();
+            foreach ($array_favorite as $value) {
+                foreach($favorite as $love){
+                    if($value->hotel_id == $love->hotel_id){
+                        $value->favo_check = 1;
+                    }
+                }
+            }
+            return View('Frontend.layout.hotel.all-hotel')->with('all_hotel', $all_hotel);
+        }
         // $rating_number = $this->getRatingHotelId();
 
         return View('Frontend.layout.hotel.all-hotel')->with('all_hotel', $all_hotel);
@@ -355,5 +368,30 @@ class FrontendController extends Controller
         ->select('user_comment.*', 'users_web.*')
         ->where('hotel_id', $id)->get();
         return count($comment);
+    }
+    //Add object in table user_rental
+    public function addReceipForUser($id, Request $request){
+        $this->AuthLogin();
+        
+        $rental = array();
+        $rental['user_id'] = Auth::user()->id;
+        $rental['hotel_id'] = $id;
+        $rental['time_pick'] = $request->date_pick;
+        $rental['time_drop'] = $request->date_drop;
+        $date = date('Y/m/d', time());
+        $rental['time_receip'] = $date;
+        $rental['total_money'] = $request->total_money;
+        DB::table('user_rental')->insert($rental);
+
+        return View('Frontend.layout.receip', compact('rental'));
+    }
+    //Get hotel in the favorite of user
+    public function getAllHotelFavorite(){
+        $favorite = DB::table('hotel')
+                    ->join('favorite', 'hotel.hotel_id', '=', 'favorite.hotel_id')
+                    ->join('location', 'location.location_id', '=', 'hotel.location')
+                    ->select('hotel.*', 'favorite.*', 'location.*')
+                    ->get();
+        return View('Frontend.layout.favorite.index', compact('favorite'));
     }
 }

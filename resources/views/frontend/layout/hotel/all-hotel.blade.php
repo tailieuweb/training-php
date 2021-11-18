@@ -82,7 +82,13 @@
                         {{$hotel->address}}
                     </div>
                     <div class="tm-home-box-2-container">
-                        <a href="#" class="tm-home-box-2-link"><i class="fa fa-heart tm-home-box-2-icon border-right"></i></a>
+                        <div id="favorites" class="tm-home-box-2-link <?php 
+                            if(isset($all_hotel)){
+                                if($hotel->favo_check == 1){
+                                    echo "active";
+                                }
+                            }
+                        ?>"><i class="fa fa-heart tm-home-box-2-icon border-right"></i></div>
                         <a href="{{asset('')}}detail/{{$hotel->hotel_id}}" class="tm-home-box-2-link"><span class="tm-home-box-2-description">Travel</span></a>
                         <a href="{{asset('')}}detail/{{$hotel->hotel_id}}" class="tm-home-box-2-link"><i class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
                     </div>
@@ -93,7 +99,7 @@
             
         </div>
     </div>
-        {{$all_hotel->links() }}
+        <!-- {{$all_hotel->links() }} -->
     <!-- <div class="row mt-5">
         <div class="col text-center">
             <div class="block-27">
@@ -137,5 +143,14 @@
             $('#brows').fadeOut();
         });
     });
+</script>
+<script>
+    const favorite = document.querySelectorAll('#favorites');
+    favorite.forEach( (e) => {
+        e.addEventListener('click', function(){
+            e.classList.toggle('active');
+            window.location = '{{asset('')}}hotel'
+        })
+    })
 </script>
 @endsection
