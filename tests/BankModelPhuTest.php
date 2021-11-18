@@ -6,50 +6,63 @@ class BankModelPhuTest extends TestCase
 {
     //test testfindUser_id     
     public function testfindUser_idOk (){
-        $user_id = new BankModel();
-        $keys = "2";
-        // $expected = "1";
-        $actual = $user_id->getBankByUserId($keys);
+        $bankmodel = new BankModel();
+        $keys = "3";
+        // $expected = "3";
+        $actual = $bankmodel->findUserBankById($keys);
 
-        if(!empty($actual)){
-            return $this->assertTrue(true);
+        if ($actual == true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
         }
-        return $this->assertTrue(false);
        
     }
 
-    public function testFindUserByIdF()
+    public function testFindUser_idByIdF()
     {
-        $userModel = new UserModel();
-        $userId = 10;
-        $expected = [];
-        $actual = $userModel->findUserById($userId);
-        $this->assertEquals($expected, $actual);
+        $bankmodel = new BankModel();
+        $user_id = 999;
+        $actual = $bankmodel->findUserBankById($user_id);
+
+        if (empty($actual)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
 
-    public function testFindUserById_KyTu()
+    public function testFindUserById_KyTuF()
     {
-        $userModel = new UserModel();
-        $userIdid = 'qwert';
-        $expected = [];
-        $actual = $userModel->findUserById($userIdid);
-        $this->assertEquals($expected, $actual);
+        $bankmodel = new BankModel();
+        $user_id = 'aaa';
+        $actual = $bankmodel->findUserBankById($user_id);
+
+        if (empty($actual)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
 
     public function testFindUserById_KyTuDacBiet()
     {
-        $userModel = new UserModel();
-        $userIdid = '!!!!!';
-        $expected = [];
-        $actual = $userModel->findUserById($userIdid);
-        $this->assertEquals($expected, $actual);
+        $bankmodel = new BankModel();
+        $user_id = '~~~!!!';
+        $actual = $bankmodel->findUserBankById($user_id);
+
+        if (empty($actual)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
     //test getBanks
     public function testGetBanksOk()
     {
         $BankModel = new BankModel();
     
-        $count_array = 5;
+        $count_array = 4;
         $actual = $BankModel->getBanks();
         
         $this->assertEquals($count_array,count($actual));
@@ -58,10 +71,70 @@ class BankModelPhuTest extends TestCase
     {
         $BankModel = new BankModel();
         $params= [];
-        $params['keyword'] = 'a';
-        $count_array = 1;
+        $params['keyword1'] = '3';
+        $count_array = 4;
         $actual = $BankModel->getBanks( $params);
          
         $this->assertEquals($count_array,count($actual));
     }
+    //test getBanks khi khong co du lieu oke
+    public function testGetBanksKhongDuLieuOK()
+    {
+        $bankmodel = new BankModel();
+
+        $actual = $bankmodel->getBanks();
+
+        if ($actual != null) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+     //test getBanks khi khong co du lieu F
+    public function testGetBanksKhongDuLieuF()
+    {
+        $bankmodel = new BankModel();
+        $actual = null;
+        $actual = $bankmodel->getBanks();
+
+        if ($actual != null) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+     //test getBanks khi truyen vao chuoi rong oke
+     public function testGetBanksChuoiRongOke()
+     {
+        $bankmodel = new BankModel();
+
+        $keyword = array(
+            'keyword' => null,
+        );
+        $actual = $bankmodel->getBanks($keyword);
+
+        if ($actual != []) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+     }
+     //test getBanks khi truyen vao chuoi rong F
+     public function testGetBanksChuoiRongF()
+     {
+        $bankmodel = new BankModel();
+
+        $keyword = array(
+            'keyword' => 'cost',
+            'keyword' => 'user_id'
+        );
+        $actual = $bankmodel->getBanks($keyword);
+
+        if ($actual != []) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+     }
+    
 }

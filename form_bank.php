@@ -4,12 +4,12 @@ session_start();
 require_once 'models/BankModel.php';
 $bankModel = new BankModel();
 
-$bank = NULL; //Add new user
+$bank = NULL; //Add new bank
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
-    $bank = $bankModel->findUserBankById($_id); //Update existing user
+    $bank = $bankModel->findUserBankById($_id); //Update existing bank
 }
 
 
@@ -33,7 +33,7 @@ if (!empty($_POST['submit'])) {
 </head>
 
 <body>
-    <?php include 'views/header.php' ?>
+    <?php include 'views/headerbank.php' ?>
     <div class="container">
 
         <?php if ($bank || !isset($_id)) { ?>

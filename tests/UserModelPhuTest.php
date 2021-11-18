@@ -131,33 +131,33 @@ class UserModelPhuTest extends TestCase
 
     //     $this->assertEquals($userName, $actual);
     // }
-    public function testInsertUserOk()
-    {
-        $userModel = new UserModel();
-        $user = array(
-            'id' => 14,
-            'name' => 'abc',
-            'fullname' => 'vitcon',
-            'type' => 'admin',
-            'email' => 'hhhhh@gmail.com',
-            'password' => '123456'
-        );
-        $actual = $userModel->insertUser($user);
-        if ($actual == true) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
-    }
+    // public function testInsertUserOk()
+    // {
+    //     $userModel = new UserModel();
+    //     $user = array(
+    //         'id' => 14,
+    //         'name' => 'abc',
+    //         'fullname' => 'vitcon',
+    //         'type' => 'admin',
+    //         'email' => 'hhhhh@gmail.com',
+    //         'password' => '123456'
+    //     );
+    //     $actual = $userModel->insertUser($user);
+    //     if ($actual == true) {
+    //         $this->assertTrue(true);
+    //     } else {
+    //         $this->assertTrue(false);
+    //     }
+    // }
     public function testUpdateUserOk()
     {
         $userModel = new UserModel();
         $user = array(
             'id' => 19,
             'name' => 'abcd',
-            'fullname' => 'vitconnn',
+            'fullname' => 'hoangphu',
             'type' => 'admin',
-            'email' => 'hhhhaah@gmail.com',
+            'email' => 'hhhpppp@gmail.com',
             'password' => '1234567'
         );
         $actual = $userModel->updateUser($user);
@@ -186,15 +186,15 @@ class UserModelPhuTest extends TestCase
         }
     }
 
-    public function testGetUserOk()
-    {
-        $userModel = new UserModel();
+    // public function testGetUserOk()
+    // {
+    //     $userModel = new UserModel();
 
-        $count_array = 6;
-        $actual = $userModel->getUsers();
+    //     $count_array = 6;
+    //     $actual = $userModel->getUsers();
 
-        $this->assertEquals($count_array, count($actual));
-    }
+    //     $this->assertEquals($count_array, count($actual));
+    // }
     // public function testGetUserbyKeyWordOk()
     // {
     //     $userModel = new UserModel();
@@ -205,20 +205,20 @@ class UserModelPhuTest extends TestCase
 
     //     $this->assertEquals($count_array,count($actual));
     // }
-    public function testDeleteUserByIdNg()
-    {
-        $userModel = new UserModel();
-        $id = 20;
+    // public function testDeleteUserByIdNg()
+    // {
+    //     $userModel = new UserModel();
+    //     $id = 20;
 
 
-        $actual = $userModel->deleteUserById($id);
+    //     $actual = $userModel->deleteUserById($id);
 
 
-        // $this->assertEquals($userModel->findUserById($id),$actual);
-        if ($actual == true) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
-    }
+    //     // $this->assertEquals($userModel->findUserById($id),$actual);
+    //     if ($actual == true) {
+    //         $this->assertTrue(true);
+    //     } else {
+    //         $this->assertTrue(false);
+    //     }
+    // }
 }

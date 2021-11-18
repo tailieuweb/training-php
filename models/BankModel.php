@@ -55,25 +55,8 @@ class BankModel extends BaseModel
 
         return $bank;
     }
-
     /**
-     * Insert bank with id
-     * @param $input
-     * @return mixed
-     */
-    public function insertBankWithId($bankId, $userId, $cost)
-    {
-        if (is_numeric($bankId) && is_numeric($userId) && is_numeric($cost)) {
-            $sql = "INSERT INTO `banks`(`id`, `user_id`, `cost`) 
-            VALUES ('" . $bankId . "','" . $userId . "','" . $cost . "')";
-            $bank = $this->insert($sql);
-            return $bank;
-        }
-        return false;
-    }
-
-    /**
-     * Update user
+     * Update bank
      * @param $input
      * @return mixed
      */
@@ -103,19 +86,17 @@ class BankModel extends BaseModel
     /**
      * Get all Banks
      */
-    public function getBanks()
+    public function getBanks($params = [])
     {
         //Keyword
         if (!empty($params['keyword'])) {
             $keyword = $params['keyword'];
-            $sql = 'SELECT * 
-                    FROM `banks` 
-                    WHERE `user_id` LIKE "%' . $keyword . '%"' . ' OR `cost` LIKE "%';
+            $sql = 'SELECT * FROM banks WHERE id = ' . $keyword;
             //Keep this line to use Sql Injection
             //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
+            //Example keyword: abcef%";TRUNCATE banks;##. $keyword1
             //$users = self::$_connection->multi_query($sql);
-            $banks = $this->select($sql);
+            $bank = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM `banks` ORDER BY `id`';
             $bank = $this->select($sql);
