@@ -25,8 +25,16 @@ class UserModel extends BaseModel {
      * @return array
      */
     public function auth($userName, $password) {
-        $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+        // $md5Password = md5($password);
+        // $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+
+        // $user = $this->select($sql);
+        // return $user;
+        if (is_numeric($userName) || is_array($userName) || is_object($userName) || is_double($userName)
+            || !is_string($userName)) {
+            return 'Not invalid';
+        }
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $password . '"';
 
         $user = $this->select($sql);
         return $user;

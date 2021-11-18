@@ -120,4 +120,129 @@ class UserModelTest extends TestCase
 
        $this->assertEquals($expected, $actual);
     }
+
+   // Bao lam test function Auth
+   public function testAuthOk()
+   {
+       $userModel = new UserModel();
+       $username = 'test2';
+       $password = '123';
+       $actual = $userModel->auth($username, $password);
+       if (!empty($actual)) {
+           return $this->assertTrue(true);
+       }
+       return $this->assertTrue(false);
+   }
+   public function testAuthNg()
+   {
+       $userModel = new UserModel();
+       $username = 'bao';
+       $password = 'bao';
+       $actual = $userModel->auth($username, $password);
+       if (empty($user)) {
+           $this->assertTrue(true);
+       } else {
+           $this->assertTrue(false);
+       }
+   }
+   // Test username là số âm
+   public function testAuthUsernameIsNegativeNum()
+   {
+       $userModel = new UserModel();
+       $expected = 'Not invalid';
+       $username = -10;
+       $password = '123';
+       $actual = $userModel->auth($username, $password);
+       $this->assertEquals($expected, $actual);
+   }
+   // Test username là số thuc
+   public function tesAuthUsernameIsDouble()
+   {
+       $userModel = new UserModel();
+       $expected = 'Not invalid';
+       $username = 5.5;
+       $password = '123';
+       $actual = $userModel->auth($username, $password);
+       $this->assertEquals($expected, $actual);
+   }
+   // Test username là mảng
+   public function testAuthUsernameIsArray()
+   {
+       $userModel = new UserModel();
+       $expected = 'Not invalid';
+       $username = [123];
+       $password = '123';
+       $actual = $userModel->auth($username, $password);
+       $this->assertEquals($expected, $actual);
+   }
+   // Test username là null
+   public function testAuthUsernameIsNull()
+   {
+       $userModel = new UserModel();
+       $expected = 'Not invalid';
+       $username = null;
+       $password = '123';
+       $actual = $userModel->auth($username, $password);
+       $this->assertEquals($expected, $actual);
+   }
+   // Test username là boolean(true/false)
+   public function testAuthUsernameIsBoolean()
+   {
+       $userModel = new UserModel();
+       $username = true;
+       $password = '123';
+       $actual = $userModel->auth($username, $password);
+       if ($actual != false) {
+           return $this->assertTrue(true);
+       } else {
+           return $this->assertTrue(false);
+       }
+   }
+   // Test username không tồn tại
+   public function testAuthUsernameIsNotExist()
+   {
+       $userModel = new UserModel();
+       $username = 'bao';
+       $password = 'bao';
+       $user = $userModel->auth($username,$password);
+       if (empty($user)) {
+           $this->assertTrue(true);
+       } else {
+           $this->assertTrue(false);
+       }
+   }
+   // Test username là kí tự đặc biệt
+   public function testAuthUsernameIsCharacter()
+   {
+       $userModel = new UserModel();
+       $expected = [];
+       $username = '*12';
+       $password = '123';
+       $actual = $userModel->auth($username, $password);
+       $this->assertEquals($expected, $actual);
+   }
+   // Test username là object
+   public function testAuthUsernameIsObject()
+   {
+       $userModel = new UserModel();
+       $expected = 'Not invalid';
+       $username = new BankModel();
+       $password = '123';
+       $actual = $userModel->auth($username,$password);
+       $this->assertEquals($expected, $actual);
+   }
+   // Test username là số 
+   public function testAuthUsernameIsNum()
+   {
+       $userModel = new UserModel();
+       $expected = 'Not invalid';
+       $username = 11111;
+       $password = '123';
+       $actual = $userModel->auth($username,$password);
+       $this->assertEquals($expected, $actual);
+   }
+   
+   // End test function Auth
+
+
 }
