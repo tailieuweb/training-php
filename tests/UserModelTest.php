@@ -53,6 +53,7 @@ class UserModelTest extends TestCase
         $userId = '@@@';
         $expected = [];
         $actual = $userModel->findUserById($userId);
+
         $this->assertEquals($expected, $actual);
     }
 
@@ -72,25 +73,6 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-
-    public function testFindUserByIdObjectNotG()
-    {
-        $userModel = new UserModel();
-        $object = (object)'123';
-
-        if (is_object($object)) {
-            $object = 14;
-
-            $actual = $userModel->findUserById($object);
-            $expected = $actual[0]['name'];
-            $userName = 'ddddd';
-
-            if ($userName !== $expected) {
-                $this->assertTrue(true);
-            }
-        }
-    }
-
 
     //test getUser
     public function testInsertUserOk()
@@ -333,6 +315,7 @@ class UserModelTest extends TestCase
     public function testFactoryPatternMakeNull()
     {
         $factory = new FactoryPattern();
+        $expected = new UserModel();
 
         $actual = $factory->make('');
 
@@ -341,15 +324,5 @@ class UserModelTest extends TestCase
         } else {
             $this->assertTrue(false);
         }
-    }
-
-    public function testFactoryPatternValueObjectNotG()
-    {
-        $factory = new FactoryPattern();
-        $object = (object)'abc123';
-        $expected = null;
-        $actual = $factory->make($object);
-
-        $this->assertEquals($actual, $expected);
     }
 }
