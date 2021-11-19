@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import Footer from "../../src/components/Footer";
 import Header from "../../src/components/Header";
 import PostsDetail from "../../src/components/PostsDetail";
+import apiCaller from "../../src/utils/apiCaller";
 
 export default function PostsDetailPage() {
   const { t } = useTranslation("common");
@@ -23,12 +24,29 @@ export default function PostsDetailPage() {
 }
 
 // This function gets called at build time
-export const getStaticPaths = () => {
+export const getStaticPaths = async () => {
+  const posts = await apiCaller("products", "GET", null).then((res) => {
+    if (res.success) {
+      return res.data;
+    }
+    return [];
+  });
+
+  const pathsEn = posts.map((post) => ({
+    params: { id: `${post.id}` },
+    locale: "en",
+  }));
+  const pathsJp = posts.map((post) => ({
+    params: { id: `${post.id}` },
+    locale: "jp",
+  }));
+  const pathsVi = posts.map((post) => ({
+    params: { id: `${post.id}` },
+    locale: "vi",
+  }));
+
   return {
-    paths: [
-      { params: { id: "0" }, locale: "en" },
-      { params: { id: "0" }, locale: "vi" },
-    ],
+    paths: [...pathsEn, ...pathsJp, ...pathsVi],
     fallback: true,
   };
 };
