@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { actDeletePost, actEditPost, actLoadPosts } from "../../redux/actions/postsActions";
@@ -11,12 +12,16 @@ import ProfileUser from "./ProfileUser";
 const inputPost = { id: "", title: "", description: "" };
 
 export default function Profile() {
+  const { t } = useTranslation("common");
+
+  // Redux
   const dispatch = useDispatch();
   const authSelector = useSelector((state) => state.auth);
   const user = authSelector?.user;
   const selectorPosts = useSelector((state) => state.posts);
   const postsBase = selectorPosts?.posts;
 
+  // React
   const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [postSelected, setPostSelected] = useState(inputPost);
@@ -51,7 +56,7 @@ export default function Profile() {
     }
 
     // request and close modal
-    await dispatch(actEditPost({ ...postSelected, user_id: user?.id }));
+    await dispatch(actEditPost({ ...postSelected, user_id: user?.id }, t));
     setPostSelected(inputPost);
     document.querySelector("#editModal button[data-dismiss='modal']").click();
   };
@@ -64,7 +69,7 @@ export default function Profile() {
     }
 
     // request and close modal
-    await dispatch(actDeletePost(postSelected));
+    await dispatch(actDeletePost(postSelected, t));
     setPostSelected(inputPost);
     document.querySelector("#deleteModal button[data-dismiss='modal']").click();
   };

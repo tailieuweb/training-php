@@ -35,11 +35,15 @@ export default function Auth() {
     }
 
     dispatch(
-      actSignInUser({ email, password }, () => {
-        document
-          .querySelector("#authModal button[data-dismiss='modal']")
-          .click();
-      })
+      actSignInUser(
+        { email, password },
+        () => {
+          document
+            .querySelector("#authModal button[data-dismiss='modal']")
+            .click();
+        },
+        t
+      )
     );
   };
 
@@ -58,9 +62,13 @@ export default function Auth() {
       return toast.warning("Re password is incorrect!");
     }
     dispatch(
-      actSignUpUser({ name, email, password, confirm_password }, () => {
-        setAuthStatus("signIn");
-      })
+      actSignUpUser(
+        { name, email, password, confirm_password },
+        () => {
+          setAuthStatus("signIn");
+        },
+        t
+      )
     );
   };
 

@@ -40,7 +40,7 @@ export const actLoadSignInUser = () => {
   };
 };
 
-export const actSignInUser = (user, callback) => {
+export const actSignInUser = (user, callback, t) => {
   return (dispatch) => {
     dispatch(startLoading());
     const { email, password } = user;
@@ -51,16 +51,16 @@ export const actSignInUser = (user, callback) => {
           dispatch(loginUser(res.data));
           const token = jwt.sign({ ...res.data, password }, APP_JWT_TOKEN);
           localStorage.setItem(".user", token);
-          toast.success("SignIn successfully!");
+          toast.success(t("app.toast.signInSuccess"));
           callback();
         }
       })
-      .catch(() => toast.warning("Your email or password is incorrect!"))
+      .catch(() => toast.warning(t("app.toast.signInFailure")))
       .finally(() => dispatch(stopLoading()));
   };
 };
 
-export const actSignUpUser = (user, callback) => {
+export const actSignUpUser = (user, callback, t) => {
   return (dispatch) => {
     dispatch(startLoading());
     const { name, email, password, confirm_password } = user;
@@ -69,13 +69,13 @@ export const actSignUpUser = (user, callback) => {
       .then((res) => {
         if (res.success) {
           if (!res.data.success) {
-            return toast.warning("This email is already exists!");
+            return toast.warning(t("app.toast.signUpEmailExists"));
           }
-          toast.success("SignUp successfully!");
+          toast.success(t("app.toast.signUpSuccess"));
           callback();
         }
       })
-      .catch(() => toast.error("An error occurred!"))
+      .catch(() => toast.error(t("app.toast.signUpFailure")))
       .finally(() => dispatch(stopLoading()));
   };
 };
@@ -83,6 +83,6 @@ export const actSignUpUser = (user, callback) => {
 export const actLogoutUser = () => {
   return (dispatch) => {
     dispatch(logoutUser());
-    toast.success("SignOut successfully!");
+    toast.success(t("app.toast.signOutSuccess"));
   };
 };
