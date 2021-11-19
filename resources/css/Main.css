@@ -1,0 +1,16 @@
+.main-navbar {
+    text-align: center;
+  }
+  .main-navbar--custom-link {
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.5s;
+  }
+  .main-navbar--custom-link:hover {
+    color: #e66f28;
+  }
+  .navbar--custom-logo {
+    width: 70%;
+    height: auto;
+  }
+  

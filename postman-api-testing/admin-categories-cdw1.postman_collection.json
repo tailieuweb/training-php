@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "b70ad5af-9375-48a6-9335-7147f91da80d",
+		"name": "admin-categories-cdw1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET-getall-categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/category",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET-getcategories-byid",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "category_image",
+							"value": "none",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/category/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"category",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST-insert-categories",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "category_image",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "created_at",
+							"value": "{{$timestamp}}",
+							"type": "text"
+						},
+						{
+							"key": "updated_at",
+							"value": "{{$timestamp}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/category",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH-update-categories",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "update",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "update",
+							"type": "text"
+						},
+						{
+							"key": "category_image",
+							"value": "update",
+							"type": "text"
+						},
+						{
+							"key": "updated_at",
+							"value": "{{$timestamp}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/category/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"category",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE-delete-cateogories",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/category/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"category",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

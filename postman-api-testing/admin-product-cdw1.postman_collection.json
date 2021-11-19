@@ -1,0 +1,234 @@
+{
+	"info": {
+		"_postman_id": "453c3552-8ce9-45de-9979-e9091715aa08",
+		"name": "admin-product-cdw1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET-getall-products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/expenses",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"expenses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET-getproduct-byid",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "category_id",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "product_image",
+							"value": "none",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/expenses/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"expenses",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST-insert-product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "category_id",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "product_image",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "created_at",
+							"value": "{{$timestamp}}",
+							"type": "text"
+						},
+						{
+							"key": "updated_at",
+							"value": "{{$timestamp}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/expenses",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"expenses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH-udpate-product",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "update",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "update",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "category_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "product_image",
+							"value": "update",
+							"type": "text"
+						},
+						{
+							"key": "updated_at",
+							"value": "{{$timestamp}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/expenses/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"expenses",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE-delete-product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "localhost:8000/api/expenses/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"expenses",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

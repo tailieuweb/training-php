@@ -1,0 +1,34 @@
+.slide-show-custom-tag {
+  max-width: 100%;
+  position: relative;
+}
+.slide-show-slide {
+  background: #212529;
+}
+.slide-show--custom-img {
+  width: 100%;
+  height: auto;
+}
+.slide-show-carouse-info {
+  color: #fff;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: 50%;
+  text-align: center;
+}
+.slide-show-category-title {
+  font-size: 2.5rem;
+}
+.slide-show-category-link {
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 2vh 5vh;
+  transition: all 1s;
+}
+.slide-show-category-link:hover {
+  color: #fff;
+  background: #eb7127;
+  text-decoration: none;
+}

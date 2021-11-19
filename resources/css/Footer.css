@@ -1,0 +1,9 @@
+.footer {
+    background: #212529;
+    color: #fff;
+    padding: 5vh 0 0;
+} 
+.footer-contact-detail{
+    list-style: none;
+    padding: 0;
+}

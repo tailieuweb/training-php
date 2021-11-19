@@ -1,0 +1,32 @@
+.trending-categories-info {
+    padding: 5vh 2vh;
+    position: relative;
+}
+.trending-categories-info .trending-category-product-img {
+    transition: transform .5s, filter .5s ease-in-out;
+    filter: grayscale(100%);
+}
+.trending-categories-info .trending-category-product-img {
+    width: 100%;
+}
+.trending-categories-info .info-detail {
+    position: absolute;
+    bottom: 20%;
+    left: 5vh;
+}
+.trending-category-title {
+    font-size: 1.5rem;
+    transition: 0.5s;
+}
+.trending-category-product-title {
+    font-size: 2rem;
+    transition: 0.5s;
+}
+.trending-category-title:hover,
+.trending-category-product-title:hover {
+    color: #eb7025;
+}
+.trending-categories-info:hover .trending-category-product-img {
+    filter: grayscale(0);
+    transform: scale(1.1);
+}

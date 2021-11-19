@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "28141ceb-ada7-4a58-99b0-b3dad147f4b1",
+		"name": "admin-user-cdw1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET-getall-user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET-getuser-byid",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "none",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/user/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST-insert-user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{$username}}",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "092xxxxxxx",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": "user",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "none",
+							"type": "text"
+						},
+						{
+							"key": "created_at",
+							"value": "{{$timestamp}}",
+							"type": "text"
+						},
+						{
+							"key": "updated_at",
+							"value": "{{$timestamp}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH-update-user",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "update",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "update",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "update",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "092update",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "update",
+							"type": "text"
+						},
+						{
+							"key": "updated_at",
+							"value": "{{$timestamp}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/user/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE-delete-user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/category/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"category",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,21 @@
+.nav--custom{
+    margin: 10vh auto 0;
+}
+.logo--custom {
+    display: block;
+    margin: 2vh auto;
+    width: 60%;
+}
+
+.link--custom:focus {
+    background: #3490dc;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.link--custom {
+    display: block;
+    text-align: center;
+    padding: 1vh;
+    text-decoration: none !important;
+}
