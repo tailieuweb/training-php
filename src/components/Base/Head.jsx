@@ -11,6 +11,9 @@ export default function Head() {
         rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       />
+      <link rel="icon" type="image/x-icon" href="/vietnam.png" />
+      <link rel="icon" type="image/png" href="/vietnam.png" />
+      <link rel="apple-touch-icon" href="/vietnam.png" />
     </DefaultHead>
   );
 }

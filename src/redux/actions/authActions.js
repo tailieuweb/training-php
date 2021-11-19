@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { toast } from "react-toastify";
 import apiCaller from "../../utils/apiCaller";
+import { startLoading, stopLoading } from "./commonActions";
 
 const APP_JWT_TOKEN = process.env.NEXT_PUBLIC_APP_JWT_TOKEN;
 
@@ -39,8 +40,9 @@ export const actLoadSignInUser = () => {
   };
 };
 
-export const actSignInUser = (user, callback) => {
+export const actSignInUser = (user, callback, t) => {
   return (dispatch) => {
+    dispatch(startLoading());
     const { email, password } = user;
     const data = { email, password };
     return apiCaller(`api/login`, "POST", data)
@@ -49,35 +51,38 @@ export const actSignInUser = (user, callback) => {
           dispatch(loginUser(res.data));
           const token = jwt.sign({ ...res.data, password }, APP_JWT_TOKEN);
           localStorage.setItem(".user", token);
-          toast.success("SignIn successfully!");
+          toast.success(t("app.toast.signInSuccess"));
           callback();
         }
       })
-      .catch(() => toast.warning("Your email or password is incorrect!"));
+      .catch(() => toast.warning(t("app.toast.signInFailure")))
+      .finally(() => dispatch(stopLoading()));
   };
 };
 
-export const actSignUpUser = (user, callback) => {
-  return () => {
+export const actSignUpUser = (user, callback, t) => {
+  return (dispatch) => {
+    dispatch(startLoading());
     const { name, email, password, confirm_password } = user;
     const data = { name, email, password, confirm_password };
     return apiCaller(`api/register`, "POST", data)
       .then((res) => {
         if (res.success) {
           if (!res.data.success) {
-            return toast.warning("This email is already exists!");
+            return toast.warning(t("app.toast.signUpEmailExists"));
           }
-          toast.success("SignUp successfully!");
+          toast.success(t("app.toast.signUpSuccess"));
           callback();
         }
       })
-      .catch(() => toast.error("An error occurred!"));
+      .catch(() => toast.error(t("app.toast.signUpFailure")))
+      .finally(() => dispatch(stopLoading()));
   };
 };
 
 export const actLogoutUser = () => {
   return (dispatch) => {
     dispatch(logoutUser());
-    toast.success("SignOut successfully!");
+    toast.success(t("app.toast.signOutSuccess"));
   };
 };

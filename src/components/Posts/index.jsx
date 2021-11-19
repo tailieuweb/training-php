@@ -1,5 +1,6 @@
-import { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
@@ -14,14 +15,17 @@ import PostsAddItem from "./PostsAddItem";
 import PostsDelete from "./PostsDelete";
 import PostsEdit from "./PostsEdit";
 import PostsItem from "./PostsItem";
+import PostsItemSkeleton from "./PostsItemSkeleton";
 
-const ITEM_PER_PAGE = 5;
+const ITEM_PER_PAGE = 6;
 const inputPost = { id: "", title: "", description: "" };
 
 export default function Posts() {
+  const { t } = useTranslation("common");
+
   // Next
   const router = useRouter();
-  const { pageNum = 1 } = router.query;
+  const { page = 1, q = "" } = router.query;
 
   // Redux
   const dispatch = useDispatch();
@@ -31,19 +35,25 @@ export default function Posts() {
   const user = authSelector?.user;
 
   // State React
+  const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [postSelected, setPostSelected] = useState(inputPost);
 
   // Effect
-  useEffect(() => dispatch(actLoadPosts()), []);
+  useEffect(() => {
+    (async () => {
+      await dispatch(actLoadPosts());
+      setIsLoading(false);
+    })();
+  }, []);
 
   useEffect(() => {
-    const postsData = [...postsBase].splice(
-      (pageNum - 1) * ITEM_PER_PAGE,
-      ITEM_PER_PAGE
+    let postsData = [...postsBase].filter((o) =>
+      o.title.toLowerCase().includes(q.toLowerCase())
     );
+    postsData = postsData.splice((page - 1) * ITEM_PER_PAGE, ITEM_PER_PAGE);
     setPosts(postsData);
-  }, [pageNum, postsBase]);
+  }, [page, q, postsBase]);
 
   // Functions
   const onChange = (e) => {
@@ -55,11 +65,11 @@ export default function Posts() {
     e.preventDefault();
     const { title, description } = postSelected;
     if (title.length === 0 || description.length === 0) {
-      return toast.warning("Please enter the full information.");
+      return toast.warning(t("app.toast.requiredInput"));
     }
 
     // request and close modal
-    await dispatch(actAddPost({ ...postSelected, user_id: user?.id }));
+    await dispatch(actAddPost({ ...postSelected, user_id: user?.id }, t));
     setPostSelected(inputPost);
     document.querySelector("#addModal button[data-dismiss='modal']").click();
   };
@@ -73,11 +83,11 @@ export default function Posts() {
 
     const { title, description } = postSelected;
     if (title.length === 0 || description.length === 0) {
-      return toast.warning("Please enter the full information.");
+      return toast.warning(t("app.toast.requiredInput"));
     }
 
     // request and close modal
-    await dispatch(actEditPost({ ...postSelected, user_id: user?.id }));
+    await dispatch(actEditPost({ ...postSelected, user_id: user?.id }, t));
     setPostSelected(inputPost);
     document.querySelector("#editModal button[data-dismiss='modal']").click();
   };
@@ -90,7 +100,7 @@ export default function Posts() {
     }
 
     // request and close modal
-    await dispatch(actDeletePost(postSelected));
+    await dispatch(actDeletePost(postSelected, t));
     setPostSelected(inputPost);
     document.querySelector("#deleteModal button[data-dismiss='modal']").click();
   };
@@ -109,13 +119,20 @@ export default function Posts() {
         onEditPost={onEditPost}
       />
       <PostsDelete postSelected={postSelected} onDeletePost={onDeletePost} />
-      {parseInt(pageNum) === 1 && (
-        <div className="col-md-6">
-          <PostsAddItem user={user} />
+      {q === ""
+        ? parseInt(page) === 1 && (
+            <div className="col-md-12">
+              <PostsAddItem user={user} />
+            </div>
+          )
+        : null}
+      {[...Array(5).keys()].map((item) => (
+        <div key={item} className={`col-md-6 ${isLoading ? "" : "d-none"}`}>
+          <PostsItemSkeleton />
         </div>
-      )}
+      ))}
       {posts.map((post) => (
-        <div key={post.id} className="col-md-6">
+        <div key={post.id} className={`col-md-6 ${isLoading ? "d-none" : ""}`}>
           <PostsItem
             user={user}
             post={post}
