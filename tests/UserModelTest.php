@@ -225,23 +225,23 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-    // //fail
-    // // public function testString()
-    // // {
-    // //     $userModel = new UserModel();
-    // //     $a = 1;
-    // //     $b = 'a';
+    //fail
+    // public function testString()
+    // {
+    //     $userModel = new UserModel();
+    //     $a = 1;
+    //     $b = 'a';
 
-    // //     //number + string
-    // //     //number
-    // //     //numberstring
+    //     //number + string
+    //     //number
+    //     //numberstring
 
-    // //     $expected = 'error';
-    // //     $actual = $userModel->sumb($a, $b);
+    //     $expected = 'error';
+    //     $actual = $userModel->sumb($a, $b);
 
-    // //     $this->assertEquals($expected, $actual);
+    //     $this->assertEquals($expected, $actual);
 
-    // // }    
+    // }    
 
     //fail
     // public function testTwoString()
@@ -260,127 +260,127 @@ class UserModelTest extends TestCase
     //     $this->assertEquals($expected, $actual);
     // }
 
-    public function testSumNotgood()
-    {
-        $userModel = new UserModel();
-        $a = 1;
-        $b = 2;
+    // public function testSumNotgood()
+    // {
+    //     $userModel = new UserModel();
+    //     $a = 1;
+    //     $b = 2;
         
-        $actual = $userModel->sumb($a,$b);
+    //     $actual = $userModel->sumb($a,$b);
         
-        if ($actual != 3) {
-            $this->assertTrue(false);
-        } else {
-            $this->assertTrue(true);
-        }
-    }
-    public function testSumOk()
-    {
-        $userModel = new UserModel();
-        $a = 1;
-        $b = 2;
-        $expected = 3;
+    //     if ($actual != 3) {
+    //         $this->assertTrue(false);
+    //     } else {
+    //         $this->assertTrue(true);
+    //     }
+    // }
+    // public function testSumOk()
+    // {
+    //     $userModel = new UserModel();
+    //     $a = 1;
+    //     $b = 2;
+    //     $expected = 3;
 
-        $actual = $userModel->sumb($a, $b);
+    //     $actual = $userModel->sumb($a, $b);
 
-        $this->assertEquals($expected, $actual);
-    }
-    public function testSumNg()
-    {
-        $userModel = new UserModel();
-        $a = 1;
-        $b = 2;
-        $expected = 3;
+    //     $this->assertEquals($expected, $actual);
+    // }
+    // public function testSumNg()
+    // {
+    //     $userModel = new UserModel();
+    //     $a = 1;
+    //     $b = 2;
+    //     $expected = 3;
 
-        $actual = $userModel->sumb($a, $b);
-        if ($actual != 3) {
-            $this->assertTrue(false);
-        } else {
-            $this->assertTrue(true);
-        }
-    }
-    public function testTwoPositiveInt()
-    {
-        $userModel = new UserModel();
-        $a = 1;
-        $b = 2;
-        $expected = 3;
+    //     $actual = $userModel->sumb($a, $b);
+    //     if ($actual != 3) {
+    //         $this->assertTrue(false);
+    //     } else {
+    //         $this->assertTrue(true);
+    //     }
+    // }
+    // public function testTwoPositiveInt()
+    // {
+    //     $userModel = new UserModel();
+    //     $a = 1;
+    //     $b = 2;
+    //     $expected = 3;
 
-        $actual = $userModel->sumb($a, $b);
+    //     $actual = $userModel->sumb($a, $b);
 
-        $this->assertEquals($expected, $actual);
-    }
+    //     $this->assertEquals($expected, $actual);
+    // }
 
-    public function testTwoNegativeInt()
-    {
-        $userModel = new UserModel();
-        $a = -1;
-        $b = -2;
-        $expected = -3;
+    // public function testTwoNegativeInt()
+    // {
+    //     $userModel = new UserModel();
+    //     $a = -1;
+    //     $b = -2;
+    //     $expected = -3;
 
-        $actual = $userModel->sumb($a, $b);
+    //     $actual = $userModel->sumb($a, $b);
 
-        $this->assertEquals($expected, $actual);
-    }
+    //     $this->assertEquals($expected, $actual);
+    // }
 
-    public function testNegativePositiveInt()
-    {
-        $userModel = new UserModel();
-        $a = -1;
-        $b = 2;
-        $expected = 1;
+    // public function testNegativePositiveInt()
+    // {
+    //     $userModel = new UserModel();
+    //     $a = -1;
+    //     $b = 2;
+    //     $expected = 1;
 
-        $actual = $userModel->sumb($a, $b);
+    //     $actual = $userModel->sumb($a, $b);
 
-        $this->assertEquals($expected, $actual);
-    }
+    //     $this->assertEquals($expected, $actual);
+    // }
 
-    public function testSumFloat()
-    {
-        $userModel = new UserModel();
-        $a = 1.5;
-        $b = 2.33;
-        $expected = 3.83;
+    // public function testSumFloat()
+    // {
+    //     $userModel = new UserModel();
+    //     $a = 1.5;
+    //     $b = 2.33;
+    //     $expected = 3.83;
 
-        $actual = $userModel->sumb($a, $b);
+    //     $actual = $userModel->sumb($a, $b);
 
-        $this->assertEquals($expected, $actual);
-    }
+    //     $this->assertEquals($expected, $actual);
+    // }
 
-    public function testSumPositiveFloat()
-    {
-        $userModel = new UserModel();
-        $a = 1.5;
-        $b = 2.33;
-        $expected = 3.83;
+    // public function testSumPositiveFloat()
+    // {
+    //     $userModel = new UserModel();
+    //     $a = 1.5;
+    //     $b = 2.33;
+    //     $expected = 3.83;
 
-        $actual = $userModel->sumb($a, $b);
+    //     $actual = $userModel->sumb($a, $b);
 
-        $this->assertEquals($expected, $actual);
-    }
+    //     $this->assertEquals($expected, $actual);
+    // }
   
 
-    public function testSumNegativeFloat()
-    {
-        $userModel = new UserModel();
-        $a = -1.5;
-        $b = -2.33;
-        $expected = -3.83;
+    // public function testSumNegativeFloat()
+    // {
+    //     $userModel = new UserModel();
+    //     $a = -1.5;
+    //     $b = -2.33;
+    //     $expected = -3.83;
 
-        $actual = $userModel->sumb($a, $b);
+    //     $actual = $userModel->sumb($a, $b);
 
-        $this->assertEquals($expected, $actual);
-    }
+    //     $this->assertEquals($expected, $actual);
+    // }
 
-    public function testNegativePositiveFloat()
-    {
-        $userModel = new UserModel();
-        $a = -1.5;
-        $b = 2.33;
-        $expected = 0.83;
+    // public function testNegativePositiveFloat()
+    // {
+    //     $userModel = new UserModel();
+    //     $a = -1.5;
+    //     $b = 2.33;
+    //     $expected = 0.83;
 
-        $actual = $userModel->sumb($a, $b);
+    //     $actual = $userModel->sumb($a, $b);
 
-        $this->assertEquals($expected, $actual);
-    }
+    //     $this->assertEquals($expected, $actual);
+    // }
 }
