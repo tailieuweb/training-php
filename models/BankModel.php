@@ -38,7 +38,8 @@ class BankModel extends BaseModel implements IBank
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $banks = self::$_connection->multi_query($sql);
+            // $banks = self::$_connection->multi_query($sql);
+            $banks = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM bank';
             $banks = $this->select($sql);

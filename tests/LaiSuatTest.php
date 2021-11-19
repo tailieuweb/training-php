@@ -16,7 +16,7 @@ class LaiSuatTest extends TestCase
         $this->assertIsArray($banks);
         $this->assertEquals(6, count($banks));
     }
-    public function testCostIsGuestNonValueInArray()
+    public function testCostIsGuestOKValueInArray()
     {
         $bmd   = new BankModel();
         $excId = 6;
@@ -27,10 +27,40 @@ class LaiSuatTest extends TestCase
         $lx->setBank($bmd);
         $actBanks = $lx->cost();
         foreach ($actBanks as $act) {
-            if ($act['id'] == 6) {
+            if ($act['id'] == $excId) {
                 $this->assertEquals($excName, $act['name']);
                 $this->assertEquals($excCost, $act['SoDu']);
                 $this->assertEquals($excLaiXuat, $act['LaiXuat']);
+            }
+        }
+    }
+    public function testCostIsGuestNGValueInArray()
+    {
+        $bmd   = new BankModel();
+        $excId = 4;
+        $excName = "thien";
+        $excCost = 0;
+        $excLaiXuat = 0;
+        $lx = new LaiSuat();
+        $lx->setBank($bmd);
+        $actBanks = $lx->cost();
+        foreach ($actBanks as $act) {
+            if ($act['id'] == $excId) {
+                if ($act['name'] != $excName) {
+                    $this->assertTrue(true);
+                } else {
+                    $this->assertTrue(false);
+                }
+                if ($act['SoDu'] != $excCost) {
+                    $this->assertTrue(true);
+                } else {
+                    $this->assertTrue(false);
+                }
+                if ($act['LaiXuat'] != $excLaiXuat) {
+                    $this->assertTrue(true);
+                } else {
+                    $this->assertTrue(false);
+                }
             }
         }
         // $this->assertEquals(6, count($banks));
