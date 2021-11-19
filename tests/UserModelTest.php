@@ -5,7 +5,6 @@ use PHPUnit\Framework\TestCase;
 class UserModelTest extends TestCase
 {
     protected static $_instance;
-    //Hoàng Vũ
 //Function getInstance
     //OK!
     public function testGetInstanceOk(){
