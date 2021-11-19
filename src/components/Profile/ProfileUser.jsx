@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function ProfileUser(props) {
   const { user } = props;
+  const { t } = useTranslation("common");
   const [avatarHash, setAvatarHash] = useState();
 
   useEffect(() => {
@@ -25,11 +27,13 @@ export default function ProfileUser(props) {
         </a>
       )}
       <div className="mt-3">
-        <a href="https://gravatar.com/" target="_blank">
-          <button type="button" className="btn btn-primary btn-sm mb-3">
-            Change Avatar
-          </button>
-        </a>
+        {user?.email && (
+          <a href="https://gravatar.com/" target="_blank">
+            <button type="button" className="text-capitalize btn btn-primary btn-sm mb-3">
+              {t("app.common.changeAvatar")}
+            </button>
+          </a>
+        )}
         <h2 className="card-title mb-0">{user?.name}</h2>
         {user?.email && (
           <small className="card-text d-block mt-1">

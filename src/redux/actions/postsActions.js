@@ -33,7 +33,7 @@ export const actLoadPostById = (id) => {
   };
 };
 
-export const actAddPost = (post) => {
+export const actAddPost = (post, t) => {
   return (dispatch) => {
     dispatch(startLoading());
     const { title, description, user_id = 0 } = post;
@@ -42,15 +42,15 @@ export const actAddPost = (post) => {
       .then((res) => {
         if (res.success) {
           dispatch(actLoadPosts());
-          toast.success("Add post successfully!");
+          toast.success(t("app.toast.postAddSuccess"));
         }
       })
-      .catch(() => toast.error("An error occurred!"))
+      .catch(() => toast.error(t("app.toast.postAddFailure")))
       .finally(() => dispatch(stopLoading()));
   };
 };
 
-export const actEditPost = (post) => {
+export const actEditPost = (post, t) => {
   return (dispatch) => {
     dispatch(startLoading());
     const { title, description, user_id = 0 } = post;
@@ -59,25 +59,25 @@ export const actEditPost = (post) => {
       .then((res) => {
         if (res.success) {
           dispatch(actLoadPosts());
-          toast.success("Edit post successfully!");
+          toast.success(t("app.toast.postEditSuccess"));
         }
       })
-      .catch(() => toast.error("An error occurred!"))
+      .catch(() => toast.error(t("app.toast.postEditFailure")))
       .finally(() => dispatch(stopLoading()));
   };
 };
 
-export const actDeletePost = (post) => {
+export const actDeletePost = (post, t) => {
   return (dispatch) => {
       dispatch(startLoading());
       return apiCaller(`products/${post.id}`, "DELETE", null)
         .then((res) => {
           if (res.success) {
             dispatch(actLoadPosts());
-            toast.success("Delete post successfully!");
+            toast.success(t("app.toast.postDeleteSuccess"));
           }
         })
-        .catch(() => toast.error("An error occurred!"))
+        .catch(() => toast.error(t("app.toast.postDeleteFailure")))
         .finally(() => dispatch(stopLoading()));
   };
 };

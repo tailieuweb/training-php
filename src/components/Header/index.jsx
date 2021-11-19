@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import {
   actLoadSignInUser,
@@ -12,7 +13,11 @@ import HeaderLanguages from "./HeaderLanguages";
 import HeaderSearch from "./HeaderSearch";
 
 export default function Header() {
+  const {t} = useTranslation("common");
+
+  // Next
   const router = useRouter();
+  const { q = "" } = router.query;
 
   // Redux
   const dispatch = useDispatch();
@@ -21,7 +26,7 @@ export default function Header() {
 
   // State
   const [isLoading, setIsLoading] = useState(true);
-  const [inputSearch, setInputSearch] = useState("");
+  const [inputSearch, setInputSearch] = useState(q);
 
   useEffect(() => {
     (async () => {
@@ -31,7 +36,7 @@ export default function Header() {
   }, []);
 
   const onLogout = () => {
-    dispatch(actLogoutUser());
+    dispatch(actLogoutUser(t));
   };
 
   const onSearch = (e) => {

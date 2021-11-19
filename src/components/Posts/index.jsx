@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
@@ -20,6 +21,8 @@ const ITEM_PER_PAGE = 6;
 const inputPost = { id: "", title: "", description: "" };
 
 export default function Posts() {
+  const { t } = useTranslation("common");
+
   // Next
   const router = useRouter();
   const { page = 1, q = "" } = router.query;
@@ -66,7 +69,7 @@ export default function Posts() {
     }
 
     // request and close modal
-    await dispatch(actAddPost({ ...postSelected, user_id: user?.id }));
+    await dispatch(actAddPost({ ...postSelected, user_id: user?.id }, t));
     setPostSelected(inputPost);
     document.querySelector("#addModal button[data-dismiss='modal']").click();
   };
@@ -84,7 +87,7 @@ export default function Posts() {
     }
 
     // request and close modal
-    await dispatch(actEditPost({ ...postSelected, user_id: user?.id }));
+    await dispatch(actEditPost({ ...postSelected, user_id: user?.id }, t));
     setPostSelected(inputPost);
     document.querySelector("#editModal button[data-dismiss='modal']").click();
   };
@@ -97,7 +100,7 @@ export default function Posts() {
     }
 
     // request and close modal
-    await dispatch(actDeletePost(postSelected));
+    await dispatch(actDeletePost(postSelected, t));
     setPostSelected(inputPost);
     document.querySelector("#deleteModal button[data-dismiss='modal']").click();
   };
