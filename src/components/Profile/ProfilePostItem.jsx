@@ -11,7 +11,7 @@ export default function ProfilePostItem(props) {
     <div className="card mb-3">
       <div className="card-body">
         <div className="d-flex justify-content-between align-items-center mb-4">
-          <Link href={`/posts/${"1"}`}>
+          <Link href={`/posts/${post.id}`}>
             <a>
               <h3 className="text-primary mb-0"># {post.title}</h3>
             </a>
