@@ -31,7 +31,9 @@ export default function ProfileUser(props) {
         {user?.email && (
           <small className="card-text d-block mt-1">
             <i className="fa fa-envelope mr-1" aria-hidden="true"></i>{" "}
-            {user?.email}
+            <a style={{ color: "#000" }} href={`mailto:${user?.email}`}>
+              {user?.email}
+            </a>
           </small>
         )}
       </div>

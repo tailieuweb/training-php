@@ -1,19 +1,27 @@
-import Link from 'next/link';
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actLoadSignInUser, actLogoutUser } from "../../redux/actions/authActions";
+import {
+  actLoadSignInUser,
+  actLogoutUser,
+} from "../../redux/actions/authActions";
 import Auth from "../Auth";
 import HeaderAuth from "./HeaderAuth";
 import HeaderLanguages from "./HeaderLanguages";
 import HeaderSearch from "./HeaderSearch";
 
 export default function Header() {
-  const [isLoading, setIsLoading] = useState(true);
-  const authSelector = useSelector((state) => state.auth);
-  const user = authSelector?.user;
+  const router = useRouter();
 
   // Redux
   const dispatch = useDispatch();
+  const authSelector = useSelector((state) => state.auth);
+  const user = authSelector?.user;
+
+  // State
+  const [isLoading, setIsLoading] = useState(true);
+  const [inputSearch, setInputSearch] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -26,8 +34,9 @@ export default function Header() {
     dispatch(actLogoutUser());
   };
 
-  const onSearch = () => {
-    console.log("Search");
+  const onSearch = (e) => {
+    e.preventDefault();
+    router.push(`/search?q=${inputSearch}`);
   };
 
   return (
@@ -49,7 +58,11 @@ export default function Header() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="w-75 navbar-nav ml-auto align-items-center d-flex justify-content-end flex-row mt-3 mt-lg-0">
-            <HeaderSearch onSearch={onSearch} />
+            <HeaderSearch
+              onSearch={onSearch}
+              inputSearch={inputSearch}
+              setInputSearch={setInputSearch}
+            />
             <HeaderLanguages />
             <HeaderAuth isLoading={isLoading} user={user} onLogout={onLogout} />
           </ul>

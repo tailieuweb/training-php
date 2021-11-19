@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { actSignInUser, actSignUpUser } from "../../redux/actions/authActions";
 import AuthSignIn from "./AuthSignIn";
@@ -13,6 +14,7 @@ const defaultInput = {
 };
 
 export default function Auth() {
+  const { t } = useTranslation("common");
   const [authType, setAuthStatus] = useState("signIn");
   const [inputForm, setInputForm] = useState(defaultInput);
 
@@ -29,7 +31,7 @@ export default function Auth() {
   const signIn = () => {
     const { email, password } = inputForm;
     if (email.length === 0 || password.length === 0) {
-      return toast.warning("Please enter the full information.");
+      return toast.warning(t("app.toast.requiredInput"));
     }
 
     dispatch(
@@ -50,7 +52,7 @@ export default function Auth() {
       name.length === 0 ||
       confirm_password.length === 0
     ) {
-      return toast.warning("Please enter the full information.");
+      return toast.warning(t("app.toast.requiredInput"));
     }
     if (password !== confirm_password) {
       return toast.warning("Re password is incorrect!");
@@ -88,7 +90,9 @@ export default function Auth() {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="authModalLabel">
-              {authType === "signIn" ? "Sign In" : "Sign Up"}
+              {authType === "signIn"
+                ? t("app.auth.signIn")
+                : t("app.auth.signUp")}
             </h5>
             <button
               type="button"
@@ -115,8 +119,8 @@ export default function Auth() {
               }
             >
               {authType === "signIn"
-                ? "Do not have an account?"
-                : "Already have an account?"}{" "}
+                ? t("app.auth.signInButtonSwitch")
+                : t("app.auth.signUpButtonSwitch")}{" "}
             </button>
             <div>
               <button
@@ -124,10 +128,12 @@ export default function Auth() {
                 className="btn btn-secondary"
                 data-dismiss="modal"
               >
-                Close
+                {t("app.auth.buttonClose")}
               </button>
               <button type="submit" className="btn btn-primary">
-                {authType === "signIn" ? "Sign In" : "Sign Up"}
+                {authType === "signIn"
+                  ? t("app.auth.signInButtonSubmit")
+                  : t("app.auth.signUpButtonSubmit")}
               </button>
             </div>
           </div>

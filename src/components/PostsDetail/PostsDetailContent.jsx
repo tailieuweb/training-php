@@ -1,4 +1,10 @@
-export default function PostsDetailContent() {
+import Link from "next/link";
+import { useTranslation } from "react-i18next";
+
+export default function PostsDetailContent(props) {
+  const { post } = props;
+  const { t } = useTranslation("common");
+
   return (
     <div className="card bg-white rounded-lg p-4">
       <div className="card-body py-2">
@@ -12,19 +18,18 @@ export default function PostsDetailContent() {
             </a>
             <div className="ml-3">
               <a>
-                <h5 className="card-title mb-0">Unknown User</h5>
+                <h5 className="card-title mb-0">{t("app.common.unknown")}</h5>
               </a>
-              <small className="card-text">10/10/2021</small>
+              <small className="card-text">{post?.created_at}</small>
             </div>
           </div>
         </div>
-        <h2 className="text-primary my-4"># Post Title</h2>
-        <p className="card-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod
-          voluptatibus reprehenderit doloribus quasi quisquam beatae placeat
-          nemo enim, recusandae optio! Nesciunt dolor praesentium dignissimos,
-          temporibus nemo voluptatum similique ad quod?
-        </p>
+        <Link href={`/posts/${post?.id}`}>
+          <a>
+            <h2 className="text-primary my-4"># {post?.title}</h2>
+          </a>
+        </Link>
+        <p className="card-text">{post?.description}</p>
       </div>
     </div>
   );
