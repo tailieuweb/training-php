@@ -8,9 +8,10 @@ $factory = new FactoryPattern();
 $userModel = $factory->make('user');
 $bankModel = $factory -> make('bank');
 
+$type = "user";
 $params = [];
 if (!empty($_GET['keyword'])) {
-    $params['keyword'] = $_GET['keyword'];
+    $params['keyword'] =  $keyword; 
 }
 //feature 1-a
 $users = $userModel->getUsers($params);
@@ -38,13 +39,13 @@ function Xulyid($id){
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home</title>
+    <title>home - <?php echo $type?></title>
     <?php include 'views/meta.php' ?>
 </head>
+    <?php include 'views/header.php';?>
 <body>
-    <?php include 'views/header.php'?>
     <div class="container">
-        <?php if (!empty($users)) {?>
+        <?php if (!empty($users) && !empty($type)) {?>
             <div class="alert alert-warning" role="alert">
                 List of users!<br>
                 Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
@@ -90,7 +91,9 @@ function Xulyid($id){
                                 <a href="delete_user.php?id=<?php echo $handle_id ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
-
+                                <a href="delete_bank.php?id=<?php echo $user['id'] ?>">
+                                    <i class="fa fa-money" aria-hidden="true" title="Delete Cost"></i>
+                                </a>
                             </td>
                         </tr>
                     <?php } ?>

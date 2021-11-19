@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fca2aa6e-54aa-4226-b8f8-032cc5b95d0a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/update_user.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/list_users.php" beforeDir="false" afterPath="$PROJECT_DIR$/list_users.php" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/models/BaseModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/BaseModel.php" afterDir="false" />
+>>>>>>> origin/1-php-202109/2-groups/2-B/master
+      <change beforePath="$PROJECT_DIR$/models/UserModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/UserModel.php" afterDir="false" />
+>>>>>>> 1-php-202109/2-groups/2-B/2-49-Viet
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,12 +50,28 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$/design-pattern" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+
+>>>>>>> origin/1-php-202109/2-groups/2-B/master
+>>>>>>> 1-php-202109/2-groups/2-B/2-49-Viet
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+<<<<<<< HEAD
       <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php\design-pattern" />
+=======
+
+      <recent name="D:\training-php" />
+      <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php\public\js" />
+>>>>>>> origin/1-php-202109/2-groups/2-B/master
+>>>>>>> 1-php-202109/2-groups/2-B/2-49-Viet
       <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php" />
       <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php\public\js" />
     </key>
@@ -67,7 +90,13 @@
       <option name="presentableId" value="Default" />
       <updated>1632046412024</updated>
       <workItem from="1632046414701" duration="13384000" />
-      <workItem from="1632547559440" duration="9835000" />
+<<<<<<< HEAD
+      <workItem from="1632652505399" duration="2058000" />
+      <workItem from="1632725273804" duration="438000" />
+      <workItem from="1632752330211" duration="3873000" />
+      <workItem from="1632839141394" duration="4006000" />
+      <workItem from="1632894963245" duration="975000" />
+
     </task>
     <servers />
   </component>

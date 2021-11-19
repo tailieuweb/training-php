@@ -20,7 +20,7 @@ if (!empty($_GET['id'])) {
 
 
 if (!empty($_POST['submit'])) {
-
+    $_POST = userModel::clean($_POST);
     if (!empty($id)) {
         $userModel->updateUser($_POST);
     } else {
