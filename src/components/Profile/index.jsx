@@ -2,12 +2,17 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { actDeletePost, actEditPost, actLoadPosts } from "../../redux/actions/postsActions";
+import {
+  actDeletePost,
+  actEditPost,
+  actLoadPosts,
+} from "../../redux/actions/postsActions";
 import PostsDelete from "../Posts/PostsDelete";
 import PostsEdit from "../Posts/PostsEdit";
 import ProfilePostItem from "./ProfilePostItem";
 import ProfilePostSkeleton from "./ProfilePostSkeleton";
 import ProfileUser from "./ProfileUser";
+import ProfileUserSkeleton from "./ProfileUserSkeleton";
 
 const inputPost = { id: "", title: "", description: "" };
 
@@ -83,12 +88,13 @@ export default function Profile() {
       />
       <PostsDelete postSelected={postSelected} onDeletePost={onDeletePost} />
       <div className="col-12 col-md-4">
-        <ProfileUser user={user} />
+        {isLoading ? <ProfileUserSkeleton /> : <ProfileUser user={user} />}
       </div>
       <div className="col-12 col-md-8 mt-5 mt-md-0">
-        {isLoading && [...Array(5).keys()].map((item) => (
-          <ProfilePostSkeleton key={item} />
-        ))}
+        {isLoading &&
+          [...Array(5).keys()].map((item) => (
+            <ProfilePostSkeleton key={item} />
+          ))}
         {posts.map((post) => (
           <ProfilePostItem
             key={post.id}

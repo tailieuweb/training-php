@@ -126,7 +126,7 @@ export default function Posts() {
             </div>
           )
         : null}
-      {[...Array(5).keys()].map((item) => (
+      {[...Array(6).keys()].map((item) => (
         <div key={item} className={`col-md-6 ${isLoading ? "" : "d-none"}`}>
           <PostsItemSkeleton />
         </div>
