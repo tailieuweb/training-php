@@ -29,7 +29,6 @@ abstract class BaseModel {
         }
 
     }
-
     /**
      * Query in database
      * @param $sql
