@@ -4,6 +4,11 @@ require_once 'BaseModel.php';
 require_once 'Result.php';
 
 class UserModel extends BaseModel {
+    public function getAll() {
+        $sql = 'SELECT * FROM users';
+        $user = $this->select($sql);
+        return $user;
+    }
 
     public function getAll() {
         $sql = 'SELECT * FROM users';
@@ -35,10 +40,10 @@ class UserModel extends BaseModel {
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users 
         WHERE name = "' . mysqli_real_escape_string(self::$_connection, $userName) . '" 
-        AND password = "'.$md5Password.'"';
-        $user= self::$_connection->multi_query($sql);
+        AND password = "'. $md5Password .'"';
+        //$user = self::$_connection->multi_query($sql);
         //Normal 
-        $user = $this->select($sql);
+        $user = $this->select($sql);  
         return $user;
     }
 
@@ -61,28 +66,64 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-        public function updateUser($input,BaseModel $BankModel) {
+    public function updateUser($input)
+    {
 
-            $_id = $input['id'];
-            $handleFirst = substr($_id,23);
-            $_id = "";
-            for ($i=0; $i <strlen($handleFirst)-9 ; $i++) {
-                $_id.=$handleFirst[$i];
-            }
-            $input['id'] = $_id;
-            $sql = 'UPDATE users SET 
-                     name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                     password="'. md5($input['password']) .'",
-                     fullname = "' . $input['fullname'] .'",
-                     email = "'	 . $input['email'] .'",
-                     type = "' . $input['t1'] .'"
-                    WHERE id = ' . $input['id'];
-            $user = $this->update($sql);
-            if($BankModel instanceof BankModel) {
-            $BankModel->updateUser($input);
-            }
-            return $user;
+        $sql = 'UPDATE users SET 
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name'])  . '", 
+                 fullname="' . $input['fullname'] . '",
+                 email="' . $input['email'] . '",
+                 password="' . $input['password'] . '",
+                 type="' . $input['type'] . '"
+                WHERE id = ' . $input['id'];
+
+        $user = $this->update($sql);
+
+        return $user;
+    }
+
+    /**
+     * Insert user
+     * @param $input
+     * @return mixed
+     */
+    public function insertUser($input) {
+       $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
+                "'" . $input['name'] . "',
+                 '".md5($input['password'])."',
+                 '".$input['fullname']."',
+                 '".$input['email']."',
+                 '".$input['type']."')";
+        //$user = self::$_connection->multi_query($sql);
+        //Normal: 
+        $user = $this->insert($sql);
+        return $user;
+    }
+
+    /**
+     * Search users
+     * @param array $params 
+     * @return array
+     */
+    public function getUsers($params = []) {
+        //Keyword
+        if (!empty($params['keyword'])) {
+            $sql = 'SELECT * FROM users
+            WHERE u.name LIKE "%' . $params['keyword'] .'%"';
+            //Keep this line to use Sql Injection
+            //Don't change
+            //Example keyword: abcef%";TRUNCATE banks;##
+            //$users = self::$_connection->multi_query($sql);
+            //Normal 
+            $users = $this->select($sql);
+        } else {
+            $sql = 'SELECT * FROM users';
+            $users = $this->select($sql);
         }
+
+        return $users;
+    }
+
     // Singleton pattern:
     public static function getInstance() {
         if (self::$userInstance !== null) {

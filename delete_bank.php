@@ -8,7 +8,7 @@ $id = NULL;
 if (!empty($_GET['id'])) {
     //Update SQL Injection - convert id -> int -> string
     $id = isset($_GET['id'])?(string)(int)$_GET['id']:null;
-    $bankModel->deleteBalanceById($id);//Delete existing user
+    $bankModel->delete($id);//Delete existing user
 }
 header('location: list_users.php');
 ?>

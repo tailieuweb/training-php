@@ -1,103 +1,81 @@
 <?php
-require_once 'models/BankModel.php';
-$bankModel = new BankModel();
-
+// Start the session
+session_start();
+require_once 'models/FactoryPattern.php';
 require_once 'models/UserModel.php';
-$userModel = new UserModel();
+$factory = new FactoryPattern();
+$userModel = $factory->make("user");
+$bankModel = $factory->make("bank");
+$user = NULL; //Add new user
+$bank = NULL;
+$_id = NULL;
+$params = [];
+$prevCost = 0;
 
-$banks = NULL; //Add new user
-$id = NULL;
-$listUsers = $userModel->getUsers();
-if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-    $banks = $bankModel->getBankById($id);
+if (!empty($_GET['id'])) { 
+    //Update SQL Injection - convert id -> int -> string
+    $_id = isset($_GET['id'])?(string)(int)$_GET['id']:null;
+    $user =  $userModel->find($_id);//Update existing user
+    $params['user_id'] =  $_id; 
+    $bank = $bankModel->search($params);
 }
+
 
 if (!empty($_POST['submit'])) {
-    if (!empty($id)) {
-        //Update bank
-        $temp = $bankModel->updateBank($_POST);
-        if ($temp->isSuccess == true) {
-            echo "<script>alert('$temp->data');window.location.href='./list_bank.php'</script>";
-        } else {
-            echo "<script>alert('$temp->error');</script>";
-        }
+    if (!empty($_id) && !empty($bank)) {
+       $bankModel->update($_POST);
     } else {
-        $bankModel->insertBank($_POST);
-        header('location: list_bank.php');
+       $params['cost'] = $_POST['cost'];
+       $bankModel->insert($params);
     }
-    // header('location: form_bank.php');
+    header('location: list_users.php');
 }
-
 ?>
-
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Bank form</title>
+    <title>User form</title>
     <?php include 'views/meta.php' ?>
 </head>
-
+    <?php include 'views/header.php';?>
 <body>
-    <?php include 'views/header.php' ?>
     <div class="container">
 
-        <?php if ($banks || empty($id)) { ?>
+        <?php if (($user || !isset($_id))) { ?>
         <div class="alert alert-warning" role="alert">
             Bank form
         </div>
         <form method="POST">
-            <input type="hidden" name="id" value="<?php echo strip_tags($id) ?>">
-            <div class="form-group">
-                <label for="type">Name</label>
-                <select class="form-control" name="user_id">
-                    <?php 
-                        foreach($listUsers as $user) { ?>
-                    <option value=<?php echo strip_tags($user['id'])?>><?php echo strip_tags($user['name'])?></option>
-
-                    <?php  }
-                    ?>
-                </select>
+            <input type="hidden" name="id" value="<?php echo $_id ?>">
+            <div class="form-group mb-3">
+                <label for="name">Name</label>
+                <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
+                <label for="password">Fullname</label>
+                <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
+            </div>
+            <div class="form-group mb-3">
+                <label for="password">Email</label>
+                <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
+            </div>
+            <div class="form-group mb-3">
                 <label for="cost">Cost</label>
-                <input name="cost" class="form-control" placeholder="Cost" required>
-                <div class="alert alert-warning" role="alert">
-                    Bank form
-                </div>
-                <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $id ?>">
-                    <div class="form-group">
-                        <label for="type">Name</label>
-                        <select class="form-control" name="user_id">
-                            <?php
-                        foreach ($listUsers as $user) { ?>
-                            <option value="<?php echo $user['id'] ?>" 
-                            <?php if (!empty($banks[0]['name'])) {                                                                          
-                                if ($banks[0]['name'] == $user['name']) {
-                                     echo "selected";
-                                 }
-                            } ?>><?php echo $user['name'] ?></option>
-                            <?php  }
-                        ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="hidden" name="version"
-                            value="<?php if (!empty($banks[0]['version'])) echo $banks[0]['version'] ?>">
-                        <label for="cost">Cost</label>
-                        <input name="cost" class="form-control" placeholder="Cost" required
-                            value="<?php if (!empty($banks[0]['cost'])) echo $banks[0]['cost'] ?>">
-                    </div>
-                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
-                </form>
-                <?php } else { ?>
-                <div class="alert alert-success" role="alert">
-                    User not found!
-                </div>
-                <?php } ?>
+                <?php if ($bank) {?>
+                <input class="form-control" name="cost" placeholder="cost"
+                    value='<?php if (!empty($user[0]['name'])) echo $bank[0]['cost'] ?>' required>
+                <?php } else {?>
+                <input class="form-control" name="cost" placeholder="cost"
+                    value='<?php (!empty($bank)) ? $bank['cost'] : 0?>' required>
+                <?php }?>        
             </div>
+            <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <?php } else { ?>
+            User not found
+        <?php }?>
+    </div>  
 </body>
 
 </html>

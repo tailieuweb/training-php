@@ -4,39 +4,21 @@ session_start();
 //1-b
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
-$userModel = $factory->make('user');
-$bankModel = $factory -> make('bank');
-function clean($string) {
-    $string = preg_replace('/[^A-Za-z0-9]/', '', $string); // Removes special chars.
-    return preg_replace('/ +/', ' ', $string);
- }
+
+
+$type = "user";
 $params = [];
 if (!empty($_GET['keyword'])) {
-    $params['keyword'] = strip_tags($_GET['keyword']);
-}
-//feature 1-a
-$users = $userModel->getUsers($params);
-function getName($n) {
-    $characters = '162379812362378dhajsduqwyeuiasuiqwy460123';
-    $randomString = '';
-  
-    for ($i = 0; $i < $n; $i++) {
-        $index = rand(0, strlen($characters) - 1);
-        $randomString .= $characters[$index];
-    }
-  
-    return $randomString;
+    $params['keyword'] =  $_GET['keyword']; 
 }
 
-function Xulyid($id){
-    $dodaichuoi = strlen($id);
-    $chuoitruoc = getName(23);
-    $chuoisau = getName(9);
-    $handle_id = $chuoitruoc.$id. $chuoisau;
-    return $handle_id;
+if (!empty($_GET['type'])) {
+    $type = $_GET['type'];
 }
+$userModel = $factory->make("user");
 
-?>  
+$users = $userModel->search($params);
+?>
 <!DOCTYPE html>
 <html>
 <head>
