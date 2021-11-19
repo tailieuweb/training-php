@@ -1,39 +1,41 @@
 <?php
-// Start the session
-session_start();
-require_once 'models/FactoryPattern.php';
+require_once 'models/BankModel.php';
+$bankModel = new BankModel();
+
 require_once 'models/UserModel.php';
-$factory = new FactoryPattern();
-$userModel = $factory->make("user");
-$bankModel = $factory->make("bank");
-$user = NULL; //Add new user
-$bank = NULL;
-$_id = NULL;
-$params = [];
-$prevCost = 0;
+$userModel = new UserModel();
 
-if (!empty($_GET['id'])) { 
-    //Update SQL Injection - convert id -> int -> string
-    $_id = isset($_GET['id'])?(string)(int)$_GET['id']:null;
-    $user =  $userModel->findUserById($_id);//Update existing user
-    $params['user_id'] =  $_id; 
-    $bank = $bankModel->getBanksInfo($params);
+$banks = NULL; //Add new user
+$id = NULL;
+$listUsers = $userModel->getUsers();
+if (!empty($_GET['id'])) {
+    $id = $_GET['id'];
+    $banks = $bankModel->getBankById($id);
 }
-
 
 if (!empty($_POST['submit'])) {
-    if (!empty($_id) && $bank) {
-       $bankModel->updateBankInfo($_POST);
+    if (!empty($id)) {
+        //Update bank
+        $temp = $bankModel->updateBank($_POST);
+        if ($temp->isSuccess == true) {
+            echo "<script>alert('$temp->data');window.location.href='./list_bank.php'</script>";
+        } else {
+            echo "<script>alert('$temp->error');</script>";
+        }
     } else {
-       $bankModel->insertBankInfo($_POST);
+        $bankModel->insertBank($_POST);
+        header('location: list_bank.php');
     }
-    header('location: list_users.php');
+    // header('location: form_bank.php');
 }
+
 ?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
+<<<<<<< HEAD
     <title>User form</title>
     <?php include 'views/meta.php' ?>
 </head>
@@ -42,10 +44,22 @@ if (!empty($_POST['submit'])) {
     <div class="container">
 
         <?php if (($user || !isset($_id))) { ?>
+=======
+    <title>Bank form</title>
+    <?php include 'views/meta.php' ?>
+</head>
+
+<body>
+    <?php include 'views/header.php' ?>
+    <div class="container">
+
+        <?php if ($banks || empty($id)) { ?>
+>>>>>>> 1-php-202109/2-groups/2-B/3-52-Nhu
         <div class="alert alert-warning" role="alert">
             Bank form
         </div>
         <form method="POST">
+<<<<<<< HEAD
             <input type="hidden" name="id" value="<?php echo $_id ?>">
             <div class="form-group mb-3">
                 <label for="name">Name</label>
@@ -75,6 +89,58 @@ if (!empty($_POST['submit'])) {
             User not found
         <?php }?>
     </div>  
+=======
+            <input type="hidden" name="id" value="<?php echo strip_tags($id) ?>">
+            <div class="form-group">
+                <label for="type">Name</label>
+                <select class="form-control" name="user_id">
+                    <?php 
+                        foreach($listUsers as $user) { ?>
+                    <option value=<?php echo strip_tags($user['id'])?>><?php echo strip_tags($user['name'])?></option>
+
+                    <?php  }
+                    ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cost">Cost</label>
+                <input name="cost" class="form-control" placeholder="Cost" required>
+                <div class="alert alert-warning" role="alert">
+                    Bank form
+                </div>
+                <form method="POST">
+                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                    <div class="form-group">
+                        <label for="type">Name</label>
+                        <select class="form-control" name="user_id">
+                            <?php
+                        foreach ($listUsers as $user) { ?>
+                            <option value="<?php echo $user['id'] ?>" 
+                            <?php if (!empty($banks[0]['name'])) {                                                                          
+                                if ($banks[0]['name'] == $user['name']) {
+                                     echo "selected";
+                                 }
+                            } ?>><?php echo $user['name'] ?></option>
+                            <?php  }
+                        ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="version"
+                            value="<?php if (!empty($banks[0]['version'])) echo $banks[0]['version'] ?>">
+                        <label for="cost">Cost</label>
+                        <input name="cost" class="form-control" placeholder="Cost" required
+                            value="<?php if (!empty($banks[0]['cost'])) echo $banks[0]['cost'] ?>">
+                    </div>
+                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+                </form>
+                <?php } else { ?>
+                <div class="alert alert-success" role="alert">
+                    User not found!
+                </div>
+                <?php } ?>
+            </div>
+>>>>>>> 1-php-202109/2-groups/2-B/3-52-Nhu
 </body>
 
 </html>

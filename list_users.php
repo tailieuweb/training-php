@@ -4,14 +4,23 @@ session_start();
 //1-b
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
-
 $userModel = $factory->make('user');
 $bankModel = $factory -> make('bank');
+<<<<<<< HEAD
 
 $type = "user";
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] =  $keyword; 
+=======
+function clean($string) {
+    $string = preg_replace('/[^A-Za-z0-9]/', '', $string); // Removes special chars.
+    return preg_replace('/ +/', ' ', $string);
+ }
+$params = [];
+if (!empty($_GET['keyword'])) {
+    $params['keyword'] = strip_tags($_GET['keyword']);
+>>>>>>> 1-php-202109/2-groups/2-B/3-52-Nhu
 }
 //feature 1-a
 $users = $userModel->getUsers($params);
@@ -67,19 +76,13 @@ function Xulyid($id){
                         <tr>
                             <th scope="row"><?php echo $index?></th>
                             <td>
-                                <?php echo $user['name']?>
+                                <?php echo Strip_tags($user['name'])?>
                             </td>
                             <td>
-                                <?php  echo $bankValue[0]['cost'];    ?>
+                                <?php echo Strip_tags($user['fullname'])?>
                             </td>
                             <td>
-                                <?php echo $user['fullname']?>
-                            </td>
-                            <td>
-                                <?php echo $user['email']?>
-                            </td>
-                            <td>
-                                <?php echo $user['type']?>
+                                <?php echo Strip_tags($user['type'])?>
                             </td>
                             <td>
                                 <a href="form_user.php?id=<?php echo $handle_id ?>">

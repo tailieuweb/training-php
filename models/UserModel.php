@@ -1,11 +1,13 @@
 <?php
 
 require_once 'BaseModel.php';
+require_once 'Result.php';
 
 <<<<<<< HEAD
 class UserModel extends BaseModel  {
 =======
 class UserModel extends BaseModel {
+<<<<<<< HEAD
     public function getAll() {
         $sql = 'SELECT * FROM users';
         $user = $this->select($sql);
@@ -23,6 +25,14 @@ class UserModel extends BaseModel {
 
 
      public function findUserById($id) {
+=======
+    protected static $_instance;
+
+    private  function __contructor(){}
+
+    public function findUserById($id) {
+        $id = $this->decryptID($id);
+>>>>>>> 1-php-202109/2-groups/2-B/3-52-Nhu
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
         return $user;
@@ -87,6 +97,7 @@ class UserModel extends BaseModel {
     {
 
         $sql = 'UPDATE users SET 
+<<<<<<< HEAD
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name'])  . '", 
                  fullname="' . $input['fullname'] . '",
                  email="' . $input['email'] . '",
@@ -119,11 +130,25 @@ class UserModel extends BaseModel {
         }
 
 
+=======
+
+                 name = "' . mysqli_real_escape_string(self::$_connection, strip_tags($input['name'])) .'", 
+                 password="'. strip_tags(md5($input['password'])) .'",
+                 fullname="'. strip_tags($input['fullname']) .'",
+                 email="'. strip_tags($input['email']) .'",
+                 type="'. strip_tags($input['type']) .'",
+                WHERE id = ' . strip_tags($input['id']);
+        $user = $this->update($sql);
+        return $user;
+    }
+    
+>>>>>>> 1-php-202109/2-groups/2-B/3-52-Nhu
     /**
      * Insert user
      * @param $input
      * @return mixed
      */
+<<<<<<< HEAD
 <<<<<<< HEAD
     public function insertUser($input,BaseModel $bankModel) {
     //    $sql = "INSERT INTO `users`( `name`, `fullname`, `email`, `type`, `password`) VALUES (?,?,?,?,?)";
@@ -131,6 +156,18 @@ class UserModel extends BaseModel {
         "'" . $input['name'] . "', '".$input['password']."', '".$input['fullname']."', '".$input['email']."', '".$input['t1']."')";
 
         //        $sql->bind_param('sssss',$input['name'],$input['fullname'],$input['email'],$input['t1'],$input['password']);
+=======
+    public function insertUser($input)
+    {
+        $password = md5($input['password']);
+        // SQL
+        $sql = "INSERT INTO `users`(`name`,`password`,`fullname`, `email`, `type`) 
+        VALUES ('" . strip_tags($input['name']) . "',
+        '" . strip_tags(md5($input['password'])) . "',
+        '" . strip_tags($input['fullname']) . "',
+        '" . strip_tags($input['email']) . "',
+        '" . strip_tags($input['type']) . "')";
+>>>>>>> 1-php-202109/2-groups/2-B/3-52-Nhu
         $user = $this->insert($sql);
         $Lastid = $this->SelectLastid();
         $input['id']=  $Lastid[0]['MAX(id)'];
@@ -174,6 +211,7 @@ class UserModel extends BaseModel {
         $users = $this->select($sql);
         return $users;
     }
+<<<<<<< HEAD
 
 <<<<<<< HEAD
     public static function getInstance() {
@@ -189,6 +227,19 @@ class UserModel extends BaseModel {
             $user = $this -> select($sql);
             return $user;
 =======
+=======
+    // Decrypt id
+    private function decryptID($md5Id)
+    {
+        $users = $this->getUsers();
+        foreach ($users as $user) {
+            if (md5($user['id'] . 'TeamB-TDC') == $md5Id) {
+                return $user['id'];
+            }
+        }
+        return NULL;
+    }
+>>>>>>> 1-php-202109/2-groups/2-B/3-52-Nhu
     // Singleton pattern:
     public static function getInstance() {
         if (self::$userInstance !== null) {
@@ -197,10 +248,13 @@ class UserModel extends BaseModel {
         self::$userInstance = new self();
         return self::$userInstance;
     }
+<<<<<<< HEAD
     // Sum test
      public function sumb($a,$b)
     {
         return $a + $b;
 >>>>>>> 1-php-202109/2-groups/2-B/2-49-Viet
     }
+=======
+>>>>>>> 1-php-202109/2-groups/2-B/3-52-Nhu
 }

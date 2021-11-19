@@ -1,12 +1,15 @@
 <?php
 require_once 'configs/database.php';
-
 abstract class BaseModel {
     // Database connection
     protected static $_connection;
     protected static $userInstance;
     protected static $bankInstance;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 1-php-202109/2-groups/2-B/3-52-Nhu
     public function __construct() {
         //Try catch exception:
 

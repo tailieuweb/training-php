@@ -8,12 +8,7 @@ $user = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-     $handleFirst = substr($id,23);
-     $id = "";
-    for ($i=0; $i <strlen($handleFirst)-9 ; $i++) { 
-        $id.=$handleFirst[$i];
-    }    
+    $id = strip_tags($_GET['id']);
     $user = $userModel->findUserById($id);//Update existing user
     $cost  = $BankModel->SelectCostByUserId($id);
 }
@@ -22,13 +17,12 @@ if (!empty($_GET['id'])) {
 if (!empty($_POST['submit'])) {
     $_POST = userModel::clean($_POST);
     if (!empty($id)) {
-        $userModel->updateUser($_POST);
+        $userModel->updateUser(strip_tags($_POST));
     } else {
-        $userModel->insertUser($_POST);
+        $userModel->insertUser(strip_tags($_POST));
     }
     header('location: list_users.php');
 }
-
 ?>
 <!DOCTYPE html>
 <html>
