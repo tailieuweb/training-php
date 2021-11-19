@@ -1,4 +1,5 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
 import Footer from "../src/components/Footer";
 import Header from "../src/components/Header";
 import Posts from "../src/components/Posts";
@@ -6,6 +7,9 @@ import Posts from "../src/components/Posts";
 export default function HomePage() {
   return (
     <>
+      <Head>
+        <title>React Confessions</title>
+      </Head>
       <Header />
       <div className="container">
         <Posts />

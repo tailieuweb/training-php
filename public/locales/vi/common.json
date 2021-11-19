@@ -8,6 +8,10 @@
     "app.common.profile": "Thông Tin Của Tôi",
     "app.common.inputSearchPlaceholder": "Nhập một từ khóa...",
     "app.common.relate": "Có thể bạn sẽ thích",
+    "app.common.changeAvatar": "Đổi hình ảnh",
+    "app.common.searchTitle": "Kết quả tìm kiếm cho:",
+    "app.common.posts": "Bài viết",
+    "app.common.postsDetail": "Chi tiết bài viết",
 
     "app.toast.requiredInput": "Vui lòng nhập đầy đủ thông tin.",
     "app.toast.suggestLogin": "Vui lòng đăng nhập để có thể chỉnh sửa bài viết hoặc bạn có thể đăng bài ẩn danh.",

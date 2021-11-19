@@ -8,6 +8,10 @@
     "app.common.profile": "My Profile",
     "app.common.inputSearchPlaceholder": "Type a keyword...",
     "app.common.relate": "Maybe you are interested",
+    "app.common.changeAvatar": "Change avatar",
+    "app.common.searchTitle": "Search result for:",
+    "app.common.posts": "Posts",
+    "app.common.postsDetail": "Post Detail",
 
     "app.toast.requiredInput": "Please enter the full information.",
     "app.toast.suggestLogin": "Please login to be able to edit posts or you can post anonymously.",

@@ -1,17 +1,12 @@
-import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 
 export default function HeaderSearch(props) {
   const { onSearch, inputSearch, setInputSearch } = props;
-
   const { t } = useTranslation("common");
-  const router = useRouter();
-  const { q = "" } = router.query;
 
   return (
     <form onSubmit={onSearch} action="/search" className="d-flex">
       <input
-        name={q}
         type="text"
         className="form-control form-control-sm py-2 mr-2"
         placeholder={t("app.common.inputSearchPlaceholder")}

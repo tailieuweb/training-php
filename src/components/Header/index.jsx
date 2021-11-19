@@ -13,6 +13,7 @@ import HeaderSearch from "./HeaderSearch";
 
 export default function Header() {
   const router = useRouter();
+  const { q = "" } = router.query;
 
   // Redux
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ export default function Header() {
 
   // State
   const [isLoading, setIsLoading] = useState(true);
-  const [inputSearch, setInputSearch] = useState("");
+  const [inputSearch, setInputSearch] = useState(q);
 
   useEffect(() => {
     (async () => {

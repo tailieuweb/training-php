@@ -1,11 +1,17 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
 import Footer from "../../src/components/Footer";
 import Header from "../../src/components/Header";
 import Profile from "../../src/components/Profile";
 
 export default function ProfilePage() {
+  const { t } = useTranslation("common");
+
   return (
     <>
+      <Head>
+        <title>{t("app.common.profile")}</title>
+      </Head>
       <Header />
       <div className="container">
         <Profile />
