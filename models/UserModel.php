@@ -34,9 +34,9 @@ class UserModel extends BaseModel {
         $sql = 'SELECT * FROM users 
         WHERE name = "' . mysqli_real_escape_string(self::$_connection, $userName) . '" 
         AND password = "'. $md5Password .'"';
-        $user = self::$_connection->multi_query($sql);
+        //$user = self::$_connection->multi_query($sql);
         //Normal 
-        //$user = $this->select($sql);  
+        $user = $this->select($sql);  
         return $user;
     }
 
