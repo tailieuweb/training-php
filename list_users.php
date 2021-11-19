@@ -82,4 +82,5 @@ $users = $userModel->getUsers($params);
     </div>
 <?php } else{echo"Lỗi factory!";} ?>
 </body>
+
 </html>
