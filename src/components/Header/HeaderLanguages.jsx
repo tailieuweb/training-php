@@ -34,7 +34,7 @@ export default function HeaderLanguages() {
       </a>
       <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
         <li>
-          <Link href="/" locale={"en"}>
+          <Link href={router.asPath} locale={"en"}>
             <a className="dropdown-item d-flex align-items-center">
               <img
                 className="mr-2"
@@ -46,7 +46,7 @@ export default function HeaderLanguages() {
           </Link>
         </li>
         <li>
-          <Link href="/" locale={"jp"}>
+          <Link href={router.asPath} locale={"jp"}>
             <a className="dropdown-item d-flex align-items-center">
               <img
                 className="mr-2"
@@ -58,7 +58,7 @@ export default function HeaderLanguages() {
           </Link>
         </li>
         <li>
-          <Link href="/" locale={"vi"}>
+          <Link href={router.asPath} locale={"vi"}>
             <a className="dropdown-item d-flex align-items-center">
               <img
                 className="mr-2"
