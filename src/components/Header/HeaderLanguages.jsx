@@ -6,6 +6,8 @@ const getFlagByLocale = (locale) => {
   switch (locale) {
     case "en":
       return "/united.png";
+    case "jp":
+      return "/japan.png";
     case "vi":
       return "/vietnam.png";
   }
@@ -40,6 +42,18 @@ export default function HeaderLanguages() {
                 src={getFlagByLocale("en")}
               />
               {t("app.lang.english")}
+            </a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/" locale={"jp"}>
+            <a className="dropdown-item d-flex align-items-center">
+              <img
+                className="mr-2"
+                style={{ width: "22px" }}
+                src={getFlagByLocale("jp")}
+              />
+              {t("app.lang.japanese")}
             </a>
           </Link>
         </li>
