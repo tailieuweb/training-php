@@ -41,8 +41,8 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-     //OK
-     public function testGetInstanceNotGood() {
+    //OK
+    public function testGetInstanceNotGood() {
         $userModel = new UserModel();
         $expected = UserModel::getInstance();
         $actual = $userModel->getInstance();
@@ -53,8 +53,8 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }   
     }
-     //FAILURES!
-     public function testGetInstanceFloat(){
+    //FAILURES!
+    public function testGetInstanceFloat(){
         $userModel = new UserModel();
         $expected = 12.2;
         $actual = $userModel->getInstance();
@@ -111,7 +111,7 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
         
         }
-     //FAILURES!
+    //FAILURES!
     public function testFindUserByIdNotGood() {
         $userModel = new UserModel();
         $id = 18;
