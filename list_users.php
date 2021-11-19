@@ -6,13 +6,6 @@ require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 $userModel = $factory->make('user');
 $bankModel = $factory -> make('bank');
-<<<<<<< HEAD
-
-$type = "user";
-$params = [];
-if (!empty($_GET['keyword'])) {
-    $params['keyword'] =  $keyword; 
-=======
 function clean($string) {
     $string = preg_replace('/[^A-Za-z0-9]/', '', $string); // Removes special chars.
     return preg_replace('/ +/', ' ', $string);
@@ -20,7 +13,6 @@ function clean($string) {
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = strip_tags($_GET['keyword']);
->>>>>>> 1-php-202109/2-groups/2-B/3-52-Nhu
 }
 //feature 1-a
 $users = $userModel->getUsers($params);
