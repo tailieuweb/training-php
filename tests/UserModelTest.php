@@ -13,17 +13,59 @@ class UserModelTest extends TestCase
         $actual = $userModel->getInstance();
         $this->assertEquals($expected,$actual);
     }
-    //OK!
+    //FAILURES!
     public function testGetInstanceNull(){
         $userModel = new UserModel();
-        $expected = self::$_instance;
         $actual = $userModel->getInstance();
        // $this->assertEquals($expected,$actual);
-        if($expected != null){
+        if($actual != null){
             $this->assertTrue(false);
         }else{
             $this->assertTrue(true);
         }
+    }
+    //FAILURES!
+    public function testGetInstanceString(){
+        $userModel = new UserModel();
+        $expected = 'alo';
+        $actual = $userModel->getInstance();
+        $this->assertEquals($expected,$actual);
+    }
+    //FAILURES!
+    public function testGetInstanceNg(){
+        $userModel = new UserModel();
+        $actual = $userModel->getInstance();
+        if(empty($actual)){
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }
+    }
+     //OK
+     public function testGetInstanceNotGood() {
+        $userModel = new UserModel();
+        $expected = UserModel::getInstance();
+        $actual = $userModel->getInstance();
+            // $this->assertEquals($expected, $actual);
+        if ($actual != $expected) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }   
+    }
+     //FAILURES!
+     public function testGetInstanceFloat(){
+        $userModel = new UserModel();
+        $expected = 12.2;
+        $actual = $userModel->getInstance();
+        $this->assertEquals($expected,$actual);
+    }
+    //FAILURES!
+    public function testGetInstanceInt(){
+        $userModel = new UserModel();
+        $expected = 12;
+        $actual = $userModel->getInstance();
+        $this->assertEquals($expected,$actual);
     }
 //Function FindUserByID
     //OK
@@ -39,7 +81,7 @@ class UserModelTest extends TestCase
 
     }
     //FAILURES!
-    public function testFindUserByIdStr() {
+    public function testFindUserByIdString() {
         $userModel = new UserModel();
         $id = '18';
         $expected = 'error';
@@ -122,7 +164,7 @@ class UserModelTest extends TestCase
         // $this->assertEquals($email,$actual);
     }
     //FAILURES!
-    public function testFindUserStr() {
+    public function testFindUserString() {
         $userModel = new UserModel();
         $search = 'adm';
         $expected = 'error';
