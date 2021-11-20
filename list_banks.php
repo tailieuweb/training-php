@@ -1,8 +1,8 @@
 <?php
 require_once 'models/BankModel.php';
-require_once 'models/FactoryPattent.php';
+require_once 'models/FactoryPattern.php';
 
-$factory = new FactoryPattent();
+$factory = new FactoryPattern();
 $bankModel = $factory->make('bank');
 
 $params = [];

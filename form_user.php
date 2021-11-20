@@ -1,12 +1,13 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/FactoryPattent.php';
+require_once 'models/FactoryPattern.php';
 require_once 'models/Repository.php';
 require_once 'models/UserModel.php';
 require_once 'models/BankModel.php';
 $reponsitory = new Repository();
-$userModel = new UserModel();
+$factory = new FactoryPattern();
+$userModel = $factory->make('user');
 
 $user = NULL; //Add new user
 $_id = NULL;

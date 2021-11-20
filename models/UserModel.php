@@ -9,9 +9,9 @@ class UserModel extends BaseModel
 
     public function findUserByIdNew($id)
     {
-
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
+        return $user;
     }
 
     public function insertUserDecorator($data, $bank)
@@ -74,11 +74,11 @@ class UserModel extends BaseModel
         }
     }
     // Delete user by id : Step 2 cuar tam
-    public function dropUserById($id)
-    {
-        $sql = 'DELETE FROM users WHERE id = ' . $id;
-        return $this->delete($sql);
-    }
+    // public function dropUserById($id)
+    // {
+    //     $sql = 'DELETE FROM users WHERE id = ' . $id;
+    //     return $this->delete($sql);
+    // }
     /**
      * Delete user by id
      * @param $id
@@ -94,18 +94,18 @@ class UserModel extends BaseModel
      * @return mixed
      */
 
-    public function updateUserNew($input)
-    {
-        $sql = 'UPDATE users SET 
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '"
-                ,`fullname`="' . $input['full-name'] . '"
-                ,email="' . $input['email'] . '"
-                ,type="' . $input['type'] . '"      
-                ,password="' . md5($input['password']) . '"
-                WHERE id = ' . $input['id'];
-        $user = $this->update($sql);
-        return $user;
-    }
+    // public function updateUserNew($input)
+    // {
+    //     $sql = 'UPDATE users SET 
+    //              name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '"
+    //             ,`fullname`="' . $input['full-name'] . '"
+    //             ,email="' . $input['email'] . '"
+    //             ,type="' . $input['type'] . '"      
+    //             ,password="' . md5($input['password']) . '"
+    //             WHERE id = ' . $input['id'];
+    //     $user = $this->update($sql);
+    //     return $user;
+    // }
 
     public function updateUser($input, $version)
     {
@@ -186,27 +186,13 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
-
-            $mysqli = mysqli_connect("localhost", "root", "", "php_web1");
-            $key = isset($params['keyword']) ? (string)(int)$params['keyword'] : false;
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . mysqli_real_escape_string($mysqli, $key) . '%"';
-            // $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
-
-            $params['keyword'] = str_replace(
-                array(
-                    ',', ';', '#', '/', '%', 'select', 'update', 'insert', 'delete', 'truncate',
-                    'union', 'or', '"', "'", 'SELECT', 'UPDATE', 'INSERT', 'DELETE', 'TRUNCATE', 'UNION', 'OR'
-                ),
-                array(''),
-                $params['keyword']
-            );
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
-
+            $sql = 'SELECT * FROM users 
+            WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection,$params['keyword']) . '%"';
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            //Example keyword text: 1')";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+            //$users = self::$_connection->multi_query($sql);
+            $users = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
@@ -226,7 +212,7 @@ class UserModel extends BaseModel
     //Just find user_id and just id with bank
     public function findTwoTable($id)
     {
-        $sql = 'SELECT * FROM users , banks WHERE id = ' . $id . ' AND banks.id = ' . $id;
+        $sql = 'SELECT * FROM users , banks WHERE id = ' . $id . ' AND banks.user_id = ' . $id;
         $user = $this->select($sql);
         return $user;
     }

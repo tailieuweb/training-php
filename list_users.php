@@ -2,8 +2,8 @@
 // Start the session
 session_start();
 require_once 'models/UserModel.php';
-require_once 'models/FactoryPattent.php';
-$factory = new FactoryPattent();
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
 $userModel = $factory->make('user');
 $params = [];
 if (!empty($_GET['keyword'])) {
@@ -41,20 +41,21 @@ $users = $userModel->getUsers($params);
                     </tr>
                 </thead>
                 <tbody>
+                   
                     <?php foreach ($users as $user) { ?>
                         <tr>
                             <th scope="row"><?php echo $user['id'] ?></th>
                             <td>
-                                <?php echo $user['name'] ?>
+                                <?php echo htmlspecialchars($user['name'] )?>
                             </td>
                             <td>
-                                <?php echo $user['fullname'] ?>
+                                <?php echo htmlspecialchars($user['fullname']) ?>
                             </td>
                             <td>
-                                <?php echo $user['email'] ?>
+                                <?php echo htmlspecialchars($user['email']) ?>
                             </td>
                             <td>
-                                <?php echo $user['type'] ?>
+                                <?php echo htmlspecialchars($user['type']) ?>
                             </td>
                             <td>
                             <a href="form_user.php?id=<?php echo rand(100, 999) . md5($user['id'] . "chuyen-de-web-1") . rand(100, 999) ?>">
@@ -69,6 +70,7 @@ $users = $userModel->getUsers($params);
                             </td>
                         </tr>
                     <?php } ?>
+                   
                 </tbody>
             </table>
         <?php } else { ?>
