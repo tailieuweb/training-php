@@ -97,8 +97,8 @@ class BankModel extends BaseModel {
         //Keyword
         if (!empty($params['user_id'])) {
             $sql = 'SELECT * FROM banks 
-            WHERE user_id = ' . $params['user_id'];
-            $items = $this->select($sql);
+            WHERE user_id = ' . mysqli_real_escape_string(self::$_connection, $params['user_id']);
+            $items = $this->getData_With_Multi_Query($sql);
         } else {
             $sql = 'SELECT * FROM banks';
             $items = $this->select($sql);
