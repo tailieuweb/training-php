@@ -117,4 +117,4 @@ class UserModel extends BaseModel {
     public function sumb($a, $b) {
         return $a + $b;
     }
-}
+}   
