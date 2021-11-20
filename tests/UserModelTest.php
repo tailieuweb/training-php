@@ -92,7 +92,7 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'thuong7';
+    $input['name'] = 'thuong9';
     $input['fullname'] = 'tpthuong';
     $input['email'] = 'email';
     $input['type'] = 'user';
@@ -126,7 +126,7 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'thuong1';
+    $input['name'] = 'thuong10';
     $input['fullname'] = 'tpthuong';
     $input['email'] = 'email';
     $input['type'] = 'user';

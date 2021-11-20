@@ -12,7 +12,12 @@ if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
 
-$input = 1;
+$users = $userModel->getUsers($params);
+
+
+
+
+// $input = 1;
 // $input['name'] = 'testnoname1';
 
 // $input['fullname'] = 'testnoname';
@@ -33,7 +38,7 @@ $input = 1;
 // $input['type'] = 'user';
 // $input['password'] = "123";
 
-$insert = $userModel->insertUser($input);
+// $insert = $userModel->insertUser($input);
 // if(empty($input)){
 //     echo 'input rỗng';
 //   }
@@ -46,7 +51,7 @@ $insert = $userModel->insertUser($input);
 //   }else{
 //       echo 'input is empty';
 //   }
-die();
+// die();
 
 
 // echo'<br>keyword'. $params['keyword'];
@@ -54,7 +59,7 @@ die();
 //     echo'<br>input rỗng ';
 // }
 
-$users = $userModel->getUsers($params);
+
 // $params1 = [];
 // $params1['keyword'] = 1;
 // $alo = [];
