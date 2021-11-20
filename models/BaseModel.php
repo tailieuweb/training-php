@@ -105,6 +105,7 @@ require_once 'configs/database.php';
             return false;
         }
     }
+    
     // protected abstract function CreateProduct1();
     // protected abstract function CreateProduct2();
 }

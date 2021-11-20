@@ -19,12 +19,10 @@ class BankModel extends BaseModel
 
 
     
-    public function findUserByID($id)
-    {
-        $sql = $this->connectDatabase()->prepare('SELECT us.name, us.fullname, us.email,bk.cost FROM banks bk
-        , users us WHERE bk.user_id = us.id  AND bk.id = ?');
-        $sql->bind_param("i", $id);
-        $user = $this->select_result($sql);
+    public function findBankById($id) {
+        $sql = 'SELECT * FROM banks WHERE id = '.$id;
+        $user = $this->select($sql);
+
         return $user;
     }
     public function findUser($keyword) {
@@ -129,14 +127,5 @@ class BankModel extends BaseModel
         return $banks;
     }
 
-    public static function matchRegexLogin($username,$password){
-        $check_username = preg_match('/^[A-Z-a-z-0-9]+$/',$username);
-        $check_password = preg_match('/^[A-Z-a-z-0-9]+$/',$password);
-        if($check_username == 1 && $check_password == 1){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+  
 }

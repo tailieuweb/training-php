@@ -4,10 +4,10 @@ require_once './models/BaseModel.php';
 class UserModel extends BaseModel
 {
     private static $instanceUserModel = NULL;
-
-    private function __construct()
+    public $x;
+    public function __construct()
     {
-        return self::$instanceUserModel;
+        // return self::$instanceUserModel;
     }
     public static function getInstance() : UserModel{
         if(self::$instanceUserModel == NULL){
