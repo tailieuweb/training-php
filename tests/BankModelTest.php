@@ -21,6 +21,11 @@ class BankModelTest extends TestCase
         $this->assertEquals($expected_name, $user[0]['name']);
     }
 
+
+    /*
+    Test case : Login wrong
+    */
+
     public function testAuthNotGood()
     {
         //Vĩnh
@@ -29,9 +34,12 @@ class BankModelTest extends TestCase
         $password = "123457";
         $user = (array)$bankModel->auth($username, $password);
         $expected = [];
-        $this->assertEquals($expected,$user);
+        $this->assertEquals($expected, $user);
     }
 
+    /*
+    Test case : Login wrong when blank name and password
+    */
     public function testAuthNamePasswordNull()
     {
         //Vĩnh
@@ -40,9 +48,12 @@ class BankModelTest extends TestCase
         $password = "";
         $user = (array)$bankModel->auth($username, $password);
         $expected = [];
-        $this->assertEquals($expected,$user);
+        $this->assertEquals($expected, $user);
     }
 
+    /*
+    Test case : Login wrong when blank name
+    */
     public function testAuthNameNull()
     {
         //Vĩnh
@@ -51,8 +62,12 @@ class BankModelTest extends TestCase
         $password = "123456";
         $user = (array)$bankModel->auth($username, $password);
         $expected = [];
-        $this->assertEquals($expected,$user);
+        $this->assertEquals($expected, $user);
     }
+
+    /*
+    Test case : Login wrong when blank password
+    */
 
     public function testAuthUserPasswordNull()
     {
@@ -62,8 +77,12 @@ class BankModelTest extends TestCase
         $password = "";
         $user = (array)$bankModel->auth($username, $password);
         $expected = [];
-        $this->assertEquals($expected,$user);
+        $this->assertEquals($expected, $user);
     }
+
+    /*
+    Test case : Login wrong when blank password
+    */
 
     public function testAuth_matchRegexGood()
     {
@@ -72,6 +91,10 @@ class BankModelTest extends TestCase
         $password = "123456";
         $this->assertTrue(BankModel::matchRegexLogin($username, $password));
     }
+
+    /*
+    Test case : Login wrong when blank password
+    */
     public function testAuth_matchRegexNotGood()
     {
         //Vĩnh
@@ -82,20 +105,26 @@ class BankModelTest extends TestCase
 
 
     //deleteUserById
+    /*
+    Test case : Delete bank by id 
+    */
     public function testDeleteBankByIdGood()
     {
         //Vĩnh
         $bankModel = BankModel::getInstance();
         $id = 1;
         $findBank = $bankModel->findBankById($id);
-        if(!empty($findBank)){
+        if (!empty($findBank)) {
             $delete =  $bankModel->deleteUserById($id);
             $this->assertTrue(true);
-        }
-        else{
+        } else {
             $this->assertTrue(false);
         }
     }
+
+    /*
+    Test case : Delete bank by id has argument (string)
+    */
     public function testDeleteBankByStr()
     {
         //Vĩnh
@@ -104,14 +133,20 @@ class BankModelTest extends TestCase
         $expected = false;
         $this->assertEquals($expected, $delete);
     }
-
-    public function testDeleteBankByID_Double(){
+    /*
+    Test case : Delete bank by id has argument (double number)
+    */
+    public function testDeleteBankByID_Double()
+    {
         $bankModel = BankModel::getInstance();
         $delete = $bankModel->deleteUserById($this->assertIsFloat(2.5));
         $expected = false;
         $this->assertEquals($expected, $delete);
     }
 
+    /*
+    Test case : Delete bank by id has argument (null)
+    */
     public function testDeleteBankByNull()
     {
         //Vĩnh
@@ -121,51 +156,68 @@ class BankModelTest extends TestCase
         $this->assertEquals($expected, $delete);
     }
 
-    public function testDeleteBankByArray(){
-          //Vĩnh
-          $bankModel = BankModel::getInstance();
-          $id = ["5","6"];
-          $delete = $bankModel->deleteUserById($this->assertIsArray($id));
-          $expected = false;
-          $this->assertEquals($expected, $delete);
+    /*
+    Test case : Delete bank by id has argument (array)
+    */
+    public function testDeleteBankByArray()
+    {
+        //Vĩnh
+        $bankModel = BankModel::getInstance();
+        $id = ["5", "6"];
+        $delete = $bankModel->deleteUserById($this->assertIsArray($id));
+        $expected = false;
+        $this->assertEquals($expected, $delete);
     }
 
-    public function testDeleteBankNotGood(){
-          //Vĩnh
-          $bankModel = BankModel::getInstance();
-          $id = 10;
-          $findID = $bankModel->findBankById($id);
-          if(empty($findID)){
-                $this->assertTrue(true);
-          }
-          else{
-              $this->assertTrue(false);
-          }
+    /*
+    Test case : Delete bank by id not found 
+    */
+    public function testDeleteBankNotGood()
+    {
+        //Vĩnh
+        $bankModel = BankModel::getInstance();
+        $id = 10;
+        $findID = $bankModel->findBankById($id);
+        if (empty($findID)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
 
-    public function testDeleteBankByObject(){
-          //Vĩnh
-          $bankModel = BankModel::getInstance();
-          $id = new UserModel();
-          $delete = $bankModel->deleteUserById($this->assertIsObject($id));
-          $expected = false;
-          $this->assertEquals($expected, $delete);
+    /*
+    Test case : Delete bank by id has argument (object)
+    */
+    public function testDeleteBankByObject()
+    {
+        //Vĩnh
+        $bankModel = BankModel::getInstance();
+        $id = new UserModel();
+        $delete = $bankModel->deleteUserById($this->assertIsObject($id));
+        $expected = false;
+        $this->assertEquals($expected, $delete);
     }
 
     //design patter test
+    /*
+    Test case : Singleton pattern, both values are equal
+    */
     public function testSingletonBankModelGood()
     {
         $bankModel = BankModel::getInstance();
         $bankModel2 = BankModel::getInstance();
         $bankModel->x = 50;
         $bankModel2->x = 100;
-        
+
         $expected_x = 100;
         $actual = $bankModel->x;
         $this->assertEquals($expected_x, $actual);
     }
-
-    public function testSingletonBankModelNotGood(){
+    /*
+    Test case : Singleton pattern, both values are not equal
+    */
+    public function testSingletonBankModelNotGood()
+    {
         $userModel = new UserModel();
         $userModel2 = new UserModel();
         $userModel->x = 50;
@@ -174,16 +226,22 @@ class BankModelTest extends TestCase
         $actual = $userModel->x;
         $this->assertNotEquals($expected_x, $actual);
     }
-
-    public function testSingletonBankModelEqualObject(){
+    /*
+    Test case : Singleton pattern, both objects are equal
+    */
+    public function testSingletonBankModelEqualObject()
+    {
         $bankModel = BankModel::getInstance();
         $bankModel2 = BankModel::getInstance();
         $expected = true;
         $actual = $bankModel === $bankModel2 ? true : false;
         $this->assertEquals($expected, $actual);
     }
-
-    public function testSingletonBankModel_NotEqualObject(){
+  /*
+    Test case : Singleton pattern, both values are not equal
+    */
+    public function testSingletonBankModel_NotEqualObject()
+    {
         $userModel = new UserModel();
         $userModel2 = new UserModel();
         $expected = false;
