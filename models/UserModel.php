@@ -14,7 +14,7 @@ class UserModel extends BaseModel
         return $user;
     }
 
-    public function insertUserDecorator($data, $bank)
+    public function insertUserDecorator($data)
     {
         return  $this->insertUser($data);
     }
@@ -155,19 +155,28 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
+        
+        if (is_string($input['name']) == false || is_string($input['fullname']) == false || is_string($input['email']) == false
+            || is_string($input['type']) == false || is_string($input['password']) == false) {
+            return 0;
+        }
+        if(strlen($input['name']) == 0 || strlen($input['fullname']) == 0 || strlen($input['email']) == 0
+        || strlen($input['type']) == 0 || strlen($input['password']) == 0) {
+            return 0;
+        }
         $password = md5($input['password']);
         $sql = "INSERT INTO `php_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
             "'" . $input['name'] . "', '" . $input['fullname'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
 
         $user = $this->insert($sql);
 
-        $getLastID = $this->getLastID();
-        $insertBanks = [
-            'user_id' => $getLastID[0]['MAX(id)'],
-            'cost' => 500,
-        ];
-        $bankModel = new BankModel();
-        $bankModel->insertBanks($insertBanks);
+        // $getLastID = $this->getLastID();
+        // $insertBanks = [
+        //     'user_id' => $getLastID[0]['MAX(id)'],
+        //     'cost' => 500,
+        // ];
+        // $bankModel = new BankModel();
+        // $bankModel->insertBanks($insertBanks);
         return $user;
     }
     public function getLastID()
@@ -205,9 +214,9 @@ class UserModel extends BaseModel
      * @param $a
      * @param $b
      */
-    public function sumb($a, $b) {
-        return $a + $b;
-    }
+    // public function sumb($a, $b) {
+    //     return $a + $b;
+    // }
 
     //Just find user_id and just id with bank
     public function findTwoTable($id)
@@ -227,12 +236,4 @@ class UserModel extends BaseModel
     }
 
 
-    // Get id user new : tam
-    public function getUserByIdNew()
-    {
-        $sql = "SELECT MAX(id) as user_id FROM users";
-        $user = $this->select($sql);
-
-        return $user;
-    }
 }

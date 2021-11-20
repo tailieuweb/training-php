@@ -25,8 +25,8 @@ if (!empty($_POST['submit'])) {
        
         header('location: list_users.php');
     } else {
-        $bank = new BankModel();
-        $reponsitory->insertRepository($_POST,$bank);
+        // $bank = new BankModel();
+        $reponsitory->insertRepository($_POST);
         header('location: list_users.php');
     }
 }

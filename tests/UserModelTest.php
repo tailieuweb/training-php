@@ -11,8 +11,8 @@ class UserModelTest extends TestCase
        //khai báo model:
        $UserModel = new UserModel();
        //Truyên tham số : 
-       $id = 35;
-       $expected = "Tam Tran";
+       $id = 212;
+       $expected = "user";
        $actual = $UserModel->findUserByIdNew($id);
        //var_dump($actual);
        //assertEquals
