@@ -1,30 +1,42 @@
 <?php
-
-require_once 'BaseModel.php';
-
-class UserModel extends BaseModel {
+// require './models/Pattern/UserRepositoryPattern.php';
+require_once './models/BaseModel.php';
+class UserModel extends BaseModel
+{
+    private static $instanceUserModel = NULL;
+    public $x;
+    public function __construct()
+    {
+        // return self::$instanceUserModel;
+    }
+    public static function getInstance() : UserModel{
+        if(self::$instanceUserModel == NULL){
+            self::$instanceUserModel = new UserModel();
+        }
+        return self::$instanceUserModel;
+    }
 
     public function findUserById($id) {
-        $sql = 'SELECT * FROM users WHERE id = '.$id;
-        $user = $this->select($sql);
-
+        $id = BaseModel::matchRegexInput($id);
+        $sql = BaseModel::connectDatabase()->prepare("SELECT * FROM users WHERE id = ?");
+        $sql->bind_param("i",$id);
+        $sql->execute();
+        $user = array();
+        $user = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $user;
     }
 
     public function find($keyword) {
         $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
-        $user = $this->select($sql);
-
-        return $user;
+        // $user = $this->select($sql);
+        // return $user;
+        // $sql_stmt = mysqli_prepare($_connection,'SELECT * FROM users WHERE user_name LIKE   ? OR user_email LIKE ?');
+        // mysqli_stmt_bind_param($sql_stmt,'ss',$keyword,$keyword);
+        // $user = mysqli_stmt_execute($sql_stmt);
+        // return $user;
     }
     
 
-    /**
-     * Authentication user
-     * @param $userName
-     * @param $password
-     * @return array
-     */
     public function auth($userName, $password) {
         if(is_string($userName) || is_string($password)){
             $md5Password = md5($password);
@@ -124,7 +136,8 @@ class UserModel extends BaseModel {
      * @param array $param
      * @return array
      */
-    public function getUsers($params = []) {
+    public function getUsers($params = [])
+    {
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
@@ -148,16 +161,5 @@ class UserModel extends BaseModel {
         return $string;
     }
 
-    public static function getInstance() {
-        if (self::$_instance !== null){
-            return self::$_instance;
-        }
-        self::$_instance = new self();
-        return self::$_instance;
-    }
-    /**
-     * For testing
-     * @param $a
-     * @param $b
-     */
+
 }

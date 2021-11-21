@@ -79,7 +79,7 @@ class UserModelTest extends TestCase
     public function testInsertUserOk()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $user = array(
             'name' => 'abc',
             'fullname' => 'vitcon',
@@ -115,7 +115,7 @@ class UserModelTest extends TestCase
     public function testInsertUserTypeOk()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $user = array(
             'name' => '',
             'fullname' => '',
@@ -136,7 +136,7 @@ class UserModelTest extends TestCase
     public function testInsertUserTypeNotG()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $user = array(
             'name' => '',
             'fullname' => '',
@@ -157,7 +157,7 @@ class UserModelTest extends TestCase
     public function testInsertUserTypeIsNumberNotG()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $user = array(
             'name' => '',
             'fullname' => '',
@@ -178,7 +178,7 @@ class UserModelTest extends TestCase
     public function testInsertUserNameIsNumberNotG()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $user = array(
             'name' => '123',
             'fullname' => '',
@@ -199,7 +199,7 @@ class UserModelTest extends TestCase
     public function testInsertUserFullNameIsNumberNotG()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $user = array(
             'name' => '',
             'fullname' => '12345',
@@ -220,7 +220,7 @@ class UserModelTest extends TestCase
     public function testInsertUserEmaiWrongFormatNotG()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $user = array(
             'name' => '',
             'fullname' => '',
@@ -241,7 +241,7 @@ class UserModelTest extends TestCase
     public function testInsertUserEmailIsNumberNotG()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $user = array(
             'name' => '',
             'fullname' => '',
@@ -262,7 +262,7 @@ class UserModelTest extends TestCase
     public function testInsertUserEmaiSpecialCharactersNotG()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $user = array(
             'name' => '',
             'fullname' => '',
@@ -283,7 +283,7 @@ class UserModelTest extends TestCase
     public function testInsertUserPassFullNumberNotG()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $user = array(
             'name' => '',
             'fullname' => '',
@@ -317,7 +317,7 @@ class UserModelTest extends TestCase
     {
         $factory = new FactoryPattern();
 
-        $expected = new BankModel();
+        $expected = BankModel::getInstance();
         $actual = $factory->make('bank');
 
         $this->assertEquals($expected, $actual);
@@ -587,7 +587,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternInsertUserOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $user = array(
             'name' => 'test',
             'fullname' => 'testUser',
@@ -605,7 +605,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternInsertUserNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $actual = null;
         $user = array(
             'name' => 'test',
@@ -626,7 +626,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternInsertUserIntegerParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $actual = null;
         $user = array(
             'name' => 'test',
@@ -647,7 +647,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternInsertUserStringParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $actual = null;
         $user = array(
             'name' => 'test',
@@ -668,7 +668,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternInsertUserNullParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $actual = null;
         $user = array(
             'name' => 'test',
@@ -689,7 +689,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternInsertUserEmptyParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $actual = null;
         $user = array(
             'name' => 'test',
@@ -710,7 +710,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternInsertUserArrayParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $actual = null;
         $user = array(
             'name' => 'test',
@@ -731,7 +731,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternInsertUserObjectParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $actual = null;
         $user = array(
             'name' => 'test',
@@ -752,7 +752,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternInsertUserBooleanParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $actual = null;
         $user = array(
             'name' => 'test',
@@ -773,7 +773,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternInsertUserFloatParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $actual = null;
         $user = array(
             'name' => 'test',
@@ -794,7 +794,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternInsertUserSpecialCharactersParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $actual = null;
         $user = array(
             'name' => 'test',
@@ -815,7 +815,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternUpdateUserOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $temp = $userModel->findUserById(2);
         $keyCode = "aomU87239dadasdasd";
         $user = array(
@@ -836,7 +836,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternUpdateUserNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $temp = $userModel->findUserById(2);
         $actual = null;
         $keyCode = "aomU87239dadasdasd";
@@ -862,7 +862,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternUpdateUserIntegerParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $temp = $userModel->findUserById(2);
         $actual = null;
         $keyCode = "aomU87239dadasdasd";
@@ -888,7 +888,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternUpdateUserStringParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $temp = $userModel->findUserById(2);
         $actual = null;
         $keyCode = "aomU87239dadasdasd";
@@ -914,7 +914,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternUpdateUserNullParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $temp = $userModel->findUserById(2);
         $actual = null;
         $keyCode = "aomU87239dadasdasd";
@@ -940,7 +940,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternUpdateUserEmptyParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $temp = $userModel->findUserById(2);
         $actual = null;
         $keyCode = "aomU87239dadasdasd";
@@ -966,7 +966,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternUpdateUserArrayParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $temp = $userModel->findUserById(2);
         $actual = null;
         $keyCode = "aomU87239dadasdasd";
@@ -992,7 +992,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternUpdateUserObjectParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $temp = $userModel->findUserById(2);
         $actual = null;
         $keyCode = "aomU87239dadasdasd";
@@ -1018,7 +1018,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternUpdateUserBooleanParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $temp = $userModel->findUserById(2);
         $actual = null;
         $keyCode = "aomU87239dadasdasd";
@@ -1044,7 +1044,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternUpdateUserFloatParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $temp = $userModel->findUserById(2);
         $actual = null;
         $keyCode = "aomU87239dadasdasd";
@@ -1070,7 +1070,7 @@ class UserModelTest extends TestCase
     public function testDecoratorPatternUpdateUserSpecialCharactersParamNotOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $temp = $userModel->findUserById(2);
         $actual = null;
         $keyCode = "aomU87239dadasdasd";
@@ -1371,7 +1371,7 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserOk(){
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $temp = $userModel->findUserById(25);
         $keyCode = "aomU87239dadasdasd";
         $user = array(  
@@ -1392,7 +1392,7 @@ class UserModelTest extends TestCase
      */
     public function testUpdateUserNull(){
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $temp = $userModel->findUserById(25);
         $keyCode = "aomU87239dadasdasd";
         $user = array(
@@ -1418,7 +1418,7 @@ class UserModelTest extends TestCase
      */
     public function testUpdateUserString(){
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $temp = $userModel->findUserById(25);
         $keyCode = "aomU87239dadasdasd";
         $user = array(
@@ -1444,7 +1444,7 @@ class UserModelTest extends TestCase
      */
     public function testUpdateUserObject(){
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $temp = $userModel->findUserById(25);
         $keyCode = "aomU87239dadasdasd";
         $ob = (object)'23';
@@ -1470,7 +1470,7 @@ class UserModelTest extends TestCase
      */
     public function testUpdateUserBool(){
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $temp = $userModel->findUserById(74);
         $keyCode = "aomU87239dadasdasd";
         $user = array(
@@ -1495,7 +1495,7 @@ class UserModelTest extends TestCase
      */
     public function testUpdateUserFloatNg(){
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $temp = $userModel->findUserById(25);
         $keyCode = "aomU87239dadasdasd";
         $user = array(
@@ -1520,7 +1520,7 @@ class UserModelTest extends TestCase
      */
     public function testUpdateUserSpecialCharactersNg(){
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        $bankModel = BankModel::getInstance();
         $pattern = '/[0-9A-Za-z]/';
         $temp = $userModel->findUserById(25);
         $keyCode = "aomU87239dadasdasd";

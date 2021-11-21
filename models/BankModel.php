@@ -1,31 +1,46 @@
 <?php
 require_once 'BaseModel.php';
-
-class BankModel extends BaseModel {
-
-    public function findBankById($id) {
-        $sql = 'SELECT * FROM banks WHERE id = '.$id;
+class BankModel extends BaseModel
+{
+    private static $instanceBankModel = NULL;
+    public $x;
+    private function __construct()
+    {
+        return self::$instanceBankModel;
+    }
+    public static function getInstance(): BankModel
+    {
+        if (self::$instanceBankModel == NULL) {
+            self::$instanceBankModel = new BankModel();
+        }
+        return self::$instanceBankModel;
+    }
+    
+    public function findBankById($id)
+    {
+        $sql = 'SELECT * FROM banks WHERE id = ' . $id;
         $user = $this->select($sql);
 
         return $user;
     }
 
-    public function findBank($keyword) {
-        $sql = 'SELECT * FROM banks WHERE cost LIKE %'.$keyword.'%'. ' OR user_id LIKE %'.$keyword.'%' ;
+    public function findBank($keyword)
+    {
+        $sql = 'SELECT * FROM banks WHERE cost LIKE %' . $keyword . '%' . ' OR user_id LIKE %' . $keyword . '%';
         $user = $this->select($sql);
-
         return $user;
     }
 
-    /**
-     * Authentication user
-     * @param $userName
-     * @param $password
-     * @return array
-     */
-    public function auth($userName, $password) {
+    // /**
+    //  * Authentication user
+    //  * @param $userName
+    //  * @param $password
+    //  * @return array
+    //  */
+    public function auth($userName, $password)
+    {
         $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
         $user = $this->select($sql);
         return $user;
     }
@@ -35,11 +50,11 @@ class BankModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteBankById($id) {
-      
-        $sql = 'DELETE FROM banks WHERE id = '.$id;
-        return $this->delete($sql);
+    public function deleteBankById($id)
+    {
 
+        $sql = 'DELETE FROM banks WHERE id = ' . $id;
+        return $this->delete($sql);
     }
 
 
@@ -49,9 +64,10 @@ class BankModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function updateBank($input) {
-            
-        $sql = 'UPDATE banks SET user_id ="'.$input['user_id'].'", cost = "'.$input['cost'].'" WHERE id = "'.$input['id'].'"';
+    public function updateBank($input)
+    {
+
+        $sql = 'UPDATE banks SET user_id ="' . $input['user_id'] . '", cost = "' . $input['cost'] . '" WHERE id = "' . $input['id'] . '"';
 
         $bank = $this->update($sql);
         return $bank;
@@ -62,36 +78,34 @@ class BankModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function insertBank($input) {
-        $sql = 'INSERT INTO app_web1.banks (user_id,cost) VALUES ('.$input['user_id'].', '.$input['cost'].')';
+    public function insertBank($input)
+    {
+        $sql = 'INSERT INTO app_web1.banks (user_id,cost) VALUES (' . $input['user_id'] . ', ' . $input['cost'] . ')';
         $bank = $this->insert($sql);
         return $bank;
-        
-                
     }
 
-   /**
+    /**
      * Search banks
      * @param array $param
      * @return array
      */
-    public function getBanks($params = []) {
+    public function getBanks($params = [])
+    {
         //Keyword
         if (!empty($params['keyword'])) {
-           
-            $sql = 'SELECT * FROM banks WHERE user_id LIKE "%' . $params['keyword'] .'%"';
+
+            $sql = 'SELECT * FROM banks WHERE user_id LIKE "%' . $params['keyword'] . '%"';
 
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
             // $banks = self::$_connection->multi_query($sql);
             $banks = $this->select($sql);
-            
         } else {
             $sql = 'SELECT * FROM banks';
             $banks = $this->select($sql);
         }
         return $banks;
-       
     }
 }

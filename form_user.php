@@ -9,9 +9,8 @@ $id = NULL;
 $keyCode = "aomU87239dadasdasd";
 
 if (!empty($_GET['id'])) {
-    $id = base64_decode($_GET['id']);
-    $newid = substr($id,23);
-    $user = $userModel->findUserById($newid);//Update existing user
+    $_id = $_GET['id'];
+    $user = $userModel->findUserById($_id);//Update existing user
 }
 
 

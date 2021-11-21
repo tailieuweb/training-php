@@ -1,17 +1,19 @@
 <?php
 // Start the session
 session_start();
-require_once './models/FactoryPattern.php';
-$factory = new FactoryPattern();
 
-$bankmodel = $factory->make('bank');
+spl_autoload_register(function($class){
+    require './models/' . $class . '.php';
+});
+// require_once './models/Facade/Facade.php';
+//     $facade = new Facade();
+$bankModel = BankModel::getInstance();  
 
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword']; 
 }
-
-$banks = $bankmodel->getBanks($params);
+$banks = $bankModel->getBanks($params);
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,7 +52,7 @@ $banks = $bankmodel->getBanks($params);
                                 <a href="form_bank.php?id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo $bank['id'] ?>">
+                                <a href="view_bank.php?id=<?php echo strip_tags($bank['id']) ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
                                 <a href="delete_bank.php?id=<?php echo $bank['id']?>">

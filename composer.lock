@@ -5,12 +5,17 @@
         "This file is @generated automatically"
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
     "content-hash": "d04a6a4216eec9684d7a430e94632a78",
 =======
     "content-hash": "c96bb2071d123d23c7334bb6258c1169",
 >>>>>>> 1-php-202109/2-groups/4-D/6--Kiet-phpunit
     "packages": [],
     "packages-dev": [
+=======
+    "content-hash": "de098541b0cfbf244e2152476853564e",
+    "packages": [
+>>>>>>> 1-php-202109/2-groups/4-D/2-51-Vinh-phpunit
         {
             "name": "doctrine/instantiator",
             "version": "1.4.0",
@@ -2105,6 +2110,7 @@
             "time": "2021-03-09T10:59:23+00:00"
         }
     ],
+    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],

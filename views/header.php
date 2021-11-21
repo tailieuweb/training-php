@@ -5,7 +5,7 @@ if(!empty($_SESSION['id'])) {
 }
 
 $keyword = '';
-if(!empty($_GET['keyword'])) {
+if (!empty($_GET['keyword'])) {
     $keyword = $_GET['keyword'];
 }
 if(!empty($_SERVER['PHP_SELF'])){
