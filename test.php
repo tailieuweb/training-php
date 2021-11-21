@@ -1,68 +1,67 @@
 <?php
-abstract class Base {
-
-    protected static $_instance;
-}
-class User extends Base {
-    public static function getInstance()
+//01
+abstract class Employee
+{
+    protected $name;
+    private static $types = ['Minion', 'CluedUp', 'WellConnected'];
+    public function __construct(string $name)
     {
-        parent::$_instance = null; 
-        if(self::$_instance !== null){
-            return self::$_instance;
-        }
-        self::$_instance = new self();
-        return self::$_instance;
+        $this->name = $name;
     }
-    public function print(){
-
-        echo 'Đây là lớp user <br>';
-
-    }
-    
-
-}
-class Bank extends Base {
-    public static function getInstance()
+    public static function recruit(string $name)
     {
-        parent::$_instance = null;
-        if(self::$_instance !== null){
-            return self::$_instance;
-        }
-        self::$_instance = new self();
-        return self::$_instance;
+        $num = rand(1, count(self::$types)) - 1;
+        $class = __NAMESPACE__ . "\\" . self::$types[$num];
+        return new $class($name);
     }
-    public function print(){
-
-        echo 'Đây là lớp bank';
-
-    }
-
+    abstract public function fire();
 }
-class Factory {
-    public function make($model){
-        
-        // if($model != 'user' || $mode != 'bank'){
-        //     return null;
-        // }
-
-        if($model == 'user'){
-
-        return User::getInstance();
-
-        } else if($model == 'bank'){
-
-            return Bank::getInstance();
-
-        } else {
-
-            return null;
-            
+//02
+class Minion extends Employee
+{
+    public function fire()
+    {
+        print "{$this->name} : I'll clear my desk<br>";
+    }
+}
+//06
+// new Employee class...
+class CluedUp extends Employee
+{
+    public function fire()
+    {
+        print "{$this->name}: I'll call my lawyer<br>";
+    }
+}
+//03
+class NastyBoss
+{
+    private $employees = [];
+    public function addEmployee(Employee $employee)
+    {
+        $this->employees[] = $employee;
+    }
+    public function projectFails()
+    {
+        if (count($this->employees) > 0) {
+            $emp = array_pop($this->employees);
+            $emp->fire();
         }
     }
-
 }
-$factory = new Factory();
-$bank = $factory->make('bank');
-$user = $factory->make('user');
-$user->print();
-$bank->print();
+//08
+class WellConnected extends Employee
+{
+    public function fire()
+    {
+        print "{$this->name}: I'll call my dad\n";
+    }
+}
+//07
+// listing 09.10
+$boss = new NastyBoss();
+$boss->addEmployee(Employee::recruit("harry"));
+$boss->addEmployee(Employee::recruit("bob"));
+$boss->addEmployee(Employee::recruit("mary"));
+
+//

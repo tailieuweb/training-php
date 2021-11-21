@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fca2aa6e-54aa-4226-b8f8-032cc5b95d0a" name="Default Changelist" comment="">
+    <list default="true" id="5f846128-93be-44c6-9fb1-070c59531ff3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/check_out.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/checkout_cart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/css/check_out.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/check_out.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/check_out/header.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/order.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PHP/component.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP/component.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/controller/product-controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/controller/product-controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/admin/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cart2.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index2.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/product/spMoinhat.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/product/spMoinhat.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,50 +40,54 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="PhpDebugGeneral" listening_started="true" />
-  <component name="PhpServers">
-    <servers>
-      <server host="localhost" id="1762c1b2-3483-41ef-b80f-e8c9a2e7d6c8" name="localhost" />
-    </servers>
-  </component>
-  <component name="PhpWebServerValidation" path_to_validation_script="D:\1-github-workspace\1-tailieuweb\11-training-php" selected_validation_type="LOCAL" web_path_to_validation_script="http://localhost:80" />
-  <component name="ProjectId" id="1yM0zWCb2arA2jD17lTdnGEZKeN" />
+  <component name="ProjectId" id="1zVaD5Js36TsLq6yOJBzUXlC7x8" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
-    <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php\public\js" />
-      <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php" />
+      <recent name="D:\3-Project-Web" />
+      <recent name="D:\3-Project-Web\vendor" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="ComposerRunConfigurationType" factoryName="Composer Script">
-      <method v="2" />
-    </configuration>
-    <configuration name="localhost" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="localhost" start_url="http://localhost/php_training/form_user.php">
-      <method v="2" />
-    </configuration>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\3-Project-Web\dist" />
+      <recent name="D:\3-Project-Web\css" />
+      <recent name="D:\3-Project-Web" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="fca2aa6e-54aa-4226-b8f8-032cc5b95d0a" name="Default Changelist" comment="" />
-      <created>1632046412024</created>
+      <changelist id="5f846128-93be-44c6-9fb1-070c59531ff3" name="Changes" comment="" />
+      <created>1634235590698</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1632046412024</updated>
-      <workItem from="1632046414701" duration="13384000" />
+      <updated>1634235590698</updated>
+      <workItem from="1634235593398" duration="15000" />
+      <workItem from="1634270962286" duration="65000" />
+      <workItem from="1634271029383" duration="263000" />
+      <workItem from="1634271295388" duration="84000" />
+      <workItem from="1634271401653" duration="1051000" />
+      <workItem from="1634276824339" duration="3201000" />
+      <workItem from="1634884794650" duration="1334000" />
+      <workItem from="1635288932842" duration="11937000" />
+      <workItem from="1635301174896" duration="3313000" />
+      <workItem from="1635304538053" duration="12004000" />
+      <workItem from="1635328069208" duration="17529000" />
+      <workItem from="1635381266227" duration="12000" />
+      <workItem from="1635843457038" duration="19483000" />
+      <workItem from="1635902381709" duration="35384000" />
     </task>
     <servers />
   </component>
