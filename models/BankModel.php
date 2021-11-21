@@ -1,5 +1,5 @@
 <?php
-require_once 'BaseModel.php';
+require_once './models/BaseModel.php';
 class BankModel extends BaseModel
 {
     private static $instanceBankModel = NULL;

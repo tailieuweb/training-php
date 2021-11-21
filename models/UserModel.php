@@ -26,10 +26,10 @@ class UserModel extends BaseModel
         return $user;
     }
 
-    public function find($keyword) {
+    public function findUser($keyword) {
         $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
-        // $user = $this->select($sql);
-        // return $user;
+        $user = $this->select($sql);
+        return $user;
         // $sql_stmt = mysqli_prepare($_connection,'SELECT * FROM users WHERE user_name LIKE   ? OR user_email LIKE ?');
         // mysqli_stmt_bind_param($sql_stmt,'ss',$keyword,$keyword);
         // $user = mysqli_stmt_execute($sql_stmt);
@@ -155,11 +155,7 @@ class UserModel extends BaseModel
         }
          return  $users;
     }
-    public function removeSpecialCharacter($string){
-        $array = ["'",'"',"<",">","*","","!","/","%",";","#"];
-        $string = str_replace($array,'',$string);
-        return $string;
-    }
+    
 
 
 }

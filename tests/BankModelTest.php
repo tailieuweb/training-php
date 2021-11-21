@@ -246,7 +246,7 @@ class BankModelTest extends TestCase
     {
         $bankModel = BankModel::getInstance();
         $keyword = array(
-            'keyword' => '9'
+            'keyword' => '16516515616516'
         );
         $actual = $bankModel->getBanks($keyword);
         $excute = [];

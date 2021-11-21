@@ -1290,7 +1290,7 @@ class UserModelTest extends TestCase
     public function testFindUserOk() {
         $userModel = new UserModel();
         $id = 1;      
-        $user = $userModel->findUserById($id);
+        $user = $userModel->findUser($id);
         if (empty($user)) {
             $this->assertTrue(true);
         } else {
@@ -1307,7 +1307,7 @@ class UserModelTest extends TestCase
         $userModel = new UserModel();
         $keyword = 4;
         $expected = [];
-        $actual = $userModel->findUserById($keyword);
+        $actual = $userModel->findUser($keyword);
 
         $this->assertEquals($expected, $actual);
 
@@ -1321,7 +1321,7 @@ class UserModelTest extends TestCase
         $keyword = 'aa';
         $expected = [];
 
-        $actual = $userModel->findUserById($keyword);       
+        $actual = $userModel->findUser($keyword);       
         $this->assertEquals($expected, $actual);
 
     }
@@ -1335,7 +1335,7 @@ class UserModelTest extends TestCase
 
         if(is_object($ob)){          
             $ob = '';
-            $userModel->findUserById($ob);
+            $userModel->findUser($ob);
             $this->assertTrue(true);
         }else{
             $this->assertTrue(false);
@@ -1349,7 +1349,7 @@ class UserModelTest extends TestCase
         $userModel = new UserModel();
         $parttern = '/[0-9A-Za-z]/';
         $keyword = '@@@';     
-        $userModel->findUserById($keyword);
+        $userModel->findUser($keyword);
         if(!preg_match($parttern, $keyword)){          
             $this->assertTrue(true);
         }else{
@@ -1361,7 +1361,7 @@ class UserModelTest extends TestCase
      {
          $userModel = new UserModel();
          $keyword =  0.1;
-         $actual = $userModel->findUserById($keyword);
+         $actual = $userModel->findUser($keyword);
          $excute = [];
          $this->assertEquals($excute, $actual);
      }

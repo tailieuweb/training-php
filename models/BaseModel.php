@@ -6,7 +6,7 @@ require_once 'configs/database.php';
     private $connection;
     private static $instance = NULL;
     
-    private function __construct()
+    public function __construct()
     {
         return $this->connection;
     }
@@ -105,7 +105,18 @@ require_once 'configs/database.php';
             return false;
         }
     }
+
+    public function getID(){
+        $sql = "SELECT id FROM `users` ORDER BY id DESC LIMIT 1";
+        $user = $this->select($sql);
+        return $user;
+    }
     
+    public function removeSpecialCharacter($string){
+        $array = ["'",'"',"<",">","*","","!","/","%",";","#"];
+        $string = str_replace($array,'',$string);
+        return $string;
+    }
     // protected abstract function CreateProduct1();
     // protected abstract function CreateProduct2();
 }
