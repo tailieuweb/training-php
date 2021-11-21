@@ -210,13 +210,16 @@ class UserModel extends BaseModel
     public function getUsers($params = [])
     {
         //Keyword
-        // if (!is_string($params['keyword'])) {
-        //     return 'Not invalid';
-        // }
+        
+       
         if (!empty($params['keyword'])) {
+            if(is_array($params['keyword'])){
+                return 'Invalid';
+            }
             if(is_null($params['keyword']) || is_bool($params['keyword']) || is_object($params['keyword'])) {
                 return 'Invalid';
             }
+            
             else{
                 $sql = 'SELECT * FROM users 
                 WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection, $params['keyword']) . '%"';
@@ -227,9 +230,7 @@ class UserModel extends BaseModel
             $users = $this->select($sql);
             }
         }
-        else if(is_array($params['keyword'])){
-            return 'Invalid';
-        }
+       
         else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
