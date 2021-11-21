@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class BankModelPhuTest extends TestCase
+class BankModelTest extends TestCase
 {
     //test testfindUser_id     
     public function testfindUser_idOk (){
