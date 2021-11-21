@@ -42,7 +42,7 @@ class BankModel extends BaseModel{
     }
 
     /**
-     * Delete user by id
+     * Delete bank by id
      * @param $id
      * @return mixed
      */
@@ -67,7 +67,7 @@ class BankModel extends BaseModel{
         return $user;
     }
     /**
-     * Update user
+     * Insert bank
      * @param $input
      * @return mixed
      */
@@ -76,6 +76,20 @@ class BankModel extends BaseModel{
         "'" . $input['id'] . "', '".$input['cost']."')";
 
         $bank = $this->insert($sql);
+        return $bank;
+    }
+    /**
+     * Update bank
+     * @param $input
+     * @return mixed
+     */
+    public function updateBank($input) {
+        $sql = 'UPDATE banks SET 
+                 user_id = "' . $input['user_id'] .'", 
+                 cost = "' . $input['cost'] .'"
+                WHERE bank_id = ' . $input['bank_id'];
+        $bank = $this->update($sql);
+
         return $bank;
     }
 }

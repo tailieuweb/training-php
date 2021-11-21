@@ -15,7 +15,7 @@ class UserModel extends BaseModel {
 
     public function findUser($keyword) {
         
-        //$keyword = htmlentities($keyword, ENT_QUOTES, "UTF-8");
+        // $keyword = htmlentities($keyword, ENT_QUOTES, "UTF-8");
         
         $sql = 'SELECT * FROM users WHERE name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
         $user = $this->select($sql);
@@ -34,7 +34,11 @@ class UserModel extends BaseModel {
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
 
         $user = $this->select($sql);
-        return $user;
+        //Check $user different is null?
+        if(!empty($user)){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -62,7 +66,6 @@ class UserModel extends BaseModel {
                  password="'. md5($input['password']) .'"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
-
         return $user;
     }
 
@@ -121,25 +124,5 @@ class UserModel extends BaseModel {
         return self::$_instance;
     }
     //
-   /**
-     * For testing
-     * @param $a
-     * @param $b
-     */
 
-    public function sumb($a ,$b){
-        if(!is_numeric($a)) return 'error';
-        if(!is_numeric($b)) return 'error';
-        return $a + $b;
-    }
-    //Check string have work specical
-    public function checkString($field){
-        if(filter_var($field, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
-            return true;
-        } 
-        else if(is_int($field)){
-            return true;
-        }
-        return false;
-    }
 }
