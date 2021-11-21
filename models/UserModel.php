@@ -73,11 +73,17 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
-        $isAuth = $this->getUsers();
-        foreach ($isAuth as $item) {
-            if (md5($item['id'] . "chuyen-de-web-1") == $id) {
-                $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
-                return $this->delete($sql);
+        if (is_object($id)) {
+            return false;
+        }
+        else {
+            $isAuth = $this->getUsers();
+            foreach ($isAuth as $item) {
+               
+                if (md5($item['id'] . "chuyen-de-web-1") == $id) {
+                    $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
+                    return $this->delete($sql);
+                }
             }
         }
     }
@@ -182,6 +188,7 @@ class UserModel extends BaseModel
     {
         # code...
         $sql = "SELECT MAX(id) FROM users";
+
         $id = $this->select($sql);
         return $id;
     }
