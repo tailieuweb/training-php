@@ -9,8 +9,12 @@ class Repository extends BaseModel
      */
     public function createFullUser($input)
     {
+        if(!is_numeric($input['type']) ||  !is_string($input['name']) || !is_string($input['fullname']) || !is_string($input['email'])){
+            return false;
+        }
+        $md5Password = md5($input['password']);
         $sql = "INSERT INTO `users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
-            "'" . $input['name'] . "', '" . $input['fullname'] . "', '" . $input['email'] . "', '" . $input['type'] . "', '" . $input['password'] . "')";
+            "'" . $input['name'] . "', '" . $input['fullname'] . "', '" . $input['email'] . "', '" . $input['type'] . "', '" . $md5Password . "')";
 
 
         $user = $this->insert($sql);
@@ -25,7 +29,6 @@ class Repository extends BaseModel
 
             $banks = $this->insert($sqlBank);
 
-            return $banks;
         }
         return $user;
     }
@@ -35,6 +38,11 @@ class Repository extends BaseModel
      */
     public function updateFullUser($input)
     {
+        foreach($input as $value){
+            if(is_array($value) || is_object($value) ){
+                return false;
+            }
+        }
         $sql = 'UPDATE users SET 
                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '", 
                 fullname = "' . $input['fullname'] . '", 
@@ -63,6 +71,9 @@ class Repository extends BaseModel
      * @param $sql
      */
     public function getFullUser($id){
+        if(is_array($id) || is_object($id) || is_string($id)){
+            return false;
+        }
         $sql = 'SELECT * FROM  banks WHERE user_id = '.$id;
         $bank = $this->select($sql);
         if($bank != null){
