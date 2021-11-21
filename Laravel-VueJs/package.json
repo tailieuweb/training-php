@@ -1,0 +1,29 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production",
+        "runOneTime": "php artisan serve  npm run watch"
+    },
+    "devDependencies": {
+        "@types/webpack-env": "^1.16.2",
+        "@vue/compiler-sfc": "^3.2.19",
+        "axios": "^0.21",
+        "laravel-mix": "^6.0.31",
+        "laravel-mix-vue3": "^0.7.0",
+        "lodash": "^4.17.19",
+        "postcss": "^8.3.9",
+        "vue": "^3.2.19",
+        "vue-loader": "^16.8.1",
+        "vue-router": "^4.0.11"
+    },
+    "dependencies": {
+        "@hennge/vue3-pagination": "^1.0.17",
+        "save-dev": "0.0.1-security"
+    }
+}

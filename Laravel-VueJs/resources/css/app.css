@@ -1,0 +1,22 @@
+.alert{
+    position: absolute!important;
+    top: 3%;
+    width: 30%;
+    left: 34%;
+    z-index: 1;
+    box-shadow: 3px 3px 10px rgb(0 0 0 / 30%);
+    animation: 5s trans alternate forwards;
+}
+
+@keyframes trans {
+    0%{
+        transform: translateY(0px);
+    }
+    70%{
+        transform: translateY(0px);
+    }
+    100%{
+        transform: translateY(-100px);
+    }
+}
+

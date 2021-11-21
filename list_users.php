@@ -7,12 +7,24 @@ $factory = new FactoryPattern();
 
 $userModel = $factory->make('user');
 
+$key_code = "sdaknAnN67KbNJ234NK8oa2";
+
 $params = [];
 if (!empty($_GET['keyword'])) {
-    $params['keyword'] = $_GET['keyword'];
+    $params['keyword'] = $_GET['keyword']; 
 }
 
+if(isset($_GET['success'])){
+    echo "<script>alert('!!! Cập nhật thành công !!!')</script>";
+    echo "<script>window.location.href = 'list_users.php'</script>";
+}
+
+if(isset($_GET['err'])){
+    echo "<script>alert('Có vẻ như dữ liệu của bạn đã được thay đổi trước đó rồi!!! Vui lòng kiểm tra lại dữ liệu')</script>";
+    echo "<script>window.location.href = 'list_users.php'</script>";
+}
 $users = $userModel->getUsers($params);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,6 +53,7 @@ $users = $userModel->getUsers($params);
                 </thead>
                 <tbody>
                     <?php foreach ($users as $user) {?>
+                        <input type="hidden" value="<?php echo $user['version'] ?>">
                         <tr>
                             <th scope="row"><?php echo $user['id']?></th>
                             <td>
@@ -56,13 +69,13 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['type']?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="form_user.php?id=<?php echo base64_encode($key_code.$user['id'])  ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $user['id']?>">
+                                <a href="delete_user.php?id=<?php echo base64_encode($key_code.$user['id'])?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
