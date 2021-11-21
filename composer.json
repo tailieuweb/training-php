@@ -5,6 +5,10 @@
     ]
   },
   "require-dev": {
+<<<<<<< HEAD
     "phpunit/phpunit": "^9.5"
+=======
+    "phpunit/phpunit": "9.5"
+>>>>>>> 1-php-202109/2-groups/4-D/6--Kiet-phpunit
   }
 }

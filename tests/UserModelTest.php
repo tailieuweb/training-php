@@ -11,7 +11,7 @@ class UserModelTest extends TestCase
 {
     //test testFindUserById      - hung
     public function testFindUserByIdOk()
-    { 
+    {
         $userModel = new UserModel();
         $userId = 14;
         $userName = 'abc';
@@ -87,7 +87,7 @@ class UserModelTest extends TestCase
             'email' => 'hhhhh@gmail.com',
             'password' => '123456'
         );
-        $actual = $userModel->insertUser($user,$bankModel);
+        $actual = $userModel->insertUser($user, $bankModel);
         if ($actual == true) {
             $this->assertTrue(true);
         } else {
@@ -124,7 +124,7 @@ class UserModelTest extends TestCase
             'password' => "123"
         );
 
-        $userModel->insertUser($user,$bankModel);
+        $userModel->insertUser($user, $bankModel);
 
         if ($user['type'] == "admin" || $user['type'] == "user" || $user['type'] == "guest") {
             $this->assertTrue(true);
@@ -145,7 +145,7 @@ class UserModelTest extends TestCase
             'password' => '123'
         );
 
-        $userModel->insertUser($user,$bankModel);
+        $userModel->insertUser($user, $bankModel);
 
         if ($user['type'] == "admin" || $user['type'] == "user" || $user['type'] == "guest") {
             $this->assertTrue(false);
@@ -166,7 +166,7 @@ class UserModelTest extends TestCase
             'password' => '123'
         );
 
-        $userModel->insertUser($user,$bankModel);
+        $userModel->insertUser($user, $bankModel);
 
         if (!is_numeric($user['type'])) {
             $this->assertTrue(false);
@@ -187,7 +187,7 @@ class UserModelTest extends TestCase
             'password' => '123'
         );
 
-        $userModel->insertUser($user,$bankModel);
+        $userModel->insertUser($user, $bankModel);
 
         if (!is_numeric($user['name'])) {
             $this->assertTrue(false);
@@ -208,7 +208,7 @@ class UserModelTest extends TestCase
             'password' => '123'
         );
 
-        $userModel->insertUser($user,$bankModel);
+        $userModel->insertUser($user, $bankModel);
 
         if (!is_numeric($user['fullname'])) {
             $this->assertTrue(false);
@@ -229,7 +229,7 @@ class UserModelTest extends TestCase
             'password' => '123'
         );
 
-        $userModel->insertUser($user,$bankModel);
+        $userModel->insertUser($user, $bankModel);
 
         if (empty($user['email'])) {
             $this->assertTrue(false);
@@ -250,7 +250,7 @@ class UserModelTest extends TestCase
             'password' => '123'
         );
 
-        $userModel->insertUser($user,$bankModel);
+        $userModel->insertUser($user, $bankModel);
 
         if (is_numeric($user['email'])) {
             $this->assertTrue(false);
@@ -271,7 +271,7 @@ class UserModelTest extends TestCase
             'password' => '123'
         );
 
-        $userModel->insertUser($user,$bankModel);
+        $userModel->insertUser($user, $bankModel);
 
         if (empty($user['email'])) {
             $this->assertTrue(false);
@@ -292,7 +292,7 @@ class UserModelTest extends TestCase
             'password' => '123456789'
         );
 
-        $userModel->insertUser($user,$bankModel);
+        $userModel->insertUser($user, $bankModel);
 
         if (!is_numeric($user['password'])) {
             $this->assertTrue(false);
@@ -337,7 +337,7 @@ class UserModelTest extends TestCase
         }
     }
 
-    
+
     /* ===================== Test user & password đúng ===================*/
     //truong
     public function testauthOK()
@@ -1174,8 +1174,8 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $keyword = array(
-            'keyword' => 'admin',
-            'keyword' => 'user'
+            'keyword' => 'Kiet',
+            'keyword' => 'Kiet'
         );
         $actual = $userModel->getUsers($keyword);
         $excute = [];
@@ -1280,5 +1280,265 @@ class UserModelTest extends TestCase
         $actual = $userModel->getUsers($keyword);
         $excute = [];
         $this->assertEquals($excute, $actual);
+    }
+
+
+    // Kiet
+/**
+     * Testcase findUser
+     */    
+    public function testFindUserOk() {
+        $userModel = new UserModel();
+        $id = 1;      
+        $user = $userModel->findUserById($id);
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+
+    }
+    
+    /**
+     * test findUser truyền vào dữ liệu là Null
+     */
+    public function testFindUserNull() {
+
+        $userModel = new UserModel();
+        $keyword = 4;
+        $expected = [];
+        $actual = $userModel->findUserById($keyword);
+
+        $this->assertEquals($expected, $actual);
+
+    }
+    /**
+     * test findUser truyền vào dữ liệu là String
+     */
+    public function testFindUserStr() {
+
+        $userModel = new UserModel();  
+        $keyword = 'aa';
+        $expected = [];
+
+        $actual = $userModel->findUserById($keyword);       
+        $this->assertEquals($expected, $actual);
+
+    }
+    /**
+     * test findUser truyền vào dữ liệu là Object
+     */
+    public function testFindUserObject() {
+
+        $userModel = new UserModel();
+        $ob = (object)'25';  
+
+        if(is_object($ob)){          
+            $ob = '';
+            $userModel->findUserById($ob);
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
+    /**
+     * test findUser truyền vào dữ liệu là ký tự đặc biệt
+     */
+    public function testFindUserSpecialCharacters()
+    {
+        $userModel = new UserModel();
+        $parttern = '/[0-9A-Za-z]/';
+        $keyword = '@@@';     
+        $userModel->findUserById($keyword);
+        if(!preg_match($parttern, $keyword)){          
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
+
+    public function testFindUserFloatNotOK()
+     {
+         $userModel = new UserModel();
+         $keyword =  0.1;
+         $actual = $userModel->findUserById($keyword);
+         $excute = [];
+         $this->assertEquals($excute, $actual);
+     }
+    /**
+     * testUpdateUser 
+     */
+
+    public function testUpdateUserOk(){
+        $userModel = new UserModel();
+        $bankModel = new BankModel();
+        $temp = $userModel->findUserById(25);
+        $keyCode = "aomU87239dadasdasd";
+        $user = array(  
+            'id' => 25,        
+            'name' => 'user3',
+            'fullname' => 'User3',
+            'email' => 'user@gmail.com',
+            'type' => 'user',
+            'password' => md5('user3'),
+            'version' => base64_encode($keyCode . $temp[0]['version']),
+        );         
+        $expected = true;
+        $actual = $userModel->updateUser($user,$bankModel);
+        $this->assertEquals($actual, $expected);   
+    }
+    /**
+     * test updateUser truyền vào dữ liệu là Null
+     */
+    public function testUpdateUserNull(){
+        $userModel = new UserModel();
+        $bankModel = new BankModel();
+        $temp = $userModel->findUserById(25);
+        $keyCode = "aomU87239dadasdasd";
+        $user = array(
+            'id' => '25',        
+            'name' => '',
+            'fullname' => '',
+            'type' => '',
+            'email' => '',
+            'password' => md5(''),
+            'version' => base64_encode($keyCode . $temp[0]['version']),
+        );
+        $expected = true;
+        $actual = $userModel->updateUser($user,$bankModel);
+        $this->assertEquals($expected,$actual); 
+        if(!empty($user['name']) && !empty($user['fullname']) && !empty($user['type']) && !empty($user['email']) && !empty($user['password'])){            
+            $this->assertTrue(false);
+        }else{
+            $this->assertTrue(true);
+        }   
+    }
+    /**
+     * test updateUser truyền vào dữ liệu là String
+     */
+    public function testUpdateUserString(){
+        $userModel = new UserModel();
+        $bankModel = new BankModel();
+        $temp = $userModel->findUserById(25);
+        $keyCode = "aomU87239dadasdasd";
+        $user = array(
+            'id' => '25',        
+            'name' => 'a',
+            'fullname' => 'b',
+            'type' => 'c',
+            'email' => 'asd',
+            'password' => md5('avc'),
+            'version' => base64_encode($keyCode . $temp[0]['version']),
+        );
+        $expected = true;
+        $actual = $userModel->updateUser($user,$bankModel);
+        $this->assertEquals($expected,$actual); 
+        if(is_numeric($user['name']) == true && is_numeric($user['fullname']) == true && is_numeric($user['type']) == true && is_numeric($user['email']) == true && is_numeric($user['password']) == true){            
+            $this->assertTrue(false);
+        }else{
+            $this->assertTrue(true);
+        }   
+    }
+    /**
+     * test updateUser truyền vào dữ liệu là Object
+     */
+    public function testUpdateUserObject(){
+        $userModel = new UserModel();
+        $bankModel = new BankModel();
+        $temp = $userModel->findUserById(25);
+        $keyCode = "aomU87239dadasdasd";
+        $ob = (object)'23';
+        $user = array(     
+            'id' => '25',                
+            'name' => $ob,
+            'fullname' => 'user3',
+            'email' => 'user@gmail.com',
+            'type' => 'user',
+            'password' => md5('user3'),
+            'version' => base64_encode($keyCode . $temp[0]['version']),
+        );   
+        if(is_object($user['name']) || is_object($user['fullname']) || is_object($user['email']) || is_object($user['type']) || is_object($user['password'])){  
+            $user['name'] = null;
+            $userModel->updateUser($user,$bankModel);
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
+    /**
+     * test updateUser truyền vào dữ liệu bool 
+     */
+    public function testUpdateUserBool(){
+        $userModel = new UserModel();
+        $bankModel = new BankModel();
+        $temp = $userModel->findUserById(74);
+        $keyCode = "aomU87239dadasdasd";
+        $user = array(
+            'id' => 74,
+            'name' => true,
+            'fullname' =>false,
+            'email' => 'user@gmail.com',
+            'type' => 'user',
+            'password' => md5('user3'),
+            'version' => base64_encode($keyCode . $temp[0]['version']),
+        );
+        $userModel->updateUser($user,$bankModel);
+        if(is_bool($user['name']) || is_bool($user['fullname']) || is_bool($user['email']) || is_bool($user['type']) || is_bool($user['password'])){  
+            
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
+    /**
+     * test updateUser truyền vào dữ liệu là số thực
+     */
+    public function testUpdateUserFloatNg(){
+        $userModel = new UserModel();
+        $bankModel = new BankModel();
+        $temp = $userModel->findUserById(25);
+        $keyCode = "aomU87239dadasdasd";
+        $user = array(
+            'id' => 25,
+            'name' => 2.5,
+            'fullname' =>'user3',
+            'email' => 'user@gmail.com',
+            'type' => 'user',
+            'password' => md5('user3'),
+            'version' => base64_encode($keyCode . $temp[0]['version']),
+        );
+        $userModel->updateUser($user,$bankModel);
+        if(is_float($user['name']) || is_float($user['fullname']) || is_float($user['email']) || is_float($user['type']) || is_float($user['password'])){  
+            
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
+    /**
+     * test updateUser truyền vào dữ liệu là ký tự đặc biệt
+     */
+    public function testUpdateUserSpecialCharactersNg(){
+        $userModel = new UserModel();
+        $bankModel = new BankModel();
+        $pattern = '/[0-9A-Za-z]/';
+        $temp = $userModel->findUserById(25);
+        $keyCode = "aomU87239dadasdasd";
+        $user = array(
+            'id' => 25,
+            'name' => "@#$",
+            'fullname' =>'user3',
+            'email' => 'user@gmail.com',
+            'type' => 'user',
+            'password' => md5('user3'),
+            'version' => base64_encode($keyCode . $temp[0]['version']),
+        );
+        $userModel->updateUser($user,$bankModel);
+        if(!preg_match($pattern, $user['name'])){  
+            
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
     }
 }
