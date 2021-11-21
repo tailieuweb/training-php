@@ -12,6 +12,7 @@ $key_code = "sdaknAnN67KbNJ234NK8oa2";
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword']; 
+<<<<<<< HEAD
 }
 
 if(isset($_GET['success'])){
@@ -23,6 +24,10 @@ if(isset($_GET['err'])){
     echo "<script>alert('Có vẻ như dữ liệu của bạn đã được thay đổi trước đó rồi!!! Vui lòng kiểm tra lại dữ liệu')</script>";
     echo "<script>window.location.href = 'list_users.php'</script>";
 }
+=======
+}
+$token = md5(uniqid());
+>>>>>>> 1-php-202109/2-groups/4-D/5-15-Huy-phpunit
 $users = $userModel->getUsers($params);
 
 ?>
@@ -52,12 +57,19 @@ $users = $userModel->getUsers($params);
                     </tr>
                 </thead>
                 <tbody>
+<<<<<<< HEAD
                     <?php foreach ($users as $user) {?>
                       
+=======
+
+                    <?php 
+                     foreach ($users as $user) {?>
+>>>>>>> 1-php-202109/2-groups/4-D/5-15-Huy-phpunit
                         <tr>
                             <th scope="row"><?php echo $user['id']?></th>
                             <td>
-                                <?php echo $user['name']?>
+                                <?php echo $user['name'];?>
+
                             </td>
                             <td>
                                 <?php echo $user['fullname']?>
@@ -69,13 +81,23 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['type']?>
                             </td>
                             <td>
+<<<<<<< HEAD
                                 <a href="form_user.php?id=<?php echo base64_encode($key_code.$user['id'])?>">
+=======
+                                <a href="form_user.php?id=<?php echo base64_encode(rand(100,999).$user['id'].rand(10,99)) ?>&version=<?php echo $user['version']?>">
+>>>>>>> 1-php-202109/2-groups/4-D/5-15-Huy-phpunit
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
+<<<<<<< HEAD
                                 <a href="delete_user.php?id=<?php echo base64_encode($key_code.$user['id'])?>">
+=======
+                                <a href="delete_user.php?id=<?php echo base64_encode(rand(100,999).$user['id'].rand(10,99))?>&token=<?php echo $token?>">                              
+                                <?php $_SESSION['token'] = $token;
+                                // var_dump($_SESSION['token']);var_dump($token);?>
+>>>>>>> 1-php-202109/2-groups/4-D/5-15-Huy-phpunit
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

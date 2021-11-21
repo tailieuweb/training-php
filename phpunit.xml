@@ -15,7 +15,8 @@
     </testsuites>
     <filter>				
         <whitelist processUncoveredFilesFromWhitelist="true">				
-            <directory suffix=".php">./models</directory>				
+            <directory suffix=".php">./models</directory>	
+			<directory suffix=".php">./Repository</directory>			
         </whitelist>				
     </filter>				
     <php>
@@ -28,3 +29,5 @@
         <server name="TELESCOPE_ENABLED" value="false"/>
     </php>
 </phpunit>
+			
+							
