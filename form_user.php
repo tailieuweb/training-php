@@ -15,6 +15,7 @@ if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
     $id_start = substr($_id, 3);
     $id_end = substr($id_start, 0, -3);
+    var_dump($id_end);
     $user = $userModel->findUserById($id_end); //Update existing user
 }
 if (!empty($_POST['submit'])) {
