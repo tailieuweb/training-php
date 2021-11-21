@@ -35,6 +35,10 @@ class UserModel extends BaseModel
             return 'Error';
         }
 
+        if (!is_string($userName) || !is_string($password)) {
+            return 'Error';
+        }
+
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
 
@@ -64,7 +68,7 @@ class UserModel extends BaseModel
             return "Error";
         }
 
-        if (is_null($input['name']) || is_null($input['fullname']) || is_null($input['email']) || is_null($input['password'] || is_null($input['type']))) {
+        if (!is_string($input['name']) || !is_string($input['fullname']) || !is_string($input['email']) || !is_string($input['password'] || !is_string($input['type']))) {
             return "Error";
         }
 
@@ -92,6 +96,10 @@ class UserModel extends BaseModel
             return "Error";
         }
 
+        if (!is_string($input['name']) || !is_string($input['fullname']) || !is_string($input['email']) || !is_string($input['password'] || !is_string($input['type']))) {
+            return "Error";
+        }
+
         $password = md5($input['password']);
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
             "'" . $input['name'] . "', '" . $password . "', '" . $input['fullname'] . "', '" . $input['email'] . "', '" . $input['type'] . "')";
@@ -111,6 +119,11 @@ class UserModel extends BaseModel
         //Keyword
         $users = null;
         if (!empty($params['keyword'])) {
+
+            if (!is_string($params['keyword'])) {
+                return "Error";
+            }
+
             $stmt = self::$_connection->prepare("SELECT * FROM users WHERE name LIKE CONCAT('%',?,'%')");
             if ($stmt) {
                 $stmt->bind_param("s", $params['keyword']);
