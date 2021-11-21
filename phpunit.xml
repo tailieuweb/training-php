@@ -9,7 +9,8 @@ cacheResult ="false"
 <testsuite name="SqlWsContractImport">				
 <file>./tests/UserModelTest.php</file>
 <file>./tests/InsertUserTest.php</file>
-<file>./tests/GetUserByIdNewTest.php</file>		
+<file>./tests/GetUserByIdNewTest.php</file>
+<file>./tests/BankModelTest.php</file>	
 </testsuite>				
 </testsuites>				
 <filter>				

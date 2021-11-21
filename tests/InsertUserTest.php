@@ -10,7 +10,7 @@ class InsertUserTest extends TestCase
     public function testInsertUserOk()
     {
         $userModel = new UserModel();
-        $id = 220;
+        $id = 290;
         $name = 'test username';
         $data = array(
             'id'   => $id,

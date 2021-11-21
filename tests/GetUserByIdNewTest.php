@@ -24,150 +24,68 @@ class GetUserByIdNewTest extends TestCase
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
     }
-     /**
-     * Test case Not Good
-     */
     public function testInsertUserAndBanksNg()
     {
-        $bankModel = new BankModel();
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make('bank');
         
-       
+        //Truyền đúng id mới nhất của danh sách users
+        $user = 289;
         $params = array(
-            'user_id' => 2000,
-            'cost' => 0,
+            'user_id' => $user,
         );
         //Ket qua biet truoc:
-        $expected = 0;
+        $expected = 1;
         //Ket qua mong doi:
-        if(!empty($params['cost'])) {
+        if(empty($params['cost']) == null) {
             $actual = $bankModel->insertUserAndBanks($params);
         }
-        
-        //var_dump($actual);die();
-        if(!empty($actual)){
-            $this->assertTrue(false);
-        }else{
+        // var_dump($actual);die();
+        if(empty($actual)) {
             $this->assertTrue(true);
-        }
-    }
-   /**
-     * Add user with database null
-     * Test case Not Insert null
-     */
-    
-    public function testInsertUserAndBanksIsNull()
-    {
-        $bankModel = new BankModel();
-        
-        
-        $params = array(
-            'user_id' => Null,
-            'cost' => 0,
-        );
-        //Ket qua biet truoc:
-        $expected = 1;
-        //Ket qua mong doi:
-        if($params['user_id'] == null) {
-            $actual = 1;
         }else {
-            $actual = $bankModel->insertUserAndBanks($params);
+            $this->assertTrue(false);
         }
-        //var_dump($actual);die();
-        $this->assertEquals($expected, $actual);
     }
+
+    //------------------------------------------ Test Case getUserByIdNew -----------------------//
+    public function testGetUserByIdNewOk()
+    {
+        $userModel = new BankModel();
+        
+        $user = $userModel->getUserByIdNew();
+        $actual = $user[0]['user_id'];
+        $expected = '291';
+        $this->assertEquals($expected, $actual);       // var_dump($actual[0]['user_id']);die();
+    }
+    // Not good
+    public function testGetUserByIdNewNg()
+    {
+        $userModel = new BankModel();
+        
+        $actual = $userModel->getUserByIdNew();
+        // var_dump($user);die();
+        // var_dump($actual);die();
+        if(empty($actual[0]['MAX'])) {
+            $this->assertTrue(true);
+        }else {
+            $this->assertTrue(false);
+        }
+    }
+     // Not NULL
+     public function testGetUserByIdNewNull()
+     {
+         $userModel = new BankModel();
+         
+         $actual = $userModel->getUserByIdNew();
+         // var_dump($user);die();
+         // var_dump($actual);die();
+         if(!empty($actual[0]['MAX'])) {
+             $this->assertTrue(false);
+         }else {
+             $this->assertTrue(true);
+         }
+     }
+
      
-    /**
-     * Test case user Not EmtyString
-     */
-    public function testInsertUserAndBanksIsEmptyString()
-    {
-        $bankModel = new BankModel();
-        
-        
-        $params = array(
-            'user_id' => '',
-            'cost' => 0,
-        );
-        //Ket qua biet truoc:
-        $expected = 1;
-        //Ket qua mong doi:
-        if($params['user_id'] == '') {
-            $actual = 1;
-        }else {
-            $actual = $bankModel->insertUserAndBanks($params);
-        }
-        //var_dump($actual);die();
-        $this->assertEquals($expected, $actual);
-    }
-     /**
-     * Test case user with database not object value:
-     */
-    public function testInsertUserAndBanksIsObject()
-    {
-        $bankModel = new BankModel();
-        
-        $obj = new UserModel();
-        $params = array(
-            'user_id' => $obj,
-            'cost' => 0,
-        );
-        //Ket qua biet truoc:
-        $expected = 1;
-        //Ket qua mong doi:
-        if($params['user_id'] == $obj) {
-            $actual = 1;
-        }else {
-            $actual = $bankModel->insertUserAndBanks($params);
-        }
-        //var_dump($actual);die();
-        $this->assertEquals($expected, $actual);
-    }
-     /**
-     * Test case user with database Not Array value:
-     */
-    public function testInsertUserAndBanksIsArray()
-    {
-        $bankModel = new BankModel();
-        
-        $arr = ['a' , 'b' , 'c'];
-        $params = array(
-            'user_id' => $arr,
-            'cost' => 0,
-        );
-        //Ket qua biet truoc:
-        $expected = 1;
-        //Ket qua mong doi:
-        if($params['user_id'] == $arr) {
-            $actual = 1;
-        }else {
-            $actual = $bankModel->insertUserAndBanks($params);
-        }
-        //var_dump($actual);die();
-        $this->assertEquals($expected, $actual);
-    }
-    /**
-     * Test case user with database Not Bool value:
-     */ 
-    public function testInsertUserAndBanksIsBool()
-    {
-        $bankModel = new BankModel();
-        
-        $boolval = true;
-        
-        $params = array(
-            'user_id' => $boolval,
-            'cost' => 0,
-        );
-        //Ket qua biet truoc:
-        $expected = 1;
-        //Ket qua mong doi:
-        if($params['user_id'] == true) {
-            $actual = 1;
-        }else {
-            $actual = $bankModel->insertUserAndBanks($params);
-        }
-        //var_dump($actual);die();
-        $this->assertEquals($expected, $actual);
-    }
-    
 }
