@@ -11,7 +11,7 @@ class UserModel extends BaseModel {
         return $user;
     }
 
-    public function findUser($keyword) {
+    public function find($keyword) {
         $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
         $user = $this->select($sql);
 
@@ -139,8 +139,12 @@ class UserModel extends BaseModel {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
-        return $users;
-       
+         return  $users;
+    }
+    public function removeSpecialCharacter($string){
+        $array = ["'",'"',"<",">","*","","!","/","%",";","#"];
+        $string = str_replace($array,'',$string);
+        return $string;
     }
 
     public static function getInstance() {

@@ -8,7 +8,6 @@ $keyword = '';
 if(!empty($_GET['keyword'])) {
     $keyword = $_GET['keyword'];
 }
-
 if(!empty($_SERVER['PHP_SELF'])){
     $pageUrl = $_SERVER['PHP_SELF'];
 }

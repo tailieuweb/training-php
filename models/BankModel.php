@@ -10,8 +10,8 @@ class BankModel extends BaseModel {
         return $user;
     }
 
-    public function findUser($keyword) {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
+    public function findBank($keyword) {
+        $sql = 'SELECT * FROM banks WHERE cost LIKE %'.$keyword.'%'. ' OR user_id LIKE %'.$keyword.'%' ;
         $user = $this->select($sql);
 
         return $user;
@@ -70,8 +70,8 @@ class BankModel extends BaseModel {
                 
     }
 
-    /**
-     * Search users
+   /**
+     * Search banks
      * @param array $param
      * @return array
      */
@@ -79,12 +79,13 @@ class BankModel extends BaseModel {
         //Keyword
         if (!empty($params['keyword'])) {
            
-            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] .'%"';
+            $sql = 'SELECT * FROM banks WHERE user_id LIKE "%' . $params['keyword'] .'%"';
 
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $banks = self::$_connection->multi_query($sql);
+            // $banks = self::$_connection->multi_query($sql);
+            $banks = $this->select($sql);
             
         } else {
             $sql = 'SELECT * FROM banks';
