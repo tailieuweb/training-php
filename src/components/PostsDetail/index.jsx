@@ -14,6 +14,7 @@ import PostsDetailRelateSkeleton from "./PostsDetailRelateSkeleton";
 export default function PostsDetail() {
   const router = useRouter();
   const { id = 0 } = router.query;
+
   //Redux
   const dispatch = useDispatch();
   const selectorPosts = useSelector((state) => state.posts);
@@ -33,7 +34,7 @@ export default function PostsDetail() {
     (async () => {
       const post = await dispatch(actLoadPostById(id));
       if (!post) {
-        return router.back();
+        return router.replace("/404");
       }
       setPost(post);
     })();
