@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class UserModelPhuTest extends TestCase
+class UserModelTest extends TestCase
 {
 
     /**
@@ -117,30 +117,17 @@ class UserModelPhuTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-    /**
-     * Test find user
-     */
-    // public function testfindUserByIdOk()
-    // {
-    //     $userModel = new UserModel();
-    //     $userId = 2;
-    //     $userName = 'Phu';
-
-    //     $user = $userModel->findUserById($userId);
-    //     $actual = $user[0]['name'];
-
-    //     $this->assertEquals($userName, $actual);
-    // }
+    
     // public function testInsertUserOk()
     // {
     //     $userModel = new UserModel();
     //     $user = array(
-    //         'id' => 14,
-    //         'name' => 'abc',
-    //         'fullname' => 'vitcon',
-    //         'type' => 'admin',
-    //         'email' => 'hhhhh@gmail.com',
-    //         'password' => '123456'
+    //         'id' => 2,
+    //         'name' => 'test2',
+    //         'fullname' => '',
+    //         'type' => '',
+    //         'email' => '',
+    //         'password' => ''
     //     );
     //     $actual = $userModel->insertUser($user);
     //     if ($actual == true) {
@@ -186,21 +173,79 @@ class UserModelPhuTest extends TestCase
         }
     }
 
-    // public function testGetUserOk()
-    // {
-    //     $userModel = new UserModel();
+    public function testGetUserOk()
+    {
+        $userModel = new UserModel();
 
-    //     $count_array = 6;
-    //     $actual = $userModel->getUsers();
+        $count_array = 4;
+        $actual = $userModel->getUsers();
 
-    //     $this->assertEquals($count_array, count($actual));
-    // }
+        $this->assertEquals($count_array, count($actual));
+    }
+    //test getUser khi khong co du lieu oke
+    public function testGetUserNullOK()
+    {
+        $userModel = new UserModel();
+
+        $actual = $userModel->getUsers();
+
+        if ($actual != null) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+      //test getUser khi khong co du lieu false
+      public function testGetUserNullF()
+    {
+        $userModel = new UserModel();
+        $actual = null;
+        $actual = $userModel->getUsers();
+
+        if ($actual != null) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+      //test getUser khi strNull ok
+      public function testGetUserStrNullOke()
+     {
+        $userModel = new UserModel();
+        $keyword = array(
+            'keyword' => null,
+        );
+        $actual = $userModel->getUsers($keyword);
+
+        if ($actual != []) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+     }
+     //test getUser khi strNull F
+     public function testGetUserStrNullF()
+     {
+        $userModel = new UserModel();
+
+        $keyword = array(
+            'keyword' => 'id',
+            'keyword' => 'Username'
+        );
+        $actual = $userModel->getUsers($keyword);
+
+        if ($actual != []) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+     }
     // public function testGetUserbyKeyWordOk()
     // {
     //     $userModel = new UserModel();
     //     $params= [];
     //     $params['keyword'] = '321';
-    //     $count_array = 6;
+    //     $count_array = 3;
     //     $actual = $userModel->getUsers( $params);
 
     //     $this->assertEquals($count_array,count($actual));
@@ -221,4 +266,70 @@ class UserModelPhuTest extends TestCase
     //         $this->assertTrue(false);
     //     }
     // }
+    /**
+     * Test findUserById Ok
+     */
+    public function testFindUserByIdOk()
+    {
+        $userModel = new UserModel();
+        $userID = 3;
+        $userName = 'hackerasfasf';
+
+        $user = $userModel->findUserById($userID);
+        $actual = $user[0]['name'];
+
+        $this->assertEquals($userName, $actual);
+    }
+
+    /**
+     * Test findUserById sai:
+     */
+    public function testFindUserByIdNg()
+    {
+        $userModel = new UserModel();
+        $userID = 6;
+
+        $user = $userModel->findUserById($userID);
+
+       if(empty($user)){
+           $this->assertTrue(true);
+       }
+       else{
+        $this->assertTrue(false);
+       }
+    }
+    /**
+     * Test findUserById dữ liệu rổng
+     */
+    public function testFindUserByIdNull()
+    {
+        $userModel = new UserModel();
+        $userID = null;
+
+        $user = $userModel->findUserById($userID);
+
+       if(empty($user)){
+           $this->assertTrue(true);
+       }
+       else{
+        $this->assertTrue(false);
+       }
+    }
+    /**
+     * Test findUserById dữ liệu chuổi:
+     */
+    public function testFindUserByIdStr()
+    {
+        $userModel = new UserModel();
+        $userID ='asd';
+
+        $user = $userModel->findUserById($userID);
+
+       if(empty($user)){
+           $this->assertTrue(true);
+       }
+       else{
+        $this->assertTrue(false);
+       }
+    }
 }
