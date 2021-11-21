@@ -25,23 +25,16 @@ export default function PostsDetailPage() {
 
 // This function gets called at build time
 export const getStaticPaths = async () => {
-  const posts = await apiCaller("products", "GET", null).then((res) => {
-    if (res.success) {
-      return res.data;
-    }
-    return [];
-  });
-
-  const pathsEn = posts.map((post) => ({
-    params: { id: `${post.id}` },
+  const pathsEn = Array.from({ length: 1000 }, (_, index) => ({
+    params: { id: `${index}` },
     locale: "en",
   }));
-  const pathsJp = posts.map((post) => ({
-    params: { id: `${post.id}` },
+  const pathsJp = Array.from({ length: 1000 }, (_, index) => ({
+    params: { id: `${index}` },
     locale: "jp",
   }));
-  const pathsVi = posts.map((post) => ({
-    params: { id: `${post.id}` },
+  const pathsVi = Array.from({ length: 1000 }, (_, index) => ({
+    params: { id: `${index}` },
     locale: "vi",
   }));
 
