@@ -1,14 +1,25 @@
 <?php
-require_once 'models/UserModel.php';
-require_once 'models/BankModel.php';
-class FactoryPattern extends BaseModel{
-
-    public function make($model) {
+require_once 'UserModel.php';
+require_once 'BankModel.php';
+class FactoryPattern
+{
+    protected static $_instance;
+    // make function
+    public function make($model)
+    {
         if ($model == 'user') {
-            return new UserModel();
+            return UserModel::getInstance();
         } else if ($model == 'bank') {
-            return new BankModel();
+            return BankModel::getInstance();
         }
     }
-
+    // Singleton Design Pattern
+    public static function getInstance()
+    {
+        if (self::$_instance != null) {
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
+    }
 }

@@ -92,6 +92,16 @@ function getUserById($id){
 	return $user;
 }
 
+function getBankById($id){
+	global $conn;
+	$query = "SELECT * FROM banks WHERE id=" . $id;
+	$result = mysqli_query($conn, $query);
+
+	$bank = mysqli_fetch_assoc($result);
+	return $bank;
+}
+
+
 function escape($val){
 	global $conn;
 	return mysqli_real_escape_string($conn, trim($val));
