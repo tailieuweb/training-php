@@ -45,9 +45,17 @@ class BankModel extends BaseModel
     // Find user_id trong table banks
     public function findUserByIdTableBank($user_id)
     {
+        if(is_object($user_id)){
+            return false;
+        }
+        elseif(is_array($user_id)){
+            return false;
+        }
+        else{
         $sql = 'SELECT * FROM banks WHERE user_id = ' . $user_id;
         $bank = $this->select($sql);
         return $bank;
+        }
     }
 
     // Get id user new : 
@@ -90,15 +98,20 @@ class BankModel extends BaseModel
         $sql1 = 'SELECT id FROM banks';
         $allUser = $this->select($sql1);
 
-        $_id = $id;
-        $id_start = substr($_id, 3);
-        $id_end = substr($id_start, 0, -3);
+        // $_id = $id;
+        // $id_start = substr($_id, 3);
+        // $id_end = substr($id_start, 0, -3);
 
-        foreach ($allUser as $key) {
-            $md5 = md5($key['id'] . "chuyen-de-web-1");
-            if ($md5 == $id) {
-                $sql = 'DELETE FROM banks WHERE id = ' . $key['id'];
-                return $this->delete($sql);
+        if (is_object($id)) {
+            return false;
+        }
+         else {
+            foreach ($allUser as $key) {
+                $md5 = md5($key['id'] . "chuyen-de-web-1");
+                if ($md5 == $id) {
+                    $sql = 'DELETE FROM banks WHERE id = ' . $key['id'];
+                    return $this->delete($sql);
+                }
             }
         }
     }
@@ -136,7 +149,7 @@ class BankModel extends BaseModel
             $sql = 'UPDATE banks SET 
             user_id = "' . $input['user_id'] . '", 
             cost = "' . $input['cost'] . '",
-            version = "'.$time1.'"
+            version = "' . $time1 . '"
             WHERE id = ' . $id;
             $bank = $this->update($sql);
             return $bank;

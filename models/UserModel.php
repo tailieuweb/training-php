@@ -65,11 +65,17 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
-        $isAuth = $this->getUsers();
-        foreach ($isAuth as $item) {
-            if (md5($item['id'] . "chuyen-de-web-1") == $id) {
-                $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
-                return $this->delete($sql);
+        if (is_object($id)) {
+            return false;
+        }
+        else {
+            $isAuth = $this->getUsers();
+            foreach ($isAuth as $item) {
+               
+                if (md5($item['id'] . "chuyen-de-web-1") == $id) {
+                    $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
+                    return $this->delete($sql);
+                }
             }
         }
     }
@@ -129,7 +135,7 @@ class UserModel extends BaseModel
             }
         }
         $oldTime = $userById[0]['version'] . "chuyen-de-web-1";
-     
+
         if (md5($oldTime) == $version) {
             $time1 = (int)$oldTime + 1;
             $sql = 'UPDATE users SET 
@@ -141,7 +147,7 @@ class UserModel extends BaseModel
                 password="' . md5($input['password']) . '"
                 WHERE id = ' . $id;
             $user = $this->update($sql);
-           
+
             return $user;
         } else {
             return $error;
@@ -174,6 +180,7 @@ class UserModel extends BaseModel
     {
         # code...
         $sql = "SELECT MAX(id) FROM users";
+
         $id = $this->select($sql);
         return $id;
     }
@@ -219,13 +226,9 @@ class UserModel extends BaseModel
      * @param $a
      * @param $b
      */
-    public function sumb($a, $b) {
-        if(!is_numeric($a) || !is_numeric($b)){
-            return "error";
-        }
-        else{
-            return $a + $b;
-        }
+    public function sumb($a, $b)
+    {
+        return $a + $b;
     }
 
     //Just find user_id and just id with bank

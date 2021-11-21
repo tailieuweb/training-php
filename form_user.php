@@ -55,7 +55,7 @@ if (!empty($_POST['submit'])) {
 
             <form method="POST">
                 <input type="hidden" name="id" value="<?php echo $id_end ?>">
-                <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo md5($user[0]['version'] . "chuyen-de-web-1") ?>">
+                <input type="hidden" name="version" value="<?php if (isset($user[0]['version'])) echo md5($user[0]['version'] . "chuyen-de-web-1") ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
