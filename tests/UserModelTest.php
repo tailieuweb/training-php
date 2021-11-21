@@ -1,6 +1,8 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\equalTo;
+
 class UserModelTest extends TestCase
 {
 
@@ -34,6 +36,23 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         } else {
             $this->assertTrue(true);
+        }
+    }
+    public function testGetID(){
+        $userModel = new UserModel();
+        $expected = 300;
+        $actual = $userModel->getID();
+        $this->assertEquals($expected, $actual[0]["id"]);
+    }
+    public function testGetIDNG(){
+        $userModel = new UserModel();
+        $expected = 30;
+        $actual = $userModel->getID();
+     //   var_dump($actual[0]["id"]);die();
+        if($expected != $actual[0]["id"]){
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
         }
     }
 }
