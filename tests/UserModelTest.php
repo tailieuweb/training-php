@@ -1,72 +1,55 @@
 <?php
-
 use PHPUnit\Framework\TestCase;
-
+define('VERSON');
 class UserModelTest extends TestCase
 {
-
-    /**
-     * Test case Not good
-     */
-    public function  testFindUserByIdNg()
-    {
-        $userModel = new UserModel();
-        $userId = 999;
-        $user = $userModel->findUserById($userId);
-        if (empty($user)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
-    }
     /**
      * Test case Okie
      */
-    // public function testInsertUser()
-    // {
-    //     $input = [
-    //         'name' => 'ngo thanh thai 76',
-    //         'password' => 'sahuynh1',
-    //     ];
-
-    //     $userModel = new UserModel();
-    //     $actual = $userModel->insertUser($input);
-    //     $expected = true;
-    //     $this->assertEquals($actual, $expected);
-    // }
-    public function testGetUser()
+    public function testFindUserByIdNewOk()
     {
-        $userModel = new UserModel();
-        $actual = $userModel->getUsers();
-        if (is_array($actual)) {
-            $actual = true;
-        } else {
-            $actual = false;
-        }
-        $expected = true;
-        $this->assertEquals($actual, $expected);
+       //khai báo model:
+       $UserModel = new UserModel();
+       //Truyên tham số : 
+       $id = 212;
+       $expected = "user";
+       $actual = $UserModel->findUserByIdNew($id);
+       //var_dump($actual);
+       //assertEquals
+       $this->assertEquals($expected , $actual[0]['name']);
     }
-    public function testSumOk()
+     /**
+     * Test case Ng
+     */
+    public function testFindUserByIdNewNg()
     {
-        $userModel = new UserModel();
-        $a = 1;
-        $b = 2;
-        $expected = 3;
-
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
+       //khai báo model:
+       $UserModel = new UserModel();
+       //id khong ton tai
+       $id = 100;
+       $actual = $UserModel->findUserByIdNew($id);
+       //var_dump($actual);
+       //Neu ket qua mong doi khong ton tai
+       if(empty($actual)) {
+           return $this->assertTrue(true);
+       }
+       return $this->assertTrue(false);
     }
-    public function testSumOk2()
+      /**
+     * Test case String
+     */
+    public function testFindUserByIdNewIsString()
     {
-        $userModel = new UserModel();
-        $a = -1;
-        $b = -2;
-        $expected = -3;
+       //khai báo model:
+       $UserModel = new UserModel();
+       //id la mot chuoi bat ky:
+       $id = "chuoi";
 
-        $actual = $userModel->sumb($a, $b);
+       $expected = [];
+       $actual = $UserModel->findUserByIdNew($id);
 
-        $this->assertEquals($expected, $actual);
+       $this->assertEquals($expected , $actual);
+       
     }
     public function testSumOk3()
     {
@@ -151,10 +134,129 @@ class UserModelTest extends TestCase
     //     $this->assertEquals($userName, $actual);
     // }
 
-    /**
-     * Test case Not good
+
+     /**
+     * Test case Array
      */
-    public function testSumNg()
+    public function testFindUserByIdNewIsArray()
+    {
+       //khai báo model:
+       $UserModel = new UserModel();
+       //id la mot chuoi bat ky:
+       $id = [
+            'name' , 'email' , 'fullname' , 'type'
+       ];
+
+       $expected = [];
+       $actual = $UserModel->findUserByIdNew($id[0]);
+        //var_dump($actual);die();
+       $this->assertEquals($expected , $actual);
+       
+    }
+      /**
+     * Test case Null
+     */
+    public function testFindUserByIdNewIsNull()
+    {
+       //khai báo model:
+       $UserModel = new UserModel();
+       //id la mot chuoi bat ky:
+       $id = null;
+       //Result da biet:
+       $expected = [];
+       $actual = $UserModel->findUserByIdNew($id);
+        //var_dump($actual);die();
+       $this->assertEquals($expected , $actual);
+    }
+     /**
+     * Test case Object
+     */
+    public function testFindUserByIdNewIsObject()
+    {
+       //khai báo model:
+       $UserModel = new UserModel();
+       //id la mot chuoi bat ky:
+       $id = BankModel::class;
+       //var_dump($id);
+       //Result da biet:
+       $expected = [];
+       $actual = $UserModel->findUserByIdNew($id);
+       //var_dump($actual);die();
+       $this->assertEquals($expected , $actual);
+    }
+     /**
+     * Test case Double
+     */
+    public function testFindUserByIdNewIsDouble()
+    {
+       //khai báo model:
+       $UserModel = new UserModel();
+       //id la mot chuoi bat ky:
+       $id = 9.5;
+       //Result da biet:
+       $expected = [];
+       $actual = $UserModel->findUserByIdNew($id);
+        //var_dump($actual);die();
+       $this->assertEquals($expected , $actual);
+    }
+    /**
+     * Test case Double
+     */
+    public function  testFindUserByIdNewIsBool()
+    {
+       //khai báo model:
+       $UserModel = new UserModel();
+       //id la mot chuoi bat ky:
+       
+       $id = true;
+       //Result da biet:
+       $expected = false;
+       $actual = $UserModel->findUserByIdNew($id);
+       //var_dump($actual);die();
+       if($actual == null) {
+            $this->assertTrue(true);
+       }
+       else  {
+            $this->assertTrue(false);
+       }
+    }
+     /**
+     * Test case Negative
+     */
+    public function  testFindUserByIdNewIsNegative()
+    {
+       //khai báo model:
+       $UserModel = new UserModel();
+       //id la mot so am:
+       
+       $id = -35;
+       //Result da biet:
+       $expected = [];
+       $actual = $UserModel->findUserByIdNew($id);
+       //var_dump($actual);die();
+       $this->assertEquals($expected , $actual);
+    }
+     /**
+     * Test case Characters
+     */
+    public function  testFindUserByIdNewIsCharacters()
+    {
+       //khai báo model:
+       $UserModel = new UserModel();
+       //id la mot ky tu dat biet:
+       
+       $id = '#';
+       //Result da biet:
+       $expected = [];
+       $actual = $UserModel->findUserByIdNew($id);
+       //var_dump($actual);die();
+       $this->assertEquals($expected , $actual);
+    }
+
+    /**
+     * Test case NegativeDouble
+     */
+    public function  testFindUserByIdNewIsNegativeDouble()
     {
         $userModel = new UserModel();
         $a = 1;
