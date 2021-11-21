@@ -1,0 +1,31 @@
+@media all and (min-width: 480px) {
+    .Login {
+      padding: 60px 0;
+    }
+  
+    .Login form {
+      margin: 0 auto;
+      max-width: 320px;
+    }
+    
+  }
+label {
+  color: white;
+}
+button {
+  background: center;
+}
+.Login {
+  width: 90%;
+    border: 1px solid;
+    position: relative;
+    left: 60px;
+    right: 0;
+    box-shadow: 0 0 5px -5px white;
+}
+
+.name-login {
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+}

@@ -1,1 +1,0 @@
-Cookies.set('PHPSESSID', 'true', { expires: 7 });

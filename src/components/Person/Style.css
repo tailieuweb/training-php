@@ -1,0 +1,66 @@
+
+.title-popularPersonTMDB {
+    padding-top: 25px;
+}
+.title-popularPersonTMDB h4 {
+    font-family: 'Titan One',cursive;
+    font-size: 30px;
+    font-weight: 700;
+    color: orange;
+    margin-bottom: 25px;
+}
+.table-tv {
+    padding-top: 150px;
+}
+.name-link a {
+    color: white;
+}
+.name-link a:hover {
+    text-decoration: none;
+    color: tomato;
+}
+.border-profile {
+    box-shadow: 0 0 5px 0px white;
+    text-align: center;
+    
+    
+}
+.padding-profile {
+    padding-top: 20px;
+}
+.border-profile .top-profile img {
+    text-align: center;
+    padding-bottom: 5px;
+}
+.border-profile .over-profile {
+    float: right;
+}
+.border-profile .average-profile {
+    float: left;
+}
+.profile-height-with {
+    text-align: center;
+}
+.border-profile label {
+    margin-left: -20px;
+}
+/* Button profile */
+.button-images {
+    box-shadow: 0 0 5px 0px white;
+    margin-top: 20px;
+    width: 308px;
+    background: linear-gradient( red , blue );
+}
+.profile {
+    margin-top: 15px;
+    padding: 4px 10px;
+    color: #fff;
+    border-color: rgb(240 246 252 / 8%);
+    border-radius: 6px;
+}
+.button-images .profile {
+    text-align: center;
+    display: flow-root;
+    color: white;
+    text-decoration: none;
+}

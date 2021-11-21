@@ -1,0 +1,172 @@
+/* General Styling */
+
+body {
+	padding:60px 0;
+	font-family: sans-serif;
+	color:#333;
+}
+
+h1, h2 {
+	width:960px;
+	margin:0 auto 12px auto;
+}
+
+a {
+	color:#333;
+	text-decoration: none;
+}
+
+footer {
+	width: 99%;
+	text-align: center;
+	padding:20px 0;
+}
+
+.outerWrapper {
+	text-align: left;
+	position:relative;
+	margin:60px auto 60px auto;
+	width:960px;
+}
+
+.item {
+	float:left;
+	margin-right:48px;
+	width:162px;
+	padding:20px;
+	height:162px;
+	border:1px solid #b3b3b3;
+	background-color:#fff;
+	border-radius:5px;
+}
+
+.item div {
+	background:#ddd;
+	width:99%;
+	height:99%;
+	color:white;
+	color:#b3b3b3;
+	text-align:center;
+	line-height: 162px;
+	font-size:60px;
+	border-radius:5px;
+	border:1px solid #b3b3b3;
+}
+
+.left-nav-btn, .right-nav-btn {
+	position:absolute;
+	width:37px;
+	height:37px;
+	top:80px;
+	cursor:pointer;
+	opacity: 0.8;
+	background:transparent url('../images/arrows.png') top left no-repeat;
+	-webkit-transition:opacity 0.2s linear;
+  	-moz-transition:opacity 0.2s linear;
+  	-o-transition:opacity 0.2s linear;
+  	transition:opacity 0.2s linear;
+}
+
+.left-nav-btn {
+	left:-80px;
+}
+
+.right-nav-btn {
+	right:-80px;
+	background-position: top right;
+}
+
+.left-nav-btn:hover, .right-nav-btn:hover {
+	opacity: 1;
+}
+
+/* Vertical Mode */
+
+.vert.outerWrapper {
+	margin:50px auto 60px auto;
+	width:204px;
+	height:456px;
+}
+
+.vert .item {
+	float:left;
+	margin-bottom:48px;
+	width:162px;
+}
+
+.vert .left-nav-btn, .vert .right-nav-btn {
+	position:absolute;
+	width:37px;
+	height:37px;
+	cursor:pointer;
+	left:82px;
+	background:transparent url('../images/arrows_vert.png') top left no-repeat;
+}
+
+.vert .left-nav-btn {
+	top:-60px;
+}
+
+.vert .right-nav-btn {
+	top:auto;
+	bottom:-60px;
+	background-position: bottom left;
+}
+
+.leftWrapper {
+	width:48%;
+	float:left;
+}
+
+.rightWrapper {
+	width:48%;
+	float:right;
+}
+
+.leftWrapper h2, .rightWrapper h2 {
+	width:100%;
+	text-align:center;
+}
+
+.outerWrapper2 .item {
+	margin-right:50px;
+	width:110px;
+	padding:20px;
+}
+
+/* Pager */
+
+.pager {
+	line-height: 100px;
+	text-align: center;
+}
+
+.pager > span {
+	cursor: pointer;
+	border-radius:8px;
+	display: inline-block;
+	width:16px;
+	height:16px;
+	background: #DDDDDD;
+	border:1px solid #B3B3B3;
+	margin:0 4px;
+	overflow: none;
+}
+
+.pager > span.active {
+	background: #B3B3B3;
+}
+
+.pager > span > span {
+	display: none;
+}
+
+/* Counter (See Example 7) */
+
+#counter {
+	margin-top:-30px;
+	font-weight: bold;
+	font-size: 18px;
+	text-align: center;
+	padding-bottom: 20px;
+}
