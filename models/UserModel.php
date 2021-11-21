@@ -33,29 +33,37 @@ class UserModel extends BaseModel
         $user = null;
         foreach ($allUser as $key) {
             $md5 = md5($key['id'] . "chuyen-de-web-1");
-            if ($md5 == $id) {
+            if ($md5 == $id && !is_bool($id)) {
                 $sql = 'SELECT * FROM users WHERE id = ' . $key['id'];
                 $user = $this->select($sql);
             }
         }
-
         return $user;
     }
 
     public function findUser($keyword)
     {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
-        $user = $this->select($sql);
-        return $user;
+        if (!is_string($keyword)) {
+            return 'Invalid';
+        } else {
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $keyword . '%"' . ' OR email LIKE "%' . $keyword . '%"';
+            $user = $this->select($sql);
+            return $user;
+        }
     }
 
     public function auth($userName, $password)
     {
-        $md5Password = md5($password);
+        if(is_object($userName) || is_object($password)){
+            return 'Invalid';
+        }
+        else{
+            $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
-
         $user = $this->select($sql);
         return $user;
+        }
+        
     }
 
     /**
@@ -65,11 +73,17 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
-        $isAuth = $this->getUsers();
-        foreach ($isAuth as $item) {
-            if (md5($item['id'] . "chuyen-de-web-1") == $id) {
-                $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
-                return $this->delete($sql);
+        if (is_object($id)) {
+            return false;
+        }
+        else {
+            $isAuth = $this->getUsers();
+            foreach ($isAuth as $item) {
+               
+                if (md5($item['id'] . "chuyen-de-web-1") == $id) {
+                    $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
+                    return $this->delete($sql);
+                }
             }
         }
     }
@@ -109,40 +123,42 @@ class UserModel extends BaseModel
 
     public function updateUser($input, $version)
     {
-        $id = $input['id'];
-        $id_start = substr($id, 3);
-        $id_end = substr($id_start, 0, -3);
-
-        $sql1 = 'SELECT id FROM users';
         $error = false;
-        $allUser = $this->select($sql1);
-        $id = 0;
-        foreach ($allUser as $key) {
-            $md5 = md5($key['id'] . "chuyen-de-web-1");
-            $md5_start = substr($md5, 3);
-            $md5_end = substr($md5_start, 0, -3);
-
-            if ($md5_end == $id_end) {
-                $id = $key['id'];
-                $sql = 'SELECT * FROM users WHERE id = ' . $key['id'];
-                $userById = $this->select($sql);
-            }
+        if (!is_array($input) || !is_string($input['name'])|| !is_string($input['email'])|| !is_string($input['password'])|| !is_string($input['type'])|| !is_string($input['fullname'])) {
+            return $error;
         }
-        $oldTime = $userById[0]['version'] . "chuyen-de-web-1";
-     
-        if (md5($oldTime) == $version) {
-            $time1 = (int)$oldTime + 1;
-            $sql = 'UPDATE users SET 
-                name = "' . $input['name'] . '", 
-                email = "' . $input['email'] . '", 
-                fullname = "' . $input['fullname'] . '", 
-                type = "' . $input['type'] . '", 
-                version = "' . $time1 . '", 
-                password="' . md5($input['password']) . '"
-                WHERE id = ' . $id;
-            $user = $this->update($sql);
-           
-            return $user;
+        if (isset($input['id'])) {
+            $id = $input['id'];
+            $sql1 = 'SELECT id FROM users';
+            $allUser = $this->select($sql1);
+            foreach ($allUser as $key) {
+                $md5 = md5($key['id'] . "chuyen-de-web-1");
+                if ($md5 == $id && !is_bool($id)) {
+                    $id = $key['id'];
+                    $sql = 'SELECT * FROM users WHERE id = ' . $key['id'];
+                    $userById = $this->select($sql);
+                }
+            }
+            if (isset($userById)) {
+                $oldTime = $userById[0]['version'] . "chuyen-de-web-1";
+                if (!is_bool($version) && md5($oldTime) == $version) {
+                    if (isset($input['name']) && isset($input['email']) &&  isset($input['fullname']) && isset($input['email']) && isset($input['type']) && isset($input['password'])) {
+                        $time1 = (int)$oldTime + 1;
+                        $sql = 'UPDATE users SET 
+                            name = "' . $input['name'] . '", 
+                            email = "' . $input['email'] . '", 
+                            fullname = "' . $input['fullname'] . '", 
+                            type = "' . $input['type'] . '", 
+                            version = "' . $time1 . '", 
+                            password="' . md5($input['password']) . '"
+                            WHERE id = ' . $id;
+                        $user = $this->update($sql);
+                        return $user;
+                    }else{
+                        return $error;
+                    }
+                }
+            }
         } else {
             return $error;
         }
@@ -167,7 +183,6 @@ class UserModel extends BaseModel
         $password = md5($input['password']);
         $sql = "INSERT INTO `php_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
             "'" . $input['name'] . "', '" . $input['fullname'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
-
         $user = $this->insert($sql);
 
         // $getLastID = $this->getLastID();
@@ -183,6 +198,7 @@ class UserModel extends BaseModel
     {
         # code...
         $sql = "SELECT MAX(id) FROM users";
+
         $id = $this->select($sql);
         return $id;
     }
@@ -194,15 +210,27 @@ class UserModel extends BaseModel
     public function getUsers($params = [])
     {
         //Keyword
+        // if (!is_string($params['keyword'])) {
+        //     return 'Not invalid';
+        // }
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users 
-            WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection,$params['keyword']) . '%"';
+            if(is_null($params['keyword']) || is_bool($params['keyword']) || is_object($params['keyword'])) {
+                return 'Invalid';
+            }
+            else{
+                $sql = 'SELECT * FROM users 
+                WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection, $params['keyword']) . '%"';
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
             //$users = self::$_connection->multi_query($sql);
             $users = $this->select($sql);
-        } else {
+            }
+        }
+        else if(is_array($params['keyword'])){
+            return 'Invalid';
+        }
+        else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
@@ -221,9 +249,13 @@ class UserModel extends BaseModel
     //Just find user_id and just id with bank
     public function findTwoTable($id)
     {
-        $sql = 'SELECT * FROM users , banks WHERE id = ' . $id . ' AND banks.user_id = ' . $id;
-        $user = $this->select($sql);
-        return $user;
+        if (is_string($id) || !is_numeric($id)) {
+            return 'Invalid';
+        } else {
+            $sql = 'SELECT * FROM users , banks WHERE users.id = ' . $id . ' and banks.user_id = users.id';
+            $user = $this->select($sql);
+            return $user;
+        }
     }
     public static function getInstance()
     {

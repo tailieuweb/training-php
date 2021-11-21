@@ -7,18 +7,14 @@
 >
     <testsuites>
         <testsuite name="SqlWsContractImport">
-           <!-- <file>./tests/UserModelTest.php</file> -->
-           <file>./tests/FindUserTwoTable.php</file>
-           <file>./tests/FindBankByIdVersionTwo.php</file>
-           <file>./tests/Auth.php</file>
-           <file>./tests/GetUsers.php</file>
+            <file>./tests/UserModelTest.php</file>
         </testsuite>
     </testsuites>
-	<filter>				
-	<whitelist processUncoveredFilesFromWhitelist="true">				
-	<directory suffix=".php">./models</directory>				
-	</whitelist>				
-	</filter>	
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+        <directory suffix=".php">./models</directory>
+        </whitelist>
+    </filter>
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
@@ -27,6 +23,5 @@
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>
         <server name="TELESCOPE_ENABLED" value="false"/>
-		
     </php>
 </phpunit>
