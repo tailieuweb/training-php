@@ -1,5 +1,7 @@
 <?php
 
+use function PHPUnit\Framework\isEmpty;
+
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
@@ -29,6 +31,14 @@ class UserModel extends BaseModel
      */
     public function auth($userName, $password)
     {
+        if (empty($userName) || empty($password)) {
+            return 'Error';
+        }
+
+        if (!is_string($userName) || !is_string($password)) {
+            return 'Error';
+        }
+
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
 
@@ -54,6 +64,14 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
+        if (empty($input['id'])) {
+            return "Error";
+        }
+
+        if (!is_string($input['name']) || !is_string($input['fullname']) || !is_string($input['email']) || !is_string($input['password'] || !is_string($input['type']))) {
+            return "Error";
+        }
+
         $sql = 'UPDATE users SET 
                  name = "' . $input['name'] . '", 
                  fullname = "' . $input['fullname'] . '", 
@@ -73,6 +91,15 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
+
+        if (empty($input['name']) || empty($input['fullname']) || empty($input['email']) || empty($input['password'] || empty($input['type']))) {
+            return "Error";
+        }
+
+        if (!is_string($input['name']) || !is_string($input['fullname']) || !is_string($input['email']) || !is_string($input['password'] || !is_string($input['type']))) {
+            return "Error";
+        }
+
         $password = md5($input['password']);
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
             "'" . $input['name'] . "', '" . $password . "', '" . $input['fullname'] . "', '" . $input['email'] . "', '" . $input['type'] . "')";
@@ -92,8 +119,13 @@ class UserModel extends BaseModel
         //Keyword
         $users = null;
         if (!empty($params['keyword'])) {
+
+            if (!is_string($params['keyword'])) {
+                return "Error";
+            }
+
             $stmt = self::$_connection->prepare("SELECT * FROM users WHERE name LIKE CONCAT('%',?,'%')");
-            if($stmt) {
+            if ($stmt) {
                 $stmt->bind_param("s", $params['keyword']);
                 $stmt->execute();
                 $users = array();
@@ -114,9 +146,16 @@ class UserModel extends BaseModel
      * @param $a
      * @param $b
      */
-    public function sumb($a, $b) {
+    public function sumb($a, $b)
+    {
+
+        if (!is_numeric($a) || !is_numeric($b)) {
+            return "Error";
+        }
+
         return $a + $b;
     }
+
     public static function getInstance()
     {
         if (self::$_instance !== null) {
