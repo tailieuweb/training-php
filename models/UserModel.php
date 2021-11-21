@@ -44,18 +44,27 @@ class UserModel extends BaseModel
 
     public function findUser($keyword)
     {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
-        $user = $this->select($sql);
-        return $user;
+        if (!is_string($keyword)) {
+            return 'Invalid';
+        } else {
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $keyword . '%"' . ' OR email LIKE "%' . $keyword . '%"';
+            $user = $this->select($sql);
+            return $user;
+        }
     }
 
     public function auth($userName, $password)
     {
-        $md5Password = md5($password);
+        if(is_object($userName) || is_object($password)){
+            return 'Invalid';
+        }
+        else{
+            $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
-
         $user = $this->select($sql);
         return $user;
+        }
+        
     }
 
     /**
@@ -129,7 +138,7 @@ class UserModel extends BaseModel
             }
         }
         $oldTime = $userById[0]['version'] . "chuyen-de-web-1";
-     
+
         if (md5($oldTime) == $version) {
             $time1 = (int)$oldTime + 1;
             $sql = 'UPDATE users SET 
@@ -141,7 +150,7 @@ class UserModel extends BaseModel
                 password="' . md5($input['password']) . '"
                 WHERE id = ' . $id;
             $user = $this->update($sql);
-           
+
             return $user;
         } else {
             return $error;
@@ -161,13 +170,13 @@ class UserModel extends BaseModel
 
         $user = $this->insert($sql);
 
-        $getLastID = $this->getLastID();
-        $insertBanks = [
-            'user_id' => $getLastID[0]['MAX(id)'],
-            'cost' => 500,
-        ];
-        $bankModel = new BankModel();
-        $bankModel->insertBanks($insertBanks);
+        // $getLastID = $this->getLastID();
+        // $insertBanks = [
+        //     'user_id' => $getLastID[0]['MAX(id)'],
+        //     'cost' => 500,
+        // ];
+        // $bankModel = new BankModel();
+        // $bankModel->insertBanks($insertBanks);
         return $user;
     }
     public function getLastID()
@@ -185,29 +194,27 @@ class UserModel extends BaseModel
     public function getUsers($params = [])
     {
         //Keyword
+        // if (!is_string($params['keyword'])) {
+        //     return 'Not invalid';
+        // }
         if (!empty($params['keyword'])) {
-
-            $mysqli = mysqli_connect("localhost", "root", "", "php_web1");
-            $key = isset($params['keyword']) ? (string)(int)$params['keyword'] : false;
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . mysqli_real_escape_string($mysqli, $key) . '%"';
-            // $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
-
-            $params['keyword'] = str_replace(
-                array(
-                    ',', ';', '#', '/', '%', 'select', 'update', 'insert', 'delete', 'truncate',
-                    'union', 'or', '"', "'", 'SELECT', 'UPDATE', 'INSERT', 'DELETE', 'TRUNCATE', 'UNION', 'OR'
-                ),
-                array(''),
-                $params['keyword']
-            );
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
-
+            if(is_null($params['keyword']) || is_bool($params['keyword']) || is_object($params['keyword'])) {
+                return 'Invalid';
+            }
+            else{
+                $sql = 'SELECT * FROM users 
+                WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection, $params['keyword']) . '%"';
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            //Example keyword text: 1')";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
-        } else {
+            //$users = self::$_connection->multi_query($sql);
+            $users = $this->select($sql);
+            }
+        }
+        else if(is_array($params['keyword'])){
+            return 'Invalid';
+        }
+        else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
@@ -219,11 +226,12 @@ class UserModel extends BaseModel
      * @param $a
      * @param $b
      */
-    public function sumb($a, $b) {
-        if(is_string($a)){
+    public function sumb($a, $b)
+    {
+        if (is_string($a)) {
             return 'Not invalid';
         }
-        if(is_string($b)){
+        if (is_string($b)) {
             return 'Not invalid';
         }
         return $a + $b;
@@ -232,9 +240,13 @@ class UserModel extends BaseModel
     //Just find user_id and just id with bank
     public function findTwoTable($id)
     {
-        $sql = 'SELECT * FROM users , banks WHERE id = ' . $id . ' AND banks.id = ' . $id;
-        $user = $this->select($sql);
-        return $user;
+        if (is_string($id) || !is_numeric($id)) {
+            return 'Invalid';
+        } else {
+            $sql = 'SELECT * FROM users , banks WHERE users.id = ' . $id . ' and banks.user_id = users.id';
+            $user = $this->select($sql);
+            return $user;
+        }
     }
     public static function getInstance()
     {

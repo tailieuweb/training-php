@@ -38,9 +38,13 @@ class BankModel extends BaseModel
     // Find id banks pass design pattern
     public function findBankByIdVersionTwo($id)
     {
-        $sql = 'SELECT * FROM banks WHERE id = ' . $id;
-        $bank = $this->select($sql);
-        return $bank;
+        if (is_string($id) || !is_numeric($id)) {
+            return 'Not invalid';
+        } else {
+            $sql = 'SELECT * FROM banks WHERE id = ' . $id;
+            $bank = $this->select($sql);
+            return $bank;
+        }
     }
     // Find user_id trong table banks
     public function findUserByIdTableBank($user_id)
@@ -136,7 +140,7 @@ class BankModel extends BaseModel
             $sql = 'UPDATE banks SET 
             user_id = "' . $input['user_id'] . '", 
             cost = "' . $input['cost'] . '",
-            version = "'.$time1.'"
+            version = "' . $time1 . '"
             WHERE id = ' . $id;
             $bank = $this->update($sql);
             return $bank;

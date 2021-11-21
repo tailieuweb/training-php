@@ -7,7 +7,11 @@
 >
     <testsuites>
         <testsuite name="SqlWsContractImport">
-           <file>./tests/UserModelTest.php</file>
+           <!-- <file>./tests/UserModelTest.php</file> -->
+           <file>./tests/FindUserTwoTable.php</file>
+           <file>./tests/FindBankByIdVersionTwo.php</file>
+           <file>./tests/Auth.php</file>
+           <file>./tests/GetUsers.php</file>
         </testsuite>
     </testsuites>
 	<filter>				

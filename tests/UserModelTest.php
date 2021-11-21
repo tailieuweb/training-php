@@ -4,42 +4,16 @@ use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
 {
+
     /**
-     * Test case Okie
-     */
-    public function testFindUserOk() {
-        $userModel = new UserModel();
-        $keyword = 'user1';
-        $expected = 'user1';
-
-        $user = $userModel->findUser($keyword);
-        $actual = $keyword;
-
-        $this->assertEquals($expected, $actual);
-    }
-    /**
-     * Test case Okie
-     */
-    public function  testFindUserByIdOk() {
-        $userModel = new UserModel();
-        $userId = 2;
-        $expected = 'user1';
-
-        $user = $userModel->findUserById($userId);
-        $actual = $user[0]['name'];
-
-        $this->assertEquals($expected, $actual);
-    }
-     /**
      * Test case Not good
      */
-    public function  testFindUserByIdNg() {
+    public function  testFindUserByIdNg()
+    {
         $userModel = new UserModel();
         $userId = 999;
-
         $user = $userModel->findUserById($userId);
-
-        if(empty($user)) {
+        if (empty($user)) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
@@ -119,7 +93,7 @@ class UserModelTest extends TestCase
         $userModel = new UserModel();
         $a = -10;
         $b = '1';
-        $expected = 'Not invalid';
+        $expected = 'Invalid';
 
         $actual = $userModel->sumb($a, $b);
 
@@ -130,7 +104,7 @@ class UserModelTest extends TestCase
         $userModel = new UserModel();
         $a = '-10';
         $b = '1';
-        $expected = 'Not invalid';
+        $expected = 'Invalid';
 
         $actual = $userModel->sumb($a, $b);
 
@@ -139,33 +113,20 @@ class UserModelTest extends TestCase
 
 
 
-    public function testFindUserByIdOk()
-    {
-        # code...
-        $userModel = new UserModel();
-        $userId = 5;
-        $userName = 'Chanh';
+    // public function testFindUserByIdOk()
+    // {
+    //     # code...
+    //     $userModel = new UserModel();
+    //     $userId = 5;
+    //     $userName = 'Chanh';
 
-        $expected = 'Not invalid';
-        $user = $userModel->findUserById($userId);
-        $actual = $user[0]['name'];
+    //     $expected = 'Invalid';
+    //     $user = $userModel->findUserById($userId);
+    //     $actual = $user[0]['name'];
 
-        $this->assertEquals($userName, $actual);
-    }
-   
-    public function  testFindUserByIdNg()
-    {
-        $userModel = new UserModel();
-        $userId = 999;
+    //     $this->assertEquals($userName, $actual);
+    // }
 
-        $user = $userModel->findUserById($userId);
-
-        if (empty($user)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
-    }
     /**
      * Test case Not good
      */
