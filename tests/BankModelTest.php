@@ -90,15 +90,38 @@ class BankModelTest extends TestCase
     public function testDeleteBankByIdNg(){
         $bankModel = new BankModel();
         $Id = 999;
-        $excuted = true;
+        //$excuted = false;
         $actual = $bankModel->deleteBanksById($Id);
-        if($actual == false) {
-            $this->assertTrue(false);
-        } else {
+        if(empty($actual)) {
             $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
         }
     }
-
+    //test deleteBankByIdNull
+    public function testDeleteBankByIdNull(){
+        $bankModel = new BankModel();
+        $Id = null;
+        //$excuted = true;
+        $actual = $bankModel->deleteBanksById($Id);
+        if(empty($actual)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    
+    //test deleteBankByIdStr
+    public function testDeleteBankByIdStr(){
+        $bankModel = new BankModel();
+        $Id = "hellp";
+        $actual = $bankModel->deleteBanksById($Id);
+        if(empty($actual)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
     
     
 
