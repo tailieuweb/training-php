@@ -62,6 +62,12 @@ class UserRepository extends BaseModel
         // var_dump($bankModel1->test);
         // die();
 
+        if (!empty($params['keyword'])) {
+            if ($params['keyword'] instanceof stdClass || is_bool($params['keyword']) || is_array($params['keyword'])) {
+                throw new InvalidArgumentException('Invalid argument');
+            }
+        }
+
         return $bankModel->getBankAccounts($params);
     }
 
