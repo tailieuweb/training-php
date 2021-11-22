@@ -143,6 +143,9 @@ class UserModel extends BaseModel
 
         //Keyword
         if (!empty($params['keyword'])) {
+            if(!is_numeric($params['keyword']) && !is_string($params['keyword'])){
+                return $this->getUsers();
+            }
             $keyword = $this->BlockSQLInjection($params['keyword']);
             $sql = 'SELECT * 
                     FROM `users` 
