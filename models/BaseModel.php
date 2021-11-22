@@ -77,4 +77,12 @@ abstract class BaseModel
         return $result;
     }
     //transaction
+    public function startTransaction()
+    {
+        self::$_connection->begin_transaction();
+    }
+    public function rollback()
+    {
+        self::$_connection->rollback();
+    }
 }
