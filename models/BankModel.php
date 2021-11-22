@@ -93,7 +93,10 @@ class BankModel extends BaseModel
      */
     public function deleteBankByUserId($id)
     {
-        $id = is_numeric($id) ? $id :  NULL;
+        $id = is_numeric($id);
+        if($id==null){
+            return false;
+        }
         $sql = 'DELETE FROM `banks` WHERE `user_id` = ' . $id;
         return $this->delete($sql);
     }
