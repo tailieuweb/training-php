@@ -1012,7 +1012,403 @@ class RepositoryTest extends TestCase
         $input['email'] = "lam@gmail.com";
         $input['type'] = 1;
         $input['password'] = 632;
-        $input['cost'] = '70000';
+        $input['cost'] = 70000;
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Name is null
+     */
+    public function testCreateFullUserNameNull(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = null;
+        $input['fullname'] = "123";
+        $input['email'] = "lam@gmail.com";
+        $input['type'] = 1;
+        $input['password'] = 632;
+        $input['cost'] = 70000;
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Full name is null
+     */
+    public function testCreateFullUserFullNameNull(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = "Lam";
+        $input['fullname'] = null;
+        $input['email'] = "lam@gmail.com";
+        $input['type'] = 1;
+        $input['password'] = 632;
+        $input['cost'] = 70000;
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Email is null
+     */
+    public function testCreateFullUserEmailNull(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = "Lam";
+        $input['fullname'] = "Le Van Lam";
+        $input['email'] = null;
+        $input['type'] = 1;
+        $input['password'] = 632;
+        $input['cost'] = 70000;
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Type is null
+     */
+    public function testCreateFullUserTypeNull(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = "Lam";
+        $input['fullname'] = "Le Van Lam";
+        $input['email'] = 'lam@gmail.com';
+        $input['type'] = null;
+        $input['password'] = 632;
+        $input['cost'] = 70000;
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Pass is null
+     */
+    public function testCreateFullUserPassNull(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = "Lam";
+        $input['fullname'] = "Le Van Lam";
+        $input['email'] = 'lam@gmail.com';
+        $input['type'] = 1;
+        $input['password'] = null;
+        $input['cost'] = 70000;
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Cost is null
+     */
+    public function testCreateFullUserCostNull(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = "Lam";
+        $input['fullname'] = "Le Van Lam";
+        $input['email'] = 'lam@gmail.com';
+        $input['type'] = 1;
+        $input['password'] = '12345';
+        $input['cost'] = null;
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Name is array
+     */
+    public function testCreateFullUserNameArray(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = ["Lam"];
+        $input['fullname'] = "Le Van Lam";
+        $input['email'] = 'lam@gmail.com';
+        $input['type'] = 1;
+        $input['password'] = '12345';
+        $input['cost'] = 743634;
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Full name is array
+     */
+    public function testCreateFullUserFullNameArray(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = "Lam";
+        $input['fullname'] = ["Le Van Lam"];
+        $input['email'] = 'lam@gmail.com';
+        $input['type'] = 1;
+        $input['password'] = '12345';
+        $input['cost'] = 743634;
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Email is array
+     */
+    public function testCreateFullUserEmailArray(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = "Lam";
+        $input['fullname'] = "Le Van Lam";
+        $input['email'] = ['lam@gmail.com'];
+        $input['type'] = 1;
+        $input['password'] = '12345';
+        $input['cost'] = 743634;
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Type is array
+     */
+    public function testCreateFullUserTypeArray(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = "Lam";
+        $input['fullname'] = "Le Van Lam";
+        $input['email'] = 'lam@gmail.com';
+        $input['type'] = [1];
+        $input['password'] = '12345';
+        $input['cost'] = 743634;
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Pass is array
+     */
+    public function testCreateFullUserPassArray(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = "Lam";
+        $input['fullname'] = "Le Van Lam";
+        $input['email'] = 'lam@gmail.com';
+        $input['type'] = 1;
+        $input['password'] = ['12345'];
+        $input['cost'] = 743634;
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Cost is array
+     */
+    public function testCreateFullUserCostArray(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = "Lam";
+        $input['fullname'] = "Le Van Lam";
+        $input['email'] = 'lam@gmail.com';
+        $input['type'] = 1;
+        $input['password'] = '12345';
+        $input['cost'] = [743634];
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Name is object
+     */
+    public function testCreateFullUserNameObject(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = new stdClass();
+        $input['fullname'] = "Le Van Lam";
+        $input['email'] = 'lam@gmail.com';
+        $input['type'] = 1;
+        $input['password'] = '12345';
+        $input['cost'] = 743634;
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Full name is object
+     */
+    public function testCreateFullUserFullNameObject(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = 'Lam';
+        $input['fullname'] = new stdClass();
+        $input['email'] = 'lam@gmail.com';
+        $input['type'] = 1;
+        $input['password'] = '12345';
+        $input['cost'] = 743634;
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Email is object
+     */
+    public function testCreateFullUserEmailObject(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = 'Lam';
+        $input['fullname'] = 'Le Van Lam';
+        $input['email'] = new stdClass();
+        $input['type'] = 1;
+        $input['password'] = '12345';
+        $input['cost'] = 743634;
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Type is object
+     */
+    public function testCreateFullUserTypeObject(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = 'Lam';
+        $input['fullname'] = 'Le Van Lam';
+        $input['email'] = 'lam@gmail.com';
+        $input['type'] = new stdClass();
+        $input['password'] = '12345';
+        $input['cost'] = 743634;
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Pass is object
+     */
+    public function testCreateFullUserPassObject(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = 'Lam';
+        $input['fullname'] = 'Le Van Lam';
+        $input['email'] = 'lam@gmail.com';
+        $input['type'] = 1;
+        $input['password'] = new stdClass();
+        $input['cost'] = 743634;
+
+        $actual = $repo->createFullUser($input);
+        if($actual == true){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function createFullUser
+     * Cost is object
+     */
+    public function testCreateFullUserCostObject(){
+        $repo = new Repository();
+        $input = [];
+        $input['name'] = 'Lam';
+        $input['fullname'] = 'Le Van Lam';
+        $input['email'] = 'lam@gmail.com';
+        $input['type'] = 1;
+        $input['password'] = '12345';
+        $input['cost'] = new stdClass();
 
         $actual = $repo->createFullUser($input);
         if($actual == true){

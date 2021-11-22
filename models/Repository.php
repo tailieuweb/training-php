@@ -9,6 +9,11 @@ class Repository extends BaseModel
      */
     public function createFullUser($input)
     {
+        foreach($input as $value){
+            if(is_array($value) || is_object($value) ){
+                return false;
+            }
+        }
         if(!is_numeric($input['type']) ||  !is_string($input['name']) || !is_string($input['fullname']) || !is_string($input['email'])){
             return false;
         }
