@@ -8,10 +8,16 @@ class UserRepositoryTest extends TestCase
      * Test _construct Function in UserRepository - 'Danh' do this
      */
     // Test case testConstruct
+  
     public function testConstruct(){
         $repository = new UserRepository;
-        $check= $repository->__construct();
-        if ($check == false) {
+        $userModel=$repository->userModel;
+        $bankModel=$repository->bankModel;
+        $check= 
+        is_object($userModel) && get_class($userModel) == 'UserModel' &&
+        is_object($bankModel) && get_class($bankModel) == 'BankModel';
+
+        if ($check == true) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
@@ -20,12 +26,13 @@ class UserRepositoryTest extends TestCase
         // Test case testConstructExpectedAndActual
     public function testConstructExpectedAndActual(){
         $repository = new UserRepository;
-        $expected= $repository->__construct();
-        $actual=false;
-        if ($expected == false) {
-            $this->assertEquals($expected, $actual);
-        } else {
-            return false;
-        }
+        $userModel=$repository->userModel;
+        $bankModel=$repository->bankModel;
+        $actual= 
+        is_object($userModel) && get_class($userModel) == 'UserModel' &&
+        is_object($bankModel) && get_class($bankModel) == 'BankModel';
+        $expected = true;
+        $this->assertEquals($expected, $actual);
+        
     }
 }

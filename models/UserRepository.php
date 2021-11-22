@@ -6,8 +6,8 @@ require_once 'Result.php';
 class UserRepository
 {
     protected static $_instance;
-    private $userModel;
-    private $bankModel;
+    public $userModel;
+    public $bankModel;
     //constructor
     public function __construct()
     {
