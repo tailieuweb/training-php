@@ -7,7 +7,7 @@ $id = NULL;
 
 $user = UserModel::getInstance();
 $obje = new stdClass();
-$a = $user->findUserById($obje);
+$a = $user->findUser(null);
 var_dump($a);
 die();
 

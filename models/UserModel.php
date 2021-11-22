@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\ErrorHandler\Error\FatalError;
+
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
@@ -37,7 +39,11 @@ class UserModel extends BaseModel
     // Get user by keyword:
     public function findUser($keyword)
     {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
+        if ($keyword instanceof stdClass) {
+            throw new InvalidArgumentException('Invalid argument');
+        }
+
+        $sql = 'SELECT * FROM users WHERE users.name LIKE ' . '\'%' . $keyword . '%\'' . ' OR email LIKE ' . '\'%' . $keyword . '%\'';
         $user = $this->select($sql);
 
         return $user;
@@ -155,5 +161,14 @@ class UserModel extends BaseModel
         $user = $this->select($sql);
 
         return $user[0]["version"];
+    }
+
+    // Code for testing
+    public function startTransaction(){
+        self::$_connection->begin_transaction();
+    }
+
+    public function rollback(){
+        self::$_connection->rollback();
     }
 }
