@@ -18,7 +18,15 @@ class BankModel extends BaseModel
     {
         echo "bankModel";
     }
-
+    // rollback data: 
+    public function startTransaction()
+    {
+        self::$_connection->begin_transaction();
+    }
+    public function rollback()
+    {
+        self::$_connection->rollback();
+    }
     public function findBankById($id)
     {
         $sql1 = 'SELECT id FROM banks';
@@ -91,18 +99,7 @@ class BankModel extends BaseModel
         $bank = $this->insert($sql);
         return $bank;
     }
-    // public function updateBank2($input)
-    // {
-    //     $tong = $input['cost'] - 100;
-
-    //     $user = $this->getUserByIdNew();
-    //     $sql = 'UPDATE banks SET 
-    //         user_id = "' . $user[0]['user_id'] . '", 
-    //         cost = "' . $tong . '", 
-    //         WHERE id = ' . $input['id'];
-    //     $bank = $this->update($sql);
-    //     return $bank;
-    // }
+    
 
 
     /**

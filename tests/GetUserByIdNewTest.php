@@ -11,16 +11,18 @@ class GetUserByIdNewTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make('bank');
-        
+        // $bankModel->startTransaction();
         //Truyền đúng id mới nhất của danh sách users
-        $user = 212;
+        $user = 1;
         $params = array(
             'user_id' => $user,
         );
         //Ket qua biet truoc:
         $expected = 1;
         //Ket qua mong doi:
+        
         $actual = $bankModel->insertUserAndBanks($params);
+        // $bankModel->rollback();
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
     }
@@ -37,9 +39,11 @@ class GetUserByIdNewTest extends TestCase
         //Ket qua biet truoc:
         $expected = 1;
         //Ket qua mong doi:
+        $bankModel->startTransaction();
         if(empty($params['cost']) == null) {
             $actual = $bankModel->insertUserAndBanks($params);
         }
+        $bankModel->rollback();
         // var_dump($actual);die();
         if(empty($actual)) {
             $this->assertTrue(true);
@@ -51,19 +55,24 @@ class GetUserByIdNewTest extends TestCase
     //------------------------------------------ Test Case getUserByIdNew -----------------------//
     public function testGetUserByIdNewOk()
     {
-        $userModel = new BankModel();
-        
-        $user = $userModel->getUserByIdNew();
+        $bankModel = new BankModel();
+
+        $bankModel->startTransaction();
+        $user = $bankModel->getUserByIdNew();
+        $bankModel->rollback();
+
         $actual = $user[0]['user_id'];
-        $expected = '291';
+        $expected = '1';
         $this->assertEquals($expected, $actual);       // var_dump($actual[0]['user_id']);die();
     }
     // Not good
     public function testGetUserByIdNewNg()
     {
-        $userModel = new BankModel();
-        
-        $actual = $userModel->getUserByIdNew();
+        $bankModel = new BankModel();
+
+        $bankModel->startTransaction();
+        $actual = $bankModel->getUserByIdNew();
+        $bankModel->rollback();
         // var_dump($user);die();
         // var_dump($actual);die();
         if(empty($actual[0]['MAX'])) {
@@ -75,9 +84,11 @@ class GetUserByIdNewTest extends TestCase
      // Not NULL
      public function testGetUserByIdNewNull()
      {
-         $userModel = new BankModel();
+         $bankModel = new BankModel();
          
-         $actual = $userModel->getUserByIdNew();
+         $bankModel->startTransaction();
+         $actual = $bankModel->getUserByIdNew();
+         $bankModel->rollback();
          // var_dump($user);die();
          // var_dump($actual);die();
          if(!empty($actual[0]['MAX'])) {
