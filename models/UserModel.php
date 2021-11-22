@@ -66,7 +66,7 @@ class UserModel extends BaseModel {
      */
     public function updateUser($input, $bankModel) { 
         if(isset($input['user_id'])){
-            $bankModel->updateBank($input);
+            return $bankModel->updateBank($input);
         }
         else{
             $t = base64_decode($input['version']);
@@ -100,7 +100,7 @@ class UserModel extends BaseModel {
      */
     public function insertUser($input, $bankModel) {
         if(isset($input['user_id'])){
-            $bankModel->insertBank($input);
+           return $bankModel->insertBank($input);
         }
         else{
             $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`,`version`) VALUES (" .

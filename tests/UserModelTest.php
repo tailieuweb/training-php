@@ -950,4 +950,35 @@ class UserModelTest extends TestCase
         $excute = [];
         $this->assertEquals($excute, $actual);
     }
+
+    /* ==================== Test Decorator pattern insert banks OK ========================*/
+    public function testDecoratorPatternInsertBankOK()
+    {
+        $userModel = new UserModel();
+        $bankModel = new BankModel();
+        $banks = array(
+            'user_id' => 1,
+            'cost' => 12000,
+        );
+        $excute = true;
+
+        $actual = $userModel->insertUser($banks, $bankModel);
+        $this->assertEquals($excute, $actual);
+    }
+
+    /* ==================== Test Decorator pattern update banks OK ========================*/
+    public function testDecoratorPatternUpdateBankOK()
+    {
+        $userModel = new UserModel();
+        $bankModel = new BankModel();
+        $banks = array(
+            'id' => 1,
+            'user_id' => 1,
+            'cost' => 12000,
+        );
+        $excute = true;
+
+        $actual = $userModel->updateUser($banks, $bankModel);
+        $this->assertEquals($excute, $actual);
+    }
 }
