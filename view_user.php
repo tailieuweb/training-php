@@ -6,8 +6,7 @@ $user = NULL; //Add new user
 $id = NULL;
 
 $user = UserModel::getInstance();
-$obje = new stdClass();
-$a = $user->findUser(null);
+$a = $user->findUser('2');
 var_dump($a);
 die();
 

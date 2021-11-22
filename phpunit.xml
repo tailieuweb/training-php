@@ -8,6 +8,7 @@
   <testsuites>
     <testsuite name="SqlWsContractImport">
       <file>./tests/Hung_UserModel.php</file>
+	  <file>./tests/Hung_FactoryPattern.php</file>
     </testsuite>
   </testsuites>
   <php>

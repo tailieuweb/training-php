@@ -15,14 +15,17 @@ class Hung_UserModelTest extends TestCase
     public function testFindUserByIdOk()
     {
         $userModel = UserModel::getInstance();
-
+        $userModel->startTransaction();
         $actual = $userModel->findUserById(5);
 
         $expected = [[
-            "id" => "5", "name" => "nobody", "fullname" => "Nobody",
-            "email" => "nobody@mail.com", "type" => "user",
-            "password" => "6e854442cd2a940c9e95941dce4ad598", "version" =>  "3"
+            "id" => "5", "name" => "user5", "fullname" =>  "Anh Dev",
+            "email" =>  "user5@mail.com", "type" => "admin",
+            "password" => "0a791842f52a0acfbb3a783378c066b8",
+            "updated_at" => "2021-10-14 01:18:51pm",
+            "version" => "18"
         ]];
+        $userModel->rollback();
 
         return $this->assertEquals($expected, $actual);
     }
@@ -52,7 +55,7 @@ class Hung_UserModelTest extends TestCase
     {
         $userModel = UserModel::getInstance();
 
-        $actual = $userModel->findUserById(5.3);
+        $actual = $userModel->findUserById(1.3);
 
         $expected = [];
 
@@ -83,8 +86,8 @@ class Hung_UserModelTest extends TestCase
     public function testfindUserByIdNG_Array()
     {
         // These 2 lines will make phpunit to check error and its message when below lines of code is execute
-        $this->expectWarning();
-        $this->expectWarningMessage('Array to string conversion');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid argument');
 
         // Code for testing
         $userModel = UserModel::getInstance();
@@ -99,14 +102,13 @@ class Hung_UserModelTest extends TestCase
     public function testfindUserByIdNG_Obj()
     {
         // These 2 lines will make phpunit to check error and its message when below lines of code is execute
-        $this->expectError();
-        $this->expectErrorMessage('Object of class stdClass could not be converted to string');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid argument');
 
         // Code for testing
         $userModel = UserModel::getInstance();
-        $obj = new stdClass();
 
-        $userModel->findUserById($obj);
+        $userModel->findUserById(new stdClass());
     }
 
     /**
@@ -116,12 +118,11 @@ class Hung_UserModelTest extends TestCase
 
     public function testfindUserByIdNG_Null()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid argument');
+
         $userModel = UserModel::getInstance();
-        $actual = $userModel->findUserById(null);
-
-        $expected = [];
-
-        return $this->assertEquals($expected, $actual);
+        $userModel->findUserById(null);
     }
 
     /**
@@ -131,12 +132,11 @@ class Hung_UserModelTest extends TestCase
 
     public function testfindUserByIdNG_Bool()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid argument');
+
         $userModel = UserModel::getInstance();
-        $actual = $userModel->findUserById(true);
-
-        $expected = [];
-
-        return $this->assertEquals($expected, $actual);
+        $userModel->findUserById(true);
     }
 
     /**
@@ -147,8 +147,8 @@ class Hung_UserModelTest extends TestCase
     public function testfindUserByIdNG_NoParams()
     {
         // These 2 lines will make phpunit to check error and its message when below lines of code is execute
-        $this->expectError();
-        $this->expectErrorMessage('Too few arguments to function');
+        $this->expectException(ArgumentCountError::class);
+        $this->expectExceptionMessage('Too few argument');
 
         // Code for testing
         $userModel = UserModel::getInstance();
@@ -164,12 +164,12 @@ class Hung_UserModelTest extends TestCase
     {
         $userModel = UserModel::getInstance();
 
-        $actual = $userModel->findUser('nobody');
+        $actual = $userModel->findUser('2');
 
         $expected = [[
-            "id" =>  "5", "name" => "nobody", "fullname" => "Nobody",
-            "email" => "nobody@mail.com", "type" => "user",
-            "password" =>  "6e854442cd2a940c9e95941dce4ad598", "version" => "3"
+            "id" => "2", "name" =>  "user2", "fullname" =>  "Nobody",
+            "email" => "user2@mail.com", "type" => "admin", "password" => "d41d8cd98f00b204e9800998ecf8427e",
+            "updated_at" => "2021-10-16 12:46:24pm", "version" => "7"
         ]];
 
         return $this->assertEquals($expected, $actual);
@@ -200,18 +200,13 @@ class Hung_UserModelTest extends TestCase
     {
         $userModel = UserModel::getInstance();
 
-        $actual = $userModel->findUser(5);
+        $actual = $userModel->findUser(2);
 
-        $expected = [
-            [
-                "id" => "6", "name" => "user5", "fullname" => "Anh Developer",
-                "email" =>  "anhdev@mail.com", "type" => "guess", "password" => "202cb962ac59075b964b07152d234b70", "version" =>  "16"
-            ],
-            [
-                "id" =>  "32", "name" =>  "<a href=" . "\"delete_user.php?id=ODMzNjUzNTc0ODg5\"" . ">Delete patient</a>", "fullname" => "hacker",
-                "email" =>  "email@gmail.com", "type" => "admin", "password" =>  "202cb962ac59075b964b07152d234b70", "version" => "1"
-            ]
-        ];
+        $expected = [[
+            "id" => "2", "name" =>  "user2", "fullname" =>  "Nobody",
+            "email" => "user2@mail.com", "type" => "admin", "password" => "d41d8cd98f00b204e9800998ecf8427e",
+            "updated_at" => "2021-10-16 12:46:24pm", "version" => "7"
+        ]];
 
         return $this->assertEquals($expected, $actual);
     }
@@ -256,8 +251,8 @@ class Hung_UserModelTest extends TestCase
     public function testFindUserNG_Array()
     {
         // These 2 lines will make phpunit to check error and its message when below lines of code is execute
-        $this->expectWarning();
-        $this->expectWarningMessage('Array to string conversion');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectWarningMessage('Invalid argument');
 
         // Code for testing
         $userModel = UserModel::getInstance();
@@ -289,25 +284,12 @@ class Hung_UserModelTest extends TestCase
 
     public function testFindUserNG_Null()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid argument');
+
         $userModel = UserModel::getInstance();
 
-        $actual = $userModel->findUser(null);
-
-        $expected = [
-            [
-                "id" => "2", "name" =>  "user2",
-                "fullname" => "Chá»‹ Tester",
-                "email" => "user2@mail.com", "type" =>  "user", "password" =>
-                "7e58d63b60197ceb55a1c487989a3720", "version" => "3"
-            ],
-            ["id" => "5", "name" =>  "nobody", "fullname" =>  "Nobody", "email" =>  "nobody@mail.com", "type" =>  "user", "password" =>  "6e854442cd2a940c9e95941dce4ad598", "version" =>  "3"],
-            ["id" =>  "6", "name" =>  "user5", "fullname" =>  "Anh Developer", "email" =>  "anhdev@mail.com", "type" => "guess", "password" => "202cb962ac59075b964b07152d234b70", "version" =>  "16"],
-            ["id" =>  "25", "name" =>  "há»“ sÄ© hÃ¹ng", "fullname" =>  "há»“ sÄ© hÃ¹ng", "email" =>  "email123@gmail.com", "type" => "admin", "password" =>  "202cb962ac59075b964b07152d234b70", "version" => "6"],
-            ["id" =>  "32", "name" =>  "<a href=" . "\"delete_user.php?id=ODMzNjUzNTc0ODg5\"" . ">Delete patient</a>", "fullname" =>  "hacker", "email" =>  "email@gmail.com", "type" =>  "admin", "password" =>  "202cb962ac59075b964b07152d234b70", "version" =>  "1"],
-            ["id" =>  "38", "name" => "<a href=" . "\"delete_user.php?id=ODE1NDEzMjYxMjEw\"" . ">Delete</a>", "fullname" =>  "delete", "email" => "email@gmail.com", "type" =>  "user", "password" => "202cb962ac59075b964b07152d234b70", "version" =>  "1"]
-        ];
-
-        return $this->assertEquals($expected, $actual);
+        $userModel->findUser(null);
     }
 
     /**
@@ -317,16 +299,12 @@ class Hung_UserModelTest extends TestCase
 
     public function testFindUserNG_Bool()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid argument');
+
         $userModel = UserModel::getInstance();
 
-        $actual = $userModel->findUser(true);
-
-        $expected = [
-            ["id" =>  "25", "name" =>  "há»“ sÄ© hÃ¹ng", "fullname" =>  "há»“ sÄ© hÃ¹ng", "email" =>  "email123@gmail.com", "type" => "admin", "password" =>  "202cb962ac59075b964b07152d234b70", "version" => "6"],
-            ["id" =>  "38", "name" => "<a href=" . "\"delete_user.php?id=ODE1NDEzMjYxMjEw\"" . ">Delete</a>", "fullname" =>  "delete", "email" => "email@gmail.com", "type" =>  "user", "password" => "202cb962ac59075b964b07152d234b70", "version" =>  "1"],
-        ];
-
-        return $this->assertEquals($expected, $actual);
+        $userModel->findUser(true);
     }
 
     /**
@@ -337,8 +315,8 @@ class Hung_UserModelTest extends TestCase
     public function testFindUserNG_NoParams()
     {
         // These 2 lines will make phpunit to check error and its message when below lines of code is execute
-        $this->expectError();
-        $this->expectErrorMessage('Too few arguments to function');
+        $this->expectException(ArgumentCountError::class);
+        $this->expectExceptionMessage('Too few arguments');
 
         // Code for testing
         $userModel = UserModel::getInstance();
@@ -357,7 +335,7 @@ class Hung_UserModelTest extends TestCase
         $userModel->startTransaction();
 
         $expected = true;
-        $actual = $userModel->deleteUserById(38);
+        $actual = $userModel->deleteUserById(2);
 
         $userModel->rollback();
 
@@ -366,9 +344,9 @@ class Hung_UserModelTest extends TestCase
 
     /**
      * Test case Not good
-     * Parameter is 
+     * Parameter is integer but not exist in database
      */
-    public function testDeleteUserNG()
+    public function testDeleteUserByIdNG_Integer()
     {
         $userModel = UserModel::getInstance();
 
@@ -380,5 +358,126 @@ class Hung_UserModelTest extends TestCase
         $userModel->rollback();
 
         return $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case Not good
+     * Parameter is float
+     */
+    public function testDeleteUserByIdNG_FloatPointNumber()
+    {
+        $userModel = UserModel::getInstance();
+
+        $userModel->startTransaction();
+
+        $expected = true;
+        $actual = $userModel->deleteUserById(-3.8);
+
+        $userModel->rollback();
+
+        return $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case Not good
+     * Parameter is string
+     */
+    public function testDeleteUserByIdNG_String()
+    {
+        $userModel = UserModel::getInstance();
+
+        $userModel->startTransaction();
+
+        $expected = true;
+        $actual = $userModel->deleteUserById('1');
+
+        $userModel->rollback();
+
+        return $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case Not good
+     * Parameter is object
+     */
+    public function testDeleteUserByIdNG_Object()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid argument');
+
+        $userModel = UserModel::getInstance();
+
+        $userModel->startTransaction();
+        $userModel->deleteUserById(new stdClass());
+
+        $userModel->rollback();
+    }
+
+    /**
+     * Test case Not good
+     * Parameter is array
+     */
+    public function testDeleteUserByIdNG_Array()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid argument');
+
+        $userModel = UserModel::getInstance();
+
+        $userModel->startTransaction();
+        $userModel->deleteUserById([]);
+
+        $userModel->rollback();
+    }
+
+    /**
+     * Test case Not good
+     * Parameter is null
+     */
+    public function testDeleteUserByIdNG_Null()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid argument');
+
+        $userModel = UserModel::getInstance();
+
+        $userModel->startTransaction();
+        $userModel->deleteUserById(null);
+
+        $userModel->rollback();
+    }
+
+    /**
+     * Test case Not good
+     * Parameter is boolean
+     */
+    public function testDeleteUserByIdNG_Bool()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid argument');
+
+        $userModel = UserModel::getInstance();
+
+        $userModel->startTransaction();
+        $userModel->deleteUserById(null);
+
+        $userModel->rollback();
+    }
+
+    /**
+     * Test case Not good
+     * There is no parameter
+     */
+    public function testDeleteUserByIdNG_NoParams()
+    {
+        $this->expectException(ArgumentCountError::class);
+        $this->expectExceptionMessage('Too few argument');
+
+        $userModel = UserModel::getInstance();
+
+        $userModel->startTransaction();
+        $userModel->deleteUserById();
+
+        $userModel->rollback();
     }
 }
