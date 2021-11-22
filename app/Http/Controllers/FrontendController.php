@@ -394,4 +394,23 @@ class FrontendController extends Controller
                     ->get();
         return View('Frontend.layout.favorite.index', compact('favorite'));
     }
+    //Post the hotel favorite of user
+    public function postFavoriteOfUser(Request $request){
+        $this->AuthLogin();
+        if(isset(Auth::user()->id)){
+            $getFavorite = DB::table('favorite')
+                    ->where('hotel_id', $request->hotel_id)
+                    ->where('user_id', Auth::user()->id)
+                    ->get();
+            $data = array();
+            $data['hotel_id'] = $request->hotel_id;
+            $data['user_id'] = Auth::user()->id;
+            if(count($getFavorite) != 0){
+                DB::table('favorite')->where('favorite_id', $getFavorite[0]->favorite_id)->delete();
+                return $this->getAllHotel();
+            }
+        }
+        DB::table('favorite')->insert($data);
+        return $this->getAllHotel();
+    }
 }

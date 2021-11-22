@@ -82,13 +82,18 @@
                         {{$hotel->address}}
                     </div>
                     <div class="tm-home-box-2-container">
-                        <div id="favorites" class="tm-home-box-2-link <?php 
-                            if(isset($all_hotel)){
-                                if($hotel->favo_check == 1){
-                                    echo "active";
+                        <form id="form_favorite" method="post" style="display: inline-block;">
+                        @csrf
+                            <input id="hotel_id" type="text" value="{{$hotel->hotel_id}}" name="hotel_id" hidden>
+                            <button id="favorites" class="tm-home-box-2-link <?php 
+                                if(isset($all_hotel)){
+                                    if($hotel->favo_check == 1){
+                                        echo "active";
+                                    }
                                 }
-                            }
-                        ?>"><i class="fa fa-heart tm-home-box-2-icon border-right"></i></div>
+                            ?>"><i class="fa fa-heart tm-home-box-2-icon border-right"></i></button>
+                        </form>
+                        
                         <a href="{{asset('')}}detail/{{$hotel->hotel_id}}" class="tm-home-box-2-link"><span class="tm-home-box-2-description">Travel</span></a>
                         <a href="{{asset('')}}detail/{{$hotel->hotel_id}}" class="tm-home-box-2-link"><i class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
                     </div>
@@ -149,7 +154,22 @@
     favorite.forEach( (e) => {
         e.addEventListener('click', function(){
             e.classList.toggle('active');
-            window.location = '{{asset('')}}hotel'
+            // window.location = '{{asset('')}}hotel'
+        })
+    })
+</script>
+<script>
+    $('#form_favorite').submit(function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            cache: false,
+            url: "{{ route('frontend.dashboard.index.favorite.post') }}",
+            data: {
+                // "_token": '{{csrf_token()}}',
+                "hotel_id": $("#hotel_id").val(),
+                // "email": $("").val(),
+            },
         })
     })
 </script>

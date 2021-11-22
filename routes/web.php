@@ -117,4 +117,5 @@ Route::group(['module' => 'dashboard', 'middleware' => 'web', 'namespace' => "Ap
     Route::post("/receip/{id}", ["as" => "frontend.dashboard.index.receip", "uses" => "FrontendController@addReceipForUser"]);
     //
     Route::get("/favorite", ["as" => "frontend.dashboard.index.favorite", "uses" => "FrontendController@getAllHotelFavorite"]);
+    Route::post("/hotel", ["as" => "frontend.dashboard.index.favorite.post", "uses" => "FrontendController@postFavoriteOfUser"]);
 });
