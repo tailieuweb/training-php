@@ -6,7 +6,15 @@ class UserModel extends BaseModel
 {
     protected static $_instance;
 
-
+    // rollback data: 
+    public function startTransaction()
+    {
+        self::$_connection->begin_transaction();
+    }
+    public function rollback()
+    {
+        self::$_connection->rollback();
+    }
     public function findUserByIdNew($id)
     {
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
