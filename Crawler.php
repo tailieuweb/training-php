@@ -4,7 +4,7 @@ require_once 'sites/VnExpressSite.php';
 $site = new VnExpressSite();
 $post = new PostModel();
 
-$maxPage = 2;
+$maxPage = 20;
 
 for ($i = 1; $i <= $maxPage; $i++) {
     $site->setFullUrl('the-thao-p'.$i);
