@@ -22,8 +22,7 @@ class UserModel extends BaseModel
     {
         $sql = 'SELECT * FROM users WHERE email ="' . $email . '"';
         $user = $this->select($sql);
-       return isset($user[0]) ? $user[0] : false;
-      
+        return isset($user[0]) ? $user[0] : false;
     }
 
     /**
@@ -61,6 +60,9 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
+        if(!$this->checkInput($input,true)){
+            return false;
+        }
         $result = ResultClass::getInstance();
         $id = $this->decryptID($input['id']);
         $user = $this->findUserById($input['id']);
@@ -96,9 +98,7 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
-        $checkEmailStyle = $this->checkEmailStyle($input['email']);
-        $checkEmailExist = $this->checkEmailExist($input['email']);
-        if($checkEmailExist || !$checkEmailStyle){
+        if (!$this->checkInput($input)) {
             return false;
         }
         $password = md5($input['password']);
@@ -117,9 +117,14 @@ class UserModel extends BaseModel
      */
     public function insertUserWithId($id, $name, $fullname, $email, $type, $password)
     {
-        $checkEmailStyle = $this->checkEmailStyle($email);
-        $checkEmailExist = $this->checkEmailExist($email);
-        if($checkEmailExist || !$checkEmailStyle){
+        $input = [
+            'name'=>$name,
+            'fullname'=>$fullname,
+            'email'=>$email,
+            'type'=>$type,
+            'password'=>$password
+        ];
+        if(!$this->checkInput($input)){
             return false;
         }
         if (!is_numeric($id)) {
@@ -143,7 +148,7 @@ class UserModel extends BaseModel
 
         //Keyword
         if (!empty($params['keyword'])) {
-            if(!is_numeric($params['keyword']) && !is_string($params['keyword'])){
+            if (!is_numeric($params['keyword']) && !is_string($params['keyword'])) {
                 return $this->getUsers();
             }
             $keyword = $this->BlockSQLInjection($params['keyword']);
@@ -223,6 +228,81 @@ class UserModel extends BaseModel
             }
         }
         return NULL;
+    }
+    /**
+     * Check Input
+     */
+    public function checkInput($input, bool $isUpdate = false)
+    {
+        if (is_array($input)) {
+            // Check Name
+            if (isset($input['name'])) {
+                if (!is_string($input['name']) && !is_numeric($input['name'])) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+            // Check fullname
+            if (isset($input['fullname'])) {
+                if (!is_string($input['fullname']) && !is_numeric($input['fullname'])) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+            // Check email
+            if (isset($input['email'])) {
+                if (is_string($input['email'])) {
+                    $checkEmailStyle = $this->checkEmailStyle($input['email']);
+                    $checkEmailExist = $this->checkEmailExist($input['email']);
+                    if ($checkEmailExist || !$checkEmailStyle) {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+            // Check type
+            if (isset($input['type'])) {
+                if (!is_string($input['type']) && !is_numeric($input['type'])) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+            // Check password
+            if (isset($input['password'])) {
+                if (!is_string($input['password']) && !is_numeric($input['password'])) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+            // Check if it is update
+            if ($isUpdate) {
+                // Check id
+                if (isset($input['id'])) {
+                    if (!is_string($input['id']) && !is_numeric($input['id'])) {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+                // Check version
+                if (isset($input['version'])) {
+                    if (!is_string($input['version']) && !is_numeric($input['version'])) {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     public static function getInstance()
