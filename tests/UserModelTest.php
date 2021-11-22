@@ -208,4 +208,32 @@ class UserModelTest extends TestCase
           $expected = NULL;
           $this->assertEquals($expected, $actual);
       }
+
+    /**
+     * Test getInstance function, 'Hiếu Cao' do this 
+     * */
+    // Test case getInstance Good
+    public function testGetInstanceGood()
+    {
+        $userModelSingleton = UserModel::getInstance();
+        $userModelSingleton2 = UserModel::getInstance();
+
+        $expected = true;
+        $actual = is_object($userModelSingleton) && 
+                get_class($userModelSingleton) == 'UserModel' &&
+                $userModelSingleton === $userModelSingleton2;
+
+        $this->assertEquals($expected, $actual);
+    }
+    // Test case getInstance Not Good
+    public function testGetInstanceNg()
+    {
+        $userModelSingleton = UserModel::getInstance();
+
+        $expected = false;
+        $actual = !is_object($userModelSingleton) || 
+                !get_class($userModelSingleton) == 'UserModel';
+
+        $this->assertEquals($expected, $actual);
+    }
 }
