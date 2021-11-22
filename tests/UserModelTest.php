@@ -1,5 +1,6 @@
 <?php
 
+use phpDocumentor\Reflection\PseudoTypes\True_;
 use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
@@ -176,6 +177,220 @@ class UserModelTest extends TestCase
       $keyword = $userModel;
       try {
          $userModel->findUser($keyword);
+      } catch (Throwable $e) {
+         $this->assertTrue(true);
+      }
+   }
+
+   /*
+     * Test function: updateUser()
+     * Author: Long
+     */
+
+   //Test update user with valid input ok
+   public function testUpdateUser_OK()
+   {
+      $userModel = new UserModel();
+      $user['name'] = "Long";
+      $user['password'] = "123";
+      $user['id'] = "2";
+      //Excute function
+      $userModel->updateUser($user);
+      //Get actual
+      $actual = $userModel->findUser($user['name']);
+      //Compare
+      $this->assertEquals($user['name'], $actual[0]['name']);
+   }
+   //Test update user with valid input true
+   public function testUpdateUser_NG()
+   {
+      $userModel = new UserModel();
+      $user['name'] = "Long";
+      $user['password'] = "123";
+      $user['id'] = "2";
+      //Excute function
+      $userModel->updateUser($user);
+      //Get actual
+      $actual = $userModel->findUser($user['name']);
+      //Compare
+      ($actual[0]['name'] != $user['name']) ? $this->assertTrue(false) : $this->assertTrue(true);
+   }
+   //Test update user with invalid id
+   public function testUpdateUserInvalidId_OK()
+   {
+      $userModel = new UserModel();
+      $user['name'] = "Long";
+      $user['password'] = "123";
+      $user['id'] = "1000";
+      //Excute function
+      $userModel->updateUser($user);
+      // var_dump($actual); die();
+      //Actual
+      $actual = $userModel->findUserById($user['id']);
+      $expected = array();
+      $this->assertEquals($expected, $actual);
+   }
+   //Test update user without param "name"
+   public function testUpdateUserWithoutName_OK()
+   {
+      $userModel = new UserModel();
+      $user['name'] = null;
+      $user['password'] = "123";
+      $user['id'] = "2";
+      //Excute function
+      $userModel->updateUser($user);
+      //Actual
+      $actual = $userModel->findUserById($user['id']);
+      $this->assertEquals($actual[0]['name'], null);
+      $this->assertEquals($actual[0]['password'], md5("123"));
+   }
+
+   //Test update user with param name is array
+   public function testUpdateUserWithArrayName_NG()
+   {
+      $userModel = new UserModel();
+      $user['name'] = ["Long", "Kunz"];
+      $user['password'] = "123";
+      $user['id'] = "2";
+      try {
+         $userModel->updateUser($user);
+      } catch (Throwable $e) {
+         $this->assertTrue(true);
+      }
+   }
+   //Test update user with param password is null
+   public function testUpdateUserWithoutPassword_OK()
+   {
+      $userModel = new UserModel();
+      $user['name'] = "Long";
+      $user['password'] = null;
+      $user['id'] = "2";
+      $userModel->updateUser($user);
+      $actual = $userModel->findUserById($user['id']);
+      $this->assertEquals($actual[0]['password'], md5(""));
+   }
+   //Test update user with param password & name is null
+   public function testUpdateUserWithNull_OK()
+   {
+      $userModel = new UserModel();
+      $user['name'] = null;
+      $user['password'] = null;
+      $user['id'] = "2";
+      $userModel->updateUser($user);
+      $actual = $userModel->findUserById($user['id']);
+      $this->assertEquals($actual[0]['password'], md5(""));
+      $this->assertEquals($actual[0]['name'], null);
+   }
+   //Test update user with all params is null
+   public function testUpdateUserWithAllNull_NG()
+   {
+      $userModel = new UserModel();
+      $user['name'] = null;
+      $user['password'] = null;
+      $user['id'] = null;
+      $actual = $userModel->updateUser($user);
+      $actual == false ? $this->assertTrue(true) : $this->assertTrue(false);
+   }
+   //Test update user with param name is array
+   public function testUpdateUserWithArrayPass_NG()
+   {
+      $userModel = new UserModel();
+      $user['name'] = "Long";
+      $user['password'] = ["Long", "Kunz"];
+      $user['id'] = "2";
+      try {
+         $userModel->updateUser($user);
+      } catch (Throwable $e) {
+         $this->assertTrue(true);
+      }
+   }
+   //Test update user with param name & pass is array
+   public function testUpdateUserWithArray_NG()
+   {
+      $userModel = new UserModel();
+      $user['name'] = ["Long", "Kunz"];
+      $user['password'] = ["Long", "Kunz"];
+      $user['id'] = "2";
+      try {
+         $userModel->updateUser($user);
+      } catch (Throwable $e) {
+         $this->assertTrue(true);
+      }
+   }
+   //Test update user with param name is object
+   public function testUpdateUserWithObjName_NG()
+   {
+      $userModel = new UserModel();
+      $user['name'] = $userModel;
+      $user['password'] = "123";
+      $user['id'] = "2";
+      try {
+         $userModel->updateUser($user);
+      } catch (Throwable $e) {
+         $this->assertTrue(true);
+      }
+   }
+   //Test update user with param password is object
+   public function testUpdateUserWithObjPass_NG()
+   {
+      $userModel = new UserModel();
+      $user['name'] = "long";
+      $user['password'] = $userModel;
+      $user['id'] = "2";
+      try {
+         $userModel->updateUser($user);
+      } catch (Throwable $e) {
+         $this->assertTrue(true);
+      }
+   }
+   //Test update user with param name & password is object
+   public function testUpdateUserWithObj_NG()
+   {
+      $userModel = new UserModel();
+      $user['name'] = $userModel;
+      $user['password'] = $userModel;
+      $user['id'] = "2";
+      try {
+         $userModel->updateUser($user);
+      } catch (Throwable $e) {
+         $this->assertTrue(true);
+      }
+   }
+   //Test update user with id is array
+   public function testUpdateUserWithArrayId_NG()
+   {
+      $userModel = new UserModel();
+      $user['name'] = "long";
+      $user['password'] = "123";
+      $user['id'] = ["2", "3"];
+      try {
+         $userModel->updateUser($user);
+      } catch (Throwable $e) {
+         $this->assertTrue(true);
+      }
+   }
+   //Test update user with all params is object
+   public function testUpdateUserWithAllObj_NG()
+   {
+      $userModel = new UserModel();
+      $user['name'] = $userModel;
+      $user['password'] = $userModel;
+      $user['id'] = $userModel;
+      try {
+         $userModel->updateUser($user);
+      } catch (Throwable $e) {
+         $this->assertTrue(true);
+      }
+   }
+   //Test update user with all params is array
+   public function testUpdateUserWithAllArr_NG()
+   {
+      $userModel = new UserModel();
+      $user['name'] = ["long", "kunz"];
+      $user['password'] = ["long", "kunz"];
+      $user['id'] = ["long", "kunz"];
+      try {
+         $userModel->updateUser($user);
       } catch (Throwable $e) {
          $this->assertTrue(true);
       }
