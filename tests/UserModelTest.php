@@ -193,11 +193,7 @@ class UserModelTest extends TestCase
         $id = -1;
         $expected = $userModel->deleteUserById($id);
         $actual = true;
-        if ($expected == true) {
-            $this->assertEquals($expected, $actual);
-        } else {
-            return false;
-        }
+        $this->assertEquals($expected, $actual);
     }
     /**
      * Test getUser Function in UserModel - 'Danh' do this

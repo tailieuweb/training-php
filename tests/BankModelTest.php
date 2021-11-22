@@ -79,13 +79,7 @@ class BankModelTest extends TestCase
         $id = -1;
         $expected = $bankModel->deleteBankByUserId($id);
         $actual = true;
-        if($expected==true)
-        {
-            $this->assertEquals($expected, $actual);
-        }
-       else{
-           return false;
-       }
+        $this->assertEquals($expected, $actual);
     }
     /**
      * Test getBankByUserId Function in BankModel - 'Danh' do this
