@@ -144,7 +144,7 @@ class UserModelTest extends TestCase
       $keyword = 'test';
       $actual = $userModel->findUser($keyword);
       // var_dump($actual); die;
-      if ($actual[0]['name'] == 'test1' && $actual[1]['name'] == 'test3') {
+      if ($actual[0]['name'] == 'test1' && $actual[1]['name'] == 'test2') {
          $this->assertTrue(true);
       } else {
          $this->assertTrue(false);
@@ -194,12 +194,14 @@ class UserModelTest extends TestCase
       $user['name'] = "Long";
       $user['password'] = "123";
       $user['id'] = "2";
+      $userModel->startTransaction();
       //Excute function
       $userModel->updateUser($user);
       //Get actual
       $actual = $userModel->findUser($user['name']);
       //Compare
       $this->assertEquals($user['name'], $actual[0]['name']);
+      $userModel->rollback();
    }
    //Test update user with valid input true
    public function testUpdateUser_NG()
@@ -209,11 +211,13 @@ class UserModelTest extends TestCase
       $user['password'] = "123";
       $user['id'] = "2";
       //Excute function
+      $userModel->startTransaction();
       $userModel->updateUser($user);
       //Get actual
       $actual = $userModel->findUser($user['name']);
       //Compare
       ($actual[0]['name'] != $user['name']) ? $this->assertTrue(false) : $this->assertTrue(true);
+      $userModel->rollback();
    }
    //Test update user with invalid id
    public function testUpdateUserInvalidId_OK()
@@ -223,12 +227,14 @@ class UserModelTest extends TestCase
       $user['password'] = "123";
       $user['id'] = "1000";
       //Excute function
+      $userModel->startTransaction();
       $userModel->updateUser($user);
       // var_dump($actual); die();
       //Actual
       $actual = $userModel->findUserById($user['id']);
       $expected = array();
       $this->assertEquals($expected, $actual);
+      $userModel->rollback();
    }
    //Test update user without param "name"
    public function testUpdateUserWithoutName_OK()
@@ -238,11 +244,13 @@ class UserModelTest extends TestCase
       $user['password'] = "123";
       $user['id'] = "2";
       //Excute function
+      $userModel->startTransaction();
       $userModel->updateUser($user);
       //Actual
       $actual = $userModel->findUserById($user['id']);
       $this->assertEquals($actual[0]['name'], null);
       $this->assertEquals($actual[0]['password'], md5("123"));
+      $userModel->rollback();
    }
 
    //Test update user with param name is array
@@ -265,9 +273,12 @@ class UserModelTest extends TestCase
       $user['name'] = "Long";
       $user['password'] = null;
       $user['id'] = "2";
+      //Execute function
+      $userModel->startTransaction();
       $userModel->updateUser($user);
       $actual = $userModel->findUserById($user['id']);
       $this->assertEquals($actual[0]['password'], md5(""));
+      $userModel->rollback();
    }
    //Test update user with param password & name is null
    public function testUpdateUserWithNull_OK()
@@ -276,10 +287,13 @@ class UserModelTest extends TestCase
       $user['name'] = null;
       $user['password'] = null;
       $user['id'] = "2";
+      //Execute function
+      $userModel->startTransaction();
       $userModel->updateUser($user);
       $actual = $userModel->findUserById($user['id']);
       $this->assertEquals($actual[0]['password'], md5(""));
       $this->assertEquals($actual[0]['name'], null);
+      $userModel->rollback();
    }
    //Test update user with all params is null
    public function testUpdateUserWithAllNull_NG()
@@ -288,8 +302,11 @@ class UserModelTest extends TestCase
       $user['name'] = null;
       $user['password'] = null;
       $user['id'] = null;
+      //Execute function
+      $userModel->startTransaction();
       $actual = $userModel->updateUser($user);
       $actual == false ? $this->assertTrue(true) : $this->assertTrue(false);
+      $userModel->rollback();
    }
    //Test update user with param name is array
    public function testUpdateUserWithArrayPass_NG()

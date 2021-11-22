@@ -67,7 +67,7 @@ class BankModelTest extends TestCase
         $bankModel->insertBank($input);
         //Actual
         // var_dump($actual); die;
-        $actual = $bankModel->findBankById(12);
+        $actual = $bankModel->findBankById(8);
         ($actual[0]['user_id'] != "long") ? $this->assertTrue(true) : $this->assertTrue(false);
     }
     //Test insert bank with cost = null
@@ -82,7 +82,7 @@ class BankModelTest extends TestCase
         $bankModel->insertBank($input);
         //Actual
         // var_dump($actual); die;
-        $actual = $bankModel->findBankById(15);
+        $actual = $bankModel->findBankById(9);
         ($actual[0]['cost'] == 0) ? $this->assertTrue(true) : $this->assertTrue(false);
     }
     //Test insert bank with cost is character
@@ -97,7 +97,7 @@ class BankModelTest extends TestCase
         $bankModel->insertBank($input);
         //Actual
         // var_dump($actual); die;
-        $actual = $bankModel->findBankById(19);
+        $actual = $bankModel->findBankById(10);
         ($actual[0]['cost'] != "long") ? $this->assertTrue(true) : $this->assertTrue(false);
     }
     //Test insert bank with user_id & cost is character or string
@@ -112,7 +112,7 @@ class BankModelTest extends TestCase
         $bankModel->insertBank($input);
         //Actual
         // var_dump($actual); die;
-        $actual = $bankModel->findBankById(20);
+        $actual = $bankModel->findBankById(11);
         ($actual[0]['cost'] != "long" && $actual[0]['user_id'] != "long") ? $this->assertTrue(true) : $this->assertTrue(false);
     }
     //Test insert bank with user_id is array
