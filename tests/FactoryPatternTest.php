@@ -106,4 +106,32 @@ class FactoryPatternTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
+
+    /**
+     * Test getInstance function, 'Hiếu Cao' do this 
+     * */
+    // Test case getInstance Good
+    public function testGetInstanceGood()
+    {
+        $factoryPatterSingleton = FactoryPattern::getInstance();
+        $factoryPatterSingleton2 = FactoryPattern::getInstance();
+
+        $expected = true;
+        $actual = is_object($factoryPatterSingleton) && 
+                get_class($factoryPatterSingleton) == 'FactoryPattern' &&
+                $factoryPatterSingleton === $factoryPatterSingleton2;
+
+        $this->assertEquals($expected, $actual);
+    }
+    // Test case getInstance Not Good
+    public function testGetInstanceNg()
+    {
+        $factoryPatterSingleton = FactoryPattern::getInstance();
+
+        $expected = false;
+        $actual = !is_object($factoryPatterSingleton) || 
+                !get_class($factoryPatterSingleton) == 'FactoryPattern';
+
+        $this->assertEquals($expected, $actual);
+    }
 }
