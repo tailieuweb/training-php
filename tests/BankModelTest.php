@@ -87,4 +87,21 @@ class BankModelTest extends TestCase
            return false;
        }
     }
+    /**
+     * Test getBankByUserId Function in BankModel - 'Danh' do this
+     */
+    // Test case testDeleteBankById
+    public function testGetBankByUserIdNg()
+    {
+        $bankModel = new BankModel();
+        $id = -1;
+        $bankModel->insertBank($id,'12345');
+        $check = $bankModel->getBankByUserId($id);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+        
+    }
 }
