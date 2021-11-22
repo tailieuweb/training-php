@@ -7,30 +7,6 @@ class BankModel extends BaseModel
 {
     protected static $_instance;
     /**
-     *  Get Bank By Id
-     */
-    public function getBankById($id)
-    {
-
-        $id = is_numeric($id) ? $id : NULL;
-        $sql = 'SELECT * FROM `banks` WHERE `id` = ' . $id;
-        $bank = $this->select($sql);
-        return isset($bank[0]) ? $bank[0] : false;
-    }
-    /**
-     *  Get Bank By User Id
-     */
-    public function getBankByUserId($userId)
-    {
-        $userId = is_numeric($userId) ? $userId : NULL;
-        $sql = 'SELECT `banks`.*
-        FROM `users`,`banks` 
-        WHERE `users`.`id` = `banks`.`user_id` 
-        AND `users`.`id` = ' . $userId;
-        $bank = $this->select($sql);
-        return isset($bank[0]) ? $bank[0] : false;
-    }
-    /**
      *  Find User Id
      */
     public function findUserBankById($id)

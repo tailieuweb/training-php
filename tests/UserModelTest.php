@@ -117,38 +117,6 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-    /**
-     * Test find user
-     */
-    // public function testfindUserByIdOk()
-    // {
-    //     $userModel = new UserModel();
-    //     $userId = 2;
-    //     $userName = 'Phu';
-
-    //     $user = $userModel->findUserById($userId);
-    //     $actual = $user[0]['name'];
-
-    //     $this->assertEquals($userName, $actual);
-    // }
-    // public function testInsertUserOk()
-    // {
-    //     $userModel = new UserModel();
-    //     $user = array(
-    //         'id' => 14,
-    //         'name' => 'abc',
-    //         'fullname' => 'vitcon',
-    //         'type' => 'admin',
-    //         'email' => 'hhhhh@gmail.com',
-    //         'password' => '123456'
-    //     );
-    //     $actual = $userModel->insertUser($user);
-    //     if ($actual == true) {
-    //         $this->assertTrue(true);
-    //     } else {
-    //         $this->assertTrue(false);
-    //     }
-    // }
     public function testUpdateUserOk()
     {
         $userModel = new UserModel();
@@ -185,40 +153,4 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-
-    // public function testGetUserOk()
-    // {
-    //     $userModel = new UserModel();
-
-    //     $count_array = 6;
-    //     $actual = $userModel->getUsers();
-
-    //     $this->assertEquals($count_array, count($actual));
-    // }
-    // public function testGetUserbyKeyWordOk()
-    // {
-    //     $userModel = new UserModel();
-    //     $params= [];
-    //     $params['keyword'] = '321';
-    //     $count_array = 6;
-    //     $actual = $userModel->getUsers( $params);
-
-    //     $this->assertEquals($count_array,count($actual));
-    // }
-    // public function testDeleteUserByIdNg()
-    // {
-    //     $userModel = new UserModel();
-    //     $id = 20;
-
-
-    //     $actual = $userModel->deleteUserById($id);
-
-
-    //     // $this->assertEquals($userModel->findUserById($id),$actual);
-    //     if ($actual == true) {
-    //         $this->assertTrue(true);
-    //     } else {
-    //         $this->assertTrue(false);
-    //     }
-    // }
 }
