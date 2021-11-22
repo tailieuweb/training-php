@@ -36,4 +36,23 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
+
+    public function testInsertUser()
+    {
+
+        $userModel = new UserModel();
+        $input = [
+            'name' => 'test',
+            'password' => 'test',
+        ];
+
+        $userModel->startTransaction();
+
+        $userModel->insertUser($input);
+
+        $userModel->rollback();
+
+        $this->assertTrue(true);
+
+    }
 }
