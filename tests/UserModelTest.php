@@ -123,7 +123,7 @@ class UserModelTest extends TestCase
     public function testFindUserByIdNg()
     {
         $userModel = new UserModel();
-        $userID = 7;
+        $userID = 8888;
 
         $user = $userModel->findUserById($userID);
 
