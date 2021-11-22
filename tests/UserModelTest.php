@@ -97,21 +97,22 @@ class UserModelTest extends TestCase
 
       $this->assertEquals($expected, $actual);
    }
+   /***************************************************************/
    /*
      * Test function: findUser()
      * Author: Long
      */
-   //Test find user with valid keyword
-   public function testFindUserValid()
+   //Test find user with valid keyword & return 1 result
+   public function testFindUserValid_OK()
    {
       $userModel = new UserModel();
       $keyword = 'test1';
       $actual = $userModel->findUser($keyword);
-      //var_dump($actual); die;
+      // var_dump($actual); die;
       $this->assertEquals($keyword, $actual[0]['name']);
    }
-   //Test find user with valid keyword true
-   public function testFindUserValidTrue()
+   //Test find user with valid keyword true & return 1 result
+   public function testFindUserValid_NG()
    {
       $userModel = new UserModel();
       $keyword = 'test1';
@@ -123,8 +124,8 @@ class UserModelTest extends TestCase
          $this->assertTrue(true);
       }
    }
-   //Test find user with invalid keyword
-   public function testFindUserInvalid()
+   //Test find user with invalid keyword 
+   public function testFindUserInvalid_NG()
    {
       $userModel = new UserModel();
       $keyword = 'test5';
@@ -135,8 +136,8 @@ class UserModelTest extends TestCase
          $this->assertTrue(false);
       }
    }
-   //Test find user with multi result
-   public function testFindUserMultiResult()
+   //Test find user with valid keyword & return multi result 
+   public function testFindUserMultiResult_NG()
    {
       $userModel = new UserModel();
       $keyword = 'test';
@@ -148,37 +149,35 @@ class UserModelTest extends TestCase
          $this->assertTrue(false);
       }
    }
-   /*
-     * Test function: updateUser()
-     * Author: Long
-     */
-
-   //Test update user with valid input ok
-   public function testUpdateUserOk()
+   //Test find user with null input
+   public function testFindUserNull_OK()
    {
       $userModel = new UserModel();
-      $user['name'] = "Long";
-      $user['password'] = "123";
-      $user['id'] = "2";
-      //Excute function
-      $userModel->updateUser($user);
-      //Get actual
-      $actual = $userModel->findUser($user['name']);
-      //Compare
-      $this->assertEquals($user['name'], $actual[0]['name']);
+      $keyword = null;
+      $actual = $userModel->findUser($keyword);
+      // var_dump($actual); die;
+      $this->assertEquals($actual[0]['id'], "1");
    }
-   //Test update user with valid input true
-   public function testUpdateUserTrue()
+   //Test find user with keyword is array
+   public function testFindUserArray_NG()
    {
       $userModel = new UserModel();
-      $user['name'] = "Long";
-      $user['password'] = "123";
-      $user['id'] = "2";
-      //Excute function
-      $userModel->updateUser($user);
-      //Get actual
-      $actual = $userModel->findUser($user['name']);
-      //Compare
-      ($actual[0]['name'] != $user['name']) ? $this->assertTrue(false) : $this->assertTrue(true);
+      $keyword = ["long", "kunz"];
+      try {
+         $userModel->findUser($keyword);
+      } catch (Throwable $e) {
+         $this->assertTrue(true);
+      }
+   }
+   //Test find user with keyword is object
+   public function testFindUserObj_NG()
+   {
+      $userModel = new UserModel();
+      $keyword = $userModel;
+      try {
+         $userModel->findUser($keyword);
+      } catch (Throwable $e) {
+         $this->assertTrue(true);
+      }
    }
 }
