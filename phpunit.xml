@@ -8,6 +8,7 @@
   <testsuites>
     <testsuite name="SqlWsContractImport">
       <file>./tests/BankModelTest.php</file>
+      <file>./tests/UserModelTest.php</file>
     </testsuite>
   </testsuites>
   <php>

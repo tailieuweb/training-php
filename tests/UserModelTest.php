@@ -69,8 +69,8 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
 
-        $id = md5(123 . "chuyen-de-web-1");
-        $expected  = 'Ng13123';
+        $id = md5(56 . "chuyen-de-web-1");
+        $expected  = 'thai';
 
         $bank = $userModel->findUserById($id);
         $this->assertEquals($expected, $bank[0]['name']);
@@ -124,7 +124,7 @@ class UserModelTest extends TestCase
     public function testFindUserByIdDouble()
     {
         $userModel = new UserModel();
-        $id = md5(123.000000 . "chuyen-de-web-1");
+        $id = md5(56.000000 . "chuyen-de-web-1");
         $actual = $userModel->findUserById($id);
         if (!empty($actual)) {
             $this->assertTrue(true);
@@ -143,7 +143,7 @@ class UserModelTest extends TestCase
     public function testFindUserByIdStringValueNumber()
     {
         $userModel = new UserModel();
-        $id = md5('123' . 'chuyen-de-web-1');
+        $id = md5('56' . 'chuyen-de-web-1');
         $actual = $userModel->findUserById($id);
         if (!empty($actual)) {
             $this->assertTrue(true);
@@ -171,7 +171,8 @@ class UserModelTest extends TestCase
     //Data
     public function testUpdateUserOk()
     {
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
+        $userModel = new UserModel();
         $data = [
             'id' => $idNew,
             'name' => 'thai',
@@ -180,16 +181,19 @@ class UserModelTest extends TestCase
             'password' => '123456',
             'type' => '1'
         ];
-        $version = md5(VERSION . "chuyen-de-web-1");
-        $expected = true;
-        $userModel = new UserModel();
+        $version = md5(1 . "chuyen-de-web-1");
+
+        $userModel->startTransaction();
         $actual = $userModel->updateUser($data, $version);
+        $userModel->rollback();
+
+        $expected = true;
         $this->assertEquals($expected, $actual);
     }
     public function testUpdateUserWithDataEmpty()
     {
         $data = [];
-        $version = md5(43 . "chuyen-de-web-1");
+        $version = md5(56 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -234,16 +238,18 @@ class UserModelTest extends TestCase
     public function testUpdateUserWithDataNumber()
     {
         $data = 124;
-        $version = md5(43 . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
+        $userModel->startTransaction();
         $actual = $userModel->updateUser($data, $version);
+        $userModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     public function testUpdateUserWithDataNegative()
     {
         $data = -124;
-        $version = md5(43 . "chuyen-de-web-1");
+        $version = md5(56 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -255,9 +261,13 @@ class UserModelTest extends TestCase
         $version = md5(43 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
+        $userModel->startTransaction();
         $actual = $userModel->updateUser($data, $version);
+        $userModel->rollback();
         $this->assertEquals($expected, $actual);
+       
     }
+    //OKI NE
     public function testUpdateUserDataNotFieldName()
     {
         $idNew = md5(124 . "chuyen-de-web-1");
@@ -276,7 +286,7 @@ class UserModelTest extends TestCase
     }
     public function testUpdateUserDataNotFieldFullName()
     {
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => 'thai',
@@ -284,7 +294,7 @@ class UserModelTest extends TestCase
             'type' => 'admin',
             'password' => '1234'
         ];
-        $version = md5(53 . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -292,7 +302,7 @@ class UserModelTest extends TestCase
     }
     public function testUpdateUserDataNotFieldEmail()
     {
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => 'thai',
@@ -300,7 +310,7 @@ class UserModelTest extends TestCase
             'type' => 'admin',
             'password' => '1234'
         ];
-        $version = md5(53 . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -308,7 +318,7 @@ class UserModelTest extends TestCase
     }
     public function testUpdateUserDataNotFieldType()
     {
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => 'thai',
@@ -316,7 +326,7 @@ class UserModelTest extends TestCase
             'email' => 'ngothai@gmail.com',
             'password' => '1234'
         ];
-        $version = md5(53 . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -324,7 +334,7 @@ class UserModelTest extends TestCase
     }
     public function testUpdateUserDataNotFieldPassword()
     {
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => 'thai',
@@ -332,7 +342,7 @@ class UserModelTest extends TestCase
             'email' => 'ngothai@gmail.com',
             'type' => 'admin',
         ];
-        $version = md5(53 . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -340,7 +350,7 @@ class UserModelTest extends TestCase
     }
     public function testUpdateUserDataNotFieldId()
     {
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'name' => 'thai',
             'fullname' => 'ngothanhthai',
@@ -348,16 +358,18 @@ class UserModelTest extends TestCase
             'type' => 'admin',
             'password' => '1234'
         ];
-        $version = md5(53 . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
         $this->assertEquals($expected, $actual);
     }
+
+    
     //Data Name
     public function testUpdateUserDataFieldNameObject()
     {
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => new stdClass(),
@@ -366,7 +378,7 @@ class UserModelTest extends TestCase
             'password' => '123123',
             'type' => 'admin',
         ];
-        $version = md5(VERSION . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -377,7 +389,7 @@ class UserModelTest extends TestCase
         $array = [
             'name' => 'thai'
         ];
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => $array,
@@ -386,7 +398,7 @@ class UserModelTest extends TestCase
             'password' => '123123',
             'type' => 'admin',
         ];
-        $version = md5(VERSION . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -394,7 +406,7 @@ class UserModelTest extends TestCase
     }
     public function testUpdateUserDataFieldNameNull()
     { 
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => null,
@@ -403,16 +415,18 @@ class UserModelTest extends TestCase
             'password' => '123123',
             'type' => 'admin',
         ];
-        $version = md5(59 . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
         $this->assertEquals($expected, $actual);
+        
     }
+
     //Data FullName
     public function testUpdateUserDataFieldFullNameObject()
     {
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => 'thai',
@@ -421,7 +435,7 @@ class UserModelTest extends TestCase
             'password' => '123123',
             'type' => 'admin',
         ];
-        $version = md5(59 . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -432,7 +446,7 @@ class UserModelTest extends TestCase
         $array = [
             'name' => 'thai'
         ];
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => 'thai',
@@ -441,7 +455,7 @@ class UserModelTest extends TestCase
             'password' => '123123',
             'type' => 'admin',
         ];
-        $version = md5(59 . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -449,7 +463,7 @@ class UserModelTest extends TestCase
     }
     public function testUpdateUserDataFieldFullNameNull()
     { 
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => 'thai',
@@ -458,16 +472,18 @@ class UserModelTest extends TestCase
             'password' => '123123',
             'type' => 'admin',
         ];
-        $version = md5(59 . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
         $this->assertEquals($expected, $actual);
+        
     }
+
     //Data Email
     public function testUpdateUserDataFieldEmailObject()
     {
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => 'thai',
@@ -476,7 +492,7 @@ class UserModelTest extends TestCase
             'password' => '123123',
             'type' => 'admin',
         ];
-        $version = md5(59 . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -522,7 +538,7 @@ class UserModelTest extends TestCase
     //Data type
     public function testUpdateUserDataFieldTypeObject()
     {
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => 'thai',
@@ -531,7 +547,7 @@ class UserModelTest extends TestCase
             'password' => '123123',
             'type' =>  new stdClass(),
         ];
-        $version = md5(59 . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -542,7 +558,7 @@ class UserModelTest extends TestCase
         $array = [
             'name' => 'thai'
         ];
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => 'thai',
@@ -551,7 +567,7 @@ class UserModelTest extends TestCase
             'password' => '123123',
             'type' => $array,
         ];
-        $version = md5(59 . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -559,7 +575,7 @@ class UserModelTest extends TestCase
     }
     public function testUpdateUserDataFieldTypeNull()
     { 
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => 'thai',
@@ -568,7 +584,7 @@ class UserModelTest extends TestCase
             'password' => '123123',
             'type' => null,
         ];
-        $version = md5(59 . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -577,7 +593,7 @@ class UserModelTest extends TestCase
     //Data password
     public function testUpdateUserDataFieldPasswordObject()
     {
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => 'thai',
@@ -586,7 +602,7 @@ class UserModelTest extends TestCase
             'password' => new stdClass(),
             'type' =>  'admin',
         ];
-        $version = md5(59 . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -628,9 +644,11 @@ class UserModelTest extends TestCase
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
         $this->assertEquals($expected, $actual);
+     
+
     }
     //Data Id
-
+    
     public function testUpdateUserWithIdNotExist()
     {
         $id = md5(55555 . "chuyen-de-web-1");
@@ -642,7 +660,7 @@ class UserModelTest extends TestCase
             'password' => '123456',
             'type' => '1'
         ];
-        $version = md5(VERSION . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -659,7 +677,7 @@ class UserModelTest extends TestCase
             'password' => '123456',
             'type' => '1'
         ];
-        $version = md5(VERSION . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -716,7 +734,8 @@ class UserModelTest extends TestCase
     }
     public function testUpdateUserWithIdDouble()
     {
-        $idNew = md5(124.0000000 . "chuyen-de-web-1");
+        $idNew = md5(56.0000000 . "chuyen-de-web-1");
+        $userModel = new UserModel();
         $data = [
             'id' => $idNew,
             'name' => 'thai',
@@ -725,9 +744,10 @@ class UserModelTest extends TestCase
             'password' => '123456',
             'type' => '1'
         ];
-        $version = md5(VERSION + 1  . "chuyen-de-web-1");
-        $userModel = new UserModel();
+        $version = md5(1  . "chuyen-de-web-1");
+        $userModel->startTransaction();
         $actual = $userModel->updateUser($data, $version);
+        $userModel->rollback();
         if (!empty($actual)) {
             $this->assertTrue(true);
         } else {
@@ -752,7 +772,8 @@ class UserModelTest extends TestCase
     }
     public function testUpdateUserWithIdStringValueNumber()
     {
-        $idNew = md5('124' . "chuyen-de-web-1");
+        $idNew = md5('56' . "chuyen-de-web-1");
+        $userModel = new UserModel();
         $data = [
             'id' => $idNew,
             'name' => 'thai',
@@ -761,9 +782,10 @@ class UserModelTest extends TestCase
             'password' => '123456',
             'type' => '1'
         ];
-        $version = md5(VERSION + 2 . "chuyen-de-web-1");
-        $userModel = new UserModel();
+        $version = md5(1 . "chuyen-de-web-1");
+        $userModel->startTransaction();
         $actual = $userModel->updateUser($data, $version);
+        $userModel->rollback();
         if (!empty($actual)) {
             $this->assertTrue(true);
         } else {
@@ -803,11 +825,12 @@ class UserModelTest extends TestCase
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
         $this->assertEquals($expected, $actual);
+        
     }
     //Version
     public function testUpdateUserWithVersionOk()
     {
-        $idNew = md5('124' . "chuyen-de-web-1");
+        $idNew = md5('56' . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => 'thai',
@@ -816,15 +839,17 @@ class UserModelTest extends TestCase
             'password' => '123456',
             'type' => '1'
         ];
-        $version = md5(VERSION + 3 . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = true;
         $userModel = new UserModel();
+        $userModel->startTransaction();
         $actual = $userModel->updateUser($data, $version);
+        $userModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     public function testUpdateUserWithVersionNotExist()
     {
-        $id = md5(124 . "chuyen-de-web-1");
+        $id = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $id,
             'name' => 'thai',
@@ -841,7 +866,7 @@ class UserModelTest extends TestCase
     }
     public function testUpdateUserWithVersionString()
     {
-        $id = md5(124 . "chuyen-de-web-1");
+        $id = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $id,
             'name' => 'thai',
@@ -855,7 +880,9 @@ class UserModelTest extends TestCase
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
         $this->assertEquals($expected, $actual);
+       
     }
+    //moosc
     public function testUpdateUserWithVersionEmpty()
     {
         $id = md5(124 . "chuyen-de-web-1");
@@ -909,7 +936,7 @@ class UserModelTest extends TestCase
     }
     public function testUpdateUserWithVersionDouble()
     {
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => 'thai',
@@ -918,9 +945,11 @@ class UserModelTest extends TestCase
             'password' => '123456',
             'type' => '1'
         ];
-        $version = md5(VERSION + 4 + 0.0000000000 . "chuyen-de-web-1");
+        $version = md5(1.00000000000 . "chuyen-de-web-1");
         $userModel = new UserModel();
+        $userModel->startTransaction();
         $actual = $userModel->updateUser($data, $version);
+        $userModel->rollback();
         if (!empty($actual)) {
             $this->assertTrue(true);
         } else {
@@ -929,7 +958,7 @@ class UserModelTest extends TestCase
     }
     public function testUpdateUserWithVersionNull()
     {
-        $idNew = md5(124 . "chuyen-de-web-1");
+        $idNew = md5(56 . "chuyen-de-web-1");
         $data = [
             'id' => $idNew,
             'name' => 'thai',
