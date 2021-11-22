@@ -1,12 +1,13 @@
 <?php
 require_once 'models/UserModel.php';
+require_once 'repositories/UserRepository.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
 $id = NULL;
 
-$user = UserModel::getInstance();
-$a = $user->findUser('2');
+$user = UserRepository::getInstance();
+$a = $user->getBankAccounts(['aa' => '2']);
 var_dump($a);
 die();
 

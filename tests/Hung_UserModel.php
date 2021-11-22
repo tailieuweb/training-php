@@ -80,6 +80,44 @@ class Hung_UserModelTest extends TestCase
 
     /**
      * Test case not good
+     * Parameter is string but its value is integer and exists in database
+     */
+
+    public function testfindUserByIdNG_StringValueNumber()
+    {
+        $userModel = UserModel::getInstance();
+
+        $actual = $userModel->findUserById('2');
+
+        $expected = [
+            [
+                "id" =>  "2", "name" =>  "user2", "fullname" => "Nobody",
+                "email" =>  "user2@mail.com", "type" => "admin", "password" => "d41d8cd98f00b204e9800998ecf8427e",
+                "updated_at" =>  "2021-10-16 12:46:24pm", "version" => "7"
+            ]
+        ];
+
+        return $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case not good
+     * Parameter is string but its value is speical character
+     */
+
+    public function testfindUserByIdNG_StringSpecialCharacters()
+    {
+        $userModel = UserModel::getInstance();
+
+        $actual = $userModel->findUserById('/');
+
+        $expected = [];
+
+        return $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case not good
      * Parameter is string
      */
 
@@ -390,6 +428,42 @@ class Hung_UserModelTest extends TestCase
 
         $expected = true;
         $actual = $userModel->deleteUserById('1');
+
+        $userModel->rollback();
+
+        return $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case Not good
+     * Parameter is alphabet string
+     */
+    public function testDeleteUserByIdNG_StringAlphabet()
+    {
+        $userModel = UserModel::getInstance();
+
+        $userModel->startTransaction();
+
+        $expected = false;
+        $actual = $userModel->deleteUserById('u');
+
+        $userModel->rollback();
+
+        return $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case Not good
+     * Parameter is special string
+     */
+    public function testDeleteUserByIdNG_StringSpecialCharacters()
+    {
+        $userModel = UserModel::getInstance();
+
+        $userModel->startTransaction();
+
+        $expected = false;
+        $actual = $userModel->deleteUserById('%');
 
         $userModel->rollback();
 
