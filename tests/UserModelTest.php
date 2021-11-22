@@ -148,6 +148,16 @@ class UserModelTest extends TestCase
          $expected = NULL;
          $this->assertEquals($expected, $actual);
      }
+     // Test case decrypt ID With Id Positive Number
+     public function testDecryptIdWithIdPositiveNumber()
+     {
+         $userModel = new UserModel();
+
+         $id = 1;
+         $actual = $userModel->decryptID($id);
+         $expected = NULL;
+         $this->assertEquals($expected, $actual);
+     }
      // Test case decrypt ID With Id Negative Number
      public function testDecryptIdWithIdNegativeNumber()
      {
