@@ -8,6 +8,9 @@ class FactoryPattern
     // make function
     public function make($model)
     {
+        if(!is_string($model)){
+            return NULL;
+        }
         if ($model == 'user') {
             return UserModel::getInstance();
         } else if ($model == 'bank') {
