@@ -8,6 +8,8 @@ cacheResult ="false"
 <testsuites>
 <testsuite name="SqlWsContractImport">
 <file>./Tests/UserModelTest.php</file>
+<file>./Tests/BanksModelTest.php</file>
+<file>./Tests/FactoryPatternTest.php</file>
 </testsuite>
 </testsuites>
 <filter>
