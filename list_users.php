@@ -1,7 +1,7 @@
 <?php
 // Start the session
 session_start();
-
+//1-b
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
@@ -11,7 +11,7 @@ $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
-
+//feature 1-a
 $users = $userModel->getUsers($params);
 ?>
 <!DOCTYPE html>
