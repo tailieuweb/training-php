@@ -11,6 +11,9 @@ class UserModel extends BaseModel
     public function findUserById($id)
     {
         $id = $this->decryptID($id);
+        if(is_null($id)){
+            return false;
+        }
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
 
@@ -60,15 +63,15 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
-        if(!$this->checkInput($input,true)){
-            return false;
-        }
         $result = ResultClass::getInstance();
-        $id = $this->decryptID($input['id']);
-        $user = $this->findUserById($input['id']);
-        if ($user) {
-            if ($user['version'] == $input['version']) {
-                $sql = 'UPDATE `users` SET 
+        if (!$this->checkInput($input, true)) {
+            $result->setError("Thông tin nhập vào không đúng !!");
+        } else {
+            $id = $this->decryptID($input['id']);
+            $user = $this->findUserById($input['id']);
+            if ($user) {
+                if ($user['version'] == $input['version']) {
+                    $sql = 'UPDATE `users` SET 
                 name = "' . $this->BlockSQLInjection($input['name']) . '", 
                  fullname="' . $this->BlockSQLInjection($input['fullname']) . '",
                  email="' . $this->BlockSQLInjection($input['email']) . '",
@@ -76,17 +79,18 @@ class UserModel extends BaseModel
                  password="' . md5($input['password']) . '",
                  version="' . ($input['version'] + 1) . '"
                  WHERE id = ' . $id;
-                $user = $this->update($sql);
-                if ($user == true) {
-                    $result->setData("Đã update thành công");
+                    $user = $this->update($sql);
+                    if ($user == true) {
+                        $result->setData("Đã update thành công");
+                    } else {
+                        $result->setError("Lỗi");
+                    }
                 } else {
-                    $result->setError("Lỗi");
+                    $result->setError("Dữ liệu đã được cập nhật trước đó! Xin hãy reload lại trang");
                 }
             } else {
-                $result->setError("Dữ liệu đã được cập nhật trước đó! Xin hãy reload lại trang");
+                $result->setError("Không tìm thấy id của user");
             }
-        } else {
-            $result->setError("Không tìm thấy id của user");
         }
         return $result;
     }
@@ -118,13 +122,13 @@ class UserModel extends BaseModel
     public function insertUserWithId($id, $name, $fullname, $email, $type, $password)
     {
         $input = [
-            'name'=>$name,
-            'fullname'=>$fullname,
-            'email'=>$email,
-            'type'=>$type,
-            'password'=>$password
+            'name' => $name,
+            'fullname' => $fullname,
+            'email' => $email,
+            'type' => $type,
+            'password' => $password
         ];
-        if(!$this->checkInput($input)){
+        if (!$this->checkInput($input)) {
             return false;
         }
         if (!is_numeric($id)) {

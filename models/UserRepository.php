@@ -109,6 +109,28 @@ class UserRepository
         }
         return $result;
     }
+    /**
+     * Insert User With Id
+     */
+    public function insertUserWithId($input)
+    {
+        $insertUser = $this->userModel->insertUserWithId(
+            $input['id'],
+            $input['name'],
+            $input['fullname'],
+            $input['email'],
+            $input['type'],
+            $input['password']
+        );
+        if ($insertUser == false) {
+            return false;
+        } else {
+            $userId = $input['id'];
+            $cost = 1000;
+            $insertbank = $this->bankModel->insertBank($userId, $cost);
+            return $insertbank;
+        }
+    }
     public static function getInstance()
     {
         if (self::$_instance !== null) {
