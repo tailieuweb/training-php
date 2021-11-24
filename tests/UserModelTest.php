@@ -230,4 +230,11 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
+
+
+    // Test function in UserModel
+    public function testgetUser(){
+
+    }
+
 }
