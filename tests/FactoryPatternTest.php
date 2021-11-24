@@ -38,13 +38,29 @@ class FactoryPatternTest extends TestCase {
             $this->assertTrue(true); 
         }
     }
-    public function testFactoryFailure()
-    {
+    //kiểm tra giá trị rông thì sẽ báo sai
+    public function  testFactoryBankNgFull1(){
         $factoryUser = new FactoryPattern();
-        $model = 2;
-        // $exptected = 7;
-        $actual = $factoryUser ->make($model);
-        $this->assertEquals(count($actual));
+        $count = " ";
+        $actual = $factoryUser ->make($count);
+        if(empty($actual)){
+            return $this -> assertTrue(true);
+        }
+        else{
+            return $this -> assertTrue(false);
+        }
+    }
+    //kiểm tra giá trị khác rông thì sẽ báo đúng
+    public function  testFactoryBankNgFull2(){
+        $factoryUser = new FactoryPattern();
+        $count = "user";
+        $actual = $factoryUser ->make($count);
+        if(!empty($actual)){
+            return $this -> assertTrue(true);
+        }
+        else{
+            return $this -> assertTrue(false);
+        }
     }
 }
 ?>
