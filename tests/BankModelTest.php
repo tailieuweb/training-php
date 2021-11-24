@@ -31,9 +31,29 @@ class BankModelTest extends TestCase {
             $this->assertTrue(true); 
         }
      }
+     //test function getUser với giá trị và trả về danh sách tuần tự như trên
+     public function testGetUserPutOutNG2(){
+        $bankModel = new BankModel();
+        $tableUser = ['id'=>2,'name'=>'test2','fullname'=>'a','email'=>'admin@admin.com',
+        'type'=>1,'password'=>'12345'];
+        //lấy mảng và trả về tuần tự
+        $actual = $bankModel->getUser(array_values($tableUser));
+        //var_dump($actual);die();
+        if($actual != true)
+        {
+            
+            $this->assertTrue(false); 
+        }
+        else
+        {
+            $this->assertTrue(true); 
+        }
+     }
+     //-------------------------------------------------------------
     /**
      * test delete bank by ID
      */
+
     //test truong hop xoa theo id va token
     public function testDeleteBankByIdNg()
     {
@@ -92,6 +112,47 @@ class BankModelTest extends TestCase {
             $this->assertTrue(false); 
         }
     }
+    //test trương hop xoa phan tu la mot gia tri rong
+    public function testDeleteBankByIdNg3()
+    {
+        $bankModel = new BankModel();
+        $idBank = null;
+        $token_false = 'JFASJDBAJS566';
+       
+        $actual = $bankModel->deleteBankById($idBank,$token_false);
+       
+        // $this->assertEquals($userModel->findUserById($id),$actual);
+        if( $actual == NULL)
+        {
+            $this->assertTrue(true); 
+        }
+        else{
+            $this->assertTrue(false); 
+        }
+    }
+    //test trường hợp tìm giá trị id phù hợp trong mảng sau đó mới thực hiện xóa
+    public function testDeleteBankByIdNg4(){
+        $bankModel = new BankModel();
+        $array = array(
+            'bank_id'=>74,
+            'user_id'=>0,
+            'cost'=>0
+        );
+        $idBank = array_search(74,$array);
+        $token_false = 'JFASJDBAJS566';
+        
+        $actual = $bankModel->deleteBankById($idBank,$token_false);
+       
+        // $this->assertEquals($userModel->findUserById($id),$actual);
+        if( $actual == NULL)
+        {
+            $this->assertTrue(true); 
+        }
+        else{
+            $this->assertTrue(false); 
+        }
+    }
+    //-------------------------------------------------------------
     /**
      * Test Insert Bank 
     */
@@ -131,6 +192,75 @@ class BankModelTest extends TestCase {
             $this->assertTrue(true); 
         }
     }
+    //test trường hơp thêm toàn bộ giá trị là chuỗi
+    public function testInsertBankNg3(){
+        $bankModel = new BankModel();
+        $input = [];
+        //note user_id == id of users 
+        $input['id'] = "motmot";
+        $input['cost'] = "mot tram ba lam ngan";
+        $actual = $bankModel -> insertBank($input);
+        if($actual != true)
+        {
+            $this->assertTrue(false); 
+        }
+        else
+        {
+            $this->assertTrue(true); 
+        }
+    }
+    //test trường hợp thêm giá trị id và số đều là rỗng
+    public function testInsertBankNg4(){
+        $bankModel = new BankModel();
+        $input = [];
+        //note user_id == id of users 
+        $input['id'] = null;
+        $input['cost'] = null;
+        $actual = $bankModel -> insertBank($input);
+        if($actual != true)
+        {
+            $this->assertTrue(false); 
+        }
+        else
+        {
+            $this->assertTrue(true); 
+        }
+    }
+    //test giá trị truyenf vào co id rong
+    public function testInsertBankNg5(){
+        $bankModel = new BankModel();
+        $input = [];
+        //note user_id == id of users 
+        $input['id'] = null;
+        $input['cost'] = 12345678;
+        $actual = $bankModel -> insertBank($input);
+        if($actual != true)
+        {
+            $this->assertTrue(false); 
+        }
+        else
+        {
+            $this->assertTrue(true); 
+        }
+    }
+    //test trường hợp giá trị truyền vào có cost rong
+    public function testInsertBankNg6(){
+        $bankModel = new BankModel();
+        $input = [];
+        //note user_id == id of users 
+        $input['id'] = 10000;
+        $input['cost'] = null;
+        $actual = $bankModel -> insertBank($input);
+        if($actual != true)
+        {
+            $this->assertTrue(false); 
+        }
+        else
+        {
+            $this->assertTrue(true); 
+        }
+    }
+    //----------------------------------------------------------------
         /**
       * test function FindBankById 1
       *(sreach banks by id -> test OK)
@@ -161,10 +291,11 @@ class BankModelTest extends TestCase {
         }
     }
      //tim id có tồn tại các giá trị của mảng trung trong bảng -> T/F
+     //trường hợp này rỗng vì giá trị user_id sai 
      public function testFindBankByIdNg2(){
         $bank = new BankModel();
         $bankId = 22;
-        $expectedArray = array(0=>'24',1=>'25',3=>'121');
+        $expectedArray = array("bank_id"=>24,"user_id"=>25,"cost"=>121);
         //ham in_array tim gia trị trung
         $IdMatch = in_array($bankId,$expectedArray);
 
@@ -175,6 +306,69 @@ class BankModelTest extends TestCase {
         }
         return $this->assertTrue(false);
     }
+    //test trường hợp tìm id với giá trị không có thực
+    public function testFindBankByIdNg3(){
+        $bank = new BankModel();
+        $bankId = 300;
+        $actual = $bank ->findBankById($bankId);
+        $expected = 2;
+        $this -> assertEquals($expected, $actual);
+
+    }
+    //test giá trị trường hợp tìm id = là chuỗi 
+    public function testFindBankByIdNg4(){
+        $bank = new BankModel();
+        $bankId = "abcdef";
+        $actual = $bank ->findBankById($bankId);
+        $expected = "error";
+        $this -> assertEquals($expected, $actual);
+
+    }
+    //giá trị id tim là một gia trị null
+    public function testFindBankByIdNg5(){
+        $bank = new BankModel();
+        $bankId = null;
+        $actual = $bank ->findBankById($bankId);
+        $expected = "error";
+        $this -> assertEquals($expected, $actual);
+
+    }
+    //Tìm giá trị id khi truyền vào là 1 danh sách mảng
+    //khẳng đinh nó sai
+    public function testFindBankByIdNg6(){
+        $bank = new BankModel();
+        $bankId = 200;
+        $expectedArray = array(
+            array(
+                'bank_id'=>24,
+                'user_id'=>5,
+                'cost'=>121
+            ),
+            array(
+                'bank_id'=>25,
+                'user_id'=>10,
+                'cost'=>121122
+            ),
+            array(
+                'bank_id'=>26,
+                'user_id'=>3,
+                'cost'=>11111
+            )
+        );
+        //sử dụng hàm này để xác đinh vị trí cột trả về trong mảng
+        $first_id_banks = array_column($expectedArray, 'bank_id');
+        
+        //tìm giá trị cụ thể trong mảng
+        $id = array_search($bankId, $first_id_banks);
+        //var_dump($key);die();
+        $actual = $bank ->findBankById($id);
+        //var_dump($actual);die();
+        if(empty($actual)){
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    //---------------------------------------------------
      /**
      * test function GetBank
      */
@@ -183,7 +377,7 @@ class BankModelTest extends TestCase {
     public function testGetBanksOk(){
         $bankModel = new BankModel();
         
-        for($i = 0,$max = 8; $i <= $max;$i++){
+        for($i = 0,$max = 7; $i <= $max;$i++){
             $count_array = $i;
         }
         //$i += 1;
