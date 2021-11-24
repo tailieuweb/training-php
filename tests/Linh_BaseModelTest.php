@@ -35,9 +35,23 @@ class BaseModelTest extends TestCase
         $factory = new FactoryPattern();
         $userModel = $factory->make('user');
 
-        // GET THE LAST ID:
+        // Prepare:
+        $param = array(
+            "id" => "",
+            "bank_id" => 0,
+            "name" => "user99",
+            "fullname" => "user99",
+            "email" => "user99@mail.com",
+            "type" => "user",
+            "password" => "admin",
+            "cost" => "0",
+            "ver" => "",
+            "submit" => "submit"
+        );
+        $userModel->insertUser($param);
         $last_uid = $userModel->getTheID();
 
+        // Test:
         $actual = $userModel->deleteUserById($last_uid);
         $expected = 1;
 

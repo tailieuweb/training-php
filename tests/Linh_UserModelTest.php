@@ -4,108 +4,6 @@ use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
 {
-
-    /**
-     * Test case Okie
-     */
-    public function testSumOk()
-    {
-        // $userModel = new UserModel();
-        $factory = new FactoryPattern();
-        $userModel = $factory->make('user');
-
-        $a = 1;
-        $b = 2;
-        $expected = 3;
-
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
-    }
-
-
-    /**
-     * Test case Not good
-     */
-    public function testSumNg()
-    {
-        // $userModel = new UserModel();
-        $factory = new FactoryPattern();
-        $userModel = $factory->make('user');
-
-        $a = 1;
-        $b = 2;
-
-        $actual = $userModel->sumb($a, $b);
-
-        if ($actual != 3) {
-            $this->assertTrue(false);
-        } else {
-            $this->assertTrue(true);
-        }
-    }
-
-
-    /**
-     * Test case:
-     * String and number.
-     */
-    public function testSum_StringAndNum()
-    {
-        // $userModel = new UserModel();
-        $factory = new FactoryPattern();
-        $userModel = $factory->make('user');
-
-        $a = 1;
-        $b = 'a';
-
-        $expected = 'NaN exception!';
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
-    }
-
-
-    /**
-     * Test case:
-     * String and string.
-     */
-    public function testSum_StringAndString()
-    {
-        // $userModel = new UserModel();
-        $factory = new FactoryPattern();
-        $userModel = $factory->make('user');
-
-        $a = 'a';
-        $b = 'b';
-
-        $expected = 'NaN exception!';
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
-    }
-
-
-    /**
-     * Test case:
-     * Floating point numbers.
-     */
-    public function testSum_FloatingPointNumbers()
-    {
-        // $userModel = new UserModel();
-        $factory = new FactoryPattern();
-        $userModel = $factory->make('user');
-
-        $a = 2.3;
-        $b = 3.5;
-
-        $expected = 5.8;
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
-    }
-
-
     // ____________________________________________________________________________________________________
     /**
      * Test case:
@@ -190,6 +88,12 @@ class UserModelTest extends TestCase
         print_r("\t=> Actual: " . $actual  . "\n");
 
         $this->assertEquals($expected, $actual);
+
+        // Rollback:
+        if ($actual == $expected) {
+            $last_uid = $userModel->getTheID();
+            $userModel->deleteUserById($last_uid);
+        }
     }
 
     /**
@@ -226,6 +130,12 @@ class UserModelTest extends TestCase
         print_r("\t=> The last ID after: " . $actual  . "\n");
 
         $this->assertEquals($expected, $actual);
+
+        // Rollback:
+        if ($actual == $expected) {
+            $last_uid = $userModel->getTheID();
+            $userModel->deleteUserById($last_uid);
+        }
     }
 
     /**
@@ -401,14 +311,31 @@ class UserModelTest extends TestCase
         $factory = new FactoryPattern();
         $userModel = $factory->make('user');
 
-        $currentDataVerion = $userModel->getVersionByUserID(1);
+        // Prepare:
+        $param = array(
+            "id" => "",
+            "bank_id" => 0,
+            "name" => "user99",
+            "fullname" => "user99",
+            "email" => "user99@mail.com",
+            "type" => "user",
+            "password" => "admin",
+            "cost" => "0",
+            "ver" => "",
+            "submit" => "submit"
+        );
+        $userModel->insertUser($param);
+        $last_uid = $userModel->getTheID();
+
+        // Test:
+        $currentDataVerion = $userModel->getVersionByUserID($last_uid);
 
         $param = array(
-            "id" => "1",
+            "id" => $last_uid,
             "bank_id" => "10",
-            "name" => "user1_updated",
-            "fullname" => "user1_updated",
-            "email" => "user1_updated@mail.com",
+            "name" => "user99_updated",
+            "fullname" => "user99_updated",
+            "email" => "user99_updated@mail.com",
             "type" => "user",
             "password" => "admin",
             "cost" => "111000",
@@ -422,6 +349,11 @@ class UserModelTest extends TestCase
         print_r("\t=> Actual: " . $actual  . "\n");
 
         $this->assertEquals($expected, $actual);
+
+        // Rollback:
+        if ($actual == $expected) {
+            $userModel->deleteUserById($last_uid);
+        }
     }
 
     /**
@@ -498,10 +430,27 @@ class UserModelTest extends TestCase
         $factory = new FactoryPattern();
         $userModel = $factory->make('user');
 
-        $currentDataVerion = $userModel->getVersionByUserID(1);
+        // Prepare:
+        $param = array(
+            "id" => "",
+            "bank_id" => 0,
+            "name" => "user99",
+            "fullname" => "user99",
+            "email" => "user99@mail.com",
+            "type" => "user",
+            "password" => "admin",
+            "cost" => "0",
+            "ver" => "",
+            "submit" => "submit"
+        );
+        $userModel->insertUser($param);
+        $last_uid = $userModel->getTheID();
+
+        // Test:
+        $currentDataVerion = $userModel->getVersionByUserID($last_uid);
 
         $param = array(
-            "id" => "1",
+            "id" => $last_uid,
             "bank_id" => "10",
             "name" => "",
             "fullname" => "",
@@ -519,6 +468,11 @@ class UserModelTest extends TestCase
         print_r("\t=> Actual: " . $actual  . "\n");
 
         $this->assertEquals($expected, $actual);
+
+        // Rollback:
+        if ($last_uid > 0) {
+            $userModel->deleteUserById($last_uid);
+        }
     }
 
     /**
