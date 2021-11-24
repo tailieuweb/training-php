@@ -161,12 +161,10 @@ class UserModelTest extends TestCase
             "submit" => "submit"
         );
 
-        $actual = $userModel->insertUser($param);
-        $expected = 0;
+        $this-> expectException(InvalidArgumentException::class);
+        $this->expectDeprecationMessage('Invalid argument exception!');
 
-        print_r("\t=> Actual: " . $actual  . "\n");
-
-        $this->assertEquals($expected, $actual);
+        $userModel->insertUser($param);
     }
 
     /**
@@ -192,12 +190,10 @@ class UserModelTest extends TestCase
             "submit" => "submit"
         );
 
-        $actual = $userModel->insertUser($param);
-        $expected = 0;
+        $this-> expectException(InvalidArgumentException::class);
+        $this->expectDeprecationMessage('Invalid argument exception!');
 
-        print_r("\t=> Actual: " . $actual  . "\n");
-
-        $this->assertEquals($expected, $actual);
+        $userModel->insertUser($param);
     }
 
     /**
@@ -225,12 +221,10 @@ class UserModelTest extends TestCase
             "submit" => "submit"
         );
 
-        $actual = $userModel->insertUser($param);
-        $expected = 0;
-
-        print_r("\t=> Actual: " . $actual  . "\n");
-
-        $this->assertEquals($expected, $actual);
+        $this-> expectException(InvalidArgumentException::class);
+        $this->expectDeprecationMessage('Invalid argument exception!');
+        
+        $userModel->insertUser($param);
     }
 
     /**
@@ -258,12 +252,10 @@ class UserModelTest extends TestCase
             "submit" => "submit"
         );
 
+        $this-> expectException(InvalidArgumentException::class);
+        $this->expectDeprecationMessage('Invalid argument exception!');
+
         $actual = $userModel->insertUser($param);
-        $expected = 0;
-
-        print_r("\t=> Actual: " . $actual  . "\n");
-
-        $this->assertEquals($expected, $actual);
     }
 
     /**
@@ -291,12 +283,10 @@ class UserModelTest extends TestCase
             "submit" => "submit"
         );
 
+        $this-> expectException(InvalidArgumentException::class);
+        $this->expectDeprecationMessage('Invalid argument exception!');
+        
         $actual = $userModel->insertUser($param);
-        $expected = 0;
-
-        print_r("\t=> Actual: " . $actual  . "\n");
-
-        $this->assertEquals($expected, $actual);
     }
 
 

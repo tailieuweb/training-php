@@ -125,7 +125,7 @@ class UserModel extends BaseModel
             || is_string($input['type']) == false || is_string($input['password']) == false
             || strlen($input['name']) == 0 || strlen($input['fullname']) == 0 || strlen($input['email']) == 0
             || strlen($input['type']) == 0 || strlen($input['password']) == 0) {
-            return 0;
+            throw new InvalidArgumentException('Invalid argument exception!');
         }
 
         // Specify the id to assign to the new user:
