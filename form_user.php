@@ -18,10 +18,10 @@ if (!empty($_POST['submit'])) {
         $userModel->updateUser($_POST);
     } else {
         $userModel->insertUser($_POST);
-         header('location: list_users.php');
     }
-   
+    header('location: list_users.php');
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,13 +38,7 @@ if (!empty($_POST['submit'])) {
                     User form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $_id ?>">
-
                     <input type="hidden" name="id" value="<?php echo $user[0]['id'] ?>">
-                    <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo base64_encode($keyCode.$user[0]['version'])?>">
-
-                    <input type="hidden" name="id" value="<?php echo $user[0]['id'] ?>">
-
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">

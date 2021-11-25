@@ -45,6 +45,7 @@ class BankModel extends BaseModel {
 
         return $bank;
     }
+
     /**
      * Search banks
      * @param array $params
@@ -53,6 +54,7 @@ class BankModel extends BaseModel {
     public function getBanks() {
         $sql = 'SELECT * FROM banks';
         $banks = $this->select($sql);
+
         return $banks;
     }
 }
