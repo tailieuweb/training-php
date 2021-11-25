@@ -121,7 +121,7 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $user = array(
-            'id' => 19,
+            'id' => 3,
             'name' => 'abcd',
             'fullname' => 'hoangphu',
             'type' => 'admin',
@@ -145,6 +145,24 @@ class UserModelTest extends TestCase
             'type' => '',
             'email' => '',
             'password' => ''
+        );
+        $actual = $userModel->updateUser($user);
+        if ($actual == true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    public function testUpdateUser_idsai()
+    {
+        $userModel = new UserModel();
+        $user = array(
+            'id' => 4,
+            'name' => 'abcd',
+            'fullname' => 'hoangphu',
+            'type' => 'admin',
+            'email' => 'hhhpppp@gmail.com',
+            'password' => '1234567'
         );
         $actual = $userModel->updateUser($user);
         if ($actual == true) {
