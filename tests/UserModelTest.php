@@ -96,7 +96,6 @@ class UserModelTest extends TestCase
 
        $this->assertEquals($expected, $actual);
     }
-<<<<<<< HEAD
     /*
      * Test function: getUsers()
      * Author: Quyen
@@ -105,20 +104,20 @@ class UserModelTest extends TestCase
    // test function testGetUsers ok
     public function testGetUsersOk(){
        $userModel = new UserModel();
-       $userName = 'Quyen';
+       $userName = 'test1';
        $user = $userModel->getUsers($userName);
        
-       $actual = $user[5]['name'];
+       $actual = $user[0]['name'];
        $this->assertEquals($userName, $actual);
     }
 
    //  test function testGetUsers not good
     public function testGetUsersNg(){
       $userModel = new UserModel();
-      $userName = 'Quyen';
+      $userName = 'test1';
       $user = $userModel->getUsers($userName);
       
-      $actual = $user[5]['name'];
+      $actual = $user[0]['name'];
       
       if($userName != $actual){
          $this->assertFalse(false);
@@ -130,7 +129,7 @@ class UserModelTest extends TestCase
    //  test function getUsers when search ok
     public function testGetUsersWhenSearchOk(){
        $userModel = new UserModel();
-       $param['keyword'] = 'Quyen';
+       $param['keyword'] = 'test1';
 
        $user = $userModel->getUsers($param);
        if(empty($user)){
@@ -178,47 +177,29 @@ class UserModelTest extends TestCase
          $this->assertFalse(false);
       }
    }
-=======
 
-    /**
-     * Test case insertUser OK
-     */
-    public function testInsertUserOk()
-    {
+   // test function getUsers when search array
+   public function testGetUsersWhenSearchArray(){
       $userModel = new UserModel();
-      $userId = 6;
-      $input['name'] = 'le';
-      $input['password']  = '1234';
-      $input['fullname'] = 'lenguyentan';
-      $input['email'] = 'tanle123@gmail.com';
-      $input['type'] = 'admin';
-      $userModel->insertUser($input);
-      $expected = $userModel->findUserById($userId);
-      $actual = $expected[4]['name']['password']['fullname']['email']['type'];
-      //var_dump($actual); die();
-      $this->assertEquals($input['name']['password']['fullname']['email']['type'], $actual);
-    }
+      $param['keyword'] = array();
 
-   /**
-     * Test case insertUser Not good
-     */
-    public function testInsertUserNg()
-    {
-      $userModel = new UserModel();
-      $input['name'] = 'tanle';
-      $input['password']  = '12345';
-      $input['fullname'] = 'nguyentanle';
-      $input['email'] = 'tanle@gmail.com';
-      $input['type'] = 'user';
-      
-      $user = $userModel->insertUser($input);
-      $expected = $userModel->findUserById(6);
-      if($expected != null){
+      $user = $userModel->getUsers($param);
+      if(empty($user) == $param){
          $this->assertTrue(true);
-      }
-      else{
+      }else{
          $this->assertFalse(false);
       }
-    }
->>>>>>> 1-php-202109/2-groups/9-I/master-phpunit
+   }
+
+   // test function getUsers when search object
+   public function testGetUsersWhenSearchObject(){
+      $userModel = new UserModel();
+      $param['keyword'] = new stdClass();
+
+      try{
+         $userModel->getUsers($param);
+         }catch(Throwable $e){
+               $this->assertTrue(True);
+         }
+   }
 }

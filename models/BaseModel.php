@@ -76,6 +76,7 @@ abstract class BaseModel
         $result = $this->query($sql);
         return $result;
     }
+    
     //transaction
     public function startTransaction()
     {
