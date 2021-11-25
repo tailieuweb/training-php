@@ -9,6 +9,9 @@ class UserModel extends BaseModel
 
     public function findUserById($id)
     {
+        if(is_array($id) || is_object($id)){
+            return false;
+        }
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
 
@@ -17,7 +20,9 @@ class UserModel extends BaseModel
 
     public function findUser($keyword)
     {
-
+        if(is_array($keyword) || is_object($keyword)){
+            return false;
+        }
         // $keyword = htmlentities($keyword, ENT_QUOTES, "UTF-8");
 
         $sql = 'SELECT * FROM users WHERE name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
@@ -34,6 +39,9 @@ class UserModel extends BaseModel
      */
     public function auth($userName, $password)
     {
+        if(is_array($userName) || is_array($password) ||is_object($userName) || is_object($password)){
+            return false;
+        }
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
 
@@ -52,6 +60,9 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id, $token)
     {
+        if(!is_int($id) || !is_string($token)){
+            return false;
+        }
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql, $token);
     }
@@ -64,9 +75,12 @@ class UserModel extends BaseModel
     public function updateUser($input)
     {
         foreach($input as $value){
-            if(is_array($value) || is_object($value)){
+            if(is_array($value) || is_object($value) || is_null($value)){
                 return false;
             }
+        }
+        if(is_string($input['id']) || is_string($input['type']) || is_numeric($input['name']) || is_numeric($input['fullname']) || is_numeric($input['email'])){
+            return false;
         }
         $sql = 'UPDATE users SET 
                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '", 
@@ -86,6 +100,11 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
+        foreach($input as $value){
+            if(is_array($value) || is_object($value)){
+                return false;
+            }
+        }
         $md5Password = md5($input['password']);
         $sql = "INSERT INTO `users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
             "'" . $input['name'] . "', '" . $input['fullname'] . "', '" . $input['email'] . "', '" . $input['type'] . "', '" . $md5Password . "')";
@@ -138,5 +157,16 @@ class UserModel extends BaseModel
         return self::$_instance;
     }
     //
-
+    /** 
+     * Transatcion
+     */
+    public function startTransaction(){
+        self::$_connection->begin_transaction();
+    }
+    /**
+     * Rollback
+     */
+    public function rollback(){
+        self::$_connection->rollback();
+    }
 }
