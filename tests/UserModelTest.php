@@ -36,24 +36,82 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
-    public function testFindUserbyIdOk()
+    //Test Auth nhap dung user,pass
+    public function testAuthOK()
     {
-        $userModel = new UserModel();
-        $userId = 1;
-        $userName = 'abc';
-        $user = $userModel->findUserById($userId);
+        
+    }
        
-        $actual = $user[0]['name'];
-        $this->assertEquals($userName, $actual);
+       
+    //Test Auth nhap sai user,pass
+    public function testAuthNG()
+    { 
+        $userModel = new UserModel();
+        $user = "mrluongdz";
+        $pass = "luongvo1247";
+
+        $excute = []; 
+
+        $actual =  $userModel->auth($user, $pass);
+        $this->assertEquals($excute, $actual);
     }
-    public function testAuthOk()
+    //Test Auth nhap vào ki tu dac biet
+    public function testAuthkitudacbietNG()
     {
         $userModel = new UserModel();
-        $userName = 'abc';
-        $userPassword = '123';
-        $user = $userModel->auth($userName);
-
-        $actual = $user[4]['passsword'];
-        $this->assertEquals($userPassword, $actual);
+        $user = '+_+';
+        $pass =  '_+_';
+        $expected = [];
+        $actual = $userModel->auth($user, $pass);
+        $this->assertEquals($expected, $actual);
     }
+    //Xoa đúng id
+    public function testDeleteUserByIdOK()
+    {
+        $userModel = new UserModel();
+        $id =1;
+        $excute = true;
+        $actual = $userModel->deleteUserById($id);
+        $this->assertEquals($excute, $actual);
+    }
+    //Xoa sai id
+    public function testDeleteUserByIdNG()
+    {
+        $userModel = new UserModel();
+        $id = '1,1';
+
+        $actual = $userModel->deleteUserById($id);
+        if ($actual == false) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+    //xoa id khong co ở data
+    public function testDeleteUserByIdShowNG()
+    {
+        $userModel = new UserModel();
+        $id = 1000;
+        $excute = true;
+        $key = $userModel->findUserById($id);
+        $actual = $userModel->deleteUserById($id);
+
+        if ($key == []) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertEquals($excute, $actual);
+        }
+    }
+
+
+    public function testSingletonNG()
+    {
+        $userModel = new UserModel;
+        $userModel2 = new UserModel;
+        $expected = false;
+        $actual = $userModel === $userModel2 ? true : false;
+        $this->assertEquals($expected, $actual);
+    }
+
+   
 }
