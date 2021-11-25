@@ -102,9 +102,7 @@ class UserModelTest extends TestCase
      */
     public function testInsertUserOk()
     {
-        // $userModel = new UserModel();
         $userModel = new UserModel();
-        //$userModel = $factory->make('user');
         $param = array(
             "id" => "",
             "name" => "user11",
@@ -140,11 +138,34 @@ class UserModelTest extends TestCase
       }
     }
 
-    public function testInsertUserNull()
+    /**
+     * Test case insertUser Null Id
+     */
+    public function testInsertUserNullId()
     {
         $userModel = new UserModel();
-        //$factory = new FactoryPattern();
-        //$userModel = $factory->make('user');
+
+        $param = array(
+            "id" => null,
+            "name" => "",
+            "fullname" => "nguyentanle",
+            "email" => "le@mail.com",
+            "type" => "user",
+            "password" => "12345"
+        );
+
+        $actual = $userModel->insertUser($param);
+        $expected = 'error';
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case insertUser Null Name
+     */
+    public function testInsertUserNullName()
+    {
+        $userModel = new UserModel();
 
         $param = array(
             "id" => "",
@@ -161,14 +182,81 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function testInsertUserStr()
+    /**
+     * Test case insertUser Null Fullname
+     */
+    public function testInsertUserNullFullName()
     {
         $userModel = new UserModel();
-        //$factory = new FactoryPattern();
-        //$userModel = $factory->make('user');
 
         $param = array(
             "id" => "",
+            "name" => "",
+            "fullname" => null,
+            "email" => "le@mail.com",
+            "type" => "user",
+            "password" => "12345"
+        );
+
+        $actual = $userModel->insertUser($param);
+        $expected = 'error';
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case insertUser Null Email
+     */
+    public function testInsertUserNullEmail()
+    {
+        $userModel = new UserModel();
+
+        $param = array(
+            "id" => "",
+            "name" => "",
+            "fullname" => "",
+            "email" => null,
+            "type" => "user",
+            "password" => "12345"
+        );
+
+        $actual = $userModel->insertUser($param);
+        $expected = 'error';
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case insertUser Null Type
+     */
+    public function testInsertUserNullType()
+    {
+        $userModel = new UserModel();
+
+        $param = array(
+            "id" => "",
+            "name" => "le",
+            "fullname" => "nguyentanle",
+            "email" => "le@mail.com",
+            "type" => null,
+            "password" => "12345"
+        );
+
+        $actual = $userModel->insertUser($param);
+        $expected = 'error';
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case insertUser String
+     */
+    public function testInsertUserStr()
+    {
+        $userModel = new UserModel();
+
+        $param = array(
+            "id" => "abc",
             "name" => "",
             "fullname" => "nguyentanle",
             "email" => "le@mail.com",
@@ -182,11 +270,12 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * Test case insertUser Object
+     */
     public function testInsertUserObject()
     {
         $userModel = new UserModel();
-        //$factory = new FactoryPattern();
-        //$userModel = $factory->make('user');
 
         $object = new stdClass();
 
