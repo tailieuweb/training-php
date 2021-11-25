@@ -1,9 +1,13 @@
 <?php
+
+use phpDocumentor\Reflection\Types\This;
+
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
     private static $_instance;
+
     public function findUserById($id)
     {
         if (is_numeric($id)) {
@@ -19,17 +23,22 @@ class UserModel extends BaseModel
 
     public function findUser($keyword)
     {
+        // var_dump(self::$_connection);
+        // die();
         if ($keyword != null) {
-            $search = ['/', '//', ';', '%'];
-            $replace = '';
-
-            $result = str_replace($search, $replace, $keyword);
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $result . '%" OR email LIKE "%' . $result . '%"';
-
-            // var_dump($sql);
-            // die();
-            $user = $this->select($sql);
-            return $user;
+            if (!is_bool($keyword) && strlen($keyword) <= 255) {
+                $sql = "SELECT * FROM users WHERE name LIKE ? OR email LIKE ?";
+                $stm = self::$_connection->prepare($sql);
+                $name = '%' . $keyword . '%';
+                $stm->bind_param('ss', $name, $name);
+                // var_dump($stm);
+                // die();
+                $stm->execute();
+                $users = [];
+                $users = $stm->get_result()->fetch_all(MYSQLI_ASSOC);
+                return $users;
+                //code tiep
+            }
         } else {
             return false;
         }
@@ -70,26 +79,39 @@ class UserModel extends BaseModel
     {
         $regex_email = "/^[A-Za-z0-9_.]{6,32}@([a-zA-Z0-9]{2,12})(.[a-zA-Z]{2,12})+$/";
         $regex_not_special_sign = "/^[a-zA-Z0-9*\s]+$/";
+        $regex_id = "/^[0-9*\s]+$/";
         // var_dump($input['email']);
         // die();
+        $sql = 'SELECT * FROM users';
+        $users = $this->select($sql);
+        // var_dump($users);
+        // die();
         if (
-            $input['id'] != null and $input['name'] != null and $input['fullname'] != null and $input['email'] != null and $input['type'] != null and $input['password'] != null and preg_match($regex_not_special_sign, $input['fullname'])
-            and preg_match($regex_not_special_sign, $input['name']) and preg_match($regex_email, $input['email'])
-        ) if ($input['type'] == 'user' or $input['type'] == 'admin') {
-            $sql = 'UPDATE users SET 
+            $input['id'] != null and $input['name'] != null and $input['fullname'] != null and $input['email'] != null and $input['type'] != null and $input['password'] != null and !is_object($input['name']) and !is_object($input['id']) and !is_object($input['fullname']) and !is_object($input['email']) && preg_match($regex_not_special_sign, $input['fullname'])
+            and preg_match($regex_not_special_sign, $input['name']) and preg_match($regex_email, $input['email']) && preg_match($regex_id, $input['id']) && is_bool($input['fullname']) != true && is_bool($input['name']) != true && is_bool($input['email']) != true && is_bool($input['type']) != true && strlen($input['name']) <= 100 && strlen($input['fullname']) < 100
+        ) {
+            if ($input['type'] == 'user' or $input['type'] == 'admin') {
+                foreach ($users as $value) {
+                    if ($value['id'] === $input['id']) {
+                        $sql = 'UPDATE users SET 
                  name = "' . $input['name'] . '", 
                  fullname = "' . $input['fullname'] . '",
                  email = "' . $input['email'] . '",
                  type = "' . $input['type'] . '",
                  password="' . $input['password'] . '"
                 WHERE id = ' . $input['id'];
-            // var_dump($sql);
-            // var_dump(preg_match($regex_not_special_sign, $input['fullname']));
-            // die();
-            $user = $this->update($sql);
-            return $user;
+
+                        // var_dump(is_bool($input['type']));
+                        // var_dump($sql);
+                        // die();
+                        $user = $this->update($sql);
+                        return $user;
+                    }
+                }
+            }
         } else {
-            // var_dump(preg_match($regex_not_special_sign, $input['fullname']));
+            // var_dump(preg_match($regex_email, $input['email']));
+            // var_dump('die2');
             // die();
             return false;
         }
@@ -134,13 +156,21 @@ class UserModel extends BaseModel
         return $users;
     }
 
+    //!TODO: Get All Users Have Not Bank Account,Thanh An
+    public  function getUserHaveNotBank()
+    {
+        $sql = "SELECT * FROM users WHERE NOT EXISTS (SELECT * FROM banks WHERE users.id = banks.user_id)";
+        $users = $this->select($sql);
+        return $users;
+    }
+
     public static function getInstance()
     {
         if (self::$_instance !== null) {
-            var_dump('returning instance user');
+            // var_dump('returning instance user');
             return self::$_instance;
         }
-        var_dump('creating instance user');
+        // var_dump('creating instance user');
         self::$_instance = new self();
         return self::$_instance;
     }

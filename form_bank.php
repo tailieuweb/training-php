@@ -14,7 +14,7 @@ $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
-$users = $userModel->getUsers($params);
+$users = $userModel->getUserHaveNotBank();
 $banks = $bankModel->getBanks($params);
 
 // if (!empty($_GET['id'])) {
@@ -113,7 +113,7 @@ if (!empty($_POST['submit'])) {
                 ?>
                 <div class="form-group">
                     <label for="cost">Cost</label>
-                    <input type="number" name="cost" class="form-control" placeholder="Cost" value="<?php if (isset($_GET['id'])) {
+                    <input type="number" step="any" name="cost" class="form-control" placeholder="Cost" value="<?php if (isset($_GET['id'])) {
                                                                                                         foreach ($banks as $bank) {
                                                                                                             if ($bank['user_id'] == $_GET['id']) {
                                                                                                                 echo $bank['cost'];

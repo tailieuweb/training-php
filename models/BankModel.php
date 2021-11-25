@@ -108,26 +108,11 @@ class BankModel extends BaseModel
      */
     public function insertBanks($input)
     {
-        // $allBanks = $this->getAllBanks($input['user_id']);
-        // if (empty($allBanks)) {
-        //     $sql = "INSERT INTO `banks` (`user_id`, `cost` ) VALUES (" .
-        //         "'" . $input['user_id'] . "','" . $input['cost'] . "')";
-        //     $bank = $this->insert($sql);
-        //     return $bank;
-        // } else {
-        //     $cost = $allBanks[0]['cost'] + $input['cost'];
-        //     $sql = 'UPDATE banks SET 
-        //     cost = "' . $cost . '"
-        //     WHERE id = ' . $allBanks[0]['id'];
-
-        //     $user = $this->update($sql);
-        //     return $user;
-        // }
-        $regex_not_special_sign = "/^[a-zA-Z0-9]+$/";
+        $regex_not_special_sign = "/^-?(?:0|[1-9][0-9]*)\.?[0-9]+([e|E][+-]?[0-9]+)?$/";
         $regex_id = "/^[0-9]+$/";
         if (
             $input['user_id'] != null && $input['cost'] != null && is_numeric($input['user_id']) && is_numeric($input['cost']) &&
-            preg_match($regex_not_special_sign, $input['cost']) && preg_match($regex_id, $input['user_id'])
+            preg_match($regex_id, $input['user_id']) && preg_match($regex_not_special_sign, $input['cost']) && is_bool($input['user_id']) != true && is_bool($input['cost']) != true && is_object($input['user_id']) != true && !is_object($input['cost'])
         ) {
             $sql = "INSERT INTO `banks` (`user_id`, `cost` ) VALUES (" .
                 "'" . $input['user_id'] . "', '" . $input['cost'] . "')";
