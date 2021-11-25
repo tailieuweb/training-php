@@ -14,6 +14,30 @@ class BankModelTest extends TestCase {
          $actual = $bankModel->getUser();
          $this->assertEquals($count_array,count($actual));
      }
+    //lấy ra giá trị mảng user có trong danh sách và khác giá trị rỗng
+    public function testGetUserPutOutOk1()
+     {
+         $bankModel = new BankModel();
+         $count_array = 5;
+         $actual = $bankModel->getUser();
+         $this->assertEquals($count_array,isset($actual));
+     } 
+     //lấy ra giá trị user có danh sachs giá trị  khác rỗng
+     public function testGetUserPutOutOk2()
+     {
+         $bankModel = new BankModel();
+         $count_array = 5;
+         $actual = $bankModel->getUser();
+         $this->assertEquals($count_array,!empty($actual));
+     } 
+     //lấy ra giá trị user có danh sách giá trị rỗng
+     public function testGetUserPutOutOk3()
+     {
+         $bankModel = new BankModel();
+         $count_array = null;
+         $actual = $bankModel->getUser();
+         $this->assertEquals($count_array,empty($actual));
+     } 
      //test function GetUser 2(Not Good)
      public function testGetUserPutOutNG(){
         $bankModel = new BankModel();
