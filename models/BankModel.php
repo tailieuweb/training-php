@@ -7,6 +7,15 @@ class BankModel extends BaseModel
 {
     protected static $_instance;
     /**
+     *  Find Bank by id
+     */
+    public function findBankById($id) {
+        $sql = 'SELECT * FROM banks WHERE id = '.$id;
+        $bank = $this->select($sql);
+
+        return $bank;
+    }
+    /**
      *  Find User Id
      */
     public function findUserBankById($id)
@@ -48,13 +57,29 @@ class BankModel extends BaseModel
         return $bank;
     }
 
+    /**
+     * Update user
+     * @param $input
+     * @return mixed
+     */
+    public function updateUser_id($input) {
+        $sql = 'UPDATE banks SET 
+                 user_id = "' . mysqli_real_escape_string(self::$_connection, $input['user_id']) .'", 
+                 Cost="'. $input['cost'] .'"
+                WHERE id = ' . $input['id'];
+
+        $bank = $this->update($sql);
+
+        return $bank;
+    }
+
 
     /**
      * Delete user by id
      * @param $id
      * @return mixed
      */
-    public function deleteBankById($id)
+    public function deleteBanksById($id)
     {
         $sql = 'DELETE FROM banks WHERE id = ' . $id;
         return $this->delete($sql);

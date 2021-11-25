@@ -5,14 +5,14 @@ class FactoryPattern
 {
     protected static $_instance;
     // make function
-    public function make($model)
-    {
-        if ($model == 'user') {
-            return UserModel::getInstance();
-        } else if ($model == 'bank') {
-            return BankModel::getInstance();
-        }
-    }
+    // public function make($model)
+    // {
+    //     if ($model == 'user') {
+    //         return UserModel::getInstance();
+    //     } else if ($model == 'bank') {
+    //         return BankModel::getInstance();
+    //     }
+    // }
     // Singleton Design Pattern
     public static function getInstance()
     {

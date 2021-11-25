@@ -1,7 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-class UserModelTest extends TestCase
+class MinhSang_UserModelTest extends TestCase
 {
 
     /**

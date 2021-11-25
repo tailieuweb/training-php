@@ -134,11 +134,11 @@ class UserModel extends BaseModel
         if(!is_numeric($b)) return 'error';
         return $a + $b;
     }
-    /**
-     * For testing
-     * @param $a
-     * @param $b
-     */
-    public function sumb($a, $b) {
-    }
+    // /**
+    //  * For testing
+    //  * @param $a
+    //  * @param $b
+    //  */
+    // public function sumb($a, $b) {
+    // }
 }

@@ -1,7 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-class BankModelTest extends TestCase
+class MinhSang_BankModelTest extends TestCase
 {
     //test findBankByID
     public function testFindBankByIdOK(){
