@@ -77,21 +77,8 @@ class Phu_BankModelTest extends TestCase
          
         $this->assertEquals($count_array,count($actual));
     }
-    //test getBanks khi khong co du lieu oke
-    public function testGetBanksKhongDuLieuOK()
-    {
-        $bankmodel = new BankModel();
-
-        $actual = $bankmodel->getBanks();
-
-        if ($actual != null) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
-    }
-     //test getBanks khi khong co du lieu F
-    public function testGetBanksKhongDuLieuF()
+     //test getBanks khi khong co du lieu 
+    public function testGetBanksKhongDuLieu()
     {
         $bankmodel = new BankModel();
         $actual = null;
@@ -103,30 +90,13 @@ class Phu_BankModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-     //test getBanks khi truyen vao chuoi rong oke
+     //test getBanks khi truyen vao chuoi rong
      public function testGetBanksChuoiRongOke()
      {
         $bankmodel = new BankModel();
 
         $keyword = array(
             'keyword' => null,
-        );
-        $actual = $bankmodel->getBanks($keyword);
-
-        if ($actual != []) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
-     }
-     //test getBanks khi truyen vao chuoi rong F
-     public function testGetBanksChuoiRongF()
-     {
-        $bankmodel = new BankModel();
-
-        $keyword = array(
-            'keyword' => 'cost',
-            'keyword' => 'user_id'
         );
         $actual = $bankmodel->getBanks($keyword);
 
