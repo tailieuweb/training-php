@@ -136,42 +136,7 @@ class UserModelTest extends TestCase
     //         $this->assertTrue(false);
     //     }
     // }
-    public function testUpdateUserOk()
-    {
-        $userModel = new UserModel();
-        $user = array(
-            'id' => 19,
-            'name' => 'abcd',
-            'fullname' => 'hoangphu',
-            'type' => 'admin',
-            'email' => 'hhhpppp@gmail.com',
-            'password' => '1234567'
-        );
-        $actual = $userModel->updateUser($user);
-        if ($actual == true) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
-    }
-    public function testUpdateUserNull()
-    {
-        $userModel = new UserModel();
-        $user = array(
-            'id' => [],
-            'name' => '',
-            'fullname' => '',
-            'type' => '',
-            'email' => '',
-            'password' => ''
-        );
-        $actual = $userModel->updateUser($user);
-        if ($actual == true) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
-    }
+    
 
     public function testGetUserOk()
     {
@@ -269,67 +234,4 @@ class UserModelTest extends TestCase
     /**
      * Test findUserById Ok
      */
-    public function testFindUserByIdOk()
-    {
-        $userModel = new UserModel();
-        $userID = 3;
-        $userName = 'hackerasfasf';
-
-        $user = $userModel->findUserById($userID);
-        $actual = $user[0]['name'];
-
-        $this->assertEquals($userName, $actual);
-    }
-
-    /**
-     * Test findUserById sai:
-     */
-    public function testFindUserByIdNg()
-    {
-        $userModel = new UserModel();
-        $userID = 6;
-
-        $user = $userModel->findUserById($userID);
-
-       if(empty($user)){
-           $this->assertTrue(true);
-       }
-       else{
-        $this->assertTrue(false);
-       }
-    }
-    /**
-     * Test findUserById dữ liệu rổng
-     */
-    public function testFindUserByIdNull()
-    {
-        $userModel = new UserModel();
-        $userID = null;
-
-        $user = $userModel->findUserById($userID);
-
-       if(empty($user)){
-           $this->assertTrue(true);
-       }
-       else{
-        $this->assertTrue(false);
-       }
-    }
-    /**
-     * Test findUserById dữ liệu chuổi:
-     */
-    public function testFindUserByIdStr()
-    {
-        $userModel = new UserModel();
-        $userID ='asd';
-
-        $user = $userModel->findUserById($userID);
-
-       if(empty($user)){
-           $this->assertTrue(true);
-       }
-       else{
-        $this->assertTrue(false);
-       }
-    }
 }
