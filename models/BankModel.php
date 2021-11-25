@@ -4,8 +4,11 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel
 {
+    private static $_bank_instance;
+
     // Singleton pattern:
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (self::$_bank_instance !== null) {
             return self::$_bank_instance;
         }
@@ -20,13 +23,15 @@ class BankModel extends BaseModel
      */
     public function getBankAccounts($params = [])
     {
+
+
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT users.*, banks.id AS bank_id, banks.cost AS cost 
                 FROM users 
                 INNER JOIN banks 
                 ON banks.user_id = users.id 
-                WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection,$params['keyword']) . '%"'
+                WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection, $params['keyword']) . '%"'
                 . ' ORDER BY id ASC';
             $banks = $this->select($sql);
         } else {
@@ -78,7 +83,6 @@ class BankModel extends BaseModel
     {
         $sql = 'SELECT * FROM banks WHERE id = ' . $id;
         $items = $this->select($sql);
-
         return $items;
     }
 
@@ -102,11 +106,16 @@ class BankModel extends BaseModel
      */
     public function updateBankInfo($input)
     {
+        if (!isset($input['cost']) || !isset($input['id'])){
+            return  false;
+        }
+        if(!is_numeric($input['cost']) || !is_numeric($input['id'])){
+            return  false;
+        }
         $sql = 'UPDATE banks SET 
                  cost = "' . $input['cost']  . '"
                 WHERE id = ' . ($input['id']);
         $item = $this->update($sql);
-
         return $item;
     }
 
@@ -117,14 +126,12 @@ class BankModel extends BaseModel
      */
     public function insertBankInfo($input)
     {
-        $sql = "INSERT INTO `banks` VALUES (" . 
+        $sql = "INSERT INTO `banks` VALUES (" .
             0 . ", "
             . $input['user_id'] . ", "
             . $input['cost']
-         . ")";
-
+            . ")";
         $item = $this->insert($sql);
-
         return $item;
     }
 }
