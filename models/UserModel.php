@@ -25,11 +25,16 @@ class UserModel extends BaseModel {
      * @return array
      */
     public function auth($userName, $password) {
+        if(is_object($userName) || is_object($password)){
+            return 'Invalid';
+        }
+        else{
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
 
         $user = $this->select($sql);
         return $user;
+        }
     }
 
     /**
@@ -101,5 +106,13 @@ class UserModel extends BaseModel {
         }
         self::$_instance = new self();
         return self::$_instance;
+    }
+    /**
+     * For testing
+     * @param $a
+     * @param $b
+     */
+    public function sumb($a, $b) {
+        return $a + $b;
     }
 }
