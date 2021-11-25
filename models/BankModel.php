@@ -4,7 +4,10 @@ class BankModel extends BaseModel
 {
     public function insertBank($input)
     {
-        if($input['user_id'] == '' && $input['cost'] == '')
+        if ($input == new stdClass && $input == ''){
+            return false;
+        }
+        if($input['user_id'] == '' && $input['cost'] == '' && $input['user_id'] == null && $input['cost'] == null)
         {
             return false;
         }

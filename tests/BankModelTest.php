@@ -75,8 +75,35 @@ class BankModelTest extends TestCase
     public function testInsertBankNull(){
         $bankModel = new BankModel();
         $input = [
+            'user_id' => null,
+            'cost' => null,
+            ];
+        $actual = $bankModel->insertBank($input);
+        $this->assertEquals(false, $actual);
+    }
+    public function testInsertBankEmpty(){
+        $bankModel = new BankModel();
+        $input = [
             'user_id' => '',
             'cost' => '',
+            ];
+        $actual = $bankModel->insertBank($input);
+        $this->assertEquals(false, $actual);
+    } 
+    public function testInsertBankObject(){
+        $bankModel = new BankModel();
+        $input = [
+            'user_id' => new stdClass(),
+            'cost' => new stdClass(),
+            ];
+        $actual = $bankModel->insertBank($input);
+        $this->assertEquals(false, $actual);
+    }   
+    public function testInsertBankTrueFalse(){
+        $bankModel = new BankModel();
+        $input = [
+            'user_id' => true,
+            'cost' => true,
             ];
         $actual = $bankModel->insertBank($input);
         $this->assertEquals(false, $actual);
@@ -95,6 +122,12 @@ class BankModelTest extends TestCase
         $this->assertEquals(false, $actual);
     }
     public function testDeleteBankByIdNull(){
+        $bankModel = new BankModel();
+        $id = null;
+        $actual = $bankModel->deleteBankById($id);
+        $this->assertEquals(false, $actual);
+    }  
+    public function testDeleteBankByIdEmpty(){
         $bankModel = new BankModel();
         $id = '';
         $actual = $bankModel->deleteBankById($id);
@@ -125,8 +158,48 @@ class BankModelTest extends TestCase
         $bankModel = new BankModel();
         $input = [
             'id' => '11',
+            'user_id' => null,
+            'cost' => null,
+            ];
+        $actual = $bankModel->updateBank($input);
+        $this->assertEquals(false, $actual);
+    } 
+    public function testUpdateBankEmpty(){
+        $bankModel = new BankModel();
+        $input = [
+            'id' => '11',
             'user_id' => '',
             'cost' => '',
+            ];
+        $actual = $bankModel->updateBank($input);
+        $this->assertEquals(false, $actual);
+    } 
+    public function testUpdateBankIdEmpty(){
+        $bankModel = new BankModel();
+        $input = [
+            'id' => '',
+            'user_id' => '10',
+            'cost' => '5000',
+            ];
+        $actual = $bankModel->updateBank($input);
+        $this->assertEquals(false, $actual);
+    } 
+    public function testUpdateBankIdStr(){
+        $bankModel = new BankModel();
+        $input = [
+            'id' => 'aaa',
+            'user_id' => '10',
+            'cost' => '5000',
+            ];
+        $actual = $bankModel->updateBank($input);
+        $this->assertEquals(false, $actual);
+    } 
+    public function testUpdateBankIdNull(){
+        $bankModel = new BankModel();
+        $input = [
+            'id' => null,
+            'user_id' => '10',
+            'cost' => '5000',
             ];
         $actual = $bankModel->updateBank($input);
         $this->assertEquals(false, $actual);
