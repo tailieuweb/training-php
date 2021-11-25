@@ -1,9 +1,9 @@
 <?php
 
-require_once 'BaseModel.php';
-$ds       = DIRECTORY_SEPARATOR;
-$base_dir = realpath(dirname(__FILE__).$ds.'..').$ds;
-require_once("{$base_dir}models{$ds}IBank.php");
+//require_once 'BaseModel.php';
+//$ds       = DIRECTORY_SEPARATOR;
+//$base_dir = realpath(dirname(__FILE__).$ds.'..').$ds;
+//require_once("{$base_dir}models{$ds}IBank.php");
 class BankModel extends BaseModel implements IBank
 {
     public static function getInstance()
