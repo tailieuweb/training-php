@@ -17,7 +17,7 @@ class BankModelTest extends TestCase
     //test findBankByIDng
      public function testFindBankByIdNg(){
         $bankModel = new BankModel();
-         $Id = 9999;
+         $Id = -9999;
 
          $bank = $bankModel ->findBankById($Id);
          if(empty($bank)) {
@@ -67,9 +67,8 @@ class BankModelTest extends TestCase
     //test findBankByIdArr
     public function testFindBankByIdArr(){
         $bankModel = new BankModel();
-         $Id = [];
-
-         $bank = $bankModel ->findBankById($Id);
+         $Id = ["aha","hello"];
+         $bank = $bankModel ->findBankById($Id[0]);
          if(empty($bank)) {
             $this->assertTrue(true);
         } else {
@@ -89,50 +88,49 @@ class BankModelTest extends TestCase
     //test deleteBankByIdNg
     public function testDeleteBankByIdNg(){
         $bankModel = new BankModel();
-        $Id = 999;
-        //$excuted = false;
-        $actual = $bankModel->deleteBanksById($Id);
-        if(empty($actual)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
+        $id = -9999;
+        $expected = true;
+        $user = $bankModel->deleteBanksById($id);
+        $actual = $user;
+        $this->assertEquals($expected, $actual);
     }
     //test deleteBankByIdNull
     public function testDeleteBankByIdNull(){
         $bankModel = new BankModel();
-        $Id = null;
-        //$excuted = true;
-        $actual = $bankModel->deleteBanksById($Id);
-        if(empty($actual)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
+        $id = null;
+        $expected = false;
+        $user = $bankModel->deleteBanksById($id);
+        $actual = $user;
+        $this->assertEquals($expected, $actual);
     }
     
     //test deleteBankByIdStr
     public function testDeleteBankByIdStr(){
         $bankModel = new BankModel();
-        $Id = "hellp";
-        $actual = $bankModel->deleteBanksById($Id);
-        if(empty($actual)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
+        $id = "user1";
+        $expected = false;
+        $user = $bankModel->deleteBanksById($id);
+        $actual = $user;
+        $this->assertEquals($expected, $actual);
     }
 
     //test deleteBankByIdStr
     public function testDeleteBankByIdKey(){
         $bankModel = new BankModel();
-        $Id = "****";
-        $actual = $bankModel->deleteBanksById($Id);
-        if(empty($actual)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
+        $id = "****";
+        $expected = false;
+        $user = $bankModel->deleteBanksById($id);
+        $actual = $user;
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testDeleteBankByIdNegative(){
+        $bankModel = new BankModel();
+        $id = -11;
+        $expected = true;
+        $user = $bankModel->deleteBanksById($id);
+        $actual = $user;
+        $this->assertEquals($expected, $actual);
     }
     
     
