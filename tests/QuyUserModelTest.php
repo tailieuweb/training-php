@@ -205,16 +205,16 @@ class QuyUserModelTest extends TestCase
             $this->assertTrue(true);
         }
      }
-    // public function testGetUserbyKeyWordOk()
-    // {
-    //     $userModel = new UserModel();
-    //     $params= [];
-    //     $params['keyword'] = '321';
-    //     $count_array = 3;
-    //     $actual = $userModel->getUsers( $params);
+    public function testGetUserbyKeyWordOk()
+    {
+        $userModel = new UserModel();
+        $params= [];
+        $params['keyword'] = '';
+        $count_array = 4;
+        $actual = $userModel->getUsers( $params);
 
-    //     $this->assertEquals($count_array,count($actual));
-    // }
+        $this->assertEquals($count_array,count($actual));
+    }
     // public function testDeleteUserByIdNg()
     // {
     //     $userModel = new UserModel();
