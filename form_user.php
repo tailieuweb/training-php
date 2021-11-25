@@ -1,8 +1,11 @@
 <?php
 // Start the session
 session_start();
-require_once 'repositories/UserRepository.php';
-$userRepository = new UserRepository();
+require_once 'models/FactoryPattern.php';
+
+$factory = new FactoryPattern();
+
+$userModel = $factory->make('user');
 
 $user = NULL; //Add new user
 $_id = NULL;

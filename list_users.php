@@ -1,16 +1,20 @@
 <?php
 // Start the session
 session_start();
+require_once 'models/FactoryPattern.php';
 
-require_once 'repositories/UserRepository.php';
-$userRepository = new UserRepository();
+$factory = new FactoryPattern();
+
+$userModel = $factory->make('user');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
 
-$users = $userRepository->getUsers($params);
+$users = $userModel->getUsers($params);
+var_dump($users);
+
 ?>
 <!DOCTYPE html>
 <html>
