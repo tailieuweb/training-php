@@ -339,16 +339,4 @@ class UserModelTest extends TestCase
     $actual = $user->auth('" or ""="', "admin");
     $this->assertEquals($expected, $actual);
   }
-
-  // function testGetUsers
-  public function testGetUsers()
-  {
-    $userModel = new UserModel();
-    $params = [];
-
-    $expected = 1;
-    $arrUsers = $userModel->getUsers($params);
-    $actual = $arrUsers;
-    $this->assertEquals($expected, $actual);
-  }
 }
