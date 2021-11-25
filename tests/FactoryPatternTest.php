@@ -84,11 +84,33 @@ class FactoryPatternTest extends TestCase
     // test function make null
     public function testMakeNull(){
         $factoryPattern = new FactoryPattern();
-        $text = '';
-        $expected = Null;
+        $text = null;
+        $expected = null;
         
         $actual = $factoryPattern->make($text);
 
+        $this->assertEquals($expected, $actual);
+    }
+
+    // test function make string
+    public function testMakeStringIsEmpty(){
+        $factoryPattern = new FactoryPattern();
+        $text = " ";
+        $expected = Null;
+        
+        $actual = $factoryPattern->make($text);
+        
+        $this->assertEquals($expected, $actual);
+    }
+
+    // test function make array
+    public function testMakeArray(){
+        $factoryPattern = new FactoryPattern();
+        $text = array();
+        $expected = Null;
+        
+        $actual = $factoryPattern->make($text);
+        
         $this->assertEquals($expected, $actual);
     }
 
