@@ -23,5 +23,5 @@ class BankModelTest extends TestCase
        
         $this->assertEquals($expected, $actual);
        
-    }
+    }  
 }
