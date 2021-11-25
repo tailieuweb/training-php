@@ -19,7 +19,7 @@ $bmd   = new BankModel();
 $lx = new LaiSuat();
 $lx->setBank($bmd);
 $banks = $lx->cost();
-
+var_dump($banks);
 ?>
 <!DOCTYPE html>
 <html>
