@@ -8,7 +8,11 @@
 <testsuites>					
     <testsuite name="SqlWsContractImport">					
         <file>./Tests/MinhSang_UserModelTest.php</file>					
-        <file>./Tests/MinhSang_BankModelTest.php</file>					
+        <file>./Tests/MinhSang_BankModelTest.php</file>
+        <file>./tests/UserModelTest.php</file>
+        <file>./tests/GSang_DeleteUserByIdTest.php</file>
+        <file>./tests/GSang_UserModelAuthTest.php</file>
+        <file>./tests/GSang_UpdateUserIdBankModelTest.php</file>
     </testsuite>					
 </testsuites>					
 <filter>					
