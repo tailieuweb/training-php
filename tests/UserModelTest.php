@@ -5,6 +5,21 @@ use PHPUnit\Framework\TestCase;
 class UserModelTest extends TestCase
 {
     //ok
+    public function testAuthOk()
+    {
+        $userModel = new UserModel();
+        $userName = "admin";
+        $password='';
+        $user = $userModel->auth($userName, $password);
+       if(empty($user)){
+           $this->assertTrue(true);
+       }
+       else{
+        $this->assertTrue(false);
+       }
+    }
+
+    //ok
     public function testFindUserByIdOk(){
         $userModel = new UserModel();
         $userId = 18;
