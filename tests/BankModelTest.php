@@ -10,7 +10,7 @@ class BankModelTest extends TestCase {
      public function testGetUserPutOutOk()
      {
          $bankModel = new BankModel();
-         $count_array = 6;
+         $count_array = 5;
          $actual = $bankModel->getUser();
          $this->assertEquals($count_array,count($actual));
      }
