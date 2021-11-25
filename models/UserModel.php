@@ -40,7 +40,6 @@ class UserModel extends BaseModel {
     public function deleteUserById($id) {
         $sql = 'DELETE FROM users WHERE id = '.$id;
         return $this->delete($sql);
-
     }
 
     /**
@@ -65,8 +64,8 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".md5($input['password'])."')";
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
+            "'" . $input['name'] . "', '" . md5($input['password']) . "','" . $input['fullname'] . "','" . $input['email'] . "','" . $input['type'] . "')";
 
         $user = $this->insert($sql);
 
@@ -95,11 +94,15 @@ class UserModel extends BaseModel {
         return $users;
     }
 
-    public static function getInstance() {
-        if (self::$_instance !== null){
-            return self::$_instance;
-        }
-        self::$_instance = new self();
-        return self::$_instance;
+    /**
+     * For testing
+     * @param $a
+     * @param $b
+     */
+    public function sumb($a, $b) {
+        if(is_string($a) && is_string($b)) return $a.$b;
+        if(!is_numeric($a)) return 'error';
+        if(!is_numeric($b)) return 'error';
+        return $a + $b;
     }
 }
