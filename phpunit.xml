@@ -13,6 +13,8 @@
         <file>./tests/GSang_DeleteUserByIdTest.php</file>
         <file>./tests/GSang_UserModelAuthTest.php</file>
         <file>./tests/GSang_UpdateUserIdBankModelTest.php</file>
+        <file>./Tests/Phu_BankModelTest.php</file>
+        <file>./Tests/Phu_BankModelTest.php</file>
     </testsuite>					
 </testsuites>					
 <filter>					

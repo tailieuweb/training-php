@@ -3,7 +3,7 @@
 session_start();
 //1-b
 require_once 'models/FactoryPattern.php';
-$factory = new FactoryPattern();
+$factory = FactoryPattern::getInstance();
 
 $userModel = $factory->make('user');
 
@@ -34,6 +34,7 @@ $users = $userModel->getUsers($params);
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">Fullname</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Type</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -47,6 +48,9 @@ $users = $userModel->getUsers($params);
                             </td>
                             <td>
                                 <?php echo $user['fullname']?>
+                            </td>
+                            <td>
+                                <?php echo $user['email']?>
                             </td>
                             <td>
                                 <?php echo $user['type']?>
