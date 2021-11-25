@@ -1,9 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
-
-class UserModelTest extends TestCase
-{
-
+class UserModelTest extends TestCase{
     /**
      * Test case Okie
      */
