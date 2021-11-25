@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class UserModelTest extends TestCase
+class QuyUserModelTest extends TestCase
 {
 
     /**

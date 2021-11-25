@@ -7,12 +7,12 @@
 >
     <testsuites>
         <testsuite name="SqlWsContractImport">
-            <file>./Tests/UserModelTest.php</file>
+            <file>./Tests/QuyUserModelTest.php</file>
         </testsuite>
     </testsuites>
      <testsuites>
         <testsuite name="SqlWsContractImport">
-            <file>./Tests/BankModelTest.php</file>
+            <file>./Tests/QuyBankModelTest.php</file>
         </testsuite>
     </testsuites>
      <filter>				
