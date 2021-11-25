@@ -10,7 +10,7 @@
 	<filter>
 		<whitelist processUncoveredFilesFromWhitelist="true">
 			<directory suffix=".php">
-				./models
+				./models/BankModel.php
 			</directory>
 		</whitelist>
 	</filter>

@@ -5,16 +5,16 @@ use PHPUnit\Framework\TestCase;
 class BankModelTest extends TestCase
 {
 
-  // tham số truyền vào nhiều hơn 5.
-  public function testInsertUser_bank_more_than_5_paramOk()
+  // 1. tham số truyền vào nhiều hơn 5.
+  public function test_insert_user_bank_more_than_5_param_ng()
   {
     $bankModel = new BankModel();
     $input = array(
-      "name" => "lav",
-      "fullname" => "le anh vu",
-      "sdt" => "1234",
-      "email" => "lav@gmail.com",
-      "stk" => "123",
+      "name" => "thamsonhieuhon5",
+      "fullname" => "thamsonhieuhon5",
+      "sdt" => "0",
+      "email" => "thamsonhieuhon5@gmail.com",
+      "stk" => "1234",
       "bank" => 'test'
     );
 
@@ -24,15 +24,15 @@ class BankModelTest extends TestCase
     $this->assertEquals($expected, $actual);
   }
 
-  // tham số truyền vào ít hơn 5.
-  public function testInsertUser_bank_less_than_5_paramOk()
+  // 2. tham số truyền vào ít hơn 5.
+  public function test_insert_user_bank_bank_less_than_5_param_ng()
   {
     $bankModel = new BankModel();
     $input = array(
-      "name" => "lav",
-      "fullname" => "le anh vu",
+      "name" => "thamsoithon5",
+      "fullname" => "thamsoithon5",
       "sdt" => "1234",
-      "email" => "lav@gmail.com",
+      "email" => "thamsoithon5@gmail.com",
     );
 
     $expected = "Số lượng tham số truyền vào không phù hợp";
@@ -41,13 +41,13 @@ class BankModelTest extends TestCase
     $this->assertEquals($expected, $actual);
   }
 
-  // độ dài name lớn hơn 8
-  public function testInsertUser_bank_name_length_more_than_8_paramOk()
+  // 3. độ dài name be hơn 8
+  public function test_insert_user_bank_bank_name_length_more_than_8_param_ng()
   {
     $bankModel = new BankModel();
     $input = array(
-      "name" => "lavla",
-      "fullname" => "le anh vu",
+      "name" => "ddbh8",
+      "fullname" => "dodainamebehon8",
       "sdt" => "1234",
       "email" => "lav@gmail.com",
       "stk" => "123"
@@ -57,15 +57,16 @@ class BankModelTest extends TestCase
     $expected = "Name must be between 8 and 120";
     $this->assertEquals($expected, $actual);
   }
-  // độ dài name bé hơn 120
-  public function testInsertUser_bank_name_length_less_than_120_paramOk()
+
+  // 4. độ dài name lon hơn 120
+  public function test_insert_user_bank_bank_name_length_less_than_120_param_ng()
   {
     $bankModel = new BankModel();
 
     // độ dài name đang 240
     $input = array(
       "name" => "lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345",
-      "fullname" => "le anh vu",
+      "fullname" => "dodainamelonhon120",
       "sdt" => "1234",
       "email" => "lav@gmail.com",
       "stk" => "123"
@@ -76,31 +77,31 @@ class BankModelTest extends TestCase
     $this->assertEquals($expected, $actual);
   }
 
-  // độ dài fullname lớn hơn 8
-  public function testInsertUser_bank_fullname_length_more_than_8_paramOk()
+  // 5. độ dài fullname be hơn 8
+  public function test_insert_user_bank_bank_fullname_length_more_than_8_param_ng()
   {
     $bankModel = new BankModel();
     $input = array(
-      "name" => "lavla",
-      "fullname" => "le vu",
+      "name" => "dodaifullnamebehon8",
+      "fullname" => "ddbh8",
       "sdt" => "1234",
       "email" => "lav@gmail.com",
       "stk" => "123"
     );
 
     $actual = $bankModel->insertUser_bank($input);
-    $expected = "Name must be between 8 and 120";
+    $expected = "Fullname must be between 8 and 120";
     $this->assertEquals($expected, $actual);
   }
 
-  // độ dài fullname bé hơn 120
-  public function testInsertUser_bank_fullname_length_less_than_120_paramOk()
+  // 6. độ dài fullname lon hơn 120
+  public function test_insert_user_bank_bank_fullname_length_less_than_120_param_ng()
   {
     $bankModel = new BankModel();
 
     // độ dài name đang 240
     $input = array(
-      "name" => "lavla",
+      "name" => "dodaifullnamelonhon8",
       "fullname" => "lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345lavla12345",
       "sdt" => "1234",
       "email" => "lav@gmail.com",
@@ -108,17 +109,17 @@ class BankModelTest extends TestCase
     );
 
     $actual = $bankModel->insertUser_bank($input);
-    $expected = "Name must be between 8 and 120";
+    $expected = "Fullname must be between 8 and 120";
     $this->assertEquals($expected, $actual);
   }
 
-  // email khoong hợp lệ.
-  public function testInsertUserBankWithErrorEmailOk()
+  // 7. email không hợp lệ.
+  public function test_insert_user_bank_bank_with_error_email_ng()
   {
     $bankModel = new BankModel();
     $input = array(
-      "name" => "leanhvu1412",
-      "fullname" => "le anh vu",
+      "name" => "emailkhonghople",
+      "fullname" => "email khong hop le",
       "sdt" => "1234",
       "email" => "lav@gmail",
       "stk" => "123"
@@ -128,14 +129,14 @@ class BankModelTest extends TestCase
     $actual = $bankModel->insertUser_bank($input);
     $this->assertEquals($expected, $actual);
   }
-  
-  // email bị rỗng.
-  public function testInsertUserBankWithEmptyEmailOk()
+
+  // 8. email bị rỗng.
+  public function test_insert_user_bank_bank_with_empty_email_ng()
   {
     $bankModel = new BankModel();
     $input = array(
-      "name" => "leanhvu1412",
-      "fullname" => "le anh vu",
+      "name" => "emailbirong",
+      "fullname" => "email bi rong",
       "sdt" => "1234",
       "email" => "",
       "stk" => "123"
@@ -146,13 +147,13 @@ class BankModelTest extends TestCase
     $this->assertEquals($expected, $actual);
   }
 
-  // stk bị rỗng.
-  public function testInsertUserBankWithEmptyStkOk()
+  // 9. stk bị rỗng.
+  public function test_insert_user_bank_bank_with_empty_stk_ng()
   {
     $bankModel = new BankModel();
     $input = array(
-      "name" => "leanhvu1412",
-      "fullname" => "le anh vu",
+      "name" => "stkbirong",
+      "fullname" => "so tai khoan bi rong",
       "sdt" => "1234",
       "email" => "leanhvu@gmail.com",
       "stk" => ""
@@ -163,13 +164,13 @@ class BankModelTest extends TestCase
     $this->assertEquals($expected, $actual);
   }
 
-  // stk không phải kiểu số.
-  public function testInsertUserBankWithStkIsNotNumberOk()
+  // 10. stk không phải kiểu số.
+  public function test_insert_user_bank_bank_with_stk_is_not_number_ng()
   {
     $bankModel = new BankModel();
     $input = array(
-      "name" => "leanhvu1412",
-      "fullname" => "le anh vu",
+      "name" => "stkkhongphaikieuso",
+      "fullname" => "stk khong phai kieu so",
       "sdt" => "1234",
       "email" => "leanhvu@gmail.com",
       "stk" => "123aA"
@@ -181,16 +182,52 @@ class BankModelTest extends TestCase
     $this->assertEquals($expected, $actual);
   }
 
-  // trùng stk.
-  public function testInsertUserBankWithSameStkOk()
+  // 11. sdt bị rỗng.
+  public function test_insert_user_bank_bank_with_empty_sdt_ng()
   {
     $bankModel = new BankModel();
     $input = array(
-      "name" => "leanhvu1412",
-      "fullname" => "le anh vu",
+      "name" => "stkbirong",
+      "fullname" => "so tai khoan bi rong",
+      "sdt" => "",
+      "email" => "leanhvu@gmail.com",
+      "stk" => "0333121111"
+    );
+
+    $expected = "Phone number is not valid";
+    $actual = $bankModel->insertUser_bank($input);
+    $this->assertEquals($expected, $actual);
+  }
+
+  // 12. sdt không phải kiểu số.
+  public function test_insert_user_bank_bank_with_sdt_is_not_number_ng()
+  {
+    $bankModel = new BankModel();
+    $input = array(
+      "name" => "stkkhongphaikieuso",
+      "fullname" => "stk khong phai kieu so",
+      "sdt" => "14A1",
+      "email" => "leanhvu@gmail.com",
+      "stk" => "0333121111"
+    );
+
+    $expected = "Phone number is not valid";
+    $actual = $bankModel->insertUser_bank($input);
+
+    $this->assertEquals($expected, $actual);
+  }
+
+  // 13. trùng stk.
+  // tiên quyết: trong database phải có giá trị stk = 141211515 trước khi chạy test này.
+  public function test_insert_user_bank_bank_with_same_stk_ng()
+  {
+    $bankModel = new BankModel();
+    $input = array(
+      "name" => "trungsotaikhoan",
+      "fullname" => "trung so tai khoan",
       "sdt" => "1234",
       "email" => "leanhvu@gmail.com",
-      "stk" => "123"
+      "stk" => "141211515"
     );
 
     $expected = "Card number is exists";
@@ -199,17 +236,37 @@ class BankModelTest extends TestCase
     $this->assertEquals($expected, $actual);
   }
 
-  // kiểm tra trường hợp câu truy vấn không bình thường.
-  // giá trị truyền vào không bình thường.
-  public function testInsertUserBankWithErrorParamsOk()
+  // 15. kiểm tra trường hợp câu truy vấn không bình thường.
+  // giá trị truyền vào không bình thường (Truyền vào câu truy vấn.).
+  // lưu ý: khi chạy xong dữ liệu sẽ được lưu lại, nên nếu chạy testdox hoặc coverage lần nữa phải hồi phục dữ liệu về trạng thái ban đầu.
+  public function test_insert_user_bank_bank_with_sql_injection_params_ng()
   {
     $bankModel = new BankModel();
     $input = array(
       "name" => "';######",
       "fullname" => ";;##------",
       "sdt" => "1234",
-      "email" => "lav@gmail.com",
-      "stk" => "12314567"
+      "email" => "truonghoptruyvanbinhthuong@gmail.com",
+      "stk" => "1412314"
+    );
+
+    $expected = true;
+    $actual = $bankModel->insertUser_bank($input);
+
+    $this->assertEquals($expected, $actual);
+  }
+
+  // 15. giá trị truyền vào hoàn toàn đúng.
+  // lưu ý: khi chạy xong dữ liệu sẽ được lưu lại, nên nếu chạy testdox hoặc coverage lần nữa phải hồi phục dữ liệu về trạng thái ban đầu.
+  public function test_insert_user_bank_bank_with_correct_params_ok()
+  {
+    $bankModel = new BankModel();
+    $input = array(
+      "name" => "truonghoptruyvanbinhthuong",
+      "fullname" => "truong hop truy van binh thuong",
+      "sdt" => "1234",
+      "email" => "truonghoptruyvanbinhthuong@gmail.com",
+      "stk" => "14111412"
     );
 
     $expected = true;

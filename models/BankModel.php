@@ -53,6 +53,7 @@ class BankModel extends BaseModel implements IBank
         // bắt lỗi số lượng value request.
         if (count($input) !== 5) {
             return "Số lượng tham số truyền vào không phù hợp";
+            die;
         }
 
         // bắt lỗi câu truy vấn.
@@ -65,26 +66,43 @@ class BankModel extends BaseModel implements IBank
         // bắt lỗi độ dài value.
         if (strlen($name) < 8 || strlen($name) > 120) {
             return "Name must be between 8 and 120";
+            die;
         }
 
         // bắt lỗi độ dài value.
         if (strlen($fullname) < 8 || strlen($fullname) > 120) {
             return "Fullname must be between 8 and 120";
+            die;
         }
 
         // bắt lỗi email không hợp lệ (cũng như độ dài chuỗi)
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return "Email is not valid";
+            die;
         }
 
         // stk bị rỗng.
         if (strlen($stk) == 0) {
             return "Card number is not valid";
+            die;
         }
 
         // bắt lỗi stk không phải là số.
         if (!is_numeric($stk)) {
             return "Card number is not valid";
+            die;
+        }
+
+        // sdt bị rỗng.
+        if (strlen($sdt) == 0) {
+            return "Phone number is not valid";
+            die;
+        }
+
+        // bắt lỗi sdt không phải là số.
+        if (!is_numeric($sdt)) {
+            return "Phone number is not valid";
+            die;
         }
 
         // bắt lỗi tồn tại "số tài khoản".
@@ -92,6 +110,7 @@ class BankModel extends BaseModel implements IBank
         $banks = $this->select($sql);
         if (count($banks) > 0) {
             return "Card number is exists";
+            die;
         }
 
         $sql = "INSERT INTO `bank` (`name`, `fullname`, `sdt`, `email`, `stk`) 
@@ -100,9 +119,7 @@ class BankModel extends BaseModel implements IBank
 
         // bắt lỗi câu truy vấn.
         $stmt = mysqli_stmt_init(parent::$_connection);
-        if (!mysqli_stmt_prepare($stmt, $sql)) {
-            $result = false;
-        } else {
+        if (mysqli_stmt_prepare($stmt, $sql)) {
             mysqli_stmt_bind_param($stmt, "sssss", $name, $fullname, $sdt, $email, $stk);
             $result = mysqli_stmt_execute($stmt);
         }
