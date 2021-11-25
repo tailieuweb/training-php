@@ -61,12 +61,25 @@ class SingletonPatternTest extends TestCase
     }
 
     /**
-     * Test case singletonUser  Number
+     * Test case singletonUser Object
      */
     public function testMakeObject()
     {
         $singleton = new SingletonPattern();
         $model = new stdClass();;
+        $expected = 'error';
+        $actual = $singleton->make($model);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case singletonUser Array
+     */
+    public function testMakeArray()
+    {
+        $singleton = new SingletonPattern();
+        $model = array(1,2,3);
         $expected = 'error';
         $actual = $singleton->make($model);
 
