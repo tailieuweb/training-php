@@ -39,18 +39,34 @@ if (!empty($_POST['submit'])) {
                     User form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $_id ?>">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                    </div>
-
-                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
-                </form>
+            <input type="hidden" name="id" value="<?php echo $id ?>">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control" name="name" placeholder="Name"
+                    value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Password" value='<?php if (!empty($user[0]['name'])) echo $user[0]['password'] ?>' required>
+            </div>
+            <div class="form-group">
+                <label for="fullname">Fullname</label>
+                <input name="fullname" class="form-control" placeholder="Fullname" value='<?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?>' required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input name="email" class="form-control" placeholder="Email" value='<?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?>' required>
+            </div>
+            <div class="form-group">
+                <label for="type">Type</label>
+                <select name="type">
+                    <option value="admin">admin</option>
+                    <option value="user">user</option>
+                    <option value="guest">guest</option>
+                </select>
+            </div>
+            <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+        </form>
             <?php } else { ?>
                 <div class="alert alert-success" role="alert">
                     User not found!
