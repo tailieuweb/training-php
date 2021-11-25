@@ -8,9 +8,9 @@
     <testsuites>
         <testsuite name="SqlWsContractImport">
             <file>./tests/UserModelTest.php</file>
-            <file>./tests/DeleteUserByIdTest.php</file>
-            <file>./tests/UserModelAuthTest.php</file>
-            <file>./tests/UpdateUserIdBankModelTest.php</file>
+            <file>./tests/GSang_DeleteUserByIdTest.php</file>
+            <file>./tests/GSang_UserModelAuthTest.php</file>
+            <file>./tests/GSang_UpdateUserIdBankModelTest.php</file>
         </testsuite>
     </testsuites>
     <filter>	
