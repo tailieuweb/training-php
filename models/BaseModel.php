@@ -78,12 +78,4 @@ abstract class BaseModel {
     {
         self::$_connection->rollback();
     }
-
-    public function starTransaction(){
-        self::$_connection->begin_transaction();
-    }
-    public function rollback(){
-        self::$_connection->rollback();
-    }
-
 }

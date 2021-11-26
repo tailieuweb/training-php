@@ -1,79 +1,8 @@
 <?php
 use PHPUnit\Framework\TestCase;
-define('VERSON');
 class UserModelTest extends TestCase
 {
     
-    public function testSumOk3()
-    {
-        $userModel = new UserModel();
-        $a = -1;
-        $b = 2;
-        $expected = 1;
-
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
-    }
-    public function testSumOk4()
-    {
-        $userModel = new UserModel();
-        $a = 1.5;
-        $b = 2.5;
-        $expected = 4;
-
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
-    }
-    public function testSumOk5()
-    {
-        $userModel = new UserModel();
-        $a = -1.5;
-        $b = -2.5;
-        $expected = -4;
-
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
-    }
-    public function testSumOk6()
-    {
-        $userModel = new UserModel();
-        $a = -10;
-        $b = 20;
-        $expected = 10;
-
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
-    }
-    public function testSumOk7()
-    {
-        $userModel = new UserModel();
-        $a = -10;
-        $b = '1';
-        $expected = 'Invalid';
-
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
-    }
-    public function testSumOk8()
-    {
-        $userModel = new UserModel();
-        $a = '-10';
-        $b = '1';
-        $expected = 'Invalid';
-
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
-    }
-
-
-
-   
 
 
     
@@ -708,7 +637,7 @@ class UserModelTest extends TestCase
             'password' => '123456',
             'type' => '1'
         ];
-        $version = md5(VERSION . "chuyen-de-web-1");
+        $version = md5(100 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -740,7 +669,7 @@ class UserModelTest extends TestCase
             'password' => '123456',
             'type' => '1'
         ];
-        $version = md5(VERSION . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
@@ -778,7 +707,7 @@ class UserModelTest extends TestCase
             'password' => '123456',
             'type' => '1'
         ];
-        $version = md5(VERSION . "chuyen-de-web-1");
+        $version = md5(1 . "chuyen-de-web-1");
         $expected = false;
         $userModel = new UserModel();
         $actual = $userModel->updateUser($data, $version);
