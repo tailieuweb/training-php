@@ -8,7 +8,6 @@
     <testsuites>
         <testsuite name="SqlWsContractImport">
             <file>./tests/UserModelTest.php</file>
-            <!-- <file>./tests/BaseModelTest.php</file> -->
         </testsuite>
     </testsuites>
     <filter>

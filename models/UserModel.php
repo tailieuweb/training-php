@@ -1,11 +1,12 @@
 <?php
-
-use function PHPUnit\Framework\isEmpty;
-
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
-{
+{ 
+  
+  private static $_instance;
+
+  //singleton pattern
   public static function getInstance()
   {
     if (self::$_instance !== null) {
@@ -14,11 +15,27 @@ class UserModel extends BaseModel
     self::$_instance = new self();
     return self::$_instance;
   }
+
   public function findUserById($id)
   {
     $sql = 'SELECT * FROM users WHERE id = ' . $id;
     $user = $this->select($sql);
     return $user;
+  }
+  //
+  public function checkUserExist($id)
+  {
+    if (!is_integer($id) || empty($id)) {
+      return "error";
+    } else {
+      $sql = 'SELECT * FROM users WHERE  `id` =' . $id;
+      $users = $this->query($sql);
+      if ($users->num_rows == 0) {
+        return false;
+      } else {
+        return true;
+      }
+    }
   }
   //--------------------------------------------------------------
   public function auth($userName, $password)
@@ -29,30 +46,14 @@ class UserModel extends BaseModel
     return $user;
   }
   //--------------------------------------------------------------
-  function checkUserExist($id)
-  {
-    if (is_null($id) || is_string($id) || !is_numeric($id) || empty($id)) {
-      return "error";
-    }
-    $sql = 'SELECT * FROM users WHERE  `id` =' . $id;
-    $user = $this->select($sql);
-    if (empty($user)) {
-      return false;
-    }
-    if ($user[0]["id"] == $id) {
-      return true;
-    }
-  }
-  //todo--------------------------------------------------------------
   public function deleteUserById($id)
   {
-    if (is_null($id) || is_string($id) || !is_numeric($id) || empty($id)) {
+    if (!is_integer($id)) {
       return "error";
     }
     if ($this->checkUserExist($id) == true) {
       $sql = 'DELETE FROM users WHERE id = ' . $id;
-      $check = $this->delete($sql);
-      return true;
+      return $this->delete($sql);
     } else {
       return "User doesn't exis";
     }
@@ -60,29 +61,27 @@ class UserModel extends BaseModel
   //--------------------------------------------------------------
   public function updateUser($input)
   {
-
+    if (empty($input)) {
+      return "error";
+    }
+    if (empty($input['id']) || empty($input['name']) || empty($input['fullname']) || empty($input['email']) || empty($input['password']) || empty($input['type'])) {
+      return "error";
+    }
     if (
-      is_numeric(($input['id'])) == false || $input['id'] == 'e'
-      || is_string($input['name']) == false || is_string($input['fullname']) == false || is_string($input['email']) == false
+      is_integer(($input['id'])) == false  || $input['id'] == 'e'
+      || is_string($input['name'])  == false || is_string($input['fullname']) == false || is_string($input['email']) == false
       || is_string($input['type']) == false || is_string($input['password']) == false
       || strlen($input['name']) == 0 || strlen($input['fullname']) == 0 || strlen($input['email']) == 0
       || strlen($input['type']) == 0 || strlen($input['password']) == 0
     ) {
       return "error";
     }
-
-    if ($this->checkUserExist(($input['id'])) == true) {
-      $sql = 'UPDATE users SET 
-      name = "' . mysqli_real_escape_string(self::$_connection, $input['name'])  . '", 
-      fullname="' . ($input['fullname']) . '",
-      email="' . ($input['email']) . '",
-      password="' . (md5($input['password'])) . '",
-      type="' . $input['type'] . '"
-      WHERE id = ' . ($input['id']);
-      $user = $this->update($sql);
-      return true;
-    } else {
+    if ($this->checkUserExist($input['id']) == false) {
       return "User not exist";
+    } else {
+      $sql = self::$_connection->prepare("UPDATE `users` SET `name`=?,`fullname`=?,`email`=?,`type`=?,`password`=? WHERE `id` =?");
+      $sql->bind_param("sssssi", $input['name'], $input['fullname'], $input['password'], $input['email'], $input['type'], $input['id']);
+      return $sql->execute();
     }
   }
   //--------------------------------------------------------------
@@ -118,4 +117,7 @@ class UserModel extends BaseModel
 
     return $users;
   }
+
+  //--------------------------------------------------------------
+
 }
