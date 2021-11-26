@@ -13,8 +13,6 @@
       <change beforePath="$PROJECT_DIR$/coverage/UserModel.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/coverage/UserModel.php.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/coverage/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/coverage/dashboard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/coverage/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/coverage/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/BankModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/BankModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/DecoratorBank.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/DecoratorBank.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/UserModelTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/UserModelTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -250,7 +250,6 @@ class UserModelTest extends TestCase {
         $expected         = 2;
         $this->assertEquals($expected, $actual);
     }
-
     public function testGetCountNoUser() {
         $user             = new UserModel();
         $param["keyword"] = "l";
@@ -258,7 +257,6 @@ class UserModelTest extends TestCase {
         $expected         = "User not found!";
         $this->assertEquals($expected, $actual);
     }
-
     public function testSpecialCharacters() {
         $user             = new UserModel();
         $param["keyword"] = "??";
@@ -266,7 +264,6 @@ class UserModelTest extends TestCase {
         $expected         = 0;
         $this->assertEquals($expected, $actual);
     }
-
     public function testGetUserNg() {
         $user             = new UserModel();
         $param["keyword"] = "dsdsdsd";
@@ -287,7 +284,6 @@ class UserModelTest extends TestCase {
             $this->assertTrue(true);
         }
     }
-
     public function testLongCharacters() {
         $user             = new UserModel();
         $param["keyword"] = "Loren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artist";
@@ -295,7 +291,6 @@ class UserModelTest extends TestCase {
         $expected         = 0;
         $this->assertEquals($expected, $actual);
     }
-
     public function testNumber() {
         $user             = new UserModel();
         $param["keyword"] = "45646546546";
@@ -303,7 +298,6 @@ class UserModelTest extends TestCase {
         $expected         = 0;
         $this->assertEquals($expected, $actual);
     }
-
     public function testNullValue() {
         $user             = new UserModel();
         $param["keyword"] = "";
@@ -311,7 +305,6 @@ class UserModelTest extends TestCase {
         $expected         = 3;
         $this->assertEquals($expected, $actual);
     }
-
     public function testSpace() {
         $user             = new UserModel();
         $param["keyword"] = "          ";
@@ -327,8 +320,6 @@ class UserModelTest extends TestCase {
         $expected         = "admin";
         $this->assertEquals($expected, $actual);
     }
-
-
 //    public function testSQLInjection() {
 //        $user             = new UserModel();
 //        $param["keyword"] = 'abcef%'.'"'.';TRUNCATE banks;##';
@@ -337,27 +328,25 @@ class UserModelTest extends TestCase {
 //        $this->assertEquals($expected, $actual);
 //
 //    }
-
 //Test InsertUser
-//    public function testInsertUser() {
-//        $actual = function () {
-//            $user = new UserModel();
-//            $form = ["name"      => "Tinh",
-//                     "full-name" => "Nguyen Trong Tinh",
-//                     "email"     => "123489",
-//                     "type"      => "trongtinh2k@gmail.com",
-//                     "password"  => md5("999999"),
-//            ];
-//
-//            return $user->insertUser($form);
-//        };
-//        if ((bool) $actual() === true) {
-//            $actual = "Add 1 User Successful!";
-//        }
-//        $expected = "Add 1 User Successful!";
-//        $this->assertEquals($expected, $actual);
-//    }
+    public function testInsertUser() {
+        $actual = function () {
+            $user = new UserModel();
+            $form = ["name"      => "Tinh",
+                     "full-name" => "Nguyen Trong Tinh",
+                     "email"     => "123489",
+                     "type"      => "trongtinh2k@gmail.com",
+                     "password"  => md5("999999"),
+            ];
 
+            return $user->insertUser($form);
+        };
+        if ((bool) $actual() === true) {
+            $actual = "Add 1 User Successful!";
+        }
+        $expected = "Add 1 User Successful!";
+        $this->assertEquals($expected, $actual);
+    }
     public function testFieldNameLength() {
         $user   = new UserModel();
         $input  = ['name'      => 'Tinh',
@@ -365,10 +354,12 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'user',
                    'password'  => md5('123')];
+
         $actual = strlen($input['name']) < 100 ? true : false;
 
         if ($actual == true) {
             $actual = "valid name";
+            $user->insertUser($input);
         } else {
             $actual = "invalid name";
         }
@@ -383,10 +374,12 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'user',
                    'password'  => md5('123')];
+        $user->insertUser($input);
         $actual = strlen($input['name']) < 100 ? true : false;
 
         if ($actual == true) {
             $actual = "valid name";
+
         } else {
             $actual = "invalid name";
         }
@@ -401,10 +394,12 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'user',
                    'password'  => md5('123')];
+        $user->insertUser($input);
         $actual = empty($input['name']) ? false : true;
 
         if ($actual == true) {
             $actual = "valid name";
+
         } else {
             $actual = "invalid name";
         }
@@ -419,10 +414,12 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'user',
                    'password'  => md5('123')];
+        $user->insertUser($input);
         $actual = is_numeric($input['name']) ? false : true;
 
         if ($actual == true) {
             $actual = "valid name";
+
         } else {
             $actual = "invalid name";
         }
@@ -437,17 +434,19 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'user',
                    'password'  => md5('123')];
+
         $actual = !empty($input["name"]) && !preg_match('~[^a-z\d]~i', $input["name"]) ? true : false;
         if ($actual == true) {
             $actual = "valid name";
+
         } else {
             $actual = "invalid name";
+            $user->insertUser($input);
         }
         $expected = "invalid name";
 
         $this->assertEquals($expected, $actual);
     }
-
     public function testFieldFullNameLength() {
         $user   = new UserModel();
         $input  = ['name'      => 'Tinh',
@@ -455,10 +454,12 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'user',
                    'password'  => md5('123')];
+
         $actual = strlen($input['full-name']) < 100 ? true : false;
 
         if ($actual == true) {
             $actual = "valid full-name";
+            $user->insertUser($input);
         } else {
             $actual = "invalid full-name";
         }
@@ -466,7 +467,6 @@ class UserModelTest extends TestCase {
 
         $this->assertEquals($expected, $actual);
     }
-
     public function testFieldEmailLength() {
         $user   = new UserModel();
         $input  = ['name'      => 'Tinh',
@@ -474,10 +474,12 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'user',
                    'password'  => md5('123')];
+
         $actual = strlen($input['email']) < 100 ? true : false;
 
         if ($actual == true) {
             $actual = "valid email";
+            $user->insertUser($input);
         } else {
             $actual = "invalid email";
         }
@@ -485,7 +487,6 @@ class UserModelTest extends TestCase {
 
         $this->assertEquals($expected, $actual);
     }
-
     public function testFieldTypeLength() {
         $user   = new UserModel();
         $input  = ['name'      => 'Tinh',
@@ -497,6 +498,7 @@ class UserModelTest extends TestCase {
 
         if ($actual == true) {
             $actual = "valid type";
+            $user->insertUser($input);
         } else {
             $actual = "invalid type";
         }
@@ -504,7 +506,6 @@ class UserModelTest extends TestCase {
 
         $this->assertEquals($expected, $actual);
     }
-
     public function testFieldPassWordLength() {
         $user   = new UserModel();
         $input  = ['name'      => 'Tinh',
@@ -512,10 +513,12 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'user',
                    'password'  => md5('123')];
+
         $actual = strlen($input['password']) < 250 ? true : false;
 
         if ($actual == true) {
             $actual = "valid password";
+            $user->insertUser($input);
         } else {
             $actual = "invalid password";
         }
@@ -523,10 +526,6 @@ class UserModelTest extends TestCase {
 
         $this->assertEquals($expected, $actual);
     }
-
-
-    /// Full name
-
     public function testFieldFullNameLongCharacter() {
         $user   = new UserModel();
         $input  = ['name'      => 'Tinh',
@@ -538,6 +537,7 @@ class UserModelTest extends TestCase {
 
         if ($actual == true) {
             $actual = "valid full-name";
+            $user->insertUser($input);
         } else {
             $actual = "invalid full-name";
         }
@@ -552,6 +552,7 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'user',
                    'password'  => md5('123')];
+        $user->insertUser($input);
         $actual = empty($input['full-name']) ? false : true;
 
         if ($actual == true) {
@@ -576,6 +577,7 @@ class UserModelTest extends TestCase {
             $actual = "valid full-name";
         } else {
             $actual = "invalid full-name";
+            $user->insertUser($input);
         }
         $expected = "invalid full-name";
 
@@ -593,14 +595,12 @@ class UserModelTest extends TestCase {
             $actual = "valid full-name";
         } else {
             $actual = "invalid full-name";
+            $user->insertUser($input);
         }
         $expected = "invalid full-name";
 
         $this->assertEquals($expected, $actual);
     }
-
-
-    // Email
     public function testFieldEmailLongCharacter() {
         $user   = new UserModel();
         $input  = ['name'      => 'Tinh',
@@ -614,6 +614,7 @@ class UserModelTest extends TestCase {
             $actual = "valid Email";
         } else {
             $actual = "invalid Email";
+            $user->insertUser($input);
         }
         $expected = "invalid Email";
 
@@ -630,8 +631,10 @@ class UserModelTest extends TestCase {
 
         if ($actual == true) {
             $actual = "valid Email";
+
         } else {
             $actual = "invalid Email";
+            $user->insertUser($input);
         }
         $expected = "invalid Email";
 
@@ -645,11 +648,11 @@ class UserModelTest extends TestCase {
                    'type'      => 'user',
                    'password'  => md5('123')];
         $actual = is_numeric($input['email']) ? false : true;
-
         if ($actual == true) {
             $actual = "valid Email";
         } else {
             $actual = "invalid Email";
+            $user->insertUser($input);
         }
         $expected = "invalid Email";
 
@@ -666,6 +669,7 @@ class UserModelTest extends TestCase {
         $actual = !empty($input["email"]) && preg_match($regex, $input["email"]) ? true : false;
         if ($actual == true) {
             $actual = "Valid Email";
+            $user->insertUser($input);
         } else {
             $actual = "invalid Email";
         }
@@ -673,10 +677,6 @@ class UserModelTest extends TestCase {
 
         $this->assertEquals($expected, $actual);
     }
-
-
-    // TYPE
-
     public function testFieldTypeLongCharacter() {
         $user   = new UserModel();
         $input  = ['name'      => 'Tinh',
@@ -684,6 +684,7 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'useruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruser',
                    'password'  => md5('123')];
+        $user->insertUser($input);
         $actual = strlen($input['type']) < 100 ? true : false;
 
         if ($actual == true) {
@@ -702,6 +703,7 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => '',
                    'password'  => md5('123')];
+        $user->insertUser($input);
         $actual = empty($input['type']) ? false : true;
 
         if ($actual == true) {
@@ -720,6 +722,7 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => '32423',
                    'password'  => md5('123')];
+        $user->insertUser($input);
         $actual = is_numeric($input['type']) ? false : true;
 
         if ($actual == true) {
@@ -738,6 +741,7 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => '%$^$$%$%',
                    'password'  => md5('123')];
+        $user->insertUser($input);
         $actual = !empty($input["type"]) && !preg_match('~[^a-z\d]~i', $input["type"]) ? true : false;
         if ($actual == true) {
             $actual = "valid type";
@@ -748,8 +752,6 @@ class UserModelTest extends TestCase {
 
         $this->assertEquals($expected, $actual);
     }
-
-    //PASSWORD
     public function testFieldPassWordIsString() {
         $user   = new UserModel();
         $input  = ['name'      => 'Tinh',
@@ -757,7 +759,7 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'user',
                    'password'  => md5('123')];
-
+        $user->insertUser($input);
         $actual =preg_match('/^[a-f0-9]{32}$/',$input['password']);
         //$actual = preg_match('/^[a-f0-9]{32}$/',$input['password']);
 
@@ -770,7 +772,6 @@ class UserModelTest extends TestCase {
 
         $this->assertEquals($expected, $actual);
     }
-
     public function testFieldPassWordNull() {
         $user   = new UserModel();
         $input  = ['name'      => 'Tinh',
@@ -778,7 +779,7 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'user',
                    'password'  => md5('')];
-
+        $user->insertUser($input);
         $actual = empty($input['password']) && preg_match('/^[a-f0-9]{32}$/',$input['password'])? true :false;
 
         if ($actual == true) {
@@ -787,6 +788,194 @@ class UserModelTest extends TestCase {
             $actual = "invalid password";
         }
         $expected = "invalid password";
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /// Test Update User
+    public function testUpDateUserNameEmpty() {
+        $user = new UserModel();
+
+        $formData = [
+                'name'      => '',
+                'full-name' => 'Nguyen Trong Tinh',
+                'email'     => 'trongtinh2k@gmail.com',
+                'type'      => 'user',
+                'password'  => md5('123'),
+                'id'        => '17',
+        ];
+        $user->updateUser($formData);
+        $actual = empty($input['Tinh']) ? true : false;
+        if ($actual == true) {
+            $actual = "can not update";
+        } else {
+            $actual = "Ok";
+        }
+        $expected = "can not update";
+        $this->assertEquals($expected, $actual);
+    }
+    public function testUpDateUserNameNotEmpty() {
+        $user     = new UserModel();
+        $formData = [
+                'name'      => 'Tinh',
+                'full-name' => 'Nguyen Trong Tinh',
+                'email'     => 'trongtinh2k@gmail.com',
+                'type'      => 'user',
+                'password'  => md5('123'),
+                'id'        => '17',
+        ];
+        $user->updateUser($formData);
+        $actual = ! empty($input['Tinh']) ? true : false;
+        if ($actual == true) {
+            $actual = "can not update";
+        } else {
+            $actual = "Ok";
+        }
+        $expected = "Ok";
+        $this->assertEquals($expected, $actual);
+    }
+    public function testUpDateUserFullNameNotEmpty() {
+        $user     = new UserModel();
+        $formData = [
+                'name'      => 'Tinh',
+                'full-name' => 'Nguyen Trong Tinh',
+                'email'     => 'trongtinh2k@gmail.com',
+                'type'      => 'user',
+                'password'  => md5('123'),
+                'id'        => '17',
+        ];
+        $user->updateUser($formData);
+        $actual = ! empty($formData['Nguyen Trong Tinh']) ? true : false;
+        if ($actual == true) {
+            $actual = "can not update";
+        } else {
+            $actual = "Ok";
+        }
+        $expected = "Ok";
+        $this->assertEquals($expected, $actual);
+    }
+    public function testUpDateUserPassWord() {
+        $user = new UserModel();
+
+        $formData = [
+                'name'      => 'user',
+                'full-name' => 'user',
+                'email'     => 'user@gmail.com',
+                'type'      => 'user',
+                'password'  => md5('123'),
+                'id'        => "17",
+
+        ];
+        $user->updateUser($formData);
+        $formActual = $user->findUserById(17);
+
+        $this->assertEquals(md5($formData["password"]), $formActual[0]["password"]);
+    }
+    public function testUpDateUserName() {
+        $user = new UserModel();
+
+        $formData = [
+                'name'      => 'userName',
+                'full-name' => 'user',
+                'email'     => 'user@gmail.com',
+                'type'      => 'user',
+                'password'  => md5('123'),
+                'id'        => "17",
+
+        ];
+        $user->updateUser($formData);
+        $formActual = $user->findUserById(17);
+
+        $this->assertEquals($formData["name"], $formActual[0]["name"]);
+    }
+    public function testUpDateUserFullName() {
+        $user = new UserModel();
+
+        $formData = [
+                'name'      => 'user',
+                'full-name' => 'userFullName',
+                'email'     => 'user@gmail.com',
+                'type'      => 'user',
+                'password'  => md5('123'),
+                'id'        => "17",
+
+        ];
+        $user->updateUser($formData);
+        $formActual = $user->findUserById(17);
+
+        $this->assertEquals($formData["full-name"], $formActual[0]["fullname"]);
+    }
+    public function testUpDateUserEmail() {
+        $user = new UserModel();
+
+        $formData = [
+                'name'      => 'user',
+                'full-name' => 'user',
+                'email'     => 'userEmail@gmail.com',
+                'type'      => 'user',
+                'password'  => md5('123'),
+                'id'        => "17",
+
+        ];
+        $user->updateUser($formData);
+        $formActual = $user->findUserById(17);
+
+        $this->assertEquals($formData["email"], $formActual[0]["email"]);
+    }
+    public function testUpDateUserType() {
+        $user = new UserModel();
+
+        $formData = [
+                'name'      => 'user',
+                'full-name' => 'user',
+                'email'     => 'user@gmail.com',
+                'type'      => 'admin',
+                'password'  => md5('123'),
+                'id'        => "17",
+
+        ];
+        $user->updateUser($formData);
+        $formActual = $user->findUserById(17);
+
+        $this->assertEquals($formData["type"], $formActual[0]["type"]);
+    }
+    public function testUpDateUserPassWordNotEmpty() {
+        $user     = new UserModel();
+        $formData = [
+                'name'      => 'Tinh',
+                'full-name' => 'Nguyen Trong Tinh',
+                'email'     => 'trongtinh2k@gmail.com',
+                'type'      => 'user',
+                'password'  => md5(''),
+                'id'        => '17',
+        ];
+        $user->updateUser($formData);
+        $actual = ! empty($formData['password']) ? true : false;
+        if ($actual == true) {
+            $actual = "can not update";
+        } else {
+            $actual = "Ok";
+        }
+        $expected = "can not update";
+        $this->assertEquals($expected, $actual);
+    }
+    public function testUpdateEmai() {
+        $user  = new UserModel();
+        $input = ['name'      => 'Tinh',
+                  'full-name' => 'Nguyen Trong Tinh',
+                  'email'     => 'trongtinh2k@gmail.com',
+                  'type'      => 'user',
+                  'password'  => md5('123'),
+                  'id'        => "17",];
+        $user->updateUser($input);
+        $regex  = "/([a-z0-9_]+|[a-z0-9_]+\.[a-z0-9_]+)@(([a-z0-9]|[a-z0-9]+\.[a-z0-9]+)+\.([a-z]{2,4}))/i";
+        $actual = ! empty($input["email"]) && preg_match($regex, $input["email"]) ? true : false;
+        if ($actual == true) {
+            $actual = "can update";
+        } else {
+            $actual = "can not update";
+        }
+        $expected = "can update";
 
         $this->assertEquals($expected, $actual);
     }
