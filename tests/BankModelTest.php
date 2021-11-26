@@ -15,7 +15,7 @@ class BankModelTest extends TestCase
         $expected = [
             ["id" => "1", 
             "user_id" => "1", 
-            "cost" => "1111"],
+            "cost" => "0"],
         ] ;
 
         $actual = $bankModel->getAll();
@@ -38,7 +38,7 @@ class BankModelTest extends TestCase
         //Execute
         $bankModel->insertBankInfo($input);
         //Actual
-        $actual = $bankModel->findBankInfoById(59);
+        $actual = $bankModel->findBankInfoById(2);
         $this->assertEquals($actual[0]['cost'], $input['cost']);
     }
        /**
@@ -219,7 +219,7 @@ class BankModelTest extends TestCase
 
         
     /*
-     //////////////////////////////////////  getBanks Info ///////////////////////
+     //////////////////////////////////////  getBanks  param ///////////////////////
         
     */
     /**
@@ -238,6 +238,92 @@ class BankModelTest extends TestCase
         } else {
             $this->assertTrue(false);
         }
+    }
+    
+    /**
+    *function testgetBanksParam_OK() truyen day du thong tin
+    * Author: Quoc Viet
+     */
+    public function testgetBanksParam_OK()
+    {
+        $bankModel = new BankModel();
+        $keyword = array(
+            'keyword' => '4'
+        );
+        $actual = $bankModel->getBanks($keyword);
+        if ($actual != []) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+      /**
+    *function testgetBanksParamInfo_Object_OK() 
+    * Author: Quoc Viet
+     */
+    //Test truyen vao object
+    public function testgetBanksParamInfo_Object_OK()
+    {
+        $bankModel = new BankModel();
+        $actual = null;
+
+        $keyword = array(
+            'keyword' => $bankModel,
+        );
+        try {
+            $actual = $bankModel->getBanks($keyword);
+        } catch (Throwable $e) {
+            $excute = false;
+        }
+        $this->assertEquals($excute, $actual);
+    }
+    //test getbanks truyen vao arraylist
+    public function testgetBanksParamInfoArrayList_NotOK()
+    {
+        $bankModel = new BankModel();
+        $actual = null;
+
+        $keyword = array(
+            'keyword' => ['vietnguyen'],
+        );
+        try {
+            $actual = $bankModel->getBanks($keyword);
+        } catch (Throwable $e) {
+            $excute = false;
+        }
+        $this->assertEquals($excute, $actual);
+    }
+    //test getbanks truyen vao chuoi rong;
+    public function testgetBanksParamInfoCharacter_Empty_NotOK()
+    {
+        $bankModel = new BankModel();
+        $actual = null;
+
+        $keyword = array(
+            'keyword' => '',
+        );
+        try {
+            $actual = $bankModel->getBanks($keyword);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        $this->assertTrue(true);
+       
+    }
+      /**
+    *function testgetBanksInfoParamDouble_OK() truyen day du thong tin
+    * Author: Quoc Viet
+     */
+    //Truyen du lieu bang kieu so thuc:
+    public function testgetBanksInfoParamDouble_OK()
+    {
+        $bankModel = new BankModel();
+        $keyword = array(
+            'keyword' => 1.4,
+        );
+        $actual = $bankModel->getBanks($keyword);
+        $excute = [];
+        $this->assertEquals($excute, $actual);
     }
 // //////////////////////////////////////////////////Update BanksInfo//////////////////////////////////
 

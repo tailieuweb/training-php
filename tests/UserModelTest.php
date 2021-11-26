@@ -63,4 +63,21 @@ class UserModelTest extends TestCase
             "actual is empty"
         );
     }
+    public function testInsertInfoUser_id_ArrayList_Ok()
+    {
+        $userModel = new UserModel();
+        $input = array(
+            'name' => ['nhu','cute'],
+            'password' => 'viet',
+            'fullname' => 'nguyenquocviet',
+            'email' => 'nguyenquocviet@gmail.com',
+            'type' => 'user'    
+        );
+        //Execute test
+        try {
+            $userModel->insertUser($input);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+    }
 }
