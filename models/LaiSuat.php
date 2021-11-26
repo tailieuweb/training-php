@@ -1,5 +1,4 @@
 <?php
-require  "DecoratorBank.php";
 class LaiSuat extends DecoratorBank {
     public  function cost()
     {

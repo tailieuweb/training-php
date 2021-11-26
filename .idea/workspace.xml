@@ -3,14 +3,27 @@
   <component name="ChangeListManager">
     <list default="true" id="4621108c-d5a8-4bd2-a6a3-127138bfce2c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/UserModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/UserModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coverage/BankModel.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/coverage/BankModel.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coverage/BaseModel.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/coverage/BaseModel.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coverage/DecoratorBank.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/coverage/DecoratorBank.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coverage/FactoryPattern.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/coverage/FactoryPattern.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coverage/FatoryPattem.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/coverage/FatoryPattem.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coverage/IBank.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/coverage/IBank.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coverage/LaiSuat.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/coverage/LaiSuat.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coverage/UserModel.php.html" beforeDir="false" afterPath="$PROJECT_DIR$/coverage/UserModel.php.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coverage/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/coverage/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coverage/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/coverage/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/BankModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/BankModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/DecoratorBank.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/DecoratorBank.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/UserModelTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/UserModelTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" doNotAsk="true">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
   <component name="Git.Settings">
@@ -82,7 +95,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../3-Project-Web" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -93,10 +107,23 @@
       <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php\public\js" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="PHPUnit.UserModelTest.testFindUserByIdOk">
+    <configuration name="UserModelTest.testFindUserByIdOk" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="UserModelTest1" file="$PROJECT_DIR$/tests/UserModelTest.php" method="testFindUserByIdOk" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner scope="XML" />
+      <method v="2" />
+    </configuration>
     <configuration name="localhost" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="localhost" start_url="http://localhost/php_training/form_user.php">
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHPUnit.UserModelTest.testFindUserByIdOk" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -114,6 +141,11 @@
       <workItem from="1633870135855" duration="109000" />
       <workItem from="1633955132255" duration="4752000" />
       <workItem from="1634276466632" duration="353000" />
+      <workItem from="1637543942804" duration="1595000" />
+      <workItem from="1637607160454" duration="447000" />
+      <workItem from="1637772709839" duration="11191000" />
+      <workItem from="1637838176028" duration="6038000" />
+      <workItem from="1637860890869" duration="13482000" />
     </task>
     <servers />
   </component>

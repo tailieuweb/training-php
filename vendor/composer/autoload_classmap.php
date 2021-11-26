@@ -6,8 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'BankModel' => $baseDir . '/models/BankModel.php',
     'BaseModel' => $baseDir . '/models/BaseModel.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'DecoratorBank' => $baseDir . '/models/DecoratorBank.php',
+    'FactoryPattern' => $baseDir . '/models/FactoryPattern.php',
+    'FatoryPattem' => $baseDir . '/models/FatoryPattem.php',
+    'IBank' => $baseDir . '/models/IBank.php',
+    'LaiSuat' => $baseDir . '/models/LaiSuat.php',
     'PHPUnit\\Exception' => $vendorDir . '/phpunit/phpunit/src/Exception.php',
     'PHPUnit\\Framework\\ActualValueIsNotAnObjectException' => $vendorDir . '/phpunit/phpunit/src/Framework/Exception/ActualValueIsNotAnObjectException.php',
     'PHPUnit\\Framework\\Assert' => $vendorDir . '/phpunit/phpunit/src/Framework/Assert.php',

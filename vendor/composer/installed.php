@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '244b73b7f1f3039ce34f36d4d486442a829774a6',
+        'reference' => '502129164de6dbcce775a4a0721870ba580580a2',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '244b73b7f1f3039ce34f36d4d486442a829774a6',
+            'reference' => '502129164de6dbcce775a4a0721870ba580580a2',
             'dev_requirement' => false,
         ),
         'doctrine/instantiator' => array(
@@ -104,12 +104,12 @@
             'dev_requirement' => true,
         ),
         'phpunit/php-code-coverage' => array(
-            'pretty_version' => '9.2.8',
-            'version' => '9.2.8.0',
+            'pretty_version' => '9.2.9',
+            'version' => '9.2.9.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpunit/php-code-coverage',
             'aliases' => array(),
-            'reference' => 'cf04e88a2e3c56fc1a65488afd493325b4c1bc3e',
+            'reference' => 'f301eb1453c9e7a1bc912ee8b0ea9db22c60223b',
             'dev_requirement' => true,
         ),
         'phpunit/php-file-iterator' => array(
