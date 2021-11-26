@@ -178,8 +178,64 @@ class UserModelTest extends TestCase
       $actual = $userModel->findUserById($id);
       
       $this->assertEquals($expected, $actual);
-      
-      
-      
       }
+                     /** Test InsertUser_UserModel*/
+
+      /**
+     * Thêm user mới vào database
+     */
+    public function testInsertUserOk()
+    {
+        $userModel = new UserModel();
+        $param = array(
+            "id" => "",
+            "bank_id" => 0,
+            "name" => "user1",
+            "fullname" => "user1",
+            "email" => "user1@mail.com",
+            "type" => "user",
+            "password" => "user1",
+            "cost" => "0",
+            "ver" => "",
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->insertUser($param);
+        $expected = 1;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+     /**
+     * Thêm user mới bị trùng id
+     */
+    public function testInsertUserTrungId()
+    {
+        $userModel = new UserModel();
+        $existing_id = $userModel->getTheID();
+
+        $param = array(
+         "id" => "",
+         "bank_id" => 0,
+         "name" => "user1",
+         "fullname" => "user1",
+         "email" => "user1@mail.com",
+         "type" => "user",
+         "password" => "user1",
+         "cost" => "0",
+         "ver" => "",
+         "submit" => "submit"
+        );
+
+        $userModel->insertUser($param);
+        $actual = $userModel->getTheID();
+        $expected = $existing_id + 1;
+
+        print_r("\t=> The last ID before: " . $existing_id  . "\n");
+        print_r("\t=> The last ID after: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+
 }
