@@ -132,44 +132,50 @@ class UserModel extends BaseModel
     public function updateUser($input, $version)
     {
         $error = false;
-        if (!is_array($input) || !is_string($input['name'])|| !is_string($input['email'])|| !is_string($input['password'])|| !is_string($input['type'])|| !is_string($input['fullname'])) {
-            return $error;
-        }
-        if (isset($input['id'])) {
-            $id = $input['id'];
-            $sql1 = 'SELECT id FROM users';
-            $allUser = $this->select($sql1);
-            foreach ($allUser as $key) {
-                $md5 = md5($key['id'] . "chuyen-de-web-1");
-                if ($md5 == $id && !is_bool($id)) {
-                    $id = $key['id'];
-                    $sql = 'SELECT * FROM users WHERE id = ' . $key['id'];
-                    $userById = $this->select($sql);
-                }
+        if(!is_object($input) && !empty($input) && isset($input['name'])&& isset($input['fullname'])
+        && isset($input['email'])&& isset($input['type'])&& isset($input['password'])){
+            if (!is_array($input) || !is_string($input['name'])|| !is_string($input['fullname'])|| !is_string($input['email'])
+            || !is_string($input['type']) || !is_string($input['password'])) {
+                return $error;
             }
-            if (isset($userById)) {
-                $oldTime = $userById[0]['version'] . "chuyen-de-web-1";
-                if (!is_bool($version) && md5($oldTime) == $version) {
-                    if (isset($input['name']) && isset($input['email']) &&  isset($input['fullname']) && isset($input['email']) && isset($input['type']) && isset($input['password'])) {
-                        $time1 = (int)$oldTime + 1;
-                        $sql = 'UPDATE users SET 
-                            name = "' . $input['name'] . '", 
-                            email = "' . $input['email'] . '", 
-                            fullname = "' . $input['fullname'] . '", 
-                            type = "' . $input['type'] . '", 
-                            version = "' . $time1 . '", 
-                            password="' . md5($input['password']) . '"
-                            WHERE id = ' . $id;
-                        $user = $this->update($sql);
-                        return $user;
-                    }else{
-                        return $error;
+            if (isset($input['id'])) {
+                $id = $input['id'];
+                $sql1 = 'SELECT id FROM users';
+                $allUser = $this->select($sql1);
+                foreach ($allUser as $key) {
+                    $md5 = md5($key['id'] . "chuyen-de-web-1");
+                    if ($md5 == $id && !is_bool($id)) {
+                        $id = $key['id'];
+                        $sql = 'SELECT * FROM users WHERE id = ' . $key['id'];
+                        $userById = $this->select($sql);
                     }
                 }
-            }
-        } else {
+                if (isset($userById)) {
+                    $oldTime = $userById[0]['version'] . "chuyen-de-web-1";
+                    if (!is_bool($version) && md5($oldTime) == $version) {
+                        if (isset($input['name']) && isset($input['email']) &&  
+                        isset($input['fullname']) && isset($input['email']) && isset($input['type']) && isset($input['password'])) {
+                            $time1 = (int)$oldTime + 1;
+                            $sql = 'UPDATE users SET 
+                                name = "' . $input['name'] . '", 
+                                email = "' . $input['email'] . '", 
+                                fullname = "' . $input['fullname'] . '", 
+                                type = "' . $input['type'] . '", 
+                                version = "' . $time1 . '", 
+                                password="' . md5($input['password']) . '"
+                                WHERE id = ' . $id;
+                            $user = $this->update($sql);
+                            return $user;
+                        }else{
+                            return $error;
+                        }
+                    }
+                }
+            } 
+        }else {
             return $error;
         }
+        
     }
 
     /**
@@ -277,4 +283,12 @@ class UserModel extends BaseModel
     }
 
 
+    // Get id user new : tam
+    public function getUserByIdNew()
+    {
+        $sql = "SELECT MAX(id) as user_id FROM users";
+        $user = $this->select($sql);
+
+        return $user;
+    }
 }
