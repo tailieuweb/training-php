@@ -25,12 +25,5 @@ class BankModelTest extends TestCase
        
     }  
 
-    public function testSingletonOK()
-    {
-        $bankModel = BankModel();
-        $bankModel2 = BankModel();
-        $expected = true;
-        $actual = $bankModel === $bankModel2 ? false : true;
-        $this->assertEquals($expected, $actual);
-    }
+   
 }
