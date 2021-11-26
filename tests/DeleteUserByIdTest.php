@@ -11,8 +11,8 @@ class DeleteUserByIdTest extends TestCase
     public function testDeleteUserByIdOk() {
         $userModel = new UserModel();
         $expected = true;
-        $userid = md5(51 . "chuyen-de-web-1");
-        $userModel->starTransaction();
+        $userid = md5(54 . "chuyen-de-web-1");
+        $userModel->startTransaction();
         $actual = $userModel->deleteUserById($userid);
         $userModel->rollback();
         // var_dump($userid);die();
@@ -26,7 +26,7 @@ class DeleteUserByIdTest extends TestCase
         $userModel = new UserModel();
         $expected = false;
         $userid = md5("aaaa" . "chuyen-de-web-1");
-        $userModel->starTransaction();
+        $userModel->startTransaction();
         $user = $userModel->deleteUserById($userid);
         $userModel->rollback();
         $actual = $user;
@@ -40,7 +40,7 @@ class DeleteUserByIdTest extends TestCase
     public function  testDeleteUserByIdNg() {
         $userModel = new UserModel();
         $userId = 999;
-        $userModel->starTransaction();
+        $userModel->startTransaction();
         $user = $userModel->deleteUserById($userId);
         $userModel->rollback();
         if(empty($user)) {
@@ -56,7 +56,7 @@ class DeleteUserByIdTest extends TestCase
         $userModel = new UserModel();
         $expected = false;
         $userid = md5(999 . "chuyen-de-web-1");
-        $userModel->starTransaction();
+        $userModel->startTransaction();
         $user = $userModel->deleteUserById($userid);
         $userModel->rollback();
         $actual = $user;
@@ -72,7 +72,7 @@ class DeleteUserByIdTest extends TestCase
         $userModel = new UserModel();
         $expected = false;
         $userid = new stdClass();
-        $userModel->starTransaction();
+        $userModel->startTransaction();
         $user = $userModel->deleteUserById($userid);
         $userModel->rollback();
         $actual = $user;
@@ -87,7 +87,7 @@ class DeleteUserByIdTest extends TestCase
         $userModel = new UserModel();
         $expected = false;
         $userid = md5(2.5 . "chuyen-de-web-1");
-        $userModel->starTransaction();
+        $userModel->startTransaction();
         $user = $userModel->deleteUserById($userid);
         $userModel->rollback();
         $actual = $user;
@@ -103,7 +103,7 @@ class DeleteUserByIdTest extends TestCase
         $userModel = new UserModel();
         $expected = false;
         $userid = [];
-        $userModel->starTransaction();
+        $userModel->startTransaction();
         $user = $userModel->deleteUserById($userid);
         $userModel->rollback();
         $actual = $user;
@@ -118,7 +118,7 @@ class DeleteUserByIdTest extends TestCase
         $userModel = new UserModel();
         $expected = false;
         $userid = null;
-        $userModel->starTransaction();
+        $userModel->startTransaction();
         $user = $userModel->deleteUserById($userid);
         $userModel->rollback();
         $actual = $user;
@@ -134,7 +134,7 @@ class DeleteUserByIdTest extends TestCase
         $userModel = new UserModel();
         $expected = false;
         $userid = md5(-5 . "chuyen-de-web-1");
-        $userModel->starTransaction();
+        $userModel->startTransaction();
         $user = $userModel->deleteUserById($userid);
         $userModel->rollback();
         $actual = $user;

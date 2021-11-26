@@ -62,7 +62,7 @@ class GetUserByIdNewTest extends TestCase
         $bankModel->rollback();
 
         $actual = $user[0]['user_id'];
-        $expected = '1';
+        $expected = '63';
         $this->assertEquals($expected, $actual);       // var_dump($actual[0]['user_id']);die();
     }
     // Not good
