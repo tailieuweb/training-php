@@ -13,7 +13,6 @@ if (!empty($_GET['keyword'])) {
 }
 
 $users = $userModel->getUsers($params);
-var_dump($users);
 
 ?>
 <!DOCTYPE html>
@@ -27,9 +26,16 @@ var_dump($users);
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-        <?php if (!empty($users)) { ?>
-            <div class="alert alert-success" role="alert">
-                Connect to db success
+        <?php if (!empty($users)) {
+                if(is_string($users)){
+        ?>
+        <div class="alert alert-dark" role="alert">
+                Not Found User!
+            </div>
+        <?php exit();} ?>
+            <div class="alert alert-warning" role="alert">
+                List of users! <br>
+                Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
             </div>
             <table class="table table-striped">
                 <thead>
@@ -71,7 +77,7 @@ var_dump($users);
             </table>
         <?php } else { ?>
             <div class="alert alert-dark" role="alert">
-                This is a dark alert—check it out!
+                Not Found User!
             </div>
         <?php } ?>
     </div>
