@@ -71,6 +71,19 @@ class UserModel extends BaseModel {
 
         return $user;
     }
+    /**
+     * getId
+     * @param $input
+     * @return mixed
+     */
+    public function getID()
+    {
+        $sql = 'SELECT MAX(id) as user_id FROM users';
+        $user = $this->select($sql);
+
+        return $user[0]["user_id"];
+    }
+
 
     /**
      * Search users

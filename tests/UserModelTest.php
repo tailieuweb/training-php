@@ -191,12 +191,8 @@ class UserModelTest extends TestCase
             "id" => "",
             "bank_id" => 0,
             "name" => "user1",
-            "fullname" => "user1",
-            "email" => "user1@mail.com",
-            "type" => "user",
             "password" => "user1",
             "cost" => "0",
-            "ver" => "",
             "submit" => "submit"
         );
 
@@ -213,23 +209,19 @@ class UserModelTest extends TestCase
     public function testInsertUserTrungId()
     {
         $userModel = new UserModel();
-        $existing_id = $userModel->getTheID();
+        $existing_id = $userModel->getID();
 
         $param = array(
          "id" => "",
-         "bank_id" => 0,
-         "name" => "user1",
-         "fullname" => "user1",
-         "email" => "user1@mail.com",
-         "type" => "user",
-         "password" => "user1",
-         "cost" => "0",
-         "ver" => "",
-         "submit" => "submit"
+            "bank_id" => 0,
+            "name" => "user1",
+            "password" => "user1",
+            "cost" => "0",
+            "submit" => "submit"
         );
 
         $userModel->insertUser($param);
-        $actual = $userModel->getTheID();
+        $actual = $userModel->getID();
         $expected = $existing_id + 1;
 
         print_r("\t=> The last ID before: " . $existing_id  . "\n");
@@ -237,5 +229,79 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
+     /**
+     * Add new user with empty string values.
+     */
+    public function testInsertUserEmptyStringValues()
+    {
+        $userModel = new UserModel();
+        $param = array(
+            "id" => "",
+            "bank_id" => 0,
+            "name" => "",
+            "password" => "",
+            "cost" => "0",
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->insertUser($param);
+        $expected = 1;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * thêm người dùng mới với giá trị null
+     */
+    public function testInsertUserNull()
+    {
+        $userModel = new UserModel();
+
+        $param = array(
+         "id" => "",
+         "bank_id" => 0,
+         "name" => "user1",
+         "password" => "user1",
+         "cost" => "0",
+         "submit" => "submit"
+        );
+
+        $actual = $userModel->insertUser($param);
+        $expected = 1;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+     /**
+     * thêm người dùng mới với giá trị là đối tượng
+     */
+    public function testInsertUserNgObject()
+    {
+        $userModel = new UserModel();
+        $obj = new stdClass();
+
+        $param = array(
+            "id" => "",
+            "bank_id" => 0,
+            "name" => $obj,
+            "fullname" => $obj,
+            "email" => $obj,
+            "type" => $obj,
+            "password" => $obj,
+            "cost" => "0",
+            "ver" => "",
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->insertUser($param);
+        $expected = 0;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+
 
 }
