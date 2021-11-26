@@ -34,16 +34,16 @@ class BankModel extends BaseModel {
      */
     public function deleteBalanceById($id)
     {
-        $sql = 'UPDATE `banks` SET `cost`="0" WHERE `user_id` ='  . $id;
-        return $this->update($sql);
+        $sql = 'DELETE FROM banks WHERE id = ' . $id;
+        return $this->delete($sql);
     }
 
     public function findBankInfoById($id)
-    {
-        $sql = 'SELECT * FROM banks WHERE id = ' . $id;
-        $items = $this->select($sql);
+    { 
+         $sql = 'SELECT * FROM banks WHERE id = ' . $id;
+        $bank = $this->select($sql);
 
-        return $items;
+        return $bank;
     }
 
     public function findBankInfoByUserID($user_id)
@@ -76,15 +76,12 @@ class BankModel extends BaseModel {
      */
     public function insertBankInfo($input)
     {
-        $sql = "INSERT INTO `banks` VALUES (" . 
-            0 . ", "
-            . $input['user_id'] . ", "
-            . $input['cost']
-         . ")";
+        $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
+            "'" . $input['user_id'] . "', '" . $input['cost'] . "')";
 
-        $item = $this->insert($sql);
+        $bank = $this->insert($sql);
 
-        return $item;
+        return $bank;
     }
 
     /**
@@ -106,4 +103,25 @@ class BankModel extends BaseModel {
 
         return $items;
     }
+    public function getBanks($params = []) {
+        //Keyword
+       
+        if (!empty($params['keyword'])) {
+           
+            $sql = 'SELECT * FROM banks WHERE user_id LIKE "%' . $params['keyword'] .'%"';
+
+            //Keep this line to use Sql Injection
+            //Don't change
+            //Example keyword: abcef%";TRUNCATE banks;##
+            // $banks = self::$_connection->multi_query($sql);
+            $banks = $this->select($sql);
+            
+        } else {
+            $sql = 'SELECT * FROM banks';
+            $banks = $this->select($sql);
+        }
+        return $banks;
+       
+    }
+
 }

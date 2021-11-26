@@ -1,6 +1,7 @@
 <?php
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+require_once './models/FactoryPattern.php';
+$factory = new FactoryPattern();
+$userModel = $factory->make('user');
 
 $user = NULL; //Add new user
 $id = NULL;
@@ -8,16 +9,15 @@ $id = NULL;
 if (!empty($_GET['id'])) {
     //Update SQL Injection - convert id -> int -> string
     $id = isset($_GET['id'])?(string)(int)$_GET['id']:null;
-    $user = $userModel->findUserById($id);//Update existing user
+    $user = $userModel->find($id);//Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
-    $_POST = userModel::clean($_POST);
     if (!empty($id)) {
-        $userModel->updateUser($_POST);
+        $userModel->update($_POST);
     } else {
-        $userModel->insertUser($_POST);
+        $userModel->insert($_POST);
     }
     header('location: list_users.php');
 }

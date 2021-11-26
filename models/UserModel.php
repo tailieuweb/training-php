@@ -33,10 +33,10 @@ class UserModel extends BaseModel {
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users 
         WHERE name = "' . mysqli_real_escape_string(self::$_connection, $userName) . '" 
-        AND password = "'.$md5Password.'"';
-        $user= self::$_connection->multi_query($sql);
+        AND password = "'. $md5Password .'"';
+        //$user = self::$_connection->multi_query($sql);
         //Normal 
-        $user = $this->select($sql);
+        $user = $this->select($sql);  
         return $user;
     }
 
@@ -121,10 +121,5 @@ class UserModel extends BaseModel {
         }
         self::$userInstance = new self();
         return self::$userInstance;
-    }
-    // Sum test
-     public function sumb($a,$b)
-    {
-        return $a + $b;
     }
 }
