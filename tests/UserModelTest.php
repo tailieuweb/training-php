@@ -84,6 +84,23 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
+    public function testInsertUserIdArrayListOk()
+    {
+        $userModel = new UserModel();
+        $input = array(
+            'name' => ['nhu','cute'],
+            'password' => 'khanhu',
+            'fullname' => 'lethihuynhnhu',
+            'email' => 'khanhu26@gmail.com',
+            'type' => 'user'    
+        );
+        //Execute test
+        try {
+            $userModel->insertUser($input);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+    }
     public function testGetInsertUserNull()
     {
         $userModel = new UserModel();
@@ -111,7 +128,6 @@ class UserModelTest extends TestCase
             'email' => '',
             'type' => ''
         );
-
         $userModel->insertUser($user);
 
         if (!is_numeric($user['password'])) {
@@ -263,7 +279,7 @@ class UserModelTest extends TestCase
             'email' => '%!?$@gmail.com',
             'type' => ''
         );
-
+        
         $userModel->insertUser($user);
 
         if (empty($user['email'])) {
