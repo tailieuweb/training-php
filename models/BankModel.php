@@ -39,7 +39,7 @@ class BankModel extends BaseModel
     // Find id banks pass design pattern
     public function findBankByIdVersionTwo($id)
     {
-        if (is_string($id) || !is_numeric($id)) {
+        if (!is_numeric($id)) {
             return 'Not invalid';
         } else {
             $sql = 'SELECT * FROM banks WHERE id = ' . $id;

@@ -13,8 +13,10 @@ class FindBankByIdVersionTwo extends TestCase
         $bankModel = new BankModel();
         $id = 53;
         $expected = "30000";
+        $bankModel->startTransaction();
         $bank = $bankModel->findBankByIdVersionTwo($id);
         $actual = $bank[0]['cost'];
+        $bankModel->rollback();
         // var_dump($actual);
         // die();
         $this->assertEquals($expected, $actual);
@@ -26,7 +28,9 @@ class FindBankByIdVersionTwo extends TestCase
     {
         $bankModel = new BankModel();
         $id = 100;
+        $bankModel->startTransaction();
         $bank = $bankModel->findBankByIdVersionTwo($id);
+        $bankModel->rollback();
         if (empty($bank)) {
             $this->assertTrue(true);
         } else {
@@ -40,8 +44,10 @@ class FindBankByIdVersionTwo extends TestCase
     {
         $bankModel = new BankModel();
         $id = '123';
-        $expected = 'Not invalid';
+        $expected = [];
+        $bankModel->startTransaction();
         $actual = $bankModel->findBankByIdVersionTwo($id);
+        $bankModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -52,7 +58,9 @@ class FindBankByIdVersionTwo extends TestCase
         $bankModel = new BankModel();
         $id = [];
         $expected = 'Not invalid';
+        $bankModel->startTransaction();
         $actual = $bankModel->findBankByIdVersionTwo($id);
+        $bankModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -63,7 +71,9 @@ class FindBankByIdVersionTwo extends TestCase
         $bankModel = new BankModel();
         $id = null;
         $expected = 'Not invalid';
+        $bankModel->startTransaction();
         $actual = $bankModel->findBankByIdVersionTwo($id);
+        $bankModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -74,7 +84,9 @@ class FindBankByIdVersionTwo extends TestCase
         $bankModel = new BankModel();
         $id = new UserModel();
         $expected = 'Not invalid';
+        $bankModel->startTransaction();
         $actual = $bankModel->findBankByIdVersionTwo($id);
+        $bankModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -85,7 +97,9 @@ class FindBankByIdVersionTwo extends TestCase
         $bankModel = new BankModel();
         $id = true;
         $expected = 'Not invalid';
+        $bankModel->startTransaction();
         $actual = $bankModel->findBankByIdVersionTwo($id);
+        $bankModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -96,7 +110,9 @@ class FindBankByIdVersionTwo extends TestCase
         $bankModel = new BankModel();
         $id = '@@';
         $expected = 'Not invalid';
+        $bankModel->startTransaction();
         $actual = $bankModel->findBankByIdVersionTwo($id);
+        $bankModel->rollback();
         $this->assertEquals($expected, $actual);
     }
 }
