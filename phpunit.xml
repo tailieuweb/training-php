@@ -2,16 +2,28 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd" bootstrap="vendor/autoload.php" colors="true"
 cacheResult ="false">
     <testsuites>
-        <testsuite name="SqlWsContractImport">
+        <!-- <testsuite name="SqlWsContractImport">
             <file>./tests/UserModelTest.php</file>
         </testsuite>
         <testsuite name="SqlWsContractImport">
             <file>./tests/LaiSuatTest.php</file>
+        </testsuite> -->
+        <testsuite name="SqlWsContractImport">
+            <file>./tests/TestAuth.php</file>
+        </testsuite>
+        <testsuite name="SqlWsContractImport">
+            <file>./tests/TestFactoryPattern.php</file>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./models</directory>
+        </whitelist>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./models/UserModel.php</directory>
+        </whitelist>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./models/FactoryPattern.php</directory>
         </whitelist>
     </filter>
     <php>
