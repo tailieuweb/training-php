@@ -9,8 +9,8 @@ class GetUsers extends TestCase{
     public function testGetUsersGood()
     {
         $userModel = new UserModel();
-        $params['keyword']  = 'cam';
-        $expected = 'Cam';
+        $params['keyword']  = 'Thái Ngô';
+        $expected = 'Thái Ngô';
         $user = $userModel->getUsers($params);
         $actual = $user[0]['name'];
         $this->assertEquals($expected, $actual);
@@ -48,7 +48,7 @@ class GetUsers extends TestCase{
     {
         $userModel = new UserModel();
         $params['keyword']  = null;
-        $expected = 'tien';
+        $expected = 'Thái Ngô';
         $user = $userModel->getUsers($params);
         $actual = $user[0]['name'];
         $this->assertEquals($expected, $actual);
@@ -70,10 +70,11 @@ class GetUsers extends TestCase{
     public function testGetUsersIsArray()
     {
         $userModel = new UserModel();
-        $params['keyword']  = [];
+        
+        $params['keyword']  = ['1','2','3'];
         $expected = 'Invalid';
         $actual = $userModel->getUsers($params);
-        // var_dump($actual).die();
+        //var_dump($actual).die();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -93,8 +94,8 @@ class GetUsers extends TestCase{
     public function testGetUsersIsOneSpace()
     {
         $userModel = new UserModel();
-        $params['keyword']  = 'tra dao';
-        $expected = 'tra dao';
+        $params['keyword']  = 'Thái Ngô';
+        $expected = 'Thái Ngô';
         $user = $userModel->getUsers($params);
         $actual = $user[0]['name'];
         $this->assertEquals($expected, $actual);

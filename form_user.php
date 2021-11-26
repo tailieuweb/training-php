@@ -1,12 +1,13 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/FactoryPattent.php';
+require_once 'models/FactoryPattern.php';
 require_once 'models/Repository.php';
 require_once 'models/UserModel.php';
 require_once 'models/BankModel.php';
 $reponsitory = new Repository();
-$userModel = new UserModel();
+$factory = new FactoryPattern();
+$userModel = $factory->make('user');
 
 $user = NULL; //Add new user
 $_id = NULL;
@@ -15,7 +16,7 @@ if (!empty($_GET['id'])) {
     $_id = $_GET['id'];
     $id_start = substr($_id, 3);
     $id_end = substr($id_start, 0, -3);
-    var_dump($id_end);
+   
     $user = $userModel->findUserById($id_end); //Update existing user
 }
 if (!empty($_POST['submit'])) {
@@ -25,8 +26,8 @@ if (!empty($_POST['submit'])) {
        
         header('location: list_users.php');
     } else {
-        $bank = new BankModel();
-        $reponsitory->insertRepository($_POST,$bank);
+        // $bank = new BankModel();
+        $reponsitory->insertRepository($_POST);
         header('location: list_users.php');
     }
 }
@@ -56,7 +57,7 @@ if (!empty($_POST['submit'])) {
 
             <form method="POST">
                 <input type="hidden" name="id" value="<?php echo $id_end ?>">
-                <input type="hidden" name="version" value="<?php if (!empty($user[0]['version'])) echo md5($user[0]['version'] . "chuyen-de-web-1") ?>">
+                <input type="hidden" name="version" value="<?php if (isset($user[0]['version'])) echo md5($user[0]['version'] . "chuyen-de-web-1") ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">

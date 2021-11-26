@@ -1,8 +1,8 @@
 <?php
 require_once 'models/UserModel.php';
-require_once 'models/FactoryPattent.php';
+require_once 'models/FactoryPattern.php';
 
-$factory = new FactoryPattent();
+$factory = new FactoryPattern();
 $userModel = $factory->make('user');
 
 $user = NULL; //Add new user
@@ -12,6 +12,7 @@ if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     $id_start = substr($id,3);
     $id_end=substr($id_start,0,-3);
+    
     $userModel->deleteUserById($id_end);//Delete existing user
 }
 header('location: list_users.php');

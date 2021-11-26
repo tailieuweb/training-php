@@ -11,10 +11,11 @@ class FindUserTwoTable extends TestCase
     public function testFindUserTwoTableOk()
     {
         $userModel = new UserModel();
-        $id = 66;
-        $expected = 'tra dao';
+        $id = 54;
+        $expected = 'Thái Ngô';
         $user = $userModel->findTwoTable($id);
         $actual = $user[0]['name'];
+
         $this->assertEquals($expected, $actual);
     }
     /**

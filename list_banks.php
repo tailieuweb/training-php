@@ -1,16 +1,13 @@
 <?php
 require_once 'models/BankModel.php';
-require_once 'models/FactoryPattent.php';
+require_once 'models/FactoryPattern.php';
 
-$factory = new FactoryPattent();
+$factory = new FactoryPattern();
 $bankModel = $factory->make('bank');
 
-$params = [];
-if (!empty($_GET['keyword'])) {
-    $params['keyword'] = $_GET['keyword'];
-}
 
-$banks = $bankModel->getBanks($params);
+
+$banks = $bankModel->getBanks();
 
 ?>
 <!DOCTYPE html>
