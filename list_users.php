@@ -14,65 +14,6 @@ if (!empty($_GET['keyword'])) {
 
 $users = $userModel->getUsers($params);
 
-
-
-
-// $input = 1;
-// $input['name'] = 'testnoname1';
-
-// $input['fullname'] = 'testnoname';
-// $input['email'] = 'testnoname';
-// // $input['type'] = 'user';
-// $input['password'] = 'testnoname';
-
-// $result = $userModel->insertUser($input);
-// if($result){
-//     echo 'add success';
-// }
-// else echo 'add failed';
-
-
-// $input['name'] = 'thuong2';
-// $input['fullname'] = 'tpthuong';
-// $input['email'] = 'email';
-// $input['type'] = 'user';
-// $input['password'] = "123";
-
-// $insert = $userModel->insertUser($input);
-// if(empty($input)){
-//     echo 'input rỗng';
-//   }
-//   else{
-//       echo 'input ko rỗng';
-//   }
-
-//   if (!empty($input['password']) && !empty($input['name']) && !empty($input['type'])) {
-//     echo 'input is not empty';
-//   }else{
-//       echo 'input is empty';
-//   }
-// die();
-
-
-// echo'<br>keyword'. $params['keyword'];
-// if(!isset($params['keyword'])){
-//     echo'<br>input rỗng ';
-// }
-
-
-// $params1 = [];
-// $params1['keyword'] = 1;
-// $alo = [];
-// echo 'size: '. count($alo);
-// $alo['keyword'] = 1;
-// $data = $userModel->getUsers($alo);
-//  echo 'size: '.count($users). '<br>';
-// $users1[] = null;
-// //  echo ($users).'<br>';
-// echo '<br>';
-// echo '<br>'.count($users).'<br>';
-// //  die();
-
 ?>
 <!DOCTYPE html>
 <html>

@@ -89,11 +89,9 @@ class UserModel extends BaseModel
       if (is_bool($params['keyword']) || is_array($params['keyword']) || is_null($params['keyword']) || is_numeric($params['keyword'])) {
         return 'error';
       }
-      //  echo '<br>input ko rỗng';
       $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
       $users = $this->select($sql);
     } else {
-      //  echo '<br>input rỗng';
       $sql = 'SELECT * FROM users';
       $users = $this->select($sql);
     }
