@@ -38,6 +38,18 @@ class BankModelTest extends TestCase {
          $actual = $bankModel->getUser();
          $this->assertEquals($count_array,empty($actual));
      } 
+      //Lấy ra giá trị user được khởi tạo bằng đối tượng
+      public function testGetUserObjectError()
+      {
+          $bankModel = new BankModel();
+  
+          $id = new UserModel();
+  
+          $actual = $bankModel->getUser($id->createToken());
+          // $this->assertEquals($expected, $actual);
+          $expected = 'abcdfgh';
+          $this->assertEquals($expected, $actual);
+      }
      //test function GetUser 2(Not Good)
      public function testGetUserPutOutNG(){
         $bankModel = new BankModel();
@@ -77,7 +89,30 @@ class BankModelTest extends TestCase {
     /**
      * test delete bank by ID
      */
-
+     //Xóa phần tử mảng Bank theo đối tượng
+    public function testDeleteBankByIdObject(){
+        $bank = new BankModel();
+        $bankId = new stdClass();
+        try{
+            $bank->deleteBankById($bankId);
+        }
+        catch(Throwable $ex){
+            $this->assertTrue(True);
+        }
+     }
+      //test truong hop xoa theo id va token truyền vào là giá trị mảng
+      public function testDeleteBankByIdNgArray()
+      {
+          $bankModel = new BankModel();
+          $idBank = array(1,2,3);
+          $token_false = 'JFASJDBAJS566';
+         try{
+             $bankModel->deleteBankById($idBank,$token_false);
+         }
+         catch(Throwable $ex){
+            $this->assertTrue(True);
+        }
+      }
     //test truong hop xoa theo id va token
     public function testDeleteBankByIdNg()
     {
@@ -180,6 +215,23 @@ class BankModelTest extends TestCase {
     /**
      * Test Insert Bank 
     */
+    // //
+    // public function testInsertBankPassObject()
+    // {
+    //     //Create array
+    //     $object = new stdClass();
+    //     $bankModel = new BankModel();
+    //     $input = [];
+    //     $input['id'] = $object;
+    //     $input['cost'] = 10000000;
+    //     $actual = $bankModel -> insertBank($input);
+
+    //     // var_dump($actual);die();
+    //     if ($actual == true) {
+    //         return $this->assertTrue(true);
+    //     }
+    //     return $this->assertTrue(false);
+    // }
     //test thêm banks Ng
     public function testInsertBankNg(){
         $bankModel = new BankModel();
@@ -298,6 +350,29 @@ class BankModelTest extends TestCase {
 
         $this->assertEquals($expected,$actual[0]['user_id']);
     }
+    //Tìm giá trị id của bank theo đối tượng được tạo
+    public function testFindBankByIdObject(){
+        $bank = new BankModel();
+        $bankId = new stdClass();
+        try{
+            $bank->findBankById($bankId);
+        }
+        catch(Throwable $ex){
+            $this->assertTrue(True);
+        }
+    }
+     // Test function findUserById với bản thân là một đối tượng đc tạo bơi token
+    public function testFindBankByIdObjectError()
+    {
+        $bankModel = new BankModel();
+
+        $id = new UserModel();
+
+        $actual = $bankModel->findBankById($id->createToken());
+        // $this->assertEquals($expected, $actual);
+        $expected = 'error';
+        $this->assertEquals($expected, $actual);
+    }
       //tim id tra ve T/F
       public function testFindBankByIdNg(){
         $bank = new BankModel();
@@ -410,6 +485,17 @@ class BankModelTest extends TestCase {
         //Count() goi tong gia tri trong mang
         $this->assertEquals($count_array,count($actual));
     }
+    //lấy đối ra danh sách của Bank theo đối tượng
+    public function testGetBankObject(){
+        $bank = new BankModel();
+        $bankId = new stdClass();
+        try{
+            $bank->getBanks($bankId);
+        }
+            catch(Throwable $ex){
+            $this->assertTrue(True);
+        }
+     }
     //test kiểm tra gia trị có tồn tại trong mảng hay không
     public function testGetBanksNg1(){
         $bankModel = new BankModel();
