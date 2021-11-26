@@ -95,7 +95,9 @@
                         <tr>
 
                           <th>Id</th>
-                          <th>Name</th>
+                          <th>User</th>
+                          <th>Hotel</th>
+                          <th>Date</th>
 
                           <!-- <th>Type_id</th>
                           <th>Manu_id</th>
@@ -123,8 +125,10 @@
                           <!-- <td>{{ $loop->index + 1 }}</td> -->
 
 
-                          <td>{{$favorite->id}}</td>
+                          <td>{{$favorite->hotel_id}}</td>
+                          <td>{{$favorite->username}}</td>
                           <td>{{$favorite->name}}</td>
+                          <td>{{$favorite->date_created}}</td>
 
                           <td>
                             <!-- <div class="fa-hover col-md-3 col-sm-4  "><a href="{{URL::to('/favorite/edit/'.$key.$favorite->id)}}"><i class="fa fa-wrench"></i></a> -->

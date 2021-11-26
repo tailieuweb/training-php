@@ -15,12 +15,23 @@ class FavoriteController extends Controller
         // $admin_name = DB::table('users')->where('id', $admin_id)->first();
         $favorite = DB::table("favorite")
              ->join('hotel', 'hotel.hotel_id', '=', 'favorite.hotel_id')
+             ->join('users_web', 'users_web.id', '=', 'favorite.user_id')
             // ->join('manufactures', 'manufactures.id', '=', 'products.manu_id')
-             ->select('favorite.*','hotel.name');
+             ->select('favorite.*','hotel.*', 'users_web.*');
         $favorite = $favorite->orderBy("favorite.favorite_id", "Desc");
 
         $favorite = $favorite->paginate(15);
         return view('backend.layouts.Favorite.AllFavorite')->with('favorite', $favorite);
+    }
+    //Add new favorite of user
+    public function createFavorite(){
+        $hotel = DB::table('hotel')
+                ->select('hotel.*')->get();
+        $user = DB::table('users_web')
+                ->select('users_web.*')->get();
+                
+        return view('backend.layouts.Favorite.AddFavorite', ['user' => $user, 'hotel' => $hotel]);
+
     }
     // public function AddFavorite(Request $request)
     // {
