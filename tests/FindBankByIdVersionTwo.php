@@ -11,10 +11,12 @@ class FindBankByIdVersionTwo extends TestCase
     public function testFindBankByIdVersionTwoOk()
     {
         $bankModel = new BankModel();
-        $id = 41;
-        $expected = 500;
+        $id = 53;
+        $expected = "30000";
         $bank = $bankModel->findBankByIdVersionTwo($id);
         $actual = $bank[0]['cost'];
+        // var_dump($actual);
+        // die();
         $this->assertEquals($expected, $actual);
     }
     /**

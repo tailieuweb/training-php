@@ -8,8 +8,8 @@ class GetlastIdTest extends TestCase
      */
     public function testGetLastIdOk() {
         $userModel = new UserModel();
-        $expected = '56';
-        $userModel->starTransaction();
+        $expected = '63';
+        $userModel->startTransaction();
         $user = $userModel->getLastID();
         $userModel->rollback();
         $actual = $user[0]["MAX(id)"];
@@ -21,7 +21,7 @@ class GetlastIdTest extends TestCase
      */
     public function  testGetLastIdNullOk() {
         $userModel = new UserModel();
-        $userModel->starTransaction();
+        $userModel->startTransaction();
         $user = $userModel->getLastID();
         $userModel->rollback();
         if(!empty($user[0]["MAX(id)"])) {
@@ -36,7 +36,7 @@ class GetlastIdTest extends TestCase
      */
     public function  testGetLastIdNg() {
         $userModel = new UserModel();
-        $userModel->starTransaction();
+        $userModel->startTransaction();
         $user = $userModel->getLastID();
         $userModel->rollback();
         // var_dump($user[0]["MAX(id)"]);die();

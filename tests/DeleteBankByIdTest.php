@@ -11,8 +11,8 @@ class DeleteBankByIdTest extends TestCase
     public function testDeleteBankByIdOk() {
         $bankModel = new BankModel();
         $expected = true;
-        $bankid = md5(3 . "chuyen-de-web-1");
-        $bankModel->starTransaction();
+        $bankid = md5(54 . "chuyen-de-web-1");
+        $bankModel->startTransaction();
         $actual = $bankModel->deleteBankById($bankid);
         $bankModel->rollback();
         // var_dump($actual);die();
@@ -24,8 +24,8 @@ class DeleteBankByIdTest extends TestCase
     public function  testDeleteBankByIdString() {
         $bankModel = new BankModel();
         $expected = false;
-        $userid = md5("56" . "chuyen-de-web-1");
-        $bankModel->starTransaction();
+        $userid = md5("aaaa" . "chuyen-de-web-1");
+        $bankModel->startTransaction();
         $user = $bankModel->deleteBankById($userid);
         $bankModel->rollback();
         $actual = $user;
@@ -39,7 +39,7 @@ class DeleteBankByIdTest extends TestCase
     public function  testDeleteBankByIdNg() {
         $bankModel = new BankModel();
         $userId = 999;
-        $bankModel->starTransaction();
+        $bankModel->startTransaction();
         $user = $bankModel->deleteBankById($userId);
         $bankModel->rollback();
         if(empty($user)) {
@@ -55,7 +55,7 @@ class DeleteBankByIdTest extends TestCase
         $bankModel = new BankModel();
         $expected = false;
         $userid = md5(999 . "chuyen-de-web-1");
-        $bankModel->starTransaction();
+        $bankModel->startTransaction();
         $user = $bankModel->deleteBankById($userid);
         $bankModel->rollback();
         $actual = $user;
@@ -71,7 +71,7 @@ class DeleteBankByIdTest extends TestCase
         $bankModel = new BankModel();
         $expected = false;
         $userid = new stdClass();
-        $bankModel->starTransaction();
+        $bankModel->startTransaction();
         $user = $bankModel->deleteBankById($userid);
         $bankModel->rollback();
         $actual = $user;
@@ -86,7 +86,7 @@ class DeleteBankByIdTest extends TestCase
         $bankModel = new BankModel();
         $expected = false;
         $userid = md5(2.5 . "chuyen-de-web-1");
-        $bankModel->starTransaction();
+        $bankModel->startTransaction();
         $user = $bankModel->deleteBankById($userid);
         $bankModel->rollback();
         $actual = $user;
@@ -102,7 +102,7 @@ class DeleteBankByIdTest extends TestCase
         $bankModel = new BankModel();
         $expected = false;
         $userid = [];
-        $bankModel->starTransaction();
+        $bankModel->startTransaction();
         $user = $bankModel->deleteBankById($userid);
         $bankModel->rollback();
         $actual = $user;
@@ -117,7 +117,7 @@ class DeleteBankByIdTest extends TestCase
         $bankModel = new BankModel();
         $expected = false;
         $userid = null;
-        $bankModel->starTransaction();
+        $bankModel->startTransaction();
         $user = $bankModel->deleteBankById($userid);
         $bankModel->rollback();
         $actual = $user;
@@ -133,7 +133,7 @@ class DeleteBankByIdTest extends TestCase
         $bankModel = new BankModel();
         $expected = false;
         $userid = md5(-5 . "chuyen-de-web-1");
-        $bankModel->starTransaction();
+        $bankModel->startTransaction();
         $user = $bankModel->deleteBankById($userid);
         $bankModel->rollback();
         $actual = $user;

@@ -18,7 +18,8 @@ class BankModel extends BaseModel
     {
         echo "bankModel";
     }
-
+    // rollback data: 
+   
     public function findBankById($id)
     {
         $sql1 = 'SELECT id FROM banks';
@@ -56,9 +57,9 @@ class BankModel extends BaseModel
             return false;
         }
         else{
-        $sql = 'SELECT * FROM banks WHERE user_id = ' . $user_id;
-        $bank = $this->select($sql);
-        return $bank;
+            $sql = 'SELECT * FROM banks WHERE user_id = ' . $user_id;
+            $bank = $this->select($sql);
+            return $bank;
         }
     }
 
@@ -91,18 +92,7 @@ class BankModel extends BaseModel
         $bank = $this->insert($sql);
         return $bank;
     }
-    // public function updateBank2($input)
-    // {
-    //     $tong = $input['cost'] - 100;
-
-    //     $user = $this->getUserByIdNew();
-    //     $sql = 'UPDATE banks SET 
-    //         user_id = "' . $user[0]['user_id'] . '", 
-    //         cost = "' . $tong . '", 
-    //         WHERE id = ' . $input['id'];
-    //     $bank = $this->update($sql);
-    //     return $bank;
-    // }
+    
 
 
     /**
@@ -175,10 +165,21 @@ class BankModel extends BaseModel
 
     public function insertBanks($input)
     {
-        $sql = "INSERT INTO `php_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
-            "'" . $input['user_id'] . "','" . $input['cost'] . "')";
-        $bank = $this->insert($sql);
-        return $bank;
+        if (isset($input) && is_array($input)) {
+            if (isset($input['user_id']) && isset($input['cost'])) {
+                if (!is_string($input['user_id']) || !is_string($input['cost'])  || $input['user_id'] < 0 || $input['cost'] < 0) {
+                    return false;
+                }
+                $sql = "INSERT INTO php_web1.`banks` (user_id, cost ) VALUES (" .
+                    "'" . $input['user_id'] . "','" . $input['cost'] . "')";
+                $bank = $this->insert($sql);
+                return $bank;
+            } else {
+                return false;
+            }
+        }
+        return false;
+       
     }
 
     /**

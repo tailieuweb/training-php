@@ -10,10 +10,12 @@ class FindUserByIdTableBankTest extends TestCase
      */
     public function testFindUserByIdTableBankOk() {
         $bankModel = new BankModel();
-        $expected = 56;
-        $bankid = 56;
-        $bankModel->starTransaction();
+        $expected = 54;
+        $bankid = 54;
+        $bankModel->startTransaction();
         $user = $bankModel->findUserByIdTableBank($bankid);
+        // print_r($user);
+        // die();
         $bankModel->rollback();
         $actual = $user[0]['user_id'];
         // var_dump($actual);die();
@@ -26,7 +28,7 @@ class FindUserByIdTableBankTest extends TestCase
         $bankModel = new BankModel();
         $expected = [];
         $userid = "abc";
-        $bankModel->starTransaction();
+        $bankModel->startTransaction();
         $user = $bankModel->findUserByIdTableBank($userid);
         $bankModel->rollback();
         // $actual = $user['user_id'];
@@ -40,7 +42,7 @@ class FindUserByIdTableBankTest extends TestCase
     public function  testFindUserByIdTableBankNg() {
         $bankModel = new BankModel();
         $userId = 999;
-        $bankModel->starTransaction();
+        $bankModel->startTransaction();
         $user = $bankModel->findUserByIdTableBank($userId);
         $bankModel->rollback();
         if(empty($user)) {
@@ -56,7 +58,7 @@ class FindUserByIdTableBankTest extends TestCase
         $bankModel = new BankModel();
         $expected = [];
         $userid = 999;
-        $bankModel->starTransaction();
+        $bankModel->startTransaction();
         $user = $bankModel->findUserByIdTableBank($userid);
         $bankModel->rollback();
         $actual = $user;
@@ -72,7 +74,7 @@ class FindUserByIdTableBankTest extends TestCase
         $bankModel = new BankModel();
         $expected = false;
         $userid = new stdClass();
-        $bankModel->starTransaction();
+        $bankModel->startTransaction();
         $user = $bankModel->findUserByIdTableBank($userid);
         $bankModel->rollback();
         $actual = $user;
@@ -87,7 +89,7 @@ class FindUserByIdTableBankTest extends TestCase
         $bankModel = new BankModel();
         $expected = [];
         $userid = 2.5;
-        $bankModel->starTransaction();
+        $bankModel->startTransaction();
         $user = $bankModel->findUserByIdTableBank($userid);
         $bankModel->rollback();
         $actual = $user;
@@ -103,7 +105,7 @@ class FindUserByIdTableBankTest extends TestCase
         $bankModel = new BankModel();
         $expected = false;
         $userid = [];
-        $bankModel->starTransaction();
+        $bankModel->startTransaction();
         $user = $bankModel->findUserByIdTableBank($userid);
         $bankModel->rollback();
         $actual = $user;
@@ -118,7 +120,7 @@ class FindUserByIdTableBankTest extends TestCase
         $bankModel = new BankModel();
         $expected = [];
         $userid = null;
-        $bankModel->starTransaction();
+        $bankModel->startTransaction();
         $user = $bankModel->findUserByIdTableBank($userid);
         $bankModel->rollback();
         $actual = $user;
@@ -134,7 +136,7 @@ class FindUserByIdTableBankTest extends TestCase
         $bankModel = new BankModel();
         $expected = [];
         $userid = -5;
-        $bankModel->starTransaction();
+        $bankModel->startTransaction();
         $user = $bankModel->findUserByIdTableBank($userid);
         $bankModel->rollback();
         $actual = $user;
