@@ -10,6 +10,11 @@
     {{ session()->get('message') }}
 </div>
 @endif
+<?php
+$date_pick = '';
+$date_drop = '';
+$total_moneys = 0;
+?>
 <section class="payment">
     <div class="container">
         <div class="row">
@@ -26,10 +31,12 @@
                         <div class="d-flex w-100">
                             <div class="pick">Pick-up date:</div>
                             <div class="info-pick">{{$data["date_begin"]}}</div>
+                            <?php $date_pick = $data["date_begin"]; ?>
                         </div>
                         <div class="d-flex w-100 mt-1">
                             <div class="pick">Drop-off date:</div>
                             <div class="info-pick">{{$data["date_exit"]}}</div>
+                            <?php $date_drop = $data["date_exit"] ?>
                         </div>
                         <div class="d-flex w-100 mt-1">
                             <div class="pick">Amount people:</div>
@@ -67,6 +74,7 @@
                         <div class="total d-flex w-100 mt-1">
                             <div class="pick">Total:</div>
                             <div class="info-pick">{{ $total_money}} VND</div>
+                            <?php $total_moneys = $total_money ?>
                         </div>
                     </div>
                     @endforeach
@@ -102,20 +110,20 @@
                                                             <form action="#" class="request-form ftco-animate mt-2">
                                                                 <div class="form-group">
                                                                     <label for="" class="label">Card number</label>
-                                                                    <input type="text" class="form-control">
+                                                                    <input type="text" class="form-control" required>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="" class="label">Name of card</label>
-                                                                    <input type="text" class="form-control">
+                                                                    <input type="text" class="form-control" required>
                                                                 </div>
                                                                 <div class="d-flex" style="width: 100%;">
                                                                     <div class="form-group" style="width: 59%;margin-right: 15px;">
                                                                         <label for="" class="label">Expiration</label>
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="text" class="form-control" required>
                                                                     </div>
                                                                     <div class="form-group" style="width: 39%;">
                                                                         <label for="" class="label">CCV/CVV</label>
-                                                                        <input type="text" class="form-control">
+                                                                        <input type="text" class="form-control" required>
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -143,7 +151,11 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col-12 pay">
-                        <form action="{{url('')}}/payment-success/{{$hotel[0]->hotel_id}}">
+                        <form method="post" action="{{url('')}}/receip/{{$hotel[0]->hotel_id}}">
+                            @csrf
+                            <input type="date" name="date_pick" value="{{$date_pick}}" hidden>
+                            <input type="date" name="date_drop" value="{{$date_drop}}" hidden>
+                            <input type="int" name="total_money" value="{{$total_moneys}}" hidden>
                             <button class="pay-now">Pay Now</button>
                         </form>
                     </div>

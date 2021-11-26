@@ -68,7 +68,7 @@
                                             aria-label="Toggle navigation">{{Auth::user()->username}}</a></div>
                                     <div class="dropdown-menu" aria-labelledby="user_rental" id="navbarsExample06">
                                         <a class="dropdown-item" href="#">Profile</a>
-                                        <a class="dropdown-item" href="{{route('admin.favorite')}}">Favorite</a>
+                                        <a class="dropdown-item" href="{{route('frontend.dashboard.index.favorite')}}">Favorite</a>
                                         <a class="dropdown-item" href="{{route('frontend.logout.index')}}">Logout</a>
                                     </div>
                                 </div>

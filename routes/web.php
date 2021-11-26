@@ -24,20 +24,21 @@ use Illuminate\Support\Facades\Route;
 *******************ROUTE Ở PHẦN GIAO DIỆN ADMIN********************
 ********************************************************************
 */
+
 Route::group(['module' => 'dashboard', 'middleware' => 'web', 'namespace' => "App\Http\Controllers"], function () {
-   
+
 
 
     Route::group(['middleware' => ['auth']], function () {
-        Route::group(["prefix" => "dashboard"], function() {
-//             Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
-        //Dashboard
-        Route::get("/", ["as" => "admin.dashboard.index", "uses" => "AdminController@getIndexAdmin"]);
+        Route::group(["prefix" => "dashboard"], function () {
+            //             Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+            //     return view('dashboard');
+            // })->name('dashboard');
+            //Dashboard
+            Route::get("/", ["as" => "admin.dashboard.index", "uses" => "AdminController@getIndexAdmin"]);
         });
 
-        Route::group(["prefix" => "hotels"], function() {
+        Route::group(["prefix" => "hotels"], function () {
             Route::get("/", ["as" => "admin.hotels", "uses" => "AdminController@getAllHotel"]);
             Route::get("addhotel", ["as" => "admin.hotels.add", "uses" => "AdminController@AddHotel"]);
             Route::post("savehotel", ["as" => "admin.hotels.add", "uses" => "AdminController@getSaveHotel"]);
@@ -46,7 +47,7 @@ Route::group(['module' => 'dashboard', 'middleware' => 'web', 'namespace' => "Ap
             Route::post("updatehotel/{id}", ["as" => "admin.hotels.eidt", "uses" => "AdminController@UpdateHotel"]);
         });
 
-        Route::group(["prefix" => "categories"], function() {
+        Route::group(["prefix" => "categories"], function () {
             Route::get("/", ["as" => "admin.categories", "uses" => "CategoriesController@getAllCategories"]);
             Route::get("add", ["as" => "admin.categories.add", "uses" => "CategoriesController@AddCategories"]);
             Route::post("save", ["as" => "admin.categories.add", "uses" => "CategoriesController@getSaveCategories"]);
@@ -54,19 +55,17 @@ Route::group(['module' => 'dashboard', 'middleware' => 'web', 'namespace' => "Ap
             Route::get("edit/{id}", ["as" => "admin.categories.edit", "uses" => "CategoriesController@EditCategories"]);
             Route::post("update/{id}", ["as" => "admin.categories.eidt", "uses" => "CategoriesController@UpdateCategories"]);
         });
-        Route::group(["prefix" => "favorite"], function() {
+        Route::group(["prefix" => "favorite"], function () {
             Route::get("/", ["as" => "admin.favorite", "uses" => "FavoriteController@getAllFavorite"]);
-           
+
             Route::get("delete/{id}", ["as" => "admin.favorite.delete", "uses" => "FavoriteController@DeleteFavorite"]);
-           
         });
-        Route::group(["prefix" => "rating"], function() {
+        Route::group(["prefix" => "rating"], function () {
             Route::get("/", ["as" => "admin.rating", "uses" => "RatingController@getAllRating"]);
-           
+
             Route::get("delete/{id}", ["as" => "admin.rating.delete", "uses" => "RatingController@DeleteRating"]);
-           
         });
-        Route::group(["prefix" => "location"], function() {
+        Route::group(["prefix" => "location"], function () {
             Route::get("/", ["as" => "admin.location", "uses" => "LocationController@getAllLocation"]);
             Route::get("add", ["as" => "admin.location.add", "uses" => "LocationController@AddLocation"]);
             Route::post("save", ["as" => "admin.location.add", "uses" => "LocationController@getSaveLocation"]);
@@ -74,7 +73,7 @@ Route::group(['module' => 'dashboard', 'middleware' => 'web', 'namespace' => "Ap
             Route::get("edit/{id}", ["as" => "admin.location.edit", "uses" => "LocationController@EditLocation"]);
             Route::post("update/{id}", ["as" => "admin.location.eidt", "uses" => "LocationController@UpdateLocation"]);
         });
-        Route::group(["prefix" => "users"], function() {
+        Route::group(["prefix" => "users"], function () {
             Route::get("/", ["as" => "admin.users", "uses" => "UsersController@getAllUser"]);
             Route::get("add", ["as" => "admin.users.add", "uses" => "UsersController@AddUser"]);
             Route::post("save", ["as" => "admin.users.add", "uses" => "UsersController@getSaveUser"]);
@@ -82,13 +81,10 @@ Route::group(['module' => 'dashboard', 'middleware' => 'web', 'namespace' => "Ap
             Route::get("edit/{id}", ["as" => "admin.users.edit", "uses" => "UsersController@EditUser"]);
             Route::post("update/{id}", ["as" => "admin.users.eidt", "uses" => "UsersController@UpdateUser"]);
         });
-        Route::group(["prefix" => "favorite"], function() {
-            Route::get("/", ["as" => "admin.favorite", "uses" => "UsersController@getFavorite"]);
-           
-        });
+        // Route::group(["prefix" => "favorite"], function () {
+        //     Route::get("/", ["as" => "admin.favorite", "uses" => "UsersController@getFavorite"]);
+        // });
     });
-
-
 });
 /*
 ********************************************************************
@@ -111,17 +107,15 @@ Route::group(['module' => 'dashboard', 'middleware' => 'web', 'namespace' => "Ap
     Route::get("/hotel/search", ["as" => "frontend.dashboard.index.allhotel.search", "uses" => "FrontendController@getAllHotelSearch"]);
     Route::get("/detail/{id}", ["as" => "frontend.dashboard.index.detailhotel", "uses" => "FrontendController@getDetailHotel"]);
 
+    Route::post("/detail/{id}", ["as" => "frontend.dashboard.index.comment", "uses" => "FrontendController@postComment"]);
+
     Route::post("/details", ["as" => "frontend.dashboard.index.person", "uses" => "FrontendController@rentalHotelOption"]);
     Route::get("/profile", ["as" => "frontend.dashboard.index.profile", "uses" => "FrontendController@getProfile"]);
 
     //Payment hotel
     Route::post("/payment/{id}", ["as" => "frontend.dashboard.index.payment", "uses" => "FrontendController@paymentHotelById"]);
-    Route::get("/payment-success/{id}", ["as" => "frontend.dashboard.index.payment-success", "uses" => "FrontendController@payment_succsess"]);
+    Route::post("/receip/{id}", ["as" => "frontend.dashboard.index.receip", "uses" => "FrontendController@addReceipForUser"]);
+    //
+    Route::get("/favorite", ["as" => "frontend.dashboard.index.favorite", "uses" => "FrontendController@getAllHotelFavorite"]);
+    Route::post("/hotel", ["as" => "frontend.dashboard.index.favorite.post", "uses" => "FrontendController@postFavoriteOfUser"]);
 });
-
-
-
-
-
-
-
