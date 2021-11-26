@@ -277,7 +277,7 @@ class UserModelTest extends TestCase
      /**
      * thêm người dùng mới với giá trị là đối tượng
      */
-    public function testInsertUserNgObject()
+    public function testInsertUserDt()
     {
         $userModel = new UserModel();
         $obj = new stdClass();
@@ -286,12 +286,8 @@ class UserModelTest extends TestCase
             "id" => "",
             "bank_id" => 0,
             "name" => $obj,
-            "fullname" => $obj,
-            "email" => $obj,
-            "type" => $obj,
             "password" => $obj,
             "cost" => "0",
-            "ver" => "",
             "submit" => "submit"
         );
 
@@ -302,6 +298,222 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
+    /**
+     * thêm người dùng mới với giá trị boolean
+     */
+    public function testInsertUserBoolean()
+    {
+        $userModel = new UserModel();
+        $boolean = true;
 
+        $param = array(
+            "id" => "",
+            "bank_id" => 0,
+            "name" => $boolean,
+            "password" => $boolean,
+            "cost" => "0",
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->insertUser($param);
+        $expected = 1;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * thêm người dùng mới với giá trị là mảng
+     */
+    public function testInsertUserArray()
+    {
+        $userModel = new UserModel();
+
+        $arr = [1, 2, 3];
+
+        $param = array(
+            "id" => "",
+            "bank_id" => 0,
+            "name" => $arr,
+            "password" => $arr,
+            "cost" => "0",
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->insertUser($param);
+        $expected = 1;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+
+               /** Test Update User */
+
+    /**
+     * Update user with null values
+     */
+    public function testUpdateUserNull()
+    {
+        $userModel = new UserModel();
+
+        $param = array(
+            "id" => null,
+            "bank_id" => "24",
+            "name" => "user1_update",
+            "password" => "user1_id24",
+            "cost" => "10",
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->updateUser($param);
+        $expected = 0;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Update user 
+     */
+    public function testUpdateUserOk()
+    {
+        $userModel = new UserModel();
+
+        $param = array(
+            "id" => "1",
+            "bank_id" => "24",
+            "name" => "user1_update",
+            "password" => "user1_id24",
+            "cost" => "10",
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->updateUser($param);
+        $expected = 1;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Update user with empty string values
+     */
+    public function testUpdateUserEmptyStringValues()
+    {
+        $userModel = new UserModel();
+
+        $param = array(
+            "id" => "2",
+            "bank_id" => "3",
+            "name" => "",
+            "password" => "",
+            "cost" => "",
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->updateUser($param);
+        $expected = 1;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Update user with boolean values
+     */
+    public function testUpdateUserNgBoolean()
+    {
+        $userModel = new UserModel();
+        $boolean = true;
+
+        $param = array(
+            "id" => $boolean,
+            "bank_id" => $boolean,
+            "name" => $boolean,
+            "password" => $boolean,
+            "cost" => $boolean,
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->updateUser($param);
+        $expected = 1;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Update user with array values
+     */
+    public function testUpdateUserArray()
+    {
+        $userModel = new UserModel();
+        $arr = [1, 2, 3];
+
+        $param = array(
+            "id" => $arr,
+            "bank_id" => $arr,
+            "name" => $arr,
+            "password" => $arr,
+            "cost" => $arr,
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->updateUser($param);
+        $expected = 0;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Update user with Object values
+     */
+    public function testUpdateUserObject()
+    {
+        $userModel = new UserModel();
+        $obj = new stdClass();
+
+        $param = array(
+            "id" => $obj,
+            "bank_id" => $obj,
+            "name" => $obj,
+            "password" => $obj,
+            "cost" => $obj,
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->updateUser($param);
+        $expected = 0;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Update user with NaN values
+     */
+    public function testUpdateUserNaN()
+    {
+        $userModel = new UserModel();
+        $nan = 'e';
+
+        $param = array(
+            "id" => $nan,
+            "bank_id" => "24",
+            "name" => "user1_update",
+            "password" => "user1_id24",
+            "cost" => "10",
+            "submit" => "submit"
+        );
+
+        $actual = $userModel->updateUser($param);
+        $expected = 0;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
 
 }
