@@ -142,7 +142,7 @@ class UserModelTest extends TestCase
     public function testFindUserGoodWithName()
     {
         $user = new UserModel();
-        $key = "test26";
+        $key = "test2";
         $actual = $user->findUser($key);
         // var_dump($actual);
         // die();
@@ -230,7 +230,7 @@ class UserModelTest extends TestCase
     public function testFindUserGoodWithEmail()
     {
         $user = new UserModel();
-        $keys = "example@gmail.com";
+        $keys = "example2001@gmail.com";
         $actual = $user->findUser($keys);
         // var_dump($actual);
         // die();
@@ -513,7 +513,7 @@ class UserModelTest extends TestCase
     public function testAuthGood()
     {
         $user = new UserModel();
-        $username = 'thanh nhu';
+        $username = 'thanh an';
         $password = '1234';
         $actual = $user->auth($username, $password);
         if (!empty($actual)) {

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2021 at 02:10 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.34
+-- Generation Time: Sep 30, 2021 at 10:28 AM
+-- Server version: 10.4.19-MariaDB-log
+-- PHP Version: 8.0.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `app_web1`
 --
+CREATE DATABASE IF NOT EXISTS `app_web1` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `app_web1`;
 
 -- --------------------------------------------------------
 
@@ -27,8 +29,9 @@ SET time_zone = "+00:00";
 -- Table structure for table `banks`
 --
 
+DROP TABLE IF EXISTS `banks`;
 CREATE TABLE `banks` (
-  `id_bank` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `cost` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -37,13 +40,11 @@ CREATE TABLE `banks` (
 -- Dumping data for table `banks`
 --
 
-INSERT INTO `banks` (`id_bank`, `user_id`, `cost`) VALUES
-(56, 1, 13),
-(57, 6, 200),
-(59, 2147483647, 200),
-(60, 1234567891, 200),
-(61, 2, 200),
-(68, 9, 150);
+INSERT INTO `banks` (`id`, `user_id`, `cost`) VALUES
+(1, 1, 11),
+(2, 1, 11),
+(3, 2, 11),
+(4, 3, 11);
 
 -- --------------------------------------------------------
 
@@ -51,9 +52,10 @@ INSERT INTO `banks` (`id_bank`, `user_id`, `cost`) VALUES
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `fullname` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -65,17 +67,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`) VALUES
-(1, 'gia nam', 'nguyen gia name', 'example2001@gmail.com', 'admin', '1234'),
-(2, 'test2', 'thanh an', 'fxnguyenan191101@gmail.com', 'admin', '1234'),
-(4, 'Nguyễn Thành An', 'thanh an', 'fxnguyenan1911@gmail.com', 'admin', '1234'),
-(5, '<a href=\"http://php.local/delete_user.php?id=4\"> Xóa user3</a>', '', '', '', 'c6ae6edca1ad45f42e619ec91a32b636'),
-(6, 'thanh an', 'nguyen gia name', 'example200@gmail.com', 'admin', '1234'),
-(7, 'gia nam', 'nguyen gia name', 'example99@gmail.com', 'admin', '1234'),
-(8, 'test25', 'thanhan', 'fxnam201@gmail.com', 'admin', '1234'),
-(9, '-2', 'Nguyên Thành An', 'example2002@gmail.com', 'user', '1234'),
-(10, '2test', 'nhu', 'example20022@gmail.com', 'user', '1234'),
-(11, '2.5', 'Thanh Phuc', 'fxnguyenan19@gmail.com', 'user', '1234'),
-(1234567891, 'Thanh An', 'Thanh An Nguyen', 'example205@gmail.com', 'user', '1234');
+(1, 'test1', '', '', '', '5a105e8b9d40e1329780d62ea2265d8a'),
+(2, 'test2', '', '', '', '098f6bcd4621d373cade4e832627b4f6'),
+(3, 'hacker1', '', '', '', '2ba2a8ac968a7a2b0a7baa7f2fef18d2'),
+(4, 'test3', '', '', '', '8ad8757baa8564dc136c1e07507f4a98'),
+(5, '<a href=\"http://php.local/delete_user.php?id=4\"> Xóa user3</a>', '', '', '', 'c6ae6edca1ad45f42e619ec91a32b636');
 
 --
 -- Indexes for dumped tables
@@ -85,15 +81,13 @@ INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`) VALU
 -- Indexes for table `banks`
 --
 ALTER TABLE `banks`
-  ADD PRIMARY KEY (`id_bank`),
-  ADD UNIQUE KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -103,13 +97,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `banks`
 --
 ALTER TABLE `banks`
-  MODIFY `id_bank` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1234567892;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

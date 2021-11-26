@@ -78,7 +78,7 @@ class UserModel extends BaseModel
     public function updateUser($input)
     {
         $regex_email = "/^[A-Za-z0-9_.]{6,32}@([a-zA-Z0-9]{2,12})(.[a-zA-Z]{2,12})+$/";
-        $regex_not_special_sign = "/^[a-zA-Z0-9*\s]+$/";
+        $regex_not_special_sign = "/^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹa-zA-Z0-9*\s]+$/";
         $regex_id = "/^[0-9*\s]+$/";
         // var_dump($input['email']);
         // die();
@@ -110,8 +110,8 @@ class UserModel extends BaseModel
                 }
             }
         } else {
-            // var_dump(preg_match($regex_email, $input['email']));
-            // var_dump('die2');
+            // var_dump(preg_match($regex_not_special_sign, $input['name']));
+            // var_dump($input['name']);
             // die();
             return false;
         }
@@ -127,7 +127,7 @@ class UserModel extends BaseModel
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `fullname`, `email`, `type`, `password`) VALUES (" .
             "'" . $input['name'] . "', '" . $input['fullname'] . "', '" . $input['email'] . "', '" . $input['type'] . "', '" . $input['password'] . "')";
         $user = $this->insert($sql);
-
+        var_dump($sql);
         return $user;
     }
 
