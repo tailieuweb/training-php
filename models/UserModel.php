@@ -60,14 +60,14 @@ class UserModel extends BaseModel
         if (isset($input['fullname'])) {
           $fullname = htmlspecialchars($input['fullname']);
         }
-  
+
         $email = '';
         if (isset($input['email'])) {
           $email = htmlspecialchars($input['email']);
         }
-  
+
         $type = htmlspecialchars($input['type']);
-  
+
         $sql = "INSERT INTO `users` (`name`, `fullname`, `email`, `type`, `password`)
                     VALUES ('$name', '$fullname', '$email', '$type', '$password') ";
         $user = $this->insert($sql);
@@ -83,10 +83,13 @@ class UserModel extends BaseModel
   //--------------------------------------------------------------
   public function getUsers($params = [])
   {
-    
+    if (isset($params['keyword'])) {
+      if (is_array($params['keyword']))
+        return 'error';
+    }
 
     if (!empty($params['keyword'])) {
-      if (is_bool($params['keyword']) || is_array($params['keyword']) || is_null($params['keyword']) || is_numeric($params['keyword'])) {
+      if (is_bool($params['keyword']) || is_numeric($params['keyword'])) {
         return 'error';
       }
       $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';

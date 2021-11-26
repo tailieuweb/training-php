@@ -11,8 +11,8 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $params = [];
-    $params['keyword'] = 'a';
-    $expected = 2;
+    $params['keyword'] = 'Tyga';
+    $expected = 1;
     $arrUsers = $userModel->getUsers($params);
     $actual = count($arrUsers);
     $this->assertEquals($expected, $actual);
@@ -24,9 +24,9 @@ class UserModelTest extends TestCase
     $userModel = new UserModel();
     $params = [];
     $params['keyword'] = null;
-    $expected = 'error';
+    $expected = 14;
     $arrUsers = $userModel->getUsers($params);
-    $actual = $arrUsers;
+    $actual = count($arrUsers);
     $this->assertEquals($expected, $actual);
   }
 
@@ -72,7 +72,7 @@ class UserModelTest extends TestCase
     $userModel = new UserModel();
     $params = [];
     $params['keyword'] = '';
-    $expected = 7;
+    $expected = 14;
     $arrUsers = $userModel->getUsers($params);
     $actual = count($arrUsers);
     $this->assertEquals($expected, $actual);
@@ -92,7 +92,7 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'thuong9';
+    $input['name'] = 'thuongnew';
     $input['fullname'] = 'tpthuong';
     $input['email'] = 'email';
     $input['type'] = 'user';
@@ -126,7 +126,7 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'thuong10';
+    $input['name'] = 'thuong2';
     $input['fullname'] = 'tpthuong';
     $input['email'] = 'email';
     $input['type'] = 'user';
@@ -245,7 +245,7 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'withoutfullname';
+    $input['name'] = 'withoutfullname3';
     // $input['fullname'] = 'withoutname';
     $input['email'] = 'email';
     $input['type'] = 'user';
@@ -262,7 +262,7 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'withoutemail';
+    $input['name'] = 'withoutemail3';
     $input['fullname'] = 'withoutemail';
     // $input['email'] = 'email';
     $input['type'] = 'user';
@@ -296,7 +296,7 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'withouttype';
+    $input['name'] = 'withouttypeandemail';
     $input['fullname'] = 'withouttype';
     // $input['email'] = 'email';
     // $input['type'] = 'user';
