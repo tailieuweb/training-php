@@ -102,16 +102,4 @@ class UserModelTest extends TestCase
             $this->assertEquals($excute, $actual);
         }
     }
-
-
-    public function testSingletonNG()
-    {
-        $userModel = new UserModel;
-        $userModel2 = new UserModel;
-        $expected = false;
-        $actual = $userModel === $userModel2 ? true : false;
-        $this->assertEquals($expected, $actual);
-    }
-
-   
 }
