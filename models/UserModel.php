@@ -15,10 +15,10 @@ class UserModel extends BaseModel
         return $user;
     }
 
-    public function insertUserDecorator($data)
-    {
-        return  $this->insertUser($data);
-    }
+    // public function insertUserDecorator($data)
+    // {
+    //     return  $this->insertUser($data);
+    // }
 
     public function lastUserId()
     {
@@ -42,16 +42,7 @@ class UserModel extends BaseModel
         return $user;
     }
 
-    public function findUser($keyword)
-    {
-        if (!is_string($keyword)) {
-            return 'Invalid';
-        } else {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $keyword . '%"' . ' OR email LIKE "%' . $keyword . '%"';
-            $user = $this->select($sql);
-            return $user;
-        }
-    }
+   
 
     public function auth($userName, $password)
     {

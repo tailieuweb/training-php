@@ -6,18 +6,7 @@ class BankModel extends BaseModel
 {
     protected static $_instance;
 
-    public function getUserID()
-    {
-        return $this->user_id;
-    }
-    public function getCost()
-    {
-        return $this->cost = 1000;
-    }
-    public function insertUserDecorator($data, $banks)
-    {
-        echo "bankModel";
-    }
+    
     // rollback data: 
    
     public function findBankById($id)
