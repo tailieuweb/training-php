@@ -42,11 +42,11 @@ class BankModelTest extends TestCase
         $this->assertEquals($actual[0]['cost'], $input['cost']);
     }
        /**
-     *  function testInsertBankInfoByIdUser_Null_Ok()
+     *  function testInsertBankInfoByUser_id_Null_Ok()
      * Author: Quoc Viet
     */
     //Test insert bank with user_id = null
-    public function testInsertBankInfoByIdUser_Null_Ok()
+    public function testInsertBankInfoByUser_id_Null_Ok()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -126,7 +126,7 @@ class BankModelTest extends TestCase
     {
         $bankModel = new BankModel();
         $input = array(
-            'user_id' => ["viet", "cute"],
+            'user_id' => ["viet", "cute","nam"],
             'cost' => "meo",
         );
         //Execute test
@@ -489,6 +489,36 @@ class BankModelTest extends TestCase
          $id='';
         $actual = $bankModel->deleteBalanceById($id);
         $this->assertTrue(true,$actual);
+    }
+       /**
+    *function testDeleteBanksInfoObject_Ok()
+    * Author: Quoc Viet
+     */
+    //test delete banks id character empty
+    public function testDeleteBanksInfoObject_Ok()
+    {  $bankModel = new BankModel();
+        $id = $bankModel;
+        //Execute test
+        try {
+            $bankModel->deleteBalanceById($d);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+    }
+       /**
+    *function testDeleteBanksInfo_character_Special_Ok()
+    * Author: Quoc Viet
+     */
+    public function testDeleteBanksInfo_character_Special_Ok()
+    { 
+         $bankModel = new BankModel();
+        $id ='#$%^$^"';
+        //Execute test
+        try {
+            $bankModel->deleteBalanceById($d);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
     }
 
 }

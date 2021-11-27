@@ -89,20 +89,20 @@ class BankModel extends BaseModel {
      * @param array $params
      * @return array
      */
-    public function getBanksInfo($params = [])
-    {
-        //Keyword
-        if (!empty($params['user_id'])) {
-            $sql = 'SELECT * FROM banks 
-            WHERE user_id = ' . $params['user_id'];
-            $items = $this->select($sql);
-        } else {
-            $sql = 'SELECT * FROM banks';
-            $items = $this->select($sql);
-        }
+    // public function getBanksInfo($params = [])
+    // {
+    //     //Keyword
+    //     if (!empty($params['user_id'])) {
+    //         $sql = 'SELECT * FROM banks 
+    //         WHERE user_id = ' . $params['user_id'];
+    //         $items = $this->select($sql);
+    //     } else {
+    //         $sql = 'SELECT * FROM banks';
+    //         $items = $this->select($sql);
+    //     }
 
-        return $items;
-    }
+    //     return $items;
+    // }
     public function getBanks($params = []) {
         //Keyword
        
