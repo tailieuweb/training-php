@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\ErrorHandler\Error\FatalError;
+
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
@@ -28,6 +30,14 @@ class UserModel extends BaseModel
     // Get user by id:
     public function findUserById($id)
     {
+        if ($id instanceof stdClass || is_bool($id) || is_array($id) || is_null($id)) {
+            throw new InvalidArgumentException('Invalid argument');
+        }
+
+        if (!isset($id)) {
+            throw new ArgumentCountError("Too few argument");
+        }
+
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
 
@@ -37,7 +47,15 @@ class UserModel extends BaseModel
     // Get user by keyword:
     public function findUser($keyword)
     {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
+        if ($keyword instanceof stdClass || is_bool($keyword) || is_array($keyword) || is_null($keyword)) {
+            throw new InvalidArgumentException('Invalid argument');
+        }
+
+        if (!isset($keyword)) {
+            throw new ArgumentCountError("Too few argument");
+        }
+
+        $sql = 'SELECT * FROM users WHERE users.name LIKE ' . '\'%' . $keyword . '%\'' . ' OR email LIKE ' . '\'%' . $keyword . '%\'';
         $user = $this->select($sql);
 
         return $user;
@@ -65,6 +83,14 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
+        if ($id instanceof stdClass || is_bool($id) || is_array($id) || is_null($id)) {
+            throw new InvalidArgumentException('Invalid argument');
+        }
+
+        if (!isset($id)) {
+            throw new ArgumentCountError("Too few argument");
+        }
+
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
     }
@@ -156,5 +182,15 @@ class UserModel extends BaseModel
 
         return $user[0]["version"];
     }
-}
 
+    // Code for testing
+    public function startTransaction()
+    {
+        self::$_connection->begin_transaction();
+    }
+
+    public function rollback()
+    {
+        self::$_connection->rollback();
+    }
+}
