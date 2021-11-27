@@ -151,10 +151,21 @@ class UserModel extends BaseModel
     // Get version of data:
     public function getVersionByUserID($user_id)
     {
+        if(!isset($user_id)){
+            return false;
+        }
+        if(!is_numeric($user_id)){
+            return false;
+        }
+        if(!is_int($user_id)){
+            return false;
+        }
+      if($user_id <= 0){
+          return false;
+      }
         $sql = 'SELECT version FROM users WHERE id = ' . $user_id;
         $user = $this->select($sql);
-
-        return $user[0]["version"];
+        return $user;
     }
 }
 

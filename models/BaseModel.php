@@ -4,7 +4,7 @@ require_once 'configs/database.php';
 abstract class BaseModel {
     // Database connection
     protected static $_connection;
-
+  
     // Code for repository
     protected static $_userRepo_instance;
 

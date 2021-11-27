@@ -7,9 +7,17 @@
 >
     <testsuites>
         <testsuite name="SqlWsContractImport">
-            <file>./Tests/UserModelTest.php</file>
+            <file>./Tests/Duyen_UserModelTest.php</file>
+              <file>./Tests/Duyen_BankModelTest.php</file>
+              <file>./Tests/Duyen_BaseModelTest.php</file>
+            
         </testsuite>
     </testsuites>
+    <filter>				
+	<whitelist processUncoveredFilesFromWhitelist="true">				
+	<directory suffix=".php">./models</directory>				
+	</whitelist>				
+	</filter>	
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
