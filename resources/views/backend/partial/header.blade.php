@@ -89,8 +89,6 @@
                     <ul class="nav child_menu">
                     <li><a href="{{asset('admin/favorite')}}">Danh sách yêu thích</a></li>
                     <li><a href="{{asset('admin/favorite/add')}}">Thêm favorite</a></li>
-
-
                     </ul>
                   </li>
 
