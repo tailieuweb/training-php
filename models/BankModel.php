@@ -63,6 +63,19 @@ class BankModel extends BaseModel {
         return $bank;
     }
 
+     /**
+     * getId
+     * @param $input
+     * @return mixed
+     */
+    public function getID()
+    {
+        $sql = 'SELECT MAX(id) as user_id FROM banks';
+        $user = $this->select($sql);
+
+        return $user[0]["user_id"];
+    }
+
     /**
      * Search banks
      * @param array $params

@@ -4,182 +4,7 @@ use PHPUnit\Framework\TestCase;
 class UserModelTest extends TestCase
 {
 
-    /**
-     * Test case Okie
-     */
-    public function testSumOk()
-    {
-       $userModel = new UserModel();
-       $a = 1;
-       $b = 2;
-       $expected = 3;
-
-       $actual = $userModel->sumb($a,$b);
-
-       $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * Test case Not good
-     */
-    public function testSumNg()
-    {
-        $userModel = new UserModel();
-        $a = 1;
-        $b = 2;
-
-        $actual = $userModel->sumb($a,$b);
-
-        if ($actual != 3) {
-            $this->assertTrue(false);
-        } else {
-            $this->assertTrue(true);
-        }
-    }
-    /**
-     * Test case Sum Duong
-     */
-    public function testSumDuong()
-    {
-       $userModel = new UserModel();
-       $a = 1;
-       $b = 2;
-       $expected = 3;
-
-       $actual = $userModel->sumb($a,$b);
-
-       $this->assertEquals($expected, $actual);
-    }
-    /**
-     * Test case Sum Am
-     */
-    public function testSumAm()
-    {
-       $userModel = new UserModel();
-       $a = -1;
-       $b = -2;
-       $expected = -3;
-
-       $actual = $userModel->sumb($a,$b);
-
-       $this->assertEquals($expected, $actual);
-    }
-    /**
-     * Test case Sum Am Duong
-     */
-    public function testSumAmDuong()
-    {
-       $userModel = new UserModel();
-       $a = -1;
-       $b = 2;
-       $expected = 1;
-
-       $actual = $userModel->sumb($a,$b);
-
-       $this->assertEquals($expected, $actual);
-    }
-    /**
-     * Test case Sum So Thuc
-     */
-    public function testSumSoThuc()
-    {
-       $userModel = new UserModel();
-       $a = 1;
-       $b = 2;
-       $expected = 3;
-
-       $actual = $userModel->sumb($a,$b);
-
-       $this->assertEquals($expected, $actual);
-    }
-    /**
-     * Test case Sum So va chuoi
-     */
-    public function testSumSoVaChuoi()
-    {
-       $userModel = new UserModel();
-       $a = 1;
-       $b = (int)"a";
-       $expected = (int)"1a";
-
-       $actual = $userModel->sumb($a,$b);
-
-       $this->assertEquals($expected, $actual);
-    }
-    /**
-     * Test case Sum chuoi va chuoi
-     */
-    public function testSumChuoiVaChuoi()
-    {
-       $userModel = new UserModel();
-       $a = (int)"b";
-       $b = (int)"a";
-       $expected = (int)"ab";
-
-       $actual = $userModel->sumb($a,$b);
-
-       $this->assertEquals($expected, $actual);
-    }
-    public function testFindUserByIdOk() {
-      $userModel = new UserModel();
-      
-      $id = 8;
-      $mongDoiUsername = 'asdf';
-      
-      $user = $userModel->findUserById($id);
-      
-      $this->assertEquals($mongDoiUsername, $user[0]['name']);
-      
-      }
-            
-      public function testFindUserByIdNg() {
-      $userModel = new UserModel();
-      
-      $id = 999999;
-      
-      
-      $user = $userModel->findUserById($id);
-      
-      if (empty($user)) {
-      $this->assertTrue(true);
-      } else {
-      $this->assertTrue(false);
-      }
-      
-      }
-      
-      public function testFindUserByIdStr() {
-      $userModel = new UserModel();
-      
-      $id = 'asdf';
-      
-      
-      $expected = 'error';
-      $actual = $userModel->findUserById($id);
-      
-      $this->assertEquals($expected, $actual);   
-      }
-      
-      
-      public function testFindUserByIdNull() {
-      $userModel = new UserModel();
-      $id = '';
-      $expected = 'error';
-      $actual = $userModel->findUserById($id);
-      
-      $this->assertEquals($expected, $actual);   
-      }
-      
-      public function testFindUserByIdObject() {
-      $userModel = new UserModel();
-      
-      $id = new stdClass();
-      $expected = 'error';
-      $actual = $userModel->findUserById($id);
-      
-      $this->assertEquals($expected, $actual);
-      }
-                     /** Test InsertUser_UserModel*/
+    //______________________________________/** Test InsertUser_UserModel*/_______________________________________
 
       /**
      * Thêm user mới vào database
@@ -188,12 +13,11 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $param = array(
-            "id" => "",
-            "bank_id" => 0,
+            "id" => "1",
             "name" => "user1",
+            "fullname" => "user1",
+            "email" => "user1@gmail.com",
             "password" => "user1",
-            "cost" => "0",
-            "submit" => "submit"
         );
 
         $actual = $userModel->insertUser($param);
@@ -206,18 +30,17 @@ class UserModelTest extends TestCase
      /**
      * Thêm user mới bị trùng id
      */
-    public function testInsertUserTrungId()
+    public function testInsertUserNgTrungId()
     {
         $userModel = new UserModel();
         $existing_id = $userModel->getID();
 
         $param = array(
-         "id" => "",
-            "bank_id" => 0,
+            "id" => "1",
             "name" => "user1",
+            "fullname" => "user1",
+            "email" => "user1@gmail.com",
             "password" => "user1",
-            "cost" => "0",
-            "submit" => "submit"
         );
 
         $userModel->insertUser($param);
@@ -232,16 +55,15 @@ class UserModelTest extends TestCase
      /**
      * Add new user with empty string values.
      */
-    public function testInsertUserEmptyStringValues()
+    public function testInsertUserNgEmptyStringValues()
     {
         $userModel = new UserModel();
         $param = array(
             "id" => "",
-            "bank_id" => 0,
             "name" => "",
+            "fullname" => "",
+            "email" => "",
             "password" => "",
-            "cost" => "0",
-            "submit" => "submit"
         );
 
         $actual = $userModel->insertUser($param);
@@ -254,17 +76,16 @@ class UserModelTest extends TestCase
     /**
      * thêm người dùng mới với giá trị null
      */
-    public function testInsertUserNull()
+    public function testInsertUserNgNullValues()
     {
         $userModel = new UserModel();
 
         $param = array(
-         "id" => "",
-         "bank_id" => 0,
-         "name" => "user1",
-         "password" => "user1",
-         "cost" => "0",
-         "submit" => "submit"
+            "id" => null,
+            "name" => null,
+            "fullname" => null,
+            "email" => null,
+            "password" => null,
         );
 
         $actual = $userModel->insertUser($param);
@@ -277,18 +98,17 @@ class UserModelTest extends TestCase
      /**
      * thêm người dùng mới với giá trị là đối tượng
      */
-    public function testInsertUserDt()
+    public function testInsertUserNgDt()
     {
         $userModel = new UserModel();
         $obj = new stdClass();
 
         $param = array(
-            "id" => "",
-            "bank_id" => 0,
+            "id" => $obj,
             "name" => $obj,
+            "fullname" => $obj,
+            "email" => $obj,
             "password" => $obj,
-            "cost" => "0",
-            "submit" => "submit"
         );
 
         $actual = $userModel->insertUser($param);
@@ -301,18 +121,17 @@ class UserModelTest extends TestCase
     /**
      * thêm người dùng mới với giá trị boolean
      */
-    public function testInsertUserBoolean()
+    public function testInsertUserNgBooleanValues()
     {
         $userModel = new UserModel();
         $boolean = true;
 
         $param = array(
-            "id" => "",
-            "bank_id" => 0,
+            "id" => $boolean,
             "name" => $boolean,
+            "fullname" => $boolean,
+            "email" => $boolean,
             "password" => $boolean,
-            "cost" => "0",
-            "submit" => "submit"
         );
 
         $actual = $userModel->insertUser($param);
@@ -325,19 +144,18 @@ class UserModelTest extends TestCase
     /**
      * thêm người dùng mới với giá trị là mảng
      */
-    public function testInsertUserArray()
+    public function testInsertUserNgArrayValues()
     {
         $userModel = new UserModel();
 
         $arr = [1, 2, 3];
 
         $param = array(
-            "id" => "",
-            "bank_id" => 0,
+            "id" => $arr,
             "name" => $arr,
+            "fullname" => $arr,
+            "email" => $arr,
             "password" => $arr,
-            "cost" => "0",
-            "submit" => "submit"
         );
 
         $actual = $userModel->insertUser($param);
@@ -348,22 +166,21 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-               /** Test Update User */
+    //______________________________________/** Test Update User */____________________________________________
 
     /**
      * Update user with null values
      */
-    public function testUpdateUserNull()
+    public function testUpdateUserNgNullValues()
     {
         $userModel = new UserModel();
 
         $param = array(
             "id" => null,
-            "bank_id" => "24",
             "name" => "user1_update",
-            "password" => "user1_id24",
-            "cost" => "10",
-            "submit" => "submit"
+            "fullname" => "user1_update",
+            "email" => "user1_update@gmail.com",
+            "password" => "user1_update",
         );
 
         $actual = $userModel->updateUser($param);
@@ -382,11 +199,10 @@ class UserModelTest extends TestCase
 
         $param = array(
             "id" => "1",
-            "bank_id" => "24",
             "name" => "user1_update",
-            "password" => "user1_id24",
-            "cost" => "10",
-            "submit" => "submit"
+            "fullname" => "user1_update",
+            "email" => "user1_update@gmail.com",
+            "password" => "user1_update",
         );
 
         $actual = $userModel->updateUser($param);
@@ -399,21 +215,20 @@ class UserModelTest extends TestCase
     /**
      * Update user with empty string values
      */
-    public function testUpdateUserEmptyStringValues()
+    public function testUpdateUserNgEmptyStringValues()
     {
         $userModel = new UserModel();
 
         $param = array(
-            "id" => "2",
-            "bank_id" => "3",
+            "id" => "",
             "name" => "",
-            "password" => "",
-            "cost" => "",
-            "submit" => "submit"
+            "fullname" => "user1_update",
+            "email" => "user1_update@gmail.com",
+            "password" => "user1_update",
         );
 
         $actual = $userModel->updateUser($param);
-        $expected = 1;
+        $expected = 0;
 
         print_r("\t=> Actual: " . $actual  . "\n");
 
@@ -422,18 +237,17 @@ class UserModelTest extends TestCase
     /**
      * Update user with boolean values
      */
-    public function testUpdateUserNgBoolean()
+    public function testUpdateUserNgBooleanValues()
     {
         $userModel = new UserModel();
         $boolean = true;
 
         $param = array(
             "id" => $boolean,
-            "bank_id" => $boolean,
-            "name" => $boolean,
-            "password" => $boolean,
-            "cost" => $boolean,
-            "submit" => "submit"
+            "name" =>  $boolean,
+            "fullname" => "user1_update",
+            "email" => "user1_update@gmail.com",
+            "password" => "user1_update",
         );
 
         $actual = $userModel->updateUser($param);
@@ -446,18 +260,17 @@ class UserModelTest extends TestCase
     /**
      * Update user with array values
      */
-    public function testUpdateUserArray()
+    public function testUpdateUserNgArrayValues()
     {
         $userModel = new UserModel();
         $arr = [1, 2, 3];
 
         $param = array(
             "id" => $arr,
-            "bank_id" => $arr,
-            "name" => $arr,
-            "password" => $arr,
-            "cost" => $arr,
-            "submit" => "submit"
+            "name" =>  $arr,
+            "fullname" => "user1_update",
+            "email" => "user1_update@gmail.com",
+            "password" => "user1_update",
         );
 
         $actual = $userModel->updateUser($param);
@@ -470,42 +283,17 @@ class UserModelTest extends TestCase
     /**
      * Update user with Object values
      */
-    public function testUpdateUserObject()
+    public function testUpdateUserNgObjectValues()
     {
         $userModel = new UserModel();
         $obj = new stdClass();
 
         $param = array(
             "id" => $obj,
-            "bank_id" => $obj,
-            "name" => $obj,
-            "password" => $obj,
-            "cost" => $obj,
-            "submit" => "submit"
-        );
-
-        $actual = $userModel->updateUser($param);
-        $expected = 0;
-
-        print_r("\t=> Actual: " . $actual  . "\n");
-
-        $this->assertEquals($expected, $actual);
-    }
-    /**
-     * Update user with NaN values
-     */
-    public function testUpdateUserNaN()
-    {
-        $userModel = new UserModel();
-        $nan = 'e';
-
-        $param = array(
-            "id" => $nan,
-            "bank_id" => "24",
-            "name" => "user1_update",
-            "password" => "user1_id24",
-            "cost" => "10",
-            "submit" => "submit"
+            "name" =>  $obj,
+            "fullname" => "user1_update",
+            "email" => "user1_update@gmail.com",
+            "password" => "user1_update",
         );
 
         $actual = $userModel->updateUser($param);
