@@ -10,6 +10,9 @@
       <file>./tests/Hung_UserModel.php</file>
 	  <file>./tests/Hung_FactoryPattern.php</file>
 	  	  <file>./tests/Hung_UserRepository.php</file>
+	  	  <file>./tests/Linh_BaseModelTest.php</file>
+            <file>./tests/Linh_UserModelTest.php</file>
+            <file>./tests/Linh_BankModelTest.php</file>
     </testsuite>
   </testsuites>
   <php>
@@ -21,4 +24,3 @@
     <server name="SESSION_DRIVER" value="array"/>
     <server name="TELESCOPE_ENABLED" value="false"/>
   </php>
-</phpunit>

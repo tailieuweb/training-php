@@ -44,6 +44,9 @@ if (!empty($_POST['submit'])) {
             //Be able to update or be locked:
             if ($user[0]['version'] == intval($currentVer)) {
                 $_POST["ver"] = intval($currentVer);
+                // echo '<pre>';
+                // var_dump($_POST);
+                // echo '</pre>';
                 $userRepository->update_UserAndBankAccount($_POST);
                 header('location: index.php');
             } else {
@@ -56,6 +59,11 @@ if (!empty($_POST['submit'])) {
         // header('location: list_users.php');
         $userRepository->create_UserAndBankAccount($_POST);
         header('location: index.php');
+
+        // DEBUG:
+        // echo '<pre>';
+        // var_dump($_POST);
+        // echo '</pre>';
     }
 }
 
@@ -78,7 +86,7 @@ if (!empty($_POST['submit'])) {
             </div>
             <form method="POST">
                 <input type="hidden" name="id" value="<?php echo $_id ?>">
-                <input type="hidden" name="bank_id" value="<?php echo $user[0]['bank_id'] ?>">
+                <input type="hidden" name="bank_id" value="<?php if (!empty($user[0]['bank_id'])) echo $user[0]['bank_id'] ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
@@ -113,7 +121,7 @@ if (!empty($_POST['submit'])) {
                 </div>
                 <!-- Hidden version field: -->
                 <div class="form-group">
-                    <input type="hidden" name="ver" value="<?php echo rand(10000,99999).$user[0]['version'].rand(10000,99999) ?>">
+                    <input type="hidden" name="ver" value="<?php if (isset($user[0]['version'])) echo rand(10000,99999).$user[0]['version'].rand(10000,99999) ?>">
                 </div>
 
                 <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
