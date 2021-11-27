@@ -48,16 +48,30 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function updateUser($input) {
+/*     public function updateUser($input) {
         $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
-                 password="'. md5($input['password']) .'"
+                 name = "' . mysqli_real_escape_string(self::$_connection, strip_tags($input['name'])) .'", 
+                 password="'. strip_tags(md5($input['password'])) .'",
+                 fullname="'. strip_tags($input['fullname']) .'",
+                 email="'. strip_tags($input['email']) .'",
+                 type="'. strip_tags($input['type']) .'"
+                WHERE id = ' . strip_tags($input['id']);
+        $user = $this->update($sql);
+        return $user;
+    } */
+    public function updateUser($input)
+    {
+
+        $sql = 'UPDATE users SET 
+                name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '", 
+                fullname = "' . $input['fullname'] . '", 
+                email = "' . $input['email'] . '", 
+                type = "' . $input['type'] . '", 
+                password="' . md5($input['password']) . '"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
-
         return $user;
     }
-
     /**
      * Insert user
      * @param $input
