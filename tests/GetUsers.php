@@ -11,8 +11,10 @@ class GetUsers extends TestCase{
         $userModel = new UserModel();
         $params['keyword']  = 'Thái Ngô';
         $expected = 'Thái Ngô';
+        $userModel->startTransaction();
         $user = $userModel->getUsers($params);
         $actual = $user[0]['name'];
+        $userModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -22,7 +24,9 @@ class GetUsers extends TestCase{
     {
         $userModel = new UserModel();
         $params['keyword']  = 'minh';
+        $userModel->startTransaction();
         $user = $userModel->getUsers($params);
+        $userModel->rollback();
         if (empty($user[0])) {
             return $this->assertTrue(true);
         } else {
@@ -32,25 +36,14 @@ class GetUsers extends TestCase{
     /**
      * Test keyword là số
      */
-    // public function testGetUsersByIsNum()
-    // {
-    //     $userModel = new UserModel();
-    //     $params['keyword']  = 22;
-    //     $expected = 222;
-    //     $user = $userModel->getUsers($params);
-    //     $actual = $user[0]['name'];
-    //     $this->assertEquals($expected, $actual);
-    // }
-    /**
-     * Test keyword là null
-     */
-    public function testGetUsersIsNull()
+    public function testGetUsersByIsNum()
     {
         $userModel = new UserModel();
-        $params['keyword']  = null;
-        $expected = 'Thái Ngô';
-        $user = $userModel->getUsers($params);
-        $actual = $user[0]['name'];
+        $params['keyword']  = 22;
+        $expected = [];
+        $userModel->startTransaction();
+        $actual = $userModel->getUsers($params);
+        $userModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -60,8 +53,10 @@ class GetUsers extends TestCase{
     {
         $userModel = new UserModel();
         $params['keyword']  = true;
-        $expected ='Invalid';
+        $expected = [];
+        $userModel->startTransaction();
         $actual = $userModel->getUsers($params);
+        $userModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -73,8 +68,9 @@ class GetUsers extends TestCase{
         
         $params['keyword']  = ['1','2','3'];
         $expected = 'Invalid';
+        $userModel->startTransaction();
         $actual = $userModel->getUsers($params);
-        //var_dump($actual).die();
+        $userModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -85,7 +81,9 @@ class GetUsers extends TestCase{
         $userModel = new UserModel();
         $params['keyword']  = new BankModel();
         $expected ='Invalid';
+        $userModel->startTransaction();
         $actual = $userModel->getUsers($params);
+        $userModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -96,8 +94,10 @@ class GetUsers extends TestCase{
         $userModel = new UserModel();
         $params['keyword']  = 'Thái Ngô';
         $expected = 'Thái Ngô';
+        $userModel->startTransaction();
         $user = $userModel->getUsers($params);
         $actual = $user[0]['name'];
+        $userModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -108,7 +108,19 @@ class GetUsers extends TestCase{
         $userModel = new UserModel();
         $params['keyword']  = 'tra  dao';
         $expected = [];
+        $userModel->startTransaction();
         $actual = $userModel->getUsers($params);
+        $userModel->rollback();
+        $this->assertEquals($expected, $actual);
+    }
+    public function testGetUsersIsSpecialCharacter()
+    {
+        $userModel = new UserModel();
+        $params['keyword']  = '@#';
+        $expected = [];
+        $userModel->startTransaction();
+        $actual = $userModel->getUsers($params);
+        $userModel->rollback();
         $this->assertEquals($expected, $actual);
     }
 }

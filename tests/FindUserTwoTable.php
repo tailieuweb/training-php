@@ -13,9 +13,10 @@ class FindUserTwoTable extends TestCase
         $userModel = new UserModel();
         $id = 54;
         $expected = 'Thái Ngô';
+        $userModel->startTransaction();
         $user = $userModel->findTwoTable($id);
         $actual = $user[0]['name'];
-
+        $userModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -25,7 +26,9 @@ class FindUserTwoTable extends TestCase
     {
         $userModel = new UserModel();
         $id = 100;
+        $userModel->startTransaction();
         $user = $userModel->findTwoTable($id);
+        $userModel->rollback();
         if (empty($user)) {
             $this->assertTrue(true);
         } else {
@@ -39,8 +42,10 @@ class FindUserTwoTable extends TestCase
     {
         $userModel = new UserModel();
         $id = '123';
-        $expected = 'Invalid';
+        $expected = [];
+        $userModel->startTransaction();
         $actual = $userModel->findTwoTable($id);
+        $userModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -49,9 +54,11 @@ class FindUserTwoTable extends TestCase
     public function testFindUserTwoTableIsArray()
     {
         $userModel = new UserModel();
-        $id = [];
+        $id = [1,2,3];
         $expected = 'Invalid';
+        $userModel->startTransaction();
         $actual = $userModel->findTwoTable($id);
+        $userModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -62,7 +69,9 @@ class FindUserTwoTable extends TestCase
         $userModel = new UserModel();
         $id = null;
         $expected = 'Invalid';
+        $userModel->startTransaction();
         $actual = $userModel->findTwoTable($id);
+        $userModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -73,7 +82,9 @@ class FindUserTwoTable extends TestCase
         $userModel = new UserModel();
         $id = new BankModel();
         $expected = 'Invalid';
+        $userModel->startTransaction();
         $actual = $userModel->findTwoTable($id);
+        $userModel->rollback();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -84,22 +95,10 @@ class FindUserTwoTable extends TestCase
         $userModel = new UserModel();
         $id = true;
         $expected = 'Invalid';
+        $userModel->startTransaction();
         $actual = $userModel->findTwoTable($id);
+        $userModel->rollback();
         $this->assertEquals($expected, $actual);
-    }
-    /**
-     * Test case id is not exist
-     */
-    public function testFindUserTwoTableIsNotExist()
-    {
-        $userModel = new UserModel();
-        $id = 100;
-        $user = $userModel->findTwoTable($id);
-        if (empty($user)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
     }
     /**
      * Test case id is special characters(@,#)
@@ -109,7 +108,9 @@ class FindUserTwoTable extends TestCase
         $userModel = new UserModel();
         $id = '@@';
         $expected = 'Invalid';
+        $userModel->startTransaction();
         $actual = $userModel->findTwoTable($id);
+        $userModel->rollback();
         $this->assertEquals($expected, $actual);
     }
 }

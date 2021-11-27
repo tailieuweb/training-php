@@ -217,16 +217,10 @@ class UserModel extends BaseModel
     public function getUsers($params = [])
     {
         //Keyword
-        
-       
         if (!empty($params['keyword'])) {
-            if(is_array($params['keyword'])){
+            if(is_array($params['keyword']) || is_object($params['keyword'])){
                 return 'Invalid';
             }
-            if(is_null($params['keyword']) || is_bool($params['keyword']) || is_object($params['keyword'])) {
-                return 'Invalid';
-            }
-            
             else{
                 $sql = 'SELECT * FROM users 
                 WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection, $params['keyword']) . '%"';
@@ -257,7 +251,7 @@ class UserModel extends BaseModel
     //Just find user_id and just id with bank
     public function findTwoTable($id)
     {
-        if (is_string($id) || !is_numeric($id)) {
+        if (!is_numeric($id)) {
             return 'Invalid';
         } else {
             $sql = 'SELECT * FROM users , banks WHERE users.id = ' . $id . ' and banks.user_id = users.id';
