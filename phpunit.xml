@@ -7,7 +7,7 @@
 >
     <testsuites>
         <testsuite name="SqlWsContractImport">
-            <file>./tests/UserModelTest.php</file>
+            <!-- <file>./tests/UserModelTest.php</file> -->
             <file>./tests/BankModelTest.php</file>
             <file>./tests/FactoryPatternTest.php</file>
         </testsuite>

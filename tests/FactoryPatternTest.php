@@ -39,10 +39,10 @@ class FactoryPatternTest extends TestCase {
         }
     }
     //kiểm tra giá trị rông thì sẽ báo sai
-    public function  testFactoryBankNgFull1(){
-        $factoryUser = new FactoryPattern();
+    public function  testFactoryPatternNgFull1(){
+        $factory = new FactoryPattern();
         $count = " ";
-        $actual = $factoryUser ->make($count);
+        $actual = $factory ->make($count);
         if(empty($actual)){
             return $this -> assertTrue(true);
         }
@@ -51,11 +51,25 @@ class FactoryPatternTest extends TestCase {
         }
     }
     //kiểm tra giá trị khác rông thì sẽ báo đúng
-    public function  testFactoryBankNgFull2(){
-        $factoryUser = new FactoryPattern();
+    public function  testFactoryPatternNgFull2(){
+        $factory = new FactoryPattern();
         $count = "user";
-        $actual = $factoryUser ->make($count);
+        $actual = $factory->make($count);
         if(!empty($actual)){
+            return $this -> assertTrue(true);
+        }
+        else{
+            return $this -> assertTrue(false);
+        }
+    }
+    //
+    //kiểm tra giá trị của là một đối tượng rỗng
+    public function testFacrotyPatternObject(){
+        $factory = new FactoryPattern();
+        $object = new stdClass();
+        $actual = $factory->make($object);
+       // var_dump($actual);die();
+        if(empty($actual)){
             return $this -> assertTrue(true);
         }
         else{
