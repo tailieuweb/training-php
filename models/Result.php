@@ -1,6 +1,7 @@
 <?php
 class ResultClass
 {
+    protected static $_instance;
     public $isSuccess, $data, $error;
     public function __construct()
     {
@@ -21,5 +22,14 @@ class ResultClass
         $this->isSuccess = false;
         $this->data = null;
         $this->error = $error;
+    }
+    // Singleton Design Pattern
+    public static function getInstance()
+    {
+        if (self::$_instance != null) {
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
     }
 }

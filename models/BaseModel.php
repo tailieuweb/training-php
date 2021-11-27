@@ -5,17 +5,28 @@ abstract class BaseModel
 {
     // Database connection
     protected static $_connection;
+    public $_error;
     abstract static function getInstance();
 
     public function __construct()
     {
 
         if (!isset(self::$_connection)) {
-            self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-            if (self::$_connection->connect_errno) {
-                printf("Connect failed");
-                exit();
+            try {
+                mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+                self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+            } catch (mysqli_sql_exception $ex) {
+                // $_SESSION['error'] = $ex->getMessage();
+                $_SESSION['error'] = 'Database connection failed';
+                $this->error = true;
             }
+            if (self::$_connection && isset($_SESSION['error'])) {
+                unset($_SESSION['error']);
+            }
+            // if (!self::$_connection) {
+            //     printf("Connect failed");
+            //     exit();
+            // }
         }
     }
 
@@ -84,20 +95,12 @@ abstract class BaseModel
     {
         return str_replace(array("'", '"', "''"), array('&quot;', '&quot;'), $str);
     }
-
-    /**
-     * Decrypt id
-     */
-    protected function decryptID($md5Id, $arr = [])
-    {
-        if ($md5Id == -1) {
-            return -1;
-        }
-        foreach ($arr as $item) {
-            if (md5($item['id'] . 'TeamJ-TDC') == $md5Id) {
-                return $item['id'];
-            }
-        }
-        return NULL;
+    // Transaction
+    public function startTransaction(){
+        self::$_connection->begin_transaction();
+    }
+    // Roll back
+    public function rollBack(){
+        self::$_connection->rollBack();
     }
 }

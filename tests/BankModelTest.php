@@ -5,57 +5,43 @@ use PHPUnit\Framework\TestCase;
 class BankModelTest extends TestCase
 {
     /**
-     * Test case testUpdateBankOk
-     */
-    public function testUpdateBankOk()
+     * Test getBanks function, 'Hiếu Cao' do this 
+     * */
+    // Test case Get Banks Pass
+    public function testGetBanksPass()
     {
         $bankModel = new BankModel();
-        $id = -1;
-        $bankModel->deleteBankById($id);
-        $bankModel->insertBankWithId($id, 3, 3);
-        $bank = $bankModel->getBankById($id);
-        $bankVersion = $bank[0]['version'];
-        $input = [
-            "id" => $id,
-            "user_id" => 4,
-            "cost" => 4,
-            "version" => $bankVersion
-        ];
-        $bankUpdate = $bankModel->updateBank($input);
-        $check = false;
-        if (
-            $bankUpdate->isSuccess == true &&
-            $bankUpdate->data == "Đã update thành công" &&
-            $bankUpdate->error == NULL
-        ) {
-            $check = true;
-        }
-        $actual = true;
-        $this->assertEquals($check, $actual);
-    }
+        $bankId = $userId = -1;
+        $cost = 100;
 
-    /**
-     * Test case testUpdateBankNg Not good
-     */
-    public function testUpdateBankNg()
+        $bankModel->insertBankWithId($bankId, $userId, $cost);
+        $listBank = $bankModel->getBanks();
+
+        $expected = true;
+        $actual = is_array($listBank) && count($listBank) > 0;
+        // Delete new Bank After test
+        $bankModel->deleteBankByUserId($userId);
+
+        $this->assertEquals($expected, $actual);
+    }
+    // Test case Get Banks Fail
+    public function testGetBanksFail()
     {
         $bankModel = new BankModel();
-        $id = "abc";
-        $input = [
-            "id" => $id,
-            "cost" => 4,
-        ];
-        $bankUpdate = $bankModel->updateBank($input);
-        var_dump($bankUpdate);
-        // die();
-        if (
-            $bankUpdate->isSuccess == false &&
-            $bankUpdate->data == NULL &&
-            $bankUpdate->error == "Không tìm thấy id của bank"
-        ) {
-            $check = true;
+        $bankId = $userId = -1;
+        $cost = 100;
+
+        $bankModel->insertBankWithId($bankId, $userId, $cost);
+        $listBank = $bankModel->getBanks();
+
+        $actual = !is_array($listBank) || !count($listBank) > 0 ? false : true;
+        // Delete new Bank After test
+        $bankModel->deleteBankByUserId($userId);
+
+        if ($actual == true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
         }
-        $actual = true;
-        $this->assertEquals($check, $actual);
     }
 }
