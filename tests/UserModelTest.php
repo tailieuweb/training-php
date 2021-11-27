@@ -1,5 +1,6 @@
 <?php
 
+use phpDocumentor\Reflection\Types\Null_;
 use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
@@ -120,200 +121,119 @@ class UserModelTest extends TestCase
     }
 
     /**
-     * Test DeleteUserById Function in UserModel - 'Danh' do this
-     */
-    // Test case testDeleteUserById
-    public function testDeleteUserById()
-    {
-        $userModel = new UserModel();
-        $id = 1;
-        $actual = $userModel->deleteUserById($id);
-        if (empty($id) == 1) {
-            $this->assertTrue(false);
-        } else {
-            $this->assertTrue(true);
+     * Test decryptID function, 'Hiếu Cao' do this 
+     * */
+     // Test case decrypt ID With Id Properly Encrypted
+     public function testDecryptIdWithIdProperlyEncrypted()
+     {
+         $userModel = new UserModel();
+         $md5Id = md5('1TeamJ-TDC');
+         $checkUser = $userModel->insertUserWithId(1,'testName','testFullName','testEmail@gmail.com','testType','testPassword');
+         $expected = 1;
+         $actual = $userModel->decryptID($md5Id);
+         // Delete new User if it can be insert (Not delete if that user was exist before)
+        if($checkUser){
+            $userModel->deleteUserById($md5Id);
         }
-    }
+ 
+         $this->assertEquals($expected, $actual);
+     }
+     // Test case decrypt ID With Id Properly Not Encrypted
+     public function testDecryptIdWithIdProperlyNotEncrypted()
+     {
+         $userModel = new UserModel();
+
+         $md5Id = md5('abc');
+         $actual = $userModel->decryptID($md5Id);
+         $expected = NULL;
+         $this->assertEquals($expected, $actual);
+     }
+     // Test case decrypt ID With Id Positive Number
+     public function testDecryptIdWithIdPositiveNumber()
+     {
+         $userModel = new UserModel();
+
+         $id = 1;
+         $actual = $userModel->decryptID($id);
+         $expected = NULL;
+         $this->assertEquals($expected, $actual);
+     }
+     // Test case decrypt ID With Id Negative Number
+     public function testDecryptIdWithIdNegativeNumber()
+     {
+         $userModel = new UserModel();
+
+         $id = -1;
+         $actual = $userModel->decryptID($id);
+         $expected = -1;
+         $this->assertEquals($expected, $actual);
+     }
+     // Test case decrypt ID With Id Null
+     public function testDecryptIdWithIdNull()
+     {
+         $userModel = new UserModel();
+
+         $id = NULL;
+         $actual = $userModel->decryptID($id);
+         $expected = NULL;
+         $this->assertEquals($expected, $actual);
+     }
+     // Test case decrypt ID With Id Object
+     public function testDecryptIdWithIdObject()
+     {
+         $userModel = new UserModel();
+
+         $id = new ResultClass();
+         $actual = $userModel->decryptID($id);
+         $expected = NULL;
+         $this->assertEquals($expected, $actual);
+     }
+      // Test case decrypt ID With Id Bool Type, value is True
+      public function testDecryptIdWithIdTrueBoolType()
+      {
+          $userModel = new UserModel();
+ 
+          $id = true;
+          $actual = $userModel->decryptID($id);
+          $expected = NULL;
+          $this->assertEquals($expected, $actual);
+      }
+      // Test case decrypt ID With Id Bool Type, value is false
+      public function testDecryptIdWithIdTrueFalseType()
+      {
+          $userModel = new UserModel();
+ 
+          $id = false;
+          $actual = $userModel->decryptID($id);
+          $expected = NULL;
+          $this->assertEquals($expected, $actual);
+      }
 
     /**
-     * Test updateUser Function in UserModel - 'Lập' do this
-     */
-    // Test case testUpdateUserOk
-    public function testUpdateUserOk()
+     * Test getInstance function, 'Hiếu Cao' do this 
+     * */
+    // Test case getInstance Good
+    public function testGetInstanceGood()
     {
-        $userModel = new UserModel();
-        $id = -1;
-        $userModel->deleteUserById($id);
-        $userModel->insertUserWithId($id, "testName1", "testFullName", "testEmail", "testType", "testPassword");
-        $user = $userModel->findUserById($id);
-        $userVersion = $user[0]['version'];
-        $input = [
-            "id" => $id,
-            "name" => "nameUpdate",
-            "fullname" => "fullnameUpdate",
-            "email" => "emailUpdate",
-            "type" => "typeUpdate",
-            "password" => "passwordUpdate",
-            "version" => $userVersion
-        ];
-        $userUpdate = $userModel->updateUser($input);
-        $check = false;
-        if (
-            $userUpdate->isSuccess == true &&
-            $userUpdate->data == "Đã update thành công" &&
-            $userUpdate->error == NULL
-        ) {
-            $check = true;
-        }
-        $actual = true;
-        $this->assertEquals($check, $actual);
-    }
-    // Test case testUpdateUserNg Not good
-    public function testUpdateUserNg()
-    {
-        $userModel = new UserModel();
-        $id = "abc";
-        $input = [
-            "id" => $id
-        ];
-        $userUpdate = $userModel->updateUser($input);
-        if (
-            $userUpdate->isSuccess == false &&
-            $userUpdate->data == NULL &&
-            $userUpdate->error == "Không tìm thấy id của user"
-        ) {
-            $check = true;
-        }
-        $actual = true;
-        $this->assertEquals($check, $actual);
-    }
+        $userModelSingleton = UserModel::getInstance();
+        $userModelSingleton2 = UserModel::getInstance();
 
-    /**
-     * Test auth Function in UserModel - 'Lập' do this
-     */
-    // Test case testUpdateUserNg Not good
-    public function testAuthOk()
-    {
-        $userModel = new UserModel();
-        $id = -1;
-        $password = "lap";
-        $name = "Lap";
-        $userModel->deleteUserById($id);
-        $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
-        $auth = $userModel->auth($name, $password);
-        $check = false;
-        if (!empty($auth)) {
-            if (
-                isset($auth[0]['name']) &&
-                isset($auth[0]['password'])
-            ) {
-                if (
-                    $auth[0]['name'] == $name &&
-                    $auth[0]['password'] == md5($password)
-                ) {
-                    $check = true;
-                }
-            }
-        }
-        $actual = true;
-        $this->assertEquals($check, $actual);
-    }
-    // Test case testUpdateUserNg Not good
-    public function testAuthNg()
-    {
-        $userModel = new UserModel();
-        $password = md5("lap1");
-        $name = "Lap1";
-        $auth = $userModel->auth($name, $password);
-        $check = false;
-        if (!empty($auth)) {
-            if (
-                isset($auth[0]['name']) &&
-                isset($auth[0]['password'])
-            ) {
-                if (
-                    $auth[0]['name'] == $name &&
-                    $auth[0]['password'] == md5($password)
-                ) {
-                    $check = true;
-                }
-            }
-        }
-        $actual = false;
-        $this->assertEquals($check, $actual);
-    }
+        $expected = true;
+        $actual = is_object($userModelSingleton) && 
+                get_class($userModelSingleton) == 'UserModel' &&
+                $userModelSingleton === $userModelSingleton2;
 
-    /**
-     * Test insertUserWithId Function in UserModel - 'Lập' do this
-     */
-    // Test case insertUserWithIdOk 
-    public function testInsertUserWithIdOk()
-    {
-        $userModel = new UserModel();
-        $id = -1;
-        $password = "lap";
-        $name = "Lap";
-        $userModel->deleteUserById($id);
-        $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
-        $result =  $userModel->findUserById($id);
-        $mongDoiName = 'Lap';
-        $this->assertEquals($mongDoiName, $result[0]['name']);
+        $this->assertEquals($expected, $actual);
     }
-    // Test case insertUserWithIdNg Not good
-    public function testInsertUserWithIdNg()
+    // Test case getInstance Not Good
+    public function testGetInstanceNg()
     {
-        $userModel = new UserModel();
-        $id = -99999;
-        $password = "lap";
-        $name = "Lap";
-        $userModel->deleteUserById($id);
-        $result =  $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
-        $check = false;
-        $this->assertEquals($check, $result);
-    }
-    // Test case testInsertUserWithIdStr
-    public function testInsertUserWithIdStr()
-    {
-        $userModel = new UserModel();
-        $id = "abc";
-        $password = "lap";
-        $name = "Lap";
-        $userModel->deleteUserById($id);
-        $result =  $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
-        if (empty($result)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
-    }
-    // Test case testInsertUserWithIdNull
-    public function testInsertUserWithIdNull()
-    {
-        $userModel = new UserModel();
-        $id = null;
-        $password = "lap";
-        $name = "Lap";
-        $userModel->deleteUserById($id);
-        $result =  $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
-        if (empty($result)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
-    }
-    // Test case testInsertUserWithIdObject
-    public function testInsertUserWithIdObject()
-    {
-        $userModel = new UserModel();
-        $id = new ResultClass();
-        $password = "lap";
-        $name = "Lap";
-        $userModel->deleteUserById($id);
-        $result =  $userModel->insertUserWithId($id, $name, "testFullName", "testEmail", "testType", $password);
-        if (empty($result)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
+        $userModelSingleton = UserModel::getInstance();
+
+        $expected = false;
+        $actual = !is_object($userModelSingleton) || 
+                !get_class($userModelSingleton) == 'UserModel';
+
+        $this->assertEquals($expected, $actual);
     }
 }

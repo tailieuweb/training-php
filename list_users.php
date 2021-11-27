@@ -1,21 +1,19 @@
 <?php
 // Start the session
 session_start();
-
 require_once 'models/FactoryPattern.php';
 $factory = FactoryPattern::getInstance();
-
-$userModel = $factory->make('user');
+$userRepository = $factory->make('user-repository');
 
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
+if (!isset($_SESSION['error'])) {
+    $users = $userRepository->getUsersWithBank($params);
 
-$users = $userModel->getUsers($params);
-
-$token = md5(rand(0, 7777777) . "TEAMJ");
-
+    $token = md5(rand(0, 7777777) . "TEAMJ");
+}
 
 ?>
 <!DOCTYPE html>
@@ -30,11 +28,14 @@ $token = md5(rand(0, 7777777) . "TEAMJ");
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-        <?php if (!empty($users)) { ?>
+        <?php if (isset($_SESSION['error'])) { ?>
             <div class="alert alert-warning" role="alert">
-                List of users! <br>
-                Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
+                <?= $_SESSION['error'] ?>
+                <!-- List of users! <br>
+                Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23 -->
             </div>
+        <?php } ?>
+        <?php if (!empty($users)) { ?>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -61,7 +62,7 @@ $token = md5(rand(0, 7777777) . "TEAMJ");
                                 <?php echo $user['email'] ?>
                             </td>
                             <td>
-                                <?= number_format(9999).' $' ?>
+                                <?= number_format($user['cost']).' $' ?>
                             </td>
                             <td>
                                 <?php echo $user['type'] ?>
@@ -74,7 +75,7 @@ $token = md5(rand(0, 7777777) . "TEAMJ");
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
 
-                                <a href="delete_user.php?id=<?php echo md5($user['id'] . 'TeamJ-TDC') ?>& token=<?php echo $token?>" >
+                                <a href="delete_user.php?id=<?php echo md5($user['id'] . 'TeamJ-TDC') ?>& token=<?php echo $token ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                     <?php
                                     $_SESSION['_token'] = $token;

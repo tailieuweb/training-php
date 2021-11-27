@@ -11,6 +11,9 @@ class BankModel extends BaseModel
      */
     public function getBankById($id)
     {
+        if(!$this->_error){
+            return false;
+        }
         $id = is_numeric($id) ? $id : NULL;
         $sql = 'SELECT * FROM `banks` WHERE `id` = ' . $id;
         $bank = $this->select($sql);
@@ -68,19 +71,15 @@ class BankModel extends BaseModel
      * @param $input
      * @return mixed
      */
-    public function updateBank($input)
+    public function updateBank($userId,$cost)
     {
-        $bankId = $this->$input['id'];
-        $userId = $this->$input['user_id'];
-        $cost = $this->$input['cost'];
-        if (is_numeric($bankId) && is_numeric($userId) && is_numeric($cost)) {
-            $bank = $this->getBankById($bankId);
+        if ( is_numeric($userId) && is_numeric($cost)) {
+            $bank = $this->getBankByUserId($userId);
             if ($bank) {
-                $sql = 'UPDATE `banks` 
-                        SET `user_id` = "' . $userId . '", 
-                            `cost` = "' . $cost . '"
-                            WHERE `id` = ' . $bankId;
-                return $this->update($sql);
+                $sql = 'UPDATE `banks`
+                        SET `cost` = "' . $cost . '"
+                        WHERE `user_id` = ' . $userId;
+                 return $this->update($sql);
             }
         }
         return false;
@@ -92,10 +91,10 @@ class BankModel extends BaseModel
      * @param $id
      * @return mixed
      */
-    public function deleteBankById($id)
+    public function deleteBankByUserId($id)
     {
         $id = is_numeric($id) ? $id :  NULL;
-        $sql = 'DELETE FROM `banks` WHERE `id` = ' . $id;
+        $sql = 'DELETE FROM `banks` WHERE `user_id` = ' . $id;
         return $this->delete($sql);
     }
     /**
