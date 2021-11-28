@@ -25,6 +25,9 @@ class BankModel extends BaseModel
     public function getBankByUserId($userId)
     {
         $userId = is_numeric($userId) ? $userId : NULL;
+        if($userId==null){
+            return false;
+        }
         $sql = 'SELECT `banks`.*
         FROM `users`,`banks` 
         WHERE `users`.`id` = `banks`.`user_id` 

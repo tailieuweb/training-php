@@ -213,6 +213,7 @@ class UserModelTest extends TestCase
         } else {
             $this->assertTrue(false);
         }
+        $userModel->deleteUserById($id);
     }
 // Test case testGetUsersByKey
 public function testGetUsersByKey()
