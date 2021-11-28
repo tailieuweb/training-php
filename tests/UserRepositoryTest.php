@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 class UserRepositoryTest extends TestCase
 {
-<<<<<<< HEAD
+
      /**
      * Test _construct Function in UserRepository - 'Danh' do this
      */
@@ -34,8 +34,8 @@ class UserRepositoryTest extends TestCase
         is_object($bankModel) && get_class($bankModel) == 'BankModel';
         $expected = true;
         $this->assertEquals($expected, $actual);
-        
-=======
+    }
+
     /**
      * Test getUsersWithBank function, 'Hiếu Cao' do this 
      * */
@@ -1184,6 +1184,5 @@ class UserRepositoryTest extends TestCase
         $expected = false;
         $actual = $insertUser;
         $this->assertEquals($expected, $actual);
->>>>>>> 1-php-202109/2-groups/10-J/master-phpunit
     }
 }
