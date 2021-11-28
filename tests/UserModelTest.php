@@ -998,8 +998,8 @@ class UserModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make('user');
-        $id = 9;
-        $MDUsername = 'Hen';
+        $id = 1;
+        $MDUsername = 'tronghieu60s';
 
         $user = $userModel->findUserById($id);
 
@@ -1010,7 +1010,7 @@ class UserModelTest extends TestCase
         $factory = new FactoryPattern();
         $userModel = $factory->make('user');
 
-        $id = 10;
+        $id = 99;
 
 
         $user = $userModel->findUserById($id);
