@@ -10,6 +10,7 @@ class UserModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make('user');
+        $testModel = $factory->make('test');
 
         $actual = $userModel->sumb(1, 2);
         $this->assertEquals(3, $actual);
