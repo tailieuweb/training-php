@@ -84,47 +84,40 @@ class BankModelTest extends TestCase
     {
         $bankModel = new BankModel();
         $keyword = null;
-        $expected = "error";
-        $actual1 = $bankModel->getBanks(["keyword" => $keyword]);
-        $this->assertEquals($expected, $actual1);
+        $actual = $bankModel->getBanks(["keyword" => $keyword]);
+        $actual1 = $bankModel->getBanks();
+        $this->assertEquals($actual1, $actual);
     }
 
     public function testGetBankKeywordInt()
     {
         $bankModel = new BankModel();
         $keyword = 1;
-        $expected = "error";
         $actual1 = $bankModel->getBanks(["keyword" => $keyword]);
-        $this->assertEquals($expected, $actual1);
+        $this->assertEquals(strtolower($keyword), strtolower($actual1[0]["user_id"]));
     }
     public function testGetBankKeywordArray()
     {
         $bankModel = new BankModel();
         $keyword = [];
-        $expected = "error";
-        $actual1 = $bankModel->getBanks(["keyword" => $keyword]);
-        $this->assertEquals($expected, $actual1);
+        $actual = $bankModel->getBanks(["keyword" => $keyword]);
+        $actual1 = $bankModel->getBanks();
+        $this->assertEquals($actual1, $actual);
     }
-    public function testGetBankKeywordObject()
-    {
-        $bankModel = new BankModel();
-        $keyword = new BankModel();
-        $expected = "error";
-        $actual1 = $bankModel->getBanks(["keyword" => $keyword]);
-        $this->assertEquals($expected, $actual1);
-    }
+
     public function testGetBankKeywordTrueFalse()
     {
         $bankModel = new BankModel();
         $keyword = true;
-        $keyword1 = true;
-        $expected = "error";
+        $keyword1 = false;
         if($keyword){
             $actual1 = $bankModel->getBanks(["keyword" => $keyword]);
+            $this->assertEquals(strtolower($keyword), strtolower($actual1[0]["user_id"]));
         }else
         {
             $actual1 = $bankModel->getBanks(["keyword" => $keyword1]);
+            $actual = $bankModel->getBanks();
+            $this->assertEquals($actual, $actual1);
         }
-        $this->assertEquals($expected, $actual1);
     }
 }

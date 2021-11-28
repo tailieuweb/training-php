@@ -64,9 +64,6 @@ class BankModel extends BaseModel
         if(!is_array($params)) {
             return "error";
         }
-        if(!is_string($params['keyword'])) {
-            return "error";
-        }
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM banks WHERE user_id LIKE "%' . $params['keyword'] . '%"';
