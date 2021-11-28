@@ -1,5 +1,6 @@
 <?php
 
+use phpDocumentor\Reflection\PseudoTypes\True_;
 use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
@@ -920,14 +921,79 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // public function testFindUserOk()
-    // {
-    //     $userModel = new UserModel();
-    //     $keyword = "H";
-    //     $actual1 = $userModel->findUser($keyword);
-    //     $this->assertEquals(strtolower($keyword), strtolower($actual1['name']['email']));
-    // }
+    public function testFindUserOk()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+        $keyword = "Hen";
+        $actual1 = $userModel->findUser($keyword);
+        $expected = [];
+        $this->assertEquals($expected, $actual1);
+    }
 
+    public function testFindUserKeywordInt()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+        $keyword = 1;
+        $actual1 = $userModel->findUser($keyword);
+        $expected = "error";
+        $this->assertEquals($expected, $actual1);
+    }
+    public function testFindUserKeywordTrue()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+        $keyword = true;
+        $actual1 = $userModel->findUser($keyword);
+        $expected = "error";
+        $this->assertEquals($expected, $actual1);
+    }
+    public function testFindUserKeywordFalse()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+        $keyword = false;
+        $actual1 = $userModel->findUser($keyword);
+        $expected = "error";
+        $this->assertEquals($expected, $actual1);
+    }
+    public function testFindUserKeywordArray()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+        $keyword = [];
+        $actual1 = $userModel->findUser($keyword);
+        $expected = "error";
+        $this->assertEquals($expected, $actual1);
+    }
+    public function testFindUserKeywordObject()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+        $keyword = new UserModel();
+        $actual1 = $userModel->findUser($keyword);
+        $expected = "error";
+        $this->assertEquals($expected, $actual1);
+    }
+    public function testFindUserKeywordNull()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+        $keyword = null;
+        $actual1 = $userModel->findUser($keyword);
+        $expected = "error";
+        $this->assertEquals($expected, $actual1);
+    }
+    public function testFindUserKeywordEmpty()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
+        $keyword = "";
+        $actual1 = $userModel->findUser($keyword);
+        $expected = [];
+        $this->assertEquals($expected, $actual1);
+    }
     public function testFindUserByIdOk()
     {
         $factory = new FactoryPattern();
