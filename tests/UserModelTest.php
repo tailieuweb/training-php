@@ -851,4 +851,150 @@ class UserModelTest extends TestCase
         $actual = $userModel->updateUser($input);
         $this->assertEquals("Error", $actual);
     }
+    public function testDeleteUserByIdOk()
+    {
+        $userModel = new UserModel();
+        $id = 12;
+        $actual = $userModel->deleteUserById($id);
+        $this->assertEquals(true, $actual);
+    }
+    public function testDeleteUserByIdStr()
+    {
+        $userModel = new UserModel();
+        $id = 'Hen';
+        $expected = "error";
+        $actual = $userModel->deleteUserById($id);
+        $this->assertEquals($expected, $actual);
+    }
+    public function testDeleteUserEmpty()
+    {
+        $userModel = new UserModel();
+        $id = "";
+        $expected = "error";
+        $actual = $userModel->deleteUserById($id);
+        $this->assertEquals($expected, $actual);
+    }
+    public function testDeleteUserNull()
+    {
+        $userModel = new UserModel();
+        $id = null;
+        $expected = "error";
+        $actual = $userModel->deleteUserById($id);
+        $this->assertEquals($expected, $actual);
+    }
+    public function testDeleteUserByIdNE()
+    {
+        $userModel = new UserModel();
+        $id = 99;
+        $user = $userModel->findUserById($id);
+        $expected = null;
+        if ($user) {
+            $expected = false;
+        } else {
+            $expected = true;
+        }
+        $actual = $userModel->deleteUserById($id);
+        $this->assertEquals($expected, $actual);
+    }
+    public function testDeleteUserByArray()
+    {
+        $userModel = new UserModel();
+        $id = [];
+        $expected = "error";
+        $actual = $userModel->deleteUserById($id);
+        $this->assertEquals($expected, $actual);
+    }
+    public function testDeleteUserByObject()
+    {
+        $userModel = new UserModel();
+        $id = new UserModel();;
+        $expected = "error";
+        $actual = $userModel->deleteUserById($id);
+        $this->assertEquals($expected, $actual);
+    }
+
+    // public function testFindUserOk()
+    // {
+    //     $userModel = new UserModel();
+    //     $keyword = "H";
+    //     $actual1 = $userModel->findUser($keyword);
+    //     $this->assertEquals(strtolower($keyword), strtolower($actual1['name']['email']));
+    // }
+
+    public function testFindUserByIdOk()
+    {
+        $userModel = new UserModel();
+
+        $id = 9;
+        $MDUsername = 'Hen';
+
+        $user = $userModel->findUserById($id);
+
+        $this->assertEquals($MDUsername, $user[0]['name']);
+    }
+    public function testFindUserByIdNE()
+    {
+        $userModel = new UserModel();
+
+        $id = 10;
+
+
+        $user = $userModel->findUserById($id);
+
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+
+    public function testFindUserByIdStr()
+    {
+        $userModel = new UserModel();
+
+        $id = 'Hen';
+        $expected = 'error';
+        $actual = $userModel->findUserById($id);
+
+        $this->assertEquals($expected, $actual);
+    }
+    public function testFindUserByIdEmpty()
+    {
+        $userModel = new UserModel();
+        $id = '';
+        $expected = 'error';
+        $actual = $userModel->findUserById($id);
+
+        $this->assertEquals($expected, $actual);
+    }
+    public function testFindUserByIdNull()
+    {
+        $userModel = new UserModel();
+        $id = null;
+        $expected = 'error';
+        $actual = $userModel->findUserById($id);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testFindUserByIdObject()
+    {
+        $userModel = new UserModel();
+
+        $id = new stdClass();
+        $expected = 'error';
+        $actual = $userModel->findUserById($id);
+
+        $this->assertEquals($expected, $actual);
+    }
+    public function testFindUserByIdArray()
+    {
+        $userModel = new UserModel();
+
+        $id = [];
+        $expected = 'error';
+        $actual = $userModel->findUserById($id);
+
+        $this->assertEquals($expected, $actual);
+    }
 }

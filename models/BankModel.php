@@ -4,24 +4,39 @@ class BankModel extends BaseModel
 {
     public function insertBank($input)
     {
-        $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
+        if ($input == new stdClass && $input == ''){
+            return false;
+        }
+        if($input['user_id'] == '' && $input['cost'] == '' && $input['user_id'] == null && $input['cost'] == null)
+        {
+            return false;
+        }
+        else if(is_numeric($input['user_id'])&& is_numeric($input['cost']) )
+        {
+            $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
             "'" . $input['user_id'] . "', '" . $input['cost'] . "')";
 
         $user = $this->insert($sql);
 
         return $user;
+        }
     }
 
     public function updateBank($input)
     {
-        $sql = 'UPDATE banks SET 
-                 user_id = ' . $input['user_id'] . ', 
-                 cost = ' . $input['cost'] . '
-                WHERE id = ' . $input['id'];
+        if($input['user_id'] == '' && $input['cost'] == ''){
+            return false;
+        }
+        else if(is_numeric($input['user_id'])&& is_numeric($input['cost'])) {
+            $sql = 'UPDATE banks SET 
+            user_id = ' . $input['user_id'] . ', 
+            cost = ' . $input['cost'] . '
+             WHERE id = ' . $input['id'];
 
-        $bank = $this->update($sql);
+            $bank = $this->update($sql);
 
-        return $bank;
+            return $bank;
+        }
     }
 
     /**
@@ -46,10 +61,21 @@ class BankModel extends BaseModel
 
     public function findBankById($id)
     {
-        $sql = 'SELECT * FROM banks WHERE id = ' . $id;
-        $bank = $this->select($sql);
-
-        return $bank;
+        if($id == ''){
+            return 'error';
+        }
+        if(is_string($id)){
+            return 'error';
+        }
+        // else if($id == new stdClass){
+        //     return 'error';
+        // }
+        else{
+            $sql = 'SELECT * FROM banks WHERE id = ' . $id;
+            $bank = $this->select($sql);
+    
+            return $bank;
+        }
     }
     /**
      * Search users
@@ -58,9 +84,15 @@ class BankModel extends BaseModel
      */
     public function getBanks($params = [])
     {
+        if($params === null) {
+            return "error";
+        }
+        if(!is_array($params)) {
+            return "error";
+        }
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] . '%"';
+            $sql = 'SELECT * FROM banks WHERE user_id LIKE "%' . $params['keyword'] . '%"';
         } else {
             $sql = 'SELECT * FROM banks';
         }

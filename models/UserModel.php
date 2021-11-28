@@ -9,6 +9,12 @@ class UserModel extends BaseModel
 
     public function findUserById($id)
     {
+        if($id == null){
+            return "error";
+        }
+        if(!is_numeric($id)){
+            return "error";
+        }
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
 
@@ -17,7 +23,7 @@ class UserModel extends BaseModel
 
     public function findUser($keyword)
     {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
+        $sql = 'SELECT * FROM users WHERE name LIKE' . $keyword  . ' OR email LIKE ' . $keyword;
         $user = $this->select($sql);
 
         return $user;
@@ -53,6 +59,12 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
+        if($id == null){
+            return "error";
+        }
+        if(!is_numeric($id)){
+            return "error";
+        }
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
     }
@@ -141,6 +153,7 @@ class UserModel extends BaseModel
         return $users;
     }
 
+<<<<<<< HEAD
     /**
      * For testing
      * @param $a
@@ -156,6 +169,8 @@ class UserModel extends BaseModel
         return $a + $b;
     }
 
+=======
+>>>>>>> 2-php-202109/2-groups/4-D/3-34-Trung-phpunit
     public static function getInstance()
     {
         if (self::$_instance !== null) {
