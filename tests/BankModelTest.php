@@ -10,10 +10,13 @@ class BankModelTest extends TestCase
   public function testInsertBankGood()
   {
     $bank = new BankModel();
+    $bank->startTransaction();
+
     $input = array('user_id' => '1', 'cost' => '13');
     $actual = $bank->insertBanks($input);
     // var_dump($actual);
     // die();
+    $bank->rollback();
     if ($actual != false) {
       return $this->assertTrue(true);
     } else {
@@ -66,10 +69,12 @@ class BankModelTest extends TestCase
   public function testInsertBankWithIdInt()
   {
     $bank = new BankModel();
-    $input = array('user_id' => 6, 'cost' => '200');
+    $bank->startTransaction();
+    $input = array('user_id' => 1, 'cost' => '200');
     $actual = $bank->insertBanks($input);
     // var_dump($actual);
     // die();
+    $bank->rollback();
     if ($actual != false) {
       return $this->assertTrue(true);
     } else {
@@ -118,7 +123,7 @@ class BankModelTest extends TestCase
   public function testInsertBankWithIdSameId()
   {
     $bank = new BankModel();
-    $input = array('user_id' => 1, 'cost' => '200');
+    $input = array('user_id' => 6, 'cost' => '200');
     $actual = $bank->insertBanks($input);
     // var_dump($actual);
     // die();
@@ -157,10 +162,12 @@ class BankModelTest extends TestCase
   public function testInsertBankWithEqualMaxLengthId()
   {
     $bank = new BankModel();
+    $bank->startTransaction();
     $input = array('user_id' => 1234567891, 'cost' => '200');
     $actual = $bank->insertBanks($input);
     // var_dump($actual);
     // die();
+    $bank->rollback();
     if ($actual != false) {
       return $this->assertTrue(true);
     } else {
@@ -306,10 +313,12 @@ class BankModelTest extends TestCase
   public function testInsertBankWithCostInteger()
   {
     $bank = new BankModel();
-    $input = array('user_id' => '6', 'cost' => 100);
+    $bank->startTransaction();
+    $input = array('user_id' => '1', 'cost' => 100);
     $actual = $bank->insertBanks($input);
     // var_dump($actual);
     // die();
+    $bank->rollback();
     if ($actual != false) {
       return $this->assertTrue(true);
     } else {
@@ -319,10 +328,12 @@ class BankModelTest extends TestCase
   public function testInsertBankWithCostDouble()
   {
     $bank = new BankModel();
-    $input = array('user_id' => '6', 'cost' => 100.56);
+    $bank->startTransaction();
+    $input = array('user_id' => '1', 'cost' => 100.56);
     $actual = $bank->insertBanks($input);
     // var_dump($actual);
     // die();
+    $bank->rollback();
     if ($actual != false) {
       return $this->assertTrue(true);
     } else {

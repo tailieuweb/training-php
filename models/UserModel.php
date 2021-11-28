@@ -127,7 +127,7 @@ class UserModel extends BaseModel
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `fullname`, `email`, `type`, `password`) VALUES (" .
             "'" . $input['name'] . "', '" . $input['fullname'] . "', '" . $input['email'] . "', '" . $input['type'] . "', '" . $input['password'] . "')";
         $user = $this->insert($sql);
-        var_dump($sql);
+        // var_dump($sql);
         return $user;
     }
 
@@ -199,4 +199,14 @@ class UserModel extends BaseModel
     //         echo 'chuỗi không chứa hết chữ';
     //     }
     // }
+
+    public function startTransaction()
+    {
+        self::$_connection->begin_transaction();
+    }
+
+    public function rollback()
+    {
+        self::$_connection->rollback();
+    }
 }

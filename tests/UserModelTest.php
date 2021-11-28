@@ -1652,10 +1652,12 @@ class UserModelTest extends TestCase
     public function testInsertUserGood()
     {
         $user = new UserModel();
+        $user->startTransaction();
         $input = array('name' => 'gia nam', 'fullname' => 'nguyen gia name', 'email' => 'example99@gmail.com', 'type' => 'admin', 'password' => '1234');
         $actual = $user->insertUser($input);
         // var_dump($actual);
         // die();
+        $user->rollback();
         if ($actual != false) {
             return $this->assertTrue(true);
         } else {
@@ -1685,9 +1687,9 @@ class UserModelTest extends TestCase
         $user = new UserModel();
         $actual = $user->getUserHaveNotBank();
         // var_dump($actual);
-        if(!empty($actual)){
+        if (!empty($actual)) {
             return $this->assertTrue(true);
-        }else{
+        } else {
             return $this->assertFalse(true);
         }
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2021 at 02:10 AM
+-- Generation Time: Nov 28, 2021 at 09:38 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -38,12 +38,10 @@ CREATE TABLE `banks` (
 --
 
 INSERT INTO `banks` (`id_bank`, `user_id`, `cost`) VALUES
-(56, 1, 13),
-(57, 6, 200),
 (59, 2147483647, 200),
-(60, 1234567891, 200),
 (61, 2, 200),
-(68, 9, 150);
+(68, 9, 150),
+(109, 6, 200);
 
 -- --------------------------------------------------------
 
@@ -58,7 +56,7 @@ CREATE TABLE `users` (
   `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -70,7 +68,6 @@ INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`) VALU
 (4, 'Nguyễn Thành An', 'thanh an', 'fxnguyenan1911@gmail.com', 'admin', '1234'),
 (5, '<a href=\"http://php.local/delete_user.php?id=4\"> Xóa user3</a>', '', '', '', 'c6ae6edca1ad45f42e619ec91a32b636'),
 (6, 'thanh an', 'nguyen gia name', 'example200@gmail.com', 'admin', '1234'),
-(7, 'gia nam', 'nguyen gia name', 'example99@gmail.com', 'admin', '1234'),
 (8, 'test25', 'thanhan', 'fxnam201@gmail.com', 'admin', '1234'),
 (9, '-2', 'Nguyên Thành An', 'example2002@gmail.com', 'user', '1234'),
 (10, '2test', 'nhu', 'example20022@gmail.com', 'user', '1234'),
@@ -103,13 +100,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `banks`
 --
 ALTER TABLE `banks`
-  MODIFY `id_bank` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id_bank` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1234567892;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1234567901;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -176,4 +176,14 @@ class BankModel extends BaseModel
         self::$_instance = new self();
         return self::$_instance;
     }
+
+    public function startTransaction()
+    {
+        self::$_connection->begin_transaction();
+    }
+
+    public function rollback()
+    {
+        self::$_connection->rollback();
+    }
 }
