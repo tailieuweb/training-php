@@ -10,8 +10,8 @@ class BankModelTest extends TestCase
     {
         $bankModel = new BankModel();
 
-        $id = 9;
-        $mongDoiUserID = '3';
+        $id = 1;
+        $mongDoiUserID = '10';
 
         $bank = $bankModel->findBankById($id);
 
