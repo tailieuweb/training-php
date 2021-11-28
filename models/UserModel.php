@@ -6,7 +6,7 @@ class UserModel extends BaseModel
 {
     public static function getInstance()
     {
-        if(self::$_instance !== null){
+        if (self::$_instance !== null) {
             return self::$_instance;
         }
         self::$_instance = new self();
@@ -15,7 +15,6 @@ class UserModel extends BaseModel
 
     public function findUserById($id)
     {
-        
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
 
@@ -24,7 +23,7 @@ class UserModel extends BaseModel
 
     public function findUser($keyword)
     {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
+        $sql = "SELECT * FROM users WHERE name LIKE '%$keyword%' OR email LIKE '%$keyword%'";
         $user = $this->select($sql);
 
         return $user;
@@ -51,7 +50,7 @@ class UserModel extends BaseModel
      * @return mixed
      */
     public function deleteUserById($id)
-    {   
+    {
         $isAuth = $this->getUsers();
         foreach ($isAuth as $item) {
             if (md5($item['id']) == $id) {
@@ -62,7 +61,7 @@ class UserModel extends BaseModel
     }
     // Delete user by id : Step 2
     public function dropUserById($id)
-    {   
+    {
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
     }
@@ -132,5 +131,10 @@ class UserModel extends BaseModel
         }
 
         return $users;
+    }
+
+    public function sumb($a, $b)
+    {
+        return $a + $b;
     }
 }
