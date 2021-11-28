@@ -95,4 +95,12 @@ abstract class BaseModel
     {
         return str_replace(array("'", '"', "''"), array('&quot;', '&quot;'), $str);
     }
+    // Transaction
+    public function startTransaction(){
+        self::$_connection->begin_transaction();
+    }
+    // Roll back
+    public function rollBack(){
+        self::$_connection->rollBack();
+    }
 }

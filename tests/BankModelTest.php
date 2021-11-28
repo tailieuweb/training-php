@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 class BankModelTest extends TestCase
 {
     /**
+<<<<<<< HEAD
      * Test DeleteBankById Function in BankModel - 'Danh' do this
      */
     // Test case testDeleteBankById
@@ -92,10 +93,49 @@ class BankModelTest extends TestCase
         $bankModel->insertBank($id,'12345');
         $check = $bankModel->getBankByUserId($id);
         if ($check == false) {
+=======
+     * Test getBanks function, 'Hiếu Cao' do this 
+     * */
+    // Test case Get Banks Pass
+    public function testGetBanksPass()
+    {
+        $bankModel = new BankModel();
+        $bankId = $userId = -1;
+        $cost = 100;
+
+        $bankModel->insertBankWithId($bankId, $userId, $cost);
+        $listBank = $bankModel->getBanks();
+
+        $expected = true;
+        $actual = is_array($listBank) && count($listBank) > 0;
+        // Delete new Bank After test
+        $bankModel->deleteBankByUserId($userId);
+
+        $this->assertEquals($expected, $actual);
+    }
+    // Test case Get Banks Fail
+    public function testGetBanksFail()
+    {
+        $bankModel = new BankModel();
+        $bankId = $userId = -1;
+        $cost = 100;
+
+        $bankModel->insertBankWithId($bankId, $userId, $cost);
+        $listBank = $bankModel->getBanks();
+
+        $actual = !is_array($listBank) || !count($listBank) > 0 ? false : true;
+        // Delete new Bank After test
+        $bankModel->deleteBankByUserId($userId);
+
+        if ($actual == true) {
+>>>>>>> 1-php-202109/2-groups/10-J/master-phpunit
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
         }
+<<<<<<< HEAD
         
+=======
+>>>>>>> 1-php-202109/2-groups/10-J/master-phpunit
     }
 }
