@@ -228,11 +228,11 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make('bank');
-        $user_id = '1';
+        $user_id = '10';
         $actual = $bankModel->getBanks();
         $this->assertEquals($user_id, $actual[0]["user_id"]);
 
-        $keyword = "1";
+        $keyword = "10";
         $actual1 = $bankModel->getBanks(["keyword" => $keyword]);
         $this->assertEquals(strtolower($keyword), strtolower($actual1[0]["user_id"]));
     }
@@ -324,9 +324,10 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make('bank');
-        $keyword = 1;
+        $keyword = 10;
+        $expected = "error";
         $actual1 = $bankModel->getBanks(["keyword" => $keyword]);
-        $this->assertEquals(strtolower($keyword), strtolower($actual1[0]["user_id"]));
+        $this->assertEquals($expected, $actual1);
     }
     public function testGetBankKeywordArray()
     {
@@ -337,6 +338,16 @@ class BankModelTest extends TestCase
         $actual1 = $bankModel->getBanks();
         $this->assertEquals($actual1, $actual);
     }
+    public function testGetBankKeywordObject()
+    {
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make('bank');
+        $keyword = new BankModel();
+        $expected = "error";
+        $actual = $bankModel->getBanks(["keyword" => $keyword]);
+        $this->assertEquals($expected, $actual);
+    }    
+
 
     public function testGetBankKeywordTrueFalse()
     {
@@ -344,13 +355,13 @@ class BankModelTest extends TestCase
         $bankModel = $factory->make('bank');
         $keyword = true;
         $keyword1 = false;
+        $expected = "error";
         if ($keyword) {
             $actual1 = $bankModel->getBanks(["keyword" => $keyword]);
-            $this->assertEquals(strtolower($keyword), strtolower($actual1[0]["user_id"]));
+            $this->assertEquals($expected, $actual1);
         } else {
             $actual1 = $bankModel->getBanks(["keyword" => $keyword1]);
-            $actual = $bankModel->getBanks();
-            $this->assertEquals($actual, $actual1);
+            $this->assertEquals($expected, $actual1);
         }
     }
 }

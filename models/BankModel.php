@@ -92,6 +92,9 @@ class BankModel extends BaseModel
         }
         //Keyword
         if (!empty($params['keyword'])) {
+            if (!is_string($params['keyword'])) {
+                return "error";
+            }
             $sql = 'SELECT * FROM banks WHERE user_id LIKE "%' . $params['keyword'] . '%"';
         } else {
             $sql = 'SELECT * FROM banks';
