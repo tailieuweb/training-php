@@ -92,4 +92,13 @@ class BankModel extends BaseModel{
 
         return $bank;
     }
+    /**
+     * RollBack Database in Bank
+     */
+    public function startTransaction(){
+        self::$_connection->begin_transaction();
+    }
+    public function rollback(){
+        self::$_connection->rollback();
+    }
 }
