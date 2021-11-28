@@ -7,7 +7,8 @@ class UserModelTest extends TestCase
 
     public function testSumOk1()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->sumb(1, 2);
         $this->assertEquals(3, $actual);
@@ -15,7 +16,8 @@ class UserModelTest extends TestCase
 
     public function testSumOk2()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->sumb(-1, -2);
         $this->assertEquals(-3, $actual);
@@ -23,7 +25,8 @@ class UserModelTest extends TestCase
 
     public function testSumOk3()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->sumb(1, -2);
         $this->assertEquals(-1, $actual);
@@ -31,7 +34,8 @@ class UserModelTest extends TestCase
 
     public function testSumOk4()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->sumb(2.1, 2.3);
         $this->assertEquals(4.4, $actual);
@@ -39,7 +43,8 @@ class UserModelTest extends TestCase
 
     public function testSumNg1()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->sumb(1, "aaa");
         $this->assertEquals("Error", $actual);
@@ -47,7 +52,8 @@ class UserModelTest extends TestCase
 
     public function testSumNg2()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->sumb("aaa", "bbb");
         $this->assertEquals("Error", $actual);
@@ -55,7 +61,8 @@ class UserModelTest extends TestCase
 
     public function testSumNg3()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->sumb(1, null);
         $this->assertEquals("Error", $actual);
@@ -63,7 +70,8 @@ class UserModelTest extends TestCase
 
     public function testSumNg4()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->sumb(null, null);
         $this->assertEquals("Error", $actual);
@@ -71,7 +79,8 @@ class UserModelTest extends TestCase
 
     public function testSumNg5()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->sumb(1, "");
         $this->assertEquals("Error", $actual);
@@ -79,7 +88,8 @@ class UserModelTest extends TestCase
 
     public function testSumNg6()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->sumb("", "");
         $this->assertEquals("Error", $actual);
@@ -87,7 +97,8 @@ class UserModelTest extends TestCase
 
     public function testSumNg7()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->sumb(1, array("Volvo", "BMW", "Toyota"));
         $this->assertEquals("Error", $actual);
@@ -95,7 +106,8 @@ class UserModelTest extends TestCase
 
     public function testSumNg8()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->sumb(array("Volvo", "BMW", "Toyota"), array("Volvo", "BMW", "Toyota"));
         $this->assertEquals("Error", $actual);
@@ -103,7 +115,8 @@ class UserModelTest extends TestCase
 
     public function testSumNg9()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->sumb(1, ["name" => "string"]);
         $this->assertEquals("Error", $actual);
@@ -111,7 +124,8 @@ class UserModelTest extends TestCase
 
     public function testSumNg10()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->sumb(["name" => "string"], ["name" => "string"]);
         $this->assertEquals("Error", $actual);
@@ -119,7 +133,8 @@ class UserModelTest extends TestCase
 
     public function testSumNg11()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->sumb(1, true);
         $this->assertEquals("Error", $actual);
@@ -127,7 +142,8 @@ class UserModelTest extends TestCase
 
     public function testSumNg12()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->sumb(true, false);
         $this->assertEquals("Error", $actual);
@@ -135,7 +151,8 @@ class UserModelTest extends TestCase
 
     public function testAuthOk()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         // create user
         $userModel->insertUser([
@@ -152,7 +169,8 @@ class UserModelTest extends TestCase
 
     public function testAuthNg1()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->auth("unknown-user", "123");
         $this->assertEquals(0, count($actual));
@@ -160,7 +178,8 @@ class UserModelTest extends TestCase
 
     public function testAuthNg2()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->auth("", "123");
         $this->assertEquals("Error", $actual);
@@ -168,7 +187,8 @@ class UserModelTest extends TestCase
 
     public function testAuthNg3()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->auth(null, "123");
         $this->assertEquals("Error", $actual);
@@ -176,7 +196,8 @@ class UserModelTest extends TestCase
 
     public function testAuthNg4()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->auth(2, "123");
         $this->assertEquals("Error", $actual);
@@ -184,7 +205,8 @@ class UserModelTest extends TestCase
 
     public function testAuthNg5()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->auth(2.6, "123");
         $this->assertEquals("Error", $actual);
@@ -192,7 +214,8 @@ class UserModelTest extends TestCase
 
     public function testAuthNg6()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->auth(array("Volvo", "BMW", "Toyota"), "123");
         $this->assertEquals("Error", $actual);
@@ -200,7 +223,8 @@ class UserModelTest extends TestCase
 
     public function testAuthNg7()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->auth(["name" => "string"], "123");
         $this->assertEquals("Error", $actual);
@@ -208,7 +232,8 @@ class UserModelTest extends TestCase
 
     public function testAuthNg8()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->auth(true, "123");
         $this->assertEquals("Error", $actual);
@@ -216,7 +241,8 @@ class UserModelTest extends TestCase
 
     public function testAuthNg9()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->auth("tronghieu60s", "123456");
         $this->assertEquals(0, count($actual));
@@ -224,7 +250,8 @@ class UserModelTest extends TestCase
 
     public function testAuthNg10()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->auth("tronghieu60s", "");
         $this->assertEquals("Error", $actual);
@@ -232,7 +259,8 @@ class UserModelTest extends TestCase
 
     public function testAuthNg11()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->auth("tronghieu60s", null);
         $this->assertEquals("Error", $actual);
@@ -240,7 +268,8 @@ class UserModelTest extends TestCase
 
     public function testAuthNg12()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->auth("tronghieu60s", 2);
         $this->assertEquals("Error", $actual);
@@ -248,7 +277,8 @@ class UserModelTest extends TestCase
 
     public function testAuthNg13()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->auth("tronghieu60s", 2.56);
         $this->assertEquals("Error", $actual);
@@ -256,7 +286,8 @@ class UserModelTest extends TestCase
 
     public function testAuthNg14()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->auth("tronghieu60s", array("Volvo", "BMW", "Toyota"));
         $this->assertEquals("Error", $actual);
@@ -264,7 +295,8 @@ class UserModelTest extends TestCase
 
     public function testAuthNg15()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->auth("tronghieu60s", ["name" => "string"]);
         $this->assertEquals("Error", $actual);
@@ -272,7 +304,8 @@ class UserModelTest extends TestCase
 
     public function testAuthNg16()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $actual = $userModel->auth("tronghieu60s", true);
         $this->assertEquals("Error", $actual);
@@ -280,7 +313,8 @@ class UserModelTest extends TestCase
 
     public function testGetUsersOk()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         // create user
         $userModel->insertUser([
@@ -297,7 +331,8 @@ class UserModelTest extends TestCase
 
     public function testGetUsersByKeywordOk1()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         // create user
         $userModel->insertUser([
@@ -315,7 +350,8 @@ class UserModelTest extends TestCase
 
     public function testGetUsersByKeywordOk2()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $keyword = "unknown-user";
         $actual = $userModel->getUsers(["keyword" => $keyword]);
@@ -324,7 +360,8 @@ class UserModelTest extends TestCase
 
     public function testGetUsersByKeywordNg1()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $keyword = 2;
         $actual = $userModel->getUsers(["keyword" => $keyword]);
@@ -333,7 +370,8 @@ class UserModelTest extends TestCase
 
     public function testGetUsersByKeywordNg2()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $keyword = array("Volvo", "BMW", "Toyota");
         $actual = $userModel->getUsers(["keyword" => $keyword]);
@@ -342,7 +380,8 @@ class UserModelTest extends TestCase
 
     public function testGetUsersByKeywordNg3()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $keyword = ["name" => "string"];
         $actual = $userModel->getUsers(["keyword" => $keyword]);
@@ -351,7 +390,8 @@ class UserModelTest extends TestCase
 
     public function testGetUsersByKeywordNg4()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $keyword = true;
         $actual = $userModel->getUsers(["keyword" => $keyword]);
@@ -360,7 +400,8 @@ class UserModelTest extends TestCase
 
     public function testInsertUserOk()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "name" => "Hieu",
             "fullname" => "Hieu",
@@ -375,7 +416,8 @@ class UserModelTest extends TestCase
 
     public function testInsertUserNg1()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = "";
 
         $actual = $userModel->insertUser($input);
@@ -384,7 +426,8 @@ class UserModelTest extends TestCase
 
     public function testInsertUserNg2()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = null;
 
         $actual = $userModel->insertUser($input);
@@ -393,7 +436,8 @@ class UserModelTest extends TestCase
 
     public function testInsertUserNg3()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = 2;
 
         $actual = $userModel->insertUser($input);
@@ -402,7 +446,8 @@ class UserModelTest extends TestCase
 
     public function testInsertUserNg4()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = array("Volvo", "BMW", "Toyota");
 
         $actual = $userModel->insertUser($input);
@@ -411,7 +456,8 @@ class UserModelTest extends TestCase
 
     public function testInsertUserNg5()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = ["name" => "string"];
 
         $actual = $userModel->insertUser($input);
@@ -420,7 +466,8 @@ class UserModelTest extends TestCase
 
     public function testInsertUserNg6()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = true;
 
         $actual = $userModel->insertUser($input);
@@ -429,7 +476,8 @@ class UserModelTest extends TestCase
 
     public function testInsertUserNg7()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "name" => "",
             "fullname" => "",
@@ -444,7 +492,8 @@ class UserModelTest extends TestCase
 
     public function testInsertUserNg8()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "name" => null,
             "fullname" => null,
@@ -459,7 +508,8 @@ class UserModelTest extends TestCase
 
     public function testInsertUserNg9()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "name" => 2,
             "fullname" => 2,
@@ -474,7 +524,8 @@ class UserModelTest extends TestCase
 
     public function testInsertUserNg10()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "name" => array("Volvo", "BMW", "Toyota"),
             "fullname" => array("Volvo", "BMW", "Toyota"),
@@ -489,7 +540,8 @@ class UserModelTest extends TestCase
 
     public function testInsertUserNg11()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "name" => ["name" => "string"],
             "fullname" => ["fullname" => "string"],
@@ -504,7 +556,8 @@ class UserModelTest extends TestCase
 
     public function testInsertUserNg12()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "name" => true,
             "fullname" => false,
@@ -519,7 +572,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserOk1()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "id" => "2",
             "name" => "Hieu",
@@ -535,7 +589,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserOk2()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "id" => "2",
             "name" => "",
@@ -551,7 +606,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserNg1()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = "";
 
         $actual = $userModel->updateUser($input);
@@ -560,7 +616,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserNg2()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = null;
 
         $actual = $userModel->updateUser($input);
@@ -569,7 +626,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserNg3()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = 2;
 
         $actual = $userModel->updateUser($input);
@@ -578,7 +636,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserNg4()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = array("Volvo", "BMW", "Toyota");
 
         $actual = $userModel->updateUser($input);
@@ -587,7 +646,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserNg5()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = ["name" => "string"];
 
         $actual = $userModel->updateUser($input);
@@ -596,7 +656,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserNg6()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = true;
 
         $actual = $userModel->updateUser($input);
@@ -605,7 +666,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserNg7()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "id" => "2",
             "name" => null,
@@ -621,7 +683,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserNg8()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "id" => "2",
             "name" => 21,
@@ -637,7 +700,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserNg9()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "id" => "2",
             "name" => array("Volvo", "BMW", "Toyota"),
@@ -654,7 +718,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserNg10()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "id" => "2",
             "name" => ["name" => "string"],
@@ -670,7 +735,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserNg11()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "id" => "2",
             "name" => true,
@@ -686,7 +752,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserNg12()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "id" => "",
             "name" => "Hieu",
@@ -702,7 +769,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserNg13()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "id" => null,
             "name" => "Hieu",
@@ -718,7 +786,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserNg14()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "id" => 4,
             "name" => "Hieu",
@@ -734,7 +803,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserNg15()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "id" => array("Volvo", "BMW", "Toyota"),
             "name" => "Hieu",
@@ -750,7 +820,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserNg16()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "id" => ["id" => "string"],
             "name" => "Hieu",
@@ -766,7 +837,8 @@ class UserModelTest extends TestCase
 
     public function testUpdateUserNg17()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $input = [
             "id" => true,
             "name" => "Hieu",

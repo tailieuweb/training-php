@@ -12,6 +12,7 @@
 
 # Command Test
 ```
+$ composer dump-autoload
 $ phpunnit
 $ phpunit --coverage-html coverage
 $ phpunit --testdox
