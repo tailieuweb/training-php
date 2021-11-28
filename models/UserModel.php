@@ -11,9 +11,12 @@ class UserModel extends BaseModel
     public function findUserById($id)
     {
         $id = $this->decryptID($id);
+        $id = is_numeric($id) ? $id : NULL;
+        if ($id == null) {
+            return false;
+        }
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
-
         return isset($user[0]) ? $user[0] : false;
     }
 
@@ -105,8 +108,8 @@ class UserModel extends BaseModel
         // SQL
         $sql = "INSERT INTO `users`(`name`, `fullname`, `email`, `type`, `password`) 
         VALUES ('" . $this->BlockSQLInjection($input['name']) . "','" . $this->BlockSQLInjection($input['fullname']) . "','" . $this->BlockSQLInjection($input['email']) . "','" . $this->BlockSQLInjection($input['type']) . "','" . $this->BlockSQLInjection($password) . "')";
+        
         $user = $this->insert($sql);
-
         return $user;
     }
 

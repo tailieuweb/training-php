@@ -1,12 +1,11 @@
 <?php
 
-use phpDocumentor\Reflection\Types\Null_;
 use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
 {
     /**
-     * Test sum function in User Model, all member do this 
+     * Test sum function in User Model, all member do this
      * */
     // Test case Sum Positive Number
     public function testSumPositiveNumber()
@@ -121,96 +120,96 @@ class UserModelTest extends TestCase
     }
 
     /**
-     * Test decryptID function, 'Hiếu Cao' do this 
+     * Test decryptID function, 'Hiếu Cao' do this
      * */
-     // Test case decrypt ID With Id Properly Encrypted
-     public function testDecryptIdWithIdProperlyEncrypted()
-     {
-         $userModel = new UserModel();
-         $md5Id = md5('1TeamJ-TDC');
-         $checkUser = $userModel->insertUserWithId(1,'testName','testFullName','testEmail@gmail.com','testType','testPassword');
-         $expected = 1;
-         $actual = $userModel->decryptID($md5Id);
-         // Delete new User if it can be insert (Not delete if that user was exist before)
-        if($checkUser){
+    // Test case decrypt ID With Id Properly Encrypted
+    public function testDecryptIdWithIdProperlyEncrypted()
+    {
+        $userModel = new UserModel();
+        $md5Id = md5('1TeamJ-TDC');
+        $checkUser = $userModel->insertUserWithId(1, 'testName', 'testFullName', 'testEmail@gmail.com', 'testType', 'testPassword');
+        $expected = 1;
+        $actual = $userModel->decryptID($md5Id);
+        // Delete new User if it can be insert (Not delete if that user was exist before)
+        if ($checkUser) {
             $userModel->deleteUserById($md5Id);
         }
- 
-         $this->assertEquals($expected, $actual);
-     }
-     // Test case decrypt ID With Id Properly Not Encrypted
-     public function testDecryptIdWithIdProperlyNotEncrypted()
-     {
-         $userModel = new UserModel();
 
-         $md5Id = md5('abc');
-         $actual = $userModel->decryptID($md5Id);
-         $expected = NULL;
-         $this->assertEquals($expected, $actual);
-     }
-     // Test case decrypt ID With Id Positive Number
-     public function testDecryptIdWithIdPositiveNumber()
-     {
-         $userModel = new UserModel();
+        $this->assertEquals($expected, $actual);
+    }
+    // Test case decrypt ID With Id Properly Not Encrypted
+    public function testDecryptIdWithIdProperlyNotEncrypted()
+    {
+        $userModel = new UserModel();
 
-         $id = 1;
-         $actual = $userModel->decryptID($id);
-         $expected = NULL;
-         $this->assertEquals($expected, $actual);
-     }
-     // Test case decrypt ID With Id Negative Number
-     public function testDecryptIdWithIdNegativeNumber()
-     {
-         $userModel = new UserModel();
+        $md5Id = md5('abc');
+        $actual = $userModel->decryptID($md5Id);
+        $expected = null;
+        $this->assertEquals($expected, $actual);
+    }
+    // Test case decrypt ID With Id Positive Number
+    public function testDecryptIdWithIdPositiveNumber()
+    {
+        $userModel = new UserModel();
 
-         $id = -1;
-         $actual = $userModel->decryptID($id);
-         $expected = -1;
-         $this->assertEquals($expected, $actual);
-     }
-     // Test case decrypt ID With Id Null
-     public function testDecryptIdWithIdNull()
-     {
-         $userModel = new UserModel();
+        $id = 1;
+        $actual = $userModel->decryptID($id);
+        $expected = null;
+        $this->assertEquals($expected, $actual);
+    }
+    // Test case decrypt ID With Id Negative Number
+    public function testDecryptIdWithIdNegativeNumber()
+    {
+        $userModel = new UserModel();
 
-         $id = NULL;
-         $actual = $userModel->decryptID($id);
-         $expected = NULL;
-         $this->assertEquals($expected, $actual);
-     }
-     // Test case decrypt ID With Id Object
-     public function testDecryptIdWithIdObject()
-     {
-         $userModel = new UserModel();
+        $id = -1;
+        $actual = $userModel->decryptID($id);
+        $expected = -1;
+        $this->assertEquals($expected, $actual);
+    }
+    // Test case decrypt ID With Id Null
+    public function testDecryptIdWithIdNull()
+    {
+        $userModel = new UserModel();
 
-         $id = new ResultClass();
-         $actual = $userModel->decryptID($id);
-         $expected = NULL;
-         $this->assertEquals($expected, $actual);
-     }
-      // Test case decrypt ID With Id Bool Type, value is True
-      public function testDecryptIdWithIdTrueBoolType()
-      {
-          $userModel = new UserModel();
- 
-          $id = true;
-          $actual = $userModel->decryptID($id);
-          $expected = NULL;
-          $this->assertEquals($expected, $actual);
-      }
-      // Test case decrypt ID With Id Bool Type, value is false
-      public function testDecryptIdWithIdTrueFalseType()
-      {
-          $userModel = new UserModel();
- 
-          $id = false;
-          $actual = $userModel->decryptID($id);
-          $expected = NULL;
-          $this->assertEquals($expected, $actual);
-      }
+        $id = null;
+        $actual = $userModel->decryptID($id);
+        $expected = null;
+        $this->assertEquals($expected, $actual);
+    }
+    // Test case decrypt ID With Id Object
+    public function testDecryptIdWithIdObject()
+    {
+        $userModel = new UserModel();
+
+        $id = new ResultClass();
+        $actual = $userModel->decryptID($id);
+        $expected = null;
+        $this->assertEquals($expected, $actual);
+    }
+    // Test case decrypt ID With Id Bool Type, value is True
+    public function testDecryptIdWithIdTrueBoolType()
+    {
+        $userModel = new UserModel();
+
+        $id = true;
+        $actual = $userModel->decryptID($id);
+        $expected = null;
+        $this->assertEquals($expected, $actual);
+    }
+    // Test case decrypt ID With Id Bool Type, value is false
+    public function testDecryptIdWithIdTrueFalseType()
+    {
+        $userModel = new UserModel();
+
+        $id = false;
+        $actual = $userModel->decryptID($id);
+        $expected = null;
+        $this->assertEquals($expected, $actual);
+    }
 
     /**
-     * Test getInstance function, 'Hiếu Cao' do this 
+     * Test getInstance function, 'Hiếu Cao' do this
      * */
     // Test case getInstance Good
     public function testGetInstanceGood()
@@ -219,9 +218,9 @@ class UserModelTest extends TestCase
         $userModelSingleton2 = UserModel::getInstance();
 
         $expected = true;
-        $actual = is_object($userModelSingleton) && 
-                get_class($userModelSingleton) == 'UserModel' &&
-                $userModelSingleton === $userModelSingleton2;
+        $actual = is_object($userModelSingleton) &&
+        get_class($userModelSingleton) == 'UserModel' &&
+            $userModelSingleton === $userModelSingleton2;
 
         $this->assertEquals($expected, $actual);
     }
@@ -231,9 +230,125 @@ class UserModelTest extends TestCase
         $userModelSingleton = UserModel::getInstance();
 
         $expected = false;
-        $actual = !is_object($userModelSingleton) || 
-                !get_class($userModelSingleton) == 'UserModel';
+        $actual = !is_object($userModelSingleton) ||
+        !get_class($userModelSingleton) == 'UserModel';
 
         $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test findUserById
+     */
+    // Test findUserById ok
+    public function testFindUserByIdOk()
+    {
+        $userModel = new UserModel();
+        $userId = -1;
+
+        $userModel->startTransaction();
+
+        $userModel->insertUserWithId($userId, "A", "Nguyen Van A", "nguyenvana@gmail.com", "admin", "123456");
+        $findUser = $userModel->findUserById($userId);
+
+        $userModel->rollBack();
+
+        $this->assertTrue($findUser != false &&
+            $findUser["id"] == $userId &&
+            $findUser["name"] == "A" &&
+            $findUser["fullname"] == "Nguyen Van A" &&
+            $findUser["email"] == "nguyenvana@gmail.com" &&
+            $findUser["type"] == "admin" &&
+            $findUser["password"] == md5("123456"));
+    }
+    // Test findUserById Float
+    public function testFindUserByIdFloat()
+    {
+        $userModel = new UserModel();
+        $userId = 1.1;
+
+        $userModel->startTransaction();
+
+        $findUser = $userModel->findUserById($userId);
+
+        $userModel->rollBack();
+        $this->assertTrue($findUser ? false : true);
+    }
+    // Test findUserById String
+    public function testFindUserByIdString()
+    {
+        $userModel = new UserModel();
+        $userId = "aa";
+
+        $userModel->startTransaction();
+
+        $findUser = $userModel->findUserById($userId);
+
+        $userModel->rollBack();
+        $this->assertTrue($findUser ? false : true);
+    }
+    // Test findUserById Null
+    public function testFindUserByIdNull()
+    {
+        $userModel = new UserModel();
+        $userId = Null;
+
+        $userModel->startTransaction();
+
+        $findUser = $userModel->findUserById($userId);
+
+        $userModel->rollBack();
+        $this->assertTrue($findUser ? false : true);
+    }
+    // Test findUserById Object
+    public function testFindUserByIdObject()
+    {
+        $userModel = new UserModel();
+        $userId = new UserModel();
+
+        $userModel->startTransaction();
+
+        $findUser = $userModel->findUserById($userId);
+
+        $userModel->rollBack();
+        $this->assertTrue($findUser ? false : true);
+    }
+    // Test findUserById bool true
+    public function testFindUserByIdBoolTrue()
+    {
+        $userModel = new UserModel();
+        $userId = true;
+
+        $userModel->startTransaction();
+
+        $findUser = $userModel->findUserById($userId);
+
+        $userModel->rollBack();
+        $this->assertTrue($findUser ? false : true);
+    }
+    // Test findUserById bool false
+    public function testFindUserByIdBoolFalse()
+    {
+        $userModel = new UserModel();
+        $userId = false;
+
+        $userModel->startTransaction();
+
+        $findUser = $userModel->findUserById($userId);
+
+        $userModel->rollBack();
+        $this->assertTrue($findUser ? false : true);
+    }
+    // Test findUserById bool Array
+    public function testFindUserByIdArray()
+    {
+        $userModel = new UserModel();
+        $userId = [1,2,3];
+
+        $userModel->startTransaction();
+
+        $findUser = $userModel->findUserById($userId);
+
+        $userModel->rollBack();
+        $this->assertTrue($findUser ? false : true);
     }
 }

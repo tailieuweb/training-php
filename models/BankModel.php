@@ -11,10 +11,13 @@ class BankModel extends BaseModel
      */
     public function getBankById($id)
     {
-        if(!$this->_error){
+        // if(!$this->_error){
+        //     return false;
+        // }
+        $id = is_numeric($id) ? $id : NULL;
+        if ($id == null) {
             return false;
         }
-        $id = is_numeric($id) ? $id : NULL;
         $sql = 'SELECT * FROM `banks` WHERE `id` = ' . $id;
         $bank = $this->select($sql);
         return isset($bank[0]) ? $bank[0] : false;
