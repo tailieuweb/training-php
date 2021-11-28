@@ -46,16 +46,7 @@ class BankModelTest extends TestCase
         $actual = $bankModel->findBankById($id);
 
         $this->assertEquals($expected, $actual);
-    }
-    // public function testFindUserByIdObject() {			
-    //     $bankModel = new BankModel();				
-
-    //             $id = new stdClass();			
-    //             $expected = 'error';			
-    //             $actual = $userModel->findBankById($id);			
-
-    //             $this->assertEquals($expected, $actual);			
-    // }					
+    }			
     /*testInsertBank */
     public function testInsertBankOk()
     {

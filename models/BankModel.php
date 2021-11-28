@@ -4,9 +4,7 @@ class BankModel extends BaseModel
 {
     public function insertBank($input)
     {
-        if ($input == new stdClass && $input == ''){
-            return false;
-        }
+       
         if($input['user_id'] == '' && $input['cost'] == '' && $input['user_id'] == null && $input['cost'] == null)
         {
             return false;
@@ -48,15 +46,6 @@ class BankModel extends BaseModel
     {
         $sql = 'DELETE FROM banks WHERE id = ' . $id;
         return $this->delete($sql);
-    }
-
-    public static function getInstance()
-    {
-        if (self::$_instance !== null) {
-            return self::$_instance;
-        }
-        self::$_instance = new self();
-        return self::$_instance;
     }
 
     public function findBankById($id)
