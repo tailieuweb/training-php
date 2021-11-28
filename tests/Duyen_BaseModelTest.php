@@ -3,8 +3,7 @@ use PHPUnit\Framework\TestCase;
 
 class BaseModelTest extends TestCase{
 
-
-
+   
     public function testSelectOk(){
         $factory = new FactoryPattern();
         $bankModel = $factory->make('bank');

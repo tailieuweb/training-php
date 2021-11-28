@@ -3,10 +3,22 @@ use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
 {
+      /**
+     * Test case instance
+     */
 
+    public function testGetInstanceCorrect(){
+        $expected = false;
+        $actual = UserModel::getInstance() instanceof BankModel;
+        print_r("\t=> Actual: " . $actual . "\n");
+        $this->assertEquals($expected,$actual);
+    }
     /**
      * Test case Okie
      */
+
+     
+
     public function testGetVersionByUserIDOk(){
         $factory = new FactoryPattern();
         $userModel = $factory->make('user');

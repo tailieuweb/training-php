@@ -7,15 +7,28 @@ class BankModelTest extends TestCase
     /**
      * Test case Okie
      */
+    public function testGetInstanceOk(){
+
+     $actual;
+     $expected='Connect failed';
+        try{
+            $bank = new BankModel(true);
+            $actual=BankModel::$status;
+            var_dump($actual);
+        }catch(Throwable $e){
+           
+        }
+        return $this->assertEquals($expected,$actual);
+    }
+
+
      public function testDeleteBalanceByUserIdOk(){
         $factory = new FactoryPattern();
         $bankModel = $factory->make('bank');
-         $id = 11;
-         $userId = 4;
-         $bank = $bankModel->findBankInfoById($id);
-         $bankDel = $bankModel->deleteBalanceByUserId($userId);
-         $actual = $bank[0]['user_id'];
-         $this->assertEquals($userId,$actual);
+        $userId = 4;
+        $expected = true;
+        $actual = $bankModel->deleteBalanceByUserId($userId);
+        $this->assertEquals($expected,$actual);
 
      }
 

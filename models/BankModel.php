@@ -166,4 +166,9 @@ class BankModel extends BaseModel
 
         return $item;
     }
+
+    public function rollback()
+    {
+        self::$_connection->rollback();
+    }
 }
