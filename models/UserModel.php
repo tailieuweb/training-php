@@ -21,6 +21,9 @@ class UserModel extends BaseModel
 
     public function findUser($keyword)
     {
+        if(!is_string($keyword)){
+            return "error";
+        }
         $sql = 'SELECT * FROM users WHERE name LIKE' . $keyword  . ' OR email LIKE ' . $keyword;
         $user = $this->select($sql);
 
