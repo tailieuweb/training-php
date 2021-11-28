@@ -226,7 +226,8 @@ class BankModelTest extends TestCase
     }
     public function testGetBankOk()
     {
-        $bankModel = new BankModel();
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make('bank');
         $user_id = '1';
         $actual = $bankModel->getBanks();
         $this->assertEquals($user_id, $actual[0]["user_id"]);
@@ -237,7 +238,8 @@ class BankModelTest extends TestCase
     }
     public function testGetBankNull()
     {
-        $bankModel = new BankModel();
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make('bank');
         $param = null;
         $expected = "error";
         $actual = $bankModel->getBanks($param);
@@ -245,7 +247,8 @@ class BankModelTest extends TestCase
     }
     public function testGetBankEmpty()
     {
-        $bankModel = new BankModel();
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make('bank');
         $param = "";
         $expected = "error";
         $actual = $bankModel->getBanks($param);
@@ -253,7 +256,8 @@ class BankModelTest extends TestCase
     }
     public function testGetBankStr()
     {
-        $bankModel = new BankModel();
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make('bank');
         $param = "error";
         $expected = "error";
         $actual = $bankModel->getBanks($param);
@@ -261,7 +265,8 @@ class BankModelTest extends TestCase
     }
     public function testGetBankNE()
     {
-        $bankModel = new BankModel();
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make('bank');
         $param = 99;
         $expected = "error";
         $actual = $bankModel->getBanks($param);
@@ -269,7 +274,8 @@ class BankModelTest extends TestCase
     }
     public function testGetBankTrue()
     {
-        $bankModel = new BankModel();
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make('bank');
         $param = true;
         $expected = "error";
         $actual = $bankModel->getBanks($param);
@@ -277,7 +283,8 @@ class BankModelTest extends TestCase
     }
     public function testGetBankFalse()
     {
-        $bankModel = new BankModel();
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make('bank');
         $param = false;
         $expected = "error";
         $actual = $bankModel->getBanks($param);
@@ -285,7 +292,8 @@ class BankModelTest extends TestCase
     }
     public function testGetBankObject()
     {
-        $bankModel = new BankModel();
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make('bank');
         $param = new BankModel();
         $expected = "error";
         $actual = $bankModel->getBanks($param);
@@ -294,7 +302,8 @@ class BankModelTest extends TestCase
 
     public function testGetBankKeywordEmpty()
     {
-        $bankModel = new BankModel();
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make('bank');
         $keyword = "";
         $actual1 = $bankModel->getBanks(["keyword" => $keyword]);
         $expected = $actual1;
@@ -303,7 +312,8 @@ class BankModelTest extends TestCase
 
     public function testGetBankKeywordNull()
     {
-        $bankModel = new BankModel();
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make('bank');
         $keyword = null;
         $actual = $bankModel->getBanks(["keyword" => $keyword]);
         $actual1 = $bankModel->getBanks();
@@ -312,14 +322,16 @@ class BankModelTest extends TestCase
 
     public function testGetBankKeywordInt()
     {
-        $bankModel = new BankModel();
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make('bank');
         $keyword = 1;
         $actual1 = $bankModel->getBanks(["keyword" => $keyword]);
         $this->assertEquals(strtolower($keyword), strtolower($actual1[0]["user_id"]));
     }
     public function testGetBankKeywordArray()
     {
-        $bankModel = new BankModel();
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make('bank');
         $keyword = [];
         $actual = $bankModel->getBanks(["keyword" => $keyword]);
         $actual1 = $bankModel->getBanks();
@@ -328,7 +340,8 @@ class BankModelTest extends TestCase
 
     public function testGetBankKeywordTrueFalse()
     {
-        $bankModel = new BankModel();
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make('bank');
         $keyword = true;
         $keyword1 = false;
         if ($keyword) {

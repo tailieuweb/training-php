@@ -853,14 +853,16 @@ class UserModelTest extends TestCase
     }
     public function testDeleteUserByIdOk()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $id = 12;
         $actual = $userModel->deleteUserById($id);
         $this->assertEquals(true, $actual);
     }
     public function testDeleteUserByIdStr()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $id = 'Hen';
         $expected = "error";
         $actual = $userModel->deleteUserById($id);
@@ -868,7 +870,8 @@ class UserModelTest extends TestCase
     }
     public function testDeleteUserEmpty()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $id = "";
         $expected = "error";
         $actual = $userModel->deleteUserById($id);
@@ -876,7 +879,8 @@ class UserModelTest extends TestCase
     }
     public function testDeleteUserNull()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $id = null;
         $expected = "error";
         $actual = $userModel->deleteUserById($id);
@@ -884,7 +888,8 @@ class UserModelTest extends TestCase
     }
     public function testDeleteUserByIdNE()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $id = 99;
         $user = $userModel->findUserById($id);
         $expected = null;
@@ -898,7 +903,8 @@ class UserModelTest extends TestCase
     }
     public function testDeleteUserByArray()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $id = [];
         $expected = "error";
         $actual = $userModel->deleteUserById($id);
@@ -906,7 +912,8 @@ class UserModelTest extends TestCase
     }
     public function testDeleteUserByObject()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $id = new UserModel();;
         $expected = "error";
         $actual = $userModel->deleteUserById($id);
@@ -923,8 +930,8 @@ class UserModelTest extends TestCase
 
     public function testFindUserByIdOk()
     {
-        $userModel = new UserModel();
-
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $id = 9;
         $MDUsername = 'Hen';
 
@@ -934,7 +941,8 @@ class UserModelTest extends TestCase
     }
     public function testFindUserByIdNE()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $id = 10;
 
@@ -950,7 +958,8 @@ class UserModelTest extends TestCase
 
     public function testFindUserByIdStr()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $id = 'Hen';
         $expected = 'error';
@@ -960,7 +969,8 @@ class UserModelTest extends TestCase
     }
     public function testFindUserByIdEmpty()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $id = '';
         $expected = 'error';
         $actual = $userModel->findUserById($id);
@@ -969,7 +979,8 @@ class UserModelTest extends TestCase
     }
     public function testFindUserByIdNull()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
         $id = null;
         $expected = 'error';
         $actual = $userModel->findUserById($id);
@@ -979,7 +990,8 @@ class UserModelTest extends TestCase
 
     public function testFindUserByIdObject()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $id = new stdClass();
         $expected = 'error';
@@ -989,7 +1001,8 @@ class UserModelTest extends TestCase
     }
     public function testFindUserByIdArray()
     {
-        $userModel = new UserModel();
+        $factory = new FactoryPattern();
+        $userModel = $factory->make('user');
 
         $id = [];
         $expected = 'error';
