@@ -11,7 +11,7 @@ class BankModelTest extends TestCase
     public function testDeleteBankByIdOK()
     {
         $bankModel = new BankModel();
-        $id = -2;
+        $id = -1;
         $bankModel->insertBank($id, '12345');
         $check = $bankModel->deleteBankByUserId($id);
         $findUser = $bankModel->getBankByUserId($id);
@@ -23,7 +23,7 @@ class BankModelTest extends TestCase
         } else {
             $this->assertTrue(false);
         }
-        $bankModel->deleteBankByUserId($id);
+       // $bankModel->deleteBankByUserId($id);
     }
     // Test case testDeleteBankByIdString
     public function testDeleteBankByIdString()
@@ -89,14 +89,12 @@ class BankModelTest extends TestCase
     public function testGetBankByUserIdOk()
     {
         $bankModel = new BankModel();
-        $bankModel->startTransaction();
-        $userId = -1;
+        $userId = -2;
         $bankModel->insertBank($userId, '12345');
         $getBank = $bankModel->getBankByUserId($userId);
         $check = $getBank != false &&
             $getBank['user_id'] == $userId &&
             $getBank['cost'] == '12345';
-        $bankModel->rollBack();
         if ($check === true) {
             $this->assertTrue(true);
         } else {
