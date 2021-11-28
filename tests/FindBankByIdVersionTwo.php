@@ -38,6 +38,34 @@ class FindBankByIdVersionTwo extends TestCase
         }
     }
     /**
+     * Test case id is double
+     */
+    public function testFindBankByIdVersionTwoIdIsDouble()
+    {
+        $bankModel = new BankModel();
+        $id = 10.5;
+        $bankModel->startTransaction();
+        $expected = 'Not invalid';
+        $bankModel->startTransaction();
+        $actual = $bankModel->findBankByIdVersionTwo($id);
+        $bankModel->rollback();
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test case id is negative number
+     */
+    public function testFindBankByIdVersionTwoIdIsNegative()
+    {
+        $bankModel = new BankModel();
+        $id = -2;
+        $bankModel->startTransaction();
+        $expected = 'Not invalid';
+        $bankModel->startTransaction();
+        $actual = $bankModel->findBankByIdVersionTwo($id);
+        $bankModel->rollback();
+        $this->assertEquals($expected, $actual);
+    }
+    /**
      * Test case id is string
      */
     public function testFindBankByIdVersionTwoIsString()
