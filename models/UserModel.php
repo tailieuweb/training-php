@@ -153,7 +153,6 @@ class UserModel extends BaseModel
         return $users;
     }
 
-<<<<<<< HEAD
     /**
      * For testing
      * @param $a
@@ -169,8 +168,6 @@ class UserModel extends BaseModel
         return $a + $b;
     }
 
-=======
->>>>>>> 2-php-202109/2-groups/4-D/3-34-Trung-phpunit
     public static function getInstance()
     {
         if (self::$_instance !== null) {
