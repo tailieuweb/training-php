@@ -89,22 +89,18 @@ class UserRepository
     public function updateUserWithBank($input)
     {
         $result = ResultClass::getInstance();
-        $findUser = $this->userModel->findUserById($input['id']);
-        if ($findUser == false) {
-            $result->setError("Không tìm thấy User");
+        $userUpdate = $this->userModel->updateUser($input);
+        if ($userUpdate->isSuccess == false) {
+            $result->setError($userUpdate->error);
         } else {
+            $findUser = $this->userModel->findUserById($input['id']);
             $userId = $findUser['id'];
-            $userUpdate = $this->userModel->updateUser($input);
-            if ($userUpdate->isSuccess == false) {
-                $result->setError($userUpdate->error);
+            $cost = $input['cost'];
+            $bankupdate = $this->bankModel->updateBank($userId, $cost);
+            if ($bankupdate == true) {
+                $result->setData("Update Bank and User Success");
             } else {
-                $cost = $input['cost'];
-                $bankupdate = $this->bankModel->updateBank($userId, $cost);
-                if ($bankupdate == true) {
-                    $result->setData("Update Bank and User Success");
-                } else {
-                    $result->setError("Update Bank False");
-                }
+                $result->setError("Update Bank False");
             }
         }
         return $result;

@@ -11,7 +11,7 @@ class UserModel extends BaseModel
     public function findUserById($id)
     {
         $id = $this->decryptID($id);
-        if(is_null($id)){
+        if (is_null($id)) {
             return false;
         }
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
@@ -239,6 +239,25 @@ class UserModel extends BaseModel
     public function checkInput($input, bool $isUpdate = false)
     {
         if (is_array($input)) {
+            // Check if it is update
+            if ($isUpdate) {
+                // Check id
+                if (isset($input['id'])) {
+                    if (!is_string($input['id']) && !is_numeric($input['id'])) {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+                // Check version
+                if (isset($input['version'])) {
+                    if (!is_string($input['version']) && !is_numeric($input['version'])) {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
             // Check Name
             if (isset($input['name'])) {
                 if (!is_string($input['name']) && !is_numeric($input['name'])) {
@@ -260,7 +279,21 @@ class UserModel extends BaseModel
                 if (is_string($input['email'])) {
                     $checkEmailStyle = $this->checkEmailStyle($input['email']);
                     $checkEmailExist = $this->checkEmailExist($input['email']);
-                    if ($checkEmailExist || !$checkEmailStyle) {
+                    if ($checkEmailStyle) {
+                        if ($isUpdate) {
+                            $user = $this->findUserById($input['id']);
+                            $userEmail = $user != false ? $user['email'] : null;
+                            if ($userEmail) {
+                                if($userEmail != $input['email'] && $this->checkEmailExist($input['email'])){
+                                    return false;
+                                }
+                            }
+                        } else {
+                            if ($checkEmailExist || !$checkEmailStyle) {
+                                return false;
+                            }
+                        }
+                    }else{
                         return false;
                     }
                 } else {
@@ -284,25 +317,6 @@ class UserModel extends BaseModel
                 }
             } else {
                 return false;
-            }
-            // Check if it is update
-            if ($isUpdate) {
-                // Check id
-                if (isset($input['id'])) {
-                    if (!is_string($input['id']) && !is_numeric($input['id'])) {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
-                // Check version
-                if (isset($input['version'])) {
-                    if (!is_string($input['version']) && !is_numeric($input['version'])) {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
             }
             return true;
         }
