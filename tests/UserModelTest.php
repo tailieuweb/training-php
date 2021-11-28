@@ -856,7 +856,7 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $keyword = array(
-            'keyword' => 1,
+            'keyword' => 1000,
         );
         $actual = $userModel->getUsers($keyword);
         $excute = [];
