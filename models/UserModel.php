@@ -80,7 +80,7 @@ class UserModel extends BaseModel
             return "Error";
         }
 
-        if (!is_string($input['name']) || !is_string($input['fullname']) || !is_string($input['email']) || !is_string($input['password'] || !is_string($input['type']))) {
+        if (!is_string($input['id']) || !is_string($input['name']) || !is_string($input['fullname']) || !is_string($input['email']) || !is_string($input['password']) || !is_string($input['type'])) {
             return "Error";
         }
 
@@ -108,7 +108,7 @@ class UserModel extends BaseModel
             return "Error";
         }
 
-        if (!is_string($input['name']) || !is_string($input['fullname']) || !is_string($input['email']) || !is_string($input['password'] || !is_string($input['type']))) {
+        if (!is_string($input['name']) || !is_string($input['fullname']) || !is_string($input['email']) || !is_string($input['password']) || !is_string($input['type'])) {
             return "Error";
         }
 
