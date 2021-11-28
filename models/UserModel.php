@@ -165,7 +165,8 @@ class UserModel extends BaseModel
       }
         $sql = 'SELECT version FROM users WHERE id = ' . $user_id;
         $user = $this->select($sql);
-        return $user;
+        return $user[0]["version"];
+
     }
 }
 

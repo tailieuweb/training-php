@@ -19,7 +19,7 @@ class BankModelTest extends TestCase
 
      }
 
-  
+
     public function testFindBankInfoByIdOk(){
         $factory = new FactoryPattern();
         $bankModel = $factory->make('bank');
@@ -45,19 +45,7 @@ class BankModelTest extends TestCase
     /**
      * Test case Not good
      */
-    public function testDeleteBalanceByUserIdNg()
-    {
-        $factory = new FactoryPattern();
-        $bankModel = $factory->make('bank');
-        $userId = 10;
-        $bank = $bankModel->deleteBalanceByUserId($userId);
-
-        if (isset($bank)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
-    }
+    
 
     public function testFindBankInfoByIdNg(){
         $factory = new FactoryPattern();

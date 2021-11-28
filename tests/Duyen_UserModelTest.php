@@ -12,25 +12,16 @@ class UserModelTest extends TestCase
         $userModel = $factory->make('user');
         $userId = 2;
         $version = 7;
-        $user = $userModel->getVersionByUserID($userId);
-        $actual = $user[0]['version'];
+        $actual = $userModel->getVersionByUserID($userId);
         $this->assertEquals($version,$actual);
     }
+
 
   /**
      * Test case Not good
      */
-    public function testGetVersionByUserIDNg(){
-        $factory = new FactoryPattern();
-        $userModel = $factory->make('user');
-        $userId = 10;
-        $user = $userModel->getVersionByUserID($userId);
-        if(empty($user)){
-            $this->assertTrue(true);
-        }else{
-            $this->assertTrue(false);
-        }
-    }
+   
+     
 
     /**
      * Test case Id str
