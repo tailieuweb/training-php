@@ -8,8 +8,10 @@ $userModel = $factory->make('user');
 
 $id = NULL;
 $params = [];
+$keyword = '';
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
+    $keyword = $_GET['keyword'];
 }
 if (empty($_SESSION['token'])) {
     $_SESSION['token'] = bin2hex(random_bytes(32));
@@ -24,7 +26,9 @@ if (!empty($_GET['token'])) {
         }
     }
 }
+$user2 = $userModel->findUser($keyword);
 $users = $userModel->getUsers($params);
+var_dump($user2);
 ?>
 <!DOCTYPE html>
 <html>

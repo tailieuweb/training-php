@@ -9,6 +9,12 @@ class UserModel extends BaseModel
 
     public function findUserById($id)
     {
+        if($id == null){
+            return "error";
+        }
+        if(!is_numeric($id)){
+            return "error";
+        }
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
 
@@ -17,7 +23,7 @@ class UserModel extends BaseModel
 
     public function findUser($keyword)
     {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
+        $sql = 'SELECT * FROM users WHERE name LIKE' . $keyword  . ' OR email LIKE ' . $keyword;
         $user = $this->select($sql);
 
         return $user;
@@ -53,6 +59,12 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
+        if($id == null){
+            return "error";
+        }
+        if(!is_numeric($id)){
+            return "error";
+        }
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
     }
