@@ -132,7 +132,7 @@ class UserModelTest extends TestCase
         $findUser = $userModel->findUserById($id);
         if (
             $check == true &&
-            ($findUser) == false
+            $findUser == false
         ) {
             $this->assertTrue(true);
         } else {
@@ -236,12 +236,13 @@ public function testGetUsersByKey()
 // Test case testGetUsersByNumber
 public function testGetUsersByNumber()
 {
+    
     $userModel = new UserModel;
     $id = -1;
     $params=[
         "keyword"=> '1'
     ];
-    $userModel->insertUserWithId($id, 'Danh', 'Nguyen Khac Danh', 'nguyenkhacdanh@gmail.com', 'guest', '12345');
+    $userModel->insertUserWithId($id, 'Danh1', 'Nguyen Khac Danh', 'nguyenkhacdanh@gmail.com', 'guest', '12345');
     $users= $userModel->getUsers($params);
     $check = count($users)> 0;
     $userModel->deleteUserById($id);

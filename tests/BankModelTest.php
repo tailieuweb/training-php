@@ -11,10 +11,12 @@ class BankModelTest extends TestCase
     public function testDeleteBankByIdOK()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $id = -1;
         $bankModel->insertBank($id, '12345');
         $check = $bankModel->deleteBankByUserId($id);
         $findUser = $bankModel->getBankByUserId($id);
+        $bankModel->rollBack();
         if (
             $check == true &&
             ($findUser) == false
@@ -89,12 +91,16 @@ class BankModelTest extends TestCase
     public function testGetBankByUserIdOk()
     {
         $bankModel = new BankModel();
-        $userId = -2;
+        $userModel = new UserModel();
+        $bankModel->startTransaction();
+        $userId = -1;
+        $userModel->insertUserWithId($userId, 'Danh', 'Nguyen Khac Danh', 'nguyenkhacdanh@gmail.com', 'guest', '12345');
         $bankModel->insertBank($userId, '12345');
         $getBank = $bankModel->getBankByUserId($userId);
         $check = $getBank != false &&
             $getBank['user_id'] == $userId &&
             $getBank['cost'] == '12345';
+             $bankModel->rollBack();
         if ($check === true) {
             $this->assertTrue(true);
         } else {

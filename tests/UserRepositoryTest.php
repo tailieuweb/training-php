@@ -1195,109 +1195,114 @@ class UserRepositoryTest extends TestCase
     public function testFindByIdOk()
     {
         $repository = new UserRepository;
+        $userModel = new UserModel;
+        $userModel->startTransaction();
         $userId = -2;
-        $input =[
+        $input = [
             'id' => $userId,
             'name' => 'Danh',
             'fullname' => 'Nguyen Khac',
-            'email' =>'Nguyenkhacdanh.tdc2019@gmail.com',
-           'type'=> 'admin',
-           'password' => '12345'
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
         ];
         $repository->insertUserWithId($input);
         $check = $repository->findById($userId);
+        $userModel->rollBack();
         if ($check != false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testFindByIdString
+    public function testFindByIdString()
+    {
+        $repository = new UserRepository;
+        $userId = 'Danh';
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
+        ];
+        $repository->insertUserWithId($input);
+        $check = $repository->findById($userId);
+        if ($check == false) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
         }
         $repository->deleteUser($userId);
     }
-     // Test case testFindByIdString
-     public function testFindByIdString()
-     {
-         $repository = new UserRepository;
-         $userId = 'Danh';
-         $input =[
-             'id' => $userId,
-             'name' => 'Danh',
-             'fullname' => 'Nguyen Khac',
-             'email' =>'Nguyenkhacdanh.tdc2019@gmail.com',
-            'type'=> 'admin',
+    // Test case testFindByIdObject
+    public function testFindByIdObject()
+    {
+        $repository = new UserRepository;
+        $userId = new UserRepository;
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
             'password' => '12345'
-         ];
-         $repository->insertUserWithId($input);
-         $check = $repository->findById($userId);
-         if ($check == false) {
-             $this->assertTrue(true);
-         } else {
-             $this->assertTrue(false);
-         }
-     }
-     // Test case testFindByIdObject
-     public function testFindByIdObject()
-     {
-         $repository = new UserRepository;
-         $userId = new UserRepository;
-         $input =[
-             'id' => $userId,
-             'name' => 'Danh',
-             'fullname' => 'Nguyen Khac',
-             'email' =>'Nguyenkhacdanh.tdc2019@gmail.com',
-            'type'=> 'admin',
-            'password' => '12345'
-         ];
-         $repository->insertUserWithId($input);
-         $check = $repository->findById($userId);
-         if ($check == false) {
-             $this->assertTrue(true);
-         } else {
-             $this->assertTrue(false);
-         }
-     }
-      // Test case testFindByIdNull
-      public function testFindByIdNull()
-      {
-          $repository = new UserRepository;
-          $userId = null;
-          $input =[
-              'id' => $userId,
-              'name' => 'Danh',
-              'fullname' => 'Nguyen Khac',
-              'email' =>'Nguyenkhacdanh.tdc2019@gmail.com',
-             'type'=> 'admin',
-             'password' => '12345'
-          ];
-          $repository->insertUserWithId($input);
-          $check = $repository->findById($userId);
-          if ($check == false) {
-              $this->assertTrue(true);
-          } else {
-              $this->assertTrue(false);
-          }
-      }
-        // Test case testFindByIdSpecial 
-        public function testFindByIdSpecial()
-        {
-            $repository = new UserRepository;
-            $userId = '#$$#%%^';
-            $input =[
-                'id' => $userId,
-                'name' => 'Danh',
-                'fullname' => 'Nguyen Khac',
-                'email' =>'Nguyenkhacdanh.tdc2019@gmail.com',
-               'type'=> 'admin',
-               'password' => '12345'
-            ];
-            $repository->insertUserWithId($input);
-            $check = $repository->findById($userId);
-            if ($check == false) {
-                $this->assertTrue(true);
-            } else {
-                $this->assertTrue(false);
-            }
-            $repository->deleteUser($userId);
+        ];
+        $repository->insertUserWithId($input);
+        $check = $repository->findById($userId);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
         }
+        $repository->deleteUser($userId);
+    }
+    // Test case testFindByIdNull
+    public function testFindByIdNull()
+    {
+        $repository = new UserRepository;
+        $userId = null;
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
+        ];
+        $repository->insertUserWithId($input);
+        $check = $repository->findById($userId);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+        $repository->deleteUser($userId);
+    }
+    // Test case testFindByIdSpecial 
+    public function testFindByIdSpecial()
+    {
+        $repository = new UserRepository;
+        $userId = '#$$#%%^';
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
+        ];
+        $repository->insertUserWithId($input);
+        $check = $repository->findById($userId);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+        $repository->deleteUser($userId);
+    }
     /**
      * Test deleteUser Function in UserRepository - 'Danh' do this
      */
@@ -1306,24 +1311,25 @@ class UserRepositoryTest extends TestCase
     public function testDeleteUserOk()
     {
         $repository = new UserRepository;
-            $userId = -2;
-            $input =[
-                'id' => $userId,
-                'name' => 'Danh',
-                'fullname' => 'Nguyen Khac',
-                'email' =>'Nguyenkhacdanh.tdc2019@gmail.com',
-               'type'=> 'admin',
-               'password' => '12345'
-            ];
-            $repository->insertUserWithId($input);
-            $delete = $repository->deleteUser($userId);
-            $check = $repository->findById($userId);
-            if ($check == false && $delete==true) {
-                $this->assertTrue(true);
-            } else {
-                $this->assertTrue(false);
-            }
-            $repository->deleteUser($userId);
-        
+        $userModel = new UserModel;
+        $userModel->startTransaction();
+        $userId = -2;
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
+        ];
+        $repository->insertUserWithId($input);
+        $delete = $repository->deleteUser($userId);
+        $check = $repository->findById($userId);
+        $userModel->rollBack();
+        if ($delete == true && $check == false ) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
 }
