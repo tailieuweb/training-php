@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 30, 2021 at 10:28 AM
--- Server version: 10.4.19-MariaDB-log
--- PHP Version: 8.0.7
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th10 27, 2021 lúc 04:56 AM
+-- Phiên bản máy phục vụ: 10.4.21-MariaDB
+-- Phiên bản PHP: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,42 +18,41 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `app_web1`
+-- Cơ sở dữ liệu: `app_web1`
 --
-CREATE DATABASE IF NOT EXISTS `app_web1` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `app_web1`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `banks`
+-- Cấu trúc bảng cho bảng `banks`
 --
 
-DROP TABLE IF EXISTS `banks`;
 CREATE TABLE `banks` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `cost` float NOT NULL,
-   `version` double(5,1) NOT NULL
+  `version` double(5,1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `banks`
+-- Đang đổ dữ liệu cho bảng `banks`
 --
 
-INSERT INTO `banks` (`id`, `user_id`, `cost`,`version`) VALUES
-(1, 1, 11,0.0),
-(2, 1, 11,0.0),
-(3, 2, 11,0.0),
-(4, 3, 11,0.0);
+INSERT INTO `banks` (`id`, `user_id`, `cost`, `version`) VALUES
+(1, 1, 15, 0.1),
+(2, 1, 13, 0.1),
+(3, 2, 11, 0.0),
+(4, 3, 11, 0.0),
+(5, 4, 14, 0.0),
+(6, 4, 14, 0.0),
+(7, 5, 20, 0.0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -65,47 +64,50 @@ CREATE TABLE `users` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`,`version`) VALUES
-(1, 'test1', '', '', '', '5a105e8b9d40e1329780d62ea2265d8a','0.0'),
-(2, 'test2', '', '', '', '098f6bcd4621d373cade4e832627b4f6','0.0'),
-(3, 'hacker1', '', '', '', '2ba2a8ac968a7a2b0a7baa7f2fef18d2','0.0'),
-(4, 'test3', '', '', '', '8ad8757baa8564dc136c1e07507f4a98','0.0'),
-(5, '<a href=\"http://php.local/delete_user.php?id=4\"> Xóa user3</a>', '', '', '', 'c6ae6edca1ad45f42e619ec91a32b636','0.0');
+INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`, `version`) VALUES
+(1, 'test1', '', '', '', '0cc175b9c0f1b6a831c399e269772661', 0.0),
+(2, 'test2', '', '', '', '0cc175b9c0f1b6a831c399e269772661', 0.0),
+(3, 'hacker1', '', '', '', '0cc175b9c0f1b6a831c399e269772661', 0.0),
+(4, 'test3', '', '', '', '0cc175b9c0f1b6a831c399e269772661', 0.0),
+(5, '<a href=\"http://php.local/delete_user.php?id=4\"> Xóa user3</a>', '', '', '', '0cc175b9c0f1b6a831c399e269772661', 0.0),
+(6, 'test5', 'Test5', 'clubtrailang@gmail.com', 'admin', '0cc175b9c0f1b6a831c399e269772661', 0.0),
+(7, '111', '', '', '', '0cc175b9c0f1b6a831c399e269772661', 0.0),
+(8, 'test7', '', '', '', '698d51a19d8a121ce581499d7b701668', 0.0);
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `banks`
+-- Chỉ mục cho bảng `banks`
 --
 ALTER TABLE `banks`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `banks`
+-- AUTO_INCREMENT cho bảng `banks`
 --
 ALTER TABLE `banks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

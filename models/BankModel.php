@@ -5,33 +5,42 @@ require_once 'BaseModel.php';
 class BankModel extends BaseModel {
  
     public function findBankById($id) {
-        $sql = 'SELECT * FROM banks WHERE id = '.$id;
-        $bank = $this->select($sql);
-
-        return $bank;
+        if (is_int($id)==true||is_string($id)==true){
+            $sql = 'SELECT * FROM banks WHERE id = '.$id;
+            $bank = $this->select($sql);
+            if($bank!=null){
+                return $bank;
+            }
+            return $bank='error';
+        }
+        else{
+            return $bank='error';
+        }   
     }
-    public function findBankNew() {
-        $sql = 'SELECT MAX(id) FROM `bank`';
-        $bank = $this->select($sql);
-        return $bank;
+    public function findBank($keyword) {
+        if (is_int($keyword)==true||is_string($keyword)==true){
+            $sql = 'SELECT * FROM banks WHERE user_id LIKE "%'.$keyword.'%"';
+            $bank = $this->select($sql);
+            if($bank!=null){
+                return $bank;
+            }
+            return $bank='error';
+        }
+        else{
+            return $bank='error';
+        }  
     } 
-
-    /**
-     * Authentication bank
-     * @param $bankName
-     * @param $password
-     * @return array
-     */
 
     /**
      * Delete bank by id
      * @param $id
      * @return mixed
      */
-    public function deletebankById($id) {
-        $sql = 'DELETE FROM banks WHERE id = '.$id;
-        return $this->delete($sql);
-
+    public function deleteBankById($id) {
+        if(is_int($id)==true||is_string($id)==true){
+            $sql = 'DELETE FROM banks WHERE id = '.'$id';
+            return $this->delete($sql);      
+        }
     }
 
     /**
@@ -68,20 +77,23 @@ class BankModel extends BaseModel {
      * @param array $params
      * @return array
      */
-    public function getBanks($params = []) {
-        //Keyword
-        if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] .'%"';
-
-            //Keep this line to use Sql Injection
-            //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
-            $banks = self::$_connection->multi_query($sql);
+    public function getBanks($params = []) {  
+        if (isset($params['keyword'])) {
+            if(is_int($params['keyword'])==true||is_string($params['keyword'])==true){
+                $sql = 'SELECT * FROM banks WHERE user_id LIKE "%' . $params['keyword'] .'%"';
+                $bank = $this->select($sql);
+                if($bank!=null){
+                    return $bank;
+                }            
+                return $bank='error';
+            }
+            return $bank='error';
+            
         } else {
             $sql = 'SELECT * FROM banks';
-            $banks = $this->select($sql);
+            $bank = $this->select($sql);
         }
 
-        return $banks;
+        return $bank;
     }
 }
