@@ -4,8 +4,11 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel
 {
+    private static $_bank_instance;
+
     // Singleton pattern:
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (self::$_bank_instance !== null) {
             return self::$_bank_instance;
         }
@@ -14,27 +17,69 @@ class BankModel extends BaseModel
     }
 
     /**
-     * Get bank account
+     * Get bank accounts
      * @param array $params
      * @return array
      */
-    public function getBank($params = [])
+    public function getBankAccounts($params = [])
     {
-        $sql = "SELECT * FROM `banks` INNER JOIN users ON banks.user_id=users.id";
+        //Keyword
+        if (!empty($params['keyword'])) {
+            $sql = 'SELECT users.*, banks.id AS bank_id, banks.cost AS cost 
+                FROM users 
+                INNER JOIN banks 
+                ON banks.user_id = users.id 
+                WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection, $params['keyword']) . '%"'
+                . ' ORDER BY id ASC';
+            $banks = $this->select($sql);
+        } else {
+            $sql = "SELECT users.*, banks.id AS bank_id, banks.cost AS cost 
+                FROM users 
+                INNER JOIN banks 
+                ON banks.user_id = users.id 
+                ORDER BY id ASC";
+            $banks = $this->select($sql);
+        }
+        return $banks;
+    }
+
+    /**
+     * Get bank account by user id
+     * @param array $user_id
+     * @return array
+     */
+    public function getBankAccountByUserID($user_id)
+    {
+        if(!is_numeric($user_id)) {
+            return "Invalid value";
+        }
+        //Keyword
+        $sql = 'SELECT users.*, banks.id AS bank_id, banks.cost AS cost 
+            FROM users 
+            INNER JOIN banks 
+            ON banks.user_id = users.id 
+            WHERE users.id LIKE ' . $user_id
+            . ' ORDER BY id ASC';
         $banks = $this->select($sql);
         return $banks;
     }
+
     /**
      * Delete bank account balance
      * @param $id
      * @return mixed
      */
-    public function deleteBalanceById($id)
+    public function deleteBalanceByUserId($id)
     {
         $sql = 'UPDATE `banks` SET `cost`="0" WHERE `user_id` ='  . $id;
         return $this->update($sql);
     }
 
+    /**
+     * Get bank account info by bank id:
+     * @param $id
+     * @return mixed
+     */
     public function findBankInfoById($id)
     {
         $sql = 'SELECT * FROM banks WHERE id = ' . $id;
@@ -43,6 +88,11 @@ class BankModel extends BaseModel
         return $items;
     }
 
+    /**
+     * Get bank account info by user id:
+     * @param $id
+     * @return mixed
+     */
     public function findBankInfoByUserID($user_id)
     {
         $sql = 'SELECT * FROM banks WHERE user_id = ' . $user_id;
@@ -52,7 +102,7 @@ class BankModel extends BaseModel
     }
 
     /**
-     * Update bank info
+     * Update bank account info
      * @param $input
      * @return mixed
      */
@@ -67,40 +117,35 @@ class BankModel extends BaseModel
     }
 
     /**
-     * Insert bank info
+     * Insert bank account
      * @param $input
      * @return mixed
      */
     public function insertBankInfo($input)
     {
-        $sql = "INSERT INTO `banks` VALUES (" . 
+        if(!is_numeric($input['user_id'])) {
+            return "User id param invalid";
+        }
+        if(!is_numeric($input['cost'])) {
+            return "Cost param invalid";
+        }
+        $sql = "INSERT INTO `banks` VALUES (" .
             0 . ", "
             . $input['user_id'] . ", "
             . $input['cost']
-         . ")";
+            . ")";
 
         $item = $this->insert($sql);
 
         return $item;
     }
 
-    /**
-     * Search users
-     * @param array $params
-     * @return array
-     */
-    public function getBanksInfo($params = [])
+    // Useful for test
+    public function deleteBankByUserId($userId)
     {
-        //Keyword
-        if (!empty($params['user_id'])) {
-            $sql = 'SELECT * FROM banks 
-            WHERE user_id = ' . $params['user_id'];
-            $items = $this->select($sql);
-        } else {
-            $sql = 'SELECT * FROM banks';
-            $items = $this->select($sql);
-        }
+        $sql = 'DELETE FROM banks WHERE user_id = ' . $userId;
+        $item = $this->delete($sql);
 
-        return $items;
+        return $item;
     }
 }

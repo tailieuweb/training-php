@@ -1,8 +1,17 @@
 <?php
 // Start the session
 session_start();
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
+
+require_once 'models/FactoryPattern.php';
+$factory = new FactoryPattern();
+
+$bankModel = $factory->make('bank');
+
+$data = $bankModel->getBankAccountByUserID(474)[0];
+
+var_dump($data);
+
+$userRepository = $factory->make('UserRepository');
 
 $user = NULL; //Add new user
 $_id = NULL;
@@ -22,7 +31,7 @@ if (!empty($_GET['id'])) {
 
     //Replace last number with null
     $_id = str_replace($end, "", $_id);
-    $user = $userModel->findUserById($_id); //Update existing user
+    $user = $userRepository->getBankAccountByUserID($_id); //Update existing user
 }
 
 
@@ -41,16 +50,18 @@ if (!empty($_POST['submit'])) {
             //Be able to update or be locked:
             if ($user[0]['version'] == intval($currentVer)) {
                 $_POST["ver"] = intval($currentVer);
-                $userModel->updateUser($_POST);
-                header('location: list_users.php');
+                $userRepository->update_UserAndBankAccount($_POST);
+                header('location: index.php');
             } else {
                 echo '<h5 style="text-align:center;">THÔNG TIN ĐÃ BỊ THAY ĐỔI TRƯỚC ĐÓ!
                 <br>Tải lại trang để xem cập nhật mới nhất!</h5>';
             }
         }
     } else {
-        $userModel->insertUser($_POST);
-        header('location: list_users.php');
+        // $userModel->insertUser($_POST);
+        // header('location: list_users.php');
+        $userRepository->create_UserAndBankAccount($_POST);
+        header('location: index.php');
     }
 }
 
@@ -73,6 +84,7 @@ if (!empty($_POST['submit'])) {
             </div>
             <form method="POST">
                 <input type="hidden" name="id" value="<?php echo $_id ?>">
+                <input type="hidden" name="bank_id" value="<?php echo $user[0]['bank_id'] ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
@@ -90,14 +102,20 @@ if (!empty($_POST['submit'])) {
                 <div class="form-group">
                     <label for="type">Type</label>
                     <select class="form-control" aria-label="Default select example" name="type">
-                        <option value="admin" selected>ADMIN</option>
-                        <option value="user">USER</option>
+                        <option value="admin">ADMIN</option>
+                        <option value="user" selected>USER</option>
                         <option value="guess">GUESS</option>
                     </select>
                 </div>
+                <!-- Add password field -->
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Password">
+                    <input type="password" name="password" class="form-control" placeholder="Password" value="admin">
+                </div>
+                <!-- Add bank account balance field -->
+                <div class="form-group">
+                    <label for="name">Account balance</label>
+                    <input class="form-control" name="cost" placeholder="Amount of money" value="<?php if( isset($_id) ) { echo $user[0]['cost']; } else { echo '0'; } ?>">
                 </div>
                 <!-- Hidden version field: -->
                 <div class="form-group">
