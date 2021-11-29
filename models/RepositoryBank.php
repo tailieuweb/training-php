@@ -31,5 +31,8 @@ class RepositoryBank implements RepositoryInterface{
     public function search($params) {
         return self::$bankModel->getBanksInfo($params);
     }
+    public function findByUserId($user_id) {
+        return self::$bankModel->findBankInfoByUserID($user_id);
+    }
 }
 

@@ -40,15 +40,21 @@ class BankModel extends BaseModel {
 
     public function findBankInfoById($id)
     {
-        $sql = 'SELECT * FROM banks WHERE id = ' . $id;
-        $items = $this->select($sql);
+        if (is_object($id) || is_null($id) || is_array($id)) {
+            return [];
+        }
+        $sql = 'SELECT * FROM banks WHERE id = ' . mysqli_real_escape_string(self::$_connection, $id);
+        $items = $this->getData_With_Multi_Query($sql);
 
         return $items;
     }
 
     public function findBankInfoByUserID($user_id)
     {
-        $sql = 'SELECT * FROM banks WHERE user_id = ' . $user_id;
+        if (is_object($user_id) || is_null($user_id) || is_array($user_id)) {
+            return [];
+        }
+        $sql = 'SELECT * FROM banks WHERE user_id = ' . mysqli_real_escape_string(self::$_connection, $user_id);
         $items = $this->select($sql);
 
         return $items;

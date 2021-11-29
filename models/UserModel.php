@@ -22,8 +22,11 @@ class UserModel extends BaseModel
 
     public function findUser($keyword)
     {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
-        $user = $this->getData_With_Multi_Query($sql);
+        if (is_null($keyword)) {
+            return [];
+        }
+        $sql = 'SELECT * FROM users WHERE name LIKE "%' . $keyword . '%"' . ' OR email LIKE "%' . $keyword . '%"';
+        $user = $this->select($sql);
         return $user;
     }
 
@@ -35,7 +38,10 @@ class UserModel extends BaseModel
      */
     public function auth($userName, $password)
     {
-        if (is_object($userName) || is_object($password)) {
+        if (is_object($userName) || is_object($password) || is_array($password)) {
+            return [];
+        }
+        if (is_null($userName) || is_null($password) || is_array($userName)) {
             return [];
         }
         $md5Password = md5($password);
@@ -85,15 +91,21 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
+        foreach ($input as $key => $value) {
+            if (is_array($value) || is_object($value) || is_null($value)) {
+                return [];
+            }
+        }
+        
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
-            "'" . $input['name'] . "',
+            "'" . mysqli_real_escape_string(self::$_connection, $input['name']) . "',
                  '" . md5($input['password']) . "',
-                 '" . $input['fullname'] . "',
-                 '" . $input['email'] . "',
+                 '" . mysqli_real_escape_string(self::$_connection, $input['fullname']) . "',
+                 '" . mysqli_real_escape_string(self::$_connection, $input['email']) . "',
                  '" . $input['type'] . "')";
-        //$user = self::$_connection->multi_query($sql);
+        $user = self::$_connection->multi_query($sql);
         //Normal: 
-        $user = $this->insert($sql);
+        //$user = $this->insert($sql);
         return $user;
     }
 
