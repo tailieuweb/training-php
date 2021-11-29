@@ -6,8 +6,8 @@ require_once 'Result.php';
 class UserRepository
 {
     protected static $_instance;
-    private $userModel;
-    private $bankModel;
+    public $userModel;
+    public $bankModel;
     //constructor
     public function __construct()
     {
@@ -80,8 +80,9 @@ class UserRepository
             return false;
         }
         $userId = $findUser['id'];
-        $this->userModel->deleteUserById($id);
-        $this->bankModel->deleteBankByUserId($userId);
+        $deleteUser = $this->userModel->deleteUserById($id);
+        $deleteBank = $this->bankModel->deleteBankByUserId($userId);
+        return $deleteUser && $deleteBank;
     }
     /**
      * Update  User With Bank

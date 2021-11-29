@@ -119,121 +119,173 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
-
     /**
-     * Test decryptID function, 'Hiếu Cao' do this 
-     * */
-     // Test case decrypt ID With Id Properly Encrypted
-     public function testDecryptIdWithIdProperlyEncrypted()
-     {
-         $userModel = new UserModel();
-         $md5Id = md5('1TeamJ-TDC');
-         $checkUser = $userModel->insertUserWithId(1,'testName','testFullName','testEmail@gmail.com','testType','testPassword');
-         $expected = 1;
-         $actual = $userModel->decryptID($md5Id);
-         // Delete new User if it can be insert (Not delete if that user was exist before)
-        if($checkUser){
-            $userModel->deleteUserById($md5Id);
+     * Test DeleteUserById Function in UserModel - 'Danh' do this
+     */
+    // Test case testDeleteUserById
+    public function testDeleteUserByIdOK()
+    {
+        $userModel = new UserModel();
+        $id = -1;
+        $userModel->insertUserWithId($id, 'Danh', 'Nguyen Khac Danh', 'nguyenkhacdanh@gmail.com', 'guest', '12345');
+        $check = $userModel->deleteUserById($id);
+        $findUser = $userModel->findUserById($id);
+        if (
+            $check == true &&
+            $findUser == false
+        ) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
         }
- 
-         $this->assertEquals($expected, $actual);
-     }
-     // Test case decrypt ID With Id Properly Not Encrypted
-     public function testDecryptIdWithIdProperlyNotEncrypted()
-     {
-         $userModel = new UserModel();
-
-         $md5Id = md5('abc');
-         $actual = $userModel->decryptID($md5Id);
-         $expected = NULL;
-         $this->assertEquals($expected, $actual);
-     }
-     // Test case decrypt ID With Id Positive Number
-     public function testDecryptIdWithIdPositiveNumber()
-     {
-         $userModel = new UserModel();
-
-         $id = 1;
-         $actual = $userModel->decryptID($id);
-         $expected = NULL;
-         $this->assertEquals($expected, $actual);
-     }
-     // Test case decrypt ID With Id Negative Number
-     public function testDecryptIdWithIdNegativeNumber()
-     {
-         $userModel = new UserModel();
-
-         $id = -1;
-         $actual = $userModel->decryptID($id);
-         $expected = -1;
-         $this->assertEquals($expected, $actual);
-     }
-     // Test case decrypt ID With Id Null
-     public function testDecryptIdWithIdNull()
-     {
-         $userModel = new UserModel();
-
-         $id = NULL;
-         $actual = $userModel->decryptID($id);
-         $expected = NULL;
-         $this->assertEquals($expected, $actual);
-     }
-     // Test case decrypt ID With Id Object
-     public function testDecryptIdWithIdObject()
-     {
-         $userModel = new UserModel();
-
-         $id = new ResultClass();
-         $actual = $userModel->decryptID($id);
-         $expected = NULL;
-         $this->assertEquals($expected, $actual);
-     }
-      // Test case decrypt ID With Id Bool Type, value is True
-      public function testDecryptIdWithIdTrueBoolType()
-      {
-          $userModel = new UserModel();
- 
-          $id = true;
-          $actual = $userModel->decryptID($id);
-          $expected = NULL;
-          $this->assertEquals($expected, $actual);
-      }
-      // Test case decrypt ID With Id Bool Type, value is false
-      public function testDecryptIdWithIdTrueFalseType()
-      {
-          $userModel = new UserModel();
- 
-          $id = false;
-          $actual = $userModel->decryptID($id);
-          $expected = NULL;
-          $this->assertEquals($expected, $actual);
-      }
-
+    }
+    // Test case testDeleteUserByNg
+    public function testDeleteUserByIdNg()
+    {
+        $userModel = new UserModel();
+        $id = "a";
+        $check = $userModel->deleteUserById($id);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testDeleteUserNotId
+    public function testDeleteUserNotId()
+    {
+        $userModel = new UserModel();
+        $id = "";
+        $check = $userModel->deleteUserById($id);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testDeleteUserBool
+    public function testDeleteUserBool()
+    {
+        $userModel = new UserModel();
+        $id = true;
+        $check = $userModel->deleteUserById($id);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testDeleteUserObject
+    public function testDeleteUserObject()
+    {
+        $userModel = new UserModel();
+        $id = new UserModel;
+        $check = $userModel->deleteUserById($id);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testDeleteUserExpectedandActual
+    public function testDeleteUserExpectedandActual()
+    {
+        $userModel = new UserModel();
+        $id = -1;
+        $expected = $userModel->deleteUserById($id);
+        $actual = true;
+        $this->assertEquals($expected, $actual);
+    }
     /**
-     * Test getInstance function, 'Hiếu Cao' do this 
-     * */
-    // Test case getInstance Good
-    public function testGetInstanceGood()
+     * Test getUser Function in UserModel - 'Danh' do this
+     */
+    // Test case testGetUsers
+    public function testGetUsersOk()
     {
-        $userModelSingleton = UserModel::getInstance();
-        $userModelSingleton2 = UserModel::getInstance();
-
-        $expected = true;
-        $actual = is_object($userModelSingleton) && 
-                get_class($userModelSingleton) == 'UserModel' &&
-                $userModelSingleton === $userModelSingleton2;
-
-        $this->assertEquals($expected, $actual);
+        $userModel = new UserModel;
+        $id = -1;
+        $userModel->insertUserWithId($id, 'Danh', 'Nguyen Khac Danh', 'nguyenkhacdanh@gmail.com', 'guest', '12345');
+        $users= $userModel->getUsers();
+        $check = count($users)> 0;
+        $userModel->deleteUserById($id);
+        if ($check == true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+        $userModel->deleteUserById($id);
     }
-    // Test case getInstance Not Good
-    public function testGetInstanceNg()
-    {
-        $userModelSingleton = UserModel::getInstance();
-
-        $expected = false;
-        $actual = !is_object($userModelSingleton) || 
-                !get_class($userModelSingleton) == 'UserModel';
-
-        $this->assertEquals($expected, $actual);
+// Test case testGetUsersByKey
+public function testGetUsersByKey()
+{
+    $userModel = new UserModel;
+    $id = -1;
+    $params=[
+        "keyword"=> 'Danh'
+    ];
+    $userModel->insertUserWithId($id, 'Danh', 'Nguyen Khac Danh', 'nguyenkhacdanh@gmail.com', 'guest', '12345');
+    $users= $userModel->getUsers($params);
+    $check = count($users)> 0;
+    $userModel->deleteUserById($id);
+    if ($check == true) {
+        $this->assertTrue(true);
+    } else {
+        $this->assertTrue(false);
     }
+}
+// Test case testGetUsersByNumber
+public function testGetUsersByNumber()
+{
+    
+    $userModel = new UserModel;
+    $id = -1;
+    $params=[
+        "keyword"=> '1'
+    ];
+    $userModel->insertUserWithId($id, 'Danh1', 'Nguyen Khac Danh', 'nguyenkhacdanh@gmail.com', 'guest', '12345');
+    $users= $userModel->getUsers($params);
+    $check = count($users)> 0;
+    $userModel->deleteUserById($id);
+    if ($check == true) {
+        $this->assertTrue(true);
+    } else {
+        $this->assertTrue(false);
+    }
+}
+// Test case testGetUsersByKeySpecial 
+public function testGetUsersByKeySpecial()
+{
+    $userModel = new UserModel;
+    $id = -1;
+    $params=[
+        "keyword"=> '#%$%#$'
+    ];
+    $userModel->insertUserWithId($id, 'Danh', 'Nguyen Khac Danh', 'nguyenkhacdanh@gmail.com', 'guest', '12345');
+    $users= $userModel->getUsers($params);
+    $check = count($users)> 0;
+    $userModel->deleteUserById($id);
+    if ($check == false) {
+        $this->assertTrue(true);
+    } else {
+        $this->assertTrue(false);
+    }
+}
+// Test case testGetUsersByKeyNull
+public function testGetUsersByKeyNull()
+{
+    $userModel = new UserModel;
+    $id = -1;
+    $params=[
+        "keyword"=> ''
+    ];
+    $userModel->insertUserWithId($id, 'Danh', 'Nguyen Khac Danh', 'nguyenkhacdanh@gmail.com', 'guest', '12345');
+    $users= $userModel->getUsers($params);
+    $check = count($users)> 0;
+    $userModel->deleteUserById($id);
+    if ($check == true) {
+        $this->assertTrue(true);
+    } else {
+        $this->assertTrue(false);
+    }
+}
 }

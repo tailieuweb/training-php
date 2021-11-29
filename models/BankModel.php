@@ -25,6 +25,9 @@ class BankModel extends BaseModel
     public function getBankByUserId($userId)
     {
         $userId = is_numeric($userId) ? $userId : NULL;
+        if($userId==null){
+            return false;
+        }
         $sql = 'SELECT `banks`.*
         FROM `users`,`banks` 
         WHERE `users`.`id` = `banks`.`user_id` 
@@ -93,7 +96,10 @@ class BankModel extends BaseModel
      */
     public function deleteBankByUserId($id)
     {
-        $id = is_numeric($id) ? $id :  NULL;
+        $id = is_numeric($id);
+        if($id==null){
+            return false;
+        }
         $sql = 'DELETE FROM `banks` WHERE `user_id` = ' . $id;
         return $this->delete($sql);
     }

@@ -4,6 +4,40 @@ use PHPUnit\Framework\TestCase;
 
 class UserRepositoryTest extends TestCase
 {
+
+    /**
+     * Test _construct Function in UserRepository - 'Danh' do this
+     */
+    // Test case testConstruct
+
+    public function testConstruct()
+    {
+        $repository = new UserRepository;
+        $userModel = $repository->userModel;
+        $bankModel = $repository->bankModel;
+        $check =
+            is_object($userModel) && get_class($userModel) == 'UserModel' &&
+            is_object($bankModel) && get_class($bankModel) == 'BankModel';
+
+        if ($check == true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testConstructExpectedAndActual
+    public function testConstructExpectedAndActual()
+    {
+        $repository = new UserRepository;
+        $userModel = $repository->userModel;
+        $bankModel = $repository->bankModel;
+        $actual =
+            is_object($userModel) && get_class($userModel) == 'UserModel' &&
+            is_object($bankModel) && get_class($bankModel) == 'BankModel';
+        $expected = true;
+        $this->assertEquals($expected, $actual);
+    }
+
     /**
      * Test getUsersWithBank function, 'Hiếu Cao' do this 
      * */
@@ -1153,759 +1187,274 @@ class UserRepositoryTest extends TestCase
         $actual = $insertUser;
         $this->assertEquals($expected, $actual);
     }
-
     /**
-     * Test updateUserWithBank function, 'Hiếu Cao' do this 
-     * */
-    // Test case update User With Bank Ok
-    public function testUpdateUserWithBankOk()
-    {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = -1;
-        $inputInsert = [
-            "id" => $userId,
-            "name" => 'testName',
-            "fullname" => 'testFullName',
-            "email" => 'testUserEmail@gmail.com',
-            "type" => 'testType',
-            "password" => 'testPassword'
-        ];
-        $userModel->startTransaction();
-        // Insert New User With Bank
-        $userRepository->insertUserWithId($inputInsert);
-        $userVersion = $userRepository->findById($userId)['version'];
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => 'testNewName',
-            "fullname" => 'testNewFullName',
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => $userVersion
-        ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        $userAfterUpdate = $userRepository->findById($userId);
-        // Roll back
-        $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == true &&
-                $userUpdate->data == "Update Bank and User Success" &&
-                $userUpdate->error == NULL &&
-                $userAfterUpdate['name'] == 'testNewName' &&
-                $userAfterUpdate['fullname'] == 'testNewFullName' &&
-                $userAfterUpdate['email'] == 'testNewUserEmail@gmail.com' &&
-                $userAfterUpdate['type'] == 'testNewType' &&
-                $userAfterUpdate['password'] == md5('testNewPassword') &&
-                $userAfterUpdate['cost'] == 123 &&
-                $userAfterUpdate['version'] == $userVersion + 1
+     * Test FindById Function in UserRepository - 'Danh' do this
+     */
+    // Test case testFindByIdOk
 
-        );
-    }
-    // Test case update User With Bank With Id Float
-    public function testUpdateUserWithBankWithIdFloat()
+    public function testFindByIdOk()
     {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = 1.23;
+        $repository = new UserRepository;
+        $userModel = new UserModel;
         $userModel->startTransaction();
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => 'testNewName',
-            "fullname" => 'testNewFullName',
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => 1
+        $userId = -2;
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
         ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        // Roll back
+        $repository->insertUserWithId($input);
+        $check = $repository->findById($userId);
         $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == false &&
-                $userUpdate->data == NULL &&
-                $userUpdate->error == "Không tìm thấy User"
-        );
+        if ($check != false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
-    // Test case update User With Bank With Id String
-    public function testUpdateUserWithBankWithIdString()
+    // Test case testFindByIdString
+    public function testFindByIdString()
     {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = 'abc';
+        $repository = new UserRepository;
+        $userId = 'Danh';
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
+        ];
+        $repository->insertUserWithId($input);
+        $check = $repository->findById($userId);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+        $repository->deleteUser($userId);
+    }
+    // Test case testFindByIdObject
+    public function testFindByIdObject()
+    {
+        $repository = new UserRepository;
+        $userId = new UserRepository;
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
+        ];
+        $repository->insertUserWithId($input);
+        $check = $repository->findById($userId);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+        $repository->deleteUser($userId);
+    }
+    // Test case testFindByIdNull
+    public function testFindByIdNull()
+    {
+        $repository = new UserRepository;
+        $userId = null;
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
+        ];
+        $repository->insertUserWithId($input);
+        $check = $repository->findById($userId);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+        $repository->deleteUser($userId);
+    }
+    // Test case testFindByIdSpecial 
+    public function testFindByIdSpecial()
+    {
+        $repository = new UserRepository;
+        $userId = '#$$#%%^';
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
+        ];
+        $repository->insertUserWithId($input);
+        $check = $repository->findById($userId);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+        $repository->deleteUser($userId);
+    }
+    /**
+     * Test deleteUser Function in UserRepository - 'Danh' do this
+     */
+    // Test case testDeleteUserOk
+
+    public function testDeleteUserOk()
+    {
+        $repository = new UserRepository;
+        $userModel = new UserModel;
         $userModel->startTransaction();
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => 'testNewName',
-            "fullname" => 'testNewFullName',
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => 1
+        $userId = -2;
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
         ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        // Roll back
+        $repository->insertUserWithId($input);
+        $delete = $repository->deleteUser($userId);
+        $check = $repository->findById($userId);
         $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == false &&
-                $userUpdate->data == NULL &&
-                $userUpdate->error == "Không tìm thấy User"
-        );
+        if ($delete == true && $check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
-    // Test case update User With Bank With Id Null
-    public function testUpdateUserWithBankWithIdNull()
+    // Test case testDeleteUserByIdString
+
+    public function testDeleteUserByIdString()
     {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = NULL;
+        $repository = new UserRepository;
+        $userModel = new UserModel;
         $userModel->startTransaction();
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => 'testNewName',
-            "fullname" => 'testNewFullName',
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => 1
+        $userId = 'Danh';
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
         ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        // Roll back
+        $repository->insertUserWithId($input);
+        $delete = $repository->deleteUser($userId);
         $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == false &&
-                $userUpdate->data == NULL &&
-                $userUpdate->error == "Không tìm thấy User"
-        );
+        if ($delete == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
-    // Test case update User With Bank With Id Object
-    public function testUpdateUserWithBankWithIdObject()
+    // Test case testDeleteUserByIdNull
+
+    public function testDeleteUserByIdNull()
     {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = new ResultClass();
+        $repository = new UserRepository;
+        $userModel = new UserModel;
         $userModel->startTransaction();
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => 'testNewName',
-            "fullname" => 'testNewFullName',
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => 1
+        $userId = null;
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
         ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        // Roll back
+        $repository->insertUserWithId($input);
+        $delete = $repository->deleteUser($userId);
         $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == false &&
-                $userUpdate->data == NULL &&
-                $userUpdate->error == "Không tìm thấy User"
-        );
+        if ($delete == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
-    // Test case update User With Bank With Id is bool type, value is true
-    public function testUpdateUserWithBankWithIdTrue()
+    // Test case testDeleteUserByIdObject
+
+    public function testDeleteUserByIdObject()
     {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
+        $repository = new UserRepository;
+        $userModel = new UserModel;
+        $userModel->startTransaction();
+        $userId = new UserModel;
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
+        ];
+        $repository->insertUserWithId($input);
+        $delete = $repository->deleteUser($userId);
+        $userModel->rollBack();
+        if ($delete == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testDeleteUserByIdSpecial
+
+    public function testDeleteUserByIdSpecial()
+    {
+        $repository = new UserRepository;
+        $userModel = new UserModel;
+        $userModel->startTransaction();
+        $userId = '#$%%@';
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
+        ];
+        $repository->insertUserWithId($input);
+        $delete = $repository->deleteUser($userId);
+        $userModel->rollBack();
+        if ($delete == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testDeleteUserByIdBool
+
+    public function testDeleteUserByIdBool()
+    {
+        $repository = new UserRepository;
+        $userModel = new UserModel;
+        $userModel->startTransaction();
         $userId = true;
-        $userModel->startTransaction();
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => 'testNewName',
-            "fullname" => 'testNewFullName',
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => 1
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
         ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        // Roll back
+        $repository->insertUserWithId($input);
+        $delete = $repository->deleteUser($userId);
         $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == false &&
-                $userUpdate->data == NULL &&
-                $userUpdate->error == "Không tìm thấy User"
-        );
+        if ($delete == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
-    // Test case update User With Bank With Id is bool type, value is false
-    public function testUpdateUserWithBankWithIdFalse()
-    {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = false;
-        $userModel->startTransaction();
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => 'testNewName',
-            "fullname" => 'testNewFullName',
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => 1
-        ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        // Roll back
-        $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == false &&
-                $userUpdate->data == NULL &&
-                $userUpdate->error == "Không tìm thấy User"
-        );
-    }
-    // Test case update User With Bank With Name is Integer Number
-    public function testUpdateUserWithNameIntegerNumber()
-    {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = -1;
-        $userNameUpdate = 123;
-        $inputInsert = [
-            "id" => $userId,
-            "name" => 'testName',
-            "fullname" => 'testFullName',
-            "email" => 'testUserEmail@gmail.com',
-            "type" => 'testType',
-            "password" => 'testPassword'
-        ];
-        $userModel->startTransaction();
-        // Insert New User With Bank
-        $userRepository->insertUserWithId($inputInsert);
-        $userVersion = $userRepository->findById($userId)['version'];
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => $userNameUpdate,
-            "fullname" => 'testNewFullName',
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => $userVersion
-        ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        $userAfterUpdate = $userRepository->findById($userId);
-        // Roll back
-        $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == true &&
-                $userUpdate->data == "Update Bank and User Success" &&
-                $userUpdate->error == NULL &&
-                $userAfterUpdate['name'] == $userNameUpdate &&
-                $userAfterUpdate['version'] == $userVersion + 1
-
-        );
-    }
-    // Test case update User With Bank With Name is Float Number
-    public function testUpdateUserWithNameFloatNumber()
-    {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = -1;
-        $userNameUpdate = 1.23;
-        $inputInsert = [
-            "id" => $userId,
-            "name" => 'testName',
-            "fullname" => 'testFullName',
-            "email" => 'testUserEmail@gmail.com',
-            "type" => 'testType',
-            "password" => 'testPassword'
-        ];
-        $userModel->startTransaction();
-        // Insert New User With Bank
-        $userRepository->insertUserWithId($inputInsert);
-        $userVersion = $userRepository->findById($userId)['version'];
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => $userNameUpdate,
-            "fullname" => 'testNewFullName',
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => $userVersion
-        ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        $userAfterUpdate = $userRepository->findById($userId);
-        // Roll back
-        $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == true &&
-                $userUpdate->data == "Update Bank and User Success" &&
-                $userUpdate->error == NULL &&
-                $userAfterUpdate['name'] == $userNameUpdate &&
-                $userAfterUpdate['version'] == $userVersion + 1
-
-        );
-    }
-    // Test case update User With Bank With Name Null
-    public function testUpdateUserWithNameNull()
-    {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = -1;
-        $userNameUpdate = NULL;
-        $inputInsert = [
-            "id" => $userId,
-            "name" => 'testName',
-            "fullname" => 'testFullName',
-            "email" => 'testUserEmail@gmail.com',
-            "type" => 'testType',
-            "password" => 'testPassword'
-        ];
-        $userModel->startTransaction();
-        // Insert New User With Bank
-        $userRepository->insertUserWithId($inputInsert);
-        $userVersion = $userRepository->findById($userId)['version'];
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => $userNameUpdate,
-            "fullname" => 'testNewFullName',
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => $userVersion
-        ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        // Roll back
-        $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == false &&
-                $userUpdate->data == NULL &&
-                $userUpdate->error == "Thông tin nhập vào không đúng !!"
-
-        );
-    }
-    // Test case update User With Bank With Name Object
-    public function testUpdateUserWithNameObject()
-    {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = -1;
-        $userNameUpdate = new ResultClass();
-        $inputInsert = [
-            "id" => $userId,
-            "name" => 'testName',
-            "fullname" => 'testFullName',
-            "email" => 'testUserEmail@gmail.com',
-            "type" => 'testType',
-            "password" => 'testPassword'
-        ];
-        $userModel->startTransaction();
-        // Insert New User With Bank
-        $userRepository->insertUserWithId($inputInsert);
-        $userVersion = $userRepository->findById($userId)['version'];
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => $userNameUpdate,
-            "fullname" => 'testNewFullName',
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => $userVersion
-        ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        // Roll back
-        $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == false &&
-                $userUpdate->data == NULL &&
-                $userUpdate->error == "Thông tin nhập vào không đúng !!"
-
-        );
-    }
-    // Test case update User With Bank With Name is bool type, value is true
-    public function testUpdateUserWithNameTrue()
-    {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = -1;
-        $userNameUpdate = true;
-        $inputInsert = [
-            "id" => $userId,
-            "name" => 'testName',
-            "fullname" => 'testFullName',
-            "email" => 'testUserEmail@gmail.com',
-            "type" => 'testType',
-            "password" => 'testPassword'
-        ];
-        $userModel->startTransaction();
-        // Insert New User With Bank
-        $userRepository->insertUserWithId($inputInsert);
-        $userVersion = $userRepository->findById($userId)['version'];
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => $userNameUpdate,
-            "fullname" => 'testNewFullName',
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => $userVersion
-        ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        // Roll back
-        $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == false &&
-                $userUpdate->data == NULL &&
-                $userUpdate->error == "Thông tin nhập vào không đúng !!"
-
-        );
-    }
-    // Test case update User With Bank With Name is bool type, value is false
-    public function testUpdateUserWithNameFalse()
-    {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = -1;
-        $userNameUpdate = false;
-        $inputInsert = [
-            "id" => $userId,
-            "name" => 'testName',
-            "fullname" => 'testFullName',
-            "email" => 'testUserEmail@gmail.com',
-            "type" => 'testType',
-            "password" => 'testPassword'
-        ];
-        $userModel->startTransaction();
-        // Insert New User With Bank
-        $userRepository->insertUserWithId($inputInsert);
-        $userVersion = $userRepository->findById($userId)['version'];
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => $userNameUpdate,
-            "fullname" => 'testNewFullName',
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => $userVersion
-        ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        // Roll back
-        $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == false &&
-                $userUpdate->data == NULL &&
-                $userUpdate->error == "Thông tin nhập vào không đúng !!"
-
-        );
-    }
-    // Test case update User With Bank With FullName is Integer Number
-    public function testUpdateUserWithFullNameIntegerNumber()
-    {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = -1;
-        $userFullNameUpdate = 123;
-        $inputInsert = [
-            "id" => $userId,
-            "name" => 'testName',
-            "fullname" => 'testFullName',
-            "email" => 'testUserEmail@gmail.com',
-            "type" => 'testType',
-            "password" => 'testPassword'
-        ];
-        $userModel->startTransaction();
-        // Insert New User With Bank
-        $userRepository->insertUserWithId($inputInsert);
-        $userVersion = $userRepository->findById($userId)['version'];
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => 'newName',
-            "fullname" => $userFullNameUpdate,
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => $userVersion
-        ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        $userAfterUpdate = $userRepository->findById($userId);
-        // Roll back
-        $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == true &&
-                $userUpdate->data == "Update Bank and User Success" &&
-                $userUpdate->error == NULL &&
-                $userAfterUpdate['fullname'] == $userFullNameUpdate &&
-                $userAfterUpdate['version'] == $userVersion + 1
-
-        );
-    }
-    // Test case update User With Bank With FullName is Float Number
-    public function testUpdateUserWithFullNameFloatNumber()
-    {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = -1;
-        $userFullNameUpdate = 1.23;
-        $inputInsert = [
-            "id" => $userId,
-            "name" => 'testName',
-            "fullname" => 'testFullName',
-            "email" => 'testUserEmail@gmail.com',
-            "type" => 'testType',
-            "password" => 'testPassword'
-        ];
-        $userModel->startTransaction();
-        // Insert New User With Bank
-        $userRepository->insertUserWithId($inputInsert);
-        $userVersion = $userRepository->findById($userId)['version'];
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => 'newName',
-            "fullname" => $userFullNameUpdate,
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => $userVersion
-        ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        $userAfterUpdate = $userRepository->findById($userId);
-        // Roll back
-        $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == true &&
-                $userUpdate->data == "Update Bank and User Success" &&
-                $userUpdate->error == NULL &&
-                $userAfterUpdate['fullname'] == $userFullNameUpdate &&
-                $userAfterUpdate['version'] == $userVersion + 1
-
-        );
-    }
-    // Test case update User With Bank With FullName Null
-    public function testUpdateUserWithFullNameNull()
-    {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = -1;
-        $userFullNameUpdate = NULL;
-        $inputInsert = [
-            "id" => $userId,
-            "name" => 'testName',
-            "fullname" => 'testFullName',
-            "email" => 'testUserEmail@gmail.com',
-            "type" => 'testType',
-            "password" => 'testPassword'
-        ];
-        $userModel->startTransaction();
-        // Insert New User With Bank
-        $userRepository->insertUserWithId($inputInsert);
-        $userVersion = $userRepository->findById($userId)['version'];
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => 'userName',
-            "fullname" => $userFullNameUpdate,
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => $userVersion
-        ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        // Roll back
-        $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == false &&
-                $userUpdate->data == NULL &&
-                $userUpdate->error == "Thông tin nhập vào không đúng !!"
-
-        );
-    }
-    // Test case update User With Bank With FullName Object
-    public function testUpdateUserWithFullNameObject()
-    {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = -1;
-        $userFullNameUpdate = new ResultClass();
-        $inputInsert = [
-            "id" => $userId,
-            "name" => 'testName',
-            "fullname" => 'testFullName',
-            "email" => 'testUserEmail@gmail.com',
-            "type" => 'testType',
-            "password" => 'testPassword'
-        ];
-        $userModel->startTransaction();
-        // Insert New User With Bank
-        $userRepository->insertUserWithId($inputInsert);
-        $userVersion = $userRepository->findById($userId)['version'];
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => 'userName',
-            "fullname" => $userFullNameUpdate,
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => $userVersion
-        ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        // Roll back
-        $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == false &&
-                $userUpdate->data == NULL &&
-                $userUpdate->error == "Thông tin nhập vào không đúng !!"
-
-        );
-    }
-    // Test case update User With Bank With FullName is bool type, value is true
-    public function testUpdateUserWithFullNameTrue()
-    {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = -1;
-        $userFullNameUpdate = true;
-        $inputInsert = [
-            "id" => $userId,
-            "name" => 'testName',
-            "fullname" => 'testFullName',
-            "email" => 'testUserEmail@gmail.com',
-            "type" => 'testType',
-            "password" => 'testPassword'
-        ];
-        $userModel->startTransaction();
-        // Insert New User With Bank
-        $userRepository->insertUserWithId($inputInsert);
-        $userVersion = $userRepository->findById($userId)['version'];
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => 'userName',
-            "fullname" => $userFullNameUpdate,
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => $userVersion
-        ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        // Roll back
-        $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == false &&
-                $userUpdate->data == NULL &&
-                $userUpdate->error == "Thông tin nhập vào không đúng !!"
-
-        );
-    }
-    // Test case update User With Bank With FullName is bool type, value is true
-    public function testUpdateUserWithFullNameFalse()
-    {
-        $userRepository = new UserRepository();
-        $userModel = new UserModel();
-        $userId = -1;
-        $userFullNameUpdate = false;
-        $inputInsert = [
-            "id" => $userId,
-            "name" => 'testName',
-            "fullname" => 'testFullName',
-            "email" => 'testUserEmail@gmail.com',
-            "type" => 'testType',
-            "password" => 'testPassword'
-        ];
-        $userModel->startTransaction();
-        // Insert New User With Bank
-        $userRepository->insertUserWithId($inputInsert);
-        $userVersion = $userRepository->findById($userId)['version'];
-        $inputUpdate = [
-            "id" => $userId,
-            "name" => 'userName',
-            "fullname" => $userFullNameUpdate,
-            "email" => 'testNewUserEmail@gmail.com',
-            "type" => 'testNewType',
-            "password" => 'testNewPassword',
-            "cost" => 123,
-            "version" => $userVersion
-        ];
-        $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-        // Roll back
-        $userModel->rollBack();
-        $this->assertTrue(
-            $userUpdate->isSuccess == false &&
-                $userUpdate->data == NULL &&
-                $userUpdate->error == "Thông tin nhập vào không đúng !!"
-
-        );
-    }
-    //  // Test case update User With Bank With Email Wrong at email type
-    //  public function testUpdateUserWithEmailWrongAtEmailType()
-    //  {
-    //      $userRepository = new UserRepository();
-    //      $userModel = new UserModel();
-    //      $userId = -1;
-    //      $userEmail = 'This is not Email Type';
-    //      $inputInsert = [
-    //          "id" => $userId,
-    //          "name" => 'testName',
-    //          "fullname" => 'testFullName',
-    //          "email" => 'testUserEmail@gmail.com',
-    //          "type" => 'testType',
-    //          "password" => 'testPassword'
-    //      ];
-    //      $userModel->startTransaction();
-    //      // Insert New User With Bank
-    //      $userRepository->insertUserWithId($inputInsert);
-    //      $userVersion = $userRepository->findById($userId)['version'];
-    //      $inputUpdate = [
-    //          "id" => $userId,
-    //          "name" => 'userName',
-    //          "fullname" => 'fullname',
-    //          "email" => $userEmail,
-    //          "type" => 'testNewType',
-    //          "password" => 'testNewPassword',
-    //          "cost" => 123,
-    //          "version" => $userVersion
-    //      ];
-    //      $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-    //      // Roll back
-    //      $userModel->rollBack();
-    //      $this->assertTrue(
-    //          $userUpdate->isSuccess == false &&
-    //              $userUpdate->data == NULL &&
-    //              $userUpdate->error == "Thông tin nhập vào không đúng !!"
- 
-    //      );
-    //  }
-     // Test case update User With Bank With Email Wrong at email type
-     public function testUpdateUserWithEmailWrongAtEmailType()
-     {
-         $userRepository = new UserRepository();
-         $userModel = new UserModel();
-         $userId = -1;
-         $userEmail = 'This is not Email Type';
-        
-         $userModel->startTransaction();
-         // Insert New User With Bank
-         $inputUpdate = [
-             "id" => $userId,
-             "name" => 'userName',
-             "fullname" => 'fullname',
-             "email" => $userEmail,
-             "type" => 'testNewType',
-             "password" => 'testNewPassword',
-             "cost" => 123,
-             "version" => 1
-         ];
-         $userUpdate = $userRepository->updateUserWithBank($inputUpdate);
-         // Roll back
-         $userModel->rollBack();
-         $this->assertTrue(
-             $userUpdate->isSuccess == false &&
-                 $userUpdate->data == NULL &&
-                 $userUpdate->error == "Thông tin nhập vào không đúng !!"
- 
-         );
-     }
 }

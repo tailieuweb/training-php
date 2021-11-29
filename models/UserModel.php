@@ -51,6 +51,9 @@ class UserModel extends BaseModel
     public function deleteUserById($id)
     {
         $id = $this->decryptID($id);
+        if($id==null){
+            return false;
+        }
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
     }
