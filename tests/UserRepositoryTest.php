@@ -1326,7 +1326,132 @@ class UserRepositoryTest extends TestCase
         $delete = $repository->deleteUser($userId);
         $check = $repository->findById($userId);
         $userModel->rollBack();
-        if ($delete == true && $check == false ) {
+        if ($delete == true && $check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testDeleteUserByIdString
+
+    public function testDeleteUserByIdString()
+    {
+        $repository = new UserRepository;
+        $userModel = new UserModel;
+        $userModel->startTransaction();
+        $userId = 'Danh';
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
+        ];
+        $repository->insertUserWithId($input);
+        $delete = $repository->deleteUser($userId);
+        $userModel->rollBack();
+        if ($delete == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testDeleteUserByIdNull
+
+    public function testDeleteUserByIdNull()
+    {
+        $repository = new UserRepository;
+        $userModel = new UserModel;
+        $userModel->startTransaction();
+        $userId = null;
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
+        ];
+        $repository->insertUserWithId($input);
+        $delete = $repository->deleteUser($userId);
+        $userModel->rollBack();
+        if ($delete == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testDeleteUserByIdObject
+
+    public function testDeleteUserByIdObject()
+    {
+        $repository = new UserRepository;
+        $userModel = new UserModel;
+        $userModel->startTransaction();
+        $userId = new UserModel;
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
+        ];
+        $repository->insertUserWithId($input);
+        $delete = $repository->deleteUser($userId);
+        $userModel->rollBack();
+        if ($delete == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testDeleteUserByIdSpecial
+
+    public function testDeleteUserByIdSpecial()
+    {
+        $repository = new UserRepository;
+        $userModel = new UserModel;
+        $userModel->startTransaction();
+        $userId = '#$%%@';
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
+        ];
+        $repository->insertUserWithId($input);
+        $delete = $repository->deleteUser($userId);
+        $userModel->rollBack();
+        if ($delete == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testDeleteUserByIdBool
+
+    public function testDeleteUserByIdBool()
+    {
+        $repository = new UserRepository;
+        $userModel = new UserModel;
+        $userModel->startTransaction();
+        $userId = true;
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
+        ];
+        $repository->insertUserWithId($input);
+        $delete = $repository->deleteUser($userId);
+        $userModel->rollBack();
+        if ($delete == false) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
