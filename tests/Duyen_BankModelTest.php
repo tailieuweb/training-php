@@ -7,14 +7,14 @@ class BankModelTest extends TestCase
     /**
      * Test case Okie
      */
-    public function testGetInstanceOk(){
+    public function testConstructOk(){
 
      $actual;
      $expected='Connect failed';
         try{
             $bank = new BankModel(true);
             $actual=BankModel::$status;
-            var_dump($actual);
+          //  var_dump($actual);
         }catch(Throwable $e){
            
         }
