@@ -4,6 +4,8 @@
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
 
+$userModel = $factory->make('user');
+
 $bankModel = $factory->make('bank');
 
 $params = [];
@@ -15,7 +17,7 @@ $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $bankModel->findUserById($id);//Update existing user
+    $user = $bankModel->findBankById($id);//Update existing user
 }
 
 
@@ -53,18 +55,6 @@ if (!empty($_POST['submit'])) {
             <div class="form-group">
                 <label for="cost">Cost</label>
                 <span><?php if (!empty($user[0]['name'])) echo $banks[0]['cost'] ?></span>
-            </div>
-            <div class="form-group">
-                <label for="password">Fullname</label>
-                <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
-            </div>
-            <div class="form-group">
-                <label for="password">Email</label>
-                <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
-            </div>
-            <div class="form-group">
-                <label for="password">Type</label>
-                <span><?php if (!empty($user[0]['name'])) echo $user[0]['type'] ?></span>
             </div>
         </form>
     <?php } else { ?>
