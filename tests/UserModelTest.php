@@ -359,7 +359,7 @@ class UserModelTest extends TestCase
     $userModel = new UserModel();
     $params = [];
     $params['keyword'] = null;
-    $expected = 14;
+    $expected = 20;
     $arrUsers = $userModel->getUsers($params);
     $actual = count($arrUsers);
     $this->assertEquals($expected, $actual);
@@ -407,7 +407,7 @@ class UserModelTest extends TestCase
     $userModel = new UserModel();
     $params = [];
     $params['keyword'] = '';
-    $expected = 14;
+    $expected = 20;
     $arrUsers = $userModel->getUsers($params);
     $actual = count($arrUsers);
     $this->assertEquals($expected, $actual);
@@ -427,7 +427,7 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'thuongnew';
+    $input['name'] = 'thuongnew1';
     $input['fullname'] = 'tpthuong';
     $input['email'] = 'email';
     $input['type'] = 'user';
@@ -580,7 +580,7 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'withoutfullname3';
+    $input['name'] = 'withoutfullname4';
     // $input['fullname'] = 'withoutname';
     $input['email'] = 'email';
     $input['type'] = 'user';
@@ -597,7 +597,7 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'withoutemail3';
+    $input['name'] = 'withoutemail4';
     $input['fullname'] = 'withoutemail';
     // $input['email'] = 'email';
     $input['type'] = 'user';

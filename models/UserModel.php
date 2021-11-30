@@ -96,29 +96,60 @@ class UserModel extends BaseModel
   //--------------------------------------------------------------
   public function insertUser($input)
   {
-    $name = htmlspecialchars($input['name']);
-    $fullname = htmlspecialchars($input['fullname']);
-    $email = htmlspecialchars($input['email']);
-    $type = htmlspecialchars($input['type']);
-    $password = md5($input['password']);
-    $sql = "INSERT INTO `users` (`name`, `fullname`, `email`, `type`, `password`)
-                VALUES ('$name', '$fullname', '$email', '$type', '$password') ";
-    $user = $this->insert($sql);
+    $user = null;
+
+    if (empty($input) || is_numeric($input) || is_object($input) || is_string($input)) {
+      return false;
+    }
+    if (!empty($input['password']) && !empty($input['name']) && !empty($input['type'])) {
+
+      $result = $this->query('SELECT name FROM users WHERE name = "' . $input['name'] . '"');
+      if ($result->num_rows == 0) {
+        // row not found, do stuff...
+        if (is_string($input['password']) && !preg_match("/(\s)/i", $input['password'])) {
+          $password = md5($input['password']);
+        } else {
+          return false;
+        }
+        $name = htmlspecialchars($input['name']);
+        $fullname = '';
+        if (isset($input['fullname'])) {
+          $fullname = htmlspecialchars($input['fullname']);
+        }
+
+        $email = '';
+        if (isset($input['email'])) {
+          $email = htmlspecialchars($input['email']);
+        }
+
+        $type = htmlspecialchars($input['type']);
+
+        $sql = "INSERT INTO `users` (`name`, `fullname`, `email`, `type`, `password`)
+                    VALUES ('$name', '$fullname', '$email', '$type', '$password') ";
+        $user = $this->insert($sql);
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+
     return $user;
   }
   //--------------------------------------------------------------
   public function getUsers($params = [])
   {
-    //Keyword
-    $users = null;
+    if (isset($params['keyword'])) {
+      if (is_array($params['keyword']))
+        return 'error';
+    }
+
     if (!empty($params['keyword'])) {
-      $stmt = self::$_connection->prepare("SELECT * FROM users WHERE name LIKE CONCAT('%',?,'%')");
-      if ($stmt) {
-        $stmt->bind_param("s", $params['keyword']);
-        $stmt->execute();
-        $users = array();
-        $users = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+      if (is_bool($params['keyword']) || is_numeric($params['keyword'])) {
+        return 'error';
       }
+      $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
+      $users = $this->select($sql);
     } else {
       $sql = 'SELECT * FROM users';
       $users = $this->select($sql);
