@@ -38,6 +38,9 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function deleteUserById($id) {
+        if(is_array($id)){
+            return [];
+        }
         $sql = 'DELETE FROM users WHERE id = '.$id;
         return $this->delete($sql);
 
@@ -96,17 +99,20 @@ class UserModel extends BaseModel {
      * @param array $params
      * @return array
      */
-    public function getUsers($params = []) {
-        //Keyword
+    public function getUsers($params = [])
+    {
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+            $key = str_replace('"', '', $params['keyword']);
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $key . '%"';
 
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+            // $users = self::$_connection->multi_query($sql);
+            $users = $this->select($sql);
         } else {
-            $sql = 'SELECT * FROM users';
+
+            $sql = 'SELECT * FROM users join types on users.type = types.type_id';
             $users = $this->select($sql);
         }
 
