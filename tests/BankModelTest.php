@@ -9,8 +9,18 @@ class BankModelTest extends TestCase
     Function:testGetAllBanks()
     Author:Quoc Viet
     */
+    public function testGetUserByKeyWordOk()
+    {
+        $userModel = new UserModel();
+        $params = [];
+        $params['keyword'] = 'aa';
+        $countAr = 1;
+        $actual = $userModel->getUsers($params);
+
+        $this->assertEquals($countAr, count($actual));
+    }
     
-    public function testGetAllBanks_Ok() {
+    public function testGetAllBanksArrayListOne_Ok() {
         $bankModel = new BankModel();
         $expected = [
             ["id" => "1", 
@@ -19,8 +29,29 @@ class BankModelTest extends TestCase
         ] ;
 
         $actual = $bankModel->getAll();
-        $this->assertEquals($expected[0], $actual[0]);
+        $this->assertEquals( $expected[0], $actual[0]);
     }
+        /*
+    Function:testGetAllBanksArrayListEnd_Ok()
+    Author:Quoc Viet
+    */
+    
+    // public function testGetAllBanks_not_Ok()
+    // {
+    //     $bankModel = new BankModel();
+    //     $bankId = $userId = -1;
+    //     $cost = 100;
+
+    //     $bankModel->insertBankInfo($bankId, $userId, $cost);
+    //     $listBank = $bankModel->getBanks();
+
+    //     $expected = true;
+    //     $actual = is_array($listBank) && count($listBank) > 0;
+    //     // Delete new Bank After test
+    //     $bankModel->deleteBalanceById($userId);
+
+    //     $this->assertEquals($expected, $actual);
+    // }
  /////////////////////////// Test InsertbanksInfo//////////////////////////
       /**
       * function testInsertBankInfo_Invalid_Ok()
@@ -32,8 +63,8 @@ class BankModelTest extends TestCase
     {
         $bankModel = new BankModel();
         $input = array(
-            'user_id' => "4",
-            'cost' => "1111",
+            'user_id' => "2",
+            'cost' => "0",
         );
         //Execute
         $bankModel->insertBankInfo($input);
@@ -222,10 +253,38 @@ class BankModelTest extends TestCase
      //////////////////////////////////////  getBanks  param ///////////////////////
         
     */
+
+      public function testgetBanksAcount_Ok()
+    {
+        $bankModel = new BankModel();
+
+        $countAr = 3;
+        $actual = $bankModel->getBanks();
+        // var_dump($actual);die();
+        $this->assertEquals($countAr, count($actual));
+    }
+    /**
+    *function testgetBaksByKeyWord_count_Ok()
+    * Author: Quoc Viet
+     */
+    //Tets lay dung du lieu va so luong:
+    public function testgetBaksByKeyWord_count_Ok()
+    {
+        $bankModel = new BankModel();
+        $params = [];
+        $params['keyword'] = '1';
+        $countAr = 1;
+        $actual = $bankModel->getBanks($params);
+        // var_dump($actual);die();
+        $this->assertEquals($countAr, count($actual));
+    }
+
+
     /**
     *function testgetBanksInfoParamNull_Ok()
     * Author: Quoc Viet
      */
+
   
     public function testgetBanksInfoParamNull_Ok()
     {

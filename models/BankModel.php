@@ -15,7 +15,7 @@ class BankModel extends BaseModel {
         self::$bankInstance = new self();
         return self::$bankInstance;
     }
-
+    
     /**
      * Get bank account
      * @param array $params
