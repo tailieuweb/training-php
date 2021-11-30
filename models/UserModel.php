@@ -64,7 +64,7 @@ class UserModel extends BaseModel
       $sql = 'DELETE FROM users WHERE id = ' . $id;
       return $this->delete($sql);
     } else {
-      return "User doesn't exis";
+      return "User doesn't exist";
     }
   }
   //--------------------------------------------------------------
