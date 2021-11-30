@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
 {
+ 
   //?--------------------------------------------------------------
   public function testFindUserByIdWithIdIntegerOk()
   {
@@ -727,12 +728,12 @@ class UserModelTest extends TestCase
   public function testUpdateUserByIdOk()
   {
     $param = array(
-      "id" => 10,
-      "name" => "teo10",
-      "fullname" => "teo10 update",
-      "email" => "teo10@mail.com",
+      "id" => 15,
+      "name" => "teo15",
+      "fullname" => "teo15 update",
+      "email" => "teo15@mail.com",
       "type" => "user",
-      "password" => "teo10",
+      "password" => md5("teo15"),
       "submit" => "submit"
     );
     $actual = UserModel::getInstance()->updateUser($param);
@@ -1399,8 +1400,9 @@ class UserModelTest extends TestCase
     $expected = "error";
     $this->assertEquals($expected, $actual);
   }
+  
   // test case delete_user_by_id ok
-  public function testDeleteByUserIdOk($id = 36)
+  public function testDeleteByUserIdOk($id = 66)
   {
     $userModel = new UserModel();
     $actual = $userModel->deleteUserById($id);

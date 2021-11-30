@@ -89,7 +89,7 @@ class UserModel extends BaseModel
       return "User not exist";
     } else {
       $sql = self::$_connection->prepare("UPDATE `users` SET `name`=?,`fullname`=?,`email`=?,`type`=?,`password`=? WHERE `id` =?");
-      $sql->bind_param("sssssi", $input['name'], $input['fullname'], $input['password'], $input['email'], $input['type'], $input['id']);
+      $sql->bind_param("sssssi", $input['name'], $input['fullname'], $input['email'], $input['type'], $input['password'], $input['id']);
       return $sql->execute();
     }
   }
