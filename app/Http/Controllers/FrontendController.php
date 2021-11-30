@@ -183,6 +183,7 @@ class FrontendController extends Controller
     public function getDetailHotel($id)
     {
         $this->AuthLogin();
+        $id = substr($id,9);
         $all_hotel = DB::table('hotel')
             ->join('location', 'location.location_id', '=', 'hotel.location')
             ->where('hotel.hotel_id', $id)
