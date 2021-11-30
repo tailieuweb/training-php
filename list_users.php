@@ -1,18 +1,15 @@
 <?php
 // Start the session
-session_start();
-require_once 'models/FactoryPattern.php';
-
-$factory = new FactoryPattern();
-
-$userModel = $factory->make('user');
-
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
+require_once 'models/UserModel.php';
 $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
-
-$users = $userModel->getUsers($params);
+$users = UserModel::getInstance()->getUsers($params);
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,13 +22,7 @@ $users = $userModel->getUsers($params);
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-        <?php if (!empty($users)) {
-                if(is_string($users)){
-        ?>
-        <div class="alert alert-dark" role="alert">
-                Not Found User!
-            </div>
-        <?php exit();} ?>
+    <?php if (!empty($users)) { ?>
             <div class="alert alert-warning" role="alert">
                 List of users! <br>
                 Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
@@ -66,8 +57,9 @@ $users = $userModel->getUsers($params);
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="list_users.php?id=<?php echo $user['id'] ?>&token=<?php echo $token ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
+                                    <input type="hidden" name="token" value="<?php echo $token ?>">
                                 </a>
                             </td>
                         </tr>
