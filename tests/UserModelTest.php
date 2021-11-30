@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
 {
- 
+
   //?--------------------------------------------------------------
   public function testFindUserByIdWithIdIntegerOk()
   {
@@ -360,7 +360,7 @@ class UserModelTest extends TestCase
     $userModel = new UserModel();
     $params = [];
     $params['keyword'] = null;
-    $expected = 20;
+    $expected = 22;
     $arrUsers = $userModel->getUsers($params);
     $actual = count($arrUsers);
     $this->assertEquals($expected, $actual);
@@ -408,7 +408,7 @@ class UserModelTest extends TestCase
     $userModel = new UserModel();
     $params = [];
     $params['keyword'] = '';
-    $expected = 20;
+    $expected = 22;
     $arrUsers = $userModel->getUsers($params);
     $actual = count($arrUsers);
     $this->assertEquals($expected, $actual);
@@ -428,7 +428,7 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'thuongnew1';
+    $input['name'] = 'thuongnew2';
     $input['fullname'] = 'tpthuong';
     $input['email'] = 'email';
     $input['type'] = 'user';
@@ -581,7 +581,7 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'withoutfullname4';
+    $input['name'] = 'withoutfullname5';
     // $input['fullname'] = 'withoutname';
     $input['email'] = 'email';
     $input['type'] = 'user';
@@ -598,7 +598,7 @@ class UserModelTest extends TestCase
   {
     $userModel = new UserModel();
     $input = [];
-    $input['name'] = 'withoutemail4';
+    $input['name'] = 'withoutemail5';
     $input['fullname'] = 'withoutemail';
     // $input['email'] = 'email';
     $input['type'] = 'user';
@@ -1400,7 +1400,7 @@ class UserModelTest extends TestCase
     $expected = "error";
     $this->assertEquals($expected, $actual);
   }
-  
+
   // test case delete_user_by_id ok
   public function testDeleteByUserIdOk($id = 66)
   {
