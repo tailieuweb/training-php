@@ -23,6 +23,9 @@ class UserModel extends BaseModel
     // Find User By Email
     public function findUserByEmail($email)
     {
+        if (!is_string($email)) {
+            return false;
+        }
         $sql = 'SELECT * FROM users WHERE email ="' . $email . '"';
         $user = $this->select($sql);
         return isset($user[0]) ? $user[0] : false;
@@ -51,7 +54,7 @@ class UserModel extends BaseModel
     public function deleteUserById($id)
     {
         $id = $this->decryptID($id);
-        if($id==null){
+        if ($id == null) {
             return false;
         }
         $sql = 'DELETE FROM users WHERE id = ' . $id;
@@ -287,7 +290,7 @@ class UserModel extends BaseModel
                             $user = $this->findUserById($input['id']);
                             $userEmail = $user != false ? $user['email'] : null;
                             if ($userEmail) {
-                                if($userEmail != $input['email'] && $this->checkEmailExist($input['email'])){
+                                if ($userEmail != $input['email'] && $this->checkEmailExist($input['email'])) {
                                     return false;
                                 }
                             }
@@ -296,7 +299,7 @@ class UserModel extends BaseModel
                                 return false;
                             }
                         }
-                    }else{
+                    } else {
                         return false;
                     }
                 } else {
