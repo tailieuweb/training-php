@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Categories | Pos Coron!</title>
+  <title>Favorite | Pos Coron!</title>
 
   <!-- Bootstrap -->
   <link href="{{ url('cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css')}}">
@@ -37,16 +37,16 @@
   @include('backend.partial.header')
 
   @if (session()->has('message'))
-                <div class="alert alert-success">
-                    {{ session()->get('message') }}
-                </div>
-                @endif
+  <div class="alert alert-success">
+    {{ session()->get('message') }}
+  </div>
+  @endif
   <!-- page content -->
   <div class="right_col" role="main">
     <div class="">
       <div class="page-title">
         <div class="title_left">
-          <h3>Quản lí Categories <small> </small></h3>
+          <h3>Quản lí Favorite <small> </small></h3>
         </div>
 
         <div class="title_right">
@@ -67,7 +67,7 @@
         <div class="col-md-12 col-sm-12 ">
           <div class="x_panel">
             <div class="x_title">
-              <h2>Danh sách Categories </h2>
+              <h2>Danh sách Favorite </h2>
               <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -93,44 +93,31 @@
                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                       <thead>
                         <tr>
-
                           <th>Id</th>
-                          <th>Name</th>
-
-                          <!-- <th>Type_id</th>
-                          <th>Manu_id</th>
-                          <th>Description</th>
-                          <th>Sale</th>
-                          <th>Size</th>
-                          <th>Gender</th>
-                          <th>Created_at</th>
-                          <th>Updated_at</th> -->
+                          <th>User</th>
+                          <th>Hotel</th>
+                          <th>Date</th>
                           <th style="width:50px;"></th>
-
                         </tr>
                       </thead>
-
-
                       <tbody>
                         <?php
                         $stt = 1;
+                        $id_new = 0;
                         ?>
                         @foreach($favorite as $favorite )
                         <?php $key = rand(111111111, 999999999);
-
                         ?>
                         <tr>
-                          <!-- <td>{{ $loop->index + 1 }}</td> -->
-
-
-                          <td>{{$favorite->id}}</td>
+                          <td>{{$favorite->favorite_id}}</td>
+                          <td>{{$favorite->username}}</td>
                           <td>{{$favorite->name}}</td>
-
+                          <td>{{$favorite->date_created}}</td>
                           <td>
-                            <!-- <div class="fa-hover col-md-3 col-sm-4  "><a href="{{URL::to('/favorite/edit/'.$key.$favorite->id)}}"><i class="fa fa-wrench"></i></a> -->
+                            <div class="fa-hover col-md-3 col-sm-4  "><a href="{{URL::to('admin/favorite/update/'.$key.$favorite->favorite_id)}}"><i class="fa fa-wrench"></i></a>
 
-                              <div class="fa-hover col-md-3 col-sm-4  "><a onclick="return comfirm('Bạn có chắc muốn xóa sản phẩm này không?')" href="{{URL::to('/favorite/delete/'.$key.$favorite->favorite_id)}}"><i class="fa fa-trash"></i></a>
-                              </div>
+                            <div class="fa-hover col-md-3 col-sm-4  "><a onclick="setValueDelete(<?php echo $favorite->favorite_id; ?>)"><i class="fa fa-trash"></i></a>
+                            </div>
 
                           </td>
                         </tr>
@@ -140,31 +127,23 @@
                         @endforeach
                       </tbody>
                     </table>
-
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
   </div>
 
-
   </div>
   </div>
   </div>
 
-
   </div>
   </div>
   </div>
-
-
-
 
   </div>
   </div>
@@ -175,6 +154,17 @@
   <!-- /page content -->
 
   @include('backend.partial.footer')
+  <script>
+    function setValueDelete(id) {
+      let r = confirm("Bạn có chắc muốn tiếp tục xóa?");
+      if (r == true) {
+        window.location = '{{asset('')}}admin/favorite/delete/<?php echo $key; ?>' + id
+      } else {
+        window.location = "{{asset('')}}admin/favorite/"
+      }
+      document.getElementById("demo").innerHTML = txt;
+    }
+  </script>
 
 </body>
 
