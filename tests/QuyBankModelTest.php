@@ -22,57 +22,62 @@ class QuyBankModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-    // test insert Bank null
-    public function testInsertBanksNull()
+    // insert Bank Not Good
+    public function testInsertBankNg()
     {
-        $bankmodel = new BankModel();
-        $banks = array(
-            'id' =>[],
-            'user_id' => '',
-            'cost' => '',
-            
-        );
-        $actual = $bankmodel->insertBank($banks);
-        if ($actual == true) {
-            $this->assertTrue(true);
-        }else { 
-            $this->assertTrue(false);
+        $userModel = new UserModel();
+        $input = [];
+        $input['id'] = -999991;
+        $input['user_id'] = '111';
+        $input['cost'] = "12345";
+        $actual = $userModel->insertUser( $input);
+        if($actual != true)
+        {
+            $this->assertTrue(false); 
+        }
+        else
+        {
+            $this->assertTrue(true); 
         }
     }
-    // test insert Bank Not Good
-    public function testInsertBanksNg()
-    {
-        $bankmodel = new BankModel();
-        $banks = array(
-            'id' =>6,
-            'user_id' => '',
-            'cost' => '',
-            
-        );
-        $actual = $bankmodel->insertBank($banks);
-        if ($actual == true) {
-            $this->assertTrue(true);
-        }else { 
-            $this->assertTrue(false);
-        }
-    }
+
+ 
+   // insert Bank Null
+   public function testInsertBankNull()
+   {
+       $userModel = new UserModel();
+       $input = [];
+       $input['id'] = null;
+       $input['user_id'] = '111';
+       $input['cost'] = "12345";
+       $actual = $userModel->insertUser( $input);
+       if($actual != true)
+       {
+           $this->assertTrue(false); 
+       }
+       else
+       {
+           $this->assertTrue(true); 
+       }
+   }
     // test insertBank Str
     public function testInsertBanksStr()
     {
         $bankmodel = new BankModel();
-        $banks = array(
-            'id' =>'asd',
-            'user_id' => '',
-            'cost' => '',
-            
-        );
-        $actual = $bankmodel->insertBank($banks);
-        if ($actual == true) {
-            $this->assertTrue(true);
-        }else { 
-            $this->assertTrue(false);
-        }
-    }
+       $input = [];
+       $input['id'] = 'abc';
+       $input['user_id'] = '111';
+       $input['cost'] = "12345";
+       $actual = $userModel->insertUser( $input);
+       if($actual != true)
+       {
+           $this->assertTrue(false); 
+       }
+       else
+       {
+           $this->assertTrue(true); 
+       }
+   }
     // test insertBank ky tu dat biet
     public function testInsertBanksStrDb()
     {
