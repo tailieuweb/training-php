@@ -189,7 +189,7 @@ class UserModelTest extends TestCase
          $this->assertEquals($expected, $actual);
      }
       // Test case decrypt ID With Id Bool Type, value is True
-      public function testDecryptIdWithIdTrueBoolType()
+      public function testDecryptIdWithIdTrue()
       {
           $userModel = new UserModel();
  
@@ -199,7 +199,7 @@ class UserModelTest extends TestCase
           $this->assertEquals($expected, $actual);
       }
       // Test case decrypt ID With Id Bool Type, value is false
-      public function testDecryptIdWithIdTrueFalseType()
+      public function testDecryptIdWithIdFalse()
       {
           $userModel = new UserModel();
  
