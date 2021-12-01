@@ -184,6 +184,21 @@ class ResultTest extends TestCase
             $this->assertTrue(false);
         }
     }
+    // Test setData Object
+    public function testSetDataObject()
+    {
+        $result = new ResultClass;
+        $data = new UserModel;
+        $result->setData($data);
+        $expected = $result->isSuccess == true &&
+        $result->data == $data &&
+        $result->error == null;
+        if ($expected == true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
 
     /**
      * Test set Error
@@ -226,11 +241,11 @@ class ResultTest extends TestCase
         $actual = new ResultClass;
         $error = null;
         $actual->setError($error);
-        $expected = $actual->isSuccess == false &&
+        $expected = $actual->isSuccess == true &&
         $actual->data == null &&
         $actual->error == $error;
 
-        if ($expected == true) {
+        if ($expected == false) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
@@ -242,11 +257,11 @@ class ResultTest extends TestCase
         $actual = new ResultClass;
         $error = 123;
         $actual->setError($error);
-        $expected = $actual->isSuccess == false &&
+        $expected = $actual->isSuccess == true &&
         $actual->data == null &&
         $actual->error == $error;
 
-        if ($expected == true) {
+        if ($expected == false) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
@@ -258,11 +273,11 @@ class ResultTest extends TestCase
         $actual = new ResultClass;
         $error = 1.23;
         $actual->setError($error);
-        $expected = $actual->isSuccess == false &&
+        $expected = $actual->isSuccess == true &&
         $actual->data == null &&
         $actual->error == $error;
 
-        if ($expected == true) {
+        if ($expected == false) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
@@ -274,11 +289,11 @@ class ResultTest extends TestCase
         $actual = new ResultClass;
         $error = true;
         $actual->setError($error);
-        $expected = $actual->isSuccess == false &&
+        $expected = $actual->isSuccess == true &&
         $actual->data == null &&
         $actual->error == $error;
 
-        if ($expected == true) {
+        if ($expected == false) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
@@ -290,11 +305,11 @@ class ResultTest extends TestCase
         $actual = new ResultClass;
         $error = false;
         $actual->setError($error);
-        $expected = $actual->isSuccess == false &&
+        $expected = $actual->isSuccess == true &&
         $actual->data == null &&
         $actual->error == $error;
 
-        if ($expected == true) {
+        if ($expected == false) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
@@ -306,11 +321,11 @@ class ResultTest extends TestCase
         $actual = new ResultClass;
         $error = [1, 2, 3];
         $actual->setError($error);
-        $expected = $actual->isSuccess == false &&
+        $expected = $actual->isSuccess == true &&
         $actual->data == null &&
         $actual->error == $error;
 
-        if ($expected == true) {
+        if ($expected == false) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);

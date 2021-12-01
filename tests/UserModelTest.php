@@ -406,7 +406,7 @@ public function testGetUsersByKeyNull()
     }
 
     /**
-     * Test findUserById
+     * Test findUserById Hieu-Le
      */
     // Test findUserById ok
     public function testFindUserByIdOk()

@@ -225,7 +225,7 @@ class BankModelTest extends TestCase
     }
 
     /**
-     * Test get bank by id
+     * Test get bank by id Hieu-Le
      * */
     // Test get bank by id ok
     public function testBankByIdOk()
