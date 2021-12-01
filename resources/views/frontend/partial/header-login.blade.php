@@ -3,7 +3,7 @@
 
                 <div class="bottom-grid">
                     <div class="logo">
-                        <h1> <a  style="color: white;" href="#"><span class=""></span> Hotel Luxyry</a></h1>
+                        <h1> <a  style="color: white;" href="{{asset('/')}}"><span class=""></span> Hotel Luxyry</a></h1>
                     </div>
                     <div class="links">
                         <ul class="links-unordered-list">
