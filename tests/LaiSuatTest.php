@@ -106,17 +106,16 @@ class LaiSuatTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-    public function testTilePhanTramNGStr()
+    public function testTilePhanTramNG()
     {
         $bmd   = new BankModel();
         $lx = new LaiSuat();
         $lx->setBank($bmd);
-        $expected = "0.3";
+        $expected = 0.4;
 
         $actual = $lx->tilephantram();
 
-        $this->assertEquals($expected, $actual);
-        if ($actual == $expected) {
+        if ($actual != $expected) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
