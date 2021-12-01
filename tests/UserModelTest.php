@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 class UserModelTest extends TestCase
 {
     /**
-     * Test getInstance function, 'Dattt' do this 
+     * Test checkEmailExist function, 'Dattt' do this 
      * */
 
     // Test case Check Email Exist Good 
@@ -111,6 +111,9 @@ class UserModelTest extends TestCase
         $expected = false;
         $this->assertEquals($expected, $actual);
     }
+    /**
+     * Test checkEmailStyle function, 'Dattt' do this 
+     * */
 
     // Test case Check Email Style Good 
 
@@ -206,6 +209,10 @@ class UserModelTest extends TestCase
         $expected = false;
         $this->assertEquals($expected, $actual);
     }
+
+    /**
+     * Test findUserByEmail function, 'Dattt' do this 
+     * */
 
     // Test case Find User By Email Good 
 

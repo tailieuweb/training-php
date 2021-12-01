@@ -11,7 +11,7 @@ class BankModel extends BaseModel
      */
     public function getBankById($id)
     {
-        if(!$this->_error){
+        if (!$this->_error) {
             return false;
         }
         $id = is_numeric($id) ? $id : NULL;
@@ -25,7 +25,7 @@ class BankModel extends BaseModel
     public function getBankByUserId($userId)
     {
         $userId = is_numeric($userId) ? $userId : NULL;
-        if($userId==null){
+        if ($userId == null) {
             return false;
         }
         $sql = 'SELECT `banks`.*
@@ -43,7 +43,7 @@ class BankModel extends BaseModel
      */
     public function insertBank($userId, $cost)
     {
-        if (is_numeric($userId) && is_numeric($cost)) {
+        if (is_numeric($userId) && is_numeric($cost) && $cost >= 0) {
             // SQL
             $sql = "INSERT INTO `banks`(`user_id`, `cost`) 
                     VALUES ('" . $this->BlockSQLInjection($userId) . "','" . $this->BlockSQLInjection($cost) . "')";
@@ -74,15 +74,15 @@ class BankModel extends BaseModel
      * @param $input
      * @return mixed
      */
-    public function updateBank($userId,$cost)
+    public function updateBank($userId, $cost)
     {
-        if ( is_numeric($userId) && is_numeric($cost)) {
+        if (is_numeric($userId) && is_numeric($cost)) {
             $bank = $this->getBankByUserId($userId);
             if ($bank) {
                 $sql = 'UPDATE `banks`
                         SET `cost` = "' . $cost . '"
                         WHERE `user_id` = ' . $userId;
-                 return $this->update($sql);
+                return $this->update($sql);
             }
         }
         return false;
@@ -97,7 +97,7 @@ class BankModel extends BaseModel
     public function deleteBankByUserId($id)
     {
         $id = is_numeric($id);
-        if($id==null){
+        if ($id == null) {
             return false;
         }
         $sql = 'DELETE FROM `banks` WHERE `user_id` = ' . $id;
