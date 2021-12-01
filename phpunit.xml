@@ -2,9 +2,9 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd" bootstrap="vendor/autoload.php" colors="true"
 cacheResult ="false">
     <testsuites>
-        <testsuite name="SqlWsContractImport">
+        <!-- <testsuite name="SqlWsContractImport">
             <file>./tests/UserModelTest.php</file>
-        </testsuite>
+        </testsuite> -->
         <testsuite name="SqlWsContractImport">
             <file>./tests/LaiSuatTest.php</file>
         </testsuite>
