@@ -421,6 +421,7 @@ class FrontendController extends Controller
             $data = array();
             $data['hotel_id'] = $request->hotel_id;
             $data['user_id'] = Auth::user()->id;
+            $data['date_created'] = date("Y-m-d");
             if(count($getFavorite) != 0){
                 DB::table('favorite')->where('favorite_id', $getFavorite[0]->favorite_id)->delete();
                 return $this->getAllHotel();

@@ -93,8 +93,9 @@
                                 }
                             ?>"><i class="fa fa-heart tm-home-box-2-icon border-right"></i></button>
                         </form>
-                        
-                        <a href="{{asset('')}}detail/{{$hotel->hotel_id}}" class="tm-home-box-2-link"><span class="tm-home-box-2-description">Travel</span></a>
+                        <?php $key = rand(111111111, 999999999);
+                        ?>
+                        <a href="{{asset('')}}detail/{{$key}}{{$hotel->hotel_id}}" class="tm-home-box-2-link"><span class="tm-home-box-2-description">Travel</span></a>
                         <a href="{{asset('')}}detail/{{$hotel->hotel_id}}" class="tm-home-box-2-link"><i class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
                     </div>
                 </div>

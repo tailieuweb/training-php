@@ -30,6 +30,7 @@ Route::group(['module' => 'dashboard', 'middleware' => 'web', 'namespace' => "Ap
 
 
     Route::group(['middleware' => ['auth']], function () {
+        Route::get("/logout-checkout", ["as" => "admin.logout.index", "uses" => "FrontendController@logout"]);
         Route::group(["prefix" => "dashboard"], function () {
             //             Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
             //     return view('dashboard');
@@ -72,6 +73,14 @@ Route::group(['module' => 'dashboard', 'middleware' => 'web', 'namespace' => "Ap
             Route::get("delete/{id}", ["as" => "admin.location.delete", "uses" => "LocationController@DeleteLocation"]);
             Route::get("edit/{id}", ["as" => "admin.location.edit", "uses" => "LocationController@EditLocation"]);
             Route::post("update/{id}", ["as" => "admin.location.eidt", "uses" => "LocationController@UpdateLocation"]);
+        });
+        Route::group(["prefix" => "admin/favorite"], function () {
+            Route::get("/", ["as" => "admin.favorite", "uses" => "FavoriteController@getAllFavorite"]);
+            Route::get("/add", ["as" => "admin.favorite.add", "uses" => "FavoriteController@createFavorite"]);
+            Route::post("/add", ["as" => "admin.favorite.save", "uses" => "FavoriteController@insertFavorite"]);
+            Route::get("delete/{id}", ["as" => "admin.favorite.delete", "uses" => "FavoriteController@deleteFavorite"]);
+            Route::get("update/{id}", ["as" => "admin.favorite.edit", "uses" => "FavoriteController@getUpdateFavorite"]);
+            Route::post("update/{id}", ["as" => "admin.favorite.eidt", "uses" => "FavoriteController@postUpdateFavorite"]);
         });
         Route::group(["prefix" => "users"], function () {
             Route::get("/", ["as" => "admin.users", "uses" => "UsersController@getAllUser"]);
