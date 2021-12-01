@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
@@ -9,14 +10,14 @@ class UserModelTest extends TestCase
      */
     public function testSumOk()
     {
-       $userModel = new UserModel();
-       $a = 1;
-       $b = 2;
-       $expected = 3;
+        $userModel = new UserModel();
+        $a = 1;
+        $b = 2;
+        $expected = 3;
 
-       $actual = $userModel->sumb($a,$b);
+        $actual = $userModel->sumb($a, $b);
 
-       $this->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**
@@ -28,7 +29,7 @@ class UserModelTest extends TestCase
         $a = 1;
         $b = 2;
 
-        $actual = $userModel->sumb($a,$b);
+        $actual = $userModel->sumb($a, $b);
 
         if ($actual != 3) {
             $this->assertTrue(false);
@@ -38,16 +39,66 @@ class UserModelTest extends TestCase
     }
 
     /**
-     * Test cong 2 so am
-    */
-    public function test2SoAm(){
+     * Test string
+     */
+    public function testString()
+    {
         $userModel = new UserModel();
-        $a = -1;
-        $b = -2;
-        $expected = -3;
+        $a = 'p';
+        $b = 2;
+        $expected = 'error';
 
         $actual = $userModel->sumb($a, $b);
 
         $this->assertEquals($expected, $actual);
+    }
+
+
+    /**
+     * Test two string
+     */
+    public function testTwoString()
+    {
+        $userModel = new UserModel();
+        $a = 'p';
+        $b = 'ư';
+        $expected = 'error';
+
+        $actual = $userModel->sumb($a, $b);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test findUserById
+     */
+    public function testFindUserById()
+    {
+        $userModel = new UserModel();
+        $userID = 3;
+        $userName = 'hackerasfasf';
+
+        $user = $userModel->findUserById($userID);
+        $actual = $user[0]['name'];
+
+        $this->assertEquals($userName, $actual);
+    }
+
+    /**
+     * Test findUserById not good
+     */
+    public function testFindUserByIdNg()
+    {
+        $userModel = new UserModel();
+        $userID = 1;
+
+        $user = $userModel->findUserById($userID);
+
+       if(empty($user)){
+           $this->assertTrue(true);
+       }
+       else{
+        $this->assertTrue(false);
+       }
     }
 }
