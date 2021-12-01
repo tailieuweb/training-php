@@ -25,7 +25,7 @@ class QuyBankModelTest extends TestCase
     // insert Bank Not Good
     public function testInsertBankNg()
     {
-        $userModel = new UserModel();
+        $bankmodel = new BankModel();
         $input = [];
         $input['id'] = -999991;
         $input['user_id'] = '111';
@@ -45,7 +45,7 @@ class QuyBankModelTest extends TestCase
    // insert Bank Null
    public function testInsertBankNull()
    {
-       $userModel = new UserModel();
+    $bankmodel = new BankModel();
        $input = [];
        $input['id'] = null;
        $input['user_id'] = '111';
@@ -79,22 +79,23 @@ class QuyBankModelTest extends TestCase
        }
    }
     // test insertBank ky tu dat biet
-    public function testInsertBanksStrDb()
+    public function testInsertBankStrDb()
     {
         $bankmodel = new BankModel();
-        $banks = array(
-            'id' =>'@#$%',
-            'user_id' => '',
-            'cost' => '',
-            
-        );
-        $actual = $bankmodel->insertBank($banks);
-        if ($actual == true) {
-            $this->assertTrue(true);
-        }else { 
-            $this->assertTrue(false);
-        }
-    }
+        $input = [];
+       $input['id'] = '##$#@';
+       $input['user_id'] = '111';
+       $input['cost'] = "12345";
+       $actual = $userModel->insertUser( $input);
+       if($actual != true)
+       {
+           $this->assertTrue(false); 
+       }
+       else
+       {
+           $this->assertTrue(true); 
+       }
+   }
     
     
 }
