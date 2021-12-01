@@ -60,9 +60,9 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
-        if (empty($input['id'])) {
-            return "Error";
-        }
+        // if (empty($input['id'])) {
+        //     return "Error";
+        // }
 
         $sql = 'UPDATE users SET 
                  name = "' . $input['name'] . '", 

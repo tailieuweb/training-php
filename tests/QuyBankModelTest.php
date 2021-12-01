@@ -25,12 +25,12 @@ class QuyBankModelTest extends TestCase
     // insert Bank Not Good
     public function testInsertBankNg()
     {
-        $bankmodel = new BankModel();
+        $bankModel = new BankModel();
         $input = [];
         $input['id'] = -999991;
         $input['user_id'] = '111';
         $input['cost'] = "12345";
-        $actual = $userModel->insertUser( $input);
+        $actual = $bankModel->insertBank( $input);
         if($actual != true)
         {
             $this->assertTrue(false); 
@@ -45,12 +45,12 @@ class QuyBankModelTest extends TestCase
    // insert Bank Null
    public function testInsertBankNull()
    {
-    $bankmodel = new BankModel();
+       $bankModel = new BankModel();
        $input = [];
        $input['id'] = null;
        $input['user_id'] = '111';
        $input['cost'] = "12345";
-       $actual = $userModel->insertUser( $input);
+       $actual = $bankModel->insertBank( $input);
        if($actual != true)
        {
            $this->assertTrue(false); 
@@ -63,12 +63,12 @@ class QuyBankModelTest extends TestCase
     // test insertBank Str
     public function testInsertBanksStr()
     {
-        $bankmodel = new BankModel();
+       $bankModel = new BankModel();
        $input = [];
        $input['id'] = 'abc';
        $input['user_id'] = '111';
        $input['cost'] = "12345";
-       $actual = $userModel->insertUser( $input);
+       $actual = $bankModel->insertBank( $input);
        if($actual != true)
        {
            $this->assertTrue(false); 
@@ -79,14 +79,14 @@ class QuyBankModelTest extends TestCase
        }
    }
     // test insertBank ky tu dat biet
-    public function testInsertBankStrDb()
+    public function testInsertBanksStrDb()
     {
-        $bankmodel = new BankModel();
-        $input = [];
-       $input['id'] = '##$#@';
-       $input['user_id'] = '111';
+        $bankModel = new BankModel();
+       $input = [];
+       $input['id'] = '&^%%%^%';
+       $input['user_id'] = '33';
        $input['cost'] = "12345";
-       $actual = $userModel->insertUser( $input);
+       $actual = $bankModel->insertBank( $input);
        if($actual != true)
        {
            $this->assertTrue(false); 
@@ -95,7 +95,7 @@ class QuyBankModelTest extends TestCase
        {
            $this->assertTrue(true); 
        }
-   }
+    }
     
     
 }

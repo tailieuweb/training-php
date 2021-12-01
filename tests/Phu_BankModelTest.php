@@ -61,21 +61,24 @@ class Phu_BankModelTest extends TestCase
     public function testGetBanksOk()
     {
         $BankModel = new BankModel();
-    
-        $count_array = 4;
-        $actual = $BankModel->getBanks();
-        
-        $this->assertEquals($count_array,count($actual));
+        $params['keyword']  = '3';
+        $expected = '3';
+        $bank = $BankModel->getBanks($params);
+        $actual = $bank[0]['user_id'];
+        $this->assertEquals($expected, $actual);
     }
-    public function testGetBanksKeyWordOk()
+
+    //test getbanks not good
+    public function testGetBanksNg()
     {
         $BankModel = new BankModel();
-        $params= [];
-        $params['keyword1'] = '3';
-        $count_array = 4;
-        $actual = $BankModel->getBanks( $params);
-         
-        $this->assertEquals($count_array,count($actual));
+        $params['keyword']  = '99999';
+        $bank = $BankModel->getBanks($params);
+        if (empty($bank[0])) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
     }
      //test getBanks khi khong co du lieu 
     public function testGetBanksKhongDuLieu()

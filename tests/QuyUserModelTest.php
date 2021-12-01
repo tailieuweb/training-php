@@ -51,8 +51,9 @@ class QuyUserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $params['keyword']  = true;
-        $expected =[];
-        $actual = $userModel->getUsers($params);
+        $expected = "Sang111";
+        $user = $userModel->getUsers($params);
+        $actual = $user[0]['name'];
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -76,9 +77,9 @@ class QuyUserModelTest extends TestCase
     public function testGetUsersArray()
     {
         $userModel = new UserModel();
-        $params['keyword'] = ['test2'];
+        $params['keyword'] = [];
         $expected =[];
-        $actual = $userModel->getUsers($params[]);
+        $actual = $userModel->getUsers($params);
         $this->assertEquals($expected, $actual);
     }
     /**
