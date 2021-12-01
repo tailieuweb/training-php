@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\Users_web;
 use App\Models\User;
-
+use App\Models\Profile_User;
 use Illuminate\Support\Facades\Redirect;
 use phpDocumentor\Reflection\DocBlock\Tags\See;
 
@@ -49,12 +49,24 @@ class FrontendController extends Controller
         };
         return View('Frontend.layout.login.login');
     }
+    //get profile frontedn displayindex
     public function getProfile()
     {
-
-
-        return View('Frontend.layout.Account.profile');
+        //tìm và lấy ra giá trị thuộc user_id tương ứng trong bảng Profile_User
+        $userProfile = Profile_User::where('user_id',Auth::user()->id)->first();
+        //neu gia tri do khong ton tai thì sẽ đặt một giá trị null tương ứng
+        if($userProfile != null){
+            $profile = new Profile_User();
+            $profile->user_id = Auth::user()->id;
+            $profile->save();
+            //var_dump($profile);die();
+        }
+        //tìm và hiện thị giá trị users_web tương ứng -> và hiện thị
+        $users_web = User::find(Auth::user()->id);
+        //users_web trả về biến $users_web để thực thi trên trang profile
+        return view('frontend.layout.AccountUser.profile',['users_web'=>$users_web]);
     }
+
     public function postLogin(Request $request)
     {
         $arr = [

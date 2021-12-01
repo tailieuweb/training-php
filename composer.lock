@@ -3630,6 +3630,7 @@
         },
         {
             "name": "symfony/console",
+<<<<<<< HEAD
             "version": "v5.4.0",
             "source": {
                 "type": "git",
@@ -3640,6 +3641,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/console/zipball/ec3661faca1d110d6c307e124b44f99ac54179e3",
                 "reference": "ec3661faca1d110d6c307e124b44f99ac54179e3",
+=======
+            "version": "v5.3.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/console.git",
+                "reference": "3e7ab8f5905058984899b05a4648096f558bfeba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/console/zipball/3e7ab8f5905058984899b05a4648096f558bfeba",
+                "reference": "3e7ab8f5905058984899b05a4648096f558bfeba",
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
                 "shasum": ""
             },
             "require": {
@@ -3652,7 +3665,6 @@
                 "symfony/string": "^5.1|^6.0"
             },
             "conflict": {
-                "psr/log": ">=3",
                 "symfony/dependency-injection": "<4.4",
                 "symfony/dotenv": "<5.1",
                 "symfony/event-dispatcher": "<4.4",
@@ -3709,7 +3721,11 @@
                 "terminal"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/console/tree/v5.4.0"
+=======
+                "source": "https://github.com/symfony/console/tree/v5.3.11"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
             },
             "funding": [
                 {
@@ -3725,7 +3741,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-11-29T15:30:56+00:00"
+=======
+            "time": "2021-11-21T19:41:05+00:00"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
         },
         {
             "name": "symfony/css-selector",
@@ -3862,6 +3882,7 @@
         },
         {
             "name": "symfony/error-handler",
+<<<<<<< HEAD
             "version": "v5.4.0",
             "source": {
                 "type": "git",
@@ -3872,6 +3893,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/error-handler/zipball/8433fa3145ac78df88b87a4a539118e950828126",
                 "reference": "8433fa3145ac78df88b87a4a539118e950828126",
+=======
+            "version": "v5.3.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/error-handler.git",
+                "reference": "eec73dd7218713f48a7996583a741b3bae58c8d3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/error-handler/zipball/eec73dd7218713f48a7996583a741b3bae58c8d3",
+                "reference": "eec73dd7218713f48a7996583a741b3bae58c8d3",
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
                 "shasum": ""
             },
             "require": {
@@ -3913,7 +3946,11 @@
             "description": "Provides tools to manage errors and ease debugging PHP code",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/error-handler/tree/v5.4.0"
+=======
+                "source": "https://github.com/symfony/error-handler/tree/v5.3.11"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
             },
             "funding": [
                 {
@@ -3929,6 +3966,7 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-11-29T15:30:56+00:00"
         },
         {
@@ -3943,6 +3981,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/2774908d5ae32fd94e363e7cbbd87462712c4576",
                 "reference": "2774908d5ae32fd94e363e7cbbd87462712c4576",
+=======
+            "time": "2021-11-13T13:42:37+00:00"
+        },
+        {
+            "name": "symfony/event-dispatcher",
+            "version": "v5.3.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "661a7a6e085394f8513945669e31f7c1338a7e69"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/661a7a6e085394f8513945669e31f7c1338a7e69",
+                "reference": "661a7a6e085394f8513945669e31f7c1338a7e69",
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
                 "shasum": ""
             },
             "require": {
@@ -3996,7 +4050,11 @@
             "description": "Provides tools that allow your application components to communicate with each other by dispatching events and listening to them",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/event-dispatcher/tree/v6.0.0"
+=======
+                "source": "https://github.com/symfony/event-dispatcher/tree/v5.3.11"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
             },
             "funding": [
                 {
@@ -4012,6 +4070,7 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-11-23T19:05:29+00:00"
         },
         {
@@ -4026,6 +4085,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/aa5422287b75594b90ee9cd807caf8f0df491385",
                 "reference": "aa5422287b75594b90ee9cd807caf8f0df491385",
+=======
+            "time": "2021-11-17T12:16:12+00:00"
+        },
+        {
+            "name": "symfony/event-dispatcher-contracts",
+            "version": "v2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher-contracts.git",
+                "reference": "66bea3b09be61613cd3b4043a65a8ec48cfa6d2a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/66bea3b09be61613cd3b4043a65a8ec48cfa6d2a",
+                "reference": "66bea3b09be61613cd3b4043a65a8ec48cfa6d2a",
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
                 "shasum": ""
             },
             "require": {
@@ -4038,7 +4113,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-main": "3.0-dev"
+=======
+                    "dev-main": "2.5-dev"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
                 },
                 "thanks": {
                     "name": "symfony/contracts",
@@ -4075,7 +4154,11 @@
                 "standards"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.0.0"
+=======
+                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v2.5.0"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
             },
             "funding": [
                 {
@@ -4091,7 +4174,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-07-15T12:33:35+00:00"
+=======
+            "time": "2021-07-12T14:48:14+00:00"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
         },
         {
             "name": "symfony/finder",
@@ -4138,7 +4225,10 @@
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/finder/tree/v5.4.0"
+=======
+                "source": "https://github.com/symfony/finder/tree/v5.3.7"
             },
             "funding": [
                 {
@@ -4154,6 +4244,86 @@
                     "type": "tidelift"
                 }
             ],
+            "time": "2021-08-04T21:20:46+00:00"
+        },
+        {
+            "name": "symfony/http-client-contracts",
+            "version": "v2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-client-contracts.git",
+                "reference": "ec82e57b5b714dbb69300d348bd840b345e24166"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/ec82e57b5b714dbb69300d348bd840b345e24166",
+                "reference": "ec82e57b5b714dbb69300d348bd840b345e24166",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5"
+            },
+            "suggest": {
+                "symfony/http-client-implementation": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "2.5-dev"
+                },
+                "thanks": {
+                    "name": "symfony/contracts",
+                    "url": "https://github.com/symfony/contracts"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Contracts\\HttpClient\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Generic abstractions related to HTTP clients",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "abstractions",
+                "contracts",
+                "decoupling",
+                "interfaces",
+                "interoperability",
+                "standards"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/http-client-contracts/tree/v2.5.0"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+<<<<<<< HEAD
             "time": "2021-11-28T15:25:38+00:00"
         },
         {
@@ -4168,6 +4338,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/http-foundation/zipball/5ef86ac7927d2de08dc1e26eb91325f9ccbe6309",
                 "reference": "5ef86ac7927d2de08dc1e26eb91325f9ccbe6309",
+=======
+            "time": "2021-11-03T09:24:47+00:00"
+        },
+        {
+            "name": "symfony/http-foundation",
+            "version": "v5.3.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-foundation.git",
+                "reference": "d1e7059ebeb0b8f9fe5eb5b26eacd2e3c1f371cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/d1e7059ebeb0b8f9fe5eb5b26eacd2e3c1f371cc",
+                "reference": "d1e7059ebeb0b8f9fe5eb5b26eacd2e3c1f371cc",
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
                 "shasum": ""
             },
             "require": {
@@ -4211,7 +4397,11 @@
             "description": "Defines an object-oriented layer for the HTTP specification",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/http-foundation/tree/v5.4.0"
+=======
+                "source": "https://github.com/symfony/http-foundation/tree/v5.3.11"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
             },
             "funding": [
                 {
@@ -4227,6 +4417,7 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-11-28T15:25:38+00:00"
         },
         {
@@ -4241,6 +4432,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/http-kernel/zipball/e012f16688bcb151e965473a70d8ebaa8b1d15ea",
                 "reference": "e012f16688bcb151e965473a70d8ebaa8b1d15ea",
+=======
+            "time": "2021-11-04T16:37:19+00:00"
+        },
+        {
+            "name": "symfony/http-kernel",
+            "version": "v5.3.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-kernel.git",
+                "reference": "f53025cd1d91b1af85d6d9e17eefa98e31ee953b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/f53025cd1d91b1af85d6d9e17eefa98e31ee953b",
+                "reference": "f53025cd1d91b1af85d6d9e17eefa98e31ee953b",
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
                 "shasum": ""
             },
             "require": {
@@ -4323,7 +4530,11 @@
             "description": "Provides a structured process for converting a Request into a Response",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/http-kernel/tree/v5.4.0"
+=======
+                "source": "https://github.com/symfony/http-kernel/tree/v5.3.12"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
             },
             "funding": [
                 {
@@ -4339,6 +4550,7 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-11-29T16:56:53+00:00"
         },
         {
@@ -4353,6 +4565,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/mime/zipball/d4365000217b67c01acff407573906ff91bcfb34",
                 "reference": "d4365000217b67c01acff407573906ff91bcfb34",
+=======
+            "time": "2021-11-24T08:46:46+00:00"
+        },
+        {
+            "name": "symfony/mime",
+            "version": "v5.3.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/mime.git",
+                "reference": "dffc0684f10526db12c52fcd6238c64695426d61"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/dffc0684f10526db12c52fcd6238c64695426d61",
+                "reference": "dffc0684f10526db12c52fcd6238c64695426d61",
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
                 "shasum": ""
             },
             "require": {
@@ -4406,7 +4634,11 @@
                 "mime-type"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/mime/tree/v5.4.0"
+=======
+                "source": "https://github.com/symfony/mime/tree/v5.3.11"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
             },
             "funding": [
                 {
@@ -4422,7 +4654,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-11-23T10:19:22+00:00"
+=======
+            "time": "2021-11-20T16:42:42+00:00"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -5234,6 +5470,7 @@
         },
         {
             "name": "symfony/process",
+<<<<<<< HEAD
             "version": "v5.4.0",
             "source": {
                 "type": "git",
@@ -5244,6 +5481,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/process/zipball/5be20b3830f726e019162b26223110c8f47cf274",
                 "reference": "5be20b3830f726e019162b26223110c8f47cf274",
+=======
+            "version": "v5.3.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/process.git",
+                "reference": "e498803a6e95ede78e9d5646ad32a2255c033a6a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/process/zipball/e498803a6e95ede78e9d5646ad32a2255c033a6a",
+                "reference": "e498803a6e95ede78e9d5646ad32a2255c033a6a",
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
                 "shasum": ""
             },
             "require": {
@@ -5276,7 +5525,11 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/process/tree/v5.4.0"
+=======
+                "source": "https://github.com/symfony/process/tree/v5.3.12"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
             },
             "funding": [
                 {
@@ -5292,6 +5545,7 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-11-28T15:25:38+00:00"
         },
         {
@@ -5306,6 +5560,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/routing/zipball/9eeae93c32ca86746e5d38f3679e9569981038b1",
                 "reference": "9eeae93c32ca86746e5d38f3679e9569981038b1",
+=======
+            "time": "2021-11-22T22:39:13+00:00"
+        },
+        {
+            "name": "symfony/routing",
+            "version": "v5.3.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/routing.git",
+                "reference": "fcbc2b81d55984f04bb704c2269755fa5aaf5cca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/fcbc2b81d55984f04bb704c2269755fa5aaf5cca",
+                "reference": "fcbc2b81d55984f04bb704c2269755fa5aaf5cca",
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
                 "shasum": ""
             },
             "require": {
@@ -5366,7 +5636,11 @@
                 "url"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/routing/tree/v5.4.0"
+=======
+                "source": "https://github.com/symfony/routing/tree/v5.3.11"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
             },
             "funding": [
                 {
@@ -5382,7 +5656,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-11-23T10:19:22+00:00"
+=======
+            "time": "2021-11-04T16:37:19+00:00"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
         },
         {
             "name": "symfony/service-contracts",
@@ -5554,6 +5832,7 @@
         },
         {
             "name": "symfony/translation",
+<<<<<<< HEAD
             "version": "v5.4.0",
             "source": {
                 "type": "git",
@@ -5564,6 +5843,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/translation/zipball/6fe32b10e912a518805bc9eafc2a87145773cf13",
                 "reference": "6fe32b10e912a518805bc9eafc2a87145773cf13",
+=======
+            "version": "v5.3.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/translation.git",
+                "reference": "17a965c8f3b1b348cf15d903ac53942984561f8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/17a965c8f3b1b348cf15d903ac53942984561f8a",
+                "reference": "17a965c8f3b1b348cf15d903ac53942984561f8a",
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
                 "shasum": ""
             },
             "require": {
@@ -5631,7 +5922,11 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/translation/tree/v5.4.0"
+=======
+                "source": "https://github.com/symfony/translation/tree/v5.3.11"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
             },
             "funding": [
                 {
@@ -5647,7 +5942,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-11-29T15:30:56+00:00"
+=======
+            "time": "2021-11-04T16:37:19+00:00"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
         },
         {
             "name": "symfony/translation-contracts",
@@ -5729,6 +6028,7 @@
         },
         {
             "name": "symfony/var-dumper",
+<<<<<<< HEAD
             "version": "v5.4.0",
             "source": {
                 "type": "git",
@@ -5739,6 +6039,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/var-dumper/zipball/89ab66eaef230c9cd1992de2e9a1b26652b127b9",
                 "reference": "89ab66eaef230c9cd1992de2e9a1b26652b127b9",
+=======
+            "version": "v5.3.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/var-dumper.git",
+                "reference": "a029b3a11b757f9cc8693040339153b4745a913f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/a029b3a11b757f9cc8693040339153b4745a913f",
+                "reference": "a029b3a11b757f9cc8693040339153b4745a913f",
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
                 "shasum": ""
             },
             "require": {
@@ -5798,7 +6110,11 @@
                 "dump"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/var-dumper/tree/v5.4.0"
+=======
+                "source": "https://github.com/symfony/var-dumper/tree/v5.3.11"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
             },
             "funding": [
                 {
@@ -5814,7 +6130,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-11-29T15:30:56+00:00"
+=======
+            "time": "2021-11-12T11:38:27+00:00"
+>>>>>>> 1-php-202109/2-groups/3-C/project/Anh-be-ProfileUser
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

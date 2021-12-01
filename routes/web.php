@@ -119,6 +119,7 @@ Route::group(['module' => 'dashboard', 'middleware' => 'web', 'namespace' => "Ap
     Route::post("/detail/{id}", ["as" => "frontend.dashboard.index.comment", "uses" => "FrontendController@postComment"]);
 
     Route::post("/details", ["as" => "frontend.dashboard.index.person", "uses" => "FrontendController@rentalHotelOption"]);
+    //profile user display index
     Route::get("/profile", ["as" => "frontend.dashboard.index.profile", "uses" => "FrontendController@getProfile"]);
 
     //Payment hotel
