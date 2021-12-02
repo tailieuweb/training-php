@@ -1,7 +1,5 @@
 <?php
 
-use PhpParser\Node\Expr\Cast\Object_;
-use PhpParser\Node\Expr\Empty_;
 use PHPUnit\Framework\TestCase;
 
 class TranVanLap_UserModelTest extends TestCase
