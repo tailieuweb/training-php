@@ -4,18 +4,7 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel {
  
-    public function findBankById($id) {
-    } 
-
-    /**
-     * Authentication bank
-     * @param $bankName
-     * @param $password
-     * @return array
-     */
-
-    /**
-=======
+    public function findBankById($id) { 
         if (is_int($id)==true||is_string($id)==true){
             $sql = 'SELECT * FROM banks WHERE id = '.$id;
             $bank = $this->select($sql);
@@ -41,9 +30,6 @@ class BankModel extends BaseModel {
             return $bank='error';
         }  
     } 
-
-    /**
->>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-GetBank
 
     /**
      * Delete bank by id
@@ -91,34 +77,7 @@ class BankModel extends BaseModel {
      * @param array $params
      * @return array
      */
-<<<<<<< HEAD
-    public function getBanks($params = []) {
-        //Keyword
-        if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM banks WHERE name LIKE "%' . $params['keyword'] .'%"';
-
-            //Keep this line to use Sql Injection
-            //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
-            $banks = self::$_connection->multi_query($sql);
-
-    public function getBanks($params = []) {  
-        if (isset($params['keyword'])) {
-            if(is_int($params['keyword'])==true||is_string($params['keyword'])==true){
-                $sql = 'SELECT * FROM banks WHERE user_id LIKE "%' . $params['keyword'] .'%"';
-                $bank = $this->select($sql);
-                if($bank!=null){
-                    return $bank;
-                }            
-                return $bank='error';
-            }
-            return $bank='error';
-            
-
-        } else {
-            $sql = 'SELECT * FROM banks';
-            $bank = $this->select($sql);
-    public function getBanks($params = []) {  
+        public function getBanks($params = []) {  
         if (isset($params['keyword'])) {
             if(is_int($params['keyword'])==true||is_string($params['keyword'])==true){
                 $sql = 'SELECT * FROM banks WHERE user_id LIKE "%' . $params['keyword'] .'%"';
@@ -134,7 +93,6 @@ class BankModel extends BaseModel {
             $sql = 'SELECT * FROM banks';
             $bank = $this->select($sql);
         }
-
         return $bank;
     }
 }
