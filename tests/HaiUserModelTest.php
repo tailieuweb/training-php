@@ -103,7 +103,7 @@ class HaiUserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
     /**
-     * Test findUserById Ok
+     * Test testFindUserByIdOk
      */
     public function testFindUserByIdOk()
     {
@@ -118,7 +118,7 @@ class HaiUserModelTest extends TestCase
     }
 
     /**
-     * Test findUserById not good
+     * Test testFindUserByIdNg not good
      */
     public function testFindUserByIdNg()
     {
@@ -135,7 +135,7 @@ class HaiUserModelTest extends TestCase
        }
     }
     /**
-     * Test findUserById null
+     * Test testFindUserByIdNull
      */
     public function testFindUserByIdNull()
     {
@@ -152,14 +152,46 @@ class HaiUserModelTest extends TestCase
        }
     }
     /**
-     * Test findUserById
+     * Test testFindUserByIdString
      */
-    public function testFindUserByIdStr()
+    public function testFindUserByIdString()
     {
         $userModel = new UserModel();
         $userID ='asd';
 
         $user = $userModel->findUserById($userID);
+
+       if(empty($user)){
+           $this->assertTrue(true);
+       }
+       else{
+        $this->assertTrue(false);
+       }
+    }
+    // test testFindUserById_KyTuDatBiet
+    public function testFindUserById_KyTuDatBiet()
+    {
+        $userModel = new UserModel();
+        $userID ='@####$!';
+
+        $user = $userModel->findUserById($userID);
+
+       if(empty($user)){
+           $this->assertTrue(true);
+       }
+       else{
+        $this->assertTrue(false);
+       }
+    }
+     /**
+     * Test function testFindUserOk
+     */
+    public function testFindUserOk()
+    {
+        $userModel = new UserModel();
+        $keyword = "test2";
+
+        $user = $userModel->findUser($keyword);
 
        if(empty($user)){
            $this->assertTrue(true);
@@ -190,12 +222,12 @@ class HaiUserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
     /**
-     * Test function testFindUserOk
+     * Test function testFindUser_KyTuDacBiet
      */
-    public function testFindUserOk()
+    public function testFindUser_KyTuDacBiet()
     {
         $userModel = new UserModel();
-        $keyword = "test2";
+        $keyword = "!!!!";
 
         $user = $userModel->findUser($keyword);
 
@@ -206,13 +238,11 @@ class HaiUserModelTest extends TestCase
         $this->assertTrue(false);
        }
     }
-    /**
-     * Test function testFindUser_KyTuDacBiet
-     */
-    public function testFindUser_KyTuDacBiet()
+    //test testFindUserstring
+    public function testFindUserstring()
     {
         $userModel = new UserModel();
-        $keyword = "!!!!";
+        $keyword = "abc";
 
         $user = $userModel->findUser($keyword);
 

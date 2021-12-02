@@ -148,9 +148,9 @@ class Phu_UserModelTest extends TestCase
         );
         $actual = $userModel->updateUser($user);
         if ($actual == false) {
-            $this->assertTrue(true);
-        } else {
             $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
         }
     }
     public function testUpdateUser_idsai()
