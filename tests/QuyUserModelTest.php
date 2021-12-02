@@ -72,26 +72,55 @@ class QuyUserModelTest extends TestCase
     }
     
     /**
-     * Test keyword là mang Array
+     * kiểm tra getInstance OK
      */
-    public function testGetUsersArray()
-    {
+    public function testGetInstanceOk(){
         $userModel = new UserModel();
-        $params['keyword'] = [];
-        $expected =[];
-        $actual = $userModel->getUsers($params);
-        $this->assertEquals($expected, $actual);
+        $expected = UserModel::getInstance();
+        $actual = $userModel->getInstance();
+        $this->assertEquals($expected,$actual);
     }
-    /**
-     * Test keyword là object
-     */
-
-    public function testGetUsersObject()
-    {
+    //kiểm tra getInstance Null
+    public function testGetInstanceNull(){
         $userModel = new UserModel();
-        $params['keyword'] = new UserModel();
-        $expected = 'Invalid';
-        $actual = $userModel->getUsers($params);
-        $this->assertEquals($expected, $actual);
+        $actual = $userModel->getInstance();
+        if($actual != null){
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }
+    }
+    //kiểm tra getInstance Chuổi
+    public function testGetInstanceStr(){
+        $userModel = new UserModel();
+        $expected = 'abc';
+        $actual = $userModel->getInstance();
+        if ($actual == $expected) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }   
+    }
+    //kiểm tra getInstance Chuổi ký tự đặc biệt
+    public function testGetInstanceStrDb(){
+        $userModel = new UserModel();
+        $expected = '@$#^!%$^%';
+        $actual = $userModel->getInstance();
+        if ($actual == $expected) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }   
+    }
+   //kiểm tra getInstance Not Good
+    public function testGetInstanceNG() {
+        $userModel = new UserModel();
+        $expected = UserModel::getInstance();
+        $actual = $userModel->getInstance();
+        if ($actual != $expected) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }   
     }
 }

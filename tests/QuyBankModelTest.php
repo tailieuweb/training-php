@@ -96,6 +96,56 @@ class QuyBankModelTest extends TestCase
            $this->assertTrue(true); 
        }
     }
+    public function testGetInstanceOk()
+    {   
+        $bankModel = new BankModel();
+        $expected = BankModel::getInstance();
+        $actual = $bankModel->getInstance();
+        $this->assertEquals($expected,$actual);
+    }
+     //kiểm tra getInstance Null
+     public function testGetInstanceNull(){
+        $bankModel = new BankModel();
+        $actual = $bankModel->getInstance();
+        if($actual != null){
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }
+    }
+    //kiểm tra getInstance Chuổi
+    public function testGetInstanceStr(){
+        $bankModel = new BankModel();
+        $expected = 'abc';
+        $actual = $bankModel->getInstance();
+        if ($actual == $expected) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }   
+    }
+    //kiểm tra getInstance Chuổi ký tự đặc biệt
+    public function testGetInstanceStrDb(){
+        $bankModel = new BankModel();
+        $expected = '@$#^!%$^%';
+        $actual = $bankModel->getInstance();
+        if ($actual == $expected) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }   
+    }
+   //kiểm tra getInstance Not Good
+    public function testGetInstanceNG() {
+        $bankModel = new BankModel();
+        $expected = BankModel::getInstance();
+        $actual = $bankModel->getInstance();
+        if ($actual != $expected) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }   
+    }
     
     
 }
