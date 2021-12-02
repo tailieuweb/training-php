@@ -4,106 +4,112 @@ use PHPUnit\Framework\TestCase;
 
 class BankModelTest extends TestCase
 {
-   public function testFindBankByIdOk() {
+   public function testDeleteBankByIdOk() {
+
       $BankModel = new BankModel();
       
-      $id = 2;
-      $expected = '1';
+      $id = 5;         
       
-      $Bank = $BankModel->findBankById($id);        
-      $this->assertEquals($expected, $Bank[0]['user_id']);    
+      $Bank = $BankModel->deleteBankById($id);
+      
+      if ($Bank=='success') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }            
    }
-   public function testFindBankByIdNg() {
+   public function testDeleteBankByIdNg() {
       $BankModel = new BankModel();
       
       $id = 999999;
-           
-      $Bank = $BankModel->findBankById($id);
       
-      if ($Bank=='error') {
+      
+      $del = $BankModel->deleteBankById($id);
+      
+      if ($del==false) {
       $this->assertTrue(true);
       } else {
       $this->assertTrue(false);
       }     
-   }
-   public function testFindBankByIdNgAm() {
+      }
+   public function testDeleteBankByIdNgAm() {
       $BankModel = new BankModel();
       
       $id = -999999;         
       
-      $Bank = $BankModel->findBankById($id);
+      $Bank = $BankModel->deleteBankById($id);
       
-      if ($Bank=='error') {
+      if ($Bank==false) {
       $this->assertTrue(true);
       } else {
       $this->assertTrue(false);
       }     
    }
-   public function testFindBankByIdSoThuc() {
+   public function testDeleteBankByIdSoThuc() {
       $BankModel = new BankModel();
       
       $id = 11.22;
       
-      $Bank = $BankModel->findBankById($id);
+      $Bank = $BankModel->deleteBankById($id);
       
-      if ($Bank=='error') {
+      if ($Bank==false) {
       $this->assertTrue(true);
       } else {
       $this->assertTrue(false);
       }
    }
-   public function testFindBankByIdSpecialCharacters() {
+   public function testDeleteBankByIdSpecialCharacters() {
       $BankModel = new BankModel();
       
       $id = '[@$]';
       
-      $Bank = $BankModel->findBankById($id);
+      $Bank = $BankModel->deleteBankById($id);
       
-      if ($Bank=='error') {
+      if ($Bank==false) {
       $this->assertTrue(true);
       } else {
       $this->assertTrue(false);
       }
    }
-   public function testFindBankByIdIsArray() {
+   public function testDeleteBankByIdIsArray() {
       $BankModel = new BankModel();
       
       $id = [];
       
-      $Bank = $BankModel->findBankById($id);
+      $Bank = $BankModel->deleteBankById($id);
       
-      if ($Bank=='error') {
+      if ($Bank==false) {
       $this->assertTrue(true);
       } else {
       $this->assertTrue(false);
       }
    }
-   public function testFindBankByIdStr() {
+   public function testDeleteBankByIdStr() {
       $BankModel = new BankModel();
       
       $id = 'asdf';
       
       
-      $expected = 'error';
-      $actual = $BankModel->findBankById($id);
+      $expected = false;
+      $actual = $BankModel->deleteBankById($id);
       
       $this->assertEquals($expected, $actual);   
    }
    
    
-   public function testFindBankByIdNull() {
+   public function testDeleteBankByIdNull() {
       $BankModel = new BankModel();
       $id = null;
-      $expected = 'error';
-      $actual = $BankModel->findBankById($id);
+      $expected = false;
+      $actual = $BankModel->deleteBankById($id);
       $this->assertEquals($expected, $actual);   
    }
    
-   public function testFindBankByIdObject() {
+   public function testDeleteBankByIdObject() {
       $BankModel = new BankModel();    
       $id = new stdClass();
-      $expected = 'error';
-      $actual = $BankModel->findBankById($id);      
+      $expected = false;
+      $actual = $BankModel->deleteBankById($id);      
       $this->assertEquals($expected, $actual);      
    }
             
