@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 class BankModelTest extends TestCase
 {
-   public function testFindBankByIdOk() {
+   public function testFindBankOk() {
       $BankModel = new BankModel();
       
       $id = 2;
@@ -106,6 +106,4 @@ class BankModelTest extends TestCase
       $actual = $BankModel->findBankById($id);      
       $this->assertEquals($expected, $actual);      
    }
-            
-  
 }
