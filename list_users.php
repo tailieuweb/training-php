@@ -1,15 +1,18 @@
 <?php
+
 // Start the session
 session_start();
+
 require_once 'DesignPattern/FactoryPattern.php';
 $factory = new FactoryPattern();
 $userModel = $factory->make('user');
 
-$params = [];
-if (!empty($_GET['keyword'])) {
-    $params['keyword'] = $_GET['keyword'];
+if (isset($_GET['keyword'])) {
+    $users = $userModel->findUser($_GET['keyword']);
 }
-$users = $userModel->getUsers($params);
+else{
+    $users = $userModel->getUsers();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,11 +28,11 @@ $users = $userModel->getUsers($params);
                 List of users! <br>
             </div>
             <table class="table table-striped">
-            <thead>
+                <thead>
                     <tr>
+                        <th scope="col">ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">Fullname</th>
-                        <th scope="col">Mail</th>
                         <th scope="col">Type</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -37,14 +40,12 @@ $users = $userModel->getUsers($params);
                 <tbody>
                     <?php foreach ($users as $user) {?>
                         <tr>
+                            <th scope="row"><?php echo $user['id']?></th>
                             <td>
                                 <?php echo $user['name']?>
                             </td>
                             <td>
                                 <?php echo $user['fullname']?>
-                            </td>
-                            <td>
-                                <?php echo $user['email']?>
                             </td>
                             <td>
                                 <?php echo $user['type']?>
@@ -56,7 +57,7 @@ $users = $userModel->getUsers($params);
                                 <a href="view_user.php?id=<?php echo md5($user['id']) ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo md5($user['id'])?>">
+                                <a href="delete_user.php?id=<?php echo md5($user['id']) ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
