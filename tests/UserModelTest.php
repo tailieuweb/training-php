@@ -3,6 +3,216 @@ use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
 {
+   public function testFindUserByIdOk() {
+      $userModel = new UserModel();
+      
+      $id = 2;
+      $mongDoiUsername = 'test2';
+      
+      $user = $userModel->findUserById($id);        
+      $this->assertEquals($mongDoiUsername, $user[0]['name']);    
+   }
+            
+   public function testFindUserByIdNg() {
+      $userModel = new UserModel();
+      
+      $id = 999999;
+           
+      $user = $userModel->findUserById($id);
+      
+      if ($user=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }     
+   }
+   public function testFindUserByIdNgAm() {
+      $userModel = new UserModel();
+      
+      $id = -999999;         
+      
+      $user = $userModel->findUserById($id);
+      
+      if ($user=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }     
+   }
+   public function testFindUserByIdSoThuc() {
+      $userModel = new UserModel();
+      
+      $id = 11.22;
+      
+      $user = $userModel->findUserById($id);
+      
+      if ($user=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }
+   public function testFindUserByIdSpecialCharacters() {
+      $userModel = new UserModel();
+      
+      $id = '[@$]';
+      
+      $user = $userModel->findUserById($id);
+      
+      if ($user=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }
+   public function testFindUserByIdIsArray() {
+      $userModel = new UserModel();
+      
+      $id = [];
+      
+      $user = $userModel->findUserById($id);
+      
+      if ($user=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }
+   public function testFindUserByIdStr() {
+      $userModel = new UserModel();
+      
+      $id = 'asdf';
+      
+      
+      $expected = 'error';
+      $actual = $userModel->findUserById($id);
+      
+      $this->assertEquals($expected, $actual);   
+   }
+   
+   
+   public function testFindUserByIdNull() {
+      $userModel = new UserModel();
+      $id = null;
+      $expected = 'error';
+      $actual = $userModel->findUserById($id);
+      $this->assertEquals($expected, $actual);   
+   }
+   
+   public function testFindUserByIdObject() {
+      $userModel = new UserModel();    
+      $id = new stdClass();
+      $expected = 'error';
+      $actual = $userModel->findUserById($id);      
+      $this->assertEquals($expected, $actual);      
+   }
+   public function testFindUserOk() {
+      $userModel = new UserModel();
+      $key = 'test2';
+      $mongDoiUsername = 'test2';
+      
+      $user = $userModel->findUser($key);
+      
+      $this->assertEquals($mongDoiUsername, $user[0]['name']);
+      
+   }
+   public function testFindUserNg() {
+      $userModel = new UserModel();
+      
+      $key = 999999;
+      
+      $user = $userModel->findUser($key);
+      
+      if ($user=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }
+   public function testFindUserNgAm() {
+      $userModel = new UserModel();
+      
+      $key = -999999;
+      
+      $user = $userModel->findUser($key);
+      
+      if ($user=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }
+   public function testFindUserSoThuc() {
+      $userModel = new UserModel();
+      
+      $key = 11.22;
+      
+      $user = $userModel->findUser($key);
+      
+      if ($user=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }
+   public function testFindUserSpecialCharacters() {
+      $userModel = new UserModel();
+      
+      $key = '[@$]';
+      
+      $user = $userModel->findUser($key);
+      
+      if ($user=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }
+   public function testFindUserIsArray() {
+      $userModel = new UserModel();
+      
+      $key = [];
+      
+      $user = $userModel->findUser($key);
+      
+      if ($user=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }
+   public function testFindUserStr() {
+      $userModel = new UserModel();
+      
+      $key = 'test7';
+               
+      $mongDoiUsername = 'test7';
+      $user = $userModel->findUser($key);
+      
+      $this->assertEquals($mongDoiUsername, $user[0]['name']);   
+   }
+   public function testFindUserNull() {
+      $userModel = new UserModel();
+      
+      $key = null;
+               
+      $user = $userModel->findUser($key);
+      if ($user=='error') {
+         $this->assertTrue(true);
+         } else {
+         $this->assertTrue(false);
+         }
+   }
+   public function testFindUserObject() {
+      $userModel = new UserModel();
+      
+      $key = new stdClass();
+               
+      $mongDoi = 'error';
+      $user = $userModel->findUser($key);
+      
+      $this->assertEquals($mongDoi, $user);   
+   }
    public function testAuthOk() {
       $userModel = new UserModel();
       $username = 'test2';
@@ -34,24 +244,6 @@ class UserModelTest extends TestCase
       $auth = $userModel->auth($username,$password);
       
       if ($auth=='error') {
-   public function testFindUserOk() {
-      $userModel = new UserModel();
-      $key = 'test2';
-      $mongDoiUsername = 'test2';
-      
-      $user = $userModel->findUser($key);
-      
-      $this->assertEquals($mongDoiUsername, $user[0]['name']);
-      
-   }
-   public function testFindUserNg() {
-      $userModel = new UserModel();
-      
-      $key = 999999;
-      
-      $user = $userModel->findUser($key);
-      
-      if ($user=='error') {
       $this->assertTrue(true);
       } else {
       $this->assertTrue(false);
@@ -120,6 +312,50 @@ class UserModelTest extends TestCase
       $auth = $userModel->auth($username,$password);
       
       if ($auth=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }
+   public function testAuthPassIsArray() {
+      $userModel = new UserModel();
+      $username = 'test2';
+      $password = [];
+      
+      $auth = $userModel->auth($username,$password);
+      
+      if ($auth=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }         
+   public function testAuthUserNull() {
+      $userModel = new UserModel();
+      $username = null;
+      $password = 'aaaa';
+      
+      $auth = $userModel->auth($username,$password);
+      
+      if ($auth=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }
+   public function testAuthPassNull() {
+      $userModel = new UserModel();
+      $username = 'test2';
+      $password = null;
+      
+      $auth = $userModel->auth($username,$password);
+      
+      if ($auth=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }
    // public function testDeleteUserByIdOk() {
 
    //    $userModel = new UserModel();
@@ -143,32 +379,12 @@ class UserModelTest extends TestCase
       $del = $userModel->deleteUserById($id);
       
       if ($del==false) {
-   public function testFindUserByIdOk() {
-      $userModel = new UserModel();
-      
-      $id = 2;
-      $mongDoiUsername = 'test2';
-      
-      $user = $userModel->findUserById($id);        
-      $this->assertEquals($mongDoiUsername, $user[0]['name']);    
-   }
-            
-   public function testFindUserByIdNg() {
-      $userModel = new UserModel();
-      
-      $id = 999999;
-           
-      $user = $userModel->findUserById($id);
-      
-      if ($user=='error') {
       $this->assertTrue(true);
       } else {
       $this->assertTrue(false);
-      }
+      }     
       }
    public function testDeleteUserByIdNgAm() {
-   }
-   public function testFindUserByIdNgAm() {
       $userModel = new UserModel();
       
       $id = -999999;         
@@ -176,7 +392,78 @@ class UserModelTest extends TestCase
       $user = $userModel->deleteUserById($id);
       
       if ($user==false) {
-      $user = $userModel->findUserById($id);
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }     
+   }
+   public function testDeleteUserByIdSoThuc() {
+      $userModel = new UserModel();
+      
+      $id = 11.22;
+      
+      $user = $userModel->deleteUserById($id);
+      
+      if ($user==false) {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }
+   public function testDeleteUserByIdSpecialCharacters() {
+      $userModel = new UserModel();
+      
+      $id = '[@$]';
+      
+      $user = $userModel->deleteUserById($id);
+      
+      if ($user==false) {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }
+   public function testDeleteUserByIdIsArray() {
+      $userModel = new UserModel();
+      
+      $id = [];
+      
+      $user = $userModel->deleteUserById($id);
+      
+      if ($user==false) {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }
+   public function testDeleteUserByIdStr() {
+      $userModel = new UserModel();
+      
+      $id = 'asdf';
+      
+      
+      $expected = false;
+      $actual = $userModel->deleteUserById($id);
+      
+      $this->assertEquals($expected, $actual);   
+   }
+   
+   
+   public function testDeleteUserByIdNull() {
+      $userModel = new UserModel();
+      $id = null;
+      $expected = false;
+      $actual = $userModel->deleteUserById($id);
+      $this->assertEquals($expected, $actual);   
+   }
+   
+   public function testDeleteUserByIdObject() {
+      $userModel = new UserModel();    
+      $id = new stdClass();
+      $expected = false;
+      $actual = $userModel->deleteUserById($id);      
+      $this->assertEquals($expected, $actual);      
+   }
    public function testGetUsersOk() {
       $userModel = new UserModel();
       
@@ -199,21 +486,6 @@ class UserModelTest extends TestCase
       $this->assertTrue(false);
       }     
    }
-   public function testDeleteUserByIdSoThuc() {
-   public function testFindUserByIdSoThuc() {
-      $userModel = new UserModel();
-      
-      $id = 11.22;
-      
-     $user = $userModel->deleteUserById($id);
-      
-      if ($user==false) {
-   public function testFindUserNgAm() {
-      $userModel = new UserModel();
-      
-      $key = -999999;
-      
-      $user = $userModel->findUser($key);
    public function testGetUsersNgAm() {
       $userModel = new UserModel();
       
@@ -225,15 +497,6 @@ class UserModelTest extends TestCase
       $this->assertTrue(true);
       } else {
       $this->assertTrue(false);
-      }
-   }
-   public function testFindUserSoThuc() {
-      $userModel = new UserModel();
-      
-      $key = 11.22;
-      
-      $user = $userModel->findUser($key);
-      $user = $userModel->findUserById($id);
       }     
    }
    public function testGetUsersSoThuc() {
@@ -249,30 +512,6 @@ class UserModelTest extends TestCase
       $this->assertTrue(false);
       }
    }
-   public function testAuthPassIsArray() {
-      $userModel = new UserModel();
-      $username = 'test2';
-      $password = [];
-      
-      $auth = $userModel->auth($username,$password);
-      
-      if ($auth=='error') {
-   public function testDeleteUserByIdSpecialCharacters() {
-   public function testFindUserByIdSpecialCharacters() {
-      $userModel = new UserModel();
-      
-      $id = '[@$]';
-      
-     $user = $userModel->deleteUserById($id);
-      
-      if ($user==false) {
-   public function testFindUserSpecialCharacters() {
-      $userModel = new UserModel();
-      
-      $key = '[@$]';
-      
-      $user = $userModel->findUser($key);
-     $user = $userModel->findUserById($id);
    public function testGetUsersSpecialCharacters() {
       $userModel = new UserModel();
       
@@ -285,34 +524,6 @@ class UserModelTest extends TestCase
       } else {
       $this->assertTrue(false);
       }
-   }         
-   public function testAuthUserNull() {
-      $userModel = new UserModel();
-      $username = null;
-      $password = 'aaaa';
-      
-      $auth = $userModel->auth($username,$password);
-      
-      if ($auth=='error') {
-   }
-   public function testDeleteUserByIdIsArray() {
-   }
-   public function testFindUserByIdIsArray() {
-      $userModel = new UserModel();
-      
-      $id = [];
-      
-      $user = $userModel->deleteUserById($id);
-      
-      if ($user==false) {
-   }
-   public function testFindUserIsArray() {
-      $userModel = new UserModel();
-      
-      $key = [];
-      
-      $user = $userModel->findUser($key);
-      $user = $userModel->findUserById($id);
    }
    public function testGetUsersIsArray() {
       $userModel = new UserModel();
@@ -327,96 +538,6 @@ class UserModelTest extends TestCase
       $this->assertTrue(false);
       }
    }
-   public function testAuthPassNull() {
-      $userModel = new UserModel();
-      $username = 'test2';
-      $password = null;
-      
-      $auth = $userModel->auth($username,$password);
-      
-      if ($auth=='error') {
-      $this->assertTrue(true);
-      } else {
-      $this->assertTrue(false);
-      }
-   public function testDeleteUserByIdStr() {
-   public function testFindUserByIdStr() {
-     $userModel = new UserModel();
-      
-      $id = 'asdf';
-      
-      
-     $expected = false;
-      $actual = $userModel->deleteUserById($id);
-      
-      $this->assertEquals($expected, $actual);   
-   }
-   
-   public function testDeleteUserByIdNull() {
-      $userModel = new UserModel();
-      $id = null;
-      $expected = false;
-      $actual = $userModel->deleteUserById($id);
-      $this->assertEquals($expected, $actual);   
-   }
-   
-   public function testDeleteUserByIdObject() {
-      $userModel = new UserModel();    
-      $id = new stdClass();
-      $expected = false;
-      $actual = $userModel->deleteUserById($id);      
-      $this->assertEquals($expected, $actual);
-   public function testFindUserStr() {
-      $userModel = new UserModel();
-      
-      $key = 'test7';
-               
-      $mongDoiUsername = 'test7';
-      $user = $userModel->findUser($key);
-      
-      $this->assertEquals($mongDoiUsername, $user[0]['name']);   
-   }
-   public function testFindUserNull() {
-      $userModel = new UserModel();
-      
-      $key = null;
-               
-      $user = $userModel->findUser($key);
-      if ($user=='error') {
-         $this->assertTrue(true);
-         } else {
-         $this->assertTrue(false);
-         }
-   }
-   public function testFindUserObject() {
-      $userModel = new UserModel();
-      
-      $key = new stdClass();
-               
-      $mongDoi = 'error';
-      $user = $userModel->findUser($key);
-      
-      $this->assertEquals($mongDoi, $user);   
-      $expected = 'error';
-      $actual = $userModel->findUserById($id);
-      
-      $this->assertEquals($expected, $actual);   
-   }
-   
-   
-   public function testFindUserByIdNull() {
-      $userModel = new UserModel();
-      $id = null;
-      $expected = 'error';
-      $actual = $userModel->findUserById($id);
-      $this->assertEquals($expected, $actual);   
-   }
-   
-   public function testFindUserByIdObject() {
-      $userModel = new UserModel();    
-      $id = new stdClass();
-      $expected = 'error';
-      $actual = $userModel->findUserById($id);      
    public function testGetUsersStr() {
       $userModel = new UserModel();
       
