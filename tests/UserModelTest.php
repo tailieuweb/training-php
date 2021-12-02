@@ -340,6 +340,14 @@ class UserModelTest extends TestCase
     $actual = $user->auth('" or ""="', "admin");
     $this->assertEquals($expected, $actual);
   }
+  //?--------------------------------------------------------------
+  public function testAuthWithPasswordIncorrectNotGood()
+  {
+    $user = new UserModel();
+    $expected = [];
+    $actual = $user->auth("admin", "abc");
+    $this->assertEquals($expected, $actual);
+  }
   // * getuser function start
 
   // * function testGetUsers string (finish)
