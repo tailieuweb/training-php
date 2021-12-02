@@ -4,47 +4,22 @@ use PHPUnit\Framework\TestCase;
 
 class BankModelTest extends TestCase
 {
-   public function testFindBankByIdOk() {
+   public function testFindBankOk() {
       $BankModel = new BankModel();
+      $key = 2;
+      $expected = 2;
       
-      $id = 2;
-      $expected = '1';
+      $Bank = $BankModel->findBank($key);
       
-      $Bank = $BankModel->findBankById($id);        
-      $this->assertEquals($expected, $Bank[0]['user_id']);    
+      $this->assertEquals($expected, $Bank[0]['user_id']);
+      
    }
-   public function testFindBankByIdNg() {
+   public function testFindBankNg() {
       $BankModel = new BankModel();
       
-      $id = 999999;
-           
-      $Bank = $BankModel->findBankById($id);
+      $key = 999999;
       
-      if ($Bank=='error') {
-      $this->assertTrue(true);
-      } else {
-      $this->assertTrue(false);
-      }     
-   }
-   public function testFindBankByIdNgAm() {
-      $BankModel = new BankModel();
-      
-      $id = -999999;         
-      
-      $Bank = $BankModel->findBankById($id);
-      
-      if ($Bank=='error') {
-      $this->assertTrue(true);
-      } else {
-      $this->assertTrue(false);
-      }     
-   }
-   public function testFindBankByIdSoThuc() {
-      $BankModel = new BankModel();
-      
-      $id = 11.22;
-      
-      $Bank = $BankModel->findBankById($id);
+      $Bank = $BankModel->findBank($key);
       
       if ($Bank=='error') {
       $this->assertTrue(true);
@@ -52,12 +27,12 @@ class BankModelTest extends TestCase
       $this->assertTrue(false);
       }
    }
-   public function testFindBankByIdSpecialCharacters() {
+   public function testFindBankNgAm() {
       $BankModel = new BankModel();
       
-      $id = '[@$]';
+      $key = -999999;
       
-      $Bank = $BankModel->findBankById($id);
+      $Bank = $BankModel->findBank($key);
       
       if ($Bank=='error') {
       $this->assertTrue(true);
@@ -65,12 +40,12 @@ class BankModelTest extends TestCase
       $this->assertTrue(false);
       }
    }
-   public function testFindBankByIdIsArray() {
+   public function testFindBankSoThuc() {
       $BankModel = new BankModel();
       
-      $id = [];
+      $key = 11.22;
       
-      $Bank = $BankModel->findBankById($id);
+      $Bank = $BankModel->findBank($key);
       
       if ($Bank=='error') {
       $this->assertTrue(true);
@@ -78,34 +53,62 @@ class BankModelTest extends TestCase
       $this->assertTrue(false);
       }
    }
-   public function testFindBankByIdStr() {
+   public function testFindBankSpecialCharacters() {
       $BankModel = new BankModel();
       
-      $id = 'asdf';
+      $key = '[@$]';
       
+      $Bank = $BankModel->findBank($key);
       
-      $expected = 'error';
-      $actual = $BankModel->findBankById($id);
-      
-      $this->assertEquals($expected, $actual);   
+      if ($Bank=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
    }
-   
-   
-   public function testFindBankByIdNull() {
+   public function testFindBankIsArray() {
       $BankModel = new BankModel();
-      $id = null;
-      $expected = 'error';
-      $actual = $BankModel->findBankById($id);
-      $this->assertEquals($expected, $actual);   
+      
+      $key = [];
+      
+      $Bank = $BankModel->findBank($key);
+      
+      if ($Bank=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
    }
-   
-   public function testFindBankByIdObject() {
-      $BankModel = new BankModel();    
-      $id = new stdClass();
-      $expected = 'error';
-      $actual = $BankModel->findBankById($id);      
-      $this->assertEquals($expected, $actual);      
+   public function testFindBankStr() {
+      $BankModel = new BankModel();
+      
+      $key = '3';
+               
+      $expected = '3';
+      $Bank = $BankModel->findBank($key);
+      
+      $this->assertEquals($expected, $Bank[0]['user_id']);   
    }
-            
-  
+   public function testFindBankNull() {
+      $BankModel = new BankModel();
+      
+      $key = null;
+               
+      $Bank = $BankModel->findBank($key);
+      if ($Bank=='error') {
+         $this->assertTrue(true);
+         } else {
+         $this->assertTrue(false);
+         }
+   }
+   public function testFindBankObject() {
+      $BankModel = new BankModel();
+      
+      $key = new stdClass();
+               
+      $mongDoi = 'error';
+      $Bank = $BankModel->findBank($key);
+      
+      $this->assertEquals($mongDoi, $Bank);   
+   }
 }
