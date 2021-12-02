@@ -93,11 +93,20 @@ class BankModel extends BaseModel{
             return false;
         }
         $sql = 'UPDATE banks SET 
-                 user_id = "' . $input['id'] .'", 
-                 cost = "' . $input['cost'] .'"
+                user_id = "' . $input['user_id'] .'", 
+                cost = "' . $input['cost'] .'"
                 WHERE bank_id = ' . $input['bank_id'];
         $bank = $this->update($sql);
 
         return $bank;
+    }
+    /**
+     * RollBack Database in Bank
+     */
+    public function startTransaction(){
+        self::$_connection->begin_transaction();
+    }
+    public function rollback(){
+        self::$_connection->rollback();
     }
 }

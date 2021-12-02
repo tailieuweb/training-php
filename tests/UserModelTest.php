@@ -26,7 +26,7 @@ class UserModelTest extends TestCase
         $userId = 1;
 
         $actual = $user->findUserById($userId);
-        $expected = 'error';
+        $expected = [];
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -38,7 +38,19 @@ class UserModelTest extends TestCase
         $id = 'asdf';
 
         $actual = $userModel->findUserById($id);
-        $expected = 'error';
+        $expected = [];
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test function findUserById with id is float
+     */
+    public function testFindUserByIdFloat()
+    {
+        $userModel = new UserModel();
+        $id = 11.5;
+
+        $actual = $userModel->findUserById($id);
+        $expected = [];
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -51,7 +63,7 @@ class UserModelTest extends TestCase
         $id = null;
 
         $actual = $userModel->findUserById($id);
-        $expected = 'error';
+        $expected = [];
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -65,10 +77,14 @@ class UserModelTest extends TestCase
             'name', 'email'
         ];
 
-        $actual = $userModel->findUserById($id[0]);
+        $actual = $userModel->findUserById($id);
         // $this->assertEquals($expected, $actual);
-        $expected = 'error';
-        $this->assertEquals($expected, $actual);
+        if($actual != null){
+            $this->assertTrue(false);
+        }
+        else{
+            $this->assertTrue(true);
+        }
     }
     /**
      * Test function findUserById with id is object
@@ -79,10 +95,14 @@ class UserModelTest extends TestCase
 
         $id = new BankModel();
 
-        $actual = $userModel->findUserById($id->createToken());
+        $actual = $userModel->findUserById($id);
         // $this->assertEquals($expected, $actual);
-        $expected = 'error';
-        $this->assertEquals($expected, $actual);
+        if($actual != null){
+            $this->assertTrue(false);
+        }
+        else{
+            $this->assertTrue(true);
+        }
     }
 
     /**
@@ -110,8 +130,26 @@ class UserModelTest extends TestCase
         $keys = "45125215sad";
 
         $actual = $user->findUser($keys);
-        $expected = 'error';
-        $this->assertEquals($expected, $actual);
+        if (empty($actual)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test function findUser with key is float
+     */
+    public function testFindUserKeyFloat()
+    {
+        $user = new UserModel();
+        $keys = 11.45;
+
+        $actual = $user->findUser($keys);
+        if (empty($actual)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
     /**
      * Test function findUser with key is array
@@ -121,9 +159,12 @@ class UserModelTest extends TestCase
         $user = new UserModel();
         $keys = [1];
 
-        $actual = $user->findUser($keys[0]);
-        $expected = 'error';
-        $this->assertEquals($expected, $actual);
+        $actual = $user->findUser($keys);
+        if (empty($actual)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
     /**
      * Test function findUser with key is null
@@ -134,8 +175,11 @@ class UserModelTest extends TestCase
         $keys = null;
 
         $actual = $user->findUser($keys);
-        $expected = 'error';
-        $this->assertEquals($expected, $actual);
+        if (empty($actual)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
     /**
      * Test function findUser with key is number
@@ -146,8 +190,11 @@ class UserModelTest extends TestCase
         $keys = 123;
 
         $actual = $user->findUser($keys);
-        $expected = 'error';
-        $this->assertEquals($expected, $actual);
+        if (empty($actual)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
     /**
      * Test function findUser with key is object
@@ -157,10 +204,13 @@ class UserModelTest extends TestCase
         $user = new UserModel();
         $keys = new BankModel();
 
-        $actual = $user->findUser($keys->createToken());
+        $actual = $user->findUser($keys);
 
-        $expected = 'error';
-        $this->assertEquals($expected, $actual);
+        if (empty($actual)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
 
     /**
@@ -191,7 +241,7 @@ class UserModelTest extends TestCase
         $pass = "11111";
 
         $actual = $user->auth($name, $pass);
-        $expected = true;
+        $expected = false;
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -206,7 +256,7 @@ class UserModelTest extends TestCase
         // $expected = "LE VAN LAM";
         $actual = $user->auth($name, $pass);
         // var_dump(md5($pass));die();
-        $expected = true;
+        $expected = false;
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -216,12 +266,27 @@ class UserModelTest extends TestCase
     {
         $user = new UserModel();
         $name = 123;
-        $pass = "111119999";
+        $pass = "12345";
 
         // $expected = "LE VAN LAM";
         $actual = $user->auth($name, $pass);
         // var_dump(md5($pass));die();
-        $expected = true;
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test function auth with name is number
+     */
+    public function testAuthNameFloat()
+    {
+        $user = new UserModel();
+        $name = 12.2;
+        $pass = "12345";
+
+        // $expected = "LE VAN LAM";
+        $actual = $user->auth($name, $pass);
+        // var_dump(md5($pass));die();
+        $expected = false;
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -249,7 +314,21 @@ class UserModelTest extends TestCase
 
         // $expected = "LE VAN LAM";
         $actual = $user->auth($name, $pass);
-        $expected = true;
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test function auth with password is float
+     */
+    public function testAuthPassFloat()
+    {
+        $user = new UserModel();
+        $name = "Le LAM 22";
+        $pass = 11.3231;
+
+        // $expected = "LE VAN LAM";
+        $actual = $user->auth($name, $pass);
+        $expected = false;
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -264,7 +343,7 @@ class UserModelTest extends TestCase
         // $expected = "LE VAN LAM";
         $actual = $user->auth($name, $pass);
         // var_dump(md5($pass));die();
-        $expected = true;
+        $expected = false;
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -277,7 +356,7 @@ class UserModelTest extends TestCase
         $pass = null;
 
         $actual = $user->auth($name, $pass);
-        $expected = true;
+        $expected = false;
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -289,9 +368,9 @@ class UserModelTest extends TestCase
         $name = ['Le Lam 22'];
         $pass = '2222';
 
-        $actual = $user->auth($name[0], $pass);
+        $actual = $user->auth($name, $pass);
 
-        $expected = true;
+        $expected = false;
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -303,9 +382,9 @@ class UserModelTest extends TestCase
         $name = 'Le Lam 22';
         $pass = ['1111', '22222'];
 
-        $actual = $user->auth($name, $pass[1]);
+        $actual = $user->auth($name, $pass);
 
-        $expected = true;
+        $expected = false;
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -317,8 +396,8 @@ class UserModelTest extends TestCase
         $name = new BankModel();
         $pass = '2222';
 
-        $actual = $user->auth($name->createToken(), $pass);
-        $expected = true;
+        $actual = $user->auth($name, $pass);
+        $expected = false;
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -330,15 +409,16 @@ class UserModelTest extends TestCase
         $name = 'Le Lam 22';
         $pass = new BankModel();
 
-        $actual = $user->auth($name, $pass->createToken());
+        $actual = $user->auth($name, $pass);
 
-        $expected = true;
+        $expected = false;
         $this->assertEquals($expected, $actual);
     }
 
 
     /**
      * Test function create token
+     * TODO
      */
     public function testCreateTokenOk()
     {
@@ -349,9 +429,9 @@ class UserModelTest extends TestCase
         // $expected = "LE VAN LAM";
         $actual = $user->createToken();
         if ($actual == '') {
-            return $this->assertTrue(true);
+            $this->assertTrue(true);
         } else {
-            return $this->assertTrue(false);
+            $this->assertTrue(false);
         }
     }
     /**
@@ -363,9 +443,11 @@ class UserModelTest extends TestCase
         $actual = $user->getInstance();
 
         if ($user == $actual) {
-            return $this->assertTrue(true);
+            $this->assertTrue(true);
         }
-        return $this->assertTrue(false);
+        else{
+            $this->assertTrue(false);
+        }
     }
     public function testGetInstanceChange()
     {
@@ -419,7 +501,7 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(false);
         }
         return $this->assertTrue(true);
@@ -441,7 +523,7 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -464,7 +546,7 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -486,7 +568,7 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -508,7 +590,7 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -530,7 +612,7 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -552,7 +634,7 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -588,11 +670,11 @@ class UserModelTest extends TestCase
     {
         $user = new UserModel();
         $input = [];
-        $input['id'] = '11';
+        $input['id'] = 11;
         $input['name'] = "Test update";
         $input['fullname'] = "Test user update with email null";
         $input['email'] = "testUpdate@gmail.com";
-        $input['type'] = 3;
+        $input['type'] = '3';
         $input['password'] = '12345';
         $actual = $user->updateUser($input);
 
@@ -605,22 +687,44 @@ class UserModelTest extends TestCase
     }
     /**
      * Test get type user right
-     * type is string
+     * name is int
      */
     public function testUpdateUserNameNum()
     {
         $user = new UserModel();
         $input = [];
         $input['id'] = 11;
-        $input['name'] = 123;
-        $input['fullname'] = "Test user update with email null";
-        $input['email'] = "testUpdate@gmail.com";
+        $input['name'] = 122;
+        $input['fullname'] = 'le van lam';
+        $input['email'] = 'lam@gmail.com';
         $input['type'] = 3;
         $input['password'] = '12345';
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    /**
+     * Test get type user right
+     * name is float
+     */
+    public function testUpdateUserNameFloat()
+    {
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = 11;
+        $input['name'] = 122.22;
+        $input['fullname'] = 'le van lam';
+        $input['email'] = 'lam@gmail.com';
+        $input['type'] = 3;
+        $input['password'] = '12345';
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -634,15 +738,37 @@ class UserModelTest extends TestCase
         $user = new UserModel();
         $input = [];
         $input['id'] = 11;
-        $input['name'] = 123;
-        $input['fullname'] = 123;
-        $input['email'] = "testUpdate@gmail.com";
+        $input['name'] = 'lam';
+        $input['fullname'] = 321;
+        $input['email'] = 'lam@gmail.com';
         $input['type'] = 3;
         $input['password'] = '12345';
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    /**
+     * Test get type user right
+     * Fullname is float
+     */
+    public function testUpdateUserFullNameFloat()
+    {
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = 11;
+        $input['name'] = 'lam';
+        $input['fullname'] = 1.3;
+        $input['email'] = 'lam@gmail.com';
+        $input['type'] = 3;
+        $input['password'] = '12345';
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -656,9 +782,32 @@ class UserModelTest extends TestCase
         $user = new UserModel();
         $input = [];
         $input['id'] = 11;
-        $input['name'] = 123;
-        $input['fullname'] = 123;
-        $input['email'] = 123;
+        $input['name'] = 'lam';
+        $input['fullname'] = 'le van lam';
+        $input['email'] = 1234;
+        $input['type'] = 3;
+        $input['password'] = '12345';
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        $expected = false;
+        if ($actual == $expected) {
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    /**
+     * Test get type user right
+     * email is int
+     */
+    public function testUpdateUserEmailFloat()
+    {
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = 11;
+        $input['name'] = 'lam';
+        $input['fullname'] = 'le van lam';
+        $input['email'] = 1234;
         $input['type'] = 3;
         $input['password'] = '12345';
         $actual = $user->updateUser($input);
@@ -679,11 +828,34 @@ class UserModelTest extends TestCase
         $user = new UserModel();
         $input = [];
         $input['id'] = 11;
-        $input['name'] = 123;
-        $input['fullname'] = 123;
-        $input['email'] = 123;
+        $input['name'] = 'lam';
+        $input['fullname'] = 'le van lam';
+        $input['email'] = 'lam@gmail.com';
         $input['type'] = 3;
         $input['password'] = 12345;
+        $actual = $user->updateUser($input);
+
+        // var_dump($actual);die();
+        // $expected = false;
+        if ($actual == true) {
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+    }
+    /**
+     * Test get type user right
+     * pass is float
+     */
+    public function testUpdateUserPassFloat()
+    {
+        $user = new UserModel();
+        $input = [];
+        $input['id'] = 11;
+        $input['name'] = 'lam';
+        $input['fullname'] = 'le van lam';
+        $input['email'] = 'lam@gmail.com';
+        $input['type'] = 3;
+        $input['password'] = 3123.34123;
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
@@ -740,7 +912,7 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -766,7 +938,7 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -791,7 +963,7 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -816,7 +988,7 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -841,7 +1013,7 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -867,7 +1039,7 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -892,7 +1064,7 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -917,7 +1089,7 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -942,7 +1114,7 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -967,7 +1139,7 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
@@ -992,98 +1164,252 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         // var_dump($actual);die();
-        if ($actual == true) {
+        if ($actual == false) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false);
     }
 
-
     /**
-     * Test UserModel of Hieu Trung
+     * Test func deleteUserById
+     * Test right
      */
-    //test func deleteUserById
 
-    public function testDeleteUserByIdNg()
+    public function testDeleteUserByIdOk()
     {
         $userModel = new UserModel();
-        $id = 8;
-        $token_false = 'JFASJDBAJS566';
-
-        $actual = $userModel->deleteUserById($id, $token_false);
-
+        $id = 3;
+        $token = $userModel->createToken();
+        $userModel->startTransaction();
+        $actual = $userModel->deleteUserById($id, $token);
+        $userModel->rollback();
         // $this->assertEquals($userModel->findUserById($id),$actual);
-        if ($actual == NULL) {
+        if ($actual == true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test func deleteUserById
+     * Id not exist
+     */
+
+    public function testDeleteUserByIdNotExist()
+    {
+        $userModel = new UserModel();
+        $id = 1;
+        $token = $userModel->createToken();
+        $userModel->startTransaction();
+        $actual = $userModel->deleteUserById($id, $token);
+        $userModel->rollback();
+        // $this->assertEquals($userModel->findUserById($id),$actual);
+        if ($actual == true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test func deleteUserById
+     * Id is null
+     */
+
+    public function testDeleteUserByIdNull()
+    {
+        $userModel = new UserModel();
+        $id = null;
+        $token = $userModel->createToken();
+        $userModel->startTransaction();
+        $actual = $userModel->deleteUserById($id, $token);
+        $userModel->rollback();
+        // $this->assertEquals($userModel->findUserById($id),$actual);
+        if ($actual == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test func deleteUserById
+     * Id is string
+     */
+
+    public function testDeleteUserByIdString()
+    {
+        $userModel = new UserModel();
+        $id = 'string';
+        $token = $userModel->createToken();
+        $userModel->startTransaction();
+        $actual = $userModel->deleteUserById($id, $token);
+        $userModel->rollback();
+        // $this->assertEquals($userModel->findUserById($id),$actual);
+        if ($actual == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test func deleteUserById
+     * Id is float
+     */
+
+    public function testDeleteUserByIdFloat()
+    {
+        $userModel = new UserModel();
+        $id = 1.5;
+        $token = $userModel->createToken();
+        $userModel->startTransaction();
+        $actual = $userModel->deleteUserById($id, $token);
+        $userModel->rollback();
+        // $this->assertEquals($userModel->findUserById($id),$actual);
+        if ($actual == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test func deleteUserById
+     * Id is array
+     */
+
+    public function testDeleteUserByIdArray()
+    {
+        $userModel = new UserModel();
+        $id = ['string'];
+        $token = $userModel->createToken();
+        $userModel->startTransaction();
+        $actual = $userModel->deleteUserById($id, $token);
+        $userModel->rollback();
+        // $this->assertEquals($userModel->findUserById($id),$actual);
+        if ($actual == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test func deleteUserById
+     * Id is object
+     */
+
+    public function testDeleteUserByIdObject()
+    {
+        $userModel = new UserModel();
+        $id = new stdClass();
+        $token = $userModel->createToken();
+        $userModel->startTransaction();
+        $actual = $userModel->deleteUserById($id, $token);
+        $userModel->rollback();
+        // $this->assertEquals($userModel->findUserById($id),$actual);
+        if ($actual == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test func deleteUserById
+     * Token worng
+     */
+
+    public function testDeleteUserByTokenNg()
+    {
+        $userModel = new UserModel();
+        $id = new stdClass();
+        $token = "45821nkv02935d$!@";
+        $userModel->startTransaction();
+        $actual = $userModel->deleteUserById($id, $token);
+        $userModel->rollback();
+        // $this->assertEquals($userModel->findUserById($id),$actual);
+        if ($actual == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test func deleteUserById
+     * Token int
+     */
+
+    public function testDeleteUserByTokenInt()
+    {
+        $userModel = new UserModel();
+        $id = 2;
+        $token = (int) $userModel->createToken();
+        $userModel->startTransaction();
+        $actual = $userModel->deleteUserById($id, $token);
+        $userModel->rollback();
+        // $this->assertEquals($userModel->findUserById($id),$actual);
+        if ($actual == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test func deleteUserById
+     * Token is null
+     */
+
+    public function testDeleteUserByTokenNull()
+    {
+        $userModel = new UserModel();
+        $id = 2;
+        $token = null;
+        $userModel->startTransaction();
+        $actual = $userModel->deleteUserById($id, $token);
+        $userModel->rollback();
+        // $this->assertEquals($userModel->findUserById($id),$actual);
+        if ($actual == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test func deleteUserById
+     * Token is array
+     */
+
+    public function testDeleteUserByTokenArray()
+    {
+        $userModel = new UserModel();
+        $id = 2;
+        $token = [1,'43'];
+        $userModel->startTransaction();
+        $actual = $userModel->deleteUserById($id, $token);
+        $userModel->rollback();
+        // $this->assertEquals($userModel->findUserById($id),$actual);
+        if ($actual == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    /**
+     * Test func deleteUserById
+     * Token is object
+     */
+
+    public function testDeleteUserByTokenObject()
+    {
+        $userModel = new UserModel();
+        $id = 2;
+        $token = new stdClass();
+        $userModel->startTransaction();
+        $actual = $userModel->deleteUserById($id, $token);
+        $userModel->rollback();
+        // $this->assertEquals($userModel->findUserById($id),$actual);
+        if ($actual == false) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
         }
     }
 
-
-    //test func updateUser
-
-    // public function testUpdateUserOk()
-    // {
-    //     $userModel = new UserModel();
-    //     $input['id'] = 8;
-    //     $input['name'] = 'phpunit_update';
-
-    //     $actual = $userModel->updateUser($input['name'], $input['id']);
-    //     var_dump($actual).die();
-
-    // }
-
-
-    //test func insertUser
-
-    public function testinsertUserOk()
-    {
-        $userModel = new UserModel();
-        $input = [];
-        $input['name'] = 'phpunit insert';
-        $input['fullname'] = "phpunit insert";
-        $input['email'] = "phpunitinsert@gmail.com";
-        $input['type'] = 1;
-        $input['password'] = "phpunitinsert";
-
-        $actual = $userModel->insertUser($input);
-        if ($actual != true) {
-            $this->assertTrue(false);
-        } else {
-            $this->assertTrue(true);
-        }
-    }
-    //test func getUser
-
-    public function testGetUserOk()
-    {
-        $userModel = new UserModel();
-
-        $count_array = 6;
-        $actual = $userModel->getUsers();
-
-        $this->assertEquals($count_array, count($actual));
-    }
-    public function testGetUserbyKeyWordOk()
-    {
-        $userModel = new UserModel();
-        $params = [];
-        $params['keyword'] = 'aa';
-        $count_array = 1;
-        $actual = $userModel->getUsers($params);
-
-        $this->assertEquals($count_array, count($actual));
-    }
-
-    //test func getTypes
-
-    public function testGetTypeOk()
-    {
-        $userModel = new UserModel();
-
-        $count_array = 3;
-        $actual = $userModel->getTypes();
-        $this->assertEquals($count_array, count($actual));
-    }
+    
 }

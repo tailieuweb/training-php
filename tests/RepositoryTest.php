@@ -27,7 +27,7 @@ class RepositoryTest extends TestCase
         $user_id = 1;
 
         $actual = $repo->getFullUser($user_id);
-        if(!empty($actual)){
+        if(empty($actual)){
             $this->assertTrue(true);
         }
         else{
@@ -44,7 +44,7 @@ class RepositoryTest extends TestCase
         $user_id = null;
 
         $actual = $repo->getFullUser($user_id);
-        if(!empty($actual)){
+        if(empty($actual)){
             $this->assertTrue(true);
         }
         else{
@@ -61,7 +61,7 @@ class RepositoryTest extends TestCase
         $user_id = '2';
 
         $actual = $repo->getFullUser($user_id);
-        if(!empty($actual)){
+        if(empty($actual)){
             $this->assertTrue(true);
         }
         else{
@@ -78,7 +78,7 @@ class RepositoryTest extends TestCase
         $user_id = ['dsad'];
 
         $actual = $repo->getFullUser($user_id);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -95,7 +95,7 @@ class RepositoryTest extends TestCase
         $user_id = new stdClass();
 
         $actual = $repo->getFullUser($user_id);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -192,7 +192,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 700000;
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(false);
         }
         else{
@@ -216,7 +216,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = '700000';
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(false);
         }
         else{
@@ -240,7 +240,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 700000;
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(false);
         }
         else{
@@ -360,7 +360,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 700000;
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -528,7 +528,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 421424;
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -552,7 +552,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 421424;
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -576,7 +576,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 421424;
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -600,7 +600,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 421424;
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -624,7 +624,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 421424;
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -648,7 +648,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 421424;
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -672,7 +672,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = [421424];
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -696,7 +696,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 421424;
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -720,7 +720,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 421424;
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -744,7 +744,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 421424;
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -768,7 +768,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 421424;
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -792,7 +792,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 421424;
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -816,7 +816,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 421424;
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -840,7 +840,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = new stdClass();
 
         $actual = $repo->updateFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -905,7 +905,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 70000;
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -949,7 +949,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = '70000';
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -971,7 +971,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = '70000';
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -993,7 +993,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = '70000';
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -1037,7 +1037,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 70000;
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -1059,7 +1059,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 70000;
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -1081,7 +1081,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 70000;
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -1103,7 +1103,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 70000;
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -1169,7 +1169,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 743634;
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -1191,7 +1191,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 743634;
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -1213,7 +1213,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 743634;
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -1235,7 +1235,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 743634;
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -1257,7 +1257,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 743634;
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -1279,7 +1279,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = [743634];
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -1301,7 +1301,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 743634;
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -1323,7 +1323,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 743634;
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -1345,7 +1345,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 743634;
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -1367,7 +1367,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 743634;
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -1389,7 +1389,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = 743634;
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
@@ -1411,7 +1411,7 @@ class RepositoryTest extends TestCase
         $input['cost'] = new stdClass();
 
         $actual = $repo->createFullUser($input);
-        if($actual == true){
+        if($actual == false){
             $this->assertTrue(true);
         }
         else{
