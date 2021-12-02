@@ -11,6 +11,9 @@ class UserModel extends BaseModel
     public function findUserById($id)
     {
         $id = $this->decryptID($id);
+        if (is_null($id)) {
+            return false;
+        }
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
 
@@ -22,8 +25,7 @@ class UserModel extends BaseModel
     {
         $sql = 'SELECT * FROM users WHERE email ="' . $email . '"';
         $user = $this->select($sql);
-       return isset($user[0]) ? $user[0] : false;
-      
+        return isset($user[0]) ? $user[0] : false;
     }
 
     /**
@@ -62,11 +64,14 @@ class UserModel extends BaseModel
     public function updateUser($input)
     {
         $result = ResultClass::getInstance();
-        $id = $this->decryptID($input['id']);
-        $user = $this->findUserById($input['id']);
-        if ($user) {
-            if ($user['version'] == $input['version']) {
-                $sql = 'UPDATE `users` SET 
+        if (!$this->checkInput($input, true)) {
+            $result->setError("Thông tin nhập vào không đúng !!");
+        } else {
+            $id = $this->decryptID($input['id']);
+            $user = $this->findUserById($input['id']);
+            if ($user) {
+                if ($user['version'] == $input['version']) {
+                    $sql = 'UPDATE `users` SET 
                 name = "' . $this->BlockSQLInjection($input['name']) . '", 
                  fullname="' . $this->BlockSQLInjection($input['fullname']) . '",
                  email="' . $this->BlockSQLInjection($input['email']) . '",
@@ -74,17 +79,18 @@ class UserModel extends BaseModel
                  password="' . md5($input['password']) . '",
                  version="' . ($input['version'] + 1) . '"
                  WHERE id = ' . $id;
-                $user = $this->update($sql);
-                if ($user == true) {
-                    $result->setData("Đã update thành công");
+                    $user = $this->update($sql);
+                    if ($user == true) {
+                        $result->setData("Đã update thành công");
+                    } else {
+                        $result->setError("Lỗi");
+                    }
                 } else {
-                    $result->setError("Lỗi");
+                    $result->setError("Dữ liệu đã được cập nhật trước đó! Xin hãy reload lại trang");
                 }
             } else {
-                $result->setError("Dữ liệu đã được cập nhật trước đó! Xin hãy reload lại trang");
+                $result->setError("Không tìm thấy id của user");
             }
-        } else {
-            $result->setError("Không tìm thấy id của user");
         }
         return $result;
     }
@@ -96,9 +102,7 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
-        $checkEmailStyle = $this->checkEmailStyle($input['email']);
-        $checkEmailExist = $this->checkEmailExist($input['email']);
-        if($checkEmailExist || !$checkEmailStyle){
+        if (!$this->checkInput($input)) {
             return false;
         }
         $password = md5($input['password']);
@@ -117,12 +121,16 @@ class UserModel extends BaseModel
      */
     public function insertUserWithId($id, $name, $fullname, $email, $type, $password)
     {
-        $checkEmailStyle = $this->checkEmailStyle($email);
-        $checkEmailExist = $this->checkEmailExist($email);
-        if($checkEmailExist || !$checkEmailStyle){
+        $input = [
+            'name' => $name,
+            'fullname' => $fullname,
+            'email' => $email,
+            'type' => $type,
+            'password' => $password
+        ];
+        if (!$this->checkInput($input)) {
             return false;
         }
-        $id = $this->decryptID($id);
         if (!is_numeric($id)) {
             return false;
         }
@@ -144,6 +152,9 @@ class UserModel extends BaseModel
 
         //Keyword
         if (!empty($params['keyword'])) {
+            if (!is_numeric($params['keyword']) && !is_string($params['keyword'])) {
+                return $this->getUsers();
+            }
             $keyword = $this->BlockSQLInjection($params['keyword']);
             $sql = 'SELECT * 
                     FROM `users` 
@@ -177,7 +188,7 @@ class UserModel extends BaseModel
     /**
      * Check Email Style
      */
-    private function checkEmailStyle($email)
+    public function checkEmailStyle($email)
     {
         if (!is_string($email)) {
             return false;
@@ -190,7 +201,7 @@ class UserModel extends BaseModel
     /**
      * Check Email Style
      */
-    private function checkEmailExist($email)
+    public function checkEmailExist($email)
     {
         if (!is_string($email)) {
             return false;
@@ -205,7 +216,7 @@ class UserModel extends BaseModel
     /**
      * Decrypt id
      */
-    private function decryptID($md5Id)
+    public function decryptID($md5Id)
     {
         if (!is_numeric($md5Id) && !is_string($md5Id)) {
             return null;
@@ -221,6 +232,95 @@ class UserModel extends BaseModel
             }
         }
         return NULL;
+    }
+    /**
+     * Check Input
+     */
+    public function checkInput($input, bool $isUpdate = false)
+    {
+        if (is_array($input)) {
+            // Check if it is update
+            if ($isUpdate) {
+                // Check id
+                if (isset($input['id'])) {
+                    if (!is_string($input['id']) && !is_numeric($input['id'])) {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+                // Check version
+                if (isset($input['version'])) {
+                    if (!is_string($input['version']) && !is_numeric($input['version'])) {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
+            // Check Name
+            if (isset($input['name'])) {
+                if (!is_string($input['name']) && !is_numeric($input['name'])) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+            // Check fullname
+            if (isset($input['fullname'])) {
+                if (!is_string($input['fullname']) && !is_numeric($input['fullname'])) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+            // Check email
+            if (isset($input['email'])) {
+                if (is_string($input['email'])) {
+                    $checkEmailStyle = $this->checkEmailStyle($input['email']);
+                    $checkEmailExist = $this->checkEmailExist($input['email']);
+                    if ($checkEmailStyle) {
+                        if ($isUpdate) {
+                            $user = $this->findUserById($input['id']);
+                            $userEmail = $user != false ? $user['email'] : null;
+                            if ($userEmail) {
+                                if($userEmail != $input['email'] && $this->checkEmailExist($input['email'])){
+                                    return false;
+                                }
+                            }
+                        } else {
+                            if ($checkEmailExist || !$checkEmailStyle) {
+                                return false;
+                            }
+                        }
+                    }else{
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+            // Check type
+            if (isset($input['type'])) {
+                if (!is_string($input['type']) && !is_numeric($input['type'])) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+            // Check password
+            if (isset($input['password'])) {
+                if (!is_string($input['password']) && !is_numeric($input['password'])) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
 
     public static function getInstance()
