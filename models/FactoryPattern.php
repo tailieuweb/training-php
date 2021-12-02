@@ -11,6 +11,8 @@ class FactoryPattern
             return UserModel::getInstance();
         } else if ($model == 'bank') {
             return BankModel::getInstance();
+        } else {
+            return null;
         }
     }
     // Singleton Design Pattern

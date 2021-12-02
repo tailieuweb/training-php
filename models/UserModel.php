@@ -7,9 +7,8 @@ class UserModel extends BaseModel
 
     protected static $_instance;
 
-    public function findUserById($id)
-    {
-        $sql = 'SELECT * FROM users WHERE id = ' . $id;
+    public function findUserById($id) {
+        $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
 
         return $user;
@@ -115,14 +114,17 @@ class UserModel extends BaseModel
 
         return $users;
     }
+
+
     public static function getInstance()
     {
-        if (self::$_instance != null) {
+        if (self::$_instance !== null) {
             return self::$_instance;
         }
         self::$_instance = new self();
         return self::$_instance;
     }
+
     /**
      * For testing
      * @param $a
@@ -134,11 +136,4 @@ class UserModel extends BaseModel
         if(!is_numeric($b)) return 'error';
         return $a + $b;
     }
-    // /**
-    //  * For testing
-    //  * @param $a
-    //  * @param $b
-    //  */
-    // public function sumb($a, $b) {
-    // }
 }
