@@ -239,7 +239,7 @@ class HaiUserModelTest extends TestCase
        }
     }
     //test testFindUserstring
-    public function testFindUserstring()
+    public function testFindUserString()
     {
         $userModel = new UserModel();
         $keyword = "abc";
