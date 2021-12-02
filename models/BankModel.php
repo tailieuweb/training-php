@@ -57,4 +57,6 @@ class BankModel extends BaseModel {
 
         return $banks;
     }
+
+    
 }
