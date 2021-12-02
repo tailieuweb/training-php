@@ -101,7 +101,7 @@ class UserModelTest extends TestCase
     public function testInsertUserNgDt()
     {
         $userModel = new UserModel();
-        $obj = new stdClass();
+        $obj = new DtClass();
 
         $param = array(
             "id" => $obj,
@@ -286,7 +286,7 @@ class UserModelTest extends TestCase
     public function testUpdateUserNgObjectValues()
     {
         $userModel = new UserModel();
-        $obj = new stdClass();
+        $obj = new DtClass();
 
         $param = array(
             "id" => $obj,
@@ -294,6 +294,30 @@ class UserModelTest extends TestCase
             "fullname" => "user1_update",
             "email" => "user1_update@gmail.com",
             "password" => "user1_update",
+        );
+
+        $actual = $userModel->updateUser($param);
+        $expected = 0;
+
+        print_r("\t=> Actual: " . $actual  . "\n");
+
+        $this->assertEquals($expected, $actual);
+    }
+
+     /**
+     * Update user with letter values
+     */
+    public function testUpdateUserNgletterValues()
+    {
+        $userModel = new UserModel();
+        $letter = 'a';
+
+        $param = array(
+            "id" =>   $letter,
+            "name" =>   $letter,
+            "fullname" => "user1_update",
+            "email" => "user1_update@gmail.com",
+            "password" =>   $letter,
         );
 
         $actual = $userModel->updateUser($param);

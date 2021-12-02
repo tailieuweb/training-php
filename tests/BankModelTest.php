@@ -138,7 +138,7 @@ class BankModelTest extends TestCase
     public function testInsertBankUserNgObjectValues()
     {
         $bankModel = new BankModel();
-        $obj = new stdClass();
+        $obj = new DtClass();
 
         $param = array(
             "user_id" => $obj,
@@ -178,7 +178,7 @@ class BankModelTest extends TestCase
     }
     /**
      * Test case:
-     * Add new user with null values.
+     * update user with null values.
      */
     public function testUpdateBankNgNullValues()
     {
@@ -200,7 +200,7 @@ class BankModelTest extends TestCase
     }
     /**
      * Test case:
-     * Add new user with null values.
+     * update user with null values.
      */
     public function testUpdateBankNgStringValues()
     {
@@ -222,12 +222,12 @@ class BankModelTest extends TestCase
     }
     /**
      * Test case:
-     * Add new user with  object values.
+     * update user with  object values.
      */
     public function testUpdateBankNgObjectValues()
     {
         $bankModel = new BankModel();
-        $obj = new stdClass();
+        $obj = new DtClass();
         $param = array(
             "id"  => $obj ,
             "user_id" => $obj,
@@ -244,7 +244,7 @@ class BankModelTest extends TestCase
     }
     /**
      * Test case:
-     * Add new user with boolean values.
+     * update user with boolean values.
      */
     public function testUpdateBankNgBooleanValues()
     {
@@ -266,7 +266,7 @@ class BankModelTest extends TestCase
     }
     /**
      * Test case:
-     * Add new user with  array values..
+     * update user with  array values..
      */
     public function testUpdateBankNgArrayValues()
     {
@@ -286,11 +286,28 @@ class BankModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
-    
+     /**
+     * Test case:
+     * update user with  letter values..
+     */
+    public function testUpdateBankNgLetterValues()
+    {
+        $bankModel = new BankModel();
+        $letter = 'e';
+        $param = array(
+            "id"  => $letter ,
+            "user_id" => $letter,
+            "cost" => $letter,
+            "ver" => $letter,
+        );
 
+        $actual = $bankModel->updateBank($param);
+        $expected = 0;
 
+        print_r("\t=> Actual: " . $actual  . "\n");
 
-
+        $this->assertEquals($expected, $actual);
+    }
 
 }
    
