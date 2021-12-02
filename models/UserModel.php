@@ -5,17 +5,31 @@ require_once 'BaseModel.php';
 class UserModel extends BaseModel {
 
     public function findUserById($id) {
-        $sql = 'SELECT * FROM users WHERE id = '.$id;
-        $user = $this->select($sql);
-
-        return $user;
+        if (is_int($id)==true||is_string($id)==true){
+            $sql = 'SELECT * FROM users WHERE id = '.$id;
+            $user = $this->select($sql);
+            if($user!=null){
+                return $user;
+            }
+            return $user='error';
+        }
+        else{
+            return $user='error';
+        }               
     }
 
     public function findUser($keyword) {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
-        $user = $this->select($sql);
-
-        return $user;
+        if (is_int($keyword)==true||is_string($keyword)==true){
+            $sql = 'SELECT * FROM users WHERE name LIKE "%'.$keyword.'%" OR fullname LIKE "%'.$keyword.'%"';
+            $user = $this->select($sql);
+            if($user!=null){
+                return $user;
+            }
+            return $user='error';
+        }
+        else{
+            return $user='error';
+        }  
     }
 
     /**
@@ -25,11 +39,18 @@ class UserModel extends BaseModel {
      * @return array
      */
     public function auth($userName, $password) {
+        if ((is_int($userName)==true||is_string($userName)==true)&&(is_int($password)==true||is_string($password)==true)){
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
 
         $user = $this->select($sql);
-        return $user;
+            if($user!=null){
+                return $user;
+            }
+            return $user='error';
+        }else{
+            return $user='error';
+        } 
     }
 
     /**
@@ -38,9 +59,10 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function deleteUserById($id) {
-        $sql = 'DELETE FROM users WHERE id = '.$id;
-        return $this->delete($sql);
-
+        if(is_int($id)==true||is_string($id)==true){
+            $sql = 'DELETE FROM users WHERE id = '.'$id';
+            return $this->delete($sql);      
+        }
     }
 
     /**
@@ -49,13 +71,9 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        $sql = 'UPDATE users SET
-                 type ="' . $input['type'] .'",
-                 fullname ="' . $input['fullname'] .'",
-                 email ="' . $input['email'] .'",
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 password="'. md5($input['password']) .'",
-                 version = version + 0.1
+        $sql = 'UPDATE users SET 
+                 name = "' . $input['name'] .'", 
+                 password="'. md5($input['password']) .'"
                 WHERE id = ' . $input['id'];
         $user = $this->update($sql);
         return $user;
@@ -67,8 +85,8 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`type`,`email`) VALUES (" .
-        "'" . $input['name'] ."', '".md5($input['password'])."','".$input['fullname']."','".$input['type']."','".$input['email']. "')";
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
+                "'" . $input['name'] . "', '".md5($input['password'])."')";
 
         $user = $this->insert($sql);
 
@@ -80,15 +98,18 @@ class UserModel extends BaseModel {
      * @param array $params
      * @return array
      */
-    public function getUsers($params = []) {
-        //Keyword
-        if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
-
-            //Keep this line to use Sql Injection
-            //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+    public function getUsers($params = []) {  
+        if (isset($params['keyword'])) {
+            if(is_int($params['keyword'])==true||is_string($params['keyword'])==true){
+                $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"OR fullname LIKE "%'.$params['keyword'].'%"';
+                $user = $this->select($sql);
+                if($user!=null){
+                    return $user;
+                }            
+                return $user='error';
+            }
+            return $user='error';
+            
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
@@ -96,31 +117,5 @@ class UserModel extends BaseModel {
 
         return $users;
     }
-<<<<<<< HEAD
 
-    public static function getInstance(){
-        if(self::$_instance !== null){
-            return self::$_instance;
-        }
-        self::$_instance = new self();
-        return self::$_instance;
-    }
-    /**
-     * For testing
-     * @param $a
-     * @param $b
-     */
-    public function sumb($a, $b) {
-        return $a + $b;
-=======
-    public static function getInstance(){
-        if(self::$_instance!==null){
-            return self::$_instance;
-        }
-        else{
-            self::$_instance = new self();
-            return self::$_instance;
-        }
->>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-GetBank
-    }
 }

@@ -5,16 +5,6 @@ require_once 'BaseModel.php';
 class BankModel extends BaseModel {
  
     public function findBankById($id) {
-<<<<<<< HEAD
-        $sql = 'SELECT * FROM banks WHERE id = '.$id;
-        $bank = $this->select($sql);
-
-        return $bank;
-    }
-    public function findBankNew() {
-        $sql = 'SELECT MAX(id) FROM `bank`';
-        $bank = $this->select($sql);
-        return $bank;
     } 
 
     /**
@@ -54,22 +44,17 @@ class BankModel extends BaseModel {
 
     /**
 >>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-GetBank
+
+    /**
      * Delete bank by id
      * @param $id
      * @return mixed
      */
-<<<<<<< HEAD
-    public function deletebankById($id) {
-        $sql = 'DELETE FROM banks WHERE id = '.$id;
-        return $this->delete($sql);
-
-=======
     public function deleteBankById($id) {
         if(is_int($id)==true||is_string($id)==true){
             $sql = 'DELETE FROM banks WHERE id = '.'$id';
             return $this->delete($sql);      
         }
->>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-GetBank
     }
 
     /**
@@ -116,13 +101,23 @@ class BankModel extends BaseModel {
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
             $banks = self::$_connection->multi_query($sql);
+
+    public function getBanks($params = []) {  
+        if (isset($params['keyword'])) {
+            if(is_int($params['keyword'])==true||is_string($params['keyword'])==true){
+                $sql = 'SELECT * FROM banks WHERE user_id LIKE "%' . $params['keyword'] .'%"';
+                $bank = $this->select($sql);
+                if($bank!=null){
+                    return $bank;
+                }            
+                return $bank='error';
+            }
+            return $bank='error';
+            
+
         } else {
             $sql = 'SELECT * FROM banks';
-            $banks = $this->select($sql);
-        }
-
-        return $banks;
-=======
+            $bank = $this->select($sql);
     public function getBanks($params = []) {  
         if (isset($params['keyword'])) {
             if(is_int($params['keyword'])==true||is_string($params['keyword'])==true){
@@ -141,6 +136,5 @@ class BankModel extends BaseModel {
         }
 
         return $bank;
->>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-GetBank
     }
 }
