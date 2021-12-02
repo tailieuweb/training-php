@@ -12,7 +12,11 @@ if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
     
 }
+<<<<<<< HEAD
 $banks = $bankModel->getbanks($params);
+=======
+$banks = $bankModel->getBanks($params);
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-GetBank
 
 if (!empty($_GET['id'])) {
     foreach ($banks as $bank1) {

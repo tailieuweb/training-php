@@ -31,7 +31,11 @@ if (!empty($_POST['submit'])) {
             
             header('location: list_users.php');
         }
+<<<<<<< HEAD
         else{
+=======
+        else{ 
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-GetBank
         echo '<script>alert("Version đã thay đổi, vui lòng làm mới trang!");</script>';
             header('Refresh:3');
         }

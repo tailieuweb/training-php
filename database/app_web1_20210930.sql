@@ -33,19 +33,31 @@ DROP TABLE IF EXISTS `banks`;
 CREATE TABLE `banks` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+<<<<<<< HEAD
   `cost` float NOT NULL,
    `version` double(5,1) NOT NULL
+=======
+  `cost` float NOT NULL
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-GetBank
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `banks`
 --
 
+<<<<<<< HEAD
 INSERT INTO `banks` (`id`, `user_id`, `cost`,`version`) VALUES
 (1, 1, 11,0.0),
 (2, 1, 11,0.0),
 (3, 2, 11,0.0),
 (4, 3, 11,0.0);
+=======
+INSERT INTO `banks` (`id`, `user_id`, `cost`) VALUES
+(1, 1, 11),
+(2, 1, 11),
+(3, 2, 11),
+(4, 3, 11);
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-GetBank
 
 -- --------------------------------------------------------
 

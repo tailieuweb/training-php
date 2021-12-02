@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "autoload": {
   "classmap": [
@@ -7,3 +8,15 @@
   "require-dev": {
   "phpunit/phpunit": "^9"
   }
+=======
+{	
+    "autoload": {	
+    "classmap": [	
+    "models/"	
+    ]	
+    },	
+    "require-dev": {	
+    "phpunit/phpunit": "9.5.10"	
+    }	
+    }
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-GetBank

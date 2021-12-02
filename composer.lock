@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "eaf427e91c04d06abdb542687ebc4d5d",
+=======
+    "content-hash": "4a7c103b0cc2a08bdb1f42b6afbede36",
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-GetBank
     "packages": [],
     "packages-dev": [
         {
@@ -530,6 +534,7 @@
         },
         {
             "name": "phpunit/php-code-coverage",
+<<<<<<< HEAD
             "version": "9.2.8",
             "source": {
                 "type": "git",
@@ -540,6 +545,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/cf04e88a2e3c56fc1a65488afd493325b4c1bc3e",
                 "reference": "cf04e88a2e3c56fc1a65488afd493325b4c1bc3e",
+=======
+            "version": "9.2.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
+                "reference": "f301eb1453c9e7a1bc912ee8b0ea9db22c60223b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f301eb1453c9e7a1bc912ee8b0ea9db22c60223b",
+                "reference": "f301eb1453c9e7a1bc912ee8b0ea9db22c60223b",
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-GetBank
                 "shasum": ""
             },
             "require": {
@@ -595,7 +612,11 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.8"
+=======
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.9"
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-GetBank
             },
             "funding": [
                 {
@@ -603,7 +624,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-10-30T08:01:38+00:00"
+=======
+            "time": "2021-11-19T15:21:02+00:00"
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-GetBank
         },
         {
             "name": "phpunit/php-file-iterator",

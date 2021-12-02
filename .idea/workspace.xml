@@ -3,6 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="fca2aa6e-54aa-4226-b8f8-032cc5b95d0a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/form_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/form_user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/list_users.php" beforeDir="false" afterPath="$PROJECT_DIR$/list_users.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/BaseModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/BaseModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/UserModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/UserModel.php" afterDir="false" />
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-GetBank
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,11 +49,12 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/design-pattern" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php\design-pattern" />
       <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php" />
       <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php\public\js" />
     </key>
@@ -65,6 +73,8 @@
       <option name="presentableId" value="Default" />
       <updated>1632046412024</updated>
       <workItem from="1632046414701" duration="13384000" />
+      <workItem from="1632551519322" duration="3824000" />
+      <workItem from="1632617984731" duration="255000" />
       <workItem from="1632547559440" duration="9835000" />
       <workItem from="1632980515244" duration="1922000" />
     </task>
