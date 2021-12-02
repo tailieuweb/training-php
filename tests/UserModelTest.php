@@ -11,9 +11,8 @@ class UserModelTest extends TestCase
     public function testGetFindUserByIdOk()
     {
         $userModel = new UserModel();
-        $userId = 9;
-        $userName = '123';
-
+        $userId = 3;
+        $userName = 'nhu';
         $user = $userModel->findUserById($userId);
         $actual = $user[0]['name'];
 
@@ -56,14 +55,13 @@ class UserModelTest extends TestCase
     public function testGetFindUserByIdObject()
     {
         $userModel = new UserModel();
-        $object = (object)'nhu';
+        $object = $userModel;
 
         if (is_object($object)) {
             $object = 5;
-
             $actual = $userModel->findUserById($object);
             $expected = $actual[0]['name'];
-            $userName = 'abc';
+            $userName = 'khanhu';
             $this->assertEquals($userName, $expected);
         } else {
             $this->assertTrue(false);
@@ -866,8 +864,8 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $params = [];
-        $params['keyword'] = 'nhu';
-        $countAr = 4;
+        $params['keyword'] = 'test2';
+        $countAr = 1;
         $actual = $userModel->getUsers($params);
 
         $this->assertEquals($countAr, count($actual));
