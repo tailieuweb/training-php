@@ -66,11 +66,17 @@ class FavoriteController extends Controller
     }
     //Post update favorite
     public function postUpdateFavorite($id, Request $request){
-        $data = array();
-        $data['user_id'] = $request->user_id;
-        $data['hotel_id'] = $request->hotel_id;
-        $data['date_created'] = date('Y-m-d');
-        DB::table('favorite')->where('favorite_id', $id)->update($data);
+        $favorite = DB::table('favorite')
+                    ->select('favorite.*')
+                    ->where('favorite_id', $id)->get();
+        if($request->version == $favorite[0]->favorite_version){
+            $data = array();
+            $data['user_id'] = $request->user_id;
+            $data['hotel_id'] = $request->hotel_id;
+            $data['date_created'] = date('Y-m-d');
+            $data['favorite_version'] =  $favorite[0]->favorite_version + 1;
+            DB::table('favorite')->where('favorite_id', $id)->update($data);
+        }
         return Redirect::to('/admin/favorite');
     }
 }
