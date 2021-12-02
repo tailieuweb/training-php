@@ -7,22 +7,17 @@ $userModel = $factory->make('user');
 
 $user = NULL; //Add new user
 $_id = NULL;
-$params = [];
-if (!empty($_GET['keyword'])) {
-    $params['keyword'] = $_GET['keyword'];
-    
-}
-$users = $userModel->getUsers($params);
-
 if (!empty($_GET['id'])) {
+    $users = $userModel->getUsers();
     foreach ($users as $user1) {
         if($_GET['id'] == md5($user1['id'])){                      
             $_id = $user1['id'];    
         }
     }  
-    $user = $userModel->findUserById($_id);//Update existing user
-}
-
+    $user = $userModel->findUserById($_id);
+}   
+      $user = $userModel->getUsers();
+      var_dump($user);
 
 if (!empty($_POST['submit'])) {
     if (!empty($_id)) {

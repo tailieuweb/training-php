@@ -12,7 +12,7 @@ if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
     
 }
-$banks = $bankModel->getbanks($params);
+$banks = $bankModel->getBanks($params);
 
 if (!empty($_GET['id'])) {
     foreach ($banks as $bank1) {

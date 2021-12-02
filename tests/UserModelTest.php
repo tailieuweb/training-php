@@ -3,183 +3,147 @@ use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
 {
-
-    /**
-     * Test case Okie
-     */
-    public function testSumOk()
-    {
-       $userModel = new UserModel();
-       $a = 1;
-       $b = 2;
-       $expected = 3;
-
-       $actual = $userModel->sumb($a,$b);
-
-       $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * Test case Not good
-     */
-    public function testSumNg()
-    {
-        $userModel = new UserModel();
-        $a = 1;
-        $b = 2;
-
-        $actual = $userModel->sumb($a,$b);
-
-        if ($actual != 3) {
-            $this->assertTrue(false);
-        } else {
-            $this->assertTrue(true);
-        }
-    }
-    /**
-     * Test case Sum Duong
-     */
-    public function testSumDuong()
-    {
-       $userModel = new UserModel();
-       $a = 1;
-       $b = 2;
-       $expected = 3;
-
-       $actual = $userModel->sumb($a,$b);
-
-       $this->assertEquals($expected, $actual);
-    }
-    /**
-     * Test case Sum Am
-     */
-    public function testSumAm()
-    {
-       $userModel = new UserModel();
-       $a = -1;
-       $b = -2;
-       $expected = -3;
-
-       $actual = $userModel->sumb($a,$b);
-
-       $this->assertEquals($expected, $actual);
-    }
-    /**
-     * Test case Sum Am Duong
-     */
-    public function testSumAmDuong()
-    {
-       $userModel = new UserModel();
-       $a = -1;
-       $b = 2;
-       $expected = 1;
-
-       $actual = $userModel->sumb($a,$b);
-
-       $this->assertEquals($expected, $actual);
-    }
-    /**
-     * Test case Sum So Thuc
-     */
-    public function testSumSoThuc()
-    {
-       $userModel = new UserModel();
-       $a = 1;
-       $b = 2;
-       $expected = 3;
-
-       $actual = $userModel->sumb($a,$b);
-
-       $this->assertEquals($expected, $actual);
-    }
-    /**
-     * Test case Sum So va chuoi
-     */
-    public function testSumSoVaChuoi()
-    {
-       $userModel = new UserModel();
-       $a = 1;
-       $b = (int)"a";
-       $expected = (int)"1a";
-
-       $actual = $userModel->sumb($a,$b);
-
-       $this->assertEquals($expected, $actual);
-    }
-    /**
-     * Test case Sum chuoi va chuoi
-     */
-    public function testSumChuoiVaChuoi()
-    {
-       $userModel = new UserModel();
-       $a = (int)"b";
-       $b = (int)"a";
-       $expected = (int)"ab";
-
-       $actual = $userModel->sumb($a,$b);
-
-       $this->assertEquals($expected, $actual);
-    }
-    public function testFindUserByIdOk() {
+   public function testAuthOk() {
       $userModel = new UserModel();
+      $username = 'test2';
+      $password = 'a';
+      $mongDoiUsername = 'test2';
       
-      $id = 8;
-      $mongDoiUsername = 'asdf';
+      $auth = $userModel->auth($username,$password);
       
-      $user = $userModel->findUserById($id);
-      
-      $this->assertEquals($mongDoiUsername, $user[0]['name']);
-      
-      }
-            
-      public function testFindUserByIdNg() {
+      $this->assertEquals($mongDoiUsername, $auth[0]['name']);        
+   }
+   public function testAuthUserWr() {
       $userModel = new UserModel();
+      $username = 'ádafsd';
+      $password = 'a';
       
-      $id = 999999;
+      $auth = $userModel->auth($username,$password);
       
-      
-      $user = $userModel->findUserById($id);
-      
-      if (empty($user)) {
+      if ($auth=='error') {
       $this->assertTrue(true);
       } else {
       $this->assertTrue(false);
       }
-      
-      }
-      
-      public function testFindUserByIdStr() {
+   }   
+   public function testAuthPassWr() {
       $userModel = new UserModel();
+      $username = 'test2';
+      $password = 'aaaa';
       
-      $id = 'asdf';
+      $auth = $userModel->auth($username,$password);
       
-      
-      $expected = 'error';
-      $actual = $userModel->findUserById($id);
-      
-      $this->assertEquals($expected, $actual);   
+      if ($auth=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
       }
-      
-      
-      public function testFindUserByIdNull() {
+   }
+   public function testAuthStr() {
       $userModel = new UserModel();
-      $id = '';
-      $expected = 'error';
-      $actual = $userModel->findUserById($id);
+      $username = 'test2';
+      $password = 'a';
+      $mongDoiUsername = 'test2';
       
-      $this->assertEquals($expected, $actual);   
-      }
+      $auth = $userModel->auth($username,$password);
       
-      public function testFindUserByIdObject() {
+      $this->assertEquals($mongDoiUsername, $auth[0]['name']);
+      
+   }
+   public function testAuthUserNumber() {
       $userModel = new UserModel();
+      $username = 111;
+      $password = 'a';
+      $mongDoiUsername = '111';
       
-      $id = new stdClass();
-      $expected = 'error';
-      $actual = $userModel->findUserById($id);
+      $auth = $userModel->auth($username,$password);
       
-      $this->assertEquals($expected, $actual);
+      $this->assertEquals($mongDoiUsername, $auth[0]['name']);
       
+   }
+   public function testAuthPassNumber() {
+      $userModel = new UserModel();
+      $username = 'test7';
+      $password = 111;
+      $mongDoiUsername = 'test7';
       
+      $auth = $userModel->auth($username,$password);
       
+      $this->assertEquals($mongDoiUsername, $auth[0]['name']);
+      
+   }
+   public function testAuthUserCharacterSpecial() {
+      $userModel = new UserModel();
+      $username = '[][]]';
+      $password = 'asd';
+      $auth = $userModel->auth($username,$password);
+      if ($auth=='error') {
+         $this->assertTrue(true);
+         } else {
+         $this->assertTrue(false);
+         }        
+   }
+   public function testAuthPassCharacterSpecial() {
+      $userModel = new UserModel();
+      $username = 'test2';
+      $password = '!@#$!@#$';
+      $auth = $userModel->auth($username,$password);
+      if ($auth=='error') {
+         $this->assertTrue(true);
+         } else {
+         $this->assertTrue(false);
+         }        
+   }
+   public function testAuthUserIsArray() {
+      $userModel = new UserModel();
+      $username = [];
+      $password = 'aasd';
+      
+      $auth = $userModel->auth($username,$password);
+      
+      if ($auth=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
       }
+   }
+   public function testAuthPassIsArray() {
+      $userModel = new UserModel();
+      $username = 'test2';
+      $password = [];
+      
+      $auth = $userModel->auth($username,$password);
+      
+      if ($auth=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }         
+   public function testAuthUserNull() {
+      $userModel = new UserModel();
+      $username = null;
+      $password = 'aaaa';
+      
+      $auth = $userModel->auth($username,$password);
+      
+      if ($auth=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }
+   public function testAuthPassNull() {
+      $userModel = new UserModel();
+      $username = 'test2';
+      $password = null;
+      
+      $auth = $userModel->auth($username,$password);
+      
+      if ($auth=='error') {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+      }
+   }
 }
