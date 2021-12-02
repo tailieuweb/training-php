@@ -4,21 +4,21 @@ use PHPUnit\Framework\TestCase;
 
 class BankModelTest extends TestCase
 {
-   public function testFindBankByIdOk() {
+   public function testGetBanksOk() {
       $BankModel = new BankModel();
       
-      $id = 2;
       $expected = '1';
       
-      $Bank = $BankModel->findBankById($id);        
-      $this->assertEquals($expected, $Bank[0]['user_id']);    
+      $Bank = $BankModel->getBanks();        
+      $this->assertEquals($expected, $Bank[1]['user_id']);    
    }
-   public function testFindBankByIdNg() {
+                  
+   public function testGetBanksNg() {
       $BankModel = new BankModel();
       
-      $id = 999999;
-           
-      $Bank = $BankModel->findBankById($id);
+      $params['keyword'] = 999999;
+        
+      $Bank = $BankModel->getBanks($params);
       
       if ($Bank=='error') {
       $this->assertTrue(true);
@@ -26,12 +26,12 @@ class BankModelTest extends TestCase
       $this->assertTrue(false);
       }     
    }
-   public function testFindBankByIdNgAm() {
+   public function testGetBanksNgAm() {
       $BankModel = new BankModel();
       
-      $id = -999999;         
-      
-      $Bank = $BankModel->findBankById($id);
+      $params['keyword'] = -999999;
+        
+      $Bank = $BankModel->getBanks($params);
       
       if ($Bank=='error') {
       $this->assertTrue(true);
@@ -39,12 +39,12 @@ class BankModelTest extends TestCase
       $this->assertTrue(false);
       }     
    }
-   public function testFindBankByIdSoThuc() {
+   public function testGetBanksSoThuc() {
       $BankModel = new BankModel();
       
-      $id = 11.22;
-      
-      $Bank = $BankModel->findBankById($id);
+      $params['keyword'] = 1.1;
+        
+      $Bank = $BankModel->getBanks($params);
       
       if ($Bank=='error') {
       $this->assertTrue(true);
@@ -52,12 +52,12 @@ class BankModelTest extends TestCase
       $this->assertTrue(false);
       }
    }
-   public function testFindBankByIdSpecialCharacters() {
+   public function testGetBanksSpecialCharacters() {
       $BankModel = new BankModel();
       
-      $id = '[@$]';
-      
-      $Bank = $BankModel->findBankById($id);
+      $params['keyword'] = '[@$]';
+        
+      $Bank = $BankModel->getBanks($params);
       
       if ($Bank=='error') {
       $this->assertTrue(true);
@@ -65,12 +65,12 @@ class BankModelTest extends TestCase
       $this->assertTrue(false);
       }
    }
-   public function testFindBankByIdIsArray() {
+   public function testGetBanksIsArray() {
       $BankModel = new BankModel();
       
-      $id = [];
+      $params['keyword'] = [];
       
-      $Bank = $BankModel->findBankById($id);
+      $Bank = $BankModel->getBanks($params);
       
       if ($Bank=='error') {
       $this->assertTrue(true);
@@ -78,32 +78,33 @@ class BankModelTest extends TestCase
       $this->assertTrue(false);
       }
    }
-   public function testFindBankByIdStr() {
+   public function testGetBanksStr() {
       $BankModel = new BankModel();
       
-      $id = 'asdf';
+      $params['keyword'] = 'asdf';
       
       
       $expected = 'error';
-      $actual = $BankModel->findBankById($id);
+      $actual = $BankModel->getBanks($params);
       
       $this->assertEquals($expected, $actual);   
    }
    
    
-   public function testFindBankByIdNull() {
+   public function testGetBanksNull() {
       $BankModel = new BankModel();
-      $id = null;
-      $expected = 'error';
-      $actual = $BankModel->findBankById($id);
-      $this->assertEquals($expected, $actual);   
+      $params['keyword'] = null;
+      $expected = '1';
+      
+      $Bank = $BankModel->getBanks($params);        
+      $this->assertEquals($expected, $Bank[0]['user_id']);   
    }
    
-   public function testFindBankByIdObject() {
+   public function testGetBanksObject() {
       $BankModel = new BankModel();    
-      $id = new stdClass();
+      $params['keyword'] = new stdClass();
       $expected = 'error';
-      $actual = $BankModel->findBankById($id);      
+      $actual = $BankModel->getBanks($params);      
       $this->assertEquals($expected, $actual);      
    }
             
