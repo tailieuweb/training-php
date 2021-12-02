@@ -331,4 +331,20 @@ class ResultTest extends TestCase
             $this->assertTrue(false);
         }
     }
+     // Test setError Object
+     public function testSetErrorObject()
+     {
+         $actual = new ResultClass;
+         $error = new UserModel;
+         $actual->setError($error);
+         $expected = $actual->isSuccess == true &&
+         $actual->data == null &&
+         $actual->error == $error;
+ 
+         if ($expected == false) {
+             $this->assertTrue(true);
+         } else {
+             $this->assertTrue(false);
+         }
+     }
 }
