@@ -990,6 +990,54 @@ class TranVanLap_UserModelTest extends TestCase
                 $userUpdate->error == 'Thông tin nhập vào không đúng !!'
         );
     }
+    // Test case updateUser With fullname is true
+    public function testUpdateUserFullnameTrue()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userFullname = true;
+        $inputUpdate = [
+            'id' => $userId,
+            'name' => 'updatedName',
+            'fullname' => $userFullname,
+            'email' => 'updatedEmail@gmail.com',
+            'password' => 'updatedPassword',
+            'type' => 'user',
+            'version' => 1
+        ];
+        $userUpdate = $userModel->updateUser($inputUpdate);
+        $userModel->rollBack();
+        $this->assertTrue(
+            $userUpdate->isSuccess == false &&
+                $userUpdate->data == NULL &&
+                $userUpdate->error == 'Thông tin nhập vào không đúng !!'
+        );
+    }
+     // Test case updateUser With fullname is false
+     public function testUpdateUserFullnameFalse()
+     {
+         $userModel = new UserModel();
+         $userModel->startTransaction();
+         $userId = -1;
+         $userFullname = false;
+         $inputUpdate = [
+             'id' => $userId,
+             'name' => 'updatedName',
+             'fullname' => $userFullname,
+             'email' => 'updatedEmail@gmail.com',
+             'password' => 'updatedPassword',
+             'type' => 'user',
+             'version' => 1
+         ];
+         $userUpdate = $userModel->updateUser($inputUpdate);
+         $userModel->rollBack();
+         $this->assertTrue(
+             $userUpdate->isSuccess == false &&
+                 $userUpdate->data == NULL &&
+                 $userUpdate->error == 'Thông tin nhập vào không đúng !!'
+         );
+     }
     // Test case updateUser With fullname is empty array
     public function testUpdateUserFullnameEmptyArray()
     {
