@@ -2,9 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 
-class FactoryPatternTest extends TestCase
+class CaoTrungHieu_FactoryPatternTest extends TestCase
 {
-     /**
+    /**
      * Test make function, 'Hiếu Cao' do this 
      * */
     // Test case make with param is 'user' String
@@ -114,24 +114,15 @@ class FactoryPatternTest extends TestCase
     public function testGetInstanceGood()
     {
         $factoryPatterSingleton = FactoryPattern::getInstance();
-        $factoryPatterSingleton2 = FactoryPattern::getInstance();
+        $normalFactoryPatter = new FactoryPattern();
 
-        $expected = true;
-        $actual = is_object($factoryPatterSingleton) && 
-                get_class($factoryPatterSingleton) == 'FactoryPattern' &&
-                $factoryPatterSingleton === $factoryPatterSingleton2;
-
-        $this->assertEquals($expected, $actual);
+        $this->assertEquals($factoryPatterSingleton, $normalFactoryPatter);
     }
     // Test case getInstance Not Good
     public function testGetInstanceNg()
     {
         $factoryPatterSingleton = FactoryPattern::getInstance();
-
-        $expected = false;
-        $actual = !is_object($factoryPatterSingleton) || 
-                !get_class($factoryPatterSingleton) == 'FactoryPattern';
-
-        $this->assertEquals($expected, $actual);
+        $this->assertFalse(!is_object($factoryPatterSingleton) ||
+            !get_class($factoryPatterSingleton) == 'FactoryPattern');
     }
 }

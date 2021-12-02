@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class BankModelTest extends TestCase
+class CaoTrungHieu_BankModelTest extends TestCase
 {
     /**
      * Test getBanks function, 'Hiếu Cao' do this 

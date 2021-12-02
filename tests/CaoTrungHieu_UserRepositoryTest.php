@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class UserRepositoryTest extends TestCase
+class CaoTrungHieu_UserRepositoryTest extends TestCase
 {
     /**
      * Test getUsersWithBank function, 'Hiếu Cao' do this 
