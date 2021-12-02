@@ -85,8 +85,8 @@ class BankModel extends BaseModel{
      */
     public function updateBank($input) {
         $sql = 'UPDATE banks SET 
-                 user_id = "' . $input['user_id'] .'", 
-                 cost = "' . $input['cost'] .'"
+                user_id = "' . $input['user_id'] .'", 
+                cost = "' . $input['cost'] .'"
                 WHERE bank_id = ' . $input['bank_id'];
         $bank = $this->update($sql);
 

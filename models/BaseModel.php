@@ -7,21 +7,17 @@ abstract class BaseModel {
     protected static $_connection;
     
     private $_csrf_value = '';
+    protected static $std = '';
 
-    public function __construct() {
+    public function __construct($check = false) {
 
         if (!isset(self::$_connection)) {
             self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-            // Create token
-            // $token = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
 
-
-            // setcookie($token, time() + $this->_csrf_time_live);
-            // $this->_csrf_value = $token;
-
-            if (self::$_connection->connect_errno) {
-                printf("Connect failed");
-                exit();
+            if ($check) {
+                // printf("Connect failed");
+                // exit();
+                self::$std = 'failed';
             }
 //            var_dump($token);
         }
