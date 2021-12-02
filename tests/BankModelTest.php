@@ -3,27 +3,41 @@ use PHPUnit\Framework\TestCase;
 
 class BankModelTest extends TestCase
 {
-    //Tim id tại vị có id hợp lệ
-    public function testFindBankbyIdOk()
+    public function testDeleteBankByIdOK()
     {
         $bankModel = new BankModel();
-        $bankId = 1;
-        $bankCost = '11';
-        $bank = $bankModel->findBankById($bankId);
-       
-        $actual = $bank[0]['cost'];
-        $this->assertEquals($bankCost, $actual);
+        $id = 1;
+        $findBank = $bankModel->findBankById($id);
+        if (!empty($findBank)) {
+            $delete =  $bankModel->deleteBankById($id);
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
-    //Tim id tại vị có id không hợp lệ
-    public function testFindBankByIdNG(){
+    public function testDeleteBankByIdNG()
+    {
         $bankModel = new BankModel();
-        $id  = 1000000;
-        $actual = $bankModel->findBankById($id);
-        $expected = [];
-       
-        $this->assertEquals($expected, $actual);
-       
-    }  
-
-   
+        $id = 11111;
+        $findBank = $bankModel->findBankById($id);
+        if (!empty($findBank)) {
+            $delete =  $bankModel->deleteBankById($id);
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+    public function testUpdateBankOK(){
+        $bankModel = new BankModel();
+        $bank = array(  
+            'id' => 6,        
+            'user_id' => '1234',
+            'cost' => '12344',
+            
+        );         
+        $expected = true;
+        $actual = $bankModel->updateBank($bank);
+        $this->assertEquals($actual, $expected);   
+    }
+    
 }
