@@ -662,6 +662,242 @@ class BankModelTest extends TestCase {
         } catch (Throwable $ex) {
             $this->assertTrue(true); 
         }
+
        
     }
+
+    /************************************************************************************************ */ 
+    /*updateBankNG1 */
+    /*cập nhật lại giá trị như bình thường */
+	public function testUpdateBankNG1() {
+		$bankModel = new BankModel();
+			// $idbank = 3;
+			
+			$input = [];
+			$input['bank_id'] = 3;
+			//note user_id == id of users 
+			$input['id'] = 2;
+			$input['cost'] = 123456789;
+			$actual = $bankModel -> updateBank($input);
+			if($actual != true)
+			{
+				$this->assertTrue(false); 
+			}
+			else
+			{
+				$this->assertTrue(true); 
+			}
+		  
+	}
+	/*updateBankNG2 */
+    /*cập nhật giá trị id_bank trong 1 mảng đc chọn */
+	public function testUpdateBankNG2() {
+		$bankModel = new BankModel(); 
+			$input = array("bank_id"=>6,"id"=>3,"cost"=>11111);
+			$input["bank_id"] = 654321;
+			
+			$actual = $bankModel -> updateBank($input);
+			if($actual != true)
+			{
+				$this->assertTrue(false); 
+			}
+			else
+			{
+				$this->assertTrue(true); 
+			}
+		  
+	}
+	/*updateBankNG3 */
+	/*cost co phai la so hay khong*/
+	public function testUpdateBankNG3() {
+		$bankModel = new BankModel(); 
+			$input = array("bank_id"=>19,"id"=>40,"cost"=>11111);
+			$input["cost"] = 654321;
+			$checkCost = is_numeric($input['cost']);
+			
+			$actual = $bankModel -> updateBank($input,$checkCost);
+			if($actual != true)
+			{
+				$this->assertTrue(false); 
+			}
+			else
+			{
+				$this->assertTrue(true); 
+			}
+		  
+	}
+	/*updateBankNG4 */
+	/*Cap nhat gia tri vao mot mang vs vi tri tu chon  */
+	public function testUpdateBankNG4() {
+		$bankModel = new BankModel(); 
+			$input = array("bank_id"=>19,"id"=>40,"cost"=>11111);
+			$input["cost"] = 654321;
+			$valueFill = array_fill(3,1,$input["cost"]);
+			
+			$actual = $bankModel -> updateBank($input,$valueFill);
+			if($actual != true)
+			{
+				$this->assertTrue(false); 
+			}
+			else
+			{
+				$this->assertTrue(true); 
+			}
+		  
+	}
+
+    /*updateNG5*/
+    /*cập nhật gái trị id thành giá trị rỗng */
+    public function testUpdateBankNG5() {
+        $bank = new BankModel();
+        $input = [];
+        $input['bank_id'] = null;
+        $input['id'] = 2;
+        $input['cost'] = 544;
+        $actual = $bank->updateBank($input);
+
+        // var_dump($actual);die();
+        if ($actual == true) {
+            return $this->assertFalse(true);
+        }
+        return $this->assertFalse(false);
+		  
+	}
+    /*cập nhật userId có giá trị rỗng */
+
+    public function testUpdateBankNG6() {
+        $bank = new BankModel();
+        $input = [];
+        $input['bank_id'] = 3 ;
+        $input['id'] = null ;
+        $input['cost'] = 88888;
+        $actual = $bank->updateBank($input);
+
+        // var_dump($actual);die();
+        if ($actual == true) {
+            return $this->assertFalse(true);
+        }
+        return $this->assertFalse(false);
+		  
+	}
+    /*cập nhật giá trị cost null */
+    public function testUpdateBankNG7() {
+        $bank = new BankModel();
+        $input = [];
+        $input['bank_id'] = 3 ;
+        $input['id'] = 2 ;
+        $input['cost'] = null;
+        $actual = $bank->updateBank($input);
+
+        // var_dump($actual);die();
+        if ($actual == true) {
+            return $this->assertFalse(true);
+        }
+        return $this->assertFalse(false);
+		  
+	}
+    /*cả 3 đều rỗng */
+    public function testUpdateBankNG8() {
+        $bank = new BankModel();
+        $input = [];
+        $input['bank_id'] = null ;
+        $input['id'] = null ;
+        $input['cost'] = null;
+        $actual = $bank->updateBank($input);
+
+        // var_dump($actual);die();
+        if ($actual == true) {
+            return $this->assertFalse(true);
+        }
+        return $this->assertFalse(false);
+		  
+	}
+    /*câp nhật vs giá trị mảng truyền vào là chuỗi */
+    public function testUpdateBankNG9() {
+        $bank = new BankModel();
+        $input = [];
+        $input['bank_id'] = 'null' ;
+        $input['id'] = 'null' ;
+        $input['cost'] = 'null';
+        $actual = $bank->updateBank($input);
+
+        // var_dump($actual);die();
+        if ($actual == true) {
+            return $this->assertFalse(true);
+        }
+        return $this->assertFalse(false);
+		  
+	}
+    // /** */
+    // public function testUpdateBankObjectError() {
+    //     $object = new stdClass(); 
+    //     $bank = new BankModel();
+    //     $input = [];
+    //     $input['bank_id'] = $object ;
+    //     $input['id'] = 3 ;
+    //     $input['cost'] = 77777;
+    //      $actual = $bank->updateBank($input);
+ 
+    //      // var_dump($actual);die();
+    //      if ($actual == true) {
+    //          return $this->assertTrue(true);
+    //      }
+    //      return $this->assertTrue(false);
+		  
+	// }
+	/**
+		 * Test function create token
+		 */
+		public function testCreateTokenNG1(){
+			$bank = new BankModel();
+			$name = "Le LAM";
+			$pass = "12345";
+
+			$actual = $bank->createToken();
+			if($actual == ''){
+				return $this->assertTrue(true);
+			}
+			else{
+				return $this->assertTrue(false);
+			}
+		}
+		 /**
+		 * Test function get instance
+         * du lieu do vao gia tri khi khoi tao 1 new bank vs su dung cac chuc nang cua bankModel
+		 */
+		public function testGetInstanceNG1(){
+			$bank = new BankModel();
+			$actual = $bank->getInstance();
+
+			if($bank == $actual){
+				return $this->assertTrue(true); 
+			}
+			return $this->assertTrue(false); 
+		}
+		/*test funcsion get instance 2 */
+        /*kiem tra gia tri khac rong khi nguoi dung khoi tao 1 new bank */
+		public function testGetInstanceNG2(){
+			$bank = new BankModel();
+			$actual = $bank->getInstance();
+
+			if($bank != empty($actual)){
+				return $this->assertTrue(true); 
+			}
+			return $this->assertTrue(false); 
+		}
+        /**/
+        public function testGetInstanceChange()
+    {
+        $bank = new BankModel();
+        //Create bank 2
+        $bank2 = new BankModel();
+
+        $actual = $bank2->getInstance();
+        if ($bank == $actual) {
+            return $this->assertTrue(true);
+        }
+        return $this->assertTrue(false);
+        // var_dump($user);die();
+    }
+
 }
