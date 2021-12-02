@@ -9,12 +9,12 @@ class UserModelTest extends TestCase
      */
     public function testSumOk()
     {
-       $userModel = new UserModel();
+       $UserModel = new UserModel();
        $a = 1;
        $b = 2;
        $expected = 3;
 
-       $actual = $userModel->sumb($a,$b);
+       $actual = $UserModel->sumb($a,$b);
 
        $this->assertEquals($expected, $actual);
     }
@@ -24,11 +24,11 @@ class UserModelTest extends TestCase
      */
     public function testSumNg()
     {
-        $userModel = new UserModel();
+        $UserModel = new UserModel();
         $a = 1;
         $b = 2;
 
-        $actual = $userModel->sumb($a,$b);
+        $actual = $UserModel->sumb($a,$b);
 
         if ($actual != 3) {
             $this->assertTrue(false);
@@ -39,64 +39,64 @@ class UserModelTest extends TestCase
 
     public function testSumOkam()
     {
-       $userModel = new UserModel();
+       $UserModel = new UserModel();
        $a = -1;
        $b = -2;
        $expected = -3;
 
-       $actual = $userModel->sumb($a,$b);
+       $actual = $UserModel->sumb($a,$b);
 
        $this->assertEquals($expected, $actual);
     }
 
     public function testSumOkad()
     {
-       $userModel = new UserModel();
+       $UserModel = new UserModel();
        $a = -1;
        $b = 2;
        $expected = 1;
 
-       $actual = $userModel->sumb($a,$b);
+       $actual = $UserModel->sumb($a,$b);
 
        $this->assertEquals($expected, $actual);
     }
 
     public function testSumOkDouble()
     {
-       $userModel = new UserModel();
+       $UserModel = new UserModel();
        $a = 1.5;
        $b = 2.5;
        $expected = 4;
 
-       $actual = $userModel->sumb($a,$b);
+       $actual = $UserModel->sumb($a,$b);
 
        $this->assertEquals($expected, $actual);
     }
 
     public function testStr()
     {
-       $userModel = new UserModel();
+       $UserModel = new UserModel();
        $a = 1;
        $b = 'a';
        $expected = 'error';
 
-       $actual = $userModel->sumb($a,$b);
+       $actual = $UserModel->sumb($a,$b);
 
        $this->assertEquals($expected, $actual);
     }
 
     public function testString()
     {
-       $userModel = new UserModel();
+       $UserModel = new UserModel();
        $a = 'a';
        $b = 'b';
        $expected = 'error';
 
-       $actual = $userModel->sumb($a,$b);
+       $actual = $UserModel->sumb($a,$b);
 
        $this->assertEquals($expected, $actual);
     }
-    
+    /*******************/
     
     /**
      * Test case getInstance
@@ -106,18 +106,21 @@ class UserModelTest extends TestCase
         $this->assertInstanceOf('UserModel', UserModel::getInstance());
     }
     /**
+     * Test case FindUserById
+    */
+    /**
      * Test case  findUserById OK
      */
     public function testFindUserByIdOk()
     {
-        $userModel = new UserModel();
-        $userId = 2;
-        $userName = 'test2';
+        $UserModel = new UserModel();
+        $UserId = 2;
+        $UserName = 'test2';
 
-        $user = $userModel->findUserById($userId);
-        $actual = $user[0]['name'];
+        $User = $UserModel->findUserById($UserId);
+        $actual = $User[0]['name'];
 
-        $this->assertEquals($userName, $actual);
+        $this->assertEquals($UserName, $actual);
     }
 
     /**
@@ -125,13 +128,13 @@ class UserModelTest extends TestCase
      */
     public function testFindUserByIdNg()
     {
-      $userModel = new UserModel();
-      $userId = 2222;
+      $UserModel = new UserModel();
+      $UserId = 2222;
       $expected = null;
 
-      $user = $userModel->findUserById($userId);
+      $User = $UserModel->findUserById($UserId);
 
-      if(empty($user)){
+      if(empty($User)){
          $this->assertTrue(true);
       }
       else{
@@ -139,12 +142,60 @@ class UserModelTest extends TestCase
       }
     }
     /**
+     * Test case findUserById String
+     */
+    public function testFindUserByIdStr() 
+    {
+        $UserModel = new UserModel();
+  
+        $id = 'abc';
+  
+  
+        $expected = 'error';
+        $actual = $UserModel->findUserById($id);
+  
+        $this->assertEquals($expected, $actual);
+  
+    }
+
+    /**
+     * Test case findUserById Null
+     */
+    public function testFindUserByIdNull() 
+    {
+        $UserModel = new UserModel();
+        $id = '';
+        $expected = 'error';
+        $actual = $UserModel->findUserById($id);
+  
+        $this->assertEquals($expected, $actual);
+  
+    }
+
+    /**
+     * Test case findUserById Object
+     */
+    public function testFindUserByIdObject() 
+    {
+        $UserModel = new UserModel();
+  
+        $id = new stdClass();
+        $expected = 'error';
+        $actual = $UserModel->findUserById($id);
+  
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test case DeleteUserById
+     * 
+    */
+    /**
      * Test case deleteUserByIdOk
      */
     public function testDeleteUserByIdOk(){
-      $userModel = new UserModel();
-      $userId = 4;
-      $deleteUserById = $userModel->deleteUserById($userId);
+      $UserModel = new UserModel();
+      $UserId = 4;
+      $deleteUserById = $UserModel->deleteUserById($UserId);
 
       if(empty($deleteUserById)){
           $this->assertTrue(true);
@@ -154,10 +205,10 @@ class UserModelTest extends TestCase
   }
 
   // test function deleteUserById not good
-  public function testDeleteBankByIdNg(){
-      $userModel = new UserModel();
-      $userId = 4;
-      $deleteUserkById = $userModel->deleteUserById($userId);
+  public function testDeleteUserByIdNg(){
+      $UserModel = new UserModel();
+      $UserId = 4;
+      $deleteUserkById = $UserModel->deleteUserById($UserId);
 
       if(empty($deleteUserById) != 4){
           $this->assertFalse(false);
