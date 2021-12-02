@@ -121,10 +121,10 @@ class Phu_UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $user = array(
-            'id' => 3,
+            'id' => 30,
             'name' => 'abcd',
             'fullname' => 'hoangphu',
-            'type' => 'admin',
+            'type' => '0',
             'email' => 'hhhpppp@gmail.com',
             'password' => '1234567'
         );
@@ -139,7 +139,7 @@ class Phu_UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $user = array(
-            'id' => [],
+            'id' => null,
             'name' => '',
             'fullname' => '',
             'type' => '',
@@ -147,7 +147,7 @@ class Phu_UserModelTest extends TestCase
             'password' => ''
         );
         $actual = $userModel->updateUser($user);
-        if ($actual == true) {
+        if ($actual == false) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);

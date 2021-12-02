@@ -32,7 +32,6 @@ $banks = $bankModel->getBanks($params);
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">User_ID</th>
-                <th scope="col">FullName</th>
                 <th scope="col">Cost</th>
             </tr>
             </thead>
@@ -42,9 +41,6 @@ $banks = $bankModel->getBanks($params);
                     <th scope="row"><?php echo $bank['id']?></th>
                     <td>
                         <?php echo $bank['user_id']?>
-                    </td>
-                    <td>
-                        <?php echo $bank['fullname']?>
                     </td>
                     <td>
                         <?php echo $bank['cost']?>

@@ -46,7 +46,7 @@ class updateUserIdBankModelTest extends TestCase{
             'user_id' => NULL,
             'cost' => NULL
         );
-        $expected = true;
+        $expected = false;
         $actual = $bankModel->updateUser_id($bank);
         $this->assertEquals($expected, $actual);
         if (!empty($bank['user_id']) && !empty($bank['cost'])) {

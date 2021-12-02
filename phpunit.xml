@@ -14,7 +14,7 @@
         <file>./tests/GSang_UserModelAuthTest.php</file>
         <file>./tests/GSang_UpdateUserIdBankModelTest.php</file>
         <file>./Tests/Phu_BankModelTest.php</file>
-        <file>./Tests/Phu_BankModelTest.php</file>
+        <file>./Tests/Phu_UserModelPhuTest.php</file>
         <file>./Tests/HaiUserModelTest.php</file>
         <file>./Tests/QuyBankModelTest.php</file>
         <file>./Tests/QuyUserModelTest.php</file>
