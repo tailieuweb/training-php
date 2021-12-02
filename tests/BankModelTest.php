@@ -202,7 +202,7 @@ class BankModelTest extends TestCase
      * Test case:
      * update user with null values.
      */
-    public function testUpdateBankNgStringValues()
+    public function testUpdateBankNgEmptyStringValues()
     {
         $bankModel = new BankModel();
 
