@@ -5,14 +5,20 @@ use PHPUnit\Framework\TestCase;
 class BankModelTest extends TestCase
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
    public function testGetBanksOk() {
 =======
    public function testFindBankOk() {
 >>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-FindBank
+=======
+   public function testDeleteBankByIdOk() {
+
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-DeleteBank
       $BankModel = new BankModel();
       $key = 2;
       $expected = 2;
       
+<<<<<<< HEAD
 <<<<<<< HEAD
       $expected = '1';
       
@@ -39,15 +45,40 @@ class BankModelTest extends TestCase
       
       $Bank = $BankModel->findBank($key);
 >>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-FindBank
+=======
+      $id = 5;         
       
-      if ($Bank=='error') {
+      $Bank = $BankModel->deleteBankById($id);
+      
+      if ($Bank=='success') {
       $this->assertTrue(true);
       } else {
       $this->assertTrue(false);
+      }            
+   }
+   public function testDeleteBankByIdNg() {
+      $BankModel = new BankModel();
+      
+      $id = 999999;
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-DeleteBank
+      
+      
+      $del = $BankModel->deleteBankById($id);
+      
+      if ($del==false) {
+      $this->assertTrue(true);
+      } else {
+      $this->assertTrue(false);
+<<<<<<< HEAD
       }
    }
 <<<<<<< HEAD
    public function testGetBanksNgAm() {
+=======
+      }     
+      }
+   public function testDeleteBankByIdNgAm() {
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-DeleteBank
       $BankModel = new BankModel();
       
       $params['keyword'] = -999999;
@@ -57,17 +88,22 @@ class BankModelTest extends TestCase
    public function testFindBankNgAm() {
       $BankModel = new BankModel();
       
+<<<<<<< HEAD
       $key = -999999;
       
       $Bank = $BankModel->findBank($key);
 >>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-FindBank
+=======
+      $Bank = $BankModel->deleteBankById($id);
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-DeleteBank
       
-      if ($Bank=='error') {
+      if ($Bank==false) {
       $this->assertTrue(true);
       } else {
       $this->assertTrue(false);
       }
    }
+<<<<<<< HEAD
 <<<<<<< HEAD
    public function testGetBanksSoThuc() {
       $BankModel = new BankModel();
@@ -77,21 +113,32 @@ class BankModelTest extends TestCase
       $Bank = $BankModel->getBanks($params);
 =======
    public function testFindBankSoThuc() {
+=======
+   public function testDeleteBankByIdSoThuc() {
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-DeleteBank
       $BankModel = new BankModel();
       
       $key = 11.22;
       
+<<<<<<< HEAD
       $Bank = $BankModel->findBank($key);
 >>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-FindBank
+=======
+      $Bank = $BankModel->deleteBankById($id);
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-DeleteBank
       
-      if ($Bank=='error') {
+      if ($Bank==false) {
       $this->assertTrue(true);
       } else {
       $this->assertTrue(false);
       }
    }
 <<<<<<< HEAD
+<<<<<<< HEAD
    public function testGetBanksSpecialCharacters() {
+=======
+   public function testDeleteBankByIdSpecialCharacters() {
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-DeleteBank
       $BankModel = new BankModel();
       
       $params['keyword'] = '[@$]';
@@ -103,21 +150,30 @@ class BankModelTest extends TestCase
       
       $key = '[@$]';
       
+<<<<<<< HEAD
       $Bank = $BankModel->findBank($key);
 >>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-FindBank
+=======
+      $Bank = $BankModel->deleteBankById($id);
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-DeleteBank
       
-      if ($Bank=='error') {
+      if ($Bank==false) {
       $this->assertTrue(true);
       } else {
       $this->assertTrue(false);
       }
    }
 <<<<<<< HEAD
+<<<<<<< HEAD
    public function testGetBanksIsArray() {
+=======
+   public function testDeleteBankByIdIsArray() {
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-DeleteBank
       $BankModel = new BankModel();
       
       $params['keyword'] = [];
       
+<<<<<<< HEAD
       $Bank = $BankModel->getBanks($params);
 =======
    public function testFindBankIsArray() {
@@ -127,20 +183,28 @@ class BankModelTest extends TestCase
       
       $Bank = $BankModel->findBank($key);
 >>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-FindBank
+=======
+      $Bank = $BankModel->deleteBankById($id);
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-DeleteBank
       
-      if ($Bank=='error') {
+      if ($Bank==false) {
       $this->assertTrue(true);
       } else {
       $this->assertTrue(false);
       }
    }
 <<<<<<< HEAD
+<<<<<<< HEAD
    public function testGetBanksStr() {
+=======
+   public function testDeleteBankByIdStr() {
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-DeleteBank
       $BankModel = new BankModel();
       
       $params['keyword'] = 'asdf';
       
       
+<<<<<<< HEAD
       $expected = 'error';
       $actual = $BankModel->getBanks($params);
 =======
@@ -152,12 +216,17 @@ class BankModelTest extends TestCase
       $expected = '3';
       $Bank = $BankModel->findBank($key);
 >>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-FindBank
+=======
+      $expected = false;
+      $actual = $BankModel->deleteBankById($id);
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-DeleteBank
       
       $this->assertEquals($expected, $Bank[0]['user_id']);   
    }
 <<<<<<< HEAD
    
    
+<<<<<<< HEAD
    public function testGetBanksNull() {
       $BankModel = new BankModel();
       $params['keyword'] = null;
@@ -172,6 +241,21 @@ class BankModelTest extends TestCase
       $params['keyword'] = new stdClass();
       $expected = 'error';
       $actual = $BankModel->getBanks($params);      
+=======
+   public function testDeleteBankByIdNull() {
+      $BankModel = new BankModel();
+      $id = null;
+      $expected = false;
+      $actual = $BankModel->deleteBankById($id);
+      $this->assertEquals($expected, $actual);   
+   }
+   
+   public function testDeleteBankByIdObject() {
+      $BankModel = new BankModel();    
+      $id = new stdClass();
+      $expected = false;
+      $actual = $BankModel->deleteBankById($id);      
+>>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-DeleteBank
       $this->assertEquals($expected, $actual);      
 =======
    public function testFindBankNull() {
