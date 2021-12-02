@@ -36,12 +36,7 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
-    //Test Auth nhap dung user,pass
-    public function testAuthOK()
-    {
-        
-    }
-       
+     
        
     //Test Auth nhap sai user,pass
     public function testAuthNG()
