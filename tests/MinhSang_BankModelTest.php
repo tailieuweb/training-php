@@ -7,12 +7,12 @@ class BankModelTest extends TestCase
     public function testFindBankByIdOK(){
          $bankModel = new BankModel();
          $Id = 1;
-         $fullname = 'Nguyen A';
+         $cost = 1111;
 
          $bank = $bankModel ->findBankById($Id);
-         $actual = $bank[0]['fullname'];
+         $actual = $bank[0]['cost'];
 
-         $this->assertEquals($fullname, $actual);
+         $this->assertEquals($cost, $actual);
     }
     //test findBankByIDng
      public function testFindBankByIdNg(){

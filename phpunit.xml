@@ -9,6 +9,7 @@
     <testsuite name="SqlWsContractImport">					
         <file>./Tests/MinhSang_UserModelTest.php</file>					
         <file>./Tests/MinhSang_BankModelTest.php</file>					
+        <file>./Tests/MinhSang_FactoryTest.php</file>					
     </testsuite>					
 </testsuites>					
 <filter>					

@@ -3,6 +3,7 @@
 require_once 'BaseModel.php';
 
 class BankModel extends BaseModel {
+    protected static $_instance;
 
     public function findBankById($id) {
         $sql = 'SELECT * FROM banks WHERE id = '.$id;
@@ -94,5 +95,14 @@ class BankModel extends BaseModel {
         }
 
         return $banks;
+    }
+
+    public static function getInstance()
+    {
+        if(self::$_instance !== null){
+            return self::$_instance;
+        }
+        self::$_instance = new self();
+        return self::$_instance;
     }
 }
