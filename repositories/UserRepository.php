@@ -74,6 +74,12 @@ class UserRepository extends BaseModel
     // Update user account with amount of money:
     public function update_UserAndBankAccount($input)
     {
+        if(!is_array($input)) return "Params invalid";
+        if(!is_numeric($input['id']) || !is_string($input['name']) || !is_string($input['fullname']) 
+        || !is_string($input['email']) || !is_string($input['password']) || !is_string($input['type'])  
+        || !is_numeric($input['bank_id']) || !is_numeric($input['cost'])) {
+            return "Invalid value";
+        }
         $factory = new FactoryPattern();
         $userModel = $factory->make('user');
         $bankModel = $factory->make('bank');
@@ -83,8 +89,8 @@ class UserRepository extends BaseModel
             'cost' => $input['cost']
         );
 
-        $userModel->updateUser($input);
-        $bankModel->updateBankInfo($bankAccount);
+        // Display result.
+        return $userModel->updateUser($input) ==  $bankModel->updateBankInfo($bankAccount);
     }
 
     // Get the list of bank accounts:

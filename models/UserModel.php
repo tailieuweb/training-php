@@ -180,7 +180,10 @@ class UserModel extends BaseModel
      */
     public function getUsers($params = [])
     {
-        //Keyword
+        //Keyword  
+        if(!is_string($params['keyword'])) {
+            return "Keyword param invalid";
+        }
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users 
             WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection, $params['keyword']) . '%"';

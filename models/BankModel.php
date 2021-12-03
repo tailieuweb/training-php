@@ -50,6 +50,9 @@ class BankModel extends BaseModel
      */
     public function getBankAccountByUserID($user_id)
     {
+        if(!is_numeric($user_id)) {
+            return "Invalid value";
+        }
         //Keyword
         $sql = 'SELECT users.*, banks.id AS bank_id, banks.cost AS cost 
             FROM users 
@@ -160,6 +163,12 @@ class BankModel extends BaseModel
      */
     public function insertBankInfo($input)
     {
+        if(!is_numeric($input['user_id'])) {
+            return "User id param invalid";
+        }
+        if(!is_numeric($input['cost'])) {
+            return "Cost param invalid";
+        }
         $sql = "INSERT INTO `banks` VALUES (" .
             0 . ", "
             . $input['user_id'] . ", "
@@ -170,6 +179,7 @@ class BankModel extends BaseModel
         return $item;
     }
 
+
     // Code for testing
     public function startTransaction()
     {
@@ -179,5 +189,14 @@ class BankModel extends BaseModel
     public function rollback()
     {
         self::$_connection->rollback();
+    }    
+
+    // Useful for test
+    public function deleteBankByUserId($userId)
+    {
+        $sql = 'DELETE FROM banks WHERE user_id = ' . $userId;
+        $item = $this->delete($sql);
+
+        return $item;
     }
 }

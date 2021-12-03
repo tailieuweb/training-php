@@ -19,13 +19,17 @@
          <file>./Tests/Duyen_UserModelTest.php</file>
          <file>./Tests/Duyen_BankModelTest.php</file>
          <file>./Tests/Duyen_BaseModelTest.php</file>
+          <file>./Tests/Liem_BankModel.php</file>
+            <file>./Tests/Liem_UserModel.php</file>
+            <file>./Tests/Liem_UserRepository.php</file>
+            <file>./Tests/Liem_BaseModel.php</file>
         </testsuite>
     </testsuites>
     <filter>				
 	<whitelist processUncoveredFilesFromWhitelist="true">				
 	<directory suffix=".php">./models</directory>				
 	</whitelist>				
-	</filter>	
+	</filter>
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
