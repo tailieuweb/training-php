@@ -1,5 +1,6 @@
 <?php
 
+use phpDocumentor\Reflection\PseudoTypes\True_;
 use PHPUnit\Framework\TestCase;
 
 class BanksModelTest extends TestCase
@@ -16,9 +17,9 @@ class BanksModelTest extends TestCase
 
         $actual = $bankModel->insertBank($input);
         if ($actual != true) {
-            $this->assertTrue(false);
-        }else {
             $this->assertTrue(true);
+        }else {
+            $this->assertTrue(false);
         }
     }
 
@@ -26,14 +27,14 @@ class BanksModelTest extends TestCase
         $bankModel = new BankModel();
         $input = [];
         $input['id'] = '1';
-        $input['user_id'] = '1';
-        $input['cost'] = '1111';
+        $input['user_id'] = '';
+        $input['cost'] = '';
 
         $actual = $bankModel->insertBank($input);
         if ($actual != true) {
-            $this->assertTrue(false);
-        }else {
             $this->assertTrue(true);
+        }else {
+            $this->assertTrue(false);
         }
     }
 
@@ -44,6 +45,22 @@ class BanksModelTest extends TestCase
         $input = [];
         $input['id'] = null;
         $input['user_id'] = '123';
+        $input['cost'] = '123456';
+
+        $actual = $bankModel->insertBank($input);
+        if ($actual != true) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+
+    //testInsertBankIdStr
+    public function testInsertBankIdStr(){
+        $bankModel = new BankModel();
+        $input = [];
+        $input['id'] = 'abcd';
+        $input['user_id'] = '111';
         $input['cost'] = '123456';
 
         $actual = $bankModel->insertBank($input);
@@ -83,6 +100,40 @@ class BanksModelTest extends TestCase
             $this->assertTrue(false);
         } else {
             $this->assertTrue(true);
+        }
+    }
+
+    //Test getBanks
+    public function testGetBanksOk(){
+        $bankModel = new BankModel();
+        $param['keyword'] = '1';
+        $actual = $bankModel->getBanks($param);
+        if ($actual != null) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+
+    public function testGetBanksNull(){
+        $bankModel = new BankModel();
+        $actual = null;
+        $actual = $bankModel->getBanks();
+        if ($actual != null) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    
+    public function testGetBanksNg(){
+        $bankModel             = new BankModel();
+        $param["keyword"] = "123";
+        $actual           = $bankModel->getBanks($param);
+        if ($actual != null) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
         }
     }
 }
