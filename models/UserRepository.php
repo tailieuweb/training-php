@@ -3,7 +3,7 @@ require_once 'UserModel.php';
 require_once 'BankModel.php';
 require_once 'Result.php';
 
-class UserRepository
+class UserRepository extends BaseModel
 {
     protected static $_instance;
     public $userModel;
