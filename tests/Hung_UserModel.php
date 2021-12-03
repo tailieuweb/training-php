@@ -533,7 +533,7 @@ class Hung_UserModelTest extends TestCase
         $userModel = UserModel::getInstance();
 
         $userModel->startTransaction();
-        $userModel->deleteUserById(null);
+        $userModel->deleteUserById(true);
 
         $userModel->rollback();
     }
