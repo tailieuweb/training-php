@@ -16,6 +16,7 @@ class Profile_User extends Model
     //gọi ra models tương ứng trong bảng với các giá trị cột tương ứng và thực thi trên bảng Users_web
     protected $table = 'profile_users';
     protected $fillable = [
+        'id',
         'user_id',
         'fullName',
         'phone',
