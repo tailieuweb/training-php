@@ -87,8 +87,8 @@ class Tuan_UserModelTest extends TestCase
         $username = 'user' . $userModel->getTheID();
         $actual =  $userModel->auth($username, '123456')[0]['fullname'];
         $expected = 'tuandeptrai';
-        $this->assertEquals($expected, $actual);
         $userModel->rollback();
+        $this->assertEquals($expected, $actual);
     }
 
     public  function  testauthUserModelJustHaveUserName()

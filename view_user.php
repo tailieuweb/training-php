@@ -6,11 +6,6 @@ $userModel = new UserModel();
 $user = NULL; //Add new user
 $id = NULL;
 
-$user = UserRepository::getInstance();
-$a = $user->getBankAccounts(['aa' => '2']);
-var_dump($a);
-die();
-
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     //Decode id param

@@ -2,6 +2,8 @@
 
 use Symfony\Component\ErrorHandler\Error\FatalError;
 
+use function PHPSTORM_META\type;
+
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel

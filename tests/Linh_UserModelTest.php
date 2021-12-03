@@ -161,7 +161,7 @@ class UserModelTest extends TestCase
             "submit" => "submit"
         );
 
-        $this-> expectException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectDeprecationMessage('Invalid argument exception!');
 
         $userModel->insertUser($param);
@@ -190,7 +190,7 @@ class UserModelTest extends TestCase
             "submit" => "submit"
         );
 
-        $this-> expectException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectDeprecationMessage('Invalid argument exception!');
 
         $userModel->insertUser($param);
@@ -221,9 +221,9 @@ class UserModelTest extends TestCase
             "submit" => "submit"
         );
 
-        $this-> expectException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectDeprecationMessage('Invalid argument exception!');
-        
+
         $userModel->insertUser($param);
     }
 
@@ -252,7 +252,7 @@ class UserModelTest extends TestCase
             "submit" => "submit"
         );
 
-        $this-> expectException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectDeprecationMessage('Invalid argument exception!');
 
         $actual = $userModel->insertUser($param);
@@ -283,9 +283,9 @@ class UserModelTest extends TestCase
             "submit" => "submit"
         );
 
-        $this-> expectException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectDeprecationMessage('Invalid argument exception!');
-        
+
         $actual = $userModel->insertUser($param);
     }
 
@@ -321,7 +321,7 @@ class UserModelTest extends TestCase
         $currentDataVerion = $userModel->getVersionByUserID($last_uid);
 
         $param = array(
-            "id" => $last_uid,
+            "id" => (int) $last_uid,
             "bank_id" => "10",
             "name" => "user99_updated",
             "fullname" => "user99_updated",
@@ -329,7 +329,7 @@ class UserModelTest extends TestCase
             "type" => "user",
             "password" => "admin",
             "cost" => "111000",
-            "ver" => $currentDataVerion,
+            "ver" => (int) $currentDataVerion,
             "submit" => "submit"
         );
 

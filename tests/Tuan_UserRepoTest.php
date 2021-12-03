@@ -15,15 +15,15 @@ class Tuan_UserRepoTest extends TestCase
         $input['cost'] = 1105;
         $input['name'] = "user" . (intval($userModel->getTheID()) + 1);
         $input['password'] = '123456';
-        $input['fullname'] = "tuandeptrai";
+        $input['fullname'] = "aaaaaaaaaaaa";
         $input['email'] = "katarina@gmail.com";
         $input['type'] = 'admin';
         $input['user_id'] = "" . (intval($userModel->getTheID()) + 1);
         $Repository->create_UserAndBankAccount($input);
         $id_user_recent_create = $userModel->findUserById((intval($userModel->getTheID())))[0]['id'];
         $expected = 7;
-        $this->assertEquals($expected, $id_user_recent_create);
         $Repository->rollback();
+        $this->assertEquals($expected, $id_user_recent_create);
     }
 
     public  function testCreateUserAndBankAccountIsOkWithBankTable()
@@ -35,15 +35,15 @@ class Tuan_UserRepoTest extends TestCase
         $input['cost'] = 1105;
         $input['name'] = "user" . (intval($userModel->getTheID()) + 1);
         $input['password'] = '123456';
-        $input['fullname'] = "tuandeptrai";
+        $input['fullname'] = "bbbbbbbbbb";
         $input['email'] = "katarina@gmail.com";
         $input['type'] = 'admin';
         $input['user_id'] = "" . (intval($userModel->getTheID()) + 1);
         $Repository->create_UserAndBankAccount($input);
-        $data_userid_Bank_recent_create = $Repository->getBankAccountByUserID(7)[0]['cost'];
+        $data_userid_Bank_recent_create = $Repository->getBankAccountByUserID((int)$userModel->getTheID())[0]['cost'];
         $expected = 1105;
-        $this->assertEquals($expected, $data_userid_Bank_recent_create);
         $Repository->rollback();
+        $this->assertEquals($expected, $data_userid_Bank_recent_create);
     }
 
     public function testCreateUserAndBankAccountJustFullParameterWithCreateUser()
@@ -108,8 +108,8 @@ class Tuan_UserRepoTest extends TestCase
         $input['user_id'] = "" . (intval($userModel->getTheID()) + 1);
         $actuall =  $Repository->create_UserAndBankAccount($input);
         $expected = false;
-        $this->assertEquals($expected, $actuall);
         $Repository->rollback();
+        $this->assertEquals($expected, $actuall);
     }
     public  function testCreateUserAndBankAccountFullParameterNotEmptyButCostNotNumber()
     {
