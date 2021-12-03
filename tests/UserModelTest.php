@@ -79,7 +79,7 @@ class UserModelTest extends TestCase
         $userName = 'hackerasfasf';
 
         $user = $userModel->findUserById($userID);
-        $actual = $user[0]['name'];
+        $actual = $user[0]['123'];
 
         $this->assertEquals($userName, $actual);
     }

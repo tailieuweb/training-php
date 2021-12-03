@@ -80,7 +80,7 @@ class BanksModelTest extends TestCase
         $input['cost'] = '123456';
 
         $actual = $bankModel->insertBank($input);
-        if ($actual != true) {
+        if ($actual != null) {
             $this->assertTrue(false);
         } else {
             $this->assertTrue(true);
@@ -120,9 +120,9 @@ class BanksModelTest extends TestCase
         $actual = null;
         $actual = $bankModel->getBanks();
         if ($actual != null) {
-            $this->assertTrue(true);
-        } else {
             $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
         }
     }
     
@@ -131,9 +131,9 @@ class BanksModelTest extends TestCase
         $param["keyword"] = "123";
         $actual           = $bankModel->getBanks($param);
         if ($actual != null) {
-            $this->assertTrue(true);
-        } else {
             $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
         }
     }
 }
