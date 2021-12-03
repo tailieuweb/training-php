@@ -5,7 +5,6 @@ use PHPUnit\Framework\TestCase;
 class UserModelTest extends TestCase
 {
 
-<<<<<<< HEAD
     /**
      * Test case Okie
      */
@@ -365,6 +364,4 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-=======
->>>>>>> 1-php-202109/2-groups/6-F/master-PHPUnit
 }
