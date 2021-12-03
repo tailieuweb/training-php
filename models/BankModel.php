@@ -43,10 +43,8 @@ class BankModel extends BaseModel
      */
     public function deleteBankById($id)
     {
-        if (
-            is_object($id) || $id < 0 || is_string($id) || is_double($id) || is_array($id)
-            ||  empty($id) || !is_numeric($id)
-        ) {
+        if( is_object($id) || $id<0 || is_string($id) || is_double($id) || is_array($id) 
+        ||  empty($id) || !is_numeric($id)){
             return 'Not invalid';
         }
         //Lấy id của tất cả user 
@@ -60,7 +58,7 @@ class BankModel extends BaseModel
         //         return $this->delete($sql);
         //     }
         // }
-        $sql = 'DELETE FROM banks WHERE id = ' . $id;
+        $sql = 'DELETE FROM banks WHERE id = ' .$id;
         return $this->delete($sql);
     }
 
@@ -199,13 +197,11 @@ class BankModel extends BaseModel
         }
         return $banks;
     }
-
+    
     function getAllBanks($id)
     {
-        if (
-            is_object($id) || $id < 0 || is_string($id) || is_double($id) || is_array($id)
-            ||  empty($id) || !is_numeric($id)
-        ) {
+        if( is_object($id) || $id<0 || is_string($id) || is_double($id) || is_array($id) 
+        ||  empty($id) || !is_numeric($id)){
             return 'Not invalid';
         }
         $sql = 'SELECT * FROM banks Where user_id = ' . $id;

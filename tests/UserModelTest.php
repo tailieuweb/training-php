@@ -319,7 +319,23 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
     // Test truong hop sai
-    public function testFindUserByIdNg()
+    public function testFindUserByIdNg(){
+        $userModel = new UserModel();
+        $idUser = 12;
+        $expected = 'test1';
+        $user = $userModel->findUserById($idUser);
+        $actual = $user[0]['name'];
+        $this->assertEquals($expected, $actual);
+    }
+    // public function testFindUserByIdWithInteger()
+    // {
+    //     $user = new UserModel();
+    //     $id = '1';
+    //     $expected = 'test1';
+    //     $actual = $user->findUserById($id);
+    //     $this->assertEquals($expected, $actual[0]['name']);
+    // }
+    public function testFindUserByIdWithString()
     {
         $userModel = new UserModel();
         $userId = 222;
@@ -444,7 +460,44 @@ class UserModelTest extends TestCase
         }
     }
     // Test truong hop id la chuoi
-    public function testDeleteUserByIdIsString()
+    public function testDeleteUserByIdIsString(){
+        $userModel = new UserModel();
+        $idUser = '100';
+        $user = $userModel->deleteUserById($idUser);
+        if (!empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test sai nen comment lai
+    // public function testFindUserGoodWithString()
+    // {
+    //     $user = new UserModel();
+    //     $keys = "test1";
+    //     // $expected = "";
+    //     $actual = $user->findUser($keys);
+    //     // var_dump($actual);
+    //     // die();
+    //     if (!empty($actual)) {
+    //         return $this->assertTrue(true);
+    //     }
+    //     return $this->assertTrue(false);
+    // }
+
+
+    // public function testAuthGood()
+    // {
+    //     $user = new UserModel();
+    //     $username = 'chien';
+    //     $password = '123';
+    //     $actual = $user->auth($username, $password);
+    //     if (!empty($actual)) {
+    //         return $this->assertTrue(true);
+    //     }
+    //     return $this->assertTrue(false);
+    // }
+    public function testDeleteUserByIdGood()
     {
         $userModel = new UserModel();
         $idUser = '1';
@@ -567,7 +620,7 @@ class UserModelTest extends TestCase
     public function testUpdateUserGood()
     {
         $user = new UserModel();
-        $input = array('id' => '15', 'name' => 'maihuynh', 'fullname' => 'huynh mai xuan', 'email' => 'example@gmail.com', 'type' => 'admin', 'password' => '1234');
+        $input = array('id' => '2', 'name' => 'test2', 'fullname' => 'nguyen Ngoc Chien', 'email' => 'example@gmail.com', 'type' => 'admin', 'password' => '123');
         $actual = $user->updateUser($input);
         // var_dump($actual);
         // die();
@@ -580,7 +633,7 @@ class UserModelTest extends TestCase
     public function testInsertUserGood()
     {
         $user = new UserModel();
-        $input = array('name' => 'huynh', 'fullname' => 'mai xuan huynh', 'email' => 'example@gmail.com', 'type' => 'admin', 'password' => '1234');
+        $input = array('name' => 'gia nam', 'fullname' => 'nguyen Ngoc Chien', 'email' => 'example@gmail.com', 'type' => 'admin', 'password' => '123');
         $actual = $user->insertUser($input);
         // var_dump($actual);
         // die();
@@ -601,6 +654,130 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $actual2);
     }
     
+
+    // Chien lam test GetUsers
+    public function testGetUsersGood()
+    {
+        $userModel = new UserModel();
+        $params['keyword']  = 'test1';
+        $user = $userModel->getUsers($params);
+        if (!empty($user[0])) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
+    // Test trường hợp sai
+    public function testGetUsersNg()
+    {
+        $userModel = new UserModel();
+        $params['keyword']  = 'chien';
+        $user = $userModel->getUsers($params);
+        if (empty($user[0])) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
+    // Test keyword là số
+    public function testGetUsersByIsNum()
+    {
+        $userModel = new UserModel();
+        $params['keyword'] = 123;
+        $user = $userModel->getUsers($params);
+        if (empty($user[0])) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
+    // Test keyword là số âm
+    public function testGetUsersIsNegativeNum()
+    {
+        $userModel = new UserModel();
+        $params['keyword'] = -123;
+        $user = $userModel->getUsers($params);
+        if (empty($user[0])) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
+    // Test keyword là số thuc
+    public function testGetUsersIsDouble()
+    {
+        $userModel = new UserModel();
+        $params['keyword'] = 10.5;
+        $user = $userModel->getUsers($params);
+        if (empty($user[0])) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
+   
+    // Test keyword là null
+    public function testGetUsersIsNull()
+    {
+        $userModel = new UserModel();
+        $params['keyword'] = null;
+        $user = $userModel->getUsers($params);
+        if (!empty($user[0])) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
+    // Test keyword là boolean(true/false)
+    public function testGetUsersIsBoolean()
+    {
+        $userModel = new UserModel();
+        $params['keyword'] = true;
+        $user = $userModel->getUsers($params);
+        if (!empty($user[0])) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
+    // Test keyword không tồn tại
+    public function testGetUsersIsNotExist()
+    {
+        $userModel = new UserModel();
+        $params['keyword'] = 'chien';
+        $user = $userModel->getUsers($params);
+        if (empty($user[0])) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
+    // Test keyword có 1 khoảng trắng
+    public function testGetUsersIsOneSpace()
+    {
+        $userModel = new UserModel();
+        $params['keyword'] =  'gia nam';
+        $user = $userModel->getUsers($params);
+        if (!empty($user[0])) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
+    // Test keyword có từ 2 khoảng trắng
+    public function testGetUsersIsMoreSpace()
+    {
+        $userModel = new UserModel();
+        $params['keyword'] = 'gia  nam';
+        $user = $userModel->getUsers($params);
+        if (empty($user[0])) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
+    // End chien lam
+ 
 }
 
 
