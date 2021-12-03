@@ -172,151 +172,319 @@ class UserModelTest extends TestCase
      * Test function auth with password worng
      */
 
-   //TEST OF FUNCTION auth
-   public function testAuthWithOK()
-   {
-      $userModel = new UserModel();
-      $expected = [
-          "id" => 63,
-          "name" => "Trinh",
-          "fullname" => "lemytrinh",
-          "email" => "lemytrinh021@gmail.com",
-          "type" => "admin",
-          "password" => "b59c67bf196a4758191e42f76670ceba",
-      ];
-      $name = "Trinh";
-      $password = "1111";
-      $actual = $userModel->auth($name,$password);
-      $this->assertEquals($expected, $actual[0]);
-   }
-   //
-   public function testAuthWithFailed()
-   {
-      $userModel = new UserModel();
-      $expected = [];
-      $name = "Trinh";
-      $password = "123451232";
-      $actual = $userModel->auth($name,$password);
-      $this->assertEquals($expected, $actual);
-   }
-   //
-   public function testAuthWithNameIsNumber()
-   {
-      $userModel = new UserModel();
-      $expected = false;
-      $name = 1;
-      $password = "123451232";
-      $actual = $userModel->auth($name,$password);
-      $this->assertEquals($expected, $actual);
-   }
-   //
-   public function testAuthWithPasswordIsNumber()
-   {
-      $userModel = new UserModel();
-      $expected = false;
-      $name = "Trinh";
-      $password = 11123;
-      $actual = $userModel->auth($name,$password);
-      $this->assertEquals($expected, $actual);
-   }
-   //
-   public function testAuthWithBothIsNumber()
-   {
-      $userModel = new UserModel();
-      $expected = false;
-      $name = 3004;
-      $password = 1975;
-      $actual = $userModel->auth($name,$password);
-      $this->assertEquals($expected, $actual);
-   }
-   //
-   public function testAuthWithNameIsArray()
-   {
-      $userModel = new UserModel();
-      $expected = false;
-      $name = [];
-      $password = "12345";
-      $actual = $userModel->auth($name,$password);
-      $this->assertEquals($expected, $actual);
-   }
-   //
-   public function testAuthWithPasswordIsArray()
-   {
-      $userModel = new UserModel();
-      $expected = false;
-      $name = "pp6";
-      $password = [];
-      $actual = $userModel->auth($name,$password);
-      $this->assertEquals($expected, $actual);
-   }
-   //
-   public function testAuthWithBothIsArray()
-   {
-      $userModel = new UserModel();
-      $expected = false;
-      $name = [];
-      $password = [];
-      $actual = $userModel->auth($name,$password);
-      $this->assertEquals($expected, $actual);
-   }
-   //
-   public function testAuthWithNameIsObject()
-   {
-      $userModel = new UserModel();
-      $expected = false;
-      $name = new stdClass;
-      $password = "12345";
-      $actual = $userModel->auth($name,$password);
-      $this->assertEquals($expected, $actual);
-   }
-   //
-   public function testAuthWithPasswordIsObject()
-   {
-      $userModel = new UserModel();
-      $expected = false;
-      $name = "Trinh";
-      $password = new stdClass;
-      $actual = $userModel->auth($name,$password);
-      $this->assertEquals($expected, $actual);
-   }
-   //
-   public function testAuthWithBothIsObject()
-   {
-      $userModel = new UserModel();
-      $expected = false;
-      $name = new stdClass;
-      $password = new stdClass;
-      $actual = $userModel->auth($name,$password);
-      $this->assertEquals($expected, $actual);
-   }
-   //
-   public function testAuthWithNameIsNull()
-   {
-      $userModel = new UserModel();
-      $expected = false;
-      $name = null;
-      $password = "12345";
-      $actual = $userModel->auth($name,$password);
-      $this->assertEquals($expected, $actual);
-   }
-   //
-   public function testAuthWithPasswordIsNull()
-   {
-      $userModel = new UserModel();
-      $expected = false;
-      $name = "Trinh";
-      $password = null;
-      $actual = $userModel->auth($name,$password);
-      $this->assertEquals($expected, $actual);
-   }
-   //
-   public function testAuthWithBothIsNull()
-   {
-      $userModel = new UserModel();
-      $expected = false;
-      $name = null;
-      $password = null;
-      $actual = $userModel->auth($name,$password);
-      $this->assertEquals($expected, $actual);
-   }
+    //TEST OF FUNCTION auth
+    public function testAuthWithOK()
+    {
+        $userModel = new UserModel();
+        $expected = [
+            "id" => 63,
+            "name" => "Trinh",
+            "fullname" => "lemytrinh",
+            "email" => "lemytrinh021@gmail.com",
+            "type" => "admin",
+            "password" => "b59c67bf196a4758191e42f76670ceba",
+        ];
+        $name = "Trinh";
+        $password = "1111";
+        $actual = $userModel->auth($name, $password);
+        $this->assertEquals($expected, $actual[0]);
+    }
+    //
+    public function testAuthWithFailed()
+    {
+        $userModel = new UserModel();
+        $expected = [];
+        $name = "Trinh";
+        $password = "123451232";
+        $actual = $userModel->auth($name, $password);
+        $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithNameIsNumber()
+    {
+        $userModel = new UserModel();
+        $expected = false;
+        $name = 1;
+        $password = "123451232";
+        $actual = $userModel->auth($name, $password);
+        $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithPasswordIsNumber()
+    {
+        $userModel = new UserModel();
+        $expected = false;
+        $name = "Trinh";
+        $password = 11123;
+        $actual = $userModel->auth($name, $password);
+        $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithBothIsNumber()
+    {
+        $userModel = new UserModel();
+        $expected = false;
+        $name = 3004;
+        $password = 1975;
+        $actual = $userModel->auth($name, $password);
+        $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithNameIsArray()
+    {
+        $userModel = new UserModel();
+        $expected = false;
+        $name = [];
+        $password = "12345";
+        $actual = $userModel->auth($name, $password);
+        $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithPasswordIsArray()
+    {
+        $userModel = new UserModel();
+        $expected = false;
+        $name = "pp6";
+        $password = [];
+        $actual = $userModel->auth($name, $password);
+        $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithBothIsArray()
+    {
+        $userModel = new UserModel();
+        $expected = false;
+        $name = [];
+        $password = [];
+        $actual = $userModel->auth($name, $password);
+        $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithNameIsObject()
+    {
+        $userModel = new UserModel();
+        $expected = false;
+        $name = new stdClass;
+        $password = "12345";
+        $actual = $userModel->auth($name, $password);
+        $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithPasswordIsObject()
+    {
+        $userModel = new UserModel();
+        $expected = false;
+        $name = "Trinh";
+        $password = new stdClass;
+        $actual = $userModel->auth($name, $password);
+        $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithBothIsObject()
+    {
+        $userModel = new UserModel();
+        $expected = false;
+        $name = new stdClass;
+        $password = new stdClass;
+        $actual = $userModel->auth($name, $password);
+        $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithNameIsNull()
+    {
+        $userModel = new UserModel();
+        $expected = false;
+        $name = null;
+        $password = "12345";
+        $actual = $userModel->auth($name, $password);
+        $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithPasswordIsNull()
+    {
+        $userModel = new UserModel();
+        $expected = false;
+        $name = "Trinh";
+        $password = null;
+        $actual = $userModel->auth($name, $password);
+        $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithBothIsNull()
+    {
+        $userModel = new UserModel();
+        $expected = false;
+        $name = null;
+        $password = null;
+        $actual = $userModel->auth($name, $password);
+        $this->assertEquals($expected, $actual);
+    }
+    // Test trường hợp id là kí tự
+    public function testFindUserByIdIsCharacters()
+    {
+        $userModel = new UserModel();
+        $userId = '@11';
+        $expected = 'Not invalid';
+        $actual = $userModel->findUserById($userId);
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test case DeleteUserById
+     * 
+     */
+    /**
+     * Test case deleteUserByIdOk
+     */
+    public function testDeleteUserByIdOk()
+    {
+        $UserModel = new UserModel();
+        $UserId = 4;
+        $deleteUserById = $UserModel->deleteUserById($UserId);
+
+        if (empty($deleteUserById)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertFalse(false);
+        }
+    }
+
+    // test function deleteUserById not good
+    public function testDeleteUserByIdNg()
+    {
+        $UserModel = new UserModel();
+        $UserId = 4;
+        $deleteUserkById = $UserModel->deleteUserById($UserId);
+
+        if (empty($deleteUserById) != 4) {
+            $this->assertFalse(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+    // test function deleteUserById string
+    public function testDeleteByIdString()
+    {
+        $UserModel = new UserModel();
+        $idUser = 'luan';
+        $deleteUserById = $UserModel->deleteUserById($idUser);
+
+        if (empty($deleteUserById)) {
+            $this->assertFalse(false);
+        } else {
+            $this->assertTrue(True);
+        }
+    }
+
+    // test function deleteUserById null
+    public function testDeleteByIdNull()
+    {
+        $UserModel = new UserModel();
+        $idUser = null;
+        $deleteUserById = $UserModel->deleteUserById($idUser);
+
+        if (empty($deleteUserById)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertFalse(false);
+        }
+    }
+
+    // test function deleteUserById array
+    public function testDeleteByIdArray()
+    {
+        $UserModel = new UserModel();
+        $idUser = array(1, 2, 3);
+
+        try {
+            $UserModel->deleteUserById($idUser);
+        } catch (Throwable $e) {
+            $this->assertTrue(True);
+        }
+    }
+
+    // test function deleteUserById Object
+    public function testDeleteByIdObject()
+    {
+        $UserModel = new UserModel();
+        $idUser = new stdClass();
+
+
+        try {
+            $UserModel->deleteUserById($idUser);
+        } catch (Throwable $e) {
+            $this->assertTrue(True);
+        }
+    }
+    public function testDeleteUserByIdGood()
+    {
+
+        $userModel = new UserModel();
+        $idUser = '1';
+        $user = $userModel->deleteUserById($idUser);
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test trường hợp id là số âm
+    public function testDeleteUserByIdIsNegativeNumber()
+    {
+        $userModel = new UserModel();
+        $idUser = -5;
+        $user = $userModel->deleteUserById($idUser);
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test trường hợp id là số thực
+    public function testDeleteUserByIdIsDoubleNumber()
+    {
+        $userModel = new UserModel();
+        $idUser = 5.5;
+        $user = $userModel->deleteUserById($idUser);
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test trường hợp id là boolean(true/false)
+    public function testDeleteUserByIdIsBoolean()
+    {
+        $userModel = new UserModel();
+        $idUser = true;
+        $user = $userModel->deleteUserById($idUser);
+        if (!empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test trường hợp id không tồn tại
+    public function testDeleteUserByIdNotExist()
+    {
+        $userModel = new UserModel();
+        $idUser = 100;
+        $user = $userModel->deleteUserById($idUser);
+        if (!empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test trường hợp id là kí tự
+    public function testDeleteUserByIdIsCharacters()
+    {
+        $userModel = new UserModel();
+        $idUser = '%%';
+        $user = $userModel->deleteUserById($idUser);
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
 }

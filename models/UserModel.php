@@ -125,4 +125,5 @@ class UserModel extends BaseModel
         self::$_instance = new self();
         return self::$_instance;
     }
+    
 }
