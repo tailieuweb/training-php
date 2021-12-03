@@ -172,131 +172,151 @@ class UserModelTest extends TestCase
      * Test function auth with password worng
      */
 
-    /**
-     * Các trường hợp cần test
-     * truyền đúng u & p
-     * truyền sai u
-     * truyền sai pass
-     * truyền sai u và p
-     * truyền sai kiểu dữ liệu u (array, object)
-     * truyền sai kiểu dữ liệu p (array, object)
-     * truyền sai kiểu dữ liệu u & p (array, object)
-     */
-    public function testAuthPassGood()
-    {
-        $user = new UserModel();
-        $name = "trinhnulo";
-        $pass = "123";
-        //Setup input for insert new user
-        $input = [
-            'name' => "trinhnulo",
-            'password' => "123",
-            'fullname' => "le my trinh",
-            'email' => "123",
-            'type' => "admin"
-        ];
-        //Start transaction
-        $user->startTransaction();
-
-        //Execute function insert user
-        $user->insertUser($input);
-        // $newUser = $user->findUserById(6);
-        // var_dump($newUser);
-
-        //Test
-        $actual = $user->auth($name, $pass);
-        $this->assertEquals($actual[0]['name'], "trinhnulo");
-        $user->rollback();
-
-        //Test
-
-        // die();
-        // $actual = $user->auth($name, $pass);
-        // var_dump(md5($pass));die();
-        // $expected = true;
-        // $this->assertEquals($expected, $actual);
-    }
-    //Test auth invalid input name
-    public function testAuthInvalidUser()
-    {
-        $user = new UserModel();
-        $name = "trinhnulo";
-        $pass = "123";
-        //Setup input for insert new user
-        $input = [
-            'name' => "trinhnulo",
-            'password' => "123",
-            'fullname' => "le my trinh",
-            'email' => "123",
-            'type' => "admin"
-        ];
-        //Start transaction
-        $user->startTransaction();
-
-        //Execute function insert user
-        $user->insertUser($input);
-
-        //Test
-        $actual = $user->auth($name, $pass);
-        if ($actual[0]['name'] == "trinhnulo") {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
-        $user->rollback();
-    }
-
-    //Test auth invalid input pass
-    public function testAuthPassNG()
-    {
-        $user = new UserModel();
-        $name = "trinhnulo";
-        $pass = "123";
-        //Setup input for insert new user
-        $input = [
-            'name' => "trinhnulo",
-            'password' => "123",
-            'fullname' => "le my trinh",
-            'email' => "123",
-            'type' => "admin"
-        ];
-        //Start transaction
-        $user->startTransaction();
-
-        //Execute function insert user
-        $user->insertUser($input);
-        // $newUser = $user->findUserById(6);
-        // var_dump($newUser);
-
-        //Test
-        $actual = $user->auth($name, $pass);
-        $this->assertEquals($actual[0]['password'], (md5("123")));
-        $user->rollback();
-    }
-    public function testAuthWithAllNull()
-    {
-        $user = new UserModel();
-        $name = "trinhnulo";
-        $pass = "123";
-        //Setup input for insert new user
-        $input = [
-            'name' => "trinhnulo",
-            'password' => "123",
-            'fullname' => "le my trinh",
-            'email' => "123",
-            'type' => "admin"
-        ];
-        //Start transaction
-        $user->startTransaction();
-
-        //Execute function insert user
-        $user->insertUser($input);
-        // $newUser = $user->findUserById(6);
-        // var_dump($newUser);
-
-        //Test
-        $actual = $user->auth($name, $pass);
-        $this->assertEquals($actual[]['name'], "trinhnulo");
-        $user->rollback();
-    }
+   //TEST OF FUNCTION auth
+   public function testAuthWithOK()
+   {
+      $userModel = new UserModel();
+      $expected = [
+          "id" => 63,
+          "name" => "Trinh",
+          "fullname" => "lemytrinh",
+          "email" => "lemytrinh021@gmail.com",
+          "type" => "admin",
+          "password" => "b59c67bf196a4758191e42f76670ceba",
+      ];
+      $name = "Trinh";
+      $password = "1111";
+      $actual = $userModel->auth($name,$password);
+      $this->assertEquals($expected, $actual[0]);
+   }
+   //
+   public function testAuthWithFailed()
+   {
+      $userModel = new UserModel();
+      $expected = [];
+      $name = "Trinh";
+      $password = "123451232";
+      $actual = $userModel->auth($name,$password);
+      $this->assertEquals($expected, $actual);
+   }
+   //
+   public function testAuthWithNameIsNumber()
+   {
+      $userModel = new UserModel();
+      $expected = false;
+      $name = 1;
+      $password = "123451232";
+      $actual = $userModel->auth($name,$password);
+      $this->assertEquals($expected, $actual);
+   }
+   //
+   public function testAuthWithPasswordIsNumber()
+   {
+      $userModel = new UserModel();
+      $expected = false;
+      $name = "Trinh";
+      $password = 11123;
+      $actual = $userModel->auth($name,$password);
+      $this->assertEquals($expected, $actual);
+   }
+   //
+   public function testAuthWithBothIsNumber()
+   {
+      $userModel = new UserModel();
+      $expected = false;
+      $name = 3004;
+      $password = 1975;
+      $actual = $userModel->auth($name,$password);
+      $this->assertEquals($expected, $actual);
+   }
+   //
+   public function testAuthWithNameIsArray()
+   {
+      $userModel = new UserModel();
+      $expected = false;
+      $name = [];
+      $password = "12345";
+      $actual = $userModel->auth($name,$password);
+      $this->assertEquals($expected, $actual);
+   }
+   //
+   public function testAuthWithPasswordIsArray()
+   {
+      $userModel = new UserModel();
+      $expected = false;
+      $name = "pp6";
+      $password = [];
+      $actual = $userModel->auth($name,$password);
+      $this->assertEquals($expected, $actual);
+   }
+   //
+   public function testAuthWithBothIsArray()
+   {
+      $userModel = new UserModel();
+      $expected = false;
+      $name = [];
+      $password = [];
+      $actual = $userModel->auth($name,$password);
+      $this->assertEquals($expected, $actual);
+   }
+   //
+   public function testAuthWithNameIsObject()
+   {
+      $userModel = new UserModel();
+      $expected = false;
+      $name = new stdClass;
+      $password = "12345";
+      $actual = $userModel->auth($name,$password);
+      $this->assertEquals($expected, $actual);
+   }
+   //
+   public function testAuthWithPasswordIsObject()
+   {
+      $userModel = new UserModel();
+      $expected = false;
+      $name = "Trinh";
+      $password = new stdClass;
+      $actual = $userModel->auth($name,$password);
+      $this->assertEquals($expected, $actual);
+   }
+   //
+   public function testAuthWithBothIsObject()
+   {
+      $userModel = new UserModel();
+      $expected = false;
+      $name = new stdClass;
+      $password = new stdClass;
+      $actual = $userModel->auth($name,$password);
+      $this->assertEquals($expected, $actual);
+   }
+   //
+   public function testAuthWithNameIsNull()
+   {
+      $userModel = new UserModel();
+      $expected = false;
+      $name = null;
+      $password = "12345";
+      $actual = $userModel->auth($name,$password);
+      $this->assertEquals($expected, $actual);
+   }
+   //
+   public function testAuthWithPasswordIsNull()
+   {
+      $userModel = new UserModel();
+      $expected = false;
+      $name = "Trinh";
+      $password = null;
+      $actual = $userModel->auth($name,$password);
+      $this->assertEquals($expected, $actual);
+   }
+   //
+   public function testAuthWithBothIsNull()
+   {
+      $userModel = new UserModel();
+      $expected = false;
+      $name = null;
+      $password = null;
+      $actual = $userModel->auth($name,$password);
+      $this->assertEquals($expected, $actual);
+   }
 }
