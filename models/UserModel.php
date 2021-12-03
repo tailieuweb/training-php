@@ -57,9 +57,17 @@ class UserModel extends BaseModel
      * @param $id
      * @return mixed
      */
+<<<<<<< HEAD
     public function deleteUserById($id)
     {
         $sql = 'DELETE FROM users WHERE id = ' . $id;
+=======
+    public function deleteUserById($id) {
+        if(is_array($id)){
+            return [];
+        }
+        $sql = 'DELETE FROM users WHERE id = '.$id;
+>>>>>>> 1-php-202109/2-groups/2-B/3-52-Nhu-phpunit
         return $this->delete($sql);
     }
 
@@ -80,10 +88,21 @@ class UserModel extends BaseModel
                 WHERE id = ' . $input['id'];
 
         $user = $this->update($sql);
+        return $user;
+    } */
+    public function updateUser($input)
+    {
 
+        $sql = 'UPDATE users SET 
+                name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '", 
+                fullname = "' . $input['fullname'] . '", 
+                email = "' . $input['email'] . '", 
+                type = "' . $input['type'] . '", 
+                password="' . md5($input['password']) . '"
+                WHERE id = ' . $input['id'];
+        $user = $this->update($sql);
         return $user;
     }
-
     /**
      * Insert user
      * @param $input
@@ -91,21 +110,15 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
-        foreach ($input as $key => $value) {
-            if (is_array($value) || is_object($value) || is_null($value)) {
-                return [];
-            }
-        }
-        
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
-            "'" . mysqli_real_escape_string(self::$_connection, $input['name']) . "',
-                 '" . md5($input['password']) . "',
-                 '" . mysqli_real_escape_string(self::$_connection, $input['fullname']) . "',
-                 '" . mysqli_real_escape_string(self::$_connection, $input['email']) . "',
-                 '" . $input['type'] . "')";
-        $user = self::$_connection->multi_query($sql);
-        //Normal: 
-        //$user = $this->insert($sql);
+        // SQL
+        $sql = "INSERT INTO `users`(`name`,`password`,`fullname`, `email`, `type`) 
+        VALUES ('" .$input['name'] . "',
+        '" .md5($input['password']) . "',
+        '" .$input['fullname'] . "',
+        '" .$input['email'] . "',
+        '" .$input['type'] . "')";
+        $user = $this->insert($sql);
+
         return $user;
     }
 
@@ -116,13 +129,18 @@ class UserModel extends BaseModel
      */
     public function getUsers($params = [])
     {
-        //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users
-            WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection, $params['keyword']) . '%"';
-            $users = $this->getData_With_Multi_Query($sql);
+            $key = str_replace('"', '', $params['keyword']);
+            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $key . '%"';
+
+            //Keep this line to use Sql Injection
+            //Don't change
+            //Example keyword: abcef%";TRUNCATE banks;##
+            // $users = self::$_connection->multi_query($sql);
+            $users = $this->select($sql);
         } else {
-            $sql = 'SELECT * FROM users';
+
+            $sql = 'SELECT * FROM users join types on users.type = types.type_id';
             $users = $this->select($sql);
         }
 
