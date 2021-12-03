@@ -75,6 +75,15 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
+
+        if (
+            is_string($input['name']) == false || is_string($input['fullname']) == false || is_string($input['email']) == false
+            || is_string($input['type']) == false || is_string($input['password']) == false
+            || strlen($input['name']) == 0 || strlen($input['fullname']) == 0 || strlen($input['email']) == 0
+            || strlen($input['type']) == 0 || strlen($input['password']) == 0) {
+            return 'error';
+        }
+
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
             "'" . $input['name'] . "', '" . md5($input['password']) . "','" . $input['fullname'] . "','" . $input['email'] . "','" . $input['type'] . "')";
 

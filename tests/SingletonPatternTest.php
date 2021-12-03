@@ -4,9 +4,9 @@ use PHPUnit\Framework\TestCase;
 class SingletonPatternTest extends TestCase
 {   
     /**
-     * Test case singletonUser Ok
+     * Test case singleton User Ok
      */
-     public function testMakeOK()
+     public function testMakeUserOk()
      {
          $singleton = new SingletonPattern();
          $userModel = new UserModel();
@@ -60,25 +60,69 @@ class SingletonPatternTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-     /**
-     * Test case singleton Not good
+    /**
+     * Test case singletonUser Object
      */
-     public function testMakeNg()
+    public function testMakeObject()
+    {
+        $singleton = new SingletonPattern();
+        $model = new stdClass();;
+        $expected = 'error';
+        $actual = $singleton->make($model);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case singletonUser Array
+     */
+    public function testMakeArray()
+    {
+        $singleton = new SingletonPattern();
+        $model = array(1,2,3);
+        $expected = 'error';
+        $actual = $singleton->make($model);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+     /**
+     * Test case singleton User Not good
+     */
+     public function testMakeUserNg()
      {
         $singleton = new SingletonPattern();
         $userModel = new UserModel();
-        $bankModel = new BankModel();
 
         $user = 'user';
-        $bank = 'bank';
 
-        if($singleton->make('user') == $userModel && $singleton->make('bank') == $bankModel)
+        if($singleton->make('user') != $userModel)
         {
-            $this->assertTrue(true);
+            $this->assertFalse(false);
         }
         else
         {
+            $this->assertTrue(true);
+        }
+     }
+
+     /**
+     * Test case singleton Bank Not good
+     */
+     public function testMakeBankNg()
+     {
+        $singleton = new SingletonPattern();
+        $bankModel = new BankModel();
+
+        $bank = 'bank';
+
+        if($singleton->make('bank') != $bankModel)
+        {
             $this->assertFalse(false);
+        }
+        else
+        {
+            $this->assertTrue(true);
         }
      }
 }
