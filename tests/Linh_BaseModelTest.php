@@ -85,8 +85,8 @@ class BaseModelTest extends TestCase
      */
     public function testDeleteNgNull()
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid argument');
+        $this->expectException(ArgumentCountError::class);
+        $this->expectExceptionMessage('Too few argument');
 
         // $userModel = new UserModel();
         $factory = new FactoryPattern();

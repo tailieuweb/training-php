@@ -155,8 +155,8 @@ class Hung_UserModelTest extends TestCase
 
     public function testfindUserByIdNG_Null()
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid argument');
+        $this->expectException(ArgumentCountError::class);
+        $this->expectExceptionMessage('Too few argument');
 
         $userModel = UserModel::getInstance();
         $userModel->findUserById(null);
@@ -321,8 +321,8 @@ class Hung_UserModelTest extends TestCase
 
     public function testFindUserNG_Null()
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid argument');
+        $this->expectException(ArgumentCountError::class);
+        $this->expectExceptionMessage('Too few argument');
 
         $userModel = UserModel::getInstance();
 
@@ -509,8 +509,8 @@ class Hung_UserModelTest extends TestCase
      */
     public function testDeleteUserByIdNG_Null()
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid argument');
+        $this->expectException(ArgumentCountError::class);
+        $this->expectExceptionMessage('Too few argument');
 
         $userModel = UserModel::getInstance();
 
@@ -532,7 +532,7 @@ class Hung_UserModelTest extends TestCase
         $userModel = UserModel::getInstance();
 
         $userModel->startTransaction();
-        $userModel->deleteUserById(null);
+        $userModel->deleteUserById(false);
 
         $userModel->rollback();
     }
