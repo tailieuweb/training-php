@@ -412,30 +412,12 @@ class UserModelTest extends TestCase
         }
     }
 
-
-
-
-
     /**
      * Test case insertUser OK
      */
     public function testInsertUserOk()
     {
         $userModel = new UserModel();
-        $userId = 6;
-        $input['name'] = 'le';
-        $input['password']  = '1234';
-        $input['fullname'] = 'lenguyentan';
-        $input['email'] = 'tanle123@gmail.com';
-        $input['type'] = 'admin';
-        $userModel->insertUser($input);
-        $expected = $userModel->findUserById($userId);
-        $actual = $expected[4]['name']['password']['fullname']['email']['type'];
-        //var_dump($actual); die();
-        $this->assertEquals($input['name']['password']['fullname']['email']['type'], $actual);
-    }
-
-    /**
         $param = array(
             "id" => "",
             "name" => "user11",
@@ -444,9 +426,11 @@ class UserModelTest extends TestCase
             "type" => "user",
             "password" => "12345"
         );
+        $userModel->startTransaction();
         $actual = $userModel->insertUser($param);
         $expected = 1;
         $this->assertEquals($expected, $actual);
+        $userModel->rollback();
     }
 
    /**
@@ -460,7 +444,7 @@ class UserModelTest extends TestCase
         $input['fullname'] = 'nguyentanle';
         $input['email'] = 'tanle@gmail.com';
         $input['type'] = 'user';
-
+        $userModel->startTransaction();
         $user = $userModel->insertUser($input);
         $expected = $userModel->findUserById(6);
         if ($expected != null) {
@@ -468,6 +452,7 @@ class UserModelTest extends TestCase
         } else {
             $this->assertFalse(false);
         }
+        $userModel->rollback();
     }
     //-------------------------------
     /**
@@ -1127,11 +1112,12 @@ class UserModelTest extends TestCase
             "type" => "user",
             "password" => "12345"
         );
-
+        $userModel->startTransaction();
         $actual = $userModel->insertUser($param);
         $expected = 'error';
 
         $this->assertEquals($expected, $actual);
+        $userModel->rollback();
     }
 
     /**
@@ -1149,11 +1135,12 @@ class UserModelTest extends TestCase
             "type" => "user",
             "password" => "12345"
         );
-
+        $userModel->startTransaction();
         $actual = $userModel->insertUser($param);
         $expected = 'error';
 
         $this->assertEquals($expected, $actual);
+        $userModel->rollback();
     }
 
     /**
@@ -1171,11 +1158,12 @@ class UserModelTest extends TestCase
             "type" => "user",
             "password" => "12345"
         );
-
+        $userModel->startTransaction();
         $actual = $userModel->insertUser($param);
         $expected = 'error';
 
         $this->assertEquals($expected, $actual);
+        $userModel->rollback();
     }
 
     /**
@@ -1193,11 +1181,12 @@ class UserModelTest extends TestCase
             "type" => "user",
             "password" => "12345"
         );
-
+        $userModel->startTransaction();
         $actual = $userModel->insertUser($param);
         $expected = 'error';
 
         $this->assertEquals($expected, $actual);
+        $userModel->rollback();
     }
 
     /**
@@ -1215,11 +1204,12 @@ class UserModelTest extends TestCase
             "type" => null,
             "password" => "12345"
         );
-
+        $userModel->startTransaction();
         $actual = $userModel->insertUser($param);
         $expected = 'error';
 
         $this->assertEquals($expected, $actual);
+        $userModel->rollback();
     }
 
     /**
@@ -1237,11 +1227,12 @@ class UserModelTest extends TestCase
             "type" => "user",
             "password" => "12345"
         );
-
+        $userModel->startTransaction();
         $actual = $userModel->insertUser($param);
         $expected = 'error';
 
         $this->assertEquals($expected, $actual);
+        $userModel->rollback();
     }
 
     /**
@@ -1261,9 +1252,11 @@ class UserModelTest extends TestCase
             "type" => $object,
             "password" => $object
         );
+        $userModel->startTransaction();
         $actual = $userModel->insertUser($param);
         $expected = 'error';
 
         $this->assertEquals($expected, $actual);
+        $userModel->rollback();
     }
 }
