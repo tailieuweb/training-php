@@ -17,7 +17,7 @@ class Users_web extends Authenticate
      */
     protected $table = 'users_web';
     protected $fillable = [
-        'email', 'password',
+        'username', 'email', 'password',
     ];
 
     /**
@@ -28,4 +28,9 @@ class Users_web extends Authenticate
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+      //profile Models được gọi tương ứng với giá trị id của bảng Users_web 
+      public function profile(){
+        return $this->hasOne(Profile_User::class,'user_id');
+    }
 }

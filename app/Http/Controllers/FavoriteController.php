@@ -14,89 +14,69 @@ class FavoriteController extends Controller
         // $admin_id = Session::get('id');
         // $admin_name = DB::table('users')->where('id', $admin_id)->first();
         $favorite = DB::table("favorite")
-             ->join('hotel', 'hotel.hotel_id', '=', 'favorite.hotel_id')
+            ->join('hotel', 'hotel.hotel_id', '=', 'favorite.hotel_id')
+            ->join('users_web', 'users_web.id', '=', 'favorite.user_id')
             // ->join('manufactures', 'manufactures.id', '=', 'products.manu_id')
-             ->select('favorite.*','hotel.name');
+            ->select('favorite.*','hotel.*', 'users_web.*');
         $favorite = $favorite->orderBy("favorite.favorite_id", "Desc");
 
         $favorite = $favorite->paginate(15);
         return view('backend.layouts.Favorite.AllFavorite')->with('favorite', $favorite);
     }
-    // public function AddFavorite(Request $request)
-    // {
-    //     // $this->AuthLogin();
-    //     // $admin_id = Session::get('id');
-    //     // $admin_name = DB::table('users')->where('id', $admin_id)->first();
-    //     // $manu =  DB::table("manufactures")->orderBy("id", "desc")->get();
-    //     // $type =  DB::table("protypes")->orderBy("id", "desc")->get();
-    //     // $gender =  DB::table("genders")->orderBy("id", "desc")->get();
-    //     return view('backend.layouts.Categories.addCategories');
-    // }
-    // public function getSaveFavorite(Request $request)
-    // {
-    //     // $this->AuthLogin();
-    //     // $admin_id = Session::get('id');
-    //     // $admin_name = DB::table('users')->where('id', $admin_id)->first();
-    //     $data = array();
-    //     $data['name'] = $request->name;
-        
-    //     // $data['price'] = $request->price;
-    //     // $data['type_id'] = $request->type;
-    //     // $data['manu_id'] = $request->manu;
-    //     // $data['description'] = $request->description;
-    //     // $data['sale'] = $request->sale;
-    //     // $data['size'] = $request->size;
-    //     // $data['gender'] = $request->gender;
-       
-        
-    //     DB::table('categories')->insert($data);
-        
-    //     return Redirect::to('/categories')->with(["type" => "success", "flash_message" => "Thêm thành công!"]);;
-    // }
-    // public function EditFavorite($id)
-    // {
-    //     // $this->AuthLogin();
-    //     // $admin_id = Session::get('id');
-    //     // $admin_name = DB::table('users')->where('id', $admin_id)->first();
-    //     // $manu =  DB::table("manufactures")->orderBy("id", "desc")->get();
-    //     // $type =  DB::table("protypes")->orderBy("id", "desc")->get();
-    //     // $gender =  DB::table("genders")->orderBy("id", "desc")->get();
-    //     $id = substr($id,9);
-    //     $categories =  DB::table("categories")->where('id', $id)->get();
-    //     return view('backend.layouts.Categories.editCategories')->with('categories', $categories);
-    // }
-    // public function UpdateFavorite(Request $request, $id)
-    // {
-    //     // $this->AuthLogin();
-    //     // $admin_id = Session::get('id');
-    //     // $admin_name = DB::table('users')->where('id', $admin_id)->first();
-    //     $data = array();
-    //     $data['name'] = $request->name;
-       
-    //     // $data['price'] = $request->price;
-    //     // $data['type_id'] = $request->type;
-    //     // $data['manu_id'] = $request->manu;
-    //     // $data['description'] = $request->description;
-    //     // $data['sale'] = $request->sale;
-    //     // $data['size'] = $request->size;
-    //     // $data['gender'] = $request->gender;
-       
-        
-    //     DB::table('categories')->where('id', $id)->update($data);
-        
-    //     return Redirect::to('/categories')->with(["type" => "success", "flash_message" => "Cập Nhập thành công!"]);
-    // }
-    public function DeleteFavorite($id)
-    {
-        // $this->AuthLogin();
-        // $admin_id = Session::get('id');
-        // $admin_name = DB::table('users')->where('id', $admin_id)->first();
-        $key = substr($id,0,9);
-        $id = substr($id,9);
-        
-        DB::table('favorite')->where('favorite_id', $id)->delete();
+    //Add new favorite of user
+    public function createFavorite(){
+        $hotel = DB::table('hotel')
+                ->select('hotel.*')->get();
+        $user = DB::table('users_web')
+                ->select('users_web.*')->get();
+                
+        return view('backend.layouts.Favorite.AddFavorite', ['user' => $user, 'hotel' => $hotel]);
 
-        
-        return Redirect::to('/favorite')->with([ "message" => "Delete thành công!"]);
+    }
+    //Insert the hotel in table favorite for user
+    public function insertFavorite(Request $request){
+        $data = array();
+        $data['hotel_id'] = $request->hotel_id;
+        $data['user_id'] = $request->user_id;
+        $data['date_created'] = date("Y-m-d");
+        DB::table('favorite')->insert($data);
+        return Redirect::to('/admin/favorite');
+    }
+
+    //Delete the favorite
+    public function deleteFavorite($id)
+    {
+        // $key = substr($id,0,9);
+        $id = substr($id,9);
+        DB::table('favorite')->where('favorite_id', $id)->delete();
+        return Redirect::to('/admin/favorite');
+        // return $this->getAllFavorite();
+    }
+    //Get update favorite
+    public function getUpdateFavorite($id){
+        $id = substr($id,9);
+        $favorite = DB::table('favorite')
+                    ->select('favorite.*')
+                    ->where('favorite_id', $id)->get();
+        $hotel = DB::table('hotel')
+                ->select('hotel.*')->get();
+        $user = DB::table('users_web')
+                ->select('users_web.*')->get();
+        return view('backend.layouts.Favorite.UpdateFavorite', ['user' => $user, 'hotel' => $hotel, 'favorite' => $favorite]);
+    }
+    //Post update favorite
+    public function postUpdateFavorite($id, Request $request){
+        $favorite = DB::table('favorite')
+                    ->select('favorite.*')
+                    ->where('favorite_id', $id)->get();
+        if($request->version == $favorite[0]->favorite_version){
+            $data = array();
+            $data['user_id'] = $request->user_id;
+            $data['hotel_id'] = $request->hotel_id;
+            $data['date_created'] = date('Y-m-d');
+            $data['favorite_version'] =  $favorite[0]->favorite_version + 1;
+            DB::table('favorite')->where('favorite_id', $id)->update($data);
+        }
+        return Redirect::to('/admin/favorite');
     }
 }
