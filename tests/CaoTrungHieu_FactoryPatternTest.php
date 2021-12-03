@@ -1,5 +1,4 @@
 <?php
-
 use PHPUnit\Framework\TestCase;
 
 class CaoTrungHieu_FactoryPatternTest extends TestCase

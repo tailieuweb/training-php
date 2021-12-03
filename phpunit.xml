@@ -11,7 +11,6 @@
             <file>./Tests/CaoTrungHieu_UserRepositoryTest.php</file>
             <file>./Tests/CaoTrungHieu_BankModelTest.php</file>
             <file>./Tests/CaoTrungHieu_FactoryPatternTest.php</file>
-
         </testsuite>
     </testsuites>   
     <filter>
