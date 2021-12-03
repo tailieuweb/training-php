@@ -7,18 +7,9 @@ $id = NULL;
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
-}
-
-
-if (!empty($_POST['submit'])) {
-
-    if (!empty($id)) {
-        $userModel->updateUser($_POST);
-    } else {
-        $userModel->insertUser($_POST);
-    }
-    header('location: list_users.php');
+    $id_start = substr($id,3);
+    $id_end=substr($id_start,0,-3);
+    $user = $userModel->findUserById($id_end);//Update existing user
 }
 
 ?>
@@ -44,12 +35,18 @@ if (!empty($_POST['submit'])) {
             </div>
             <div class="form-group">
                 <label for="password">Fullname</label>
-                <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
+
+                <span><?php if (!empty($user[0]['fullname'])) echo $user[0]['fullname'] ?></span>
             </div>
             <div class="form-group">
                 <label for="password">Email</label>
-                <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
+                <span><?php if (!empty($user[0]['email'])) echo $user[0]['email'] ?></span>
             </div>
+            <div class="form-group">
+                <label for="password">Type</label>
+
+                <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
+            </div>          
         </form>
     <?php } else { ?>
         <div class="alert alert-success" role="alert">
