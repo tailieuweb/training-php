@@ -15,6 +15,7 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make("bank");
+        $bankModel->startTransaction();
         $expected = [
             [
                 'id' => '1',
@@ -29,6 +30,7 @@ class BankModelTest extends TestCase
             $actual,
             "Expected and actual not equals"
         );
+        $bankModel->rollback();
     }
 
     /*
@@ -42,12 +44,14 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make("bank");
+        $bankModel->startTransaction();
 
         $actual = $bankModel->find(-1);
         $this->assertEmpty(
             $actual,
             "actual is not empty"
         );
+        $bankModel->rollback();
     }
 
     /*
@@ -61,6 +65,7 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make("bank");
+        $bankModel->startTransaction();
         $expected = [
             [
                 'id' => '1',
@@ -75,6 +80,7 @@ class BankModelTest extends TestCase
             $actual,
             "Expected and actual not equals"
         );
+        $bankModel->rollback();
     }
 
     /*
@@ -88,6 +94,7 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make("bank");
+        $bankModel->startTransaction();
         $id = new Bank(1, 1, 11);
 
         $actual = $bankModel->find($id);
@@ -95,6 +102,7 @@ class BankModelTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $bankModel->rollback();
     }
 
     /*
@@ -108,6 +116,7 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make("bank");
+        $bankModel->startTransaction();
         $id = null;
 
         $actual = $bankModel->find($id);
@@ -115,6 +124,7 @@ class BankModelTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $bankModel->rollback();
     }
 
     /*
@@ -128,6 +138,7 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make("bank");
+        $bankModel->startTransaction();
         $id = ["id" => 1];
 
         $actual = $bankModel->find($id);
@@ -135,6 +146,7 @@ class BankModelTest extends TestCase
             $actual,
             "actual is empty"
         );
+        $bankModel->rollback();
     }
 
     /*
@@ -148,12 +160,14 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make("bank");
+        $bankModel->startTransaction();
 
         $actual = $bankModel->find(100);
         $this->assertEmpty(
             $actual,
             "actual is empty"
         );
+        $bankModel->rollback();
     }
 
     /*
@@ -169,6 +183,7 @@ class BankModelTest extends TestCase
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
         $bankModel = $factory->make("bank");
+        $bankModel->startTransaction();
 
 
         $id = '1";TRUNCATE user;##';
@@ -180,6 +195,7 @@ class BankModelTest extends TestCase
             $actual[0],
             "actual is empty"
         );
+        $bankModel->rollback();
     }
 
 
@@ -194,6 +210,7 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make("bank");
+        $bankModel->startTransaction();
         $expected = [
             [
                 'id' => '1',
@@ -208,6 +225,7 @@ class BankModelTest extends TestCase
             $actual,
             "Expected and actual not equals"
         );
+        $bankModel->rollback();
     }
 
     /*
@@ -221,12 +239,14 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make("bank");
+        $bankModel->startTransaction();
 
         $actual = $bankModel->findByUserId(-1);
         $this->assertEmpty(
             $actual,
             "actual is not empty"
         );
+        $bankModel->rollback();
     }
 
     /*
@@ -239,7 +259,8 @@ class BankModelTest extends TestCase
     public function testFindBankInfoByUserId_WithInputIs_String()
     {
         $factory = new FactoryPattern();
-        $bankModel = $factory->make("bank");
+        $bankModel = $factory->make("bank");  
+        $bankModel->startTransaction();
         $expected = [
             [
                 'id' => '1',
@@ -254,6 +275,7 @@ class BankModelTest extends TestCase
             $actual,
             "Expected and actual not equals"
         );
+        $bankModel->rollback();
     }
 
     /*
@@ -267,6 +289,7 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make("bank");
+        $bankModel->startTransaction();
         $id = new Bank(1, 1, 11);
 
         $actual = $bankModel->findByUserId($id);
@@ -274,6 +297,7 @@ class BankModelTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $bankModel->rollback();
     }
 
     /*
@@ -287,6 +311,7 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make("bank");
+        $bankModel->startTransaction();
         $id = null;
 
         $actual = $bankModel->findByUserId($id);
@@ -294,6 +319,7 @@ class BankModelTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $bankModel->rollback();
     }
 
     /*
@@ -307,6 +333,7 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make("bank");
+        $bankModel->startTransaction();
         $id = ["id" => 1];
 
         $actual = $bankModel->findByUserId($id);
@@ -314,6 +341,7 @@ class BankModelTest extends TestCase
             $actual,
             "actual is empty"
         );
+        $bankModel->rollback();
     }
 
     /*
@@ -327,12 +355,14 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make("bank");
+        $bankModel->startTransaction();
 
         $actual = $bankModel->findByUserId(100);
         $this->assertEmpty(
             $actual,
             "actual is empty"
         );
+        $bankModel->rollback();
     }
 
     /*
@@ -348,6 +378,7 @@ class BankModelTest extends TestCase
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
         $bankModel = $factory->make("bank");
+        $bankModel->startTransaction();
 
 
         $id = '1";TRUNCATE user;##';
@@ -359,6 +390,7 @@ class BankModelTest extends TestCase
             $actual[0],
             "actual is empty"
         );
+        $bankModel->rollback();
     }
 
     /////////////////////////// Test getAllBanks//////////////////////////
@@ -370,6 +402,7 @@ class BankModelTest extends TestCase
     
     public function testGetAllBanksArrayListOne_Ok() {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $expected = [
             ["id" => "1", 
             "user_id" => "1", 
@@ -378,6 +411,7 @@ class BankModelTest extends TestCase
 
         $actual = $bankModel->getAll();
         $this->assertEquals( $expected[0], $actual[0]);
+        $bankModel->rollback();
     }
       /**
     *function testgetBanksAcount_Ok()
@@ -387,11 +421,13 @@ class BankModelTest extends TestCase
     public function testgetBanksAcount_Ok()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
 
         $countAr = 4;
         $actual = $bankModel->getAll();
         // var_dump($actual);die();
         $this->assertEquals($countAr, count($actual));
+        $bankModel->rollback();
     }
    /**
     *function testGetAllBanksArrayListEnd_Ok()
@@ -399,6 +435,7 @@ class BankModelTest extends TestCase
      */
     public function testGetAllBanksArrayListEnd_Ok() {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $expected = [
             ["id" => "105", 
             "user_id" => "2", 
@@ -408,6 +445,7 @@ class BankModelTest extends TestCase
         $actual = $bankModel->getAll();
         // var_dump($actual);die();
         $this->assertEquals( $expected[0], $actual[3]);
+        $bankModel->rollback();
     }
 
  /////////////////////////// Test InsertbanksInfo//////////////////////////
@@ -420,6 +458,7 @@ class BankModelTest extends TestCase
     public function testInsertBankInfo_Invalid_Ok()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $input = array(
             'user_id' => "2",
             'cost' => "0",
@@ -429,6 +468,7 @@ class BankModelTest extends TestCase
         //Actual
         $actual = $bankModel->findBankInfoById(2);
         $this->assertEquals($actual[0]['cost'], $input['cost']);
+        $bankModel->rollback();
     }
        /**
      *  function testInsertBankInfoByUser_id_Null_Ok()
@@ -438,6 +478,7 @@ class BankModelTest extends TestCase
     public function testInsertBankInfoByUser_id_Null_Ok()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $input = array(
             'user_id' => null,
             'cost' => "1111",
@@ -448,6 +489,7 @@ class BankModelTest extends TestCase
         $actual = $bankModel->findBankInfoById(5);
         var_dump($actual);
         ($actual[0]['user_id']!=null ) ? $this->assertTrue(true) : $this->assertTrue(false);
+        $bankModel->rollback();
     }
     /**
     *function testInsertBankInfoUer_id_character_Ok()
@@ -457,6 +499,7 @@ class BankModelTest extends TestCase
         public function testInsertBankInfoUer_id_character_Ok()
         {
             $bankModel = new BankModel();
+            $bankModel->startTransaction();
             $input = array(
                 'user_id' => "Viet",
                 'cost' => "1000",
@@ -467,6 +510,7 @@ class BankModelTest extends TestCase
             // var_dump($actual); die;
             $actual = $bankModel->findBankInfoById(3);
             ($actual[0]['user_id'] != "Viet") ? $this->assertTrue(true) : $this->assertTrue(false);
+            $bankModel->rollback();
         }
        /**
     *function testInsertBanksInfoCostNull_Ok()
@@ -477,6 +521,7 @@ class BankModelTest extends TestCase
     public function testInsertBanksInfoCostNull_Ok()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $input = array(
             'user_id' => 1,
             'cost' => null,
@@ -487,6 +532,7 @@ class BankModelTest extends TestCase
         $actual = $bankModel->findBankInfoById(3);
           //Actual
         ($actual[0]['cost'] != null) ? $this->assertTrue(true) : $this->assertTrue(false);
+        $bankModel->rollback();
     }
     /**
     *function testInsertBankInfoCostCharacter_Ok()
@@ -496,6 +542,7 @@ class BankModelTest extends TestCase
         public function testInsertBankInfoCostCharacter_Ok()
         {
             $bankModel = new BankModel();
+            $bankModel->startTransaction();
             $input = array(
                 'user_id' => 1,
                 'cost' => "viet",
@@ -506,6 +553,7 @@ class BankModelTest extends TestCase
             $actual = $bankModel->findBankInfoById(3);
             ($actual[0]['cost'] != "viet") ? $this->assertTrue(true) : $this->assertTrue(false);
         }
+        $bankModel->rollback();
     /**
     *function testInsertBankInfoUser_id_ArrayList_Ok()
     * Author: Quoc Viet
@@ -514,6 +562,7 @@ class BankModelTest extends TestCase
     public function testInsertBankInfoUser_id_ArrayList_Ok()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $input = array(
             'user_id' => ["viet", "cute","nam"],
             'cost' => "meo",
@@ -524,6 +573,7 @@ class BankModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
+        $bankModel->rollback();
     }
      /**
     *function testInsertBankInfoCost_ArrayList_Ok()
@@ -533,6 +583,7 @@ class BankModelTest extends TestCase
     public function testInsertBankInfoCost_ArrayList_Ok()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $input = array(
             'user_id' => 1,
             'cost' => ["viet", "cute"],
@@ -544,6 +595,7 @@ class BankModelTest extends TestCase
            
             $this->assertTrue(true);
         }
+        $bankModel->rollback();
     }
      /**
     *function testInsertBanksInfoUser_idBy_Object_Ok()
@@ -553,6 +605,7 @@ class BankModelTest extends TestCase
     public function testInsertBanksInfoUser_idBy_Object_Ok()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $input = array(
             'user_id' => $bankModel,
             'cost' => 2001,
@@ -564,6 +617,7 @@ class BankModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
+        $bankModel->rollback();
     }
     /**
     *function testInsertBanksInfoUseridBy_Object_Ok()
@@ -573,6 +627,7 @@ class BankModelTest extends TestCase
        public function testInsertBanksInfoCostBy_Object_Ok()
        {
            $bankModel = new BankModel();
+           $bankModel->startTransaction();
            $input = array(
                'user_id' => 1,
                'cost' => $bankModel,
@@ -584,6 +639,7 @@ class BankModelTest extends TestCase
            } catch (Throwable $e) {
                $this->assertTrue(true);
            }
+           $bankModel->rollback();
        }
     /**
     *function testInsertBanksInfoUserid_CostBy_Object_Ok()
@@ -593,6 +649,7 @@ class BankModelTest extends TestCase
  public function testInsertBanksInfoUserid_CostBy_Object_Ok()
  {
      $bankModel = new BankModel();
+     $bankModel->startTransaction();
      $input = array(
          'user_id' => $bankModel,
          'cost' => $bankModel,
@@ -604,6 +661,7 @@ class BankModelTest extends TestCase
      } catch (Throwable $e) {
          $this->assertTrue(true);
      }
+     $bankModel->rollback();
  }
     /**
     *function testInsertBanksInfoUserid_CostBy_Object_Ok()
@@ -613,6 +671,7 @@ class BankModelTest extends TestCase
  public function testInsertBanksInfo_double_Ok()
  {
      $bankModel = new BankModel();
+     $bankModel->startTransaction();
      $input = array(
          'user_id' => 1.3,
          'cost' => 1.3,
@@ -624,6 +683,7 @@ class BankModelTest extends TestCase
      } catch (Throwable $e) {
          $this->assertTrue(false);
      }
+     $bankModel->rollback();
  }
 
         
@@ -640,12 +700,14 @@ class BankModelTest extends TestCase
     public function testgetBaksByKeyWord_count_Ok()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $params = [];
         $params['keyword'] = '1';
         $countAr = 1;
         $actual = $bankModel->getBanks($params);
         // var_dump($actual);die();
         $this->assertEquals($countAr, count($actual));
+        $bankModel->rollback();
     }
 
 
@@ -658,7 +720,7 @@ class BankModelTest extends TestCase
     public function testgetBanksInfoParamNull_Ok()
     {
         $bankModel = new BankModel();
-
+        $bankModel->startTransaction();
         $actual = $bankModel->getBanks();
 
         if ($actual != null) {
@@ -666,6 +728,7 @@ class BankModelTest extends TestCase
         } else {
             $this->assertTrue(false);
         }
+        $bankModel->rollback();
     }
     
     /**
@@ -675,6 +738,7 @@ class BankModelTest extends TestCase
     public function testgetBanksParam_OK()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $keyword = array(
             'keyword' => '4'
         );
@@ -684,6 +748,7 @@ class BankModelTest extends TestCase
         } else {
             $this->assertTrue(false);
         }
+        $bankModel->rollback();
     }
       /**
     *function testgetBanksParamInfo_Object_OK() 
@@ -693,6 +758,7 @@ class BankModelTest extends TestCase
     public function testgetBanksParamInfo_Object_OK()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $actual = null;
 
         $keyword = array(
@@ -704,11 +770,13 @@ class BankModelTest extends TestCase
             $excute = false;
         }
         $this->assertEquals($excute, $actual);
+        $bankModel->rollback();
     }
     //test getbanks truyen vao arraylist
     public function testgetBanksParamInfoArrayList_NotOK()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $actual = null;
 
         $keyword = array(
@@ -720,11 +788,13 @@ class BankModelTest extends TestCase
             $excute = false;
         }
         $this->assertEquals($excute, $actual);
+        $bankModel->rollback();
     }
     //test getbanks truyen vao chuoi rong;
     public function testgetBanksParamInfoCharacter_Empty_NotOK()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $actual = null;
 
         $keyword = array(
@@ -736,6 +806,7 @@ class BankModelTest extends TestCase
             $this->assertTrue(true);
         }
         $this->assertTrue(true);
+        $bankModel->rollback();
        
     }
       /**
@@ -746,12 +817,14 @@ class BankModelTest extends TestCase
     public function testgetBanksInfoParamDouble_notOK()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $keyword = array(
             'keyword' => 1.4,
         );
         $actual = $bankModel->getBanks($keyword);
         $excute = [];
         $this->assertEquals($excute, $actual);
+        $bankModel->rollback();
     }
 // //////////////////////////////////////////////////Update BanksInfo//////////////////////////////////
 
@@ -763,6 +836,7 @@ class BankModelTest extends TestCase
     public function testUpdateBanksInfo_Ok()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $input = array(
             'id'=>1,
             'user_id' => 1,
@@ -770,6 +844,7 @@ class BankModelTest extends TestCase
         );
         $actual = $bankModel->updateBankInfo($input);
         $this->assertTrue($actual);
+        $bankModel->rollback();
     }
     /**
     *function testUpdateBanksInfoCostEmpty_notOk()
@@ -779,6 +854,7 @@ class BankModelTest extends TestCase
     public function testUpdateBanksInfoCostEmpty_notOk()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $input = array(
             'id'=>1,
             'user_id' => 1,
@@ -786,6 +862,7 @@ class BankModelTest extends TestCase
         );
         $actual = $bankModel->updateBankInfo($input);
         $this->assertTrue($actual);
+        $bankModel->rollback();
     }
     /**
     *function testUpdateBanksInfoCostString_notOk()
@@ -795,6 +872,7 @@ class BankModelTest extends TestCase
   public function testUpdateBanksInfoCostString_notOk()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $input = array(
             'id'=>1,
             'user_id' => 1,
@@ -802,6 +880,7 @@ class BankModelTest extends TestCase
         );
         $actual = $bankModel->updateBankInfo($input);
         $this->assertTrue($actual);
+        $bankModel->rollback();
     }
       /**
     *function testUpdateBanksInfoCostNull_notOk()
@@ -811,6 +890,7 @@ class BankModelTest extends TestCase
     public function testUpdateBanksInfoCostNull_notOk()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $input = array(
             'id'=>2,
             'user_id' =>null,
@@ -818,6 +898,7 @@ class BankModelTest extends TestCase
         );
         $actual = $bankModel->updateBankInfo($input);
         $this->assertTrue($actual);
+        $bankModel->rollback();
     }
     /**
     *function testUpdateBanksInfoIdEmpty_notOk()
@@ -827,6 +908,7 @@ class BankModelTest extends TestCase
     public function testUpdateBanksInfoIdEmpty_notOk()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $input = [
             'id' => '',
             'user_id' => '10',
@@ -834,6 +916,7 @@ class BankModelTest extends TestCase
             ];
         $actual = $bankModel->updateBankInfo($input);
         $this->assertEquals(false, $actual);
+        $bankModel->rollback();
     }
      /**
     *function testUpdateBanksInfoIdNull_Ok()
@@ -843,6 +926,7 @@ class BankModelTest extends TestCase
     public function testUpdateBanksInfoIdNull_Ok()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $input = [
             'id' => null,
             'user_id' => '10',
@@ -850,6 +934,7 @@ class BankModelTest extends TestCase
             ];
         $actual = $bankModel->updateBankInfo($input);
         $this->assertEquals(false, $actual);
+        $bankModel->rollback();
     }
     /**
     *function testUpdateBanksInfoIdCharacter()
@@ -859,6 +944,7 @@ class BankModelTest extends TestCase
     public function testUpdateBanksInfoIdCharacter()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $input = [
             'id' => 'viet',
             'user_id' => '10',
@@ -866,6 +952,7 @@ class BankModelTest extends TestCase
             ];
         $actual = $bankModel->updateBankInfo($input);
         $this->assertEquals(false, $actual);
+        $bankModel->rollback();
     }
     
 //     //////////////////////////////////////////// Delete BanksInfo//////////////
@@ -878,9 +965,11 @@ class BankModelTest extends TestCase
     public function testDeleteBanksInfo_Ok()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
          $id=5;
         $actual = $bankModel->deleteBalanceById($id);
         $this->assertTrue($actual);
+        $bankModel->rollback();
     }
      /**
     *function testDeleteBanksInfoIdString_Ok()
@@ -890,9 +979,11 @@ class BankModelTest extends TestCase
     public function testDeleteBanksInfoIdString_Ok()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
          $id="viet cute";
         $actual = $bankModel->deleteBalanceById($id);
         $this->assertTrue(true,$actual);
+        $bankModel->rollback();
     }
       /**
     *function testDeleteBanksInfoIdNull_Ok()
@@ -902,9 +993,11 @@ class BankModelTest extends TestCase
     public function testDeleteBanksInfoIdNull_Ok()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
          $id=null;
         $actual = $bankModel->deleteBalanceById($id);
         $this->assertTrue(true,$actual);
+        $bankModel->rollback();
     }
        /**
     *function testDeleteBanksInfoCharacterEmpty_Ok()
@@ -914,9 +1007,11 @@ class BankModelTest extends TestCase
     public function testDeleteBanksInfoCharacterEmpty_Ok()
     {
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
          $id='';
         $actual = $bankModel->deleteBalanceById($id);
         $this->assertTrue(true,$actual);
+        $bankModel->rollback();
     }
        /**
     *function testDeleteBanksInfoObject_Ok()
@@ -925,6 +1020,7 @@ class BankModelTest extends TestCase
     //test delete banks id character empty
     public function testDeleteBanksInfoObject_Ok()
     {  $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $id = $bankModel;
         //Execute test
         try {
@@ -932,6 +1028,7 @@ class BankModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
+        $bankModel->rollback();
     }
           /**
     *function testDeleteBanksInfoDouble_notOk()
@@ -940,6 +1037,7 @@ class BankModelTest extends TestCase
     //test delete banks id double
     public function testDeleteBanksInfoDouble_notOk()
     {  $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $id = 1.2;
         //Execute test
         try {
@@ -947,6 +1045,7 @@ class BankModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
+        $bankModel->rollback();
     }
        /**
     *function testDeleteBanksInfo_character_Special_Ok()
@@ -955,6 +1054,7 @@ class BankModelTest extends TestCase
     public function testDeleteBanksInfo_character_Special_Ok()
     { 
          $bankModel = new BankModel();
+         $bankModel->startTransaction();
         $id ='#$%^$^"';
         //Execute test
         try {
@@ -962,6 +1062,7 @@ class BankModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
+        $bankModel->rollback();
     }
               /**
     *function testDeleteBanksInfoDouble_notOk()
@@ -970,6 +1071,7 @@ class BankModelTest extends TestCase
     //test delete banks id character empty
     public function testDeleteBanksInfoArrayList_notOk()
     {  $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $id = ["viet"];
         //Execute test
         try {
@@ -977,14 +1079,16 @@ class BankModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
+        $bankModel->rollback();
     }
-                 /**
+                /**
     *function testDeleteBanksInfoDouble_notOk()
     * Author: Quoc Viet
      */
     //test delete banks id character empty
     public function testDeleteBanksInfoScript_notOk()
     {  $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $id = "<script>1</script>";
         //Execute test
         try {
@@ -992,6 +1096,7 @@ class BankModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
+        $bankModel->rollback();
     }
 
 }

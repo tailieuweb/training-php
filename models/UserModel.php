@@ -72,20 +72,6 @@ class UserModel extends BaseModel
     {
 
         $sql = 'UPDATE users SET 
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name'])  . '", 
-                 fullname="' . $input['fullname'] . '",
-                 email="' . $input['email'] . '",
-                 password="' . $input['password'] . '",
-                 type="' . $input['type'] . '"
-                WHERE id = ' . $input['id'];
-
-        $user = $this->update($sql);
-        return $user;
-    }
-    public function updateUser($input)
-    {
-
-        $sql = 'UPDATE users SET 
                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '", 
                 fullname = "' . $input['fullname'] . '", 
                 email = "' . $input['email'] . '", 

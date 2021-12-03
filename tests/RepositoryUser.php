@@ -16,6 +16,7 @@ class RepositoryUserTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
+        $userModel->startTransaction();
         $expectedAfterLength = count($userModel->read());
 
         $input = [];
@@ -45,6 +46,7 @@ class RepositoryUserTest extends TestCase
                 "expected length before and after insert is not equal"
             );
         }
+        $userModel->rollback();
     }
 
 
@@ -59,6 +61,7 @@ class RepositoryUserTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
+        $userModel->startTransaction();
 
         $input = [];
         $input["name"] = "testinsert";
@@ -76,6 +79,7 @@ class RepositoryUserTest extends TestCase
             $actual,
             "expected and actual not equal"
         );
+        $userModel->rollback();
     }
     
     /*
@@ -89,6 +93,7 @@ class RepositoryUserTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
+        $userModel->startTransaction();
 
         $input = [];
         $input["name"] = ["name" => "test2"];
@@ -103,6 +108,7 @@ class RepositoryUserTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $userModel->rollback();
     }
 
      /*
@@ -116,6 +122,7 @@ class RepositoryUserTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
+        $userModel->startTransaction();
 
         $input = [];
         $input["name"] = new User("testnsert", "password");
@@ -130,6 +137,7 @@ class RepositoryUserTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $userModel->rollback();
     }
 
      /*
@@ -143,6 +151,7 @@ class RepositoryUserTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
+        $userModel->startTransaction();
 
         $input = [];
         $input["name"] = null;
@@ -157,6 +166,7 @@ class RepositoryUserTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $userModel->rollback();
     }
 
     /*
@@ -170,6 +180,7 @@ class RepositoryUserTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
+        $userModel->startTransaction();
 
         $input = [];
         $input["name"] = "testinsert";
@@ -184,6 +195,7 @@ class RepositoryUserTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $userModel->rollback();
     }
 
     /*
@@ -197,6 +209,7 @@ class RepositoryUserTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
+        $userModel->startTransaction();
 
         $input = [];
         $input["name"] = "testinsert";
@@ -211,6 +224,7 @@ class RepositoryUserTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $userModel->rollback();
     }
 
     /*
@@ -224,6 +238,7 @@ class RepositoryUserTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
+        $userModel->startTransaction();
 
         $input = [];
         $input["name"] = "testinsert";
@@ -238,6 +253,7 @@ class RepositoryUserTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $userModel->rollback();
     }
 
      /*
@@ -251,6 +267,7 @@ class RepositoryUserTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
+        $userModel->startTransaction();
 
         $input = [];
         $input["name"] = "testinsert";
@@ -265,6 +282,7 @@ class RepositoryUserTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $userModel->rollback();
     }
 
      /*
@@ -278,6 +296,7 @@ class RepositoryUserTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
+        $userModel->startTransaction();
 
         $input = [];
         $input["name"] = "testinsert";
@@ -292,6 +311,7 @@ class RepositoryUserTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $userModel->rollback();
     }
 
      /*
@@ -305,6 +325,7 @@ class RepositoryUserTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
+        $userModel->startTransaction();
 
         $input = [];
         $input["name"] = "testinsert";
@@ -319,6 +340,7 @@ class RepositoryUserTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $userModel->rollback();
     }
 
      /*
@@ -332,6 +354,7 @@ class RepositoryUserTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
+        $userModel->startTransaction();
 
         $input = [];
         $input["name"] = "testinsert";
@@ -346,6 +369,7 @@ class RepositoryUserTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $userModel->rollback();
     }
 
       /*
@@ -359,6 +383,7 @@ class RepositoryUserTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
+        $userModel->startTransaction();
 
         $input = [];
         $input["name"] = "testinsert";
@@ -373,6 +398,7 @@ class RepositoryUserTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $userModel->rollback();
     }
 
       /*
@@ -386,6 +412,7 @@ class RepositoryUserTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
+        $userModel->startTransaction();
 
         $input = [];
         $input["name"] = "testinsert";
@@ -400,6 +427,7 @@ class RepositoryUserTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $userModel->rollback();
     }
 
        /*
@@ -413,6 +441,7 @@ class RepositoryUserTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
+        $userModel->startTransaction();
 
         $input = [];
         $input["name"] = "testinsert";
@@ -427,6 +456,7 @@ class RepositoryUserTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $userModel->rollback();
     }
 
        /*
@@ -440,6 +470,7 @@ class RepositoryUserTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
+        $userModel->startTransaction();
 
         $input = [];
         $input["name"] = "testinsert";
@@ -454,6 +485,7 @@ class RepositoryUserTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $userModel->rollback();
     }
 
        /*
@@ -467,6 +499,7 @@ class RepositoryUserTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
+        $userModel->startTransaction();
 
         $input = [];
         $input["name"] = "testinsert";
@@ -481,5 +514,6 @@ class RepositoryUserTest extends TestCase
             $actual,
             "actual is not empty"
         );
+        $userModel->rollback();
     }
 }

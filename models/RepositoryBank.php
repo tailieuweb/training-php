@@ -34,5 +34,12 @@ class RepositoryBank implements RepositoryInterface{
     public function findByUserId($user_id) {
         return self::$bankModel->findBankInfoByUserID($user_id);
     }
+    public function rollback() {
+        return self::$bankModel->rollback();
+    }
+    public function startTransaction(){
+       return self::$bankModel->startTransaction();
+    }
+
 }
 

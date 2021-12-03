@@ -34,5 +34,11 @@ class RepositoryUser implements RepositoryInterface{
     public function auth($userName, $password) {
         return self::$userModel->auth($userName, $password);
     }
+    public function rollback() {
+        return self::$userModel->rollback();
+    }
+    public function startTransaction(){
+        return self::$userModel->startTransaction();
+     }
 }
 
