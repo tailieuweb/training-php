@@ -3,7 +3,7 @@
 use phpDocumentor\Reflection\Types\Null_;
 use PHPUnit\Framework\TestCase;
 
-class UserModelTest extends TestCase
+class NguyenKhacDanh_UserModelTest extends TestCase
 {
     /**
      * Test DeleteUserById Function in UserModel - 'Danh' do this

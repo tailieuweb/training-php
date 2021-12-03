@@ -13,6 +13,12 @@
             <file>./Tests/VoThanhDat_BankModelTest.php</file>
             <file>./Tests/VoThanhDat_UserModelTest.php</file>
             <file>./Tests/VoThanhDat_UserRepositoryTest.php</file>
+            <file>./Tests/TranVanLap_UserModelTest.php</file>
+            <file>./Tests/TranVanLap_BankModelTest.php</file>
+            <file>./Tests/CaoTrungHieu_UserModelTest.php</file>
+            <file>./Tests/CaoTrungHieu_UserRepositoryTest.php</file>
+            <file>./Tests/CaoTrungHieu_BankModelTest.php</file>
+            <file>./Tests/CaoTrungHieu_FactoryPatternTest.php</file>
         </testsuite>
     </testsuites>   
     <filter>
