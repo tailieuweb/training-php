@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 use App\Models\Users_web;
 use App\Models\User;
 use App\Models\Profile_User;
@@ -53,7 +55,7 @@ class FrontendController extends Controller
     public function getProfile()
     {
         //tìm và lấy ra giá trị thuộc user_id tương ứng trong bảng Profile_User
-        $userProfile = Profile_User::where('user_id',Auth::user()->id)->first();
+        $userProfile = Profile_User::whereRaw('user_id = ?',Auth::user()->id)->first();
         //neu gia tri do khong ton tai thì sẽ đặt một giá trị null tương ứng
         if($userProfile == null){
             $profile = new Profile_User();
@@ -69,20 +71,27 @@ class FrontendController extends Controller
         //users_web trả về biến $users_web để thực thi trên trang profile
         return view('frontend.layout.AccountUser.profile',['users_web'=>$users_web])->layout('partial.header');
     }
-    //update profile user
+    //edit profile user
     public function editProfile($id){
-        $id = substr($id,9);
-        $editProfile = DB::table('profile_users')->select('profile_users.*')->where('id',$id)->get();
-        $users_web = User::find(Auth::user()->id);
-        // $user = DB::table('users_web')
-        // ->select('users_web.*')->get();
-        // $manage_profile = view('frontend.layout.AccountUser.editProfile')->with('editProfile',$editProfile)->with('users_web',$users_web);
+       // $id = substr($id,9);
+       //kiem tra id ton tai
+        $validator = Validator::make(['id' => $id], [
+            'id' => 'required|numeric'
+        ]);
+        //neu co thay doi --> bao loi
+        if ($validator->fails()) {
+            abort(404);
+        }else{
+            $editProfile = DB::table('profile_users')->select('profile_users.*')->whereRaw('id = ?',$id)->get();
+            $users_web = User::find(Auth::user()->id);
+        }
         return view('frontend.layout.AccountUser.editProfile',['users_web' => $users_web,'editProfile'=>$editProfile])->layout('partial.header');
        
     }
+    //update Profile User
     public function updateProfile(Request $request,$id){
-        $data = array();
-        
+
+        $data = array();        
         $data['fullName'] = $request->fullname;
         $data['phone'] = $request->phone;
         $data['Date'] = $request->Date;
