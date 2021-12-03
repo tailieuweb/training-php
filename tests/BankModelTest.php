@@ -57,7 +57,7 @@ class BankModelTest extends TestCase
     }
 
     // test function deleteBankById string
-    public function testDeleteByIdString()
+    public function testDeleteBankByIdString()
     {
         $bankModel = new BankModel();
         $idBank = 'quyen';
@@ -70,8 +70,21 @@ class BankModelTest extends TestCase
         }
     }
 
+    // test function deleteBankById null
+    public function testDeleteBankByIdNull(){
+        $bankModel = new BankModel();
+        $idBank = null;
+        $deleteBankById = $bankModel->deleteBankById($idBank);
+        
+        if(empty($deleteBankById)){
+            $this->assertTrue(true);
+        }else{
+            $this->assertFalse(false);
+        }
+    }
+
     // test function deleteBankById array
-    public function testDeleteByIdArray()
+    public function testDeleteBankByIdArray()
     {
         $bankModel = new BankModel();
         $idBank = array(1, 2, 3);
@@ -84,7 +97,7 @@ class BankModelTest extends TestCase
     }
 
     // test function deleteBankById Object
-    public function testDeleteByIdObject()
+    public function testDeleteBankByIdObject()
     {
         $bankModel = new BankModel();
         $idBank = new stdClass();
@@ -656,19 +669,6 @@ class BankModelTest extends TestCase
         $actual = $bankModel->findBankById($id);
 
         $this->assertEquals($expected, $actual);
-    }
-    // test function deleteBankById null
-    public function testDeleteByIdNull()
-    {
-        $bankModel = new BankModel();
-        $idBank = null;
-        $deleteBankById = $bankModel->deleteBankById($idBank);
-
-        if (empty($deleteBankById)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertFalse(false);
-        }
     }
 
     /**
