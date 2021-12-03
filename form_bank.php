@@ -1,8 +1,8 @@
 <?php
-require_once 'models/BankModel.php';
-require_once 'models/UserModel.php';
-$bankModel = new BankModel();
-$userModel = new UserModel();
+require_once 'models/FactoryModel.php';
+$factory = new FactoryModel();
+$bankModel = $factory->make('bank');
+$userModel = $factory->make('user');
 
 $bank = NULL; //Add new bank
 $_id = NULL;
@@ -12,7 +12,7 @@ $params = [];
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
 }
-$users = $userModel->getUsers($params);
+$users = $userModel->getUserHaveNotBank();
 $banks = $bankModel->getBanks($params);
 
 if (!empty($_GET['id'])) {
@@ -37,7 +37,7 @@ if (!empty($_GET['id'])) {
 // }
 if (!empty($_POST['submit'])) {
 
-    if (isset($_GET['id'])) {
+    if (isset($_GET['id_bank'])) {
         $bankModel->updateBank($_POST);
     } else {
         $bankModel->insertBanks($_POST);
@@ -60,7 +60,7 @@ if (!empty($_POST['submit'])) {
 
         <?php if ($bank || empty($id_end) || $users) { ?>
             <div class="alert alert-warning" role="alert">
-                User bank
+                Bank form
             </div>
             <?php if (isset($a)) { ?>
                 <div class="alert alert-danger" role="alert">
@@ -111,7 +111,7 @@ if (!empty($_POST['submit'])) {
                 ?>
                 <div class="form-group">
                     <label for="cost">Cost</label>
-                    <input type="number" name="cost" class="form-control" placeholder="Cost" value="<?php if (isset($_GET['id'])) {
+                    <input type="number" step="any" name="cost" class="form-control" placeholder="Cost" value="<?php if (isset($_GET['id'])) {
                                                                                                         foreach ($banks as $bank) {
                                                                                                             if ($bank['user_id'] == $_GET['id']) {
                                                                                                                 echo $bank['cost'];

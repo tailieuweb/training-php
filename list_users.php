@@ -4,17 +4,23 @@ session_start();
 
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
-// require_once 'models/FactoryPattern.php';
-// $factoryModel = new FactoryPattern();
+require_once 'models/FactoryModel.php';
+$factoryModel = new FactoryModel();
 
 $userModel = $factoryModel->make('user');
-$userModel = $factoryModel->make('user');
-$userModel = $factoryModel->make('user');
+$userModel1 = $factoryModel->make('user');
+$userModel2 = $factoryModel->make('user');
 
 $params = [];
 
 if (!empty($_GET['keyword'])) {
     $params['keyword'] = $_GET['keyword'];
+    $search = ['/', '//', ';', '%'];
+    $replace = '';
+
+    // tim kiem roi thay doi ki tu dac biet
+    $result = str_replace($search, $replace, $_GET['keyword']);
+    $params['keyword'] = $result;
 }
 
 $users = $userModel->getUsers($params);

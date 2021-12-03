@@ -102,22 +102,21 @@ body {
 .badge-danger {
   background-color: #d9534f;
 }
-<<<<<<< HEAD
 
 .navbar-icon-top .navbar-nav > li > a > .fa,
 .navbar-icon-top .navbar-nav > li > a > .glyphicon {
   position: relative;
   width: 36px;
   font-size: 24px;
-=======
-.margin-bottom-25 {
-    margin-bottom: 25px;
 }
-.navbar-icon-top .navbar-nav>li>a>.fa, .navbar-icon-top .navbar-nav>li>a>.glyphicon {
-    position: relative;
-    width: 36px;
-    font-size: 24px;
->>>>>>> origin/1-php-202109/1-master
+.margin-bottom-25 {
+  margin-bottom: 25px;
+}
+.navbar-icon-top .navbar-nav > li > a > .fa,
+.navbar-icon-top .navbar-nav > li > a > .glyphicon {
+  position: relative;
+  width: 36px;
+  font-size: 24px;
 }
 .navbar-icon-top .navbar-nav > li > a > .fa > .badge,
 .navbar-icon-top .navbar-nav > li > a > .glyphicon > .badge {

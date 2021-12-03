@@ -1,6 +1,6 @@
 <?php
-require_once 'models/FactoryPattern.php';
-$factoryModel = new FactoryPattern();
+require_once 'models/FactoryModel.php';
+$factoryModel = new FactoryModel();
 
 $bankModel = $factoryModel->make('bank');
 
@@ -39,7 +39,7 @@ $banks = $bankModel->getBanks($params);
                     <?php foreach ($banks as $bank) { ?>
 
                         <tr>
-                            <th scope="row"><?php echo $bank['id'] ?></th>
+                            <th scope="row"><?php echo $bank['id_bank'] ?></th>
                             <td>
                                 <?php echo $bank['name'] ?>
                             </td>
@@ -48,13 +48,13 @@ $banks = $bankModel->getBanks($params);
                             </td>
 
                             <td>
-                                <a href="form_bank.php?id=<?php echo $bank['id'] ?>">
+                                <a href="form_bank.php?id_bank=<?php echo $bank['id_bank'] ?>&id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_bank.php?id=<?php echo $bank['id'] ?>">
+                                <a href="view_bank.php?id_bank=<?php echo $bank['id_bank'] ?>&id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_bank.php?id=<?php echo $bank['id'] ?>">
+                                <a href="delete_bank.php?id_bank=<?php echo $bank['id_bank'] ?>&id=<?php echo $bank['id'] ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

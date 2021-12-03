@@ -4,16 +4,13 @@ require_once 'BaseModel.php';
 
 class BankModel extends BaseModel
 {
-    protected static $_instance;
+    private static $_instance;
     public function findBankById($id)
     {
-        if(is_object($id) || is_string($id) || $id<0 || is_double($id) || empty($id)
-        || is_array($id)){
+        if (is_object($id) || is_string($id) || $id < 0 || is_double($id) || empty($id) || is_array($id)) {
             return 'Not invalid';
-        }else{
-            $sql = 'SELECT banks.id as bank_id,users.name,users.email,banks.cost,users.type,users.id,banks.user_id,banks.version 
-                    FROM `banks`,`users` 
-                    WHERE banks.user_id = users.id AND banks.id = ' . $id;
+        } else {
+            $sql = 'SELECT * FROM `banks`,users WHERE banks.user_id=users.id AND banks.user_id =' . $id;
             $user = $this->select($sql);
             return $user;
         }
@@ -43,23 +40,23 @@ class BankModel extends BaseModel
      */
     public function deleteBankById($id)
     {
-        if( is_object($id) || $id<0 || is_string($id) || is_double($id) || is_array($id) 
-        ||  empty($id) || !is_numeric($id)){
-            return 'Not invalid';
-        }
         //Lấy id của tất cả user 
         // $sql1 = 'SELECT id FROM banks';
         // $allUser = $this->select($sql1);
 
         // foreach ($allUser as $key) {
-        //     $md5 = md5($key['id']);
+        //     $md5 = md5($key['id'] . "chuyen-de-web-1");
         //     if ($md5 == $id) {
         //         $sql = 'DELETE FROM banks WHERE id = ' . $key['id'];
         //         return $this->delete($sql);
         //     }
         // }
-        $sql = 'DELETE FROM banks WHERE id = ' .$id;
-        return $this->delete($sql);
+        if (is_object($id) || is_double($id) || $id <= 0 || is_array($id) || is_bool($id)) {
+            return 'Not invalid';
+        } else {
+            $sql = 'DELETE FROM banks WHERE id = ' . $id;
+            return $this->delete($sql);
+        }
     }
 
     /**
@@ -114,21 +111,20 @@ class BankModel extends BaseModel
      */
     public function insertBanks($input)
     {
-        $allBanks = $this->getAllBanks($input['user_id']);
-        if (empty($allBanks)) {
+        $regex_not_special_sign = "/^-?(?:0|[1-9][0-9]*)\.?[0-9]+([e|E][+-]?[0-9]+)?$/";
+        $regex_id = "/^[0-9]+$/";
+        if (
+            $input['user_id'] != null && $input['cost'] != null && is_numeric($input['user_id']) && is_numeric($input['cost']) &&
+            preg_match($regex_id, $input['user_id']) && preg_match($regex_not_special_sign, $input['cost']) && is_bool($input['user_id']) != true && is_bool($input['cost']) != true && is_object($input['user_id']) != true && !is_object($input['cost'])
+        ) {
             $sql = "INSERT INTO `banks` (`user_id`, `cost` ) VALUES (" .
-                "'" . $input['user_id'] . "','" . $input['cost'] . "')";
+                "'" . $input['user_id'] . "', '" . $input['cost'] . "')";
+            // var_dump($sql);
+            // die();
             $bank = $this->insert($sql);
-            // $users = self::$_connection->multi_query($sql);
             return $bank;
         } else {
-            $cost = $allBanks[0]['cost'] + $input['cost'];
-            $sql = 'UPDATE banks SET 
-            cost = "' . $cost . '"
-            WHERE id = ' . $allBanks[0]['id'];
-
-            $user = $this->update($sql);
-            return $user;
+            return false;
         }
     }
 
@@ -190,18 +186,18 @@ class BankModel extends BaseModel
             //Example keyword: abcef%";TRUNCATE banks;##
             $banks = self::$_connection->multi_query($sql);
         } else {
-            $sql = 'SELECT banks.id as bank_id,users.name,users.fullname,users.email,banks.cost,users.type,users.id,banks.user_id
-            FROM `banks`,`users` 
-            WHERE banks.user_id = users.id';
+            $sql = 'SELECT * FROM banks,users WHERE banks.user_id=users.id';
             $banks = $this->select($sql);
         }
         return $banks;
     }
-    
+
     function getAllBanks($id)
     {
-        if( is_object($id) || $id<0 || is_string($id) || is_double($id) || is_array($id) 
-        ||  empty($id) || !is_numeric($id)){
+        if (
+            is_object($id) || $id < 0 || is_string($id) || is_double($id) || is_array($id)
+            ||  empty($id) || !is_numeric($id)
+        ) {
             return 'Not invalid';
         }
         $sql = 'SELECT * FROM banks Where user_id = ' . $id;
@@ -211,9 +207,21 @@ class BankModel extends BaseModel
     public static function getInstance()
     {
         if (self::$_instance !== null) {
+            var_dump('returning instance bank');
             return self::$_instance;
         }
+        var_dump('creating instance bank');
         self::$_instance = new self();
         return self::$_instance;
+    }
+
+    public function startTransaction()
+    {
+        self::$_connection->begin_transaction();
+    }
+
+    public function rollback()
+    {
+        self::$_connection->rollback();
     }
 }
