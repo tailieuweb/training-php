@@ -6,6 +6,750 @@ use PHPUnit\Framework\TestCase;
 class UserModelTest extends TestCase
 {
     /**
+     * Test insertUser function, 'Dattt' do this 
+     * */
+    // Test case Insert User Good 
+
+    public function testInsertUserGood()
+    {
+        $userModel = new UserModel();
+        $email = 'vothanhdat123123@gmail.com';
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = true;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Not Good 
+
+    public function testInsertUserNg()
+    {
+        $userModel = new UserModel();
+        $input = 123;
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Email Already Exists
+
+    public function testInsertUserEmailAlreadyExists()
+    {
+        $userModel = new UserModel();
+        $email = 'vothanhdat123123@gmail.com';
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $userModel->insertUser($input);
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Input Is String
+
+    public function testInsertUserInputIsString()
+    {
+        $userModel = new UserModel();
+
+        $input = "129381fbsfd";
+
+        $userModel->startTransaction();
+        $userModel->insertUser($input);
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Input Is Bool
+
+    public function testInsertUserInputIsBool()
+    {
+        $userModel = new UserModel();
+
+        $input = true;
+
+        $userModel->startTransaction();
+        $userModel->insertUser($input);
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+    // Test case Insert User Input Is Null
+
+    public function testInsertUserInputIsNull()
+    {
+        $userModel = new UserModel();
+
+        $input = "";
+
+        $userModel->startTransaction();
+        $userModel->insertUser($input);
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Input Is Special
+
+    public function testInsertUserInputIsSpecial()
+    {
+        $userModel = new UserModel();
+
+        $input = "%$%#$&^$&*^%";
+
+        $userModel->startTransaction();
+        $userModel->insertUser($input);
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+    // Test case Insert User Input Name Is Null
+    public function testInsertUserInputNameIsNull()
+    {
+        $userModel = new UserModel();
+        $email = 'vothanhdat123123@gmail.com';
+        $input = [
+            'name' => '',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Input Name Is Bool
+    public function testInsertUserInputNameIsBool()
+    {
+        $userModel = new UserModel();
+        $email = 'vothanhdat123123@gmail.com';
+        $input = [
+            'name' => true,
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Input Name Is Number
+    public function testInsertUserInputNameIsNumber()
+    {
+        $userModel = new UserModel();
+        $email = 'vothanhdat123123@gmail.com';
+        $input = [
+            'name' => 123,
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = true;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Input Name Is Object
+    public function testInsertUserInputNameIsObject()
+    {
+        $userModel = new UserModel();
+        $email = 'vothanhdat123123@gmail.com';
+        $name = [
+            "name" => "dattt"
+        ];
+        $input = [
+            'name' => $name,
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Input Name Is Special
+    public function testInsertUserInputNameIsSpecial()
+    {
+        $userModel = new UserModel();
+        $email = 'vothanhdat123123@gmail.com';
+
+        $input = [
+            'name' => "18923871",
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    ///////////////////////////////     FULLNAME             //////////////////////////////
+    // Test case Insert User Input Full Name Is Null
+    public function testInsertUserInputFullNameIsNull()
+    {
+        $userModel = new UserModel();
+        $fullname = "";
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => $fullname,
+            'type' => 'admin',
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Full Name Is Bool
+    public function testInsertUserInputFullNameIsBool()
+    {
+        $userModel = new UserModel();
+        $fullname = true;
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => $fullname,
+            'type' => 'admin',
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Full Name Is Number
+    public function testInsertUserInputFullNameIsNumber()
+    {
+        $userModel = new UserModel();
+        $fullname = 123;
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => $fullname,
+            'type' => 'admin',
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Full Name Is Object
+    public function testInsertUserInputFullNameIsObject()
+    {
+        $userModel = new UserModel();
+        $fullname = [
+            "fullname" => "Vo Thanh Dat"
+        ];
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => $fullname,
+            'type' => 'admin',
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Full Name Is Special
+    public function testInsertUserInputFullNameIsSpecial()
+    {
+        $userModel = new UserModel();
+        $fullname = "&^!@#%$!*@&^(";
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => $fullname,
+            'type' => 'admin',
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+    ///////////////////////////////     TYPE             //////////////////////////////
+
+
+    // Test case Insert User Type Is Null
+    public function testInsertUserInputTypeIsNull()
+    {
+        $userModel = new UserModel();
+        $type = '';
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => $type,
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Type Is Bool
+    public function testInsertUserInputTypeIsBool()
+    {
+        $userModel = new UserModel();
+        $type = true;
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => $type,
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Type Is Number
+    public function testInsertUserInputTypeIsNumber()
+    {
+        $userModel = new UserModel();
+        $type = 123;
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => $type,
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Type Is Object
+    public function testInsertUserInputTypeIsObject()
+    {
+        $userModel = new UserModel();
+        $type = [
+            "type" => "admin"
+        ];
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => $type,
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Type Is Special
+    public function testInsertUserInputTypeIsSpecial()
+    {
+        $userModel = new UserModel();
+        $type = '*!%*&@%*&';
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => $type,
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Type Not Admin Or User
+    public function testInsertUserInputTypeNotAdminOrUser()
+    {
+        $userModel = new UserModel();
+        $type = "bagaga";
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => $type,
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+    ///////////////////////////////     EMAIl             //////////////////////////////
+
+    // Test case Insert User Input Email Is Null
+    public function testInsertUserInputEmailIsNull()
+    {
+        $userModel = new UserModel();
+        $email = '';
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Email Is Bool
+    public function testInsertUserInputEmailIsBool()
+    {
+        $userModel = new UserModel();
+        $email = true;
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Email Is Number
+    public function testInsertUserInputEmailIsNumber()
+    {
+        $userModel = new UserModel();
+        $email = 1234;
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Email Is Object
+    public function testInsertUserInputEmailIsObject()
+    {
+        $userModel = new UserModel();
+        $email = [
+            "email" => "vothanhdat@gmail.com"
+        ];
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Email Is Special
+    public function testInsertUserInputEmailIsSpecial()
+    {
+        $userModel = new UserModel();
+        $email = '(*^*^&$';
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Email Stye
+    public function testInsertUserInputEmailStyle()
+    {
+        $userModel = new UserModel();
+        $email = 'jjkjhgfbkrggeo.comnm';
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+
+    ///////////////////////////////     PASSWORD             //////////////////////////////
+
+    // Test case Insert User Input Password Is Null
+    public function testInsertUserInputPasswordIsNull()
+    {
+        $userModel = new UserModel();
+        $password = "";
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => $password
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Password Is Bool
+    public function testInsertUserInputPasswordIsBool()
+    {
+        $userModel = new UserModel();
+        $password = true;
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => $password
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Password Is Number
+    public function testInsertUserInputPasswordIsNumber()
+    {
+        $userModel = new UserModel();
+        $password = 123;
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => $password
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = true;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Password Is Object
+    public function testInsertUserInputPasswordIsObject()
+    {
+        $userModel = new UserModel();
+        $password = [
+            "password" => "123kjabdjka"
+        ];
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => $password
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Password Is Special
+    public function testInsertUserInputPasswordIsSpecial()
+    {
+        $userModel = new UserModel();
+        $password = "&^$&^*&^*#";
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => $password
+        ];
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = true;
+        $this->assertEquals($expected, $actual);
+    }
+    /**
      * Test checkEmailExist function, 'Dattt' do this 
      * */
 
