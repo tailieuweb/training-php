@@ -101,4 +101,56 @@ class UserModelTest extends TestCase
         $this->assertTrue(false);
        }
     }
+    //Test findUserById
+    public function testFindUserByIdOk()
+    {
+        $userModel = new UserModel();
+
+        $id = md5(56 . "chuyen-de-web-1");
+        $expected  = 'thai';
+
+        $bank = $userModel->findUserById($id);
+        $this->assertEquals($expected, $bank[0]['name']);
+    }
+    public function testFindUserByIdString()
+    {
+        $userModel = new UserModel();
+
+        $id = md5("qwe" . "chuyen-de-web-1");
+        $expected = false;
+        $actual = $userModel->findUserById($id);
+        $this->assertEquals($expected, $actual);
+    }
+    public function testFindUserByIdEmpty()
+    {
+        $userModel = new UserModel();
+        $id = md5("" . "chuyen-de-web-1");
+        $expected = false;
+        $actual = $userModel->findUserById($id);
+        $this->assertEquals($expected, $actual);
+    }
+    public function testFindUserByIdObject()
+    {
+        $userModel = new UserModel();
+        $id = new stdClass();
+        $expected = false;
+        $actual = $userModel->findUserById($id);
+        $this->assertEquals($expected, $actual);
+    }
+    public function testFindUserByIdBool()
+    {
+        $userModel = new UserModel();
+        $id = true;
+        $expected = false;
+        $actual = $userModel->findUserById($id);
+        $this->assertEquals($expected, $actual);
+    }
+    public function testFindUserByIdArray()
+    {
+        $userModel = new UserModel();
+        $id = ['id' => 124];
+        $expected = false;
+        $actual = $userModel->findUserById($id);
+        $this->assertEquals($expected, $actual);
+    }
 }
