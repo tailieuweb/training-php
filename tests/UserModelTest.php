@@ -70,9 +70,9 @@ class UserModelTest extends TestCase
     }
 
     /**
-     * Test findUserById
+     * Test findUserById have user
      */
-    public function testFindUserById()
+    public function testFindUserByIdHaveUser()
     {
         $userModel = new UserModel();
         $userID = 3;
@@ -90,15 +90,14 @@ class UserModelTest extends TestCase
     public function testFindUserByIdNg()
     {
         $userModel = new UserModel();
-        $userID = 1;
+        $userID = 10;
 
         $user = $userModel->findUserById($userID);
 
-       if(empty($user)){
-           $this->assertTrue(true);
-       }
-       else{
-        $this->assertTrue(false);
-       }
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
 }

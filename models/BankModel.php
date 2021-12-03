@@ -35,11 +35,14 @@ class BankModel extends BaseModel {
     // }
 
     /**
-    //  * Delete user by id
-    //  * @param $id
-    //  * @return mixed
-    //  */
+      * Delete user by id
+      * @param $id
+      * @return mixed
+      */
      public function deleteBankById($id) {
+         if(!is_numeric($id)){
+             return false;
+         }
          $sql = 'DELETE FROM banks WHERE id = '.$id;
          return $this->delete($sql);
 
@@ -51,13 +54,9 @@ class BankModel extends BaseModel {
     //  * @return mixed
     //  */
     public function updateBank($input) {
-        $sql = 'UPDATE banks SET 
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 password="'. md5($input['password']) .'",
-                 user_id="'. $input['user_id'] .'",
-                 cost="'. $input['cost'] .'",
-                 type = "' . $input['type'] .'",
-                WHERE id = ' . $input['id'];
+        $sql = "UPDATE `banks` SET `user_id` = ".$input['user_id'].",`cost` = " . $input['cost'] . "
+        WHERE `id` =" . $input['id'];
+        // var_dump($sql);die(); 
         $user = $this->update($sql);
 
         return $user;
@@ -97,5 +96,15 @@ class BankModel extends BaseModel {
         }
 
         return $banks;
+    }
+
+    //Transaction
+    public function startTransaction(){
+        self::$_connection->begin_transaction();
+    }
+
+    //Roll back
+    public function rollBack(){
+        self::$_connection->rollBack();
     }
 }
