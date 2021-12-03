@@ -11,7 +11,8 @@ class BankModel extends BaseModel
      */
     public function getBankById($id)
     {
-        $id = is_numeric($id) ? $id : NULL;
+        $id = is_integer($id) ? $id : NULL;
+        if(!$id) return false;
         $sql = 'SELECT * FROM `banks` WHERE `id` = ' . $id;
         $bank = $this->select($sql);
         return isset($bank[0]) ? $bank[0] : false;
@@ -22,6 +23,9 @@ class BankModel extends BaseModel
     public function getBankByUserId($userId)
     {
         $userId = is_numeric($userId) ? $userId : NULL;
+        if ($userId == null) {
+            return false;
+        }
         $sql = 'SELECT `banks`.*
         FROM `users`,`banks` 
         WHERE `users`.`id` = `banks`.`user_id` 
@@ -54,7 +58,7 @@ class BankModel extends BaseModel
      */
     public function insertBankWithId($bankId, $userId, $cost)
     {
-        if (is_numeric($bankId) && is_numeric($userId) && is_numeric($cost)) {
+        if (is_integer($bankId) && is_integer($userId) && is_numeric($cost)) {
             $sql = "INSERT INTO `banks`(`id`, `user_id`, `cost`) 
             VALUES ('" . $this->BlockSQLInjection($bankId) . "','" . $this->BlockSQLInjection($userId) . "','" . $this->BlockSQLInjection($cost) . "')";
             $bank = $this->insert($sql);
@@ -68,15 +72,15 @@ class BankModel extends BaseModel
      * @param $input
      * @return mixed
      */
-    public function updateBank($userId,$cost)
+    public function updateBank($userId, $cost)
     {
-        if ( is_numeric($userId) && is_numeric($cost)) {
+        if (is_numeric($userId) && is_numeric($cost)) {
             $bank = $this->getBankByUserId($userId);
             if ($bank) {
                 $sql = 'UPDATE `banks`
                         SET `cost` = "' . $cost . '"
                         WHERE `user_id` = ' . $userId;
-                 return $this->update($sql);
+                return $this->update($sql);
             }
         }
         return false;
@@ -90,7 +94,10 @@ class BankModel extends BaseModel
      */
     public function deleteBankByUserId($id)
     {
-        $id = is_numeric($id) ? $id :  NULL;
+        $id = is_numeric($id) ? $id : NULL;
+        if ($id == NULL) {
+            return false;
+        }
         $sql = 'DELETE FROM `banks` WHERE `user_id` = ' . $id;
         return $this->delete($sql);
     }
