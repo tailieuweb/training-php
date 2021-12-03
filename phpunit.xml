@@ -10,6 +10,9 @@
             <file>./Tests/NguyenKhacDanh_BankModelTest.php</file>
             <file>./Tests/NguyenKhacDanh_UserModelTest.php</file>
             <file>./Tests/NguyenKhacDanh_UserRepositoryTest.php</file>
+            <file>./Tests/VoThanhDat_BankModelTest.php</file>
+            <file>./Tests/VoThanhDat_UserModelTest.php</file>
+            <file>./Tests/VoThanhDat_UserRepositoryTest.php</file>
         </testsuite>
     </testsuites>   
     <filter>
