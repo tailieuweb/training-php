@@ -51,13 +51,18 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        $sql = 'UPDATE users SET 
-                 name = "' . $input['name'] .'", 
-                 password="'. md5($input['password']) .'"
-                WHERE id = ' . $input['id'];
-        $user = $this->update($sql);
+            $sql = 'UPDATE users SET 
+            name = "' . $input['name'] .'", 
+            fullname = "' . $input['fullname'] .'",
+            type =  "' . $input['type'] .'",
+            email =  "' . $input['email'] .'",
+            password ="'. md5($input['password']) .'"
+           WHERE id = ' . $input['id'];
+   $user = $this->update($sql);
 
-        return $user;
+   return $user;
+        
+       
     }
 
     /**
@@ -65,15 +70,18 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".md5($input['password'])."')";
-
-        $user = $this->insert($sql);
-
-        return $user;
+    public function insertUser($input)
+    {
+    
+            $password = md5($input['password']);
+            // SQL
+            $sql = "INSERT INTO `users`(`name`, `fullname`, `email`, `type`, `password`) 
+            VALUES ('" .($input['name']) . "','" . ($input['fullname']) . "','" . ($input['email']) . "','" . ($input['type']) . "','" . ($password) . "')";
+            $user = $this->insert($sql);
+    
+            return $user;
     }
-
+ 
     /**
      * Search users
      * @param array $params
