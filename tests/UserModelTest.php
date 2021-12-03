@@ -379,4 +379,109 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }   
     }
+       
+    /*Test  insert user nhập đúng OK*/
+    public function testInsertUserOK()
+    {
+        $userModel = new UserModel();
+        
+        $user = array(
+            "id" => 10,
+            'name' => 'minh an',
+            'fullname' => 'minhan',
+            'type' => 'user',
+            'email' => 'toithap1999@gmail.com',
+            'password' => '12345'
+        );
+        $excute = true;
+
+        $actual = $userModel->insertUser($user, $userModel);
+        $this->assertEquals($excute, $actual);
+    }
+     /*Test  insert nhập sai user Not OK*/
+ public function testInsertUserNG()
+ {
+     $userModel = new UserModel();
+     
+     $actual = null;
+     $user = array(
+        "id" => 10,
+         'name' => 'minh an',
+         'fullname' => 'minhan',
+         'type' => 'user',
+         'email' => 'toithap1999@gmail.com',
+         'password' => '12345'
+     );
+     try {
+         $actual = $userModel->insertUser('abcdefgh',  $userModel);
+     } catch (Throwable $e) {
+         $excute = false;
+     }
+     $this->assertEquals($excute, $actual);
+ }
+/*Test insert user truyền vào chuỗi*/
+public function testInsertUserStringNotOK()
+{
+   $userModel = new UserModel();
+  
+   $actual = null;
+   $user = array(
+    "id" => 10,
+       'name' => 'minh an',
+           'fullname' => 'minhan',
+           'type' => 'user',
+           'email' => 'toithap1999@gmail.com',
+           'password' => '12345'
+   );
+   try {
+       $actual = $userModel->insertUser("sssdasad",  $userModel);
+   } catch (Throwable $e) {
+       $excute = false;
+   }
+   $this->assertEquals($excute, $actual);
+}
+     /*Test insert user truyền vào số nguyên*/
+     public function testInsertUserIntegerNotOK()
+     {
+         $userModel = new UserModel();
+        
+         $actual = null;
+         $user = array(
+            "id" => 10,
+             'name' => 'minh an',
+             'fullname' => 'minhan',
+             'type' => 'user',
+             'email' => 'toithap1999@gmail.com',
+             'password' => '12345'
+         );
+         try {
+             $actual = $userModel->insertUser(111,  $userModel);
+         } catch (Throwable $e) {
+             $excute = false;
+         }
+         $this->assertEquals($excute, $actual);
+     }
+ 
+      /*Test insert user truyền vào số nguyên*/
+      public function testInsertUserRealnumberNotOK()
+      {
+          $userModel = new UserModel();
+         
+          $actual = null;
+          $user = array(
+            "id" => 10,
+              'name' => 'minh an',
+              'fullname' => 'minhan',
+              'type' => 'user',
+              'email' => 'toithap1999@gmail.com',
+              'password' => '12345'
+          );
+          try {
+              $actual = $userModel->insertUser(14.1,  $userModel);
+          } catch (Throwable $e) {
+              $excute = false;
+          }
+          $this->assertEquals($excute, $actual);
+      }
+      
 }
