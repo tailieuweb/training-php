@@ -655,15 +655,15 @@ class UserModelTest extends TestCase
         $expected = 'UserModel';
         $this->assertEquals($expected, $actual2);
     }
-    public function testFindUserByIdOk()
-    {
-      $userModel = new UserModel();
-      $idUser = 1;
-      $expected = 'test1';
-      $user = $userModel->findUserById($idUser);
-      $actual = $user[0]['name'];
-      $this->assertEquals($expected, $actual);
-    }
+    // public function testFindUserByIdOk()
+    // {
+    //   $userModel = new UserModel();
+    //   $idUser = 1;
+    //   $expected = 'test1';
+    //   $user = $userModel->findUserById($idUser);
+    //   $actual = $user[0]['name'];
+    //   $this->assertEquals($expected, $actual);
+    // }
     // Test truong hop sai
     public function testFindUserByIdNg()
     {
