@@ -129,8 +129,8 @@ class Hung_FactoryPatternTest extends TestCase
 
     public function testMakeNG_Null()
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid argument');
+        $this->expectException(ArgumentCountError::class);
+        $this->expectExceptionMessage('Too few argument');
 
         $factory = new FactoryPattern();
         $factory->make(null);
