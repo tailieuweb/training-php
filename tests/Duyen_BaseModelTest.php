@@ -1,7 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-class BaseModelTest extends TestCase{
+class Duyen_BaseModelTest extends TestCase{
 
    
     public function testSelectOk(){

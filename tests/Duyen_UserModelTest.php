@@ -1,7 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-class UserModelTest extends TestCase
+class Duyen_UserModelTest extends TestCase
 {
       /**
      * Test case instance
