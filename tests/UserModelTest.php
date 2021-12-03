@@ -69,5 +69,59 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }   
     }
-   
+    public function testUpdateUserSpecialCharactersNg(){
+        $userModel = new UserModel();
+        $pattern = '/[0-9A-Za-z]/';
+        $user = array(
+            'id' => 5,
+            'name' => "@#$",
+            'fullname' =>'DangDuyHuy',
+            'email' => 'duyhuy@gmail.com',
+            'type' => 'admin',
+            'password' => md5('user3')
+        );
+        $userModel->updateUser($user);
+        if(!preg_match($pattern, $user['name'])){  
+            
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
+    public function testUpdateUserFloatNg(){
+        $userModel = new UserModel();
+        $user = array(
+            'id' => 5,
+            'name' => 2.5,
+            'fullname' =>'DangDuyHuy',
+            'email' => 'duyhuy@gmail.com',
+            'type' => 'admin',
+            'password' => md5('user3')
+        );
+        $userModel->updateUser($user);
+        if(is_float($user['name']) || is_float($user['fullname']) || is_float($user['email']) || is_float($user['type']) || is_float($user['password'])){  
+            
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
+    public function testUpdateUserBool(){
+        $userModel = new UserModel();
+        $user = array(
+            'id' => 74,
+            'name' => true,
+            'fullname' =>false,
+            'email' => 'duyhuy@gmail.com',
+            'type' => 'admin',
+            'password' => md5('user3')
+        );
+        $userModel->updateUser($user);
+        if(is_bool($user['name']) || is_bool($user['fullname']) || is_bool($user['email']) || is_bool($user['type']) || is_bool($user['password'])){  
+            
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
 }

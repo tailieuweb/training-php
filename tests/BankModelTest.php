@@ -27,6 +27,7 @@ class BankModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
+    
     public function testUpdateBankOK(){
         $bankModel = new BankModel();
         $bank = array(  
@@ -39,5 +40,53 @@ class BankModelTest extends TestCase
         $actual = $bankModel->updateBank($bank);
         $this->assertEquals($actual, $expected);   
     }
-    
+    public function testUpdateBankNGNull(){
+        $bankModel = new BankModel();
+        $bank = array(
+            'id' => '',        
+            'user_id' => '',
+            'cost' => '',
+            
+        );
+        $expected = true;
+        $actual = $bankModel->updateBank($bank);
+        $this->assertEquals($expected,$actual); 
+        if(!empty($bank['id']) && !empty($bank['user_id']) && !empty($bank['cost']) ){            
+            $this->assertTrue(false);
+        }else{
+            $this->assertTrue(true);
+        }   
+    }
+    public function testUpdateBankFloatNg(){
+        $bankModel = new bankModel();
+        $bank = array(
+            'id' => 6,
+            'user_id' => 2.5,
+            'cost' =>'',
+            
+        );
+        $bankModel->updateBank($bank);
+        if(is_float($bank['id']) || is_float($bank['user_id']) || is_float($bank['cost'])){  
+            
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
+    public function testUpdateBankBool(){
+        $bankModel = new BankModel();
+        $bank = array(
+            'id' => 74,
+            'user_id' => true,
+            'cost' =>false,
+            
+        );
+        $bankModel->updateBank($bank);
+        if(is_bool($bank['id']) || is_bool($bank['user_id']) || is_bool($bank['cost'])){  
+            
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
+    }
 }
