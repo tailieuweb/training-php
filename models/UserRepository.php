@@ -28,8 +28,6 @@ class UserRepository
             $bank = $this->bankModel->getBankByUserId($userId);
             if ($bank) {
                 $result['cost'] = $bank['cost'];
-            }else{
-                $result['cost'] = null;
             }
         }
         return $result;
