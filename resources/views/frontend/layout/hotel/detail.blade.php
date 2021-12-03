@@ -18,6 +18,8 @@
 <!-- form_lebal -->
 <!-- gray bg -->
 <section class="container tm-detail-section">
+    <?php if(!empty($all_hotel[0]->hotel_id)){ ?>
+
     @foreach($all_hotel as $all_hotel)
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -270,5 +272,11 @@
     </div>
     </div>
     @endforeach
+
+    <?php }else{ ?>
+        <div class="row justify-content-center">
+            <div style="font-weight: bold;font-size: 4rem;margin-top: 200px;">Not Found Hotel</div>
+        </div>
+    <?php } ?>
 </section>
 @endsection

@@ -116,7 +116,7 @@
                           <td>
                             <div class="fa-hover col-md-3 col-sm-4  "><a href="{{URL::to('admin/favorite/update/'.$key.$favorite->favorite_id)}}"><i class="fa fa-wrench"></i></a>
 
-                            <div class="fa-hover col-md-3 col-sm-4  "><a onclick="setValueDelete(<?php echo $favorite->favorite_id; ?>)"><i class="fa fa-trash"></i></a>
+                            <div class="fa-hover col-md-3 col-sm-4  "><a onclick="setValueDelete(<?php echo $key . $favorite->favorite_id; ?>)"><i class="fa fa-trash"></i></a>
                             </div>
 
                           </td>
@@ -158,7 +158,7 @@
     function setValueDelete(id) {
       let r = confirm("Bạn có chắc muốn tiếp tục xóa?");
       if (r == true) {
-        window.location = '{{asset('')}}admin/favorite/delete/<?php echo $key; ?>' + id
+        window.location = "{{asset('')}}admin/favorite/delete/" + id
       } else {
         window.location = "{{asset('')}}admin/favorite/"
       }
