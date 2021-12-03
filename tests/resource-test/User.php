@@ -1,8 +1,5 @@
 <?php
-
-use PhpParser\Node\Expr\FuncCall;
-
-class User {
+class UserObj {
     private static $username = "";
     private static $password = "";
     private static $fullname = "";

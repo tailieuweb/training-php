@@ -6,6 +6,18 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
+    protected static $userInstance;
+
+
+    // Singleton pattern:
+    public static function getInstance() {
+        if (self::$userInstance !== null) {
+            return self::$userInstance;
+        }
+        self::$userInstance = new self();
+        return self::$userInstance;
+    }
+    
     public function getAll()
     {
         $sql = 'SELECT * FROM users';
@@ -96,7 +108,7 @@ class UserModel extends BaseModel
                 return [];
             }
         }
-        
+
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
             "'" . mysqli_real_escape_string(self::$_connection, $input['name']) . "',
                  '" . md5($input['password']) . "',
@@ -127,15 +139,5 @@ class UserModel extends BaseModel
         }
 
         return $users;
-    }
-
-    // Singleton pattern:
-    public static function getInstance()
-    {
-        if (self::$userInstance !== null) {
-            return self::$userInstance;
-        }
-        self::$userInstance = new self();
-        return self::$userInstance;
     }
 }

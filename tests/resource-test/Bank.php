@@ -1,5 +1,5 @@
 <?php
-class Bank {
+class BankObj {
     private static $id = 0;
     private static $user_id = "";
     private static $cost = "";

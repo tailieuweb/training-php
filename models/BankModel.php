@@ -1,6 +1,8 @@
 <?php 
 require_once 'BaseModel.php';
 class BankModel extends BaseModel {
+    protected static $bankInstance;
+    
     public function getAll() {
         $sql = 'SELECT * FROM banks';
         $user = $this->select($sql);

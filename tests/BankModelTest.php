@@ -1,6 +1,4 @@
 <?php
-require_once('./models/FactoryPattern.php');
-
 use PHPUnit\Framework\TestCase;
 
 class BankModelTest extends TestCase
@@ -20,7 +18,7 @@ class BankModelTest extends TestCase
             [
                 'id' => '1',
                 'user_id' => '1',
-                'cost' => '11',
+                'cost' => '1111',
             ]
         ];
 
@@ -66,7 +64,7 @@ class BankModelTest extends TestCase
             [
                 'id' => '1',
                 'user_id' => '1',
-                'cost' => '11',
+                'cost' => '1111',
             ]
         ];
 
@@ -89,7 +87,7 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make("bank");
-        $id = new Bank(1, 1, 11);
+        $id = new stdClass();
 
         $actual = $bankModel->find($id);
         $this->assertEmpty(
@@ -199,7 +197,7 @@ class BankModelTest extends TestCase
             [
                 'id' => '1',
                 'user_id' => '1',
-                'cost' => '11',
+                'cost' => '1111',
             ]
         ];
 
@@ -245,7 +243,7 @@ class BankModelTest extends TestCase
             [
                 'id' => '1',
                 'user_id' => '1',
-                'cost' => '11',
+                'cost' => '1111',
             ]
         ];
 
@@ -268,7 +266,7 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make("bank");
-        $id = new Bank(1, 1, 11);
+        $id = new stdClass();
 
         $actual = $bankModel->findByUserId($id);
         $this->assertEmpty(

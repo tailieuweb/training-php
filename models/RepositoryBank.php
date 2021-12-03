@@ -1,6 +1,5 @@
 <?php
 
-use SebastianBergmann\FileIterator\Factory;
 
 require_once './models/BankModel.php';
 require_once './models/RepositoryInterface.php';
@@ -33,6 +32,12 @@ class RepositoryBank implements RepositoryInterface{
     }
     public function findByUserId($user_id) {
         return self::$bankModel->findBankInfoByUserID($user_id);
+    }
+    public function startTransaction() {
+        self::$bankModel->startTransaction();
+    }
+    public function rollback() {
+        self::$bankModel->rollback();
     }
 }
 

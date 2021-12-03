@@ -1,25 +1,29 @@
 <?php
+
 require_once "./models/FactoryPattern.php";
-require_once "./tests/resource-test/User.php";
 
 $factory = new FactoryPattern();
+
 $userModel = $factory->make("user");
+$userModel->startTransaction();
 
-function demo()
-{
-    $input = [];
-    $input["name"] = ["name" => "test2"];
-    $input["fullname"] = "testinsert";
-    $input["email"] = "testinsert@gmail.com";
-    $input["type"] = "user";
-    $input["password"] = "password";
-    
-    foreach ($input as $key => $value) {
-        if (is_array($value)) {
-            return [];
-        }
-    }
-    return "success";
-}
+$input = [];
+$input["name"] = "test3";
+$input["fullname"] = "test2";
+$input["email"] = "test2@gmail.com";
+$input["type"] = "user";
+$input["password"] = "password";
 
-var_dump(demo());
+$userModel->insert($input);
+$userModel->rollback();
+
+
+$bankModel = $factory->make("bank");
+$bankModel->startTransaction();
+
+$input = [];
+$input["user_id"] = 10;
+$input["cost"] = 10;
+
+$bankModel->insert($input);
+$bankModel->rollback();

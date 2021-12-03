@@ -5,9 +5,6 @@ abstract class BaseModel
 {
     // Database connection
     protected static $_connection;
-    protected static $userInstance;
-    protected static $bankInstance;
-
     public function __construct()
     {
 
@@ -92,5 +89,13 @@ abstract class BaseModel
             } while (mysqli_next_result(self::$_connection));
         }
         return $data;
+    }
+
+    public function startTransaction(){
+        self::$_connection->begin_transaction();
+    }
+
+    public function rollback(){
+        self::$_connection->rollback();
     }
 }

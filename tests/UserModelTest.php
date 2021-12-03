@@ -1,9 +1,4 @@
 <?php
-foreach (glob("./tests/resource-test/*.php") as $file) {
-    require $file;
-}
-require_once "./models/FactoryPattern.php";
-
 use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
@@ -21,26 +16,26 @@ class UserModelTest extends TestCase
         $userModel = $factory->make("user");
         $expectedFirst = [
             [
-                "id" => "1",
-                "name" => "test2first",
-                "fullname" => "test2",
-                "email" => "test2@gmail.com",
-                "type" => "user",
+                "id" => "2",
+                "name" => "test2",
+                "fullname" => "",
+                "email" => "",
+                "type" => "",
                 "password" => "202cb962ac59075b964b07152d234b70"
             ],
         ];
 
         $expectedLast = [
             [
-                "id" => "5",
-                "name" => "test2last",
-                "fullname" => "test2",
-                "email" => "test2@gmail.com",
-                "type" => "user",
-                "password" => "5f4dcc3b5aa765d61d8327deb882cf99"
+                "id" => "138",
+                "name" => "",
+                "fullname" => "",
+                "email" => "%!?$@gmail.com",
+                "type" => "",
+                "password" => "d41d8cd98f00b204e9800998ecf8427e"
             ],
         ];
-        $expectedLength = 5;
+        $expectedLength = 56;
         $actual = $userModel->read();
         $actualLength = count($actual);
 
@@ -52,7 +47,7 @@ class UserModelTest extends TestCase
             );
             $v2 = $this->assertEquals(
                 $expectedLast[0],
-                $actual[4],
+                $actual[$expectedLength - 1],
                 "Expected and actual not equals"
             );
             $this->assertFalse(($v1 && $v2), "actualfrist is not equals actuallast");
@@ -74,15 +69,15 @@ class UserModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
-        $username = "test2first";
+        $username = "test2";
         $password = "123";
 
         $expected = [
-            "id" => "1",
-            "name" => "test2first",
-            "fullname" => "test2",
-            "email" => "test2@gmail.com",
-            "type" => "user",
+            "id" => "2",
+            "name" => "test2",
+            "fullname" => "",
+            "email" => "",
+            "type" => "",
             "password" => "202cb962ac59075b964b07152d234b70"
         ];
 
@@ -110,7 +105,7 @@ class UserModelTest extends TestCase
 
 
         $username = 'test2%";TRUNCATE bank;##';
-        $password = '202cb962ac59075b964b07152d234b70';
+        $password = '123';
         $actionAuth = $userModel->auth($username, $password);
 
         //Array
@@ -133,7 +128,7 @@ class UserModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
-        $username = new User("test2", "123");
+        $username = new stdClass();
         $password = "123";
 
         $actual = $userModel->auth($username, $password);
@@ -152,7 +147,7 @@ class UserModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
-        $password = new User("test2", "123");
+        $password = new stdClass();
         $username = "test2";
 
         $actual = $userModel->auth($username, $password);
