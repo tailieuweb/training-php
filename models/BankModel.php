@@ -2,10 +2,12 @@
 
 require_once 'BaseModel.php';
 
-class BankModel extends BaseModel {
+class BankModel extends BaseModel
+{
 
-    public function findBankById($id) {
-        $sql = 'SELECT * FROM banks WHERE id = '.$id;
+    public function findBankById($id)
+    {
+        $sql = 'SELECT * FROM banks WHERE id = ' . $id;
         $bank = $this->select($sql);
 
         return $bank;
@@ -16,8 +18,9 @@ class BankModel extends BaseModel {
      * @param $id
      * @return mixed
      */
-    public function deleteBankById($id) {
-        $subString = substr($id,36,-38);
+    public function deleteBankById($id)
+    {
+        $subString = substr($id, 36, -38);
         $result = base64_decode($subString);
         $sql = "DELETE FROM banks WHERE MD5(banks.id) = '" . md5($result) . "'";
         return $this->delete($sql);
@@ -27,7 +30,8 @@ class BankModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function updateBank($input) {
+    public function updateBank($input)
+    {
         $sql = "UPDATE `banks` SET `user_id` = " . "'" . $input['user_id'] . "', cost = " . "'" . $input['cost'] . "' WHERE id = " . "'" . $input['id'] . "'";
         $bank = $this->update($sql);
         return $bank;
@@ -38,7 +42,8 @@ class BankModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function insertBank($input) {
+    public function insertBank($input)
+    {
         $sql = "INSERT INTO `app_web1`.`banks` (`user_id`,`cost`) VALUES (" . "'" . $input['user_id'] . "', '" . $input['cost'] . "')";
 
         $bank = $this->insert($sql);
@@ -51,12 +56,22 @@ class BankModel extends BaseModel {
      * @param array $params
      * @return array
      */
-    public function getBanks() {
-        $sql = 'SELECT * FROM banks';
-        $banks = $this->select($sql);
+    public function getBanks($params = [])
+    {
+        if (!empty($params['keyword'])) {
+            $key = str_replace('"', '', $params['keyword']);
+            $sql = 'SELECT * FROM banks WHERE cost LIKE "%' . $key . '%"';
+
+            //Keep this line to use Sql Injection
+            //Don't change
+            //Example keyword: abcef%";TRUNCATE banks;##
+            $banks = self::$_connection->multi_query($sql);
+        } else {
+
+            $sql = 'SELECT * FROM banks join users on users.id = banks.user_id';
+            $banks = $this->select($sql);
+        }
 
         return $banks;
     }
-
-    
 }
