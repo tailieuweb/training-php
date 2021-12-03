@@ -169,4 +169,50 @@ class DeleteUserByIdTest extends TestCase
         $actual = true;
         $this->assertEquals($expected, $actual);
     }
+    public function testDeleteUserEmpty()
+    {
+        $userModel = new UserModel();
+        $id = "";
+        $expected = "error";
+        $actual = $userModel->deleteUserById($id);
+        $this->assertEquals($expected, $actual);
+    }
+    public function testDeleteUserNull()
+    {
+        $userModel = new UserModel();
+        $id = null;
+        $expected = "error";
+        $actual = $userModel->deleteUserById($id);
+        $this->assertEquals($expected, $actual);
+    }
+    public function testDeleteUserByIdNE()
+    {
+        $userModel = new UserModel();
+        $id = 99;
+        $user = $userModel->findUserById($id);
+        $expected = null;
+        if ($user) {
+            $expected = false;
+        } else {
+            $expected = true;
+        }
+        $actual = $userModel->deleteUserById($id);
+        $this->assertEquals($expected, $actual);
+    }
+    public function testDeleteUserByArray()
+    {
+        $userModel = new UserModel();
+        $id = [];
+        $expected = "error";
+        $actual = $userModel->deleteUserById($id);
+        $this->assertEquals($expected, $actual);
+    }
+    public function testDeleteUserByObject()
+    {
+        $userModel = new UserModel();
+        $id = new UserModel();;
+        $expected = "error";
+        $actual = $userModel->deleteUserById($id);
+        $this->assertEquals($expected, $actual);
+    }
 }
