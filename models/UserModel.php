@@ -194,8 +194,6 @@ class UserModel extends BaseModel
 
         return $users;
     }
-}
-
 
     // Get version of data:
     public function getVersionByUserID($user_id)

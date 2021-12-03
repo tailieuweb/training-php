@@ -1,60 +1,65 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
+
 require_once "models/FactoryPattern.php";
 
 class Tuan_UserRepoTest extends TestCase
 {
-    public  function testCreateUserAndBankAccountIsOkWithUserTable(){
-    $factory = new FactoryPattern();
-    $Repository =  $factory->make('UserRepository');
-    $userModel = UserModel::getInstance();
-    $Repository->startTransaction();
-    $input['cost'] = 1105;
-        $input['name'] = "user".(intval($userModel->getTheID())+1);
-        $input['password'] = 123456;
-        $input['fullname'] = "tuandeptrai";
-        $input['email'] = "katarina@gmail.com";
-        $input['type'] = 'admin';
-        $input['user_id'] = "".(intval($userModel->getTheID())+1);
-    $Repository->create_UserAndBankAccount($input);
-   $id_user_recent_create = $userModel->findUserById((intval($userModel->getTheID())))[0]['id'];
-    $expected = 7;
-    $this->assertEquals($expected,$id_user_recent_create);
-    $Repository->rollback();
-    }
-
-    public  function testCreateUserAndBankAccountIsOkWithBankTable(){
+    public  function testCreateUserAndBankAccountIsOkWithUserTable()
+    {
         $factory = new FactoryPattern();
         $Repository =  $factory->make('UserRepository');
         $userModel = UserModel::getInstance();
         $Repository->startTransaction();
         $input['cost'] = 1105;
-        $input['name'] = "user".(intval($userModel->getTheID())+1);
-        $input['password'] = 123456;
+        $input['name'] = "user" . (intval($userModel->getTheID()) + 1);
+        $input['password'] = '123456';
         $input['fullname'] = "tuandeptrai";
         $input['email'] = "katarina@gmail.com";
         $input['type'] = 'admin';
-        $input['user_id'] = "".(intval($userModel->getTheID())+1);
+        $input['user_id'] = "" . (intval($userModel->getTheID()) + 1);
         $Repository->create_UserAndBankAccount($input);
-        $data_userid_Bank_recent_create = $Repository->getBankAccountByUserID(7)[0]['cost'];
-        $expected = 1105;
-        $this->assertEquals($expected,$data_userid_Bank_recent_create);
+        $id_user_recent_create = $userModel->findUserById((intval($userModel->getTheID())))[0]['id'];
+        $expected = 7;
+        $this->assertEquals($expected, $id_user_recent_create);
         $Repository->rollback();
     }
 
-    public function testCreateUserAndBankAccountJustFullParameterWithCreateUser(){
+    public  function testCreateUserAndBankAccountIsOkWithBankTable()
+    {
         $factory = new FactoryPattern();
         $Repository =  $factory->make('UserRepository');
         $userModel = UserModel::getInstance();
         $Repository->startTransaction();
-        $input['name'] = "user".(intval($userModel->getTheID())+1);
+        $input['cost'] = 1105;
+        $input['name'] = "user" . (intval($userModel->getTheID()) + 1);
+        $input['password'] = '123456';
+        $input['fullname'] = "tuandeptrai";
+        $input['email'] = "katarina@gmail.com";
+        $input['type'] = 'admin';
+        $input['user_id'] = "" . (intval($userModel->getTheID()) + 1);
+        $Repository->create_UserAndBankAccount($input);
+        $data_userid_Bank_recent_create = $Repository->getBankAccountByUserID(7)[0]['cost'];
+        $expected = 1105;
+        $this->assertEquals($expected, $data_userid_Bank_recent_create);
+        $Repository->rollback();
+    }
+
+    public function testCreateUserAndBankAccountJustFullParameterWithCreateUser()
+    {
+        $factory = new FactoryPattern();
+        $Repository =  $factory->make('UserRepository');
+        $userModel = UserModel::getInstance();
+        $Repository->startTransaction();
+        $input['name'] = "user" . (intval($userModel->getTheID()) + 1);
         $input['password'] = 123456;
         $input['fullname'] = "tuandeptrai";
         $input['email'] = "katarina@gmail.com";
         $input['type'] = 'admin';
-       $actuall =  $Repository->create_UserAndBankAccount($input);
+        $actuall =  $Repository->create_UserAndBankAccount($input);
         $expected = false;
-        $this->assertEquals($expected,$actuall);
+        $this->assertEquals($expected, $actuall);
         $Repository->rollback();
     }
 
@@ -67,62 +72,66 @@ class Tuan_UserRepoTest extends TestCase
         $Repository->create_UserAndBankAccount($input);
         $actuall =  $Repository->create_UserAndBankAccount($input);
         $expected = false;
-        $this->assertEquals($expected,$actuall);
+        $this->assertEquals($expected, $actuall);
         $Repository->rollback();
     }
-    public  function testCreateUserAndBankAccountFullParameterButEmailNotRightFormat(){
+    public  function testCreateUserAndBankAccountFullParameterButEmailNotRightFormat()
+    {
         $factory = new FactoryPattern();
         $Repository =  $factory->make('UserRepository');
         $userModel = UserModel::getInstance();
         $Repository->startTransaction();
         $input['cost'] = 1105;
-        $input['name'] = "user".(intval($userModel->getTheID())+1);
+        $input['name'] = "user" . (intval($userModel->getTheID()) + 1);
         $input['password'] = 123456;
         $input['fullname'] = "tuandeptrai";
         $input['email'] = "katarina";
         $input['type'] = 'admin';
-        $input['user_id'] = "".(intval($userModel->getTheID())+1);
+        $input['user_id'] = "" . (intval($userModel->getTheID()) + 1);
         $actuall =  $Repository->create_UserAndBankAccount($input);
         $expected = false;
-        $this->assertEquals($expected,$actuall);
+        $this->assertEquals($expected, $actuall);
         $Repository->rollback();
     }
-    public  function testCreateUserAndBankAccountFullParameterButEmptySomeField(){
+    public  function testCreateUserAndBankAccountFullParameterButEmptySomeField()
+    {
         $factory = new FactoryPattern();
         $Repository =  $factory->make('UserRepository');
         $userModel = UserModel::getInstance();
         $Repository->startTransaction();
         $input['cost'] = 0;
-        $input['name'] = "user".(intval($userModel->getTheID())+1);
+        $input['name'] = "user" . (intval($userModel->getTheID()) + 1);
         $input['password'] = "";
         $input['fullname'] = "";
         $input['email'] = "";
         $input['type'] = '';
-        $input['user_id'] = "".(intval($userModel->getTheID())+1);
+        $input['user_id'] = "" . (intval($userModel->getTheID()) + 1);
         $actuall =  $Repository->create_UserAndBankAccount($input);
         $expected = false;
-        $this->assertEquals($expected,$actuall);
+        $this->assertEquals($expected, $actuall);
         $Repository->rollback();
     }
-    public  function testCreateUserAndBankAccountFullParameterNotEmptyButCostNotNumber(){
+    public  function testCreateUserAndBankAccountFullParameterNotEmptyButCostNotNumber()
+    {
         $factory = new FactoryPattern();
         $Repository =  $factory->make('UserRepository');
         $userModel = UserModel::getInstance();
         $Repository->startTransaction();
         $input['cost'] = "abcxyz";
-        $input['name'] = "user".(intval($userModel->getTheID())+1);
+        $input['name'] = "user" . (intval($userModel->getTheID()) + 1);
         $input['password'] = 123456;
         $input['fullname'] = "tuandeptrai";
         $input['email'] = "katarina@gmail.com";
         $input['type'] = 'admin';
-        $input['user_id'] = "".(intval($userModel->getTheID())+1);
+        $input['user_id'] = "" . (intval($userModel->getTheID()) + 1);
         $actuall =  $Repository->create_UserAndBankAccount($input);
         $expected = false;
-        $this->assertEquals($expected,$actuall);
+        $this->assertEquals($expected, $actuall);
         $Repository->rollback();
     }
 
-    public function testCreateUserAndBankAccountFullParameterButIsNull(){
+    public function testCreateUserAndBankAccountFullParameterButIsNull()
+    {
         $factory = new FactoryPattern();
         $Repository =  $factory->make('UserRepository');
         $userModel = UserModel::getInstance();
@@ -135,11 +144,12 @@ class Tuan_UserRepoTest extends TestCase
         $input['type'] = null;
         $actuall =  $Repository->create_UserAndBankAccount($input);
         $expected = false;
-        $this->assertEquals($expected,$actuall);
+        $this->assertEquals($expected, $actuall);
         $Repository->rollback();
     }
 
-    public function testCreateUserAndBankAccountFullParameterButIsBoolean(){
+    public function testCreateUserAndBankAccountFullParameterButIsBoolean()
+    {
         $factory = new FactoryPattern();
         $Repository =  $factory->make('UserRepository');
         $userModel = UserModel::getInstance();
@@ -152,65 +162,67 @@ class Tuan_UserRepoTest extends TestCase
         $input['type'] = true;
         $actuall =  $Repository->create_UserAndBankAccount($input);
         $expected = false;
-        $this->assertEquals($expected,$actuall);
+        $this->assertEquals($expected, $actuall);
         $Repository->rollback();
     }
 
     //  getBankAccountByUserID()
-    public  function  testgetBankAccountByUserIDIsOk(){
+    public  function  testgetBankAccountByUserIDIsOk()
+    {
         $Repo = UserRepository::getInstance();
-       $bankAccount = $Repo->getBankAccountByUserID(1)[0]['name'];
-       $usermodel = UserModel::getInstance();
-      $userdata = $usermodel->findUserById(1)[0]['name'];
-      $this->assertEquals($bankAccount,$userdata);
+        $bankAccount = $Repo->getBankAccountByUserID(1)[0]['name'];
+        $usermodel = UserModel::getInstance();
+        $userdata = $usermodel->findUserById(1)[0]['name'];
+        $this->assertEquals($bankAccount, $userdata);
     }
 
-    public  function testgetBankAccountByUserIDWithValueIsNull(){
+    public  function testgetBankAccountByUserIDWithValueIsNull()
+    {
         $Repo = UserRepository::getInstance();
         $actual = $Repo->getBankAccountByUserID(null);
         $expected = false;
-        $this->assertEquals($actual,$expected);
+        $this->assertEquals($actual, $expected);
     }
-    public function testgetBankAccountByUserIDWithValueIsEmpty(){
+    public function testgetBankAccountByUserIDWithValueIsEmpty()
+    {
         $Repo = UserRepository::getInstance();
         $actual = $Repo->getBankAccountByUserID("");
         $expected = false;
-        $this->assertEquals($actual,$expected);
+        $this->assertEquals($actual, $expected);
     }
-    public function testgetBankAccountByUserIDWithValueIsBoolean(){
+    public function testgetBankAccountByUserIDWithValueIsBoolean()
+    {
         $Repo = UserRepository::getInstance();
         $actual = $Repo->getBankAccountByUserID(true);
         $expected = false;
-        $this->assertEquals($actual,$expected);
+        $this->assertEquals($actual, $expected);
     }
-    public function testgetBankAccountByUserIDWithValueNotNumber(){
+    public function testgetBankAccountByUserIDWithValueNotNumber()
+    {
         $Repo = UserRepository::getInstance();
         $actual = $Repo->getBankAccountByUserID("a");
         $expected = false;
-        $this->assertEquals($actual,$expected);
+        $this->assertEquals($actual, $expected);
     }
-    public  function  testgetBankAccountByUserIDWithValueIsDouble(){
+    public  function  testgetBankAccountByUserIDWithValueIsDouble()
+    {
         $Repo = UserRepository::getInstance();
         $actual = $Repo->getBankAccountByUserID(11.5);
         $expected = false;
-        $this->assertEquals($actual,$expected);
+        $this->assertEquals($actual, $expected);
     }
-    public  function  testgetBankAccountByUserIDWithValueIsNegative(){
+    public  function  testgetBankAccountByUserIDWithValueIsNegative()
+    {
         $Repo = UserRepository::getInstance();
         $actual = $Repo->getBankAccountByUserID(-10);
         $expected = false;
-        $this->assertEquals($actual,$expected);
+        $this->assertEquals($actual, $expected);
     }
-    public  function testgetBankAccountByUserIDWithValueIsNaN(){
+    public  function testgetBankAccountByUserIDWithValueIsNaN()
+    {
         $Repo = UserRepository::getInstance();
         $actual = $Repo->getBankAccountByUserID(NAN);
         $expected = false;
-        $this->assertEquals($actual,$expected);
+        $this->assertEquals($actual, $expected);
     }
-
-
-
-
-
-
 }
