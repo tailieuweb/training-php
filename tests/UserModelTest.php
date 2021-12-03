@@ -75,30 +75,40 @@ class UserModelTest extends TestCase
     public function testFindUserById()
     {
         $userModel = new UserModel();
-        $userID = 3;
-        $userName = 'hackerasfasf';
-
-        $user = $userModel->findUserById($userID);
-        $actual = $user[0]['123'];
-
-        $this->assertEquals($userName, $actual);
+        $userID = '3';
+        $actual = $userModel->findUserById($userID);
+        if ($actual != null) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
     }
 
-    /**
-     * Test findUserById not good
-     */
+    //Test findUserById not good
     public function testFindUserByIdNg()
     {
         $userModel = new UserModel();
         $userID = 1;
 
-        $user = $userModel->findUserById($userID);
+        $actual = $userModel->findUserById($userID);
 
-       if(empty($user)){
-           $this->assertTrue(true);
+       if($actual != null){
+           $this->assertTrue(false);
        }
        else{
-        $this->assertTrue(false);
+            $this->assertTrue(true);
        }
+    }
+
+    //test findUserById with id is string
+    public function testFindUserByIdStr(){
+        $userModel = new UserModel();
+        $userId = 'abc';
+        $actual = $userModel->findUserById($userId);
+        if ($actual != null) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
     }
 }
