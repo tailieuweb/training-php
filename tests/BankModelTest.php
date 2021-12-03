@@ -218,7 +218,7 @@ class BankModelTest extends TestCase
 
       $BankModel = new BankModel();
       
-      $id = 15;         
+      $id = 13;         
       
       $Bank = $BankModel->deleteBankById($id);
       
@@ -334,15 +334,12 @@ class BankModelTest extends TestCase
    public function testGetBanksNg() {
       $BankModel = new BankModel();
       
-      $params['keyword'] = 999999;
+      $params['keyword'] = 2;
         
       $Bank = $BankModel->getBanks($params);
-      
-      if ($Bank=='error') {
-      $this->assertTrue(true);
-      } else {
-      $this->assertTrue(false);
-      }     
+      $expected = '2';
+             
+      $this->assertEquals($expected, $Bank[0]['user_id']);      
    }
    public function testGetBanksNgAm() {
       $BankModel = new BankModel();

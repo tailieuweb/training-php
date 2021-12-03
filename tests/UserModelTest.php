@@ -360,7 +360,7 @@ class UserModelTest extends TestCase
 
       $userModel = new UserModel();
       
-      $id = 40;         
+      $id = 70;         
       
       $del = $userModel->deleteUserById($id);
       
@@ -475,15 +475,12 @@ class UserModelTest extends TestCase
    public function testGetUsersNg() {
       $userModel = new UserModel();
       
-      $params['keyword'] = 999999;
-        
-      $user = $userModel->getUsers($params);
+      $params['keyword'] = 2;
+
+      $mongDoiUsername = 'test2';
       
-      if ($user=='error') {
-      $this->assertTrue(true);
-      } else {
-      $this->assertTrue(false);
-      }     
+      $user = $userModel->getUsers($params);        
+      $this->assertEquals($mongDoiUsername, $user[0]['name']);     
    }
    public function testGetUsersNgAm() {
       $userModel = new UserModel();
