@@ -57,17 +57,9 @@ class UserModel extends BaseModel
      * @param $id
      * @return mixed
      */
-<<<<<<< HEAD
     public function deleteUserById($id)
     {
         $sql = 'DELETE FROM users WHERE id = ' . $id;
-=======
-    public function deleteUserById($id) {
-        if(is_array($id)){
-            return [];
-        }
-        $sql = 'DELETE FROM users WHERE id = '.$id;
->>>>>>> 1-php-202109/2-groups/2-B/3-52-Nhu-phpunit
         return $this->delete($sql);
     }
 
@@ -89,7 +81,7 @@ class UserModel extends BaseModel
 
         $user = $this->update($sql);
         return $user;
-    } */
+    }
     public function updateUser($input)
     {
 
@@ -118,7 +110,6 @@ class UserModel extends BaseModel
         '" .$input['email'] . "',
         '" .$input['type'] . "')";
         $user = $this->insert($sql);
-
         return $user;
     }
 

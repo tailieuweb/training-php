@@ -95,6 +95,7 @@ class UserModelTest extends TestCase
             $actual[0],
             "Expected and actual not equals"
         );
+    }
     /* ========Test function getUserById ========*/
     public function testGetFindUserByIdOk()
     {
@@ -313,6 +314,7 @@ class UserModelTest extends TestCase
         );
 
         $userModel->insertUser($user);
+    }
 
     /*
     File: UserModel.
@@ -491,13 +493,14 @@ class UserModelTest extends TestCase
 
         $actual = $userModel->auth($username, $password);
         $this->assertEmpty($actual, "actual is not empty");
-    }
+    
         if (!is_numeric($user['fullname'])) {
             $this->assertTrue(false);
         } else {
             $this->assertTrue(true);
         }
-    }
+}
+
     public function testGetInsertUserEmaiWrongFormatNotOk()
     {
         $userModel = new UserModel();
@@ -1169,3 +1172,5 @@ class UserModelTest extends TestCase
         $this->assertEquals($excute, $actual);
     }
 }
+  
+
