@@ -1014,6 +1014,12 @@ hr { border-top: 1px solid #111010; }
 .tm-home-box-2-link:focus {
 	color: #FCDD44;
 }
+.tm-home-box-2-link.active{
+	color: #FCDD44;
+}
+.tm-home-box-2-link{
+     color: black;
+}
 .border-left { border-left: 1px solid #DDD; }
 .border-right {	border-right: 1px solid #DDD; }
 h1,h2,h3 {
@@ -1197,6 +1203,9 @@ color: #FFC107;
  }
  .pills .review .desc .star i {
      color: #01d28e;
+ }
+ .pills .review .desc .star i.disable {
+     color: gray !important;
  }
  .ion-ios-star:before {
      content: "★";
