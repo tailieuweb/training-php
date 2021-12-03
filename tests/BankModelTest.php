@@ -1,114 +1,29 @@
 <?php
-
 use PHPUnit\Framework\TestCase;
 
 class BankModelTest extends TestCase
 {
-    public function testGetBanksGood()
+    //Tim id tại vị có id hợp lệ
+    public function testFindBankbyIdOk()
     {
         $bankModel = new BankModel();
-        $params['keyword']  = 11;
-        $bank = $bankModel->getBanks($params);
-        // var_dump($bank);
-        // die();
-        if (empty($bank[0])) {
-            return $this->assertTrue(true);
-        } else {
-            return $this->assertTrue(false);
-        }
+        $bankId = 1;
+        $bankCost = '11';
+        $bank = $bankModel->findBankById($bankId);
+       
+        $actual = $bank[0]['cost'];
+        $this->assertEquals($bankCost, $actual);
     }
-    //
-    public function testGetBanksNg()
-    {
+    //Tim id tại vị có id không hợp lệ
+    public function testFindBankByIdNG(){
         $bankModel = new BankModel();
-        $params['keyword']  = 1000;
-        $bank = $bankModel->getBanks($params);
-        if (empty($bank[0])) {
-            return $this->assertTrue(true);
-        } else {
-            return $this->assertTrue(false);
-        }
-    }
-    // Test keyword là chuoi
-    public function testGetBanksByIsString()
-    {
-        $bankModel = new BankModel();
-        $params['keyword']  = '11';
-        $bank = $bankModel->getBanks($params);
-        if (empty($bank[0])) {
-            return $this->assertTrue(true);
-        } else {
-            return $this->assertTrue(false);
-        }
-    }
-    // Test keyword là số âm
-    public function testGetBanksIsNegativeNum()
-    {
-        $bankModel = new BankModel();
-        $params['keyword']  = -11;
-        $bank = $bankModel->getBanks($params);
-        if (empty($bank[0])) {
-            return $this->assertTrue(true);
-        } else {
-            return $this->assertTrue(false);
-        }
-    }
-    // Test keyword là số thuc
-    public function testGetBanksIsDouble()
-    {
-        $bankModel = new BankModel();
-        $params['keyword']  = 1.1;
-        $bank = $bankModel->getBanks($params);
-        if (empty($bank[0])) {
-            return $this->assertTrue(true);
-        } else {
-            return $this->assertTrue(false);
-        }
-    }
-
-    // // Test keyword là null
-    // public function testGetBanksIsNull()
-    // {
-    //     $bankModel = new BankModel();
-    //     $params['keyword']  = null;
-    //     $bank = $bankModel->getBanks($params);
-    //     if (empty($bank[0])) {
-    //         return $this->assertTrue(true);
-    //     } else {
-    //         return $this->assertTrue(false);
-    //     }
-    // }
-    // Test keyword là boolean(true/false)
-    public function testGetBanksIsBoolean()
-    {
-        $bankModel = new BankModel();
-        $params['keyword']  = true;
-        $bank = $bankModel->getBanks($params);
-        if (empty($bank[0])) {
-            return $this->assertTrue(true);
-        } else {
-            return $this->assertTrue(false);
-        }
-    }
-    // Test keyword không tồn tại
-    public function testGetBanksIsNotExist()
-    {
-        $bankModel = new BankModel();
-        $params['keyword']  = 100;
-        $bank = $bankModel->getBanks($params);
-        if (empty($bank[0])) {
-            return $this->assertTrue(true);
-        } else {
-            return $this->assertTrue(false);
-        }
-    }
-    // Test keyword là object
-    public function testGetBankObject()
-    {
-        $bankModel = new BankModel();
-        $expected = false;
-        $id = new stdClass;
-        $actual = $bankModel->getBanks($id);
+        $id  = 1000000;
+        $actual = $bankModel->findBankById($id);
+        $expected = [];
+       
         $this->assertEquals($expected, $actual);
-    }
+       
+    }  
+
+   
 }
