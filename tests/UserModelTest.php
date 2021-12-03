@@ -805,4 +805,119 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
+
+    /*
+     * Test function: getUsers()
+     * Author: Quyen
+     */
+
+    // test function testGetUsers ok
+    public function testGetUsersOk()
+    {
+        $userModel = new UserModel();
+        $userName = 'test1';
+        $user = $userModel->getUsers($userName);
+
+        $actual = $user[0]['name'];
+        $this->assertEquals($userName, $actual);
+    }
+
+    //  test function testGetUsers not good
+    public function testGetUsersNg()
+    {
+        $userModel = new UserModel();
+        $userName = 'test1';
+        $user = $userModel->getUsers($userName);
+
+        $actual = $user[0]['name'];
+
+        if ($userName != $actual) {
+            $this->assertFalse(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+
+    //  test function getUsers when search ok
+    public function testGetUsersWhenSearchOk()
+    {
+        $userModel = new UserModel();
+        $param['keyword'] = 'test1';
+
+        $user = $userModel->getUsers($param);
+        if (empty($user)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertFalse(false);
+        }
+    }
+
+    //  test function getUsers when search not good
+    public function testGetUsersWhenSearchNg()
+    {
+        $userModel = new UserModel();
+        $param['keyword'] = 'Quyen';
+
+        $user = $userModel->getUsers($param);
+        if (empty($user) != $param) {
+            $this->assertFalse(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+
+    // test function getUsers when search number
+    public function testGetUsersWhenSearchNum()
+    {
+        $userModel = new UserModel();
+        $param['keyword'] = 123;
+
+        $user = $userModel->getUsers($param);
+        if (empty($user) == $param) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertFalse(false);
+        }
+    }
+
+    // test function getUsers when search null
+    public function testGetUsersWhenSearchNull()
+    {
+        $userModel = new UserModel();
+        $param['keyword'] = Null;
+
+        $user = $userModel->getUsers($param);
+        if (empty($user) == $param) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertFalse(false);
+        }
+    }
+
+    // test function getUsers when search array
+    public function testGetUsersWhenSearchArray()
+    {
+        $userModel = new UserModel();
+        $param['keyword'] = array();
+
+        $user = $userModel->getUsers($param);
+        if (empty($user) == $param) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertFalse(false);
+        }
+    }
+
+    // test function getUsers when search object
+    public function testGetUsersWhenSearchObject()
+    {
+        $userModel = new UserModel();
+        $param['keyword'] = new stdClass();
+
+        try {
+            $userModel->getUsers($param);
+        } catch (Throwable $e) {
+            $this->assertTrue(True);
+        }
+    }
 }

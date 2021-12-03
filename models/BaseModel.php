@@ -76,10 +76,8 @@ abstract class BaseModel
         $result = $this->query($sql);
         return $result;
     }
-    /**
-     * Setup mysql rollback
-     */
-    //Start transaction
+    
+    //transaction
     public function startTransaction()
     {
         self::$_connection->begin_transaction();
