@@ -60,8 +60,16 @@ class UserModel extends BaseModel {
      */
     public function deleteUserById($id) {
         if(is_int($id)==true||is_string($id)==true){
-            $sql = 'DELETE FROM users WHERE id = '.'$id';
-            return $this->delete($sql);      
+            $user = $this->findUserById($id);
+            if ($user!='error') {
+                $sql = 'DELETE FROM users WHERE id = '.$id;               
+                return $this->delete($sql);
+            } else {
+                return false;
+            }             
+        }
+        else{
+            return false;
         }
     }
 
