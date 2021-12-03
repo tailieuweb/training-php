@@ -242,7 +242,7 @@ class UserModelTest extends TestCase
     public function testAuth_WithUsername_IsArr()
     {
         $factory = new FactoryPattern();
-        $userModel = $factory->make("user");
+        $UserModel = $factory->make("user");
         $password = "password";
         $username = ["username" => "test2"];
 
@@ -252,31 +252,31 @@ class UserModelTest extends TestCase
     public function testAuth_WithPassword_IsArr()
     {
         $factory = new FactoryPattern();
-        $userModel = $factory->make("user");
+        $UserModel = $factory->make("user");
         $password = ["password" => "123"];
         $username = "test2";
 
-        $actual = $userModel->auth($username, $password);
+        $actual = $UserModel->auth($username, $password);
         $this->assertEmpty($actual, "actual is not empty");
     }
     public function testAuth_WithPassword_IsObj()
     {
         $factory = new FactoryPattern();
-        $userModel = $factory->make("user");
+        $UserModel = $factory->make("user");
         $password = new User("test2", "123");
         $username = "test2";
 
-        $actual = $userModel->auth($username, $password);
+        $actual = $UserModel->auth($username, $password);
         $this->assertEmpty($actual, "actual is not empty");
     }
     public function testAuth_WithUsername_IsNull()
     {
         $factory = new FactoryPattern();
-        $userModel = $factory->make("user");
+        $UserModel = $factory->make("user");
         $password = "password";
         $username = null;
 
-        $actual = $userModel->auth($username, $password);
+        $actual = $UserModel->auth($username, $password);
         $this->assertEmpty($actual, "actual is not empty");
     }
 
