@@ -13,6 +13,13 @@ $userModel = $factory->make('user');
 // }
 // die();
 
+// CODE FOR TESTING SINGLETON DESIGN PATTERN
+// $userModel1 = $factory->make('user');
+// if ($userModel == $userModel1) {
+//     var_dump('2 Objects are the same instance');
+// }
+// die();
+
 $params = [];
 
 if (!empty($_GET['keyword'])) {

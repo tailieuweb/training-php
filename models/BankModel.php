@@ -81,7 +81,6 @@ class BankModel extends BaseModel
     {
         $sql = 'SELECT * FROM banks WHERE id = ' . $id;
         $items = $this->select($sql);
-
         return $items;
     }
 
@@ -105,11 +104,16 @@ class BankModel extends BaseModel
      */
     public function updateBankInfo($input)
     {
+        if (!isset($input['cost']) || !isset($input['id'])){
+            return  false;
+        }
+        if(!is_numeric($input['cost']) || !is_numeric($input['id'])){
+            return  false;
+        }
         $sql = 'UPDATE banks SET 
                  cost = "' . $input['cost']  . '"
                 WHERE id = ' . ($input['id']);
         $item = $this->update($sql);
-
         return $item;
     }
 
@@ -127,7 +131,6 @@ class BankModel extends BaseModel
             . ")";
 
         $item = $this->insert($sql);
-
         return $item;
     }
 }

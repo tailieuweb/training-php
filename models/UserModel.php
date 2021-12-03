@@ -40,7 +40,6 @@ class UserModel extends BaseModel
 
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
-
         return $user;
     }
 
@@ -69,9 +68,11 @@ class UserModel extends BaseModel
      */
     public function auth($userName, $password)
     {
+        if ($userName == null || $password == null){
+            return  false;
+        }
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
-
         $user = $this->select($sql);
         return $user;
     }
@@ -193,6 +194,8 @@ class UserModel extends BaseModel
 
         return $users;
     }
+}
+
 
     // Get version of data:
     public function getVersionByUserID($user_id)
@@ -212,5 +215,5 @@ class UserModel extends BaseModel
     public function rollback()
     {
         self::$_connection->rollback();
-    }
+	}
 }

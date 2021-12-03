@@ -13,6 +13,9 @@
 		 <file>./tests/Linh_BaseModelTest.php</file>
 		 <file>./tests/Linh_UserModelTest.php</file>
 		 <file>./tests/Linh_BankModelTest.php</file>
+         <file>./Tests/Tuan_UserModelTest.php</file>
+         <file>./Tests/Tuan_BankModelTest.php</file>
+         <file>./Tests/Tuan_UserRepoTest.php</file>
         </testsuite>
     </testsuites>
     <php>
