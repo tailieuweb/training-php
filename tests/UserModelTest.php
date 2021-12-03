@@ -64,11 +64,35 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-    // Test case testDeleteUserByNg
-    public function testDeleteUserByIdNg()
+      // Test case testDeleteUserByIdNg
+      public function testDeleteUserByIdNg()
+      {
+          $userModel = new UserModel();
+          $id = "999a";
+          $check = $userModel->deleteUserById($id);
+          if ($check == false) {
+              $this->assertTrue(true);
+          } else {
+              $this->assertTrue(false);
+          }
+      }
+         // Test case testDeleteUserByKey
+         public function testDeleteUserByKey()
+         {
+             $userModel = new UserModel();
+             $id = "****";
+             $check = $userModel->deleteUserById($id);
+             if ($check == false) {
+                 $this->assertTrue(true);
+             } else {
+                 $this->assertTrue(false);
+             }
+         }
+    // Test case testDeleteUserByIdString
+    public function testDeleteUserByIdString()
     {
         $userModel = new UserModel();
-        $id = "a";
+        $id = "asdasd";
         $check = $userModel->deleteUserById($id);
         if ($check == false) {
             $this->assertTrue(true);
@@ -76,8 +100,8 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-    // Test case testDeleteUserNotId
-    public function testDeleteUserNotId()
+    // Test case testDeleteUserIdNull
+    public function testDeleteUserIdNull()
     {
         $userModel = new UserModel();
         $id = "";
@@ -89,7 +113,7 @@ class UserModelTest extends TestCase
         }
     }
     // Test case testDeleteUserBool
-    public function testDeleteUserBool()
+    public function testDeleteUserBoolFalse()
     {
         $userModel = new UserModel();
         $id = false;
@@ -100,6 +124,18 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
+     // Test case testDeleteUserBool
+     public function testDeleteUserBoolTrue()
+     {
+         $userModel = new UserModel();
+         $id = true;
+         $check = $userModel->deleteUserById($id);
+         if ($check == true) {
+             $this->assertTrue(true);
+         } else {
+             $this->assertTrue(false);
+         }
+     }
     // Test case testDeleteUserExpectedandActual
     public function testDeleteUserExpectedandActual()
     {
@@ -109,6 +145,7 @@ class UserModelTest extends TestCase
         $actual = true;
         $this->assertEquals($expected, $actual);
     }
+
      /**
      * Test UpdateUser Function in UserModel - 'Vinh' do this
      */
@@ -148,7 +185,7 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-    public function testUpdateUserIdFalse(){
+    public function testUpdateUserIdString(){
         $userModel = new UserModel();
         $user  = array(
             'id' => 'a',
@@ -165,6 +202,59 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
+    public function testUpdateUserBoolFalse(){
+        $userModel = new UserModel();
+        $user  = array(
+            'id' => false,
+            'name' =>false,
+            'fullname' =>false,
+            'type' => false,
+            'email' => false,
+            'password' => false
+        );
+        $actual = $userModel->updateUser($user);
+        if($actual == false){
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }
+    }
+    public function testUpdateUserBoolTrue(){
+        $userModel = new UserModel();
+        $user  = array(
+            'id' => true,
+            'name' =>true,
+            'fullname' =>true,
+            'type' => true,
+            'email' => true,
+            'password' => true
+        );
+        $actual = $userModel->updateUser($user);
+        if($actual == true){
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }
+    }
+    public function testUpdateUserByKey(){
+        $userModel = new UserModel();
+        $user  = array(
+            'id' => '****',
+            'name' =>'****',
+            'fullname' =>'****',
+            'type' => '****',
+            'email' => '*****',
+            'password' => '****'
+        );
+        $actual = $userModel->updateUser($user);
+        if($actual == false){
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }
+    }
+
+
      /**
      * Test InsertUser Function in UserModel - 'Vinh' do this
      */
@@ -186,24 +276,26 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
+  //Test insert user Null
     public function testInsertUserNull(){
         $userModel = new UserModel();
         $user  = array(
-            'id' => [],
-            'name' =>'',
-            'fullname' =>'',
-            'type' => '',
-            'email' => '',
-            'password' => ''
+            'id' =>null,
+            'name' =>null,
+            'fullname' =>null,
+            'email' => null,
+            'type' => null,
+            'password' => null
         );
         $actual = $userModel->insertUser($user);
-        if($actual == false){
+        if($actual == true){
             $this->assertTrue(true);
         }else{
             $this->assertTrue(false);
         }
     }
-    public function testInsertUserNotId(){
+      //Test insert user by id string
+    public function testInsertUserIdString(){
         $userModel = new UserModel();
         $user  = array(
             'id' => 'a',
@@ -217,7 +309,59 @@ class UserModelTest extends TestCase
         if($actual == true){
             $this->assertTrue(true);
         }else{
+            $this->assertTrue(false);
+        }
+    }
+      //Test insert user by key
+    public function testInsertUserByKey(){
+        $userModel = new UserModel();
+        $user  = array(
+            'id' => '*****',
+            'name' =>'********',
+            'fullname' =>'********',
+            'type' => '********',
+            'email' => '********',
+            'password' => '********'
+        );
+        $actual = $userModel->insertUser($user);
+        if($actual == true){
             $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }
+    }
+    public function testInsertUserBoolTrue(){
+        $userModel = new UserModel();
+        $user  = array(
+            'id' => true,
+            'name' =>true,
+            'fullname' =>true,
+            'type' => true,
+            'email' => true,
+            'password' => true
+        );
+        $actual = $userModel->insertUser($user);
+        if($actual == true){
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }
+    }
+    public function testInsertUserBoolFalse(){
+        $userModel = new UserModel();
+        $user  = array(
+            'id' => false,
+            'name' =>false,
+            'fullname' =>false,
+            'type' => false,
+            'email' => false,
+            'password' => false
+        );
+        $actual = $userModel->insertUser($user);
+        if($actual == true){
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
         }
     }
 }
