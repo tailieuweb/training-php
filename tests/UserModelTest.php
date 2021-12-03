@@ -364,6 +364,18 @@ public function testDeleteByIdObject(){
           $this->assertTrue(false);
       }
   }
+  // Test trường hợp id là số thực
+  public function testDeleteUserByIdIsDoubleNumber()
+  {
+      $userModel = new UserModel();
+      $idUser = 5.5;
+      $user = $userModel->deleteUserById($idUser);
+      if (empty($user)) {
+          $this->assertTrue(true);
+      } else {
+          $this->assertTrue(false);
+      }
+  }
   // Test trường hợp id là boolean(true/false)
   public function testDeleteUserByIdIsBoolean()
   {
