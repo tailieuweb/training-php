@@ -85,6 +85,9 @@ class BaseModelTest extends TestCase
      */
     public function testDeleteNgNull()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid argument');
+
         // $userModel = new UserModel();
         $factory = new FactoryPattern();
         $userModel = $factory->make('user');
@@ -92,12 +95,7 @@ class BaseModelTest extends TestCase
         // GET THE LAST ID:
         $uid = null;
 
-        $actual = $userModel->deleteUserById($uid) == true ? 'true' : 'false';
-        $expected = 'false';
-
-        print_r("\t=> Actual: " . $actual . "\n");
-
-        $this->assertEquals($expected, $actual);
+        $userModel->deleteUserById($uid) == true ? 'true' : 'false';
     }
 
     /**
@@ -125,6 +123,9 @@ class BaseModelTest extends TestCase
      */
     public function testDeleteNgObject()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid argument');
+
         // $userModel = new UserModel();
         $factory = new FactoryPattern();
         $userModel = $factory->make('user');
@@ -132,12 +133,7 @@ class BaseModelTest extends TestCase
         // GET THE LAST ID:
         $uid = new stdClass();
 
-        $actual = $userModel->deleteUserById($uid) == true ? 'true' : 'false';
-        $expected = 'false';
-
-        print_r("\t=> Actual: " . $actual . "\n");
-
-        $this->assertEquals($expected, $actual);
+        $userModel->deleteUserById($uid) == true ? 'true' : 'false';
     }
 
     /**
@@ -145,6 +141,9 @@ class BaseModelTest extends TestCase
      */
     public function testDeleteNgArray()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid argument');
+
         // $userModel = new UserModel();
         $factory = new FactoryPattern();
         $userModel = $factory->make('user');
@@ -152,12 +151,7 @@ class BaseModelTest extends TestCase
         // GET THE LAST ID:
         $uid = [1, 2, 3];
 
-        $actual = $userModel->deleteUserById($uid) == true ? 'true' : 'false';
-        $expected = 'false';
-
-        print_r("\t=> Actual: " . $actual . "\n");
-
-        $this->assertEquals($expected, $actual);
+        $userModel->deleteUserById($uid) == true ? 'true' : 'false';
     }
 
     /**
@@ -165,6 +159,9 @@ class BaseModelTest extends TestCase
      */
     public function testDeleteNgBoolean()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid argument');
+
         // $userModel = new UserModel();
         $factory = new FactoryPattern();
         $userModel = $factory->make('user');
@@ -172,11 +169,6 @@ class BaseModelTest extends TestCase
         // GET THE LAST ID:
         $uid = true;
 
-        $actual = $userModel->deleteUserById($uid) == true ? 'true' : 'false';
-        $expected = 'false';
-
-        print_r("\t=> Actual: " . $actual . "\n");
-
-        $this->assertEquals($expected, $actual);
+        $userModel->deleteUserById($uid) == true ? 'true' : 'false';
     }
 }
