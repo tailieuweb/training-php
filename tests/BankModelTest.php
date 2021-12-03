@@ -39,5 +39,65 @@ class BankModelTest extends TestCase
         $actual = $bankModel->updateBank($bank);
         $this->assertEquals($actual, $expected);   
     }
-    
+    // public function testGetBanksGood()
+    // {
+    //     $bankModel = new BankModel();
+    //     $params['keyword']  = 11;
+    //     $bank = $bankModel->getBanks($params);
+    //     // var_dump($bank);
+    //     // die();
+    //     if (empty($bank[0])) {
+    //         return $this->assertTrue(true);
+    //     } else {
+    //         return $this->assertTrue(false);
+    //     }
+    // }
+    //
+    public function testGetBanksNg()
+    {
+        $bankModel = new BankModel();
+        $params['keyword']  = 1000;
+        $bank = $bankModel->getBanks($params);
+        if (empty($bank[0])) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
+    // Test keyword là chuoi
+    public function testGetBanksByIsString()
+    {
+        $bankModel = new BankModel();
+        $params['keyword']  = '11';
+        $bank = $bankModel->getBanks($params);
+        if (empty($bank[0])) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
+    // Test keyword là số âm
+    // public function testGetBanksIsNegativeNum()
+    // {
+    //     $bankModel = new BankModel();
+    //     $params['keyword']  = -11;
+    //     $bank = $bankModel->getBanks($params);
+    //     if (empty($bank[0])) {
+    //         return $this->assertTrue(true);
+    //     } else {
+    //         return $this->assertTrue(false);
+    //     }
+    // }
+    // Test keyword là số thuc
+    // public function testGetBanksIsDouble()
+    // {
+    //     $bankModel = new BankModel();
+    //     $params['keyword']  = 1.1;
+    //     $bank = $bankModel->getBanks($params);
+    //     if (empty($bank[0])) {
+    //         return $this->assertTrue(true);
+    //     } else {
+    //         return $this->assertTrue(false);
+    //     }
+    // }
 }
