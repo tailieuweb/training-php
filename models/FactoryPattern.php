@@ -10,5 +10,4 @@ class FactoryPattern {
             return new BankModel();
         }
     }
-
 }
