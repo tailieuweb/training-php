@@ -21,16 +21,20 @@ class UserModel extends BaseModel
         return $user;
     }
 
-    /**
+   /**
      * Authentication user
      * @param $userName
      * @param $password
      * @return array
      */
-    public function auth($userName, $password)
-    {
+    public function auth($userName, $password) {
+        $flag1 = is_string($userName);
+        $flag2 = is_string($password);
+        if($flag1 == false || $flag2 == false) {
+            return false;
+        }
         $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
 
         $user = $this->select($sql);
         return $user;
