@@ -18,14 +18,14 @@ class TranVanLap_BankModelTest extends TestCase
         $bankModel->startTransaction();
         $userModel->insertUserWithId($userId, 'Trần Văn Lập', 'userFullName', 'testEmail@gmail.com', 'admin', 'tranvanlap123');
         $bankInsert = $bankModel->insertBankWithId($bankId, $userId, $bankCost);
-        $bankAfterUpdate = $bankModel->getBankById($bankId);
+        $bankAfterInsert = $bankModel->getBankById($bankId);
         $bankModel->rollBack();
         $this->assertTrue(
             $bankInsert == true &&
-                $bankAfterUpdate != false &&
-                $bankAfterUpdate['id'] = $bankId &&
-                $bankAfterUpdate['user_id'] = $userId &&
-                $bankAfterUpdate['cost'] = $bankCost
+                $bankAfterInsert != false &&
+                $bankAfterInsert['id'] = $bankId &&
+                $bankAfterInsert['user_id'] = $userId &&
+                $bankAfterInsert['cost'] = $bankCost
         );
     }
     // Test case insertBankWithId With Bank id is Float 
@@ -243,14 +243,14 @@ class TranVanLap_BankModelTest extends TestCase
         $bankModel->startTransaction();
         $userModel->insertUserWithId($userId, 'Trần Văn Lập', 'userFullName', 'testEmail@gmail.com', 'admin', 'tranvanlap123');
         $bankInsert = $bankModel->insertBankWithId($bankId, $userId, $bankCost);
-        $bankAfterUpdate = $bankModel->getBankById($bankId);
+        $bankAfterInsert = $bankModel->getBankById($bankId);
         $bankModel->rollBack();
         $this->assertTrue(
             $bankInsert == true &&
-                $bankAfterUpdate != false &&
-                $bankAfterUpdate['id'] = $bankId &&
-                $bankAfterUpdate['user_id'] = $userId &&
-                $bankAfterUpdate['cost'] = $bankCost
+                $bankAfterInsert != false &&
+                $bankAfterInsert['id'] = $bankId &&
+                $bankAfterInsert['user_id'] = $userId &&
+                $bankAfterInsert['cost'] = $bankCost
         );
     }
     // Test case insertBankWithId With cost String
@@ -277,18 +277,18 @@ class TranVanLap_BankModelTest extends TestCase
         $bankModel->rollBack();
         $this->assertTrue($bankInsert == false);
     }
-     // Test case insertBankWithId With cost Object
-     public function testInsertBankWithIdWithCostObject()
-     {
-         $bankModel = new BankModel();
-         $bankId = -1;
-         $userId = -1;
-         $bankCost = new ResultClass();
-         $bankModel->startTransaction();
-         $bankInsert = $bankModel->insertBankWithId($bankId, $userId, $bankCost);
-         $bankModel->rollBack();
-         $this->assertTrue($bankInsert == false);
-     }
+    // Test case insertBankWithId With cost Object
+    public function testInsertBankWithIdWithCostObject()
+    {
+        $bankModel = new BankModel();
+        $bankId = -1;
+        $userId = -1;
+        $bankCost = new ResultClass();
+        $bankModel->startTransaction();
+        $bankInsert = $bankModel->insertBankWithId($bankId, $userId, $bankCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankInsert == false);
+    }
     // Test case insertBankWithId With cost true
     public function testInsertBankWithIdWithCostTrue()
     {
@@ -336,5 +336,431 @@ class TranVanLap_BankModelTest extends TestCase
         $bankInsert = $bankModel->insertBankWithId($bankId, $userId, $bankCost);
         $bankModel->rollBack();
         $this->assertTrue($bankInsert == false);
+    }
+
+    /**
+     * Test updateBank function, 'Lập' do this 
+     * */
+    // Test case updateBank Ok
+    public function testUpdateBankOk()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = -1;
+        $newCost = 8888;
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankApterUpdate = $bankModel->getBankByUserId($userId);
+        $bankModel->rollBack();
+        $this->assertTrue(
+            $bankUpdate == true &&
+                $bankApterUpdate != false &&
+                $bankApterUpdate['user_id'] == $userId &&
+                $bankApterUpdate['cost'] == $newCost
+        );
+    }
+    // Test case updateBank with User id not exist
+    public function testUpdateBankWithUserIdNotExist()
+    {
+        $bankModel = new BankModel();
+        $userId = -1;
+        $newCost = 8888;
+        $bankModel->startTransaction();
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankUpdate == false);
+    }
+    // Test case updateBank with User Id is float
+    public function testUpdateBankWithUserIdFloat()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = 1.23;
+        $newCost = 8888;
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankUpdate == false);
+    }
+    // Test case updateBank with User Id is string
+    public function testUpdateBankWithUserIdString()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = 'This is string';
+        $newCost = 8888;
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankUpdate == false);
+    }
+    // Test case updateBank with User Id is Null
+    public function testUpdateBankWithUserIdNull()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = null;
+        $newCost = 8888;
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankUpdate == false);
+    }
+    // Test case updateBank with User Id is Object
+    public function testUpdateBankWithUserIdObject()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = new ResultClass();
+        $newCost = 8888;
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankUpdate == false);
+    }
+    // Test case updateBank with User Id is True
+    public function testUpdateBankWithUserIdTrue()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = true;
+        $newCost = 8888;
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankUpdate == false);
+    }
+    // Test case updateBank with User Id is False
+    public function testUpdateBankWithUserIdFalse()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = false;
+        $newCost = 8888;
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankUpdate == false);
+    }
+    // Test case updateBank with User Id is empty array
+    public function testUpdateBankWithUserIdEmptyArray()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = [];
+        $newCost = 8888;
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankUpdate == false);
+    }
+    // Test case updateBank with User Id is array
+    public function testUpdateBankWithUserIdArray()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = [1, 2, 3];
+        $newCost = 8888;
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankUpdate == false);
+    }
+    // Test case updateBank with cost is negative number
+    public function testUpdateBankWithCostNegativeNumber()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = -1;
+        $newCost = -100;
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankUpdate == false);
+    }
+    // Test case updateBank with cost is float number
+    public function testUpdateBankWithCostFloat()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = -1;
+        $newCost = 1.23;
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankApterUpdate = $bankModel->getBankByUserId($userId);
+        $bankModel->rollBack();
+        $this->assertTrue(
+            $bankUpdate == true &&
+                $bankApterUpdate != false &&
+                $bankApterUpdate['user_id'] == $userId &&
+                $bankApterUpdate['cost'] == $newCost
+        );
+    }
+    // Test case updateBank with cost is string
+    public function testUpdateBankWithCostString()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = -1;
+        $newCost = 'This is String';
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankUpdate == false);
+    }
+    // Test case updateBank with cost is null
+    public function testUpdateBankWithCostNull()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = -1;
+        $newCost = null;
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankUpdate == false);
+    }
+    // Test case updateBank with cost is object
+    public function testUpdateBankWithCostObject()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = -1;
+        $newCost = new ResultClass();
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankUpdate == false);
+    }
+    // Test case updateBank with cost is true
+    public function testUpdateBankWithCostTrue()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = -1;
+        $newCost = true;
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankUpdate == false);
+    }
+    // Test case updateBank with cost is false
+    public function testUpdateBankWithCostFalse()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = -1;
+        $newCost = false;
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankUpdate == false);
+    }
+    // Test case updateBank with cost is empty array
+    public function testUpdateBankWithCostEmptyArray()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = -1;
+        $newCost = [];
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankUpdate == false);
+    }
+    // Test case updateBank with cost is array
+    public function testUpdateBankWithCostArray()
+    {
+        $bankModel = new BankModel();
+        $userRepository = new UserRepository();
+        $userId = -1;
+        $newCost = [1, 2, 3];
+        $userInsertInput = [
+            'id' => $userId,
+            'name' => 'tranvanlap',
+            'fullname' => 'Trần Văn Lập',
+            'email' => 'tranvanlap_testEmail@gmail.com',
+            'type' => 'admin',
+            'password' => 'tranvanlap'
+        ];
+        $bankModel->startTransaction();
+        $userRepository->insertUserWithId($userInsertInput);
+        $bankUpdate = $bankModel->updateBank($userId, $newCost);
+        $bankModel->rollBack();
+        $this->assertTrue($bankUpdate == false);
+    }
+
+    /**
+     * Test getInstance function, 'Lập' do this 
+     * */
+    // Test case getInstance Ok
+    public function testGetInstanceOk(){
+        $bankModelSingleton = BankModel::getInstance();
+        $bankModel = new BankModel();
+        $this->assertEquals($bankModelSingleton,$bankModel);
+    }
+    // Test case getInstance with multi class
+    public function testGetInstanceWithMultiClass(){
+        $bankModelSingleton1 = BankModel::getInstance();
+        $bankModelSingleton2 = BankModel::getInstance();
+        $bankModel = new BankModel();
+        $this->assertTrue(
+            $bankModelSingleton1 == $bankModel &&
+            $bankModelSingleton1 == $bankModelSingleton2 &&
+            $bankModelSingleton2 == $bankModel 
+        );
     }
 }
