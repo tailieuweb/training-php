@@ -5,7 +5,7 @@ class BankModelTest extends TestCase
 {
 
  /*Test  insert nhập sai Bank Not OK*/
-     public function testInsertBankNG()
+     public function testInsertBankNotOK()
     {
      
     $bankModel = new BankModel();
@@ -15,7 +15,7 @@ class BankModelTest extends TestCase
         'cost' => '123',
     );
     try {
-      $actual = $bankModel->insertBanks('abcdefgh',   $bankModel);
+      $actual = $bankModel->insertBanks('abcdefgh',$bankModel);
    } catch (Throwable $e) {
      $excute = false;
     }
@@ -32,14 +32,14 @@ class BankModelTest extends TestCase
         'cost' => '123',
    );
    try {
-    $actual = $bankModel->insertBank('abcdefgh',   $bankModel);
+    $actual = $bankModel->insertBank('abcdefgh',$bankModel);
    } catch (Throwable $e) {
    $excute = false;
   }
     $this->assertEquals($excute, $actual);
   }
    /*Test insert bank truyền vào số nguyên*/
-   public function testInsertBankIntegerNG()
+   public function testInsertBankIntegerNotOK()
    {
      
      $bankModel = new BankModel();
@@ -49,14 +49,14 @@ class BankModelTest extends TestCase
         'cost' => '123',
      );
      try {
-        $actual = $bankModel->insertBank(111,   $bankModel);
+        $actual = $bankModel->insertBank(111,$bankModel);
      } catch (Throwable $e) {
          $excute = false;
      }
      $this->assertEquals($excute, $actual);
    }
    /*Test insert bank truyền vào số nguyên*/
-   public function testInsertBankRealnumberNG()
+   public function testInsertBankRealnumberNotOK()
    {
     
      $bankModel = new BankModel();
@@ -66,7 +66,7 @@ class BankModelTest extends TestCase
         'cost' => '123',
      );
      try {
-        $actual = $bankModel->insertBank(12.2,   $bankModel);
+        $actual = $bankModel->insertBank(12.2,$bankModel);
      } catch (Throwable $e) {
          $excute = false;
      }
@@ -90,13 +90,5 @@ class BankModelTest extends TestCase
     //     $actual = $bankModel->insertUser($bank, $bankModel);
     //     $this->assertEquals($excute, $actual); 
     // }
-    // public function testInsertBankOK(){
-    //     $bankModel = new BankModel();
-    //     $bankUserid ='1';
-    //     $bankCost = '1111';
-    //     $bank = $bankModel->insertBank($bankUserid);
-       
-    //     $actual = $bank[1]['cost'];
-    //     $this->assertEquals($bankCost, $actual);
-    // }
+    
 }
