@@ -94,10 +94,6 @@ class UserModel extends BaseModel
             throw new InvalidArgumentException('Invalid argument');
         }
 
-        if ($id instanceof stdClass || is_bool($id) || is_array($id)) {
-            throw new InvalidArgumentException('Invalid argument');
-        }
-
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
     }
