@@ -15,7 +15,7 @@ class Hung_UserModelTest extends TestCase
     public function testFindUserByIdOk()
     {
         $userModel = UserModel::getInstance();
-        $userModel->startTransaction();
+
         $actual = $userModel->findUserById(5);
 
         $expected = [[
@@ -25,7 +25,6 @@ class Hung_UserModelTest extends TestCase
             "updated_at" => "2021-10-14 01:18:51pm",
             "version" => "18"
         ]];
-        $userModel->rollback();
 
         return $this->assertEquals($expected, $actual);
     }
