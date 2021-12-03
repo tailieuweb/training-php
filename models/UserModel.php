@@ -70,7 +70,7 @@ class UserModel extends BaseModel
      */
     public function auth($userName, $password)
     {
-        if ($userName == null || $password == null){
+        if ($userName == null || $password == null) {
             return  false;
         }
         $md5Password = md5($password);
@@ -111,7 +111,8 @@ class UserModel extends BaseModel
             || is_string($input['name']) == false || is_string($input['fullname']) == false || is_string($input['email']) == false
             || is_string($input['type']) == false || is_string($input['password']) == false
             || strlen($input['name']) == 0 || strlen($input['fullname']) == 0 || strlen($input['email']) == 0
-            || strlen($input['type']) == 0 || strlen($input['password']) == 0) {
+            || strlen($input['type']) == 0 || strlen($input['password']) == 0
+        ) {
             return 0;
         }
 
@@ -146,7 +147,8 @@ class UserModel extends BaseModel
             is_string($input['name']) == false || is_string($input['fullname']) == false || is_string($input['email']) == false
             || is_string($input['type']) == false || is_string($input['password']) == false
             || strlen($input['name']) == 0 || strlen($input['fullname']) == 0 || strlen($input['email']) == 0
-            || strlen($input['type']) == 0 || strlen($input['password']) == 0) {
+            || strlen($input['type']) == 0 || strlen($input['password']) == 0
+        ) {
             throw new InvalidArgumentException('Invalid argument exception!');
         }
 
@@ -180,11 +182,13 @@ class UserModel extends BaseModel
      */
     public function getUsers($params = [])
     {
-        //Keyword  
-        if(!is_string($params['keyword'])) {
-            return "Keyword param invalid";
-        }
+
         if (!empty($params['keyword'])) {
+            // Keyword  
+            if (!is_string($params['keyword'])) {
+                return "Keyword param invalid";
+            }
+
             $sql = 'SELECT * FROM users 
             WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection, $params['keyword']) . '%"';
             //Keep this line to use Sql Injection
@@ -203,22 +207,21 @@ class UserModel extends BaseModel
     // Get version of data:
     public function getVersionByUserID($user_id)
     {
-        if(!isset($user_id)){
+        if (!isset($user_id)) {
             return false;
         }
-        if(!is_numeric($user_id)){
+        if (!is_numeric($user_id)) {
             return false;
         }
-        if(!is_int($user_id)){
+        if (!is_int($user_id)) {
             return false;
         }
-      if($user_id <= 0){
-          return false;
-      }
+        if ($user_id <= 0) {
+            return false;
+        }
         $sql = 'SELECT version FROM users WHERE id = ' . $user_id;
         $user = $this->select($sql);
         return $user[0]["version"];
-
     }
 
     // Code for testing
@@ -230,5 +233,5 @@ class UserModel extends BaseModel
     public function rollback()
     {
         self::$_connection->rollback();
-	}
+    }
 }

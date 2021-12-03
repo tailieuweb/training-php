@@ -119,12 +119,14 @@ class Liem_BankModel extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make('bank');
+        $bankModel->startTransaction();
         // Set params
         $input['user_id'] = 1;
         $input['cost'] = 100000;
 
         $expected = true;
         $actual = $bankModel->InsertBankInfo($input);
+        $bankModel->rollback();
 
         $this->assertEquals($expected, $actual);
     }

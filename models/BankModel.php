@@ -58,7 +58,7 @@ class BankModel extends BaseModel
             FROM users 
             INNER JOIN banks 
             ON banks.user_id = users.id 
-            WHERE users.id LIKE ' . $user_id
+            WHERE users.id = ' . $user_id
             . ' ORDER BY id ASC';
         $banks = $this->select($sql);
         return $banks;
