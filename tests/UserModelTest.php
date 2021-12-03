@@ -126,7 +126,7 @@ class UserModelTest extends TestCase
    {
        $userModel = new UserModel();
        $username = 'test2';
-       $password = '123';
+       $password = '1234';
        $actual = $userModel->auth($username, $password);
        if (!empty($actual)) {
            return $this->assertTrue(true);
