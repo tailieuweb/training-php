@@ -1012,30 +1012,30 @@ class TranVanLap_UserModelTest extends TestCase
                 $userUpdate->error == 'Thông tin nhập vào không đúng !!'
         );
     }
-     // Test case updateUser With fullname is false
-     public function testUpdateUserFullnameFalse()
-     {
-         $userModel = new UserModel();
-         $userModel->startTransaction();
-         $userId = -1;
-         $userFullname = false;
-         $inputUpdate = [
-             'id' => $userId,
-             'name' => 'updatedName',
-             'fullname' => $userFullname,
-             'email' => 'updatedEmail@gmail.com',
-             'password' => 'updatedPassword',
-             'type' => 'user',
-             'version' => 1
-         ];
-         $userUpdate = $userModel->updateUser($inputUpdate);
-         $userModel->rollBack();
-         $this->assertTrue(
-             $userUpdate->isSuccess == false &&
-                 $userUpdate->data == NULL &&
-                 $userUpdate->error == 'Thông tin nhập vào không đúng !!'
-         );
-     }
+    // Test case updateUser With fullname is false
+    public function testUpdateUserFullnameFalse()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userFullname = false;
+        $inputUpdate = [
+            'id' => $userId,
+            'name' => 'updatedName',
+            'fullname' => $userFullname,
+            'email' => 'updatedEmail@gmail.com',
+            'password' => 'updatedPassword',
+            'type' => 'user',
+            'version' => 1
+        ];
+        $userUpdate = $userModel->updateUser($inputUpdate);
+        $userModel->rollBack();
+        $this->assertTrue(
+            $userUpdate->isSuccess == false &&
+                $userUpdate->data == NULL &&
+                $userUpdate->error == 'Thông tin nhập vào không đúng !!'
+        );
+    }
     // Test case updateUser With fullname is empty array
     public function testUpdateUserFullnameEmptyArray()
     {
@@ -2162,5 +2162,989 @@ class TranVanLap_UserModelTest extends TestCase
                 $userUpdate->data == NULL &&
                 $userUpdate->error == 'Thông tin nhập vào không đúng !!'
         );
+    }
+
+    /**
+     * Test insertUserWithId function, 'Lập' do this 
+     * */
+    // Test case insertUserWithId Ok
+    public function testInsertUserWithIdOk()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue(
+            $userInsert == true &&
+                $user != false &&
+                $user['id'] == $userId
+        );
+    }
+    // Test case insertUserWithId With id have Exist
+    public function testInsertUserWithIdWithUserIdExist()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId With id Float
+    public function testInsertUserWithIdWithIdFloat()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = 1.23;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId With id string
+    public function testInsertUserWithIdWithIdString()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = 'This is String';
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId With id NULL
+    public function testInsertUserWithIdWithIdNull()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = NULL;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId With id Object
+    public function testInsertUserWithIdWithIdObject()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = new ResultClass();
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId With id true
+    public function testInsertUserWithIdWithIdTrue()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = true;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId With id false
+    public function testInsertUserWithIdWithIdFalse()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = false;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId With id empty array
+    public function testInsertUserWithIdWithIdEmptyArray()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = [];
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId With id array
+    public function testInsertUserWithIdWithIdArray()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = [1, 2, 3];
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with User Name is Int
+    public function testInsertUserWithIdWithUserNameInt()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userName = 1;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            $userName,
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue(
+            $userInsert == true &&
+                $user != false &&
+                $user['id'] == $userId &&
+                $user['name'] == $userName
+        );
+    }
+    // Test case insertUserWithId with User Name is Float
+    public function testInsertUserWithIdWithUserNameFloat()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userName = 1.23;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            $userName,
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue(
+            $userInsert == true &&
+                $user != false &&
+                $user['id'] == $userId &&
+                $user['name'] == $userName
+        );
+    }
+    // Test case insertUserWithId with User Name is Null
+    public function testInsertUserWithIdWithUserNameNull()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userName = null;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            $userName,
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with User Name is Object
+    public function testInsertUserWithIdWithUserNameObject()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userName = new ResultClass();
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            $userName,
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with User Name is true
+    public function testInsertUserWithIdWithUserNameTrue()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userName = true;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            $userName,
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    } // Test case insertUserWithId with User Name is false
+    public function testInsertUserWithIdWithUserNameFalse()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userName = false;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            $userName,
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    public function testInsertUserWithIdWithUserNameEmptyArray()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userName = [];
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            $userName,
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    public function testInsertUserWithIdWithUserNameArray()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userName = [1, 2, 3];
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            $userName,
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with fullname int
+    public function testInsertUserWithIdWithFullNameInt()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userFullname = 1;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            $userFullname,
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue(
+            $userInsert == true &&
+                $user != false &&
+                $user['id'] == $userId &&
+                $user['fullname'] == $userFullname
+        );
+    }
+    // Test case insertUserWithId with fullname float
+    public function testInsertUserWithIdWithFullNameFloat()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userFullname = 1.23;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            $userFullname,
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue(
+            $userInsert == true &&
+                $user != false &&
+                $user['id'] == $userId &&
+                $user['fullname'] == $userFullname
+        );
+    }
+    // Test case insertUserWithId with fullname null
+    public function testInsertUserWithIdWithFullNameNull()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userFullname = null;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            $userFullname,
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with fullname Object
+    public function testInsertUserWithIdWithFullNameObject()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userFullname = new ResultClass();
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            $userFullname,
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with fullname True
+    public function testInsertUserWithIdWithFullNameTrue()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userFullname = true;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            $userFullname,
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with fullname false
+    public function testInsertUserWithIdWithFullNameFalse()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userFullname = false;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            $userFullname,
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with fullname empty array
+    public function testInsertUserWithIdWithFullNameEmptyArray()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userFullname = [];
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            $userFullname,
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with fullname array
+    public function testInsertUserWithIdWithFullNameArray()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userFullname = [];
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            $userFullname,
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with email String but Wrong at Email type
+    public function testInsertUserWithIdWithEmailWrongAtEmailType()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userEmail = 'this is not email type';
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            $userEmail,
+            'admin',
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with email Int
+    public function testInsertUserWithIdWithEmailInt()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userEmail = 1;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            $userEmail,
+            'admin',
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with email float
+    public function testInsertUserWithIdWithEmailFloat()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userEmail = 1.23;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            $userEmail,
+            'admin',
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with email null
+    public function testInsertUserWithIdWithEmailNull()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userEmail = null;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            $userEmail,
+            'admin',
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with email object
+    public function testInsertUserWithIdWithEmailObject()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userEmail = new ResultClass();
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            $userEmail,
+            'admin',
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with email true
+    public function testInsertUserWithIdWithEmailTrue()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userEmail = true;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            $userEmail,
+            'admin',
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with email false
+    public function testInsertUserWithIdWithEmailFalse()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userEmail = false;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            $userEmail,
+            'admin',
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with email empty array
+    public function testInsertUserWithIdWithEmailEmptyArray()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userEmail = [];
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            $userEmail,
+            'admin',
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with email array
+    public function testInsertUserWithIdWithEmailArray()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userEmail = [1, 2, 3];
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            $userEmail,
+            'admin',
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with Type Int
+    public function testInsertUserWithIdWithTypeInt()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userType = 1;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            $userType,
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue(
+            $userInsert == true &&
+                $user != false &&
+                $user['id'] == $userId &&
+                $user['type'] == $userType
+        );
+    }
+    // Test case insertUserWithId with Type Float
+    public function testInsertUserWithIdWithTypeFloat()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userType = 1.23;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            $userType,
+            'tranvanlap123'
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue(
+            $userInsert == true &&
+                $user != false &&
+                $user['id'] == $userId &&
+                $user['type'] == $userType
+        );
+    }
+    // Test case insertUserWithId with Type Null
+    public function testInsertUserWithIdWithTypeNull()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userType = null;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            $userType,
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with Type Object
+    public function testInsertUserWithIdWithTypeObject()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userType = new ResultClass();
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            $userType,
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with Type True
+    public function testInsertUserWithIdWithTypeTrue()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userType = true;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            $userType,
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+     // Test case insertUserWithId with Type false
+     public function testInsertUserWithIdWithTypeFalse()
+     {
+         $userModel = new UserModel();
+         $userModel->startTransaction();
+         $userId = -1;
+         $userType = false;
+         $userInsert = $userModel->insertUserWithId(
+             $userId,
+             'tranVanLap',
+             'Trần Văn Lập',
+             'tranvanlap_testEmail@gmail.com',
+             $userType,
+             'tranvanlap123'
+         );
+         $userModel->rollBack();
+         $this->assertTrue($userInsert == false);
+     }
+     // Test case insertUserWithId with Type empty array
+     public function testInsertUserWithIdWithTypeEmptyArray()
+     {
+         $userModel = new UserModel();
+         $userModel->startTransaction();
+         $userId = -1;
+         $userType = [];
+         $userInsert = $userModel->insertUserWithId(
+             $userId,
+             'tranVanLap',
+             'Trần Văn Lập',
+             'tranvanlap_testEmail@gmail.com',
+             $userType,
+             'tranvanlap123'
+         );
+         $userModel->rollBack();
+         $this->assertTrue($userInsert == false);
+     }
+      // Test case insertUserWithId with Type array
+      public function testInsertUserWithIdWithTypeArray()
+      {
+          $userModel = new UserModel();
+          $userModel->startTransaction();
+          $userId = -1;
+          $userType = [1,2,3];
+          $userInsert = $userModel->insertUserWithId(
+              $userId,
+              'tranVanLap',
+              'Trần Văn Lập',
+              'tranvanlap_testEmail@gmail.com',
+              $userType,
+              'tranvanlap123'
+          );
+          $userModel->rollBack();
+          $this->assertTrue($userInsert == false);
+      }
+      // Test case insertUserWithId with Password Int
+    public function testInsertUserWithIdWithPasswordInt()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userPassword = 1;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            $userPassword
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue(
+            $userInsert == true &&
+                $user != false &&
+                $user['id'] == $userId &&
+                $user['password'] == md5($userPassword)
+        );
+    }
+    // Test case insertUserWithId with Password float
+    public function testInsertUserWithIdWithPasswordFloat()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userPassword = 1.23;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            $userPassword
+        );
+        $user = $userModel->findUserById($userId);
+        $userModel->rollBack();
+        $this->assertTrue(
+            $userInsert == true &&
+                $user != false &&
+                $user['id'] == $userId &&
+                $user['password'] == md5($userPassword)
+        );
+    }
+    // Test case insertUserWithId with Password Null
+    public function testInsertUserWithIdWithPasswordNull()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userPassword = null;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            $userPassword
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with Password Object
+    public function testInsertUserWithIdWithPasswordObject()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userPassword = new ResultClass();
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            $userPassword
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with Password True
+    public function testInsertUserWithIdWithPasswordTrue()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userPassword = true;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            $userPassword
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with Password False
+    public function testInsertUserWithIdWithPasswordFalse()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userPassword = false;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            $userPassword
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with Password empty array
+    public function testInsertUserWithIdWithPasswordEmptyArray()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userPassword = [];
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            $userPassword
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with Password array
+    public function testInsertUserWithIdWithPasswordArray()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userPassword = [1,2,3];
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            'admin',
+            $userPassword
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
     }
 }
