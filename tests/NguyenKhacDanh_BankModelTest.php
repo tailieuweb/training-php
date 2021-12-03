@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class BankModelTest extends TestCase
+class NguyenKhacDanh_BankModelTest extends TestCase
 {
     /**
      * Test DeleteBankById Function in BankModel - 'Danh' do this
