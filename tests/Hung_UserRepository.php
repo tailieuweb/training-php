@@ -478,4 +478,59 @@ class Hung_UserRepositoryTest extends TestCase
 
         return $this->assertEquals($expected, $actual);
     }
+
+    //----------------------------------get Instance
+    /**
+     * Test case Okie
+     */
+    public function testGetInstanceOk()
+    {
+        $expected = new UserRepository();
+
+        return $this->assertEquals(UserRepository::getInstance(), $expected);
+    }
+
+    /**
+     * Test case Okie
+     */
+    public function testGetInstanceOkWithGetInstanceMethod()
+    {
+        $up = new UserRepository();
+        $expected = $up->getInstance();
+
+        return $this->assertEquals(UserRepository::getInstance(), $expected);
+    }
+
+    /**
+     * Test case Okie
+     * Check that result is class UserRepository
+     */
+    public function testGetInstanceOkByComparingClass()
+    {
+        return $this->assertEquals(get_class(UserRepository::getInstance()), 'UserRepository');
+    }
+
+    /**
+     * Test case Okie
+     * Check that result is inherited from BaseModel
+     */
+    public function testGetInstanceOkInheritedFromBaseModel()
+    {
+        $up = new UserRepository();
+        $actual = $up instanceof BaseModel;
+
+        return $this->assertEquals(true, $actual);
+    }
+
+    /**
+     * Test case Okie
+     * Check that result is Object
+     */
+    public function testGetInstanceOkIsObject()
+    {
+        $up = new UserRepository();
+        $actual = is_object($up);
+
+        return $this->assertEquals(true, $actual);
+    }
 }

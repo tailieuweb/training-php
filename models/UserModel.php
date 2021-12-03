@@ -89,6 +89,10 @@ class UserModel extends BaseModel
         if (!isset($id)) {
             throw new ArgumentCountError("Too few argument");
         }
+        
+        if ($id instanceof stdClass || is_bool($id) || is_array($id)) {
+            throw new InvalidArgumentException('Invalid argument');
+        }
 
         if ($id instanceof stdClass || is_bool($id) || is_array($id)) {
             throw new InvalidArgumentException('Invalid argument');
