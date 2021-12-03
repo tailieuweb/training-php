@@ -145,7 +145,7 @@
 </script>
 <script>
     $('#form_favorite').submit(function(e){
-        e.preventDefault();
+        // e.preventDefault();
         $.ajax({
             type: 'POST',
             cache: false,

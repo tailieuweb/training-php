@@ -405,6 +405,7 @@ class FrontendController extends Controller
                     ->get();
             $data = array();
             $data['hotel_id'] = $request->hotel_id;
+            $data['favorite_version'] = 0;
             $data['user_id'] = Auth::user()->id;
             $data['date_created'] = date("Y-m-d");
             if(count($getFavorite) != 0){
