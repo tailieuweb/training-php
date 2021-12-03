@@ -194,6 +194,7 @@ class BankModel extends BaseModel
     // Useful for test
     public function deleteBankByUserId($userId)
     {
+        if(!is_numeric($userId)) return 'Param invalid';
         $sql = 'DELETE FROM banks WHERE user_id = ' . $userId;
         $item = $this->delete($sql);
 
