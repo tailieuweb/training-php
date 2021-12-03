@@ -5,10 +5,13 @@ require_once 'BaseModel.php';
 class UserModel extends BaseModel {
 
     public function findUserById($id) {
+        $flag = is_integer($id);
+        if($flag == false) {
+            return false;
+        }
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
-
-        return $user;
+        return $user;  
     }
 
     public function findUser($keyword) {
@@ -38,10 +41,19 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function deleteUserById($id) {
-        $subString = substr($id,36,-38);
-        $result = base64_decode($subString);
-        $sql = "DELETE FROM users WHERE MD5(users.id) = '" . md5($result) . "'";
-        return $this->delete($sql);
+        if(is_numeric($id)){    
+            if(is_float($id)){
+                return false;
+            }   
+            else{
+                $sql = 'DELETE FROM users WHERE id = '.$id;
+                return $this->delete($sql);
+            }   
+           
+        } 
+        else{
+            return false;
+        }
     }
     /**
      * Update user
