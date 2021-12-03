@@ -75,8 +75,8 @@ class UserModelTest extends TestCase
     public function testFindUserById()
     {
         $userModel = new UserModel();
-        $userID = 3;
-        $userName = 'hackerasfasf';
+        $userID = 4;
+        $userName = 'hacker1';
 
         $user = $userModel->findUserById($userID);
         $actual = $user[0]['name'];
@@ -106,8 +106,8 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
 
-        $id = md5(56 . "chuyen-de-web-1");
-        $expected  = 'thai';
+        $id = md5(56 . "app_web1");
+        $expected  = 'test1';
 
         $bank = $userModel->findUserById($id);
         $this->assertEquals($expected, $bank[0]['name']);
@@ -116,7 +116,7 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
 
-        $id = md5("qwe" . "chuyen-de-web-1");
+        $id = md5("qwe" . "app_web1");
         $expected = false;
         $actual = $userModel->findUserById($id);
         $this->assertEquals($expected, $actual);
@@ -124,7 +124,7 @@ class UserModelTest extends TestCase
     public function testFindUserByIdEmpty()
     {
         $userModel = new UserModel();
-        $id = md5("" . "chuyen-de-web-1");
+        $id = md5("" . "app_web1");
         $expected = false;
         $actual = $userModel->findUserById($id);
         $this->assertEquals($expected, $actual);
@@ -151,6 +151,91 @@ class UserModelTest extends TestCase
         $id = ['id' => 124];
         $expected = false;
         $actual = $userModel->findUserById($id);
+        $this->assertEquals($expected, $actual);
+    }
+//TEST GET USER
+    public function testGetCountUsers() {
+        $user             = new UserModel();
+        $param["keyword"] = "a";
+        $actual           = count($user->getUsers($param));
+        $expected         = 2;
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testGetCountNoUser() {
+        $user             = new UserModel();
+        $param["keyword"] = "l";
+        $actual           = empty($user->getUsers($param)) ? "User not found!" : "";
+        $expected         = "User not found!";
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testSpecialCharacters() {
+        $user             = new UserModel();
+        $param["keyword"] = "??";
+        $actual           = count($user->getUsers($param));
+        $expected         = 0;
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testGetUserNg() {
+        $user             = new UserModel();
+        $param["keyword"] = "dsdsdsd";
+        $actual           = count($user->getUsers($param));
+        if ($actual != 0) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+    public function testGetUserGood() {
+        $user             = new UserModel();
+        $param["keyword"] = "admin";
+        $actual           = count($user->getUsers($param));
+        if ($actual != 1) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+
+    public function testLongCharacters() {
+        $user             = new UserModel();
+        $param["keyword"] = "Loren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artistLoren Gray Beech is an American model, singer and social media personality from Pottstown, Pennsylvania. She was signed to Virgin Records and Capitol Records until February 2021, when she became an independent artist";
+        $actual           = count($user->getUsers($param));
+        $expected         = 0;
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testNumber() {
+        $user             = new UserModel();
+        $param["keyword"] = "45646546546";
+        $actual           = count($user->getUsers($param));
+        $expected         = 0;
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testNullValue() {
+        $user             = new UserModel();
+        $param["keyword"] = "";
+        $actual           = count($user->getUsers($param));
+        $expected         = 3;
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testSpace() {
+        $user             = new UserModel();
+        $param["keyword"] = "          ";
+        $actual           = count($user->getUsers($param));
+        $expected         = 0;
+        $this->assertEquals($expected, $actual);
+    }
+    public function testTrue() {
+        $user             = new UserModel();
+        $param["keyword"] = "admin";
+        $stringActual          = $user->getUsers($param);
+        $actual = $stringActual[0]["name"];
+        $expected         = "admin";
         $this->assertEquals($expected, $actual);
     }
 }
