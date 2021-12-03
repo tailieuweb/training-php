@@ -4,19 +4,19 @@ require_once 'configs/database.php';
 abstract class BaseModel {
     // Database connection
     protected static $_connection;
-
+  
     // Code for repository
     protected static $_userRepo_instance;
+    public static $status;
+    public function __construct($flag = false) {
 
-    protected function __construct() {
-
+        if ($flag) {
+          self::$status = 'Connect failed'; 
+        }
         if (!isset(self::$_connection)) {
             self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-            if (self::$_connection->connect_errno) {
-                printf("Connect failed");
-                exit();
-            }
         }
+        
     }
 
     /**
