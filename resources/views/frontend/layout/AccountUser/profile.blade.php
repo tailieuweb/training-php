@@ -15,18 +15,18 @@
                         <div class="d-flex flex-column align-items-center text-center">
                         
                             <!-- image user -->
-                            <img src="{{asset('frontend/images/person_1.jpg')}}" alt="Admin" class="rounded-circle" width="50%">
+                            <img src="{{asset('frontend/images/profiles/user1.jpg')}}" alt="Admin" class="rounded-circle" width="50%">
                             <div class="mt-3">
                                 <!-- gán giá trị biên vừa tạo bên controller -> dẫn tới cột tương ứng của user_web -->
-                                <h4>{{$users_web->username??null}}</h4>
+                                <h4>{{$users_web->username}}</h4>
                                 <!-- còn nếu ở bảng profile thì phải trỏ thêm qua model bảng profile_users -->
                                 <!-- và giá trị nào ko tồn tại thì mình đặt '??null' để báo kiểm tra hiện thị -->
-                                <p class="text-secondary mb-1">{{$users_web->profile_users->phone??null}}</p>
-                                <p class="text-muted font-size-sm">{{$users_web->profile_users->address??null}}</p>
+                                <p class="text-secondary mb-1">{{$users_web->phone}}</p>
+                                <p class="text-muted font-size-sm">{{$users_web->address}}</p>
                                 <!-- <button class="btn btn-primary">Follow</button> -->
                                 <button class="btn btn-outline-primary"
                                     style="background-color: #FF9900; color: #fff;">
-                                    <a href="{{asset('/')}}">Home</a>
+                                    <a href="{{asset('/')}}"style="text-decoration: none; color:#fff;">Home</a>
                                 </button>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                                 <h6 class="mb-0">Full Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                {{$users_web->profile_users->fullName??null}}
+                                {{$users_web->fullName}}
                             </div>
                         </div>
                         <hr>
@@ -60,7 +60,7 @@
                                 <h6 class="mb-0">Phone</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                            {{$users_web->profile_users->phone??null}}
+                            {{$users_web->phone}}
                             </div>
                         </div>
                         <hr>
@@ -69,7 +69,7 @@
                                 <h6 class="mb-0">Date Of Birth</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                            {{$users_web->profile_users->Date??null}}
+                            {{$users_web->Date}}
                             </div>
                         </div>
                         <hr>
@@ -78,13 +78,16 @@
                                 <h6 class="mb-0">Address</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                            {{$users_web->profile_users->address??null}}
+                            {{$users_web->address}}
                             </div>
                         </div>
                         <hr>
                         <div class="row">
                             <div class="col-sm-12">
-                                <a class="btn btn-info " target="__blank" href="./edit_profile.html">Edit</a>
+
+                            <!-- tao lien ket voi edit user -->
+                                <a class="btn btn-info " target="_self" href="{{asset('')}}editProfile/{{$users_web->id}}">Edit</a>
+                              
                             </div>
                         </div>
                     </div>
