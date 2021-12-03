@@ -1343,6 +1343,18 @@
         },
         {
             "name": "laravel/framework",
+<<<<<<< HEAD
+            "version": "v8.73.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "f60e5ceccac453864edbf001b665450886cda8fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/f60e5ceccac453864edbf001b665450886cda8fc",
+                "reference": "f60e5ceccac453864edbf001b665450886cda8fc",
+=======
             "version": "v8.74.0",
             "source": {
                 "type": "git",
@@ -1353,6 +1365,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/004ea195012d5132eca07a176a6e587c6a74815e",
                 "reference": "004ea195012d5132eca07a176a6e587c6a74815e",
+>>>>>>> 1-php-202109/2-groups/3-C/project/master
                 "shasum": ""
             },
             "require": {
@@ -1465,8 +1478,13 @@
                 "predis/predis": "Required to use the predis connector (^1.1.9).",
                 "psr/http-message": "Required to allow Storage::put to accept a StreamInterface (^1.0).",
                 "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (^4.0|^5.0|^6.0|^7.0).",
+<<<<<<< HEAD
+                "symfony/cache": "Required to PSR-6 cache bridge (^5.1.4).",
+                "symfony/filesystem": "Required to enable support for relative symbolic links (^5.1.4).",
+=======
                 "symfony/cache": "Required to PSR-6 cache bridge (^5.4).",
                 "symfony/filesystem": "Required to enable support for relative symbolic links (^5.4).",
+>>>>>>> 1-php-202109/2-groups/3-C/project/master
                 "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^2.0).",
                 "wildbit/swiftmailer-postmark": "Required to use Postmark mail driver (^3.0)."
             },
@@ -1511,7 +1529,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
+<<<<<<< HEAD
+            "time": "2021-11-19T14:10:17+00:00"
+=======
             "time": "2021-11-30T15:26:05+00:00"
+>>>>>>> 1-php-202109/2-groups/3-C/project/master
         },
         {
             "name": "laravel/jetstream",
@@ -1645,6 +1667,18 @@
         },
         {
             "name": "laravel/serializable-closure",
+<<<<<<< HEAD
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/serializable-closure.git",
+                "reference": "8148e72e6c2c3af7f05640ada1b26c3bca970f8d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/8148e72e6c2c3af7f05640ada1b26c3bca970f8d",
+                "reference": "8148e72e6c2c3af7f05640ada1b26c3bca970f8d",
+=======
             "version": "v1.0.5",
             "source": {
                 "type": "git",
@@ -1655,6 +1689,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/25de3be1bca1b17d52ff0dc02b646c667ac7266c",
                 "reference": "25de3be1bca1b17d52ff0dc02b646c667ac7266c",
+>>>>>>> 1-php-202109/2-groups/3-C/project/master
                 "shasum": ""
             },
             "require": {
@@ -1700,7 +1735,11 @@
                 "issues": "https://github.com/laravel/serializable-closure/issues",
                 "source": "https://github.com/laravel/serializable-closure"
             },
+<<<<<<< HEAD
+            "time": "2021-11-16T17:01:57+00:00"
+=======
             "time": "2021-11-30T15:53:04+00:00"
+>>>>>>> 1-php-202109/2-groups/3-C/project/master
         },
         {
             "name": "laravel/tinker",
@@ -6537,6 +6576,18 @@
         },
         {
             "name": "facade/ignition",
+<<<<<<< HEAD
+            "version": "2.16.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/facade/ignition.git",
+                "reference": "29b533f63a3b269aa599d08dd4d22a0d720e295f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/29b533f63a3b269aa599d08dd4d22a0d720e295f",
+                "reference": "29b533f63a3b269aa599d08dd4d22a0d720e295f",
+=======
             "version": "2.17.2",
             "source": {
                 "type": "git",
@@ -6547,6 +6598,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/facade/ignition/zipball/af3cd70d58ca3ef5189ff0e59efbe5a5c043e2d2",
                 "reference": "af3cd70d58ca3ef5189ff0e59efbe5a5c043e2d2",
+>>>>>>> 1-php-202109/2-groups/3-C/project/master
                 "shasum": ""
             },
             "require": {
@@ -6611,7 +6663,11 @@
                 "issues": "https://github.com/facade/ignition/issues",
                 "source": "https://github.com/facade/ignition"
             },
+<<<<<<< HEAD
+            "time": "2021-11-16T13:09:30+00:00"
+=======
             "time": "2021-11-29T14:04:22+00:00"
+>>>>>>> 1-php-202109/2-groups/3-C/project/master
         },
         {
             "name": "facade/ignition-contracts",
@@ -6855,6 +6911,18 @@
         },
         {
             "name": "laravel/sail",
+<<<<<<< HEAD
+            "version": "v1.12.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/sail.git",
+                "reference": "d1c31b2c3d226e70e0071e074da69e4801f0f47b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/d1c31b2c3d226e70e0071e074da69e4801f0f47b",
+                "reference": "d1c31b2c3d226e70e0071e074da69e4801f0f47b",
+=======
             "version": "v1.12.9",
             "source": {
                 "type": "git",
@@ -6865,6 +6933,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/sail/zipball/81609c1c8ce069aa6c3613ccb843cdec299424be",
                 "reference": "81609c1c8ce069aa6c3613ccb843cdec299424be",
+>>>>>>> 1-php-202109/2-groups/3-C/project/master
                 "shasum": ""
             },
             "require": {
@@ -6911,7 +6980,11 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
+<<<<<<< HEAD
+            "time": "2021-11-16T16:55:18+00:00"
+=======
             "time": "2021-11-30T15:50:24+00:00"
+>>>>>>> 1-php-202109/2-groups/3-C/project/master
         },
         {
             "name": "mockery/mockery",
