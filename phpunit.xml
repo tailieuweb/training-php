@@ -13,6 +13,8 @@
             <file>./Tests/VoThanhDat_BankModelTest.php</file>
             <file>./Tests/VoThanhDat_UserModelTest.php</file>
             <file>./Tests/VoThanhDat_UserRepositoryTest.php</file>
+            <file>./Tests/TranVanLap_UserModelTest.php</file>
+            <file>./Tests/TranVanLap_BankModelTest.php</file>
         </testsuite>
     </testsuites>   
     <filter>
