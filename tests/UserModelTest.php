@@ -1,115 +1,172 @@
 <?php
 
+use phpDocumentor\Reflection\Types\Null_;
 use PHPUnit\Framework\TestCase;
 
-class UserModelTest extends TestCase
+class DeleteUserByIdTest extends TestCase
 {
-    public function testSumOk()
-    {
+    
+    //Function DropUserById
+    // //ok
+    // public function testDropUserByIdOk(){
+    //     $userModel = new UserModel();
+    //     $userId = 18;
+    //     $name = 'admin';
+    //     $user = $userModel->dropUserById($userId);
+    //     $actual = $user[0]['name'];
+    //     $this->assertEquals($name,$actual);
+    // }
+    //fail!
+    public function testDropUserByIdStr() {
         $userModel = new UserModel();
-        $a = 1;
-        $b = 2;
-        $expected = 3;
-
-        $actual = $userModel->sumb($a, $b);
-
+        $userId = '18';
+        $expected = 'error';
+        $actual = $userModel->dropUserById($userId);
         $this->assertEquals($expected, $actual);
     }
-    public function testSumNg()
-    {
+    //fail!
+    public function testDropUserByIdNg(){
         $userModel = new UserModel();
-        $a = 1;
-        $b = 2;
-        $expected = 3;
+        $userId = 9999;
+        // $userName = 'asdf';
+        $user = $userModel->dropUserById($userId);
+        if(empty($user)){
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }
 
-        $actual = $userModel->sumb($a, $b);
-        if ($actual != 3) {
+    }
+    //fail!
+    public function testDropUserByIdFloat() {
+        $userModel = new UserModel();
+        $id = 18.1;
+        $expected = 'error';
+        $actual = $userModel->dropUserById($id);
+        $this->assertEquals($expected, $actual);
+        
+        }
+     //ok!
+    public function testDropUserByIdNotGood() {
+        $userModel = new UserModel();
+        $id = 18;
+        // $expected = 'error';
+        $actual = $userModel->dropUserById($id);
+            // $this->assertEquals($expected, $actual);
+        if ($actual != 18) {
             $this->assertTrue(false);
         } else {
             $this->assertTrue(true);
+        }   
+    }
+    // //error!
+    // public function testDropUserByIdNull() {
+    //     $userModel = new UserModel();
+    //     $id = '';
+    //     $expected = 'error';
+    //     $actual = $userModel->dropUserById($id);
+    //     // $this->assertEquals($expected, $actual);
+    //     if(empty($id)){
+    //         $this->assertTrue(true);
+    //     }else{
+    //         $this->assertTrue(false);
+    //     }
+    // }
+    // //error!
+    // public function testDropUserByIdObject() {
+    //     $userModel = new UserModel();
+    //     $id = (object) [
+    //         'id' => 22
+    //     ];
+    //     $expected = 'error';
+    //     $actual = $userModel->dropUserById($id);
+        
+    //     $this->assertEquals($expected, $actual);
+        
+    //     }
+
+    /**
+     * Test DeleteUserById Function in UserModel - 'Vinh' do this
+     */
+    // Test case testDeleteUserById
+    public function testDeleteUserByIdOK()
+    {
+        $userModel = new UserModel();
+        $id = "1";
+        $check = $userModel->deleteUserById($id);
+        if ($check == true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
         }
     }
-    public function testTwoPositiveInt()
+      // Test case testDeleteUserByIdNg
+      public function testDeleteUserByIdNg()
+      {
+          $userModel = new UserModel();
+          $id = "999a";
+          $check = $userModel->deleteUserById($id);
+          if ($check == false) {
+              $this->assertTrue(true);
+          } else {
+              $this->assertTrue(false);
+          }
+      }
+         // Test case testDeleteUserByKey
+         public function testDeleteUserByKey()
+         {
+             $userModel = new UserModel();
+             $id = "**";
+             $check = $userModel->deleteUserById($id);
+             if ($check == false) {
+                 $this->assertTrue(true);
+             } else {
+                 $this->assertTrue(false);
+             }
+         }
+    // Test case testDeleteUserByIdString
+    public function testDeleteUserByIdString()
     {
         $userModel = new UserModel();
-        $a = 1;
-        $b = 2;
-        $expected = 3;
-
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
+        $id = "a";
+        $check = $userModel->deleteUserById($id);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
-
-    public function testTwoNegativeInt()
+    // Test case testDeleteUserIdNull
+    public function testDeleteUserIdNull()
     {
         $userModel = new UserModel();
-        $a = -1;
-        $b = -2;
-        $expected = -3;
-
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
+        $id = "";
+        $check = $userModel->deleteUserById($id);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
-
-    public function testNegativePositiveInt()
+    // Test case testDeleteUserBool
+    public function testDeleteUserBool()
     {
         $userModel = new UserModel();
-        $a = -1;
-        $b = 2;
-        $expected = 1;
-
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
+        $id = false;
+        $check = $userModel->deleteUserById($id);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
-
-    public function testSumFloat()
+    // Test case testDeleteUserExpectedandActual
+    public function testDeleteUserExpectedandActual()
     {
         $userModel = new UserModel();
-        $a = 1.5;
-        $b = 2.33;
-        $expected = 3.83;
-
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    public function testSumPositiveFloat()
-    {
-        $userModel = new UserModel();
-        $a = 1.5;
-        $b = 2.33;
-        $expected = 3.83;
-
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    public function testSumNegativeFloat()
-    {
-        $userModel = new UserModel();
-        $a = -1.5;
-        $b = -2.33;
-        $expected = -3.83;
-
-        $actual = $userModel->sumb($a, $b);
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    public function testNegativePositiveFloat()
-    {
-        $userModel = new UserModel();
-        $a = -1.5;
-        $b = 2.33;
-        $expected = 0.83;
-
-        $actual = $userModel->sumb($a, $b);
-
+        $id = -1;
+        $expected = $userModel->deleteUserById($id);
+        $actual = true;
         $this->assertEquals($expected, $actual);
     }
 }

@@ -2,23 +2,24 @@
 
 require_once 'BaseModel.php';
 
-
 class UserModel extends BaseModel
 {
-    private static $_instance;
+    protected static $_instance;
+    public function sumb($a,$b){
+        return $a + $b;
+    }
     public static function getInstance()
     {
-        if (self::$_instance !== null) {
+        if(self::$_instance !== null){
             return self::$_instance;
         }
         self::$_instance = new self();
         return self::$_instance;
     }
 
-
     public function findUserById($id)
     {
-        $id = $this->Giaima($id);
+        
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
 
@@ -27,7 +28,7 @@ class UserModel extends BaseModel
 
     public function findUser($keyword)
     {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
+        $sql = "SELECT * FROM users WHERE name LIKE '%$keyword%' OR email LIKE '%$keyword%'";
         $user = $this->select($sql);
 
         return $user;
@@ -54,11 +55,10 @@ class UserModel extends BaseModel
      * @return mixed
      */
     public function deleteUserById($id)
-    {
-        $id = $this->Giaima($id);
+    {   
         $isAuth = $this->getUsers();
         foreach ($isAuth as $item) {
-            if (md5($item['id']) == $id) {
+            if ($item['id'] == $id) {
                 $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
                 return $this->delete($sql);
             }
@@ -66,8 +66,7 @@ class UserModel extends BaseModel
     }
     // Delete user by id : Step 2
     public function dropUserById($id)
-    {
-        $id = $this->Giaima($id);
+    {   
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
     }
@@ -89,18 +88,17 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
-        $id = $this->Giaima($input['id']);
         $sql = 'UPDATE users SET 
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '"
                 ,`fullname`="' . $input['full-name'] . '"
                 ,email="' . $input['email'] . '"
                 ,type="' . $input['type'] . '"
                 ,password="' . md5($input['password']) . '"
-                WHERE id = ' . $id;
+                WHERE id = ' . $input['id'];
         $user = $this->update($sql);
         return $user;
     }
-    
+
 
     /**
      * Insert user
@@ -109,9 +107,8 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
-        $password = md5($input['password']);
         $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
-            "'" . $input['name'] . "', '" . $input['full-name'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
+            "'" . $input['name'] . "', '" . $input['full-name'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . md5($input['password']) . "')";
 
         $user = $this->insert($sql);
 
@@ -121,7 +118,7 @@ class UserModel extends BaseModel
     /**
      * Search users
      * @param array $params
-     * @return array
+     * * @return array
      */
     public function getUsers($params = [])
     {
@@ -140,15 +137,4 @@ class UserModel extends BaseModel
 
         return $users;
     }
-    private function Giaima($id)
-    {
-        $string = substr($id, 3, -3);
-        return $string;
-    }
-
-    public function sumb($a, $b)
-    {
-        return $a + $b;
-    }
-    
 }
