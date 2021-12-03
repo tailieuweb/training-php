@@ -38,8 +38,16 @@ class BankModel extends BaseModel {
      */
     public function deleteBankById($id) {
         if(is_int($id)==true||is_string($id)==true){
-            $sql = 'DELETE FROM banks WHERE id = '.'$id';
-            return $this->delete($sql);      
+            $user = $this->findBankById($id);
+            if ($user!='error') {
+                $sql = 'DELETE FROM banks WHERE id = '.$id;               
+                return $this->delete($sql);
+            } else {
+                return false;
+            }             
+        }
+        else{
+            return false;
         }
     }
 
@@ -70,6 +78,18 @@ class BankModel extends BaseModel {
         $bank = $this->insert($sql);
 
         return $bank;
+    }
+    /**
+     * getId
+     * @param $input
+     * @return mixed
+     */
+    public function getID()
+    {
+        $sql = 'SELECT MAX(id) as user_id FROM banks';
+        $user = $this->select($sql);
+
+        return $user[0]["user_id"];
     }
 
     /**

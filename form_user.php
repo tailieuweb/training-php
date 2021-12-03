@@ -16,8 +16,6 @@ if (!empty($_GET['id'])) {
     }  
     $user = $userModel->findUserById($_id);
 }   
-      $user = $userModel->getUsers();
-      var_dump($user);
 
 if (!empty($_POST['submit'])) {
     if (!empty($_id)) {
@@ -26,18 +24,14 @@ if (!empty($_POST['submit'])) {
             
             header('location: list_users.php');
         }
-<<<<<<< HEAD
-        else{
-=======
-        else{ 
->>>>>>> 2-php-202109/2-groups/3-C/2-32-Tram-phpunit-GetBank
+       else{ 
         echo '<script>alert("Version đã thay đổi, vui lòng làm mới trang!");</script>';
             header('Refresh:3');
         }
     } else {
         $userModel->insertUser($_POST);
         header('location: list_users.php');
-}
+    }
 }
 
 ?>
