@@ -25,7 +25,7 @@ class NguyenKhacDanh_BankModelTest extends TestCase
         } else {
             $this->assertTrue(false);
         }
-       // $bankModel->deleteBankByUserId($id);
+        // $bankModel->deleteBankByUserId($id);
     }
     // Test case testDeleteBankByIdString
     public function testDeleteBankByIdString()
@@ -100,7 +100,7 @@ class NguyenKhacDanh_BankModelTest extends TestCase
         $check = $getBank != false &&
             $getBank['user_id'] == $userId &&
             $getBank['cost'] == '12345';
-             $bankModel->rollBack();
+        $bankModel->rollBack();
         if ($check === true) {
             $this->assertTrue(true);
         } else {
@@ -122,219 +122,64 @@ class NguyenKhacDanh_BankModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-     // Test case testGetBankByUserIdUserIdSpecial
-     public function testGetBankByUserIdUserIdSpecial()
-     {
-         $bankModel = new BankModel();
-         $bankModel->startTransaction();
-         $userId = '#$#@#';
-         $getBank = $bankModel->getBankByUserId($userId);
-         $check = $getBank == false;
-         $bankModel->rollBack();
-         if ($check === true) {
-             $this->assertTrue(true);
-         } else {
-             $this->assertTrue(false);
-         }
-     }
-     // Test case testGetBankByUserIdUserIdString
-     public function testGetBankByUserIdUserIdString()
-     {
-         $bankModel = new BankModel();
-         $bankModel->startTransaction();
-         $userId = 'Danh';
-         $getBank = $bankModel->getBankByUserId($userId);
-         $check = $getBank == false;
-         $bankModel->rollBack();
-         if ($check === true) {
-             $this->assertTrue(true);
-         } else {
-             $this->assertTrue(false);
-         }
-     }
-      // Test case testGetBankByUserIdUserIdObject
-      public function testGetBankByUserIdUserIdObject()
-      {
-          $bankModel = new BankModel();
-          $bankModel->startTransaction();
-          $userId = new UserRepository;
-          $getBank = $bankModel->getBankByUserId($userId);
-          $check = $getBank == false;
-          $bankModel->rollBack();
-          if ($check === true) {
-              $this->assertTrue(true);
-          } else {
-              $this->assertTrue(false);
-          }
-      }
-       // Test case testGetBankByUserIdUserIdNull
-       public function testGetBankByUserIdUserIdNull()
-       {
-           $bankModel = new BankModel();
-           $bankModel->startTransaction();
-           $userId = null;
-           $getBank = $bankModel->getBankByUserId($userId);
-           $check = $getBank == false;
-           $bankModel->rollBack();
-           if ($check === true) {
-               $this->assertTrue(true);
-           } else {
-               $this->assertTrue(false);
-           }
-       }
-
-     /**
-     * Test getBanks function, 'Hiếu Cao' do this
-     * */
-    // Test case Get Banks Pass
-    public function testGetBanksPass()
+    // Test case testGetBankByUserIdUserIdSpecial
+    public function testGetBankByUserIdUserIdSpecial()
     {
         $bankModel = new BankModel();
-        $bankId = $userId = -1;
-        $cost = 100;
-
-        $bankModel->insertBankWithId($bankId, $userId, $cost);
-        $listBank = $bankModel->getBanks();
-
-        $expected = true;
-        $actual = is_array($listBank) && count($listBank) > 0;
-        // Delete new Bank After test
-        $bankModel->deleteBankByUserId($userId);
-
-        $this->assertEquals($expected, $actual);
-    }
-    // Test case Get Banks Fail
-    public function testGetBanksFail()
-    {
-        $bankModel = new BankModel();
-        $bankId = $userId = -1;
-        $cost = 100;
-
-        $bankModel->insertBankWithId($bankId, $userId, $cost);
-        $listBank = $bankModel->getBanks();
-
-        $actual = !is_array($listBank) || !count($listBank) > 0 ? false : true;
-        // Delete new Bank After test
-        $bankModel->deleteBankByUserId($userId);
-
-        if ($actual == true) {
+        $bankModel->startTransaction();
+        $userId = '#$#@#';
+        $getBank = $bankModel->getBankByUserId($userId);
+        $check = $getBank == false;
+        $bankModel->rollBack();
+        if ($check === true) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
         }
     }
-
-    /**
-     * Test get bank by id Hieu-Le
-     * */
-    // Test get bank by id ok
-    public function testBankByIdOk()
+    // Test case testGetBankByUserIdUserIdString
+    public function testGetBankByUserIdUserIdString()
     {
         $bankModel = new BankModel();
-        $bankId = -1;
-
         $bankModel->startTransaction();
-
-        $bankModel->insertBankWithId($bankId, -1, 123);
-
-        $findBank = $bankModel->getBankById($bankId);
-        $actual = $findBank != false &&
-            $findBank["id"] == $bankId &&
-            $findBank["cost"] == 123 &&
-            $findBank["user_id"] == -1;
-
+        $userId = 'Danh';
+        $getBank = $bankModel->getBankByUserId($userId);
+        $check = $getBank == false;
         $bankModel->rollBack();
-        $this->assertTrue($actual ? true : false);
+        if ($check === true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
-    // Test get bank by id float
-    public function testBankByIdFloat()
+    // Test case testGetBankByUserIdUserIdObject
+    public function testGetBankByUserIdUserIdObject()
     {
         $bankModel = new BankModel();
-        $bankId = 1.23;
-
         $bankModel->startTransaction();
-
-        $findBank = $bankModel->getBankById($bankId);
-
+        $userId = new UserRepository;
+        $getBank = $bankModel->getBankByUserId($userId);
+        $check = $getBank == false;
         $bankModel->rollBack();
-        $this->assertTrue($findBank ? false : true);
+        if ($check === true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
-    // Test get bank by id String
-    public function testBankByIdString()
+    // Test case testGetBankByUserIdUserIdNull
+    public function testGetBankByUserIdUserIdNull()
     {
         $bankModel = new BankModel();
-        $bankId = "abc";
-
         $bankModel->startTransaction();
-
-        $findBank = $bankModel->getBankById($bankId);
-
+        $userId = null;
+        $getBank = $bankModel->getBankByUserId($userId);
+        $check = $getBank == false;
         $bankModel->rollBack();
-        $this->assertTrue($findBank ? false : true);
+        if ($check === true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
     }
-    // Test get bank by id Null
-    public function testBankByIdNull()
-    {
-        $bankModel = new BankModel();
-        $bankId = null;
-
-        $bankModel->startTransaction();
-
-        $findBank = $bankModel->getBankById($bankId);
-
-        $bankModel->rollBack();
-        $this->assertTrue($findBank ? false : true);
-    }
-    // Test get bank by id Object
-    public function testBankByIdObject()
-    {
-        $bankModel = new BankModel();
-        $bankId = new BankModel();
-
-        $bankModel->startTransaction();
-
-        $findBank = $bankModel->getBankById($bankId);
-
-        $bankModel->rollBack();
-        $this->assertTrue($findBank ? false : true);
-    }
-    // Test get bank by id Bool true
-    public function testBankByIdBoolTrue()
-    {
-        $bankModel = new BankModel();
-        $bankId = true;
-
-        $bankModel->startTransaction();
-
-        $findBank = $bankModel->getBankById($bankId);
-
-        $bankModel->rollBack();
-        $this->assertTrue($findBank ? false : true);
-    }
-    // Test get bank by id Bool false
-    public function testBankByIdBoolFalse()
-    {
-        $bankModel = new BankModel();
-        $bankId = false;
-
-        $bankModel->startTransaction();
-
-        $findBank = $bankModel->getBankById($bankId);
-
-        $bankModel->rollBack();
-        $this->assertTrue($findBank ? false : true);
-    }
-     // Test get bank by id Array
-     public function testBankByIdArray()
-     {
-         $bankModel = new BankModel();
-         $bankId = [1,2,3];
- 
-         $bankModel->startTransaction();
- 
-         $findBank = $bankModel->getBankById($bankId);
- 
-         $bankModel->rollBack();
-         $this->assertTrue($findBank ? false : true);
-     }
 }

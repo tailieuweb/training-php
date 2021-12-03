@@ -22,7 +22,7 @@ class BankModel extends BaseModel
     public function getBankByUserId($userId)
     {
         $userId = is_integer($userId) ? $userId : NULL;
-        if($userId==null){
+        if ($userId == null) {
             return false;
         }
         $sql = 'SELECT `banks`.*
@@ -79,7 +79,7 @@ class BankModel extends BaseModel
                 $sql = 'UPDATE `banks`
                         SET `cost` = "' . $cost . '"
                         WHERE `user_id` = ' . $userId;
-                 return $this->update($sql);
+                return $this->update($sql);
             }
         }
         return false;
@@ -93,8 +93,8 @@ class BankModel extends BaseModel
      */
     public function deleteBankByUserId($id)
     {
-        $id = is_integer($id);
-        if($id==null){
+        $id = is_numeric($id);
+        if ($id == false) {
             return false;
         }
         $sql = 'DELETE FROM `banks` WHERE `user_id` = ' . $id;
