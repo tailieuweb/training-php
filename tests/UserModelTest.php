@@ -101,10 +101,58 @@ class UserModelTest extends TestCase
     }
 
     //test findUserById with id is string
-    public function testFindUserByIdStr(){
+    public function testFindUserByIdString(){
         $userModel = new UserModel();
         $userId = 'abc';
         $actual = $userModel->findUserById($userId);
+        if ($actual != null) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+
+    //test findUserByIdEmpty
+    public function testFindUserByIdEmpty(){
+        $userModel = new UserModel();
+        $userId = '';
+        $actual = $userModel->findUserById($userId);
+        if ($actual != null) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+
+    //test 
+    public function testFindUserByIdBool(){
+        $userModel = new UserModel();
+        $userId = true;
+        $actual = $userModel->findUserById($userId);
+        if ($actual != null) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+
+    public function testFindUserByIdArray(){
+        $userModel = new UserModel();
+        $userId = [1,2,3];
+        $id = $userModel->$this->hashToId($userId);
+        $actual = $userModel->findUserById($id);
+        if ($actual != null) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+
+    public function testFindUserByIdObject(){
+        $userModel = new UserModel();
+        $userId = new UserModel();
+        $id = $userModel->$this->hashToId($userId);
+        $actual = $userModel->findUserById($id);
         if ($actual != null) {
             $this->assertTrue(false);
         } else {

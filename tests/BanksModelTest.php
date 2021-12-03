@@ -55,8 +55,8 @@ class BanksModelTest extends TestCase
         }
     }
 
-    //testInsertBankIdStr
-    public function testInsertBankIdStr(){
+    //testInsertBankIdString
+    public function testInsertBankIdString(){
         $bankModel = new BankModel();
         $input = [];
         $input['id'] = 'abcd';
@@ -127,9 +127,9 @@ class BanksModelTest extends TestCase
     }
     
     public function testGetBanksNg(){
-        $bankModel             = new BankModel();
+        $bankModel = new BankModel();
         $param["keyword"] = "123";
-        $actual           = $bankModel->getBanks($param);
+        $actual = $bankModel->getBanks($param);
         if ($actual != null) {
             $this->assertTrue(false);
         } else {
