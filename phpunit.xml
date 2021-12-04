@@ -6,7 +6,7 @@
          cacheResult ="false"
 >
     <testsuites>
-        <testsuite name="SqlWsContractImport">
+        <testsuite name="groupJ">
                 <file>./Tests/TranVanLap_UserModelTest.php</file>
             <file>./Tests/TranVanLap_BankModelTest.php</file>
         </testsuite>
