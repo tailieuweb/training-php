@@ -937,5 +937,66 @@ class BankModelTest extends TestCase {
         return $this->assertTrue(false);
         // var_dump($user);die();
     }
+    /* Kiểm tra xem các phương thức của đối tượng có thể sử dụng đối với hàm findBankById ko*/
+
+    public function testGetInstanceFindBankOk()
+    {
+        $id = 2;
+        $actual = gettype(BankModel::getInstance()->findBankById($id));
+        printf(" ".$actual." ");
+        $expectedArray = 'array';
+        $this->assertEquals($expectedArray, $actual);
+    }
+    /*Kiểm tra xem các phương thức của đối tượng có thể sử dụng đối với hàm updateBank */
+    public function testGetInstanceUpdateBankOk()
+    {
+        $bank = new BankModel();
+        $input = [];
+        $input['bank_id'] = 22;
+        $input['id'] = 3;
+        $input['cost'] = 1;
+        $bank->startTransaction();
+        $actual = gettype(BankModel::getInstance()->updateBank($input));
+        $bank->rollback();
+        printf(" ".$actual." ");
+        if($actual != true){
+            $this->assertTrue(false);
+        
+        }else{
+            $this->assertTrue(true);
+        }
+    }
+    /*Kiểm tra xem các phương thức của đối tượng có thể sử dụng đối với hàm insert */
+    public function testGetInstanceInsertBankOk()
+    {
+        $bank = new BankModel();
+        $input = [];
+        $input['bank_id'] = 22;
+        $input['id'] = 3;
+        $input['cost'] = 10000000000;
+        $bank->startTransaction();
+        $actual = gettype(BankModel::getInstance()->InsertBank($input));
+        $bank->rollback();
+        printf(" ".$actual." ");
+        if($actual != true){
+            $this->assertTrue(false);
+        
+        }else{
+            $this->assertTrue(true);
+        }
+    }
+    /*Kiểm tra xem các phương thức của đối tượng có thể sử dụng đối với hàm delete */
+    public function  testGetInstanceDeleteBankOk()
+        {
+            $bank = new BankModel();
+            $id = 2;
+            $token_false = 'JFASJDBAJS566';
+            $bank->startTransaction();
+            $actual = gettype(BankModel::getInstance()->deleteBankById($id,$token_false));
+            $bank->startTransaction();
+            printf(" ".$actual." ");
+            $expectedArray = Null;
+            $this->assertEmpty($expectedArray,$actual);
+        }
 
 }
