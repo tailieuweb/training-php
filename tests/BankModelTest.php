@@ -19,7 +19,7 @@ class BankModelTest extends TestCase
     {
         $BankModel = new BankModel();
 
-        $params['keyword'] = 999999;
+        $params['keyword'] = 99;
 
         $Bank = $BankModel->getBanks($params);
 
