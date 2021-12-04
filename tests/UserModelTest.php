@@ -3,7 +3,6 @@ use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
 { 
-
     /**
      * Test case Okie
      */
@@ -42,8 +41,9 @@ class UserModelTest extends TestCase
     public function testInsertUserOK()
     {
         $userModel = new UserModel();
-        $bankModel = new BankModel();
+        
         $user = array(
+            "id" => 10,
             'name' => 'minh an',
             'fullname' => 'minhan',
             'type' => 'user',
@@ -52,16 +52,17 @@ class UserModelTest extends TestCase
         );
         $excute = true;
 
-        $actual = $userModel->insertUser($user, $bankModel);
+        $actual = $userModel->insertUser($user, $userModel);
         $this->assertEquals($excute, $actual);
     }
      /*Test  insert nhập sai user Not OK*/
  public function testInsertUserNG()
  {
      $userModel = new UserModel();
-     $bankModel = new BankModel();
+     
      $actual = null;
      $user = array(
+        "id" => 10,
          'name' => 'minh an',
          'fullname' => 'minhan',
          'type' => 'user',
@@ -69,7 +70,7 @@ class UserModelTest extends TestCase
          'password' => '12345'
      );
      try {
-         $actual = $userModel->insertUser('abcdefgh',  $bankModel);
+         $actual = $userModel->insertUser('abcdefgh',  $userModel);
      } catch (Throwable $e) {
          $excute = false;
      }
@@ -79,9 +80,10 @@ class UserModelTest extends TestCase
 public function testInsertUserStringNotOK()
 {
    $userModel = new UserModel();
-   $bankModel = new BankModel();
+  
    $actual = null;
    $user = array(
+    "id" => 10,
        'name' => 'minh an',
            'fullname' => 'minhan',
            'type' => 'user',
@@ -89,7 +91,7 @@ public function testInsertUserStringNotOK()
            'password' => '12345'
    );
    try {
-       $actual = $userModel->insertUser("sssdasad",  $bankModel);
+       $actual = $userModel->insertUser("sssdasad",  $userModel);
    } catch (Throwable $e) {
        $excute = false;
    }
@@ -99,9 +101,10 @@ public function testInsertUserStringNotOK()
      public function testInsertUserIntegerNotOK()
      {
          $userModel = new UserModel();
-         $bankModel = new BankModel();
+        
          $actual = null;
          $user = array(
+            "id" => 10,
              'name' => 'minh an',
              'fullname' => 'minhan',
              'type' => 'user',
@@ -109,7 +112,7 @@ public function testInsertUserStringNotOK()
              'password' => '12345'
          );
          try {
-             $actual = $userModel->insertUser(111,  $bankModel);
+             $actual = $userModel->insertUser(111,  $userModel);
          } catch (Throwable $e) {
              $excute = false;
          }
@@ -120,9 +123,10 @@ public function testInsertUserStringNotOK()
       public function testInsertUserRealnumberNotOK()
       {
           $userModel = new UserModel();
-          $bankModel = new BankModel();
+         
           $actual = null;
           $user = array(
+            "id" => 10,
               'name' => 'minh an',
               'fullname' => 'minhan',
               'type' => 'user',
@@ -130,13 +134,13 @@ public function testInsertUserStringNotOK()
               'password' => '12345'
           );
           try {
-              $actual = $userModel->insertUser(14.1,  $bankModel);
+              $actual = $userModel->insertUser(14.1,  $userModel);
           } catch (Throwable $e) {
               $excute = false;
           }
           $this->assertEquals($excute, $actual);
       }
-  
+     
 
   /*  Test hàm getUser khi không có dữ liệu truyền vào  OK */
 public function testGetUserNotDataOK()
@@ -153,52 +157,57 @@ public function testGetUserNotDataOK()
 }
 
 
+  
+
+
      /*Test hàm getUser khi có dữ liệu truyền vào là kiểu đối tượng*/
      public function testGetUserObjectNotOK()
      {
          $userModel = new UserModel();
          $actual = null;
  
-         $keyword = array(
+         $params = array(
              'keyword' => $userModel,
          );
          try {
-             $actual = $userModel->getUsers($keyword);
+             $actual = $userModel->getUsers($params);
          } catch (Throwable $e) {
              $excute = false;
          }
          $this->assertEquals($excute, $actual);
      }
-
-
  /*Test hàm getUser khi có dữ liệu truyền vào là Array*/
  public function testGetUserArrayNotOK()
  {
      $userModel = new UserModel();
      $actual = null;
 
-     $keyword = array(
-         'keyword' => ['ad'],
+     $params = array(
+        'keyword' => $userModel,
      );
      try {
-         $actual = $userModel->getUsers($keyword);
+         $actual = $userModel->getUsers($params);
      } catch (Throwable $e) {
          $excute = false;
      }
      $this->assertEquals($excute, $actual);
+
+
  }
-  /* Test hàm getUser khi có dữ liệu truyền vào  OK  */
-  public function testGetUserOK()
-  {
-      $userModel = new UserModel();
-      $keyword = array(
-          'keyword' => 'admin'
-      );
-      $actual = $userModel->getUsers($keyword);
-      if ($actual != []) {
-          $this->assertTrue(true);
-      } else {
-          $this->assertTrue(false);
-      }
-  }
-}
+// 
+// /* Test hàm getUser khi có dữ liệu truyền vào  OK  */
+// public function testGetUserOK()
+// {
+//     $userModel = new UserModel();
+//     $params['keyword']  = 'admin';
+//     $users = array(
+//         $users =>$params
+//     );
+//     $actual = $userModel->getUsers($users);
+//     if ($actual != []) {
+//         $this->assertTrue(true);
+//     } else {
+//         $this->assertTrue(false);
+//     }
+ }
+

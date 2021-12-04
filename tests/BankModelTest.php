@@ -4,6 +4,21 @@ use PHPUnit\Framework\TestCase;
 class BankModelTest extends TestCase
 {
 
+
+        /*Test  insert bank nhập đúng OK*/
+        public function testInsertBankOK()
+        {
+            $bankModel = new BankModel();
+            
+            $bank = array(
+                'user_id' => '1',
+                'cost' => '11',
+            );
+            $excute = true;
+    
+            $actual = $bankModel->insertBank($bank, $bankModel);
+            $this->assertEquals($excute, $actual);
+        }
  /*Test  insert nhập sai Bank Not OK*/
      public function testInsertBankNotOK()
     {
@@ -11,8 +26,8 @@ class BankModelTest extends TestCase
     $bankModel = new BankModel();
     $actual = null;
      $bank = array(
-        'user_id' => '6',
-        'cost' => '123',
+        'user_id' => '1',
+            'cost' => '11',
     );
     try {
       $actual = $bankModel->insertBanks('abcdefgh',$bankModel);
@@ -28,8 +43,8 @@ class BankModelTest extends TestCase
    $bankModel = new BankModel();
    $actual = null;
    $bank = array(
-        'user_id' => '6',
-        'cost' => '123',
+    'user_id' => '1',
+    'cost' => '11',
    );
    try {
     $actual = $bankModel->insertBank('abcdefgh',$bankModel);
@@ -46,7 +61,7 @@ class BankModelTest extends TestCase
      $actual = null;
      $bank = array(
         'user_id' => '1',
-        'cost' => '123',
+            'cost' => '11',
      );
      try {
         $actual = $bankModel->insertBank(111,$bankModel);
@@ -63,7 +78,7 @@ class BankModelTest extends TestCase
      $actual = null;
      $bank = array(
         'user_id' => '1',
-        'cost' => '123',
+            'cost' => '11',
      );
      try {
         $actual = $bankModel->insertBank(12.2,$bankModel);
@@ -74,21 +89,6 @@ class BankModelTest extends TestCase
    }
 
 
+          
 
-
-
-       /*Test  insert user nhập đúng OK*/
-    //    public function testInsertBankOk(){
-    //     $bankModel = new BankModel();
-    
-    //     $bank = array(
-           
-    //         'user_id' => '1',
-    //         'cost' => '1111',
-    //     );
-    //     $excute = true;
-    //     $actual = $bankModel->insertUser($bank, $bankModel);
-    //     $this->assertEquals($excute, $actual); 
-    // }
-    
 }
