@@ -5,12 +5,13 @@ require_once 'BaseModel.php';
 class UserModel extends BaseModel
 {
     protected static $_instance;
-    public function sumb($a,$b){
+    public function sumb($a, $b)
+    {
         return $a + $b;
     }
     public static function getInstance()
     {
-        if(self::$_instance !== null){
+        if (self::$_instance !== null) {
             return self::$_instance;
         }
         self::$_instance = new self();
@@ -19,7 +20,6 @@ class UserModel extends BaseModel
 
     public function findUserById($id)
     {
-        
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
 
@@ -66,7 +66,7 @@ class UserModel extends BaseModel
     }
     // Delete user by id : Step 2
     public function dropUserById($id)
-    {   
+    {
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
     }
@@ -143,5 +143,6 @@ class UserModel extends BaseModel
     }
     public function rollBack()
     {
-       self::$_connection->rollback();
+        self::$_connection->rollback();
     }
+}
