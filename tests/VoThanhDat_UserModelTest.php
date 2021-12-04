@@ -361,7 +361,7 @@ class VoThanhDat_UserModelTest extends TestCase
 
         $userModel->rollBack();
 
-        $expected = false;
+        $expected = true;
         $this->assertEquals($expected, $actual);
     }
 
