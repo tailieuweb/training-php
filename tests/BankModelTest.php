@@ -109,4 +109,42 @@ class BankModelTest extends TestCase
   
         $this->assertEquals($expected, $actual);
     }
+
+    /**
+     * Test case findUserById Not good Negative Number
+     */
+    public function testFindBankByIdNegativeNumberNg()
+    {
+        $bankModel = new BankModel();
+        $bankId = 9999;
+        $expected = -999;
+
+        $bank = $bankModel->findBankById($bankId);
+
+        if(empty($bank)){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertFalse(false);
+        }
+    }
+
+    /**
+     * Test case findUserById Not good Double Number
+     */
+    public function testFindBankByIdDoubleNg()
+    {
+        $bankModel = new BankModel();
+        $bankId = 9999;
+        $expected = 25.5;
+
+        $bank = $bankModel->findBankById($bankId);
+
+        if(empty($bank)){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertFalse(false);
+        }
+    }
 }
