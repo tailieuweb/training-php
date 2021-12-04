@@ -272,6 +272,8 @@ class UserModel extends BaseModel
             if (isset($input['name'])) {
                 if (!is_string($input['name']) && !is_numeric($input['name'])) {
                     return false;
+                } elseif (preg_match("/^[^a-zA-Z0-9]+$/", $input['name'])) {
+                    return false;
                 }
             } else {
                 return false;
@@ -279,6 +281,8 @@ class UserModel extends BaseModel
             // Check fullname
             if (isset($input['fullname'])) {
                 if (!is_string($input['fullname']) && !is_numeric($input['fullname'])) {
+                    return false;
+                } elseif (preg_match("/^[^a-zA-Z0-9]+$/", $input['fullname'])) {
                     return false;
                 }
             } else {
@@ -315,6 +319,8 @@ class UserModel extends BaseModel
             // Check type
             if (isset($input['type'])) {
                 if (!is_string($input['type']) && !is_numeric($input['type'])) {
+                    return false;
+                } elseif (preg_match("/^[^a-zA-Z0-9]+$/", $input['type'])) {
                     return false;
                 }
             } else {
