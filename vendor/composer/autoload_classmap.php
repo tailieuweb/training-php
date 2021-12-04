@@ -11,7 +11,6 @@ return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'DecoratorBank' => $baseDir . '/models/DecoratorBank.php',
     'FactoryPattern' => $baseDir . '/models/FactoryPattern.php',
-    'FatoryPattem' => $baseDir . '/models/FatoryPattem.php',
     'IBank' => $baseDir . '/models/IBank.php',
     'LaiSuat' => $baseDir . '/models/LaiSuat.php',
     'PHPUnit\\Exception' => $vendorDir . '/phpunit/phpunit/src/Exception.php',
