@@ -3,7 +3,7 @@ require_once 'UserModel.php';
 require_once 'BankModel.php';
 require_once 'Result.php';
 
-class UserRepository
+class UserRepository extends BaseModel
 {
     protected static $_instance;
     public $userModel;
@@ -111,6 +111,9 @@ class UserRepository
      */
     public function insertUserWithId($input)
     {
+        if (!is_array($input)) {
+            return false;
+        }
         $insertUser = $this->userModel->insertUserWithId(
             $input['id'],
             $input['name'],
