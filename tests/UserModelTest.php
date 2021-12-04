@@ -191,6 +191,83 @@ class UserModelTest extends TestCase
         $actual = $userModel->auth($username, $password);
         $this->assertEmpty($actual, "actual is not empty");
     }
+    
+    /*
+    File: UserModel.
+    Id: 07
+    Function: auth(username, password)
+    Desc: Test auth with input(username) is empty
+    Status: Ok
+    Author: Phuong Nguyen
+    */
+    public function testAuth_WithUsername_IsEmpty()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make("user");
+        $password = "password";
+        $username = "";
+
+        $actual = $userModel->auth($username, $password);
+        $this->assertEmpty($actual, "actual is not empty");
+    }
+
+      /*
+    File: UserModel.
+    Id: 07
+    Function: auth(username, password)
+    Desc: Test auth with input(password) is empty
+    Status: Ok
+    Author: Phuong Nguyen
+    */
+    public function testAuth_WithPassword_IsEmpty()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make("user");
+        $password = "";
+        $username = "username";
+
+        $actual = $userModel->auth($username, $password);
+        $this->assertEmpty($actual, "actual is not empty");
+    }
+
+     /*
+    File: UserModel.
+    Id: 07
+    Function: auth(username, password)
+    Desc: Test auth with input(username) is boolean
+    Status: Ok
+    Author: Phuong Nguyen
+    */
+    public function testAuth_WithUsername_IsBoolean()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make("user");
+        $password = "password";
+        $username = true;
+
+        $actual = $userModel->auth($username, $password);
+        $this->assertEmpty($actual, "actual is not empty");
+    }
+
+
+      /*
+    File: UserModel.
+    Id: 07
+    Function: auth(username, password)
+    Desc: Test auth with input(password) is boolean
+    Status: Ok
+    Author: Phuong Nguyen
+    */
+    public function testAuth_WithPassword_IsBoolean()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make("user");
+        $password = true;
+        $username = "username";
+
+        $actual = $userModel->auth($username, $password);
+        $this->assertEmpty($actual, "actual is not empty");
+    }
 
     /*
     File: UserModel.
