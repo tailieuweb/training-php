@@ -1,6 +1,7 @@
 <?php
+
 require_once "./models/FactoryPattern.php";
-require_once "./tests/resource-test/User.php";
+require_once "./models/BankModel.php";
 
 $factory = new FactoryPattern();
 $userModel = $factory->make("user");

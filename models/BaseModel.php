@@ -5,9 +5,6 @@ abstract class BaseModel
 {
     // Database connection
     protected static $_connection;
-    protected static $userInstance;
-    protected static $bankInstance;
-
     public function __construct()
     {
 
@@ -96,7 +93,7 @@ abstract class BaseModel
         self::$_connection->begin_transaction();
     }
 
-    public  function rollback(){
+    public function rollback(){
         self::$_connection->rollback();
     }
 }

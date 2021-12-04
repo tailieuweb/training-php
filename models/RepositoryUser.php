@@ -1,44 +1,47 @@
 <?php
-
-use SebastianBergmann\FileIterator\Factory;
-
 require_once './models/UserModel.php';
 require_once './models/RepositoryInterface.php';
-
-class RepositoryUser implements RepositoryInterface{
+class RepositoryUser implements RepositoryInterface 
+{
     protected static $userModel;
 
     function __construct()
     {
         self::$userModel = UserModel::getInstance();
     }
-    
-    public function read() {
+
+    public function read()
+    {
         return self::$userModel->getAll();
     }
-    public function insert($input) {
+    public function insert($input)
+    {
         return self::$userModel->insertUser($input);
     }
-    public function update($input) {
+    public function update($input)
+    {
         return self::$userModel->updateUser($input);
     }
-    public function delete($id) {
+    public function delete($id)
+    {
         return self::$userModel->deleteUserById($id);
     }
-    public function find($id) {
+    public function find($id)
+    {
         return self::$userModel->findUserById($id);
     }
-    public function search($params) {
+    public function search($params)
+    {
         return self::$userModel->getUsers($params);
     }
-    public function auth($userName, $password) {
+    public function auth($userName, $password)
+    {
         return self::$userModel->auth($userName, $password);
     }
-    public function rollback() {
-        return self::$userModel->rollback();
+    public function startTransaction() {
+        self::$userModel->startTransaction();
     }
-    public function startTransaction(){
-        return self::$userModel->startTransaction();
-     }
+    public function rollback() {
+        self::$userModel->rollback();
+    }
 }
-

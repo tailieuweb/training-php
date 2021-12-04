@@ -1,9 +1,4 @@
 <?php
-foreach (glob("./tests/resource-test/*.php") as $file) {
-    require $file;
-}
-require_once "./models/FactoryPattern.php";
-
 use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertEquals;
@@ -25,27 +20,27 @@ class UserModelTest extends TestCase
         $userModel->startTransaction();
         $expectedFirst = [
             [
-                "id" => "198",
-                "name" => "test2insert",
-                "fullname" => "test2",
-                "email" => "test2@gmail.com",
-                "type" => "user",
-                "password" => "5f4dcc3b5aa765d61d8327deb882cf99"
+                "id" => "2",
+                "name" => "test2",
+                "fullname" => "",
+                "email" => "",
+                "type" => "",
+                "password" => "202cb962ac59075b964b07152d234b70"
             ],
         ];
 
         $expectedLast =
         [
             [
-                "id" => "220",
-                "name" => "test2insert",
-                "fullname" => "test2",
-                "email" => "test2@gmail.com",
-                "type" => "user",
-                "password" => "5f4dcc3b5aa765d61d8327deb882cf99"
+                "id" => "138",
+                "name" => "",
+                "fullname" => "",
+                "email" => "%!?$@gmail.com",
+                "type" => "",
+                "password" => "d41d8cd98f00b204e9800998ecf8427e"
             ],
         ];
-        $expectedLength = 68;
+        $expectedLength = 56;
         $actual = $userModel->read();
         $actualLength = count($actual);
         // var_dump($actual);die();
@@ -58,7 +53,7 @@ class UserModelTest extends TestCase
             );
             $v2 = $this->assertEquals(
                 $expectedLast[0],
-                $actual[$expectedLength-1],
+                $actual[$expectedLength - 1],
                 "Expected and actual not equals"
             );
             $this->assertFalse(($v1 && $v2), "actualfrist is not equals actuallast");
@@ -81,16 +76,15 @@ class UserModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
-        $userModel->startTransaction();
-        $username = "test2last";
+        $username = "test2";
         $password = "123";
 
         $expected = [
-            "id" => "123",
-            "name" => "test2last",
-            "fullname" => "test2",
-            "email" => "test2@gmail.com",
-            "type" => "user",
+            "id" => "2",
+            "name" => "test2",
+            "fullname" => "",
+            "email" => "",
+            "type" => "",
             "password" => "202cb962ac59075b964b07152d234b70"
         ];
 
@@ -373,7 +367,7 @@ class UserModelTest extends TestCase
         $userModel->startTransaction();
 
         $username = 'test2%";TRUNCATE bank;##';
-        $password = '202cb962ac59075b964b07152d234b70';
+        $password = '123';
         $actionAuth = $userModel->auth($username, $password);
 
         //Array
@@ -397,8 +391,7 @@ class UserModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
-        $userModel->startTransaction();
-        $username = new User("test2", "123");
+        $username = new stdClass();
         $password = "123";
 
         $actual = $userModel->auth($username, $password);
@@ -418,8 +411,7 @@ class UserModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
-        $userModel->startTransaction();
-        $password = new User("test2", "123");
+        $password = new stdClass();
         $username = "test2";
 
         $actual = $userModel->auth($username, $password);
@@ -467,6 +459,83 @@ class UserModelTest extends TestCase
         $actual = $userModel->auth($username, $password);
         $this->assertEmpty($actual, "actual is not empty");
         $userModel->rollback();
+    }
+    
+    /*
+    File: UserModel.
+    Id: 07
+    Function: auth(username, password)
+    Desc: Test auth with input(username) is empty
+    Status: Ok
+    Author: Phuong Nguyen
+    */
+    public function testAuth_WithUsername_IsEmpty()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make("user");
+        $password = "password";
+        $username = "";
+
+        $actual = $userModel->auth($username, $password);
+        $this->assertEmpty($actual, "actual is not empty");
+    }
+
+      /*
+    File: UserModel.
+    Id: 07
+    Function: auth(username, password)
+    Desc: Test auth with input(password) is empty
+    Status: Ok
+    Author: Phuong Nguyen
+    */
+    public function testAuth_WithPassword_IsEmpty()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make("user");
+        $password = "";
+        $username = "username";
+
+        $actual = $userModel->auth($username, $password);
+        $this->assertEmpty($actual, "actual is not empty");
+    }
+
+     /*
+    File: UserModel.
+    Id: 07
+    Function: auth(username, password)
+    Desc: Test auth with input(username) is boolean
+    Status: Ok
+    Author: Phuong Nguyen
+    */
+    public function testAuth_WithUsername_IsBoolean()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make("user");
+        $password = "password";
+        $username = true;
+
+        $actual = $userModel->auth($username, $password);
+        $this->assertEmpty($actual, "actual is not empty");
+    }
+
+
+      /*
+    File: UserModel.
+    Id: 07
+    Function: auth(username, password)
+    Desc: Test auth with input(password) is boolean
+    Status: Ok
+    Author: Phuong Nguyen
+    */
+    public function testAuth_WithPassword_IsBoolean()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make("user");
+        $password = true;
+        $username = "username";
+
+        $actual = $userModel->auth($username, $password);
+        $this->assertEmpty($actual, "actual is not empty");
     }
 
     /*
