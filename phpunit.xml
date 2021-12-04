@@ -6,8 +6,17 @@
          cacheResult ="false"
 >
     <testsuites>
-        <testsuite name="SqlWsContractImport">
+        <testsuite name="a">
+            <file>./tests/UserModelTest.php</file>
+        </testsuite>
+         <testsuite name="b">
             <file>./tests/RepositoryTest.php</file>
+        </testsuite>
+         <testsuite name="c">
+            <file>./tests/BankModelTest.php</file>
+        </testsuite>
+         <testsuite name="d">
+            <file>./tests/FactoryPatternTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
@@ -15,6 +24,7 @@
     <directory suffix=".php">./models</directory>
     </whitelist>
     </filter>
+
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>

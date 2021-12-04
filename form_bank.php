@@ -11,8 +11,8 @@ $users = $bankModel->getUser();
 $bank = NULL; //Add new bank
 $_id = NULL;
 
-if (!empty($_GET['id'])) {
-    $_id = $_GET['id'];
+if (!empty($_GET['bank_id'])) {
+    $_id = $_GET['bank_id'];
     $bank = $bankModel->findBankById($_id);//Update existing user
 }
 
