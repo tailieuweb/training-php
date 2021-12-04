@@ -3,11 +3,11 @@ require_once 'UserModel.php';
 require_once 'BankModel.php';
 require_once 'Result.php';
 
-class UserRepository
+class UserRepository extends BaseModel
 {
     protected static $_instance;
-    private $userModel;
-    private $bankModel;
+    public $userModel;
+    public $bankModel;
     //constructor
     public function __construct()
     {
@@ -80,8 +80,9 @@ class UserRepository
             return false;
         }
         $userId = $findUser['id'];
-        $this->userModel->deleteUserById($id);
-        $this->bankModel->deleteBankByUserId($userId);
+        $deleteUser = $this->userModel->deleteUserById($id);
+        $deleteBank = $this->bankModel->deleteBankByUserId($userId);
+        return $deleteUser && $deleteBank;
     }
     /**
      * Update  User With Bank
@@ -110,6 +111,9 @@ class UserRepository
      */
     public function insertUserWithId($input)
     {
+        if (!is_array($input)) {
+            return false;
+        }
         $insertUser = $this->userModel->insertUserWithId(
             $input['id'],
             $input['name'],
