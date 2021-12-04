@@ -6,7 +6,7 @@
          cacheResult ="false"
 >
     <testsuites>
-        <testsuite name="SqlWsContractImport">
+        <testsuite name="NhomJ">
             <file>./Tests/LeTrungHieu_BankModelTest.php</file>
             <file>./Tests/LeTrungHieu_UserModelTest.php</file>
             <file>./Tests/LeTrungHieu_ResultTest.php</file>
