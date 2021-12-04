@@ -680,6 +680,21 @@ class UserModelTest extends TestCase
           $this->assertFalse(false);
       }
     }
+    public function testFindUserByIdNegativeNumberNg()
+    {
+        $userModel = new UserModel();
+        $userId = 9999;
+        $expected = -999;
+
+        $user = $userModel->findUserById($userId);
+
+        if(empty($user)){
+            $this->assertTrue(true);
+        }
+        else{
+            $this->assertFalse(false);
+        }
+    }
     // Test truong hop id la chuoi
    //  public function testFindUserByIdIsString()
    //  { 
@@ -693,24 +708,16 @@ class UserModelTest extends TestCase
 
    //    $this->assertEquals($expected, $actual);
    //  }
-    // Test trường hợp id là số âm
-   //  public function testFindUserByIdIsNegativeNumber()
-   //  {
-   //      $userModel = new UserModel();
-   //      $userId = -10;
-   //      $expected = 'error';
-   //      $actual = $userModel->findUserById($userId);
-   //      $this->assertEquals($expected, $actual);
-   //  }
+    
    //  // Test trường hợp id là số thực
-   //  public function testFindUserByIdIsDoubleNumber()
-   //  {
-   //      $userModel = new UserModel();
-   //      $userId = 2.5;
-   //      $expected = 'error';
-   //      $actual = $userModel->findUserById($userId);
-   //      $this->assertEquals($expected, $actual);
-   //  }
+    // public function testFindUserByIdIsDoubleNumber()
+    // {
+    //     $userModel = new UserModel();
+    //     $userId = 2.5;
+    //     $expected = 2;
+    //     $actual = $userModel->findUserById($userId);
+    //     $this->assertEquals($expected, $actual);
+    // }
     // Test trường hợp id là null
    //  public function testFindUserByIdIsNull()
    //  {
@@ -746,16 +753,16 @@ class UserModelTest extends TestCase
 
    //  }
     // Test trường hợp id là 1 object
-   //  public function testFindUserByIdIsObject()
-   //  {
-   //    $UserModel = new UserModel();
-  
-   //    $id = new stdClass();
-   //    $expected = 'error';
-   //    $actual = $UserModel->findUserById($id);
+    public function testFindUserByIdIsObject()
+    {
+        $bankModel = new BankModel();
 
-   //    $this->assertEquals($expected, $actual);
-   //  }
+        $id = new stdClass();
+        $expected = 'error';
+        $actual = $bankModel->findBankById($id);
+
+        $this->assertEquals($expected, $actual);
+    }
     // Test trường hợp id không tồn tại
     public function testFindUserByIdNotExist()
     {
@@ -768,15 +775,15 @@ class UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
-    // Test trường hợp id là kí tự
-   //  public function testFindUserByIdIsCharacters()
-   //  {
-   //      $userModel = new UserModel();
-   //      $userId = '@11';
-   //      $expected = 'error';
-   //      $actual = $userModel->findUserById($userId);
-   //      $this->assertEquals($expected, $actual);
-   //  }
+    //Test trường hợp id là kí tự
+    // public function testFindUserByIdIsCharacters()
+    // {
+    //     $userModel = new UserModel();
+    //     $userId = '@11';
+    //     $expected = 'Not invalid';
+    //     $actual = $userModel->findUserById($userId);
+    //     $this->assertEquals($expected, $actual);
+    // }
     /**
      * Test case DeleteUserById
      * 
