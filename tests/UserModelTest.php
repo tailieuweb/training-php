@@ -8,14 +8,14 @@ class UserModelTest extends TestCase
     {
        $userModel = new UserModel();
        $expected = [
-           "id" => 3,
-           "name" => "pp6",
-           "fullname" => "Paul Pogba",
-           "email" => "aaa@gmail.com",
-           "type" => "admin",
+           "id" => 1,
+           "name" => "luan",
+           "fullname" => "abc",
+           "email" => "luan@gmail.com",
+           "type" => 3,
            "password" => "827ccb0eea8a706c4c34a16891f84e7b",
        ];
-       $actual = $userModel->findUserById(3);
+       $actual = $userModel->findUserById(1);
        $this->assertEquals($expected, $actual[0]);
     }
     //
@@ -255,10 +255,10 @@ class UserModelTest extends TestCase
         $userModel = new UserModel();
         $expected = [
             "id" => 3,
-            "name" => "pp6",
-            "fullname" => "Paul Pogba",
-            "email" => "aaa@gmail.com",
-            "type" => "admin",
+            "name" => "luan",
+            "fullname" => "abc",
+            "email" => "luan@gmail.com",
+            "type" => 3,
             "password" => "827ccb0eea8a706c4c34a16891f84e7b",
         ];
         $key = "";
@@ -270,14 +270,14 @@ class UserModelTest extends TestCase
     {
        $userModel = new UserModel();
        $expected = [
-           "id" => 3,
-           "name" => "pp6",
-           "fullname" => "Paul Pogba",
-           "email" => "aaa@gmail.com",
-           "type" => "admin",
-           "password" => "827ccb0eea8a706c4c34a16891f84e7b",
+         "id" => 4,
+         "name" => "gb11",
+         "fullname" => "Gareth Bale",
+         "email" => "bbb@gmail.com",
+         "type" => "admin",
+         "password" => "827ccb0eea8a706c4c34a16891f84e7b",
        ];
-       $name = "pp6";
+       $name = "gb11";
        $password = "12345";
        $actual = $userModel->auth($name,$password);
        $this->assertEquals($expected, $actual[0]);
