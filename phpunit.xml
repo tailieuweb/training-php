@@ -11,6 +11,8 @@ cacheResult ="false"
 <file>./Tests/UserModelTest.php</file>
 <file>./Tests/LaiSuatTest.php</file>
 <file>./Tests/BankModelTest.php</file>
+<file>./tests/TestAuth.php</file>
+<file>./tests/TestFactoryPattern.php</file>
 </testsuite>
 </testsuites>
 
