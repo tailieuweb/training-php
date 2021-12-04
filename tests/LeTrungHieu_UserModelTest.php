@@ -33,7 +33,7 @@ class UserModelTest extends TestCase
     public function testFindUserByIdFloat()
     {
         $userModel = new UserModel();
-        $userId = 1.1;
+        $userId = -1.1;
 
         $userModel->startTransaction();
 
