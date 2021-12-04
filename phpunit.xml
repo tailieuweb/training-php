@@ -6,7 +6,7 @@
          cacheResult ="false"
 >
     <testsuites>
-        <testsuite name="SqlWsContractImport">
+        <testsuite name="NhomJ">
 
             <file>./Tests/NguyenKhacDanh_BankModelTest.php</file>
             <file>./Tests/NguyenKhacDanh_UserModelTest.php</file>
@@ -41,3 +41,4 @@
         <server name="TELESCOPE_ENABLED" value="false"/>
     </php>
 </phpunit>
+
