@@ -12,54 +12,68 @@ class BankModelTest extends TestCase
   // 1. Tham số hàm là một số nguyên.
   public function testInsertUserBankWithParamIsIntegerNumberNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = 1;
 
     $expected = "Parameter is not array";
     $actual = $bankModel->insertUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 2. Tham số hàm là giá trị NULL.
   public function testInsertUserBankWithParamIsNullValueNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = NULL;
 
     $expected = "Parameter is not array";
     $actual = $bankModel->insertUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 3. Tham số hàm là một chuỗi.
   public function testInsertUserBankWithParamIsStringNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = "hello";
 
     $expected = "Parameter is not array";
     $actual = $bankModel->insertUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 4. không có tham số nào truyền vào.
   public function testInsertUserBankWithoutParamNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
 
     $expected = "Input empty";
     $actual = $bankModel->insertUser_bank();
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 5. Tham số hàm nhiều hơn 5.
   public function testInsertUserBankMoreThan5ParamNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "name" => "thamsonhieuhon5",
       "fullname" => "thamsonhieuhon5",
@@ -73,12 +87,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->insertUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 6. Tham số hàm ít hơn 5.
   public function testInsertUserBankLessThan5ParamNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "name" => "thamsoithon5",
       "fullname" => "thamsoithon5",
@@ -90,12 +107,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->insertUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 7. key name trong array không phù hợp
   public function testInsertUserBankWithKeyNameNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "namê" => "keynameinarraynotaccord",
       "fullname" => "keynameinarraynotaccord",
@@ -108,12 +128,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->insertUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 8. name không phải là kiểu chuỗi.
   public function testInsertUserBankWithNameValueIsNotStringNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "name" => 123,
       "fullname" => "nameisnotstring",
@@ -126,12 +149,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->insertUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 9. độ dài name bé hơn 6
   public function testInsertUserBankNameValueWithLengthMoreThan6ParamNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "name" => "ddbh8",
       "fullname" => "dodainamebehon8",
@@ -143,12 +169,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->insertUser_bank($input);
     $expected = "Name must start with letter and must be between 6 and 120 characters";
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 10. độ dài name lớn hơn 120
   public function testInsertUserBankNameValueWithLengthLessThan120ParamNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
 
     // độ dài name đang 240
     $input = array(
@@ -162,12 +191,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->insertUser_bank($input);
     $expected = "Name must start with letter and must be between 6 and 120 characters";
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 11. name bắt đầu phải là một ký tự.
   public function testInsertUserBankWithNameValueMustStartWithLetterNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "name" => "123leanhvu",
       "fullname" => "namemuststartwithletter",
@@ -180,12 +212,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->insertUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 12. fullname không phải là một string.
   public function testInsertUserBankWithFullnameValueIsNotStringNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "name" => "fullnameisnotstring",
       "fullname" => 1234,
@@ -198,12 +233,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->insertUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 13. độ dài fullname bé hơn 6
   public function testInsertUserBankFullnameValueWithLengthMoreThan6ParamNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "name" => "dodaifullnamebehon8",
       "fullname" => "ddbh8",
@@ -215,12 +253,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->insertUser_bank($input);
     $expected = "Fullname must be between 6 and 120";
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 14. độ dài fullname lớn hơn 120
   public function testInsertUserBankFullnameValueWithLengthLessThan120ParamNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
 
     // độ dài name đang 240
     $input = array(
@@ -234,12 +275,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->insertUser_bank($input);
     $expected = "Fullname must be between 6 and 120";
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 15. email không hợp lệ.
   public function testInsertUserBankWithEmailNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "name" => "emailkhonghople",
       "fullname" => "email khong hop le",
@@ -251,12 +295,15 @@ class BankModelTest extends TestCase
     $expected = "Email is not valid";
     $actual = $bankModel->insertUser_bank($input);
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 16. email bị rỗng.
   public function testInsertUserBankWithEmptyEmailNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "name" => "emailbirong",
       "fullname" => "email bi rong",
@@ -268,12 +315,15 @@ class BankModelTest extends TestCase
     $expected = "Email is not valid";
     $actual = $bankModel->insertUser_bank($input);
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 17. stk bị rỗng.
   public function testInsertUserBankWithEmptyStkNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "name" => "stkbirong",
       "fullname" => "so tai khoan bi rong",
@@ -285,12 +335,15 @@ class BankModelTest extends TestCase
     $expected = "Card number is not valid";
     $actual = $bankModel->insertUser_bank($input);
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 18. stk không phải kiểu số.
   public function testInsertUserBankWithStkIsNotNumberNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "name" => "stkkhongphaikieuso",
       "fullname" => "stk khong phai kieu so",
@@ -303,12 +356,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->insertUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 19. sdt bị rỗng.
   public function testInsertUserBankWithEmptySdtNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "name" => "stkbirong",
       "fullname" => "so tai khoan bi rong",
@@ -320,12 +376,15 @@ class BankModelTest extends TestCase
     $expected = "Phone number is not valid";
     $actual = $bankModel->insertUser_bank($input);
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 20. sdt không phải kiểu số.
   public function testInsertUserBankWithSdtIsNotNumberNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "name" => "stkkhongphaikieuso",
       "fullname" => "stk khong phai kieu so",
@@ -338,13 +397,16 @@ class BankModelTest extends TestCase
     $actual = $bankModel->insertUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 21. trùng stk.
   // tiên quyết: trong database phải có giá trị stk = 141211515 trước khi chạy test này.
   public function testInsertUserBankWithSameStkNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "name" => "trungsotaikhoan",
       "fullname" => "trung so tai khoan",
@@ -357,14 +419,17 @@ class BankModelTest extends TestCase
     $actual = $bankModel->insertUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 22. kiểm tra trường hợp câu truy vấn không bình thường.
   // giá trị truyền vào không bình thường (Truyền vào câu SQL gây lỗi).
   // lưu ý: khi chạy xong dữ liệu sẽ được lưu lại, nên nếu chạy testdox hoặc coverage lần nữa phải hồi phục dữ liệu về trạng thái ban đầu.
   public function testInsertUserBankWithSqlInjectionParamNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "name" => "abcdA01",
       "fullname" => "';######",
@@ -377,13 +442,16 @@ class BankModelTest extends TestCase
     $actual = $bankModel->insertUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 23. Toàn bộ giá trị truyền vào hoàn toàn đúng.
   // lưu ý: khi chạy xong dữ liệu sẽ được lưu lại, nên nếu chạy testdox hoặc coverage lần nữa phải hồi phục dữ liệu về trạng thái ban đầu.
   public function testInsertUserBankWithCorrectParamOk()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "name" => "truonghoptruyvanbinhthuong",
       "fullname" => "truong hop truy van binh thuong",
@@ -396,7 +464,8 @@ class BankModelTest extends TestCase
     $actual = $bankModel->insertUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
 
   // ####################################################################
@@ -406,54 +475,68 @@ class BankModelTest extends TestCase
   // 1. Tham số hàm là một số nguyên.
   public function testUpdateUserBankWithParamIsIntegerNumberNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = 1;
 
     $expected = "Parameter is not array";
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 2. Tham số hàm là giá trị NULL.
   public function testUpdateUserBankWithParamIsNullValueNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = NULL;
 
     $expected = "Parameter is not array";
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 3. Tham số hàm là một chuỗi.
   public function testUpdateUserBankWithParamIsStringNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = "hello";
 
     $expected = "Parameter is not array";
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 4. không có tham số nào truyền vào.
   public function testUpdateUserBankWithoutParamNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
 
     $expected = "Input empty";
     $actual = $bankModel->updateUser_bank();
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 5. Tham số hàm nhiều hơn 6.
   public function testUpdateUserBankMoreThan5ParamNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1",
       "name" => "thamsonhieuhon6",
@@ -468,12 +551,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 6. Tham số hàm ít hơn 6.
   public function testUpdateUserBankLessThan5ParamNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "name" => "thamsoithon6",
       "fullname" => "thamsoithon6",
@@ -485,12 +571,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 7. key name trong array không phù hợp
   public function testUpdateUserBankWithKeyNameNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1",
       "namê" => "keynameinarraynotaccord",
@@ -504,12 +593,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 8. name không phải là kiểu chuỗi.
   public function testUpdateUserBankWithNameValueIsNotStringNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1",
       "name" => 123,
@@ -523,12 +615,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 9. độ dài name bé hơn 6
   public function testUpdateUserBankNameValueWithLengthMoreThan6ParamNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1",
       "name" => "ddbh8",
@@ -541,12 +636,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
     $expected = "Name must start with letter and must be between 6 and 120 characters";
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 10. độ dài name lớn hơn 120
   public function testUpdateUserBankNameValueWithLengthLessThan120ParamNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
 
     // độ dài name đang 240
     $input = array(
@@ -561,12 +659,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
     $expected = "Name must start with letter and must be between 6 and 120 characters";
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 11. name bắt đầu phải là một ký tự.
   public function testUpdateUserBankWithNameValueMustStartWithLetterNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1",
       "name" => "123leanhvu",
@@ -580,12 +681,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 12. fullname không phải là một string.
   public function testUpdateUserBankWithFullnameValueIsNotStringNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1",
       "name" => "fullnameisnotstring",
@@ -599,12 +703,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 13. độ dài fullname bé hơn 6
   public function testUpdateUserBankFullnameValueWithLengthMoreThan6ParamNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1",
       "name" => "dodaifullnamebehon8",
@@ -617,12 +724,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
     $expected = "Fullname must be between 6 and 120";
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 14. độ dài fullname lớn hơn 120
   public function testUpdateUserBankFullnameValueWithLengthLessThan120ParamNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
 
     // độ dài name đang 240
     $input = array(
@@ -637,12 +747,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
     $expected = "Fullname must be between 6 and 120";
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 15. email không hợp lệ.
   public function testUpdateUserBankWithEmailNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1",
       "name" => "emailkhonghople",
@@ -655,12 +768,15 @@ class BankModelTest extends TestCase
     $expected = "Email is not valid";
     $actual = $bankModel->updateUser_bank($input);
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 16. email bị rỗng.
   public function testUpdateUserBankWithEmptyEmailNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1",
       "name" => "emailbirong",
@@ -673,12 +789,15 @@ class BankModelTest extends TestCase
     $expected = "Email is not valid";
     $actual = $bankModel->updateUser_bank($input);
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 17. stk bị rỗng.
   public function testUpdateUserBankWithEmptyStkNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1",
       "name" => "stkbirong",
@@ -691,12 +810,15 @@ class BankModelTest extends TestCase
     $expected = "Card number is not valid";
     $actual = $bankModel->updateUser_bank($input);
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 18. stk không phải kiểu số.
   public function testUpdateUserBankWithStkIsNotNumberNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1",
       "name" => "stkkhongphaikieuso",
@@ -710,12 +832,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 19. sdt bị rỗng.
   public function testUpdateUserBankWithEmptySdtNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1",
       "name" => "stkbirong",
@@ -728,12 +853,15 @@ class BankModelTest extends TestCase
     $expected = "Phone number is not valid";
     $actual = $bankModel->updateUser_bank($input);
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 20. sdt không phải kiểu số.
   public function testUpdateUserBankWithSdtIsNotNumberNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1",
       "name" => "stkkhongphaikieuso",
@@ -747,13 +875,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 21. trùng stk.
   // tiên quyết: trong database phải có giá trị stk = 22135 trước khi chạy test này.
   public function testUpdateUserBankWithSameStkNg()
   {
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1",
       "name" => "trungsotaikhoan",
@@ -767,14 +897,17 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 22. kiểm tra trường hợp câu truy vấn không bình thường.
   // giá trị truyền vào không bình thường (Truyền vào câu SQL gây lỗi).
   // lưu ý: khi chạy xong dữ liệu sẽ được lưu lại, nên nếu chạy testdox hoặc coverage lần nữa phải hồi phục dữ liệu về trạng thái ban đầu.
   public function testUpdateUserBankWithSqlInjectionParamNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1",
       "name" => "abcdA01",
@@ -788,13 +921,16 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // 23. Toàn bộ giá trị truyền vào hoàn toàn đúng.
   // lưu ý: khi chạy xong dữ liệu sẽ được lưu lại, nên nếu chạy testdox hoặc coverage lần nữa phải hồi phục dữ liệu về trạng thái ban đầu.
   public function testUpdateUserBankWithCorrectParamOk()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1",
       "name" => "truonghoptruyvanbinhthuong",
@@ -808,12 +944,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // id không phải là số nguyên.
   public function testUpdateUserBankWithIdIsNotIntegerNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1.1",
       "name" => "truonghoptruyvanbinhthuong",
@@ -827,12 +966,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // id phải là kiểu số.
   public function testUpdateUserBankWithIdIsNotNumberNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "1.1ha",
       "name" => "truonghoptruyvanbinhthuong",
@@ -846,12 +988,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // id là một số nguyên dương.
   public function testUpdateUserBankWithIdIsNegativeNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "-1",
       "name" => "truonghoptruyvanbinhthuong",
@@ -865,12 +1010,15 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 
   // id không tìm thấy.
   public function testUpdateUserBankWithIdNotFoundNg()
   {
+
     $bankModel = new BankModel();
+    $bankModel->startTransaction();
     $input = array(
       "id" => "9999999999999999",
       "name" => "truonghoptruyvanbinhthuong",
@@ -884,5 +1032,6 @@ class BankModelTest extends TestCase
     $actual = $bankModel->updateUser_bank($input);
 
     $this->assertEquals($expected, $actual);
-  }
+    $bankModel->rollBack();
+  } // end;
 }
