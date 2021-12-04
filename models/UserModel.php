@@ -4,6 +4,10 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
+    protected static $_instance;
+    public function sumb($a,$b){
+        return $a + $b;
+    }
     public static function getInstance()
     {
         if(self::$_instance !== null){
@@ -24,7 +28,7 @@ class UserModel extends BaseModel
 
     public function findUser($keyword)
     {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
+        $sql = "SELECT * FROM users WHERE name LIKE '%$keyword%' OR email LIKE '%$keyword%'";
         $user = $this->select($sql);
 
         return $user;
@@ -51,12 +55,12 @@ class UserModel extends BaseModel
      * @return mixed
      */
     public function deleteUserById($id)
-    {   
+    {
         $isAuth = $this->getUsers();
         foreach ($isAuth as $item) {
             if (md5($item['id']) == $id) {
-                $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
-                return $this->delete($sql);
+                // $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
+                // return $this->delete($sql);
             }
         }
     }
@@ -114,7 +118,7 @@ class UserModel extends BaseModel
     /**
      * Search users
      * @param array $params
-     * @return array
+     * * @return array
      */
     public function getUsers($params = [])
     {

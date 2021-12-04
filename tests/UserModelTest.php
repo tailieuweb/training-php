@@ -427,6 +427,29 @@ class UserModelTest extends TestCase {
 
         $this->assertEquals($expected, $actual);
     }
+    // Test case testDeleteUserIdNull
+    public function testDeleteUserIdNull()
+    {
+        $userModel = new UserModel();
+        $id = "";
+        $check = $userModel->deleteUserById($id);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testDeleteUserBool
+    public function testDeleteUserBool() {
+        $userModel = new UserModel();
+        $id        = false;
+        $check     = $userModel->deleteUserById($id);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
     public function testFieldNameSpecial() {
         $user   = new UserModel();
         $input  = ['name'      => '%$^$%^',
@@ -976,6 +999,7 @@ class UserModelTest extends TestCase {
             $actual = "can not update";
         }
         $expected = "can update";
+
 
         $this->assertEquals($expected, $actual);
     }
