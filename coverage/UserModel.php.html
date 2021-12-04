@@ -60,14 +60,14 @@
        <td class="warning small"><div align="right">85.71%</div></td>
        <td class="warning small"><div align="right">6&nbsp;/&nbsp;7</div></td>
        <td class="warning small"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></td>
-       <td class="warning big">       <div class="progress">
-         <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="81.82" aria-valuemin="0" aria-valuemax="100" style="width: 81.82%">
-           <span class="sr-only">81.82% covered (warning)</span>
+       <td class="success big">       <div class="progress">
+         <div class="progress-bar bg-success" role="progressbar" aria-valuenow="96.97" aria-valuemin="0" aria-valuemax="100" style="width: 96.97%">
+           <span class="sr-only">96.97% covered (success)</span>
          </div>
        </div>
 </td>
-       <td class="warning small"><div align="right">81.82%</div></td>
-       <td class="warning small"><div align="right">27&nbsp;/&nbsp;33</div></td>
+       <td class="success small"><div align="right">96.97%</div></td>
+       <td class="success small"><div align="right">32&nbsp;/&nbsp;33</div></td>
       </tr>
 
       <tr>
@@ -88,15 +88,15 @@
 </td>
        <td class="warning small"><div align="right">85.71%</div></td>
        <td class="warning small"><div align="right">6&nbsp;/&nbsp;7</div></td>
-       <td class="warning small">10.66</td>
-       <td class="warning big">       <div class="progress">
-         <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="81.25" aria-valuemin="0" aria-valuemax="100" style="width: 81.25%">
-           <span class="sr-only">81.25% covered (warning)</span>
+       <td class="warning small">10</td>
+       <td class="success big">       <div class="progress">
+         <div class="progress-bar bg-success" role="progressbar" aria-valuenow="96.88" aria-valuemin="0" aria-valuemax="100" style="width: 96.88%">
+           <span class="sr-only">96.88% covered (success)</span>
          </div>
        </div>
 </td>
-       <td class="warning small"><div align="right">81.25%</div></td>
-       <td class="warning small"><div align="right">26&nbsp;/&nbsp;32</div></td>
+       <td class="success small"><div align="right">96.88%</div></td>
+       <td class="success small"><div align="right">31&nbsp;/&nbsp;32</div></td>
       </tr>
 
       <tr>
@@ -235,15 +235,15 @@
 </td>
        <td class="danger small"><div align="right">0.00%</div></td>
        <td class="danger small"><div align="right">0&nbsp;/&nbsp;1</div></td>
-       <td class="danger small">6</td>
-       <td class="danger big">       <div class="progress">
-         <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="0.00" aria-valuemin="0" aria-valuemax="100" style="width: 0.00%">
-           <span class="sr-only">0.00% covered (danger)</span>
+       <td class="danger small">2.02</td>
+       <td class="warning big">       <div class="progress">
+         <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="83.33" aria-valuemin="0" aria-valuemax="100" style="width: 83.33%">
+           <span class="sr-only">83.33% covered (warning)</span>
          </div>
        </div>
 </td>
-       <td class="danger small"><div align="right">0.00%</div></td>
-       <td class="danger small"><div align="right">0&nbsp;/&nbsp;6</div></td>
+       <td class="warning small"><div align="right">83.33%</div></td>
+       <td class="warning small"><div align="right">5&nbsp;/&nbsp;6</div></td>
       </tr>
 
 
@@ -342,19 +342,19 @@
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="88" href="#88">88</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">public</span><span class="default">&nbsp;</span><span class="keyword">function</span><span class="default">&nbsp;</span><span class="default">getUsers</span><span class="keyword">(</span><span class="default">$params</span><span class="default">&nbsp;</span><span class="keyword">=</span><span class="default">&nbsp;</span><span class="keyword">[</span><span class="keyword">]</span><span class="keyword">)</span></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="89" href="#89">89</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">{</span></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="90" href="#90">90</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//Keyword</span></td></tr>
-    <tr class="danger d-flex"><td  class="col-1 text-right"><a id="91" href="#91">91</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">if</span><span class="default">&nbsp;</span><span class="keyword">(</span><span class="keyword">!</span><span class="keyword">empty</span><span class="keyword">(</span><span class="default">$params</span><span class="keyword">[</span><span class="default">'keyword'</span><span class="keyword">]</span><span class="keyword">)</span><span class="keyword">)</span><span class="default">&nbsp;</span><span class="keyword">{</span></td></tr>
-    <tr class="danger d-flex"><td  class="col-1 text-right"><a id="92" href="#92">92</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="default">$sql</span><span class="default">&nbsp;</span><span class="keyword">=</span><span class="default">&nbsp;</span><span class="default">'SELECT&nbsp;*&nbsp;FROM&nbsp;users&nbsp;WHERE&nbsp;name&nbsp;LIKE&nbsp;&quot;%'</span><span class="default">&nbsp;</span><span class="keyword">.</span><span class="default">&nbsp;</span><span class="default">$params</span><span class="keyword">[</span><span class="default">'keyword'</span><span class="keyword">]</span><span class="default">&nbsp;</span><span class="keyword">.</span><span class="default">&nbsp;</span><span class="default">'%&quot;'</span><span class="keyword">;</span></td></tr>
+    <tr class="covered-by-large-tests popin d-flex"><td  data-title="3 tests cover line 91" data-content="&lt;ul&gt;&lt;li class=&quot;covered-by-large-tests&quot;&gt;UserModelTest::testGetUserNotDataOK&lt;/li&gt;&lt;li class=&quot;covered-by-large-tests&quot;&gt;UserModelTest::testGetUserObjectNotOK&lt;/li&gt;&lt;li class=&quot;covered-by-large-tests&quot;&gt;UserModelTest::testGetUserArrayNotOK&lt;/li&gt;&lt;/ul&gt;" data-placement="top" data-html="true" class="col-1 text-right"><a id="91" href="#91">91</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">if</span><span class="default">&nbsp;</span><span class="keyword">(</span><span class="keyword">!</span><span class="keyword">empty</span><span class="keyword">(</span><span class="default">$params</span><span class="keyword">[</span><span class="default">'keyword'</span><span class="keyword">]</span><span class="keyword">)</span><span class="keyword">)</span><span class="default">&nbsp;</span><span class="keyword">{</span></td></tr>
+    <tr class="covered-by-large-tests popin d-flex"><td  data-title="2 tests cover line 92" data-content="&lt;ul&gt;&lt;li class=&quot;covered-by-large-tests&quot;&gt;UserModelTest::testGetUserObjectNotOK&lt;/li&gt;&lt;li class=&quot;covered-by-large-tests&quot;&gt;UserModelTest::testGetUserArrayNotOK&lt;/li&gt;&lt;/ul&gt;" data-placement="top" data-html="true" class="col-1 text-right"><a id="92" href="#92">92</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="default">$sql</span><span class="default">&nbsp;</span><span class="keyword">=</span><span class="default">&nbsp;</span><span class="default">'SELECT&nbsp;*&nbsp;FROM&nbsp;users&nbsp;WHERE&nbsp;name&nbsp;LIKE&nbsp;&quot;%'</span><span class="default">&nbsp;</span><span class="keyword">.</span><span class="default">&nbsp;</span><span class="default">$params</span><span class="keyword">[</span><span class="default">'keyword'</span><span class="keyword">]</span><span class="default">&nbsp;</span><span class="keyword">.</span><span class="default">&nbsp;</span><span class="default">'%&quot;'</span><span class="keyword">;</span></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="93" href="#93">93</a></td><td class="col-11 codeLine"></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="94" href="#94">94</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//Keep&nbsp;this&nbsp;line&nbsp;to&nbsp;use&nbsp;Sql&nbsp;Injection</span></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="95" href="#95">95</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//Don't&nbsp;change</span></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="96" href="#96">96</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//Example&nbsp;keyword:&nbsp;abcef%&quot;;TRUNCATE&nbsp;banks;##</span></td></tr>
     <tr class="danger d-flex"><td  class="col-1 text-right"><a id="97" href="#97">97</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="default">$users</span><span class="default">&nbsp;</span><span class="keyword">=</span><span class="default">&nbsp;</span><span class="default">self</span><span class="default">::</span><span class="default">$_connection</span><span class="default">-&gt;</span><span class="default">multi_query</span><span class="keyword">(</span><span class="default">$sql</span><span class="keyword">)</span><span class="keyword">;</span></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="98" href="#98">98</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">}</span><span class="default">&nbsp;</span><span class="keyword">else</span><span class="default">&nbsp;</span><span class="keyword">{</span></td></tr>
-    <tr class="danger d-flex"><td  class="col-1 text-right"><a id="99" href="#99">99</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="default">$sql</span><span class="default">&nbsp;</span><span class="keyword">=</span><span class="default">&nbsp;</span><span class="default">'SELECT&nbsp;*&nbsp;FROM&nbsp;users'</span><span class="keyword">;</span></td></tr>
-    <tr class="danger d-flex"><td  class="col-1 text-right"><a id="100" href="#100">100</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="default">$users</span><span class="default">&nbsp;</span><span class="keyword">=</span><span class="default">&nbsp;</span><span class="default">$this</span><span class="default">-&gt;</span><span class="default">select</span><span class="keyword">(</span><span class="default">$sql</span><span class="keyword">)</span><span class="keyword">;</span></td></tr>
+    <tr class="covered-by-large-tests popin d-flex"><td  data-title="1 test covers line 99" data-content="&lt;ul&gt;&lt;li class=&quot;covered-by-large-tests&quot;&gt;UserModelTest::testGetUserNotDataOK&lt;/li&gt;&lt;/ul&gt;" data-placement="top" data-html="true" class="col-1 text-right"><a id="99" href="#99">99</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="default">$sql</span><span class="default">&nbsp;</span><span class="keyword">=</span><span class="default">&nbsp;</span><span class="default">'SELECT&nbsp;*&nbsp;FROM&nbsp;users'</span><span class="keyword">;</span></td></tr>
+    <tr class="covered-by-large-tests popin d-flex"><td  data-title="1 test covers line 100" data-content="&lt;ul&gt;&lt;li class=&quot;covered-by-large-tests&quot;&gt;UserModelTest::testGetUserNotDataOK&lt;/li&gt;&lt;/ul&gt;" data-placement="top" data-html="true" class="col-1 text-right"><a id="100" href="#100">100</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="default">$users</span><span class="default">&nbsp;</span><span class="keyword">=</span><span class="default">&nbsp;</span><span class="default">$this</span><span class="default">-&gt;</span><span class="default">select</span><span class="keyword">(</span><span class="default">$sql</span><span class="keyword">)</span><span class="keyword">;</span></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="101" href="#101">101</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">}</span></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="102" href="#102">102</a></td><td class="col-11 codeLine"></td></tr>
-    <tr class="danger d-flex"><td  class="col-1 text-right"><a id="103" href="#103">103</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">return</span><span class="default">&nbsp;</span><span class="default">$users</span><span class="keyword">;</span></td></tr>
+    <tr class="covered-by-large-tests popin d-flex"><td  data-title="1 test covers line 103" data-content="&lt;ul&gt;&lt;li class=&quot;covered-by-large-tests&quot;&gt;UserModelTest::testGetUserNotDataOK&lt;/li&gt;&lt;/ul&gt;" data-placement="top" data-html="true" class="col-1 text-right"><a id="103" href="#103">103</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">return</span><span class="default">&nbsp;</span><span class="default">$users</span><span class="keyword">;</span></td></tr>
     <tr class="warning d-flex"><td  class="col-1 text-right"><a id="104" href="#104">104</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">}</span></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="105" href="#105">105</a></td><td class="col-11 codeLine"><span class="keyword">}</span></td></tr>
 
@@ -367,7 +367,7 @@
     <h4>Legend</h4>
     <p><span class="success"><strong>Executed</strong></span><span class="danger"><strong>Not Executed</strong></span><span class="warning"><strong>Dead Code</strong></span></p>
     <p>
-     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 9.2.7</a> using <a href="https://secure.php.net/" target="_top">PHP 8.0.12</a> and <a href="https://phpunit.de/">PHPUnit 9.5.10</a> at Fri Dec 3 13:19:20 CET 2021.</small>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 9.2.7</a> using <a href="https://secure.php.net/" target="_top">PHP 8.0.12</a> and <a href="https://phpunit.de/">PHPUnit 9.5.10</a> at Fri Dec 3 16:22:22 CET 2021.</small>
     </p>
     <a title="Back to the top" id="toplink" href="#">
         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16"><path fill-rule="evenodd" d="M12 11L6 5l-6 6h12z"/></svg>

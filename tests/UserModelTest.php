@@ -484,4 +484,68 @@ public function testInsertUserStringNotOK()
           $this->assertEquals($excute, $actual);
       }
       
+
+      /*  Test hàm getUser khi không có dữ liệu truyền vào  OK */
+public function testGetUserNotDataOK()
+{
+    $userModel = new UserModel();
+
+    $actual = $userModel->getUsers();
+
+    if ($actual != null) {
+        $this->assertTrue(true);
+    } else {
+        $this->assertTrue(false);
+    }
+}
+
+
+  
+
+
+     /*Test hàm getUser khi có dữ liệu truyền vào là kiểu đối tượng*/
+     public function testGetUserObjectNotOK()
+     {
+         $userModel = new UserModel();
+         $actual = null;
+ 
+         $params = array(
+             'keyword' => $userModel,
+         );
+         try {
+             $actual = $userModel->getUsers($params);
+         } catch (Throwable $e) {
+             $excute = false;
+         }
+         $this->assertEquals($excute, $actual);
+     }
+ /*Test hàm getUser khi có dữ liệu truyền vào là Array*/
+ public function testGetUserArrayNotOK()
+ {
+     $userModel = new UserModel();
+     $actual = null;
+
+     $params = array(
+        'keyword' => $userModel,
+     );
+     try {
+         $actual = $userModel->getUsers($params);
+     } catch (Throwable $e) {
+         $excute = false;
+     }
+     $this->assertEquals($excute, $actual);
+
+
+ }
+public function testGetUsersNg()
+    {
+        $userModel = new UserModel();
+        $params['keyword']  = $userModel;
+        $user = $userModel->getUsers($params);
+        if (empty($user[0])) {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
+    }
 }
