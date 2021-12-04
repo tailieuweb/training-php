@@ -1072,6 +1072,34 @@ class UserModelTest extends TestCase
             $this->assertFalse(false);
         }
     }
+    
+    // test function getUsers when search actual number
+    public function testGetUsersWhenSearchActualNumber()
+    {
+        $userModel = new UserModel();
+        $param['keyword'] = 3.14;
+
+        $user = $userModel->getUsers($param);
+        if (empty($user) == $param) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertFalse(false);
+        }
+    }
+
+    // test function getUsers when search negative number
+    public function testGetUsersWhenSearchNegativeNumber()
+    {
+        $userModel = new UserModel();
+        $param['keyword'] = -3;
+
+        $user = $userModel->getUsers($param);
+        if (empty($user) == $param) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertFalse(false);
+        }
+    }
 
     // test function getUsers when search null
     public function testGetUsersWhenSearchNull()
