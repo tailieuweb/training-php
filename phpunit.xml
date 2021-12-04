@@ -16,10 +16,10 @@
            <file>./tests/FindUserByIdTableBankTest.php</file>
            <file>./tests/FindUserTwoTable.php</file>
            <file>./tests/GetlastIdTest.php</file>
-            <file>./tests/GetUserByIdNewTest.php</file>
+           <file>./tests/GetUserByIdNewTest.php</file>
            <file>./tests/GetUsers.php</file>
            <file>./tests/InsertUserTest.php</file>
-            <file>./tests/FindUserByIdNewTest.php</file>
+           <file>./tests/FindUserByIdNewTest.php</file>
         </testsuite>
     </testsuites>
 	<filter>				
