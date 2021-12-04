@@ -12,7 +12,7 @@ class LeTrungHieu_UserModelTest extends TestCase
     public function testFindUserByIdOk()
     {
         $userModel = new UserModel();
-        $userId = -1;
+        $userId = -4;
 
         $userModel->startTransaction();
 
@@ -33,7 +33,7 @@ class LeTrungHieu_UserModelTest extends TestCase
     public function testFindUserByIdFloat()
     {
         $userModel = new UserModel();
-        $userId = -1.1;
+        $userId = 1.112;
 
         $userModel->startTransaction();
 
@@ -46,7 +46,7 @@ class LeTrungHieu_UserModelTest extends TestCase
       public function testFindUserByIdNegative()
       {
           $userModel = new UserModel();
-          $userId = -1;
+          $userId = -33;
   
           $userModel->startTransaction();
   
@@ -137,7 +137,7 @@ class LeTrungHieu_UserModelTest extends TestCase
     public function testFindUserByIdArray()
     {
         $userModel = new UserModel();
-        $userId = [1,2,3];
+        $userId = [1,2,3,4,4];
 
         $userModel->startTransaction();
 

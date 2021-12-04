@@ -113,7 +113,7 @@ class LeTrungHieu_ResultTest extends TestCase
     public function testSetDataFloat()
     {
         $result = new ResultClass;
-        $data = 1.23;
+        $data = 1.2323;
         $result->setData($data);
         $expected = $result->isSuccess == true &&
         $result->data == $data &&
@@ -128,7 +128,7 @@ class LeTrungHieu_ResultTest extends TestCase
     public function testSetDataNegative()
     {
         $result = new ResultClass;
-        $data = -23;
+        $data = -2332;
         $result->setData($data);
         $expected = $result->isSuccess == true &&
         $result->data == $data &&
@@ -158,7 +158,7 @@ class LeTrungHieu_ResultTest extends TestCase
     public function testSetDataInt()
     {
         $result = new ResultClass;
-        $data = 123;
+        $data = 1232;
         $result->setData($data);
         $expected = $result->isSuccess == true &&
         $result->data == $data &&
@@ -203,7 +203,7 @@ class LeTrungHieu_ResultTest extends TestCase
     public function testSetDataArray()
     {
         $result = new ResultClass;
-        $data = [1,2,3];
+        $data = [1,2,3,34,4];
         $result->setData($data);
         $expected = $result->isSuccess == true &&
         $result->data == $data &&
@@ -301,7 +301,7 @@ class LeTrungHieu_ResultTest extends TestCase
     public function testSetErrorFloat()
     {
         $actual = new ResultClass;
-        $error = 1.23;
+        $error = 1.233;
         $actual->setError($error);
         $expected = $actual->isSuccess == true &&
         $actual->data == null &&
@@ -317,7 +317,7 @@ class LeTrungHieu_ResultTest extends TestCase
     public function testSetErrorNegative()
     {
         $actual = new ResultClass;
-        $error = -12;
+        $error = -142;
         $actual->setError($error);
         $expected = $actual->isSuccess == true &&
         $actual->data == null &&
@@ -365,7 +365,7 @@ class LeTrungHieu_ResultTest extends TestCase
     public function testSetErrorArray()
     {
         $actual = new ResultClass;
-        $error = [1, 2, 3];
+        $error = [1, 2, 3,4,5,8];
         $actual->setError($error);
         $expected = $actual->isSuccess == true &&
         $actual->data == null &&

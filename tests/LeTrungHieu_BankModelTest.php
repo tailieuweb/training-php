@@ -11,7 +11,7 @@ class LeTrungHieu_BankModelTest extends TestCase
     public function testBankByIdOk()
     {
         $bankModel = new BankModel();
-        $bankId = -1;
+        $bankId = -56;
 
         $bankModel->startTransaction();
 
@@ -30,7 +30,7 @@ class LeTrungHieu_BankModelTest extends TestCase
     public function testBankByIdFloat()
     {
         $bankModel = new BankModel();
-        $bankId = 1.23;
+        $bankId = 1.233;
 
         $bankModel->startTransaction();
 
@@ -43,7 +43,7 @@ class LeTrungHieu_BankModelTest extends TestCase
     public function testBankByIdNegative()
     {
         $bankModel = new BankModel();
-        $bankId = -1;
+        $bankId = -1234;
 
         $bankModel->startTransaction();
 
@@ -134,7 +134,7 @@ class LeTrungHieu_BankModelTest extends TestCase
      public function testBankByIdArray()
      {
          $bankModel = new BankModel();
-         $bankId = [1,2,3];
+         $bankId = [1,2,3,6,5];
  
          $bankModel->startTransaction();
  
