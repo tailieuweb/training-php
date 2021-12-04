@@ -23,7 +23,7 @@ class UserModelTest extends TestCase
     {
        $userModel = new UserModel();
        $expected = [];
-       $actual = $userModel->findUserById(0);
+       $actual = $userModel->findUserById(102);
        $this->assertEquals($expected, $actual);
     }
     //
@@ -46,7 +46,7 @@ class UserModelTest extends TestCase
     public function testFindUserByIdWithNoData()
     {
        $userModel = new UserModel();
-       $expected = [];
+       $expected = false;
        $actual = $userModel->findUserById(0);
        $this->assertEquals($expected, $actual);
     }
