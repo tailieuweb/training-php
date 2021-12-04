@@ -1,6 +1,5 @@
 <?php
 
-use phpDocumentor\Reflection\PseudoTypes\True_;
 use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
