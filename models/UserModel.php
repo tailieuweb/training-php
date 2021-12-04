@@ -38,6 +38,9 @@ class UserModel extends BaseModel
      */
     public function auth($userName, $password)
     {
+        // if (!is_numeric($userName) && !is_numeric($password)) {
+        //     return false;
+        // }
         if (!is_string($userName) || !is_string($password)) {
             return false;
         }
