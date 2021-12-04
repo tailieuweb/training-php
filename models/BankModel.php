@@ -26,16 +26,16 @@ class BankModel extends BaseModel {
     public function getBank($params = [])
     {
         if (!is_array($params)) {
-            return [];
+            return 1;
         }
-        if (isset($params["user_id"])) {
-            return [];
+        if (!isset($params["user_id"])) {
+            return 2;
         }
         if (is_object($params["user_id"]) || is_null($params["user_id"]) || is_array($params["user_id"]) || empty($params["user_id"])) {
-            return [];
+            return 3;
         }
         if (is_bool($params["user_id"])) {
-            return [];
+            return 4;
         }
         if (!is_int($params["user_id"])) {
             return [];
@@ -53,10 +53,10 @@ class BankModel extends BaseModel {
      */
     public function deleteBalanceById($id)
     {
-        if (!is_array($id)) {
+        if (is_string($input["id"])) {
             return [];
         }
-        if (isset($id)) {
+        if (!isset($id)) {
             return [];
         }
         if (is_object($id) || is_null($id) || is_array($id) || empty($id)) {
@@ -70,16 +70,14 @@ class BankModel extends BaseModel {
         } else if ($id < 0){
             return [];
         }
-        $sql = 'UPDATE `banks` SET `cost`="0" WHERE `user_id` ='  . $id;
-        return $this->update($sql);
+        $sql = 'DELETE FROM banks WHERE id = ' . $id;
+        return $this->delete($sql);
     }
 
     public function findBankInfoById($id)
     {
-        if (!is_array($id)) {
-            return [];
-        }
-        if (isset($id)) {
+       
+        if (!isset($id)) {
             return [];
         }
         if (is_object($id) || is_null($id) || is_array($id) || empty($id)) {
@@ -101,10 +99,8 @@ class BankModel extends BaseModel {
 
     public function findBankInfoByUserID($user_id)
     {
-        if (!is_array($user_id)) {
-            return [];
-        }
-        if (isset($user_id)) {
+       
+        if (!isset($user_id)) {
             return [];
         }
         if (is_object($user_id) || is_null($user_id) || is_array($user_id) || empty($user_id)) {
@@ -131,10 +127,13 @@ class BankModel extends BaseModel {
      */
     public function updateBankInfo($input)
     {
+        if (is_string($input["id"]) || is_string($input["cost"])) {
+            return [];
+        }
         if (!is_array($input)) {
             return [];
         }
-        if (isset($input)) {
+        if (!isset($input)) {
             return [];
         }
         if (is_object($input["cost"]) || is_null($input["cost"]) || is_array($input["cost"]) || empty($input["cost"])) {
@@ -166,10 +165,13 @@ class BankModel extends BaseModel {
      */
     public function insertBankInfo($input)
     {
+        if (is_string($input["user_id"]) || is_string($input["cost"])) {
+            return [];
+        }
         if (!is_array($input)) {
             return [];
         }
-        if (isset($input)) {
+        if (!isset($input)) {
             return [];
         }
         if (is_object($input["cost"]) || is_null($input["cost"]) || is_array($input["cost"]) || empty($input["cost"])) {
