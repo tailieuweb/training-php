@@ -10,10 +10,10 @@ class BankModelTest extends TestCase
     {
         $BankModel = new BankModel();
 
-        $expected = '3';
+        $expected = '2';
 
         $Bank = $BankModel->getBanks();
-        $this->assertEquals($expected, $Bank[1]['user_id']);
+        $this->assertEquals($expected, $Bank[0]['user_id']);
     }
     //
     public function testGetBanksNg()
