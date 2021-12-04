@@ -30,7 +30,33 @@ class LeTrungHieu_BankModelTest extends TestCase
     public function testBankByIdFloat()
     {
         $bankModel = new BankModel();
-        $bankId = -1.23;
+        $bankId = 1.23;
+
+        $bankModel->startTransaction();
+
+        $findBank = $bankModel->getBankById($bankId);
+
+        $bankModel->rollBack();
+        $this->assertTrue($findBank ? false : true);
+    }
+    // Test get bank by id negative
+    public function testBankByIdNegative()
+    {
+        $bankModel = new BankModel();
+        $bankId = -1;
+
+        $bankModel->startTransaction();
+
+        $findBank = $bankModel->getBankById($bankId);
+
+        $bankModel->rollBack();
+        $this->assertTrue($findBank ? false : true);
+    }
+    // Test get bank by id null Array
+    public function testBankByIdNullArray()
+    {
+        $bankModel = new BankModel();
+        $bankId = [];
 
         $bankModel->startTransaction();
 

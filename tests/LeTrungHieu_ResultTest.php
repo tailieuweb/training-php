@@ -113,7 +113,37 @@ class LeTrungHieu_ResultTest extends TestCase
     public function testSetDataFloat()
     {
         $result = new ResultClass;
-        $data = -1.23;
+        $data = 1.23;
+        $result->setData($data);
+        $expected = $result->isSuccess == true &&
+        $result->data == $data &&
+        $result->error == null;
+        if ($expected == true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test setData negative
+    public function testSetDataNegative()
+    {
+        $result = new ResultClass;
+        $data = -23;
+        $result->setData($data);
+        $expected = $result->isSuccess == true &&
+        $result->data == $data &&
+        $result->error == null;
+        if ($expected == true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test setData null array
+    public function testSetDataNullArray()
+    {
+        $result = new ResultClass;
+        $data = [];
         $result->setData($data);
         $expected = $result->isSuccess == true &&
         $result->data == $data &&
