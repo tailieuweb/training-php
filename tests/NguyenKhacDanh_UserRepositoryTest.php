@@ -45,8 +45,7 @@ class NguyenKhacDanh_UserRepositoryTest extends TestCase
     public function testFindByIdOk()
     {
         $repository = new UserRepository;
-        $userModel = new UserModel;
-        $userModel->startTransaction();
+        $bankModel = new BankModel;
         $userId = -2;
         $input = [
             'id' => $userId,
@@ -58,7 +57,6 @@ class NguyenKhacDanh_UserRepositoryTest extends TestCase
         ];
         $repository->insertUserWithId($input);
         $check = $repository->findById($userId);
-        $userModel->rollBack();
         if ($check != false) {
             $this->assertTrue(true);
         } else {
@@ -206,8 +204,8 @@ class NguyenKhacDanh_UserRepositoryTest extends TestCase
     public function testDeleteUserOk()
     {
         $repository = new UserRepository;
-        $userModel = new UserModel;
-        $userModel->startTransaction();
+        $bankModel = new BankModel;
+        $bankModel->startTransaction();
         $userId = -2;
         $input = [
             'id' => $userId,
@@ -220,12 +218,13 @@ class NguyenKhacDanh_UserRepositoryTest extends TestCase
         $repository->insertUserWithId($input);
         $delete = $repository->deleteUser($userId);
         $check = $repository->findById($userId);
-        $userModel->rollBack();
+        $bankModel->rollBack();
         if ($delete == true && $check == false) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
         }
+        $repository->deleteUser($userId);
     }
     // Test case testDeleteUserByIdString
 
