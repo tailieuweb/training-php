@@ -10,6 +10,8 @@ cacheResult ="false"
 <file>./tests/UserModelTest.php</file>
 <file>./tests/BanksModelTest.php</file>
 <file>./tests/FactoryPatternTest.php</file>
+<file>./tests/thinh_UserModelTest.php</file>
+<file>./tests/thinh_BanksModelTest.php</file>
 </testsuite>
 </testsuites>
 <filter>
