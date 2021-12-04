@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class ResultTest extends TestCase
+class LeTrungHieu_ResultTest extends TestCase
 {
     /**
      * Test getInstance
@@ -113,7 +113,37 @@ class ResultTest extends TestCase
     public function testSetDataFloat()
     {
         $result = new ResultClass;
-        $data = -1.23;
+        $data = 1.23;
+        $result->setData($data);
+        $expected = $result->isSuccess == true &&
+        $result->data == $data &&
+        $result->error == null;
+        if ($expected == true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test setData negative
+    public function testSetDataNegative()
+    {
+        $result = new ResultClass;
+        $data = -23;
+        $result->setData($data);
+        $expected = $result->isSuccess == true &&
+        $result->data == $data &&
+        $result->error == null;
+        if ($expected == true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test setData null array
+    public function testSetDataNullArray()
+    {
+        $result = new ResultClass;
+        $data = [];
         $result->setData($data);
         $expected = $result->isSuccess == true &&
         $result->data == $data &&
@@ -283,6 +313,22 @@ class ResultTest extends TestCase
             $this->assertTrue(false);
         }
     }
+    // Test setError negative
+    public function testSetErrorNegative()
+    {
+        $actual = new ResultClass;
+        $error = -12;
+        $actual->setError($error);
+        $expected = $actual->isSuccess == true &&
+        $actual->data == null &&
+        $actual->error == $error;
+
+        if ($expected == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
     // Test setError Bool true
     public function testSetErrorBoolTrue()
     {
@@ -320,6 +366,22 @@ class ResultTest extends TestCase
     {
         $actual = new ResultClass;
         $error = [1, 2, 3];
+        $actual->setError($error);
+        $expected = $actual->isSuccess == true &&
+        $actual->data == null &&
+        $actual->error == $error;
+
+        if ($expected == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test setError Array null
+    public function testSetErrorNullArray()
+    {
+        $actual = new ResultClass;
+        $error = [];
         $actual->setError($error);
         $expected = $actual->isSuccess == true &&
         $actual->data == null &&
