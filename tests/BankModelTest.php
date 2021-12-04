@@ -232,4 +232,5 @@ class BankModelTest extends TestCase
         }
         $this->assertEquals($excute, $actual);
     }
+   
 }
