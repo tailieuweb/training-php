@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class ResultTest extends TestCase
+class LeTrungHieu_ResultTest extends TestCase
 {
     /**
      * Test getInstance
