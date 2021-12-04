@@ -50,7 +50,7 @@ class BankModel extends BaseModel
 
         return $bank;
     }
-
+    //Minh Tien
     /**
      * Search banks
      * @param array $params
