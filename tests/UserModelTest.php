@@ -427,7 +427,6 @@ class UserModelTest extends TestCase {
 
         $this->assertEquals($expected, $actual);
     }
-    }
     // Test case testDeleteUserIdNull
     public function testDeleteUserIdNull()
     {
