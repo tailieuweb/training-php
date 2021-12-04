@@ -1,5 +1,13 @@
 <?php
+// try {
+//     throw new Throwable ('test');
+//     }
+//     catch (Exception $e) {
+//     var_dump('111');die();
+//     }
 // Start the session
+ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../session'));
+
 session_start();
 
 require_once 'models/FactoryPattern.php';
@@ -77,13 +85,13 @@ $users = $userModel->getUsers($params);
                         <?php echo htmlentities($user['type']) ?>
                     </td>
                     <td>
-                        <a href="form_user.php?id=<?=$user['id']?>">
+                        <a href="form_user.php?id=<?= rand(100,999).$user['id'].rand(100,999)?> ">
                             <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i> 
                         </a>
-                        <a href="view_user.php?id=<?=$user['id']?>">
+                        <a href="view_user.php?id=<?=rand(100,999).$user['id'].rand(100,999)?>">
                             <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                         </a>
-                        <a href="delete_user.php?id=<?=$user['id']?>">
+                        <a href="delete_user.php?id=<?=rand(100,999).$user['id'].rand(100,999)?>">
                             <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                         </a>
                     </td>

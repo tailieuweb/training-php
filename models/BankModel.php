@@ -1,26 +1,27 @@
 <?php
 
 require_once 'BaseModel.php';
-$ds       = DIRECTORY_SEPARATOR;
-$base_dir = realpath(dirname(__FILE__) . $ds . '..') . $ds;
-require_once("{$base_dir}models{$ds}IBank.php");
+
 class BankModel extends BaseModel implements IBank
 {
+    protected static $_instance;
+    
     public static function getInstance()
     {
-        if (self::$_instance !== null) {
+        
+        if(self::$_instance !== null){
             return self::$_instance;
         }
         self::$_instance = new self();
         return self::$_instance;
     }
-
     public function findBankById($id)
     {
-
-        $sql = 'SELECT * FROM bank WHERE id = ' . $id;
+        substr($id, 4,1);
+        
+        $sql = 'SELECT * FROM bank WHERE id = ' . substr($id, 4,1);
         $banks = $this->select($sql);
-
+        //var_dump($banks);
         return $banks;
     }
 
@@ -31,7 +32,6 @@ class BankModel extends BaseModel implements IBank
      */
     public function getBanks($params = [])
     {
-
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM bank WHERE name LIKE "%' . $params['keyword'] . '%"';
@@ -39,15 +39,18 @@ class BankModel extends BaseModel implements IBank
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            // $banks = self::$_connection->multi_query($sql);
-            $banks = $this->select($sql);
+            $banks = self::$_connection->multi_query($sql);
         } else {
             $sql = 'SELECT * FROM bank';
             $banks = $this->select($sql);
         }
-
         return $banks;
     }
+
+    // public function insertUser_bank($input) {
+    //     var_dump($input);
+    //     $sql = "INSERT INTO `bank` (`name`, `fullname`, `sdt`, `email`, `stk`) VALUES (" .
+    //         "'" . $input['name'] . "', '".$input['fullname']."','".$input['sdt']."', '".$input['email']."','".$input['stk']."')";
 
 
     // Le Anh Vu chinh sua.
@@ -316,8 +319,27 @@ class BankModel extends BaseModel implements IBank
         return $result;
     }
 
-    public function cost()
-    {
+    // public function updateUser_bank($input) {
+    //     $sql = 'UPDATE bank SET 
+    //              name = "' . $input['name'] .'", 
+    //              fullname = "'. $input['fullname'].'",
+    //              email = "' . $input['email'] .'", 
+    //              sdt = "' . $input['sdt'] .'", 
+    //              stk="'. $input['stk'].'"
+    //             WHERE id = ' . $input['id'];
+    //     $user = $this->update($sql);
+
+    //     return $user;
+    // }
+    public function cost(){
         return $this->getBanks(null);
+    }
+    public function startTransaction()
+    {
+        self::$_connection->begin_transaction();
+    }
+    public function rollBack()
+    {
+       self::$_connection->rollback();
     }
 }
