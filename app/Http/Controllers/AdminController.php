@@ -79,7 +79,7 @@ class AdminController extends Controller
         $all_hotel = $all_hotel->paginate(15);
         return view('backend.layouts.Hotel.AllHotels')->with('all_hotel', $all_hotel);
     }
-    public function AddHotel(Request $request)
+    public function AddHotel()
     {
         $admin_role = Auth::user()->role;
         if($admin_role != 1)

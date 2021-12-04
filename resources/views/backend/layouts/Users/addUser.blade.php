@@ -29,7 +29,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Thêm Location</h3>
+                    <h3>Add User</h3>
                 </div>
 
                 <div class="title_right">
@@ -64,7 +64,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Thêm Location <small>sub title</small></h2>
+                            <h2>Add User <small>sub title</small></h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -86,7 +86,7 @@
                                 <meta name="csrf-token" content="{{ csrf_token() }}">
                                 <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
                                 </p>
-                                <span class="section">Thông tin Categories</span>
+                                <span class="section">Add Information User</span>
                                 <div class="field item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3  label-align">Name<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
