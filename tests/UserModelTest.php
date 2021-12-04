@@ -37,261 +37,7 @@ class UserModelTest extends TestCase
     //     }
     // }
      
-       
-    //Test Auth nhap sai user,pass
-    public function testAuthNG()
-    { 
-        $userModel = new UserModel();
-        $user = "mrluongdz";
-        $pass = "luongvo1247";
-
-        $excute = []; 
-
-        $actual =  $userModel->auth($user, $pass);
-        $this->assertEquals($excute, $actual);
-    }
-    //Test Auth nhap vào ki tu dac biet
-    public function testAuthkitudacbietNG()
-    {
-        $userModel = new UserModel();
-        $user = '+_+';
-        $pass =  '_+_';
-        $expected = [];
-        $actual = $userModel->auth($user, $pass);
-        $this->assertEquals($expected, $actual);
-    }
-    //Xoa đúng id
-    public function testDeleteUserByIdOK()
-    {
-        $userModel = new UserModel();
-        $id =1;
-        $excute = true;
-        $actual = $userModel->deleteUserById($id);
-        $this->assertEquals($excute, $actual);
-    }
-    //Xoa sai id
-    public function testDeleteUserByIdNG()
-    {
-        $userModel = new UserModel();
-        $id = '1,1';
-
-        $actual = $userModel->deleteUserById($id);
-        if ($actual == false) {
-            $this->assertTrue(false);
-        } else {
-            $this->assertTrue(true);
-        }
-    }
-    //xoa id khong co ở data
-    public function testDeleteUserByIdShowNG()
-    {
-        $userModel = new UserModel();
-        $id = 1000;
-        $excute = true;
-        $key = $userModel->findUserById($id);
-        $actual = $userModel->deleteUserById($id);
-
-        if ($key == []) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertEquals($excute, $actual);
-        }
-    }
-      //TEST OF FUNCTION findUserById
-      public function testFindUserByIdWithOK()
-      {
-          $userModel = new UserModel();
-          $expected = [
-              "id" => '10',
-              "name" => "nguyen minh tien",
-              "fullname" => "Nguyen minh tien",
-              "email" => "nguyenminhtien1808@gmail.com",
-              "type" => "admin",
-              "password" => "81dc9bdb52d04dc20036dbd8313ed055",
-          ];
-          $actual = $userModel->findUserById(10);
-          $this->assertEquals($expected, $actual[0]);
-      }
-      //
-      public function testFindUserByIdWithNullId()
-      {
-          $userModel = new UserModel();
-          $expected = false;
-          $actual = $userModel->findUserById(null);
-          $this->assertEquals($expected, $actual);
-      }
-      //
-      public function testFindUserByIdWithNoData()
-      {
-          $userModel = new UserModel();
-          $expected = [];
-          $actual = $userModel->findUserById(0);
-          $this->assertEquals($expected, $actual);
-      }
-      //
-      public function testFindUserByStringNumberId()
-      {
-          $userModel = new UserModel();
-          $expected = false;
-          $actual = $userModel->findUserById("1");
-          $this->assertEquals($expected, $actual);
-      }
-      //
-      public function testFindUserByStringId()
-      {
-          $userModel = new UserModel();
-          $expected = false;
-          $actual = $userModel->findUserById("abcd");
-          $this->assertEquals($expected, $actual);
-      }
-      //
-      public function testFindUserBySpecialKeyId()
-      {
-          $userModel = new UserModel();
-          $expected = false;
-          $actual = $userModel->findUserById("/**//#@^%$");
-          $this->assertEquals($expected, $actual);
-      }
-      //
-      public function testFindUserByArrayId()
-      {
-          $userModel = new UserModel();
-          $expected = false;
-          $actual = $userModel->findUserById([]);
-          $this->assertEquals($expected, $actual);
-      }
-      //
-      public function testFindUserByObjectId()
-      {
-          $userModel = new UserModel();
-          $expected = false;
-          $key = new stdClass;
-          $actual = $userModel->findUserById($key);
-          $this->assertEquals($expected, $actual);
-      }
-      //
-      public function testFindUserByBooleanId()
-      {
-          $userModel = new UserModel();
-          $expected = false;
-          $key = true;
-          $actual = $userModel->findUserById($key);
-          $this->assertEquals($expected, $actual);
-      }
-      //
-      public function testFindUserByDoubleId()
-      {
-          $userModel = new UserModel();
-          $expected = false;
-          $key = 1.345;
-          $actual = $userModel->findUserById($key);
-          $this->assertEquals($expected, $actual);
-      }
-  
-      //TEST OF FUNCTION findUser
-      public function testFindUserByNameWithOK()
-      {
-          $userModel = new UserModel();
-          $expected = [
-              "id" => 10,
-              "name" => "nguyen minh tien",
-              "fullname" => "Nguyen minh tien",
-              "email" => "nguyenminhtien1808@gmail.com",
-              "type" => "admin",
-              "password" => "81dc9bdb52d04dc20036dbd8313ed055",
-          ];
-          $keyword = "nguyen minh tien";
-          $actual = $userModel->findUser($keyword);
-          $this->assertEquals($expected, $actual[0]);
-      }
-      //
-      public function testFindUserByEmailWithOK()
-      {
-          $userModel = new UserModel();
-          $expected = [
-              "id" => 11,
-              "name" => "nguyen minh tien",
-              "fullname" => "nguyen minh tien",
-              "email" => "nguyenminhtien18081@gmail.com",
-              "type" => "admin",
-              "password" => "81dc9bdb52d04dc20036dbd8313ed055",
-          ];
-          $keyword = "nguyenminhtien18081@gmail.com";
-          $actual = $userModel->findUser($keyword);
-          $this->assertEquals($expected, $actual[0]);
-      }
-      //
-      public function testFindUserWithNullKey()
-      {
-          $userModel = new UserModel();
-          $expected = false;
-          $keyword = null;
-          $actual = $userModel->findUser($keyword);
-          $this->assertEquals($expected, $actual);
-      }
-      //
-      public function testFindUserBySpecialKey()
-      {
-          $userModel = new UserModel();
-          $expected = [];
-          $actual = $userModel->findUser("/**//#@^%$");
-          $this->assertEquals($expected, $actual);
-      }
-      //
-      public function testFindUserWithNoData()
-      {
-          $userModel = new UserModel();
-          $expected = [];
-          $keyword = "sdf";
-          $actual = $userModel->findUser($keyword);
-          $this->assertEquals($expected, $actual);
-      }
-      //
-      public function testFindUserNumberKey()
-      {
-          $userModel = new UserModel();
-          $expected = false;
-          $keyword = 113;
-          $actual = $userModel->findUser($keyword);
-          $this->assertEquals($expected, $actual);
-      }
-      //
-      public function testFindUserByArrayKey()
-      {
-          $userModel = new UserModel();
-          $expected = false;
-          $keyword = [];
-          $actual = $userModel->findUserById($keyword);
-          $this->assertEquals($expected, $actual);
-      }
-      //
-      public function testFindUserByObjectKey()
-      {
-          $userModel = new UserModel();
-          $expected = false;
-          $key = new stdClass;
-          $actual = $userModel->findUser($key);
-          $this->assertEquals($expected, $actual);
-      }
-      //
-      public function testFindUserByBooleanKey()
-      {
-          $userModel = new UserModel();
-          $expected = false;
-          $key = true;
-          $actual = $userModel->findUser($key);
-          $this->assertEquals($expected, $actual);
-      }
-      //
-      public function testFindUserByDoubleKey()
-      {
-          $userModel = new UserModel();
-          $expected = false;
-          $key = 1.11;
-          $actual = $userModel->findUser($key);
-          $this->assertEquals($expected, $actual);
-      }
-      public function testUpdateUserOK(){
+    public function testUpdateUserOk(){
         $userModel = new UserModel();
         $user = array(  
             'id' => 4,        
@@ -299,36 +45,31 @@ class UserModelTest extends TestCase
             'fullname' => 'DangDuyHuy',
             'email' => 'duyhuy@gmail.com',
             'type' => 'admin',
-            'password' => md5('dangduyhuy')
+            'password' => md5('user3')
         );         
         $expected = true;
         $actual = $userModel->updateUser($user);
         $this->assertEquals($actual, $expected);   
     }
-    public function testUpdateUserNGNull(){
+    public function testUpdateUserNGNULL(){
         $userModel = new UserModel();
-        $user = array(
-            'id' => '',        
-            'name' => '',
-            'fullname' => '',
-            'type' => '',
-            'email' => '',
-            'password' => md5('')
-        );
+        $user = array(  
+            'id' => 4,        
+            'name' => 'dangduyhuy',
+            'fullname' => 'DangDuyHuy',
+            'email' => 'duyhuy@gmail.com',
+            'type' => 'admin',
+            'password' => md5('user3')
+        );         
         $expected = true;
         $actual = $userModel->updateUser($user);
-        $this->assertEquals($expected,$actual); 
-        if(!empty($user['name']) && !empty($user['fullname']) && !empty($user['type']) && !empty($user['email']) && !empty($user['password'])){            
-            $this->assertTrue(false);
-        }else{
-            $this->assertTrue(true);
-        }   
+        $this->assertEquals($actual, $expected);   
     }
     public function testUpdateUserSpecialCharactersNg(){
         $userModel = new UserModel();
         $pattern = '/[0-9A-Za-z]/';
         $user = array(
-            'id' => 5,
+            'id' => 4,
             'name' => "@#$",
             'fullname' =>'DangDuyHuy',
             'email' => 'duyhuy@gmail.com',
@@ -346,9 +87,9 @@ class UserModelTest extends TestCase
     public function testUpdateUserFloatNg(){
         $userModel = new UserModel();
         $user = array(
-            'id' => 5,
+            'id' => 25,
             'name' => 2.5,
-            'fullname' =>'DangDuyHuy',
+            'fullname' =>'dangduyhuy',
             'email' => 'duyhuy@gmail.com',
             'type' => 'admin',
             'password' => md5('user3')
@@ -378,174 +119,5 @@ class UserModelTest extends TestCase
         }else{
             $this->assertTrue(false);
         }   
-    }
-       
-    /*Test  insert user nhập đúng OK*/
-    public function testInsertUserOK()
-    {
-        $userModel = new UserModel();
-        
-        $user = array(
-            "id" => 10,
-            'name' => 'minh an',
-            'fullname' => 'minhan',
-            'type' => 'user',
-            'email' => 'toithap1999@gmail.com',
-            'password' => '12345'
-        );
-        $excute = true;
-
-        $actual = $userModel->insertUser($user, $userModel);
-        $this->assertEquals($excute, $actual);
-    }
-     /*Test  insert nhập sai user Not OK*/
- public function testInsertUserNG()
- {
-     $userModel = new UserModel();
-     
-     $actual = null;
-     $user = array(
-        "id" => 10,
-         'name' => 'minh an',
-         'fullname' => 'minhan',
-         'type' => 'user',
-         'email' => 'toithap1999@gmail.com',
-         'password' => '12345'
-     );
-     try {
-         $actual = $userModel->insertUser('abcdefgh',  $userModel);
-     } catch (Throwable $e) {
-         $excute = false;
-     }
-     $this->assertEquals($excute, $actual);
- }
-/*Test insert user truyền vào chuỗi*/
-public function testInsertUserStringNotOK()
-{
-   $userModel = new UserModel();
-  
-   $actual = null;
-   $user = array(
-    "id" => 10,
-       'name' => 'minh an',
-           'fullname' => 'minhan',
-           'type' => 'user',
-           'email' => 'toithap1999@gmail.com',
-           'password' => '12345'
-   );
-   try {
-       $actual = $userModel->insertUser("sssdasad",  $userModel);
-   } catch (Throwable $e) {
-       $excute = false;
-   }
-   $this->assertEquals($excute, $actual);
-}
-     /*Test insert user truyền vào số nguyên*/
-     public function testInsertUserIntegerNotOK()
-     {
-         $userModel = new UserModel();
-        
-         $actual = null;
-         $user = array(
-            "id" => 10,
-             'name' => 'minh an',
-             'fullname' => 'minhan',
-             'type' => 'user',
-             'email' => 'toithap1999@gmail.com',
-             'password' => '12345'
-         );
-         try {
-             $actual = $userModel->insertUser(111,  $userModel);
-         } catch (Throwable $e) {
-             $excute = false;
-         }
-         $this->assertEquals($excute, $actual);
-     }
- 
-      /*Test insert user truyền vào số nguyên*/
-      public function testInsertUserRealnumberNotOK()
-      {
-          $userModel = new UserModel();
-         
-          $actual = null;
-          $user = array(
-            "id" => 10,
-              'name' => 'minh an',
-              'fullname' => 'minhan',
-              'type' => 'user',
-              'email' => 'toithap1999@gmail.com',
-              'password' => '12345'
-          );
-          try {
-              $actual = $userModel->insertUser(14.1,  $userModel);
-          } catch (Throwable $e) {
-              $excute = false;
-          }
-          $this->assertEquals($excute, $actual);
-      }
-      
-
-      /*  Test hàm getUser khi không có dữ liệu truyền vào  OK */
-public function testGetUserNotDataOK()
-{
-    $userModel = new UserModel();
-
-    $actual = $userModel->getUsers();
-
-    if ($actual != null) {
-        $this->assertTrue(true);
-    } else {
-        $this->assertTrue(false);
-    }
-}
-
-
-  
-
-
-     /*Test hàm getUser khi có dữ liệu truyền vào là kiểu đối tượng*/
-     public function testGetUserObjectNotOK()
-     {
-         $userModel = new UserModel();
-         $actual = null;
- 
-         $params = array(
-             'keyword' => $userModel,
-         );
-         try {
-             $actual = $userModel->getUsers($params);
-         } catch (Throwable $e) {
-             $excute = false;
-         }
-         $this->assertEquals($excute, $actual);
-     }
- /*Test hàm getUser khi có dữ liệu truyền vào là Array*/
- public function testGetUserArrayNotOK()
- {
-     $userModel = new UserModel();
-     $actual = null;
-
-     $params = array(
-        'keyword' => $userModel,
-     );
-     try {
-         $actual = $userModel->getUsers($params);
-     } catch (Throwable $e) {
-         $excute = false;
-     }
-     $this->assertEquals($excute, $actual);
-
-
- }
-public function testGetUsersNg()
-    {
-        $userModel = new UserModel();
-        $params['keyword']  = $userModel;
-        $user = $userModel->getUsers($params);
-        if (empty($user[0])) {
-            return $this->assertTrue(true);
-        } else {
-            return $this->assertTrue(false);
-        }
     }
 }

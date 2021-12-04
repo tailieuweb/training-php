@@ -39,132 +39,51 @@ class BankModelTest extends TestCase
         $actual = $bankModel->updateBank($bank);
         $this->assertEquals($actual, $expected);   
     }
-    // public function testGetBanksGood()
-    // {
-    //     $bankModel = new BankModel();
-    //     $params['keyword']  = 11;
-    //     $bank = $bankModel->getBanks($params);
-    //     // var_dump($bank);
-    //     // die();
-    //     if (empty($bank[0])) {
-    //         return $this->assertTrue(true);
-    //     } else {
-    //         return $this->assertTrue(false);
-    //     }
-    // }
-    //
-    public function testGetBanksNg()
-    {
+    public function testUpdateBankNGNull(){
         $bankModel = new BankModel();
-        $params['keyword']  = 1000;
-        $bank = $bankModel->getBanks($params);
-        if (empty($bank[0])) {
-            return $this->assertTrue(true);
-        } else {
-            return $this->assertTrue(false);
-        }
+        $bank = array(
+            'id' => 6,        
+            'user_id' => '',
+            'cost' => '',
+        );
+        $expected = true;
+        $actual = $bankModel->updateBank($bank);
+        $this->assertEquals($expected,$actual); 
+        if(!empty($bank['id']) && !empty($bank['user_id']) && !empty($bank['cost']) ){            
+            $this->assertTrue(false);
+        }else{
+            $this->assertTrue(true);
+        }   
     }
-    // Test keyword là chuoi
-    public function testGetBanksByIsString()
-    {
+    // public function testUpdateBankFloatNg(){
+    //     $bankModel = new BankModel();
+    //     $bank = array(
+    //         'id' => 4,        
+    //         'user_id' => '2.5',
+    //         'cost' => '111',
+    //     );
+    //     $bankModel->updateBank($bank);
+    //     if(is_float($bank['id']) || is_float($bank['user_id']) || is_float($bank['cost'])){  
+            
+    //         $this->assertTrue(true);
+    //     }else{
+    //         $this->assertTrue(false);
+    //     }   
+    // }
+    public function testUpdateBankBool(){
         $bankModel = new BankModel();
-        $params['keyword']  = '11';
-        $bank = $bankModel->getBanks($params);
-        if (empty($bank[0])) {
-            return $this->assertTrue(true);
-        } else {
-            return $this->assertTrue(false);
-        }
+        $bank = array(
+            'id' => 74,
+            'user_id' => true,
+            'cost' =>false,
+            
+        );
+        $bankModel->updateBank($bank);
+        if(is_bool($bank['id']) || is_bool($bank['user_id']) || is_bool($bank['cost'])){  
+            
+            $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
+        }   
     }
-    // Test keyword là số âm
-    // public function testGetBanksIsNegativeNum()
-    // {
-    //     $bankModel = new BankModel();
-    //     $params['keyword']  = -11;
-    //     $bank = $bankModel->getBanks($params);
-    //     if (empty($bank[0])) {
-    //         return $this->assertTrue(true);
-    //     } else {
-    //         return $this->assertTrue(false);
-    //     }
-    // }
-    // Test keyword là số thuc
-    // public function testGetBanksIsDouble()
-    // {
-    //     $bankModel = new BankModel();
-    //     $params['keyword']  = 1.1;
-    //     $bank = $bankModel->getBanks($params);
-    //     if (empty($bank[0])) {
-    //         return $this->assertTrue(true);
-    //     } else {
-    //         return $this->assertTrue(false);
-    //     }
-    // }
-    public function testInsertBankNotOK()
-    {
-     
-    $bankModel = new BankModel();
-    $actual = null;
-     $bank = array(
-        'user_id' => '13',
-        'cost' => '123',
-    );
-    try {
-      $actual = $bankModel->insertBanks('abcdefgh',$bankModel);
-   } catch (Throwable $e) {
-     $excute = false;
-    }
-     $this->assertEquals($excute, $actual);
-}
-/*Test insert bank truyền vào chuỗi*/
-    public function testInsertBankStringNotOK()
-     {
-   
-   $bankModel = new BankModel();
-   $actual = null;
-   $bank = array(
-        'user_id' => '14',
-        'cost' => '123',
-   );
-   try {
-    $actual = $bankModel->insertBank('abcdefgh',$bankModel);
-   } catch (Throwable $e) {
-   $excute = false;
-  }
-    $this->assertEquals($excute, $actual);
-  }
-   /*Test insert bank truyền vào số nguyên*/
-   public function testInsertBankIntegerNotOK()
-   {
-     
-     $bankModel = new BankModel();
-     $actual = null;
-     $bank = array(
-        'user_id' => '15',
-        'cost' => '123',
-     );
-     try {
-        $actual = $bankModel->insertBank(111,$bankModel);
-     } catch (Throwable $e) {
-         $excute = false;
-     }
-     $this->assertEquals($excute, $actual);
-   }
-   /*Test insert bank truyền vào số nguyên*/
-   public function testInsertBankRealnumberNotOK()
-   {
-    
-     $bankModel = new BankModel();
-     $actual = null;
-     $bank = array(
-        'user_id' => '16',
-        'cost' => '123',
-     );
-     try {
-        $actual = $bankModel->insertBank(12.2,$bankModel);
-     } catch (Throwable $e) {
-         $excute = false;
-     }
-     $this->assertEquals($excute, $actual);
-   }
 }
