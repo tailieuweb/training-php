@@ -38,12 +38,7 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
-    public function testGetID(){
-        $userModel = new UserModel();
-        $expected = 300;
-        $actual = $userModel->getID();
-        $this->assertEquals($expected, $actual[0]["id"]);
-    }
+ 
     public function testGetIDNG(){
         $userModel = new UserModel();
         $expected = 30;
