@@ -47,13 +47,6 @@ class BankModel extends BaseModel
 
         return $banks;
     }
-
-    public function insertUser_bank($input) {
-        var_dump($input);
-        $sql = "INSERT INTO `bank` (`name`, `fullname`, `sdt`, `email`, `stk`) VALUES (" .
-            "'" . $input['name'] . "', '".$input['fullname']."','".$input['sdt']."', '".$input['email']."','".$input['stk']."')";
-
-
     // Le Anh Vu chinh sua.
     public function insertUser_bank($input = [])
     {
@@ -320,16 +313,4 @@ class BankModel extends BaseModel
         return $result;
     }
 
-    public function updateUser_bank($input) {
-        $sql = 'UPDATE bank SET 
-                 name = "' . $input['name'] .'", 
-                 fullname = "'. $input['fullname'].'",
-                 email = "' . $input['email'] .'", 
-                 sdt = "' . $input['sdt'] .'", 
-                 stk="'. $input['stk'].'"
-                WHERE id = ' . $input['id'];
-        $user = $this->update($sql);
-
-        return $user;
-    }
 }

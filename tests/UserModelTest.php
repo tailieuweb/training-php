@@ -3,245 +3,6 @@
 use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase {
-
-//    //test function getUser
-////    public function testGetUsers(){
-////        $userModel = new UserModel();
-////    }
-//    //ok
-//    public function testFindUserByIdOk(){
-//        $userModel = new UserModel();
-//        $userId = 18;
-//        $userName = 'admin';
-//
-//        $user = $userModel->findUserById($userId);
-//        $actual = $user[0]['name'];
-//
-//        $this->assertEquals($userName,$actual);
-//
-//    }
-//    // //fail
-//    // public function testFindUserByIdStr() {
-//    //     $userModel = new UserModel();
-//
-//    //     $id = 'asdf';
-//
-//
-//    //     $expected = 'error';
-//    //     $actual = $userModel->findUserById($id);
-//
-//    //     $this->assertEquals($expected, $actual);
-//
-//    //     }
-//    //     //fail
-//    // public function testFindUserByIdNull() {
-//    //     $userModel = new UserModel();
-//    //     $id = '';
-//    //     $expected = 'error';
-//    //     $actual = $userModel->findUserById($id);
-//
-//    //     // $this->assertEquals($expected, $actual);
-//    //     if(empty($id)){
-//
-//    //         $this->assertTrue(true);
-//    //     }else{
-//    //         $this->assertTrue(false);
-//    //     }
-//
-//    // }
-//    // //fail
-//    // public function testFindUserByIdObject() {
-//    //     $userModel = new UserModel();
-//
-//    //     $id = new stdClass();
-//    //     $expected = 'error';
-//    //     $actual = $userModel->findUserById($id);
-//
-//    //     $this->assertEquals($expected, $actual);
-//
-//    //     }
-//        //ok
-//    public function testFindUserByIdNg(){
-//        $userModel = new UserModel();
-//        $userId = 9999;
-//        $userName = 'asdf';
-//
-//        $user = $userModel->findUserById($userId);
-//
-//        if(empty($user)){
-//
-//            $this->assertTrue(true);
-//        }else{
-//            $this->assertTrue(false);
-//        }
-//
-//    }
-//    //fail
-//    // public function testString()
-//    // {
-//    //     $userModel = new UserModel();
-//    //     $a = 1;
-//    //     $b = 'a';
-//
-//    //     //number + string
-//    //     //number
-//    //     //numberstring
-//
-//    //     $expected = 'error';
-//    //     $actual = $userModel->sumb($a, $b);
-//
-//    //     $this->assertEquals($expected, $actual);
-//
-//    // }
-//
-//    //fail
-//    // public function testTwoString()
-//    // {
-//    //     $userModel = new UserModel();
-//    //     $a = 'a';
-//    //     $b = 'b';
-//
-//    //     //number + string
-//    //     //number
-//    //     //numberstring
-//
-//    //     $expected = 'error';
-//    //     $actual = $userModel->sumb($a, $b);
-//
-//    //     $this->assertEquals($expected, $actual);
-//    // }
-//
-//    public function testSumNotgood()
-//    {
-//        $userModel = new UserModel();
-//        $a = 1;
-//        $b = 2;
-//
-//        $actual = $userModel->sumb($a,$b);
-//
-//        if ($actual != 3) {
-//            $this->assertTrue(false);
-//        } else {
-//            $this->assertTrue(true);
-//        }
-//    }
-//    public function testSumOk()
-//    {
-//        $userModel = new UserModel();
-//        $a = 1;
-//        $b = 2;
-//        $expected = 3;
-//
-//        $actual = $userModel->sumb($a, $b);
-//
-//        $this->assertEquals($expected, $actual);
-//    }
-//    public function testSumNg()
-//    {
-//        $userModel = new UserModel();
-//        $a = 1;
-//        $b = 2;
-//        $expected = 3;
-//
-//        $actual = $userModel->sumb($a, $b);
-//        if ($actual != 3) {
-//            $this->assertTrue(false);
-//        } else {
-//            $this->assertTrue(true);
-//        }
-//    }
-//    public function testTwoPositiveInt()
-//    {
-//        $userModel = new UserModel();
-//        $a = 1;
-//        $b = 2;
-//        $expected = 3;
-//
-//        $actual = $userModel->sumb($a, $b);
-//
-//        $this->assertEquals($expected, $actual);
-//    }
-//
-//    public function testTwoNegativeInt()
-//    {
-//        $userModel = new UserModel();
-//        $a = -1;
-//        $b = -2;
-//        $expected = -3;
-//
-//        $actual = $userModel->sumb($a, $b);
-//
-//        $this->assertEquals($expected, $actual);
-//    }
-//
-//    public function testNegativePositiveInt()
-//    {
-//        $userModel = new UserModel();
-//        $a = -1;
-//        $b = 2;
-//        $expected = 1;
-//
-//        $actual = $userModel->sumb($a, $b);
-//
-//        $this->assertEquals($expected, $actual);
-//    }
-//
-//    public function testSumFloat()
-//    {
-//        $userModel = new UserModel();
-//        $a = 1.5;
-//        $b = 2.33;
-//        $expected = 3.83;
-//
-//        $actual = $userModel->sumb($a, $b);
-//
-//        $this->assertEquals($expected, $actual);
-//    }
-//
-//    public function testSumPositiveFloat()
-//    {
-//        $userModel = new UserModel();
-//        $a = 1.5;
-//        $b = 2.33;
-//        $expected = 3.83;
-//
-//        $actual = $userModel->sumb($a, $b);
-//
-//        $this->assertEquals($expected, $actual);
-//    }
-//
-//
-//    public function testSumNegativeFloat()
-//    {
-//        $userModel = new UserModel();
-//        $a = -1.5;
-//        $b = -2.33;
-//        $expected = -3.83;
-//
-//        $actual = $userModel->sumb($a, $b);
-//
-//        $this->assertEquals($expected, $actual);
-//    }
-//
-//    public function testNegativePositiveFloat()
-//    {
-//        $userModel = new UserModel();
-//        $a = -1.5;
-//        $b = 2.33;
-//        $expected = 0.83;
-//
-//        $actual = $userModel->sumb($a, $b);
-//
-//        $this->assertEquals($expected, $actual);
-//    }
-//    public function testadd(){
-//        $userModel = new UserModel();
-//        $result = $userModel->add(4,5);
-//        $actual = $result;
-//        $expected = 9;
-//        $this->assertEquals($expected,$actual);
-//    }
-
     // TEST GETUSERS
     public function testGetCountUsers() {
         $user             = new UserModel();
@@ -329,24 +90,23 @@ class UserModelTest extends TestCase {
 //
 //    }
 //Test InsertUser
-    public function testInsertUser() {
-        $actual = function () {
-            $user = new UserModel();
-            $form = ["name"      => "Tinh",
-                     "full-name" => "Nguyen Trong Tinh",
-                     "email"     => "123489",
-                     "type"      => "trongtinh2k@gmail.com",
-                     "password"  => md5("999999"),
-            ];
-
-            return $user->insertUser($form);
-        };
-        if ((bool) $actual() === true) {
-            $actual = "Add 1 User Successful!";
-        }
-        $expected = "Add 1 User Successful!";
-        $this->assertEquals($expected, $actual);
-    }
+//    public function testInsertUser() {
+//        $user = new UserModel();
+//        $form = ["name"      => "Tinh",
+//                 "full-name" => "Nguyen Trong Tinh",
+//                 "email"     => "123489",
+//                 "type"      => "trongtinh2k@gmail.com",
+//                 "password"  => md5("999999"),
+//        ];
+//        $user->startTransaction();
+//        $actual= $user->insertUser($form);
+//        $user->rollback();
+//        if ((bool) $actual() === true) {
+//            $actual = "Add 1 User Successful!";
+//        }
+//        $expected = "Add 1 User Successful!";
+//        $this->assertEquals($expected, $actual);
+//    }
     public function testFieldNameLength() {
         $user   = new UserModel();
         $input  = ['name'      => 'Tinh',
@@ -356,10 +116,11 @@ class UserModelTest extends TestCase {
                    'password'  => md5('123')];
 
         $actual = strlen($input['name']) < 100 ? true : false;
-
         if ($actual == true) {
             $actual = "valid name";
+            $user->startTransaction();
             $user->insertUser($input);
+            $user->rollBack();
         } else {
             $actual = "invalid name";
         }
@@ -374,7 +135,9 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'user',
                    'password'  => md5('123')];
+        $user->startTransaction();
         $user->insertUser($input);
+        $user->rollBack();
         $actual = strlen($input['name']) < 100 ? true : false;
 
         if ($actual == true) {
@@ -394,7 +157,9 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'user',
                    'password'  => md5('123')];
+        $user->startTransaction();
         $user->insertUser($input);
+        $user->rollBack();
         $actual = empty($input['name']) ? false : true;
 
         if ($actual == true) {
@@ -414,7 +179,9 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'user',
                    'password'  => md5('123')];
+        $user->startTransaction();
         $user->insertUser($input);
+        $user->rollBack();
         $actual = is_numeric($input['name']) ? false : true;
 
         if ($actual == true) {
@@ -426,29 +193,6 @@ class UserModelTest extends TestCase {
         $expected = "invalid name";
 
         $this->assertEquals($expected, $actual);
-    }
-    // Test case testDeleteUserIdNull
-    public function testDeleteUserIdNull()
-    {
-        $userModel = new UserModel();
-        $id = "";
-        $check = $userModel->deleteUserById($id);
-        if ($check == false) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
-    }
-    // Test case testDeleteUserBool
-    public function testDeleteUserBool() {
-        $userModel = new UserModel();
-        $id        = false;
-        $check     = $userModel->deleteUserById($id);
-        if ($check == false) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
     }
     public function testFieldNameSpecial() {
         $user   = new UserModel();
@@ -464,7 +208,9 @@ class UserModelTest extends TestCase {
 
         } else {
             $actual = "invalid name";
+            $user->startTransaction();
             $user->insertUser($input);
+            $user->rollBack();
         }
         $expected = "invalid name";
 
@@ -482,7 +228,9 @@ class UserModelTest extends TestCase {
 
         if ($actual == true) {
             $actual = "valid full-name";
+            $user->startTransaction();
             $user->insertUser($input);
+            $user->rollBack();
         } else {
             $actual = "invalid full-name";
         }
@@ -502,7 +250,9 @@ class UserModelTest extends TestCase {
 
         if ($actual == true) {
             $actual = "valid email";
+            $user->startTransaction();
             $user->insertUser($input);
+            $user->rollBack();
         } else {
             $actual = "invalid email";
         }
@@ -521,7 +271,9 @@ class UserModelTest extends TestCase {
 
         if ($actual == true) {
             $actual = "valid type";
+            $user->startTransaction();
             $user->insertUser($input);
+            $user->rollBack();
         } else {
             $actual = "invalid type";
         }
@@ -541,7 +293,9 @@ class UserModelTest extends TestCase {
 
         if ($actual == true) {
             $actual = "valid password";
+            $user->startTransaction();
             $user->insertUser($input);
+            $user->rollBack();
         } else {
             $actual = "invalid password";
         }
@@ -560,7 +314,9 @@ class UserModelTest extends TestCase {
 
         if ($actual == true) {
             $actual = "valid full-name";
+            $user->startTransaction();
             $user->insertUser($input);
+            $user->rollBack();
         } else {
             $actual = "invalid full-name";
         }
@@ -575,7 +331,9 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'user',
                    'password'  => md5('123')];
+        $user->startTransaction();
         $user->insertUser($input);
+        $user->rollBack();
         $actual = empty($input['full-name']) ? false : true;
 
         if ($actual == true) {
@@ -600,7 +358,9 @@ class UserModelTest extends TestCase {
             $actual = "valid full-name";
         } else {
             $actual = "invalid full-name";
+            $user->startTransaction();
             $user->insertUser($input);
+            $user->rollBack();
         }
         $expected = "invalid full-name";
 
@@ -618,7 +378,9 @@ class UserModelTest extends TestCase {
             $actual = "valid full-name";
         } else {
             $actual = "invalid full-name";
+            $user->startTransaction();
             $user->insertUser($input);
+            $user->rollBack();
         }
         $expected = "invalid full-name";
 
@@ -637,7 +399,9 @@ class UserModelTest extends TestCase {
             $actual = "valid Email";
         } else {
             $actual = "invalid Email";
+            $user->startTransaction();
             $user->insertUser($input);
+            $user->rollBack();
         }
         $expected = "invalid Email";
 
@@ -657,7 +421,9 @@ class UserModelTest extends TestCase {
 
         } else {
             $actual = "invalid Email";
+            $user->startTransaction();
             $user->insertUser($input);
+            $user->rollBack();
         }
         $expected = "invalid Email";
 
@@ -675,7 +441,9 @@ class UserModelTest extends TestCase {
             $actual = "valid Email";
         } else {
             $actual = "invalid Email";
+            $user->startTransaction();
             $user->insertUser($input);
+            $user->rollBack();
         }
         $expected = "invalid Email";
 
@@ -692,7 +460,9 @@ class UserModelTest extends TestCase {
         $actual = !empty($input["email"]) && preg_match($regex, $input["email"]) ? true : false;
         if ($actual == true) {
             $actual = "Valid Email";
+            $user->startTransaction();
             $user->insertUser($input);
+            $user->rollBack();
         } else {
             $actual = "invalid Email";
         }
@@ -707,7 +477,9 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'useruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruser',
                    'password'  => md5('123')];
+        $user->startTransaction();
         $user->insertUser($input);
+        $user->rollBack();
         $actual = strlen($input['type']) < 100 ? true : false;
 
         if ($actual == true) {
@@ -726,7 +498,9 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => '',
                    'password'  => md5('123')];
+        $user->startTransaction();
         $user->insertUser($input);
+        $user->rollBack();
         $actual = empty($input['type']) ? false : true;
 
         if ($actual == true) {
@@ -745,7 +519,9 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => '32423',
                    'password'  => md5('123')];
+        $user->startTransaction();
         $user->insertUser($input);
+        $user->rollBack();
         $actual = is_numeric($input['type']) ? false : true;
 
         if ($actual == true) {
@@ -764,7 +540,9 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => '%$^$$%$%',
                    'password'  => md5('123')];
+        $user->startTransaction();
         $user->insertUser($input);
+        $user->rollBack();
         $actual = !empty($input["type"]) && !preg_match('~[^a-z\d]~i', $input["type"]) ? true : false;
         if ($actual == true) {
             $actual = "valid type";
@@ -782,7 +560,9 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'user',
                    'password'  => md5('123')];
+        $user->startTransaction();
         $user->insertUser($input);
+        $user->rollBack();
         $actual =preg_match('/^[a-f0-9]{32}$/',$input['password']);
         //$actual = preg_match('/^[a-f0-9]{32}$/',$input['password']);
 
@@ -802,7 +582,9 @@ class UserModelTest extends TestCase {
                    'email'     => 'trongtinh2k@gmail.com',
                    'type'      => 'user',
                    'password'  => md5('')];
+        $user->startTransaction();
         $user->insertUser($input);
+        $user->rollBack();
         $actual = empty($input['password']) && preg_match('/^[a-f0-9]{32}$/',$input['password'])? true :false;
 
         if ($actual == true) {
@@ -827,7 +609,9 @@ class UserModelTest extends TestCase {
                 'password'  => md5('123'),
                 'id'        => '17',
         ];
+        $user->startTransaction();
         $user->updateUser($formData);
+        $user->rollBack();
         $actual = empty($input['Tinh']) ? true : false;
         if ($actual == true) {
             $actual = "can not update";
@@ -847,7 +631,9 @@ class UserModelTest extends TestCase {
                 'password'  => md5('123'),
                 'id'        => '17',
         ];
+        $user->startTransaction();
         $user->updateUser($formData);
+        $user->rollBack();
         $actual = ! empty($input['Tinh']) ? true : false;
         if ($actual == true) {
             $actual = "can not update";
@@ -867,7 +653,9 @@ class UserModelTest extends TestCase {
                 'password'  => md5('123'),
                 'id'        => '17',
         ];
+        $user->startTransaction();
         $user->updateUser($formData);
+        $user->rollBack();
         $actual = ! empty($formData['Nguyen Trong Tinh']) ? true : false;
         if ($actual == true) {
             $actual = "can not update";
@@ -889,7 +677,9 @@ class UserModelTest extends TestCase {
                 'id'        => "17",
 
         ];
+        $user->startTransaction();
         $user->updateUser($formData);
+        $user->rollBack();
         $formActual = $user->findUserById(17);
 
         $this->assertEquals(md5($formData["password"]), $formActual[0]["password"]);
@@ -906,10 +696,13 @@ class UserModelTest extends TestCase {
                 'id'        => "17",
 
         ];
+        $user->startTransaction();
         $user->updateUser($formData);
+
         $formActual = $user->findUserById(17);
 
         $this->assertEquals($formData["name"], $formActual[0]["name"]);
+        $user->rollBack();
     }
     public function testUpDateUserFullName() {
         $user = new UserModel();
@@ -923,10 +716,13 @@ class UserModelTest extends TestCase {
                 'id'        => "17",
 
         ];
+        $user->startTransaction();
         $user->updateUser($formData);
+
         $formActual = $user->findUserById(17);
 
         $this->assertEquals($formData["full-name"], $formActual[0]["fullname"]);
+        $user->rollBack();
     }
     public function testUpDateUserEmail() {
         $user = new UserModel();
@@ -940,10 +736,12 @@ class UserModelTest extends TestCase {
                 'id'        => "17",
 
         ];
+        $user->startTransaction();
         $user->updateUser($formData);
         $formActual = $user->findUserById(17);
 
         $this->assertEquals($formData["email"], $formActual[0]["email"]);
+        $user->rollBack();
     }
     public function testUpDateUserType() {
         $user = new UserModel();
@@ -957,10 +755,12 @@ class UserModelTest extends TestCase {
                 'id'        => "17",
 
         ];
+        $user->startTransaction();
         $user->updateUser($formData);
         $formActual = $user->findUserById(17);
 
         $this->assertEquals($formData["type"], $formActual[0]["type"]);
+        $user->rollBack();
     }
     public function testUpDateUserPassWordNotEmpty() {
         $user     = new UserModel();
@@ -972,7 +772,9 @@ class UserModelTest extends TestCase {
                 'password'  => md5(''),
                 'id'        => '17',
         ];
+        $user->startTransaction();
         $user->updateUser($formData);
+        $user->rollBack();
         $actual = ! empty($formData['password']) ? true : false;
         if ($actual == true) {
             $actual = "can not update";
@@ -990,7 +792,9 @@ class UserModelTest extends TestCase {
                   'type'      => 'user',
                   'password'  => md5('123'),
                   'id'        => "17",];
+        $user->startTransaction();
         $user->updateUser($input);
+        $user->rollBack();
         $regex  = "/([a-z0-9_]+|[a-z0-9_]+\.[a-z0-9_]+)@(([a-z0-9]|[a-z0-9]+\.[a-z0-9]+)+\.([a-z]{2,4}))/i";
         $actual = ! empty($input["email"]) && preg_match($regex, $input["email"]) ? true : false;
         if ($actual == true) {
