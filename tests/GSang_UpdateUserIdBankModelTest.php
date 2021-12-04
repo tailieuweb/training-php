@@ -42,7 +42,7 @@ class updateUserIdBankModelTest extends TestCase{
     {
         $bankModel = new BankModel();
         $bank = array(
-            'id' => 53,
+            'id' => 3,
             'user_id' => NULL,
             'cost' => NULL
         );
