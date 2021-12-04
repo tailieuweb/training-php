@@ -64,6 +64,7 @@ class NguyenKhacDanh_UserRepositoryTest extends TestCase
         } else {
             $this->assertTrue(false);
         }
+        $repository->deleteUser($userId);
     }
     // Test case testFindByIdString
     public function testFindByIdString()
@@ -114,6 +115,50 @@ class NguyenKhacDanh_UserRepositoryTest extends TestCase
     {
         $repository = new UserRepository;
         $userId = null;
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
+        ];
+        $repository->insertUserWithId($input);
+        $check = $repository->findById($userId);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+        $repository->deleteUser($userId);
+    }
+    // Test case testFindByIdFloat
+    public function testFindByIdFloat()
+    {
+        $repository = new UserRepository;
+        $userId = -1.5;
+        $input = [
+            'id' => $userId,
+            'name' => 'Danh',
+            'fullname' => 'Nguyen Khac',
+            'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+            'type' => 'admin',
+            'password' => '12345'
+        ];
+        $repository->insertUserWithId($input);
+        $check = $repository->findById($userId);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+        $repository->deleteUser($userId);
+    }
+    // Test case testFindByIdArray
+    public function testFindByIdArray()
+    {
+        $repository = new UserRepository;
+        $userId = array();
         $input = [
             'id' => $userId,
             'name' => 'Danh',
@@ -207,6 +252,56 @@ class NguyenKhacDanh_UserRepositoryTest extends TestCase
             $this->assertTrue(false);
         }
     }
+     // Test case testDeleteUserByIdArray
+
+     public function testDeleteUserByIdArray()
+     {
+         $repository = new UserRepository;
+         $userModel = new UserModel;
+         $userModel->startTransaction();
+         $userId = array();
+         $input = [
+             'id' => $userId,
+             'name' => 'Danh',
+             'fullname' => 'Nguyen Khac',
+             'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+             'type' => 'admin',
+             'password' => '12345'
+         ];
+         $repository->insertUserWithId($input);
+         $delete = $repository->deleteUser($userId);
+         $userModel->rollBack();
+         if ($delete == false) {
+             $this->assertTrue(true);
+         } else {
+             $this->assertTrue(false);
+         }
+     }
+     // Test case testDeleteUserByIdFloat
+
+     public function testDeleteUserByIdFloat()
+     {
+         $repository = new UserRepository;
+         $userModel = new UserModel;
+         $userModel->startTransaction();
+         $userId = -1.5;
+         $input = [
+             'id' => $userId,
+             'name' => 'Danh',
+             'fullname' => 'Nguyen Khac',
+             'email' => 'Nguyenkhacdanh.tdc2019@gmail.com',
+             'type' => 'admin',
+             'password' => '12345'
+         ];
+         $repository->insertUserWithId($input);
+         $delete = $repository->deleteUser($userId);
+         $userModel->rollBack();
+         if ($delete == false) {
+             $this->assertTrue(true);
+         } else {
+             $this->assertTrue(false);
+         }
+     }
     // Test case testDeleteUserByIdNull
 
     public function testDeleteUserByIdNull()

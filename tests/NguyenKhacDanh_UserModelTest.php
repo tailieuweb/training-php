@@ -49,6 +49,30 @@ class NguyenKhacDanh_UserModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
+    // Test case testDeleteUserArray
+    public function testDeleteUserArray()
+    {
+        $userModel = new UserModel();
+        $id = array();
+        $check = $userModel->deleteUserById($id);
+        if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testDeleteUserIdFloat
+    public function testDeleteUserIdFloat()
+    {
+        $userModel = new UserModel();
+        $id = -1.5;
+        $check = $userModel->deleteUserById($id);
+        if ($check == true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
     // Test case testDeleteUserBool
     public function testDeleteUserBool()
     {
@@ -151,6 +175,24 @@ class NguyenKhacDanh_UserModelTest extends TestCase
         $check = count($users) > 0;
         $userModel->deleteUserById($id);
         if ($check == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test case testGetUsersByKeyArray 
+    public function testGetUsersByKeyArray()
+    {
+        $userModel = new UserModel;
+        $id = -1;
+        $params = [
+            "keyword" => array()
+        ];
+        $userModel->insertUserWithId($id, 'Danh', 'Nguyen Khac Danh', 'nguyenkhacdanh@gmail.com', 'guest', '12345');
+        $users = $userModel->getUsers($params);
+        $check = count($users) > 0;
+        $userModel->deleteUserById($id);
+        if ($check == true) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);

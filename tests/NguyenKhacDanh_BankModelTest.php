@@ -39,6 +39,46 @@ class NguyenKhacDanh_BankModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
+        // Test case testDeleteBankByIdFloat
+        public function testDeleteBankByIdFloat()
+        {
+            $bankModel = new BankModel();
+            $bankModel->startTransaction();
+            $id = -1.5;
+            $bankModel->insertBank($id, '12345');
+            $check = $bankModel->deleteBankByUserId($id);
+            $findUser = $bankModel->getBankByUserId($id);
+            $check = $findUser == false;
+            $bankModel->rollBack();
+            if (
+                $check == true &&
+                ($findUser) == false
+            ) {
+                $this->assertTrue(true);
+            } else {
+                $this->assertTrue(false);
+            }
+        }
+         // Test case testDeleteBankByIdArray
+         public function testDeleteBankByIdArray()
+         {
+             $bankModel = new BankModel();
+             $bankModel->startTransaction();
+             $id = array('a','b');
+             $bankModel->insertBank($id, '12345');
+             $check = $bankModel->deleteBankByUserId($id);
+             $findUser = $bankModel->getBankByUserId($id);
+             $check = $findUser == false;
+             $bankModel->rollBack();
+             if (
+                 $check == true &&
+                 ($findUser) == false
+             ) {
+                 $this->assertTrue(true);
+             } else {
+                 $this->assertTrue(false);
+             }
+         }
     // Test case testDeleteBankNotId
     public function testDeleteBankNotId()
     {
@@ -107,6 +147,26 @@ class NguyenKhacDanh_BankModelTest extends TestCase
             $this->assertTrue(false);
         }
     }
+      // Test case testDeleteBankByIdArrray
+      public function testDeleteBankByIdArrray()
+      {
+          $bankModel = new BankModel();
+          $userModel = new UserModel();
+          $bankModel->startTransaction();
+          $userId = array('a','b');
+          $userModel->insertUserWithId($userId, 'Danh', 'Nguyen Khac Danh', 'nguyenkhacdanh@gmail.com', 'guest', '12345');
+          $bankModel->insertBank($userId, '12345');
+          $getBank = $bankModel->getBankByUserId($userId);
+          $check = $getBank != false &&
+              $getBank['user_id'] == $userId &&
+              $getBank['cost'] == '12345';
+               $bankModel->rollBack();
+          if ($check === false) {
+              $this->assertTrue(true);
+          } else {
+              $this->assertTrue(false);
+          }
+      }
     // Test case testGetBankByUserIdUserIdFloat
     public function testGetBankByUserIdUserIdFloat()
     {
@@ -152,6 +212,7 @@ class NguyenKhacDanh_BankModelTest extends TestCase
              $this->assertTrue(false);
          }
      }
+     
       // Test case testGetBankByUserIdUserIdObject
       public function testGetBankByUserIdUserIdObject()
       {
