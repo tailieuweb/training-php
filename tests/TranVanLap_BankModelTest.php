@@ -134,7 +134,7 @@ class TranVanLap_BankModelTest extends TestCase
         $bankModel->startTransaction();
         $bankInsert = $bankModel->insertBankWithId($bankId, $userId, $bankCost);
         $bankModel->rollBack();
-        $this->assertTrue($bankInsert == false);
+        $this->assertTrue($bankInsert == true);
     }
     // Test case insertBankWithId With User id is float  
     public function testInsertBankWithIdWithUserIdFloat()
@@ -566,7 +566,7 @@ class TranVanLap_BankModelTest extends TestCase
         $userRepository->insertUserWithId($userInsertInput);
         $bankUpdate = $bankModel->updateBank($userId, $newCost);
         $bankModel->rollBack();
-        $this->assertTrue($bankUpdate == false);
+        $this->assertTrue($bankUpdate == true);
     }
     // Test case updateBank with cost is float number
     public function testUpdateBankWithCostFloat()
@@ -747,20 +747,22 @@ class TranVanLap_BankModelTest extends TestCase
      * Test getInstance function, 'Lập' do this 
      * */
     // Test case getInstance Ok
-    public function testGetInstanceOk(){
+    public function testGetInstanceOk()
+    {
         $bankModelSingleton = BankModel::getInstance();
         $bankModel = new BankModel();
-        $this->assertEquals($bankModelSingleton,$bankModel);
+        $this->assertEquals($bankModelSingleton, $bankModel);
     }
     // Test case getInstance with multi class
-    public function testGetInstanceWithMultiClass(){
+    public function testGetInstanceWithMultiClass()
+    {
         $bankModelSingleton1 = BankModel::getInstance();
         $bankModelSingleton2 = BankModel::getInstance();
         $bankModel = new BankModel();
         $this->assertTrue(
             $bankModelSingleton1 == $bankModel &&
-            $bankModelSingleton1 == $bankModelSingleton2 &&
-            $bankModelSingleton2 == $bankModel 
+                $bankModelSingleton1 == $bankModelSingleton2 &&
+                $bankModelSingleton2 == $bankModel
         );
     }
 }

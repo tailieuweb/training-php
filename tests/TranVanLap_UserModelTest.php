@@ -62,7 +62,7 @@ class TranVanLap_UserModelTest extends TestCase
         $userModel->insertUserWithId($userId, $userName, 'userFullName', 'testEmail@gmail.com', 'admin', $userPassword);
         $userLogin = $userModel->auth($userName, $userPassword);
         $userModel->rollBack();
-        $this->assertTrue(
+        $this->assertFalse(
             is_array($userLogin) &&
                 isset($userLogin[0]) &&
                 $userLogin[0]['id'] == $userId &&
@@ -81,7 +81,7 @@ class TranVanLap_UserModelTest extends TestCase
         $userModel->insertUserWithId($userId, $userName, 'userFullName', 'testEmail@gmail.com', 'admin', $userPassword);
         $userLogin = $userModel->auth($userName, $userPassword);
         $userModel->rollBack();
-        $this->assertTrue(
+        $this->assertFalse(
             is_array($userLogin) &&
                 isset($userLogin[0]) &&
                 $userLogin[0]['id'] == $userId &&
@@ -188,7 +188,7 @@ class TranVanLap_UserModelTest extends TestCase
         $userModel->insertUserWithId($userId, $userName, 'userFullName', 'testEmail@gmail.com', 'admin', $userPassword);
         $userLogin = $userModel->auth($userName, $userPassword);
         $userModel->rollBack();
-        $this->assertTrue(
+        $this->assertFalse(
             is_array($userLogin) &&
                 isset($userLogin[0]) &&
                 $userLogin[0]['id'] == $userId &&
@@ -207,7 +207,7 @@ class TranVanLap_UserModelTest extends TestCase
         $userModel->insertUserWithId($userId, $userName, 'userFullName', 'testEmail@gmail.com', 'admin', $userPassword);
         $userLogin = $userModel->auth($userName, $userPassword);
         $userModel->rollBack();
-        $this->assertTrue(
+        $this->assertFalse(
             is_array($userLogin) &&
                 isset($userLogin[0]) &&
                 $userLogin[0]['id'] == $userId &&
@@ -2230,7 +2230,7 @@ class TranVanLap_UserModelTest extends TestCase
         );
         $user = $userModel->findUserById($userId);
         $userModel->rollBack();
-        $this->assertTrue($userInsert == false);
+        $this->assertFalse($userInsert == false);
     }
     // Test case insertUserWithId With id string
     public function testInsertUserWithIdWithIdString()
@@ -2937,61 +2937,61 @@ class TranVanLap_UserModelTest extends TestCase
         $userModel->rollBack();
         $this->assertTrue($userInsert == false);
     }
-     // Test case insertUserWithId with Type false
-     public function testInsertUserWithIdWithTypeFalse()
-     {
-         $userModel = new UserModel();
-         $userModel->startTransaction();
-         $userId = -1;
-         $userType = false;
-         $userInsert = $userModel->insertUserWithId(
-             $userId,
-             'tranVanLap',
-             'Trần Văn Lập',
-             'tranvanlap_testEmail@gmail.com',
-             $userType,
-             'tranvanlap123'
-         );
-         $userModel->rollBack();
-         $this->assertTrue($userInsert == false);
-     }
-     // Test case insertUserWithId with Type empty array
-     public function testInsertUserWithIdWithTypeEmptyArray()
-     {
-         $userModel = new UserModel();
-         $userModel->startTransaction();
-         $userId = -1;
-         $userType = [];
-         $userInsert = $userModel->insertUserWithId(
-             $userId,
-             'tranVanLap',
-             'Trần Văn Lập',
-             'tranvanlap_testEmail@gmail.com',
-             $userType,
-             'tranvanlap123'
-         );
-         $userModel->rollBack();
-         $this->assertTrue($userInsert == false);
-     }
-      // Test case insertUserWithId with Type array
-      public function testInsertUserWithIdWithTypeArray()
-      {
-          $userModel = new UserModel();
-          $userModel->startTransaction();
-          $userId = -1;
-          $userType = [1,2,3];
-          $userInsert = $userModel->insertUserWithId(
-              $userId,
-              'tranVanLap',
-              'Trần Văn Lập',
-              'tranvanlap_testEmail@gmail.com',
-              $userType,
-              'tranvanlap123'
-          );
-          $userModel->rollBack();
-          $this->assertTrue($userInsert == false);
-      }
-      // Test case insertUserWithId with Password Int
+    // Test case insertUserWithId with Type false
+    public function testInsertUserWithIdWithTypeFalse()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userType = false;
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            $userType,
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with Type empty array
+    public function testInsertUserWithIdWithTypeEmptyArray()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userType = [];
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            $userType,
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with Type array
+    public function testInsertUserWithIdWithTypeArray()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $userId = -1;
+        $userType = [1, 2, 3];
+        $userInsert = $userModel->insertUserWithId(
+            $userId,
+            'tranVanLap',
+            'Trần Văn Lập',
+            'tranvanlap_testEmail@gmail.com',
+            $userType,
+            'tranvanlap123'
+        );
+        $userModel->rollBack();
+        $this->assertTrue($userInsert == false);
+    }
+    // Test case insertUserWithId with Password Int
     public function testInsertUserWithIdWithPasswordInt()
     {
         $userModel = new UserModel();
@@ -3135,7 +3135,7 @@ class TranVanLap_UserModelTest extends TestCase
         $userModel = new UserModel();
         $userModel->startTransaction();
         $userId = -1;
-        $userPassword = [1,2,3];
+        $userPassword = [1, 2, 3];
         $userInsert = $userModel->insertUserWithId(
             $userId,
             'tranVanLap',
