@@ -436,7 +436,7 @@ class BankModelTest extends TestCase
     public function testGetBanksOk()
     {
         $BankModel = new BankModel();
-        $expected = '1';
+        $expected = '2';
         $Bank = $BankModel->getBanks();
         $this->assertEquals($expected, $Bank[0]['user_id']);
     }
