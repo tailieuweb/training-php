@@ -25,28 +25,30 @@ class UserModelTest extends TestCase
         $userModel->startTransaction();
         $expectedFirst = [
             [
-                "id" => "1",
-                "name" => "test2first",
-                "fullname" => "test2",
-                "email" => "test2@gmail.com",
-                "type" => "user",
-                "password" => "202cb962ac59075b964b07152d234b70"
-            ],
-        ];
-
-        $expectedLast = [
-            [
-                "id" => "5",
-                "name" => "test2last",
+                "id" => "198",
+                "name" => "test2insert",
                 "fullname" => "test2",
                 "email" => "test2@gmail.com",
                 "type" => "user",
                 "password" => "5f4dcc3b5aa765d61d8327deb882cf99"
             ],
         ];
-        $expectedLength = 5;
+
+        $expectedLast =
+        [
+            [
+                "id" => "220",
+                "name" => "test2insert",
+                "fullname" => "test2",
+                "email" => "test2@gmail.com",
+                "type" => "user",
+                "password" => "5f4dcc3b5aa765d61d8327deb882cf99"
+            ],
+        ];
+        $expectedLength = 68;
         $actual = $userModel->read();
         $actualLength = count($actual);
+        // var_dump($actual);die();
 
         if ($actualLength === $expectedLength) {
             $v1 = $this->assertEquals(
@@ -56,7 +58,7 @@ class UserModelTest extends TestCase
             );
             $v2 = $this->assertEquals(
                 $expectedLast[0],
-                $actual[4],
+                $actual[$expectedLength-1],
                 "Expected and actual not equals"
             );
             $this->assertFalse(($v1 && $v2), "actualfrist is not equals actuallast");
@@ -80,12 +82,12 @@ class UserModelTest extends TestCase
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
         $userModel->startTransaction();
-        $username = "test2first";
+        $username = "test2last";
         $password = "123";
 
         $expected = [
-            "id" => "1",
-            "name" => "test2first",
+            "id" => "123",
+            "name" => "test2last",
             "fullname" => "test2",
             "email" => "test2@gmail.com",
             "type" => "user",
@@ -105,10 +107,11 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $userModel->startTransaction();
-        $userId = 3;
+        $userId = 9;
         $userName = 'nhu';
         $user = $userModel->findUserById($userId);
         $actual = $user[0]['name'];
+        // var_dump($actual);die();
 
         $this->assertEquals($userName, $actual);
         $userModel->rollback();
@@ -118,9 +121,10 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $userModel->startTransaction();
-        $userId = 20;
+        $userId = 109;
         $expected = [];
         $actual = $userModel->findUserById($userId);
+        // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
         $userModel->rollback();
     }
@@ -155,23 +159,23 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
         $userModel->rollback();
     }
-    public function testGetFindUserByIdObject()
-    {
-        $userModel = new UserModel();
-        $userModel->startTransaction();
-        $object = $userModel;
+    // public function testGetFindUserByIdObject()
+    // {
+    //     $userModel = new UserModel();
+    //     $userModel->startTransaction();
+    //     $object = $userModel;
 
-        if (is_object($object)) {
-            $object = 5;
-            $actual = $userModel->findUserById($object);
-            $expected = $actual[0]['name'];
-            $userName = 'khanhu';
-            $this->assertEquals($userName, $expected);
-        } else {
-            $this->assertTrue(false);
-        }
-        $userModel->rollback();
-    }
+    //     if (is_object($object)) {
+    //         $object = 4;
+    //         $actual = $userModel->findUserById($object);
+    //         $expected = $actual[0]['name'];
+    //         $userName = 'khanhu';
+    //         $this->assertEquals($userName, $expected);
+    //     } else {
+    //         $this->assertTrue(false);
+    //     }
+    //     $userModel->rollback();
+    // }
     /*======= test function insertUser======= */
     public function testGetInsertUserOk()
     {
@@ -195,7 +199,7 @@ class UserModelTest extends TestCase
     public function testInsertUserIdArrayListOk()
     {
         $userModel = new UserModel();
-        $userModel->startTransaction();
+        // $userModel->startTransaction();
         $user = array(
             'name' => ['nhu', 'cute'],
             'password' => 'khanhu',
@@ -206,10 +210,11 @@ class UserModelTest extends TestCase
         //Execute test
         try {
             $userModel->insertUser($user);
+            $this->assertTrue(true,"not found");
         } catch (Throwable $e) {
-            $this->assertTrue(true);
+            $this->assertTrue(false,"not found");
+
         }
-        $userModel->rollback();
     }
     public function testGetInsertUserNull()
     {
@@ -336,7 +341,6 @@ class UserModelTest extends TestCase
     public function testGetInsertUserFullNameIsNumberNotOk()
     {
         $userModel = new UserModel();
-        $userModel->startTransaction();
         $user = array(
             'name' => '',
             'password' => '',
@@ -346,9 +350,13 @@ class UserModelTest extends TestCase
         );
 
         $userModel->insertUser($user);
-        $userModel->rollback();
-    }
 
+        if (!is_numeric($user['fullname'])) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
     /*
     File: UserModel.
     Id: 03
@@ -542,12 +550,6 @@ class UserModelTest extends TestCase
 
         $actual = $userModel->auth($username, $password);
         $this->assertEmpty($actual, "actual is not empty");
-    
-        if (!is_numeric($user['fullname'])) {
-            $this->assertTrue(false);
-        } else {
-            $this->assertTrue(true);
-        }
         $userModel->rollback();
 }
 
@@ -675,12 +677,12 @@ class UserModelTest extends TestCase
     public function testGetdeleteUserByIdIsArrayNotG()
     {
         $userModel = new UserModel();
-        $userModel->startTransaction();
+        // $userModel->startTransaction();
         $id = ["47"];
         $excute = false;
         $actual = $userModel->deleteUserById($id);
         $this->assertEmpty($actual);
-        $userModel->rollback();
+        // $userModel->rollback();
     }
     /*Kiểm tra trường hợp truyền vào id kiểu object*/
     public function testGetdeleteUserByIdIsObjectNotG()
@@ -761,7 +763,6 @@ class UserModelTest extends TestCase
     public function testGetupdateUserOk()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
         $input = [];
         $input['id'] = 5;
         $input['name'] = "nhu";
@@ -770,17 +771,17 @@ class UserModelTest extends TestCase
         $input['email'] = "khanhu@gmail.com";
         $input['type'] = "user";
         $actual = $user->updateUser($input);
+        var_dump($actual);
         if ($actual == true) {
             return $this->assertTrue(true);
         }
         return $this->assertTrue(false, "update user not success");
-        $userModel->rollback();
     }
     /*Kiểm tra trường hợp truyền id không tồn tại update user không thành công*/
     public function testGetUpdateUserNotOk()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input = [];
         $input['id'] = 111;
         $input['name'] = "nhu";
@@ -790,16 +791,16 @@ class UserModelTest extends TestCase
         $input['type'] = "user";
         $actual = $user->updateUser($input);
         if ($actual == false) {
-            return $this->assertTrue(false);
+              $this->assertTrue(false);
         }
-        return $this->assertTrue(true, "update user success");
-        $userModel->rollback();
+          $this->assertTrue(true, "update user success");
+        $user->rollback();
     }
     /*Kiểm tra trường hợp truyền name null*/
     public function testGetUpdateUserNameNull()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input = [];
         $input['id'] = 5;
         $input['name'] = null;
@@ -809,17 +810,17 @@ class UserModelTest extends TestCase
         $input['type'] = "user";
         $actual = $user->updateUser($input);
 
-        if ($actual == true) {
-            return $this->assertTrue(true);
+        if ($actual == false) {
+              $this->assertTrue(false);
         }
-        return $this->assertTrue(false, "Update name not ok");
-        $userModel->rollback();
+          $this->assertTrue(true, "Update name not ok");
+        $user->rollback();
     }
     /*Kiểm tra trường hợp truyền password null*/
     public function testGetUpdateUserPasswordNull()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input = [];
         $input['id'] = 5;
         $input['name'] = "khanhu";
@@ -829,17 +830,17 @@ class UserModelTest extends TestCase
         $input['type'] = "user";
         $actual = $user->updateUser($input);
 
-        if ($actual == true) {
-            return $this->assertTrue(true);
+        if ($actual == false) {
+              $this->assertTrue(false);
         }
-        return $this->assertTrue(false, "Update password not ok");
-        $userModel->rollback();
+          $this->assertTrue(true, "Update password not ok");
+        $user->rollback();
     }
     /*Kiểm tra trường hợp truyền id null*/
     public function testGetUpdateUserIdNull()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input = [];
         $input['id'] = null;
         $input['name'] = "nhu";
@@ -848,18 +849,21 @@ class UserModelTest extends TestCase
         $input['email'] = "nhu@gmail.com";
         $input['type'] = "user";
         $actual = $user->updateUser($input);
+        // var_dump($actual);die();
 
         if ($actual == false) {
-            return $this->assertTrue(true);
+              $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false, "Unable to update");
         }
-        return $this->assertTrue(false, "Unable to update");
-        $userModel->rollback();
+         
+        $user->rollback();
     }
     /*Kiểm tra trường hợp truyền fullname null*/
     public function testGetUpdateUserFullNameNull()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input = [];
         $input['id'] = 9;
         $input['name'] = "nhu";
@@ -868,18 +872,21 @@ class UserModelTest extends TestCase
         $input['email'] = "nhu@gmail.com";
         $input['type'] = "user";
         $actual = $user->updateUser($input);
+        // var_dump($actual);die();
 
         if ($actual == true) {
-            return $this->assertTrue(true);
+              $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false, "Update fullname not ok");
         }
-        return $this->assertTrue(false, "Update fullname not ok");
-        $userModel->rollback();
+        
+        $user->rollback();
     }
     /*Kiểm tra trường hợp truyền email null*/
     public function testGetUpdateUserEmailNull()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input = [];
         $input['id'] = 9;
         $input['name'] = "nhu";
@@ -888,18 +895,21 @@ class UserModelTest extends TestCase
         $input['email'] = null;
         $input['type'] = "user";
         $actual = $user->updateUser($input);
+        // var_dump($actual);die();
 
         if ($actual == true) {
-            return $this->assertTrue(true);
+              $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false, "Update email not ok");
         }
-        return $this->assertTrue(false, "Update email not ok");
-        $userModel->rollback();
+        
+        $user->rollback();
     }
     /*Kiểm tra trường hợp truyền type null*/
     public function testGetUpdateUserTypeNull()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input = [];
         $input['id'] = 9;
         $input['name'] = "nhu";
@@ -909,16 +919,18 @@ class UserModelTest extends TestCase
         $input['type'] = null;
         $actual = $user->updateUser($input);
         if ($actual == true) {
-            return $this->assertTrue(true);
+              $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false, "Update type not ok");
         }
-        return $this->assertTrue(false, "Update type not ok");
-        $userModel->rollback();
+         
+        $user->rollback();
     }
     /*Kiểm tra trường hợp truyền password là object*/
     public function testGetUpdateUserPasswordObject()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input['id'] = 9;
         $input['name'] = "nhu";
         $input['password'] = $user;
@@ -930,13 +942,13 @@ class UserModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
-        $userModel->rollback();
+        $user->rollback();
     }
     /*Kiểm tra trường hợp truyền type là object*/
     public function testGetUpdateUserTypeObject()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input['id'] = 9;
         $input['name'] = "nhu";
         $input['password'] = "123";
@@ -949,13 +961,13 @@ class UserModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
-        $userModel->rollback();
+        $user->rollback();
     }
     /*Kiểm tra trường hợp truyền email là object*/
     public function testGetUpdateUserEmailObject()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input['id'] = 9;
         $input['name'] = "nhu";
         $input['password'] = "123";
@@ -967,13 +979,13 @@ class UserModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
-        $userModel->rollback();
+        $user->rollback();
     }
     /*Kiểm tra trường hợp truyền fullname là object*/
     public function testGetUpdateUserFullNameObject()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input['id'] = 9;
         $input['name'] = "nhu";
         $input['password'] = "123";
@@ -985,13 +997,13 @@ class UserModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
-        $userModel->rollback();
+        $user->rollback();
     }
     /*Kiểm tra trường hợp truyền name là object*/
     public function testGetUpdateUserNameObject()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input['id'] = 9;
         $input['name'] = $user;
         $input['password'] = "123";
@@ -1003,13 +1015,13 @@ class UserModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
-        $userModel->rollback();
+        $user->rollback();
     }
     /*Kiểm tra trường hợp truyền id là object*/
     public function testGetUpdateUserIdObject()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input['id'] = $user;
         $input['name'] = "nhu";
         $input['password'] = "123";
@@ -1021,13 +1033,13 @@ class UserModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
-        $userModel->rollback();
+        $user->rollback();
     }
     /*Kiểm tra trường hợp truyền id là chuỗi*/
     public function testGetUpdateUserIdStr()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input = [];
         $input['id'] = "Toilanhu";
         $input['name'] = "nhu";
@@ -1039,16 +1051,18 @@ class UserModelTest extends TestCase
 
         $expected = false;
         if ($actual == $expected) {
-            return $this->assertTrue(true);
+              $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false, "Update id Subtring not ok");
         }
-        return $this->assertTrue(false, "Update id Subtring not ok");
-        $userModel->rollback();
+         
+        $user->rollback();
     }
     /*Kiểm tra trường hợp truyền Name là số*/
     public function testGetUpdateUserNameNumber()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input = [];
         $input['id'] = 3;
         $input['name'] = 111;
@@ -1059,16 +1073,19 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         if ($actual == true) {
-            return $this->assertTrue(true);
+              $this->assertTrue(true);
         }
-        return $this->assertTrue(false, "Update Name Subtring not ok");
-        $userModel->rollback();
+        else{
+            $this->assertTrue(false, "Update Name Subtring not ok");
+        }
+        
+        $user->rollback();
     }
     /*Kiểm tra trường hợp truyền FullName là số*/
     public function testGetUpdateUserFullNameNumber()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input = [];
         $input['id'] = 3;
         $input['name'] = "nhu";
@@ -1079,16 +1096,18 @@ class UserModelTest extends TestCase
         $actual = $user->updateUser($input);
 
         if ($actual == true) {
-            return $this->assertTrue(true);
+              $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false, "Update Fullname Subtring not ok");
         }
-        return $this->assertTrue(false, "Update Fullname Subtring not ok");
-        $userModel->rollback();
+         
+        $user->rollback();
     }
     /* Kiểm tra trường hợp truyền vào email là số */
     public function testGetUpdateUserEmailNumber()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input = [];
         $input['id'] = 3;
         $input['name'] = "nhu";
@@ -1100,15 +1119,17 @@ class UserModelTest extends TestCase
 
         $expected = true;
         if ($actual == $expected) {
-            return $this->assertTrue(true);
+              $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
         }
-        return $this->assertTrue(false);
-        $userModel->rollback();
+       
+        $user->rollback();
     }
     public function testGetUpdateUserTypeNumber()
     {
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input = [];
         $input['id'] = 3;
         $input['name'] = "nhu";
@@ -1120,17 +1141,19 @@ class UserModelTest extends TestCase
 
         $expected = true;
         if ($actual == $expected) {
-            return $this->assertTrue(true);
+              $this->assertTrue(true);
+        }else{
+            $this->assertTrue(false);
         }
-        return $this->assertTrue(false);
-        $userModel->rollback();
+         
+        $user->rollback();
     }
     /* Kiểm tra trường hợp truyền vào id là mảng */
     public function testGetUpdateUserIdArr()
     {
         $array_id = ['5', '8'];
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input = [];
         $input['id'] = $array_id;
         $input['name'] = "nhu";
@@ -1144,14 +1167,14 @@ class UserModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
-        $userModel->rollback();
+        $user->rollback();
     }
     /* Kiểm tra trường hợp truyền vào Name là mảng */
     public function testGetUpdateUserNameArr()
     {
         $array_name = ['5', '8'];
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input = [];
         $input['id'] = 3;
         $input['name'] = $array_name;
@@ -1165,14 +1188,14 @@ class UserModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
-        $userModel->rollback();
+        $user->rollback();
     }
     /* Kiểm tra trường hợp truyền vào fullname là mảng */
     public function testGetUpdateUserFullNameArr()
     {
         $array_fullname = ['5', '8'];
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input = [];
         $input['id'] = 3;
         $input['name'] = "nhu";
@@ -1186,14 +1209,14 @@ class UserModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
-        $userModel->rollback();
+        $user->rollback();
     }
     /* Kiểm tra trường hợp truyền vào email là mảng */
     public function testGetUpdateUserEmailArr()
     {
         $array_email = ['5', '8'];
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input = [];
         $input['id'] = 3;
         $input['name'] = "nhu";
@@ -1207,14 +1230,14 @@ class UserModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
-        $userModel->rollback();
+        $user->rollback();
     }
     /* Kiểm tra trường hợp truyền vào type là mảng */
     public function testGetUpdateUserTypeArr()
     {
         $array_type = ['5', '8'];
         $user = new UserModel();
-        $userModel->startTransaction();
+        $user->startTransaction();
         $input = [];
         $input['id'] = 3;
         $input['name'] = "nhu";
@@ -1227,7 +1250,7 @@ class UserModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
-        $userModel->rollback();
+        $user->rollback();
     }
     /* =========Test function getUsers========= */
     /* Kiểm tra trường hợp keyword nhập đúng */
@@ -1264,9 +1287,9 @@ class UserModelTest extends TestCase
         $userModel->startTransaction();
         $params = [];
         $params['keyword'] = 'test2';
-        $countAr = 1;
+        $countAr =13;
         $actual = $userModel->getUsers($params);
-
+        // var_dump($actual);die();
         $this->assertEquals($countAr, count($actual));
         $userModel->rollback();
     }

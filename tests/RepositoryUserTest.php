@@ -15,31 +15,31 @@ class RepositoryUserTest extends TestCase
     public function testInsertUserOk()
     {
         $factory = new FactoryPattern();
-        $userModel = $factory->make("user");
+        $userModel = UserModel::getInstance();
         $userModel->startTransaction();
-        $expectedAfterLength = count($userModel->read());
+        $expectedAfterLength = count($userModel->getAll());
 
         $input = [];
-        $input["name"] = "test2last";
+        $input["name"] = "test2insert";
         $input["fullname"] = "test2";
         $input["email"] = "test2@gmail.com";
         $input["type"] = "user";
         $input["password"] = "password";
 
-        $actionInsert = $userModel->insert($input);
-        $userList = $userModel->read();
+        $actionInsert = $userModel->insertUser($input);
+        $userList = $userModel->getAll();
         $expectedBeforeLength = count($userList);
 
 
 
         if ($expectedAfterLength !== $expectedBeforeLength) {
             $input["password"] = md5($input["password"]);
-            $input["id"] = end($userList)["id"];
+            $input["id"] = $userList[count($userList)  - 1]["id"];
             $this->assertEquals(
                 $input,
                 end($userList),
                 "expected and actual is not equals"
-            );
+            ); 
         } else {
             $this->assertTrue(
                 false,
@@ -89,7 +89,7 @@ class RepositoryUserTest extends TestCase
     Desc: Test insert with input (name) is array
     Author: Phuong Nguyen.
     */
-    public function testFindBankInfoById_WithInputNameIs_Arr()
+    public function testInsertUser_WithInputNameIs_Arr()
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
@@ -118,7 +118,7 @@ class RepositoryUserTest extends TestCase
     Desc: Test insert with input (name) is obj
     Author: Phuong Nguyen.
     */
-    public function testFindBankInfoById_WithInputNameIs_Obj()
+    public function testInsertUser_WithInputNameIs_Obj()
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
@@ -147,7 +147,7 @@ class RepositoryUserTest extends TestCase
     Desc: Test insert with input (name) is null
     Author: Phuong Nguyen.
     */
-    public function testFindBankInfoById_WithInputNameIs_Null()
+    public function testInsertUser_WithInputNameIs_Null()
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
@@ -176,7 +176,7 @@ class RepositoryUserTest extends TestCase
     Desc: Test insert with input (fullname) is array
     Author: Phuong Nguyen.
     */
-    public function testFindBankInfoById_WithInputFullNameIs_Arr()
+    public function testInsertUser_WithInputFullNameIs_Arr()
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
@@ -205,7 +205,7 @@ class RepositoryUserTest extends TestCase
     Desc: Test insert with input (fullname) is obj
     Author: Phuong Nguyen.
     */
-    public function testFindBankInfoById_WithInputFullNameIs_Obj()
+    public function testInsertUser_WithInputFullNameIs_Obj()
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
@@ -234,7 +234,7 @@ class RepositoryUserTest extends TestCase
     Desc: Test insert with input (fullname) is null
     Author: Phuong Nguyen.
     */
-    public function testFindBankInfoById_WithInputFullNameIs_Null()
+    public function testInsertUser_WithInputFullNameIs_Null()
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
@@ -263,7 +263,7 @@ class RepositoryUserTest extends TestCase
     Desc: Test insert with input (email) is array
     Author: Phuong Nguyen.
     */
-    public function testFindBankInfoById_WithInputEmailIs_Arr()
+    public function testInsertUser_WithInputEmailIs_Arr()
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
@@ -292,7 +292,7 @@ class RepositoryUserTest extends TestCase
     Desc: Test insert with input (email) is obj
     Author: Phuong Nguyen.
     */
-    public function testFindBankInfoById_WithInputEmailIs_Obj()
+    public function testInsertUser_WithInputEmailIs_Obj()
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
@@ -321,7 +321,7 @@ class RepositoryUserTest extends TestCase
     Desc: Test insert with input (email) is null
     Author: Phuong Nguyen.
     */
-    public function testFindBankInfoById_WithInputEmailIs_Null()
+    public function testInsertUser_WithInputEmailIs_Null()
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
@@ -350,7 +350,7 @@ class RepositoryUserTest extends TestCase
     Desc: Test insert with input (type) is array
     Author: Phuong Nguyen.
     */
-    public function testFindBankInfoById_WithInputTypeIs_Arr()
+    public function testInsertUser_WithInputTypeIs_Arr()
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
@@ -379,7 +379,7 @@ class RepositoryUserTest extends TestCase
     Desc: Test insert with input (type) is obj
     Author: Phuong Nguyen.
     */
-    public function testFindBankInfoById_WithInputTypeIs_Obj()
+    public function testInsertUser_WithInputTypeIs_Obj()
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
@@ -408,7 +408,7 @@ class RepositoryUserTest extends TestCase
     Desc: Test insert with input (type) is null
     Author: Phuong Nguyen.
     */
-    public function testFindBankInfoById_WithInputTypeIs_Null()
+    public function testInsertUser_WithInputTypeIs_Null()
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
@@ -437,7 +437,7 @@ class RepositoryUserTest extends TestCase
     Desc: Test insert with input (password) is arr
     Author: Phuong Nguyen.
     */
-    public function testFindBankInfoById_WithInputPasswordIs_Arr()
+    public function testInsertUser_WithInputPasswordIs_Arr()
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
@@ -466,7 +466,7 @@ class RepositoryUserTest extends TestCase
     Desc: Test insert with input (password) is obj
     Author: Phuong Nguyen.
     */
-    public function testFindBankInfoById_WithInputPasswordIs_Obj()
+    public function testInsertUser_WithInputPasswordIs_Obj()
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");
@@ -495,7 +495,7 @@ class RepositoryUserTest extends TestCase
     Desc: Test insert with input (password) is null
     Author: Phuong Nguyen.
     */
-    public function testFindBankInfoById_WithInputPasswordIs_Null()
+    public function testInsertUser_WithInputPasswordIs_Null()
     {
         $factory = new FactoryPattern();
         $userModel = $factory->make("user");

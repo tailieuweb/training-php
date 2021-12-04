@@ -22,7 +22,7 @@ function demo()
     return "success";
 }
 
-var_dump(demo());
+var_dump($userModel->read());
 
 require_once './models/FactoryPattern.php';
 $factory = new FactoryPattern();

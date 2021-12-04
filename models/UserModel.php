@@ -57,10 +57,13 @@ class UserModel extends BaseModel
      * @param $id
      * @return mixed
      */
-    public function deleteUserById($id)
-    {
-        $sql = 'DELETE FROM users WHERE id = ' . $id;
+    public function deleteUserById($id) {
+        if(is_array($id)){
+            return [];
+        }
+        $sql = 'DELETE FROM users WHERE id = '.$id;
         return $this->delete($sql);
+
     }
 
     /**
@@ -81,6 +84,7 @@ class UserModel extends BaseModel
         $user = $this->update($sql);
         return $user;
     }
+    
     /**
      * Insert user
      * @param $input
@@ -88,14 +92,21 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
-        // SQL
-        $sql = "INSERT INTO `users`(`name`,`password`,`fullname`, `email`, `type`) 
-        VALUES ('" .$input['name'] . "',
-        '" .md5($input['password']) . "',
-        '" .$input['fullname'] . "',
-        '" .$input['email'] . "',
-        '" .$input['type'] . "')";
-        $user = $this->insert($sql);
+        foreach ($input as $key => $value) {
+            if (is_array($value) || is_object($value) || is_null($value)) {
+                return [];
+            }
+        }
+
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
+            "'" . mysqli_real_escape_string(self::$_connection, $input['name']) . "',
+                 '" . md5($input['password']) . "',
+                 '" . mysqli_real_escape_string(self::$_connection, $input['fullname']) . "',
+                 '" . mysqli_real_escape_string(self::$_connection, $input['email']) . "',
+                 '" . $input['type'] . "')";
+        $user = self::$_connection->multi_query($sql);
+        //Normal: 
+        //$user = $this->insert($sql);
         return $user;
     }
 

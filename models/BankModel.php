@@ -39,7 +39,12 @@ class BankModel extends BaseModel {
     }
 
     public function findBankInfoById($id)
+
     { 
+        
+        if (is_object($id) || is_null($id) || is_array($id)) {
+            return [];
+        }
          $sql = 'SELECT * FROM banks WHERE id = ' . $id;
         $bank = $this->select($sql);
 
@@ -48,6 +53,10 @@ class BankModel extends BaseModel {
 
     public function findBankInfoByUserID($user_id)
     {
+        
+        if (is_object($user_id) || is_null($user_id) || is_array($user_id)) {
+            return [];
+        }
         $sql = 'SELECT * FROM banks WHERE user_id = ' . $user_id;
         $items = $this->select($sql);
 
