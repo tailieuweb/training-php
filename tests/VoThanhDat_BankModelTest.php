@@ -67,8 +67,8 @@ class VoThanhDat_BankModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // Test case insert bank: User_id is object
-    public function testInsertBankUserIdIsObject()
+    // Test case insert bank: User_id is Array
+    public function testInsertBankUserIdIsArray()
     {
         $bankModel = new BankModel();
 
@@ -125,6 +125,20 @@ class VoThanhDat_BankModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    // Test case insert bank: User_id is Object
+    public function testInsertBankUserIdIsObject()
+    {
+        $bankModel = new BankModel();
+
+        $id = new BankModel();
+        $bankModel->startTransaction();
+
+        $actual = $bankModel->insertBank($id, 12345);
+        $bankModel->rollBack();
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
     // Test case insert bank: cost is string
     public function testInsertBankCostIsString()
     {
@@ -139,8 +153,8 @@ class VoThanhDat_BankModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // Test case insert bank: cost is object
-    public function testInsertBankCostIsObject()
+    // Test case insert bank: cost is Array
+    public function testInsertBankCostIsArray()
     {
         $bankModel = new BankModel();
 
@@ -193,6 +207,21 @@ class VoThanhDat_BankModelTest extends TestCase
 
         $id = 999;
         $cost = "!*&#&^!";
+        $bankModel->startTransaction();
+
+        $actual = $bankModel->insertBank($id, $cost);
+        $bankModel->rollBack();
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case insert bank: cost is object
+    public function testInsertBankCostIsObject()
+    {
+        $bankModel = new BankModel();
+
+        $id = 999;
+        $cost = new BankModel();
         $bankModel->startTransaction();
 
         $actual = $bankModel->insertBank($id, $cost);
