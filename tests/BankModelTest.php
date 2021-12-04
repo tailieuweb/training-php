@@ -464,11 +464,13 @@ class BankModelTest extends TestCase
             'user_id' => "4",
             'cost' => "1000",
         );
+        //$bankModel->startTransaction();
         //Execute test
         $bankModel->insertBank($input);
         //Actual
         $actual = $bankModel->findBankById(5);
         $this->assertEquals($actual[0]['cost'], $input['cost']);
+        $bankModel->rollback();
     }
     //Test insertbank with valid input true
     public function testInsertBank_NG()
@@ -478,11 +480,13 @@ class BankModelTest extends TestCase
             'user_id' => "5",
             'cost' => "1000",
         );
+        $bankModel->startTransaction();
         //Execute test
         $bankModel->insertBank($input);
         //Actual
         $actual = $bankModel->findBankById(6);
         ($actual[0]['cost'] == $input['cost']) ? $this->assertTrue(true) : $this->assertTrue(false);
+        $bankModel->rollback();
     }
     //Test insert bank with user_id = null
     public function testInsertBankWithNullUserId_NG()
@@ -492,12 +496,14 @@ class BankModelTest extends TestCase
             'user_id' => null,
             'cost' => "1000",
         );
+        $bankModel->startTransaction();
         //Execute test
         $bankModel->insertBank($input);
         //Actual
         // var_dump($actual); die;
         $actual = $bankModel->findBankById(7);
         ($actual[0]['user_id'] == 0) ? $this->assertTrue(true) : $this->assertTrue(false);
+        $bankModel->rollback();
     }
     //Test insert bank with user_id is character
     public function testInsertBankWithUserIdIsCharacter_NG()
@@ -507,12 +513,14 @@ class BankModelTest extends TestCase
             'user_id' => "long",
             'cost' => "1000",
         );
+        $bankModel->startTransaction();
         //Execute test
         $bankModel->insertBank($input);
         //Actual
         // var_dump($actual); die;
         $actual = $bankModel->findBankById(8);
         ($actual[0]['user_id'] != "long") ? $this->assertTrue(true) : $this->assertTrue(false);
+        $bankModel->rollback();
     }
     //Test insert bank with cost = null
     public function testInsertBankWithNullCost_NG()
@@ -522,12 +530,14 @@ class BankModelTest extends TestCase
             'user_id' => 1,
             'cost' => null,
         );
+        $bankModel->startTransaction();
         //Execute test
         $bankModel->insertBank($input);
         //Actual
         // var_dump($actual); die;
         $actual = $bankModel->findBankById(9);
         ($actual[0]['cost'] == 0) ? $this->assertTrue(true) : $this->assertTrue(false);
+        $bankModel->rollback();
     }
     //Test insert bank with cost is character
     public function testInsertBankWithCostIsCharacter_NG()
@@ -537,12 +547,14 @@ class BankModelTest extends TestCase
             'user_id' => 1,
             'cost' => "long",
         );
+        $bankModel->startTransaction();
         //Execute test
         $bankModel->insertBank($input);
         //Actual
         // var_dump($actual); die;
         $actual = $bankModel->findBankById(10);
         ($actual[0]['cost'] != "long") ? $this->assertTrue(true) : $this->assertTrue(false);
+        $bankModel->rollback();
     }
     //Test insert bank with user_id & cost is character or string
     public function testInsertBankWithCharacterNg_NG()
@@ -552,12 +564,13 @@ class BankModelTest extends TestCase
             'user_id' => "long",
             'cost' => "long",
         );
+        $bankModel->startTransaction();
         //Execute test
         $bankModel->insertBank($input);
         //Actual
-        // var_dump($actual); die;
         $actual = $bankModel->findBankById(11);
         ($actual[0]['cost'] != "long" && $actual[0]['user_id'] != "long") ? $this->assertTrue(true) : $this->assertTrue(false);
+        $bankModel->rollback();
     }
     //Test insert bank with user_id is array
     public function testInsertBankWithArrayUserId_NG()
