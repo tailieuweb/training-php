@@ -4,98 +4,98 @@ use PHPUnit\Framework\TestCase;
 class UserModelTest extends TestCase
 {
 
-    /**
-     * Test case Okie
-     */
-    public function testSumOk()
-    {
-       $userModel = new UserModel();
-       $a = 1;
-       $b = 2;
-       $expected = 3;
+   //  /**
+   //   * Test case Okie
+   //   */
+   //  public function testSumOk()
+   //  {
+   //     $userModel = new UserModel();
+   //     $a = 1;
+   //     $b = 2;
+   //     $expected = 3;
 
-       $actual = $userModel->sumb($a,$b);
+   //     $actual = $userModel->sumb($a,$b);
 
-       $this->assertEquals($expected, $actual);
-    }
+   //     $this->assertEquals($expected, $actual);
+   //  }
 
-    /**
-     * Test case Not good
-     */
-    public function testSumNg()
-    {
-        $userModel = new UserModel();
-        $a = 1;
-        $b = 2;
+   //  /**
+   //   * Test case Not good
+   //   */
+   //  public function testSumNg()
+   //  {
+   //      $userModel = new UserModel();
+   //      $a = 1;
+   //      $b = 2;
 
-        $actual = $userModel->sumb($a,$b);
+   //      $actual = $userModel->sumb($a,$b);
 
-        if ($actual != 3) {
-            $this->assertTrue(false);
-        } else {
-            $this->assertTrue(true);
-        }
-    }
+   //      if ($actual != 3) {
+   //          $this->assertTrue(false);
+   //      } else {
+   //          $this->assertTrue(true);
+   //      }
+   //  }
 
-    public function testSumOkam()
-    {
-       $userModel = new UserModel();
-       $a = -1;
-       $b = -2;
-       $expected = -3;
+   //  public function testSumOkam()
+   //  {
+   //     $userModel = new UserModel();
+   //     $a = -1;
+   //     $b = -2;
+   //     $expected = -3;
 
-       $actual = $userModel->sumb($a,$b);
+   //     $actual = $userModel->sumb($a,$b);
 
-       $this->assertEquals($expected, $actual);
-    }
+   //     $this->assertEquals($expected, $actual);
+   //  }
 
-    public function testSumOkad()
-    {
-       $userModel = new UserModel();
-       $a = -1;
-       $b = 2;
-       $expected = 1;
+   //  public function testSumOkad()
+   //  {
+   //     $userModel = new UserModel();
+   //     $a = -1;
+   //     $b = 2;
+   //     $expected = 1;
 
-       $actual = $userModel->sumb($a,$b);
+   //     $actual = $userModel->sumb($a,$b);
 
-       $this->assertEquals($expected, $actual);
-    }
+   //     $this->assertEquals($expected, $actual);
+   //  }
 
-    public function testSumOkDouble()
-    {
-       $userModel = new UserModel();
-       $a = 1.5;
-       $b = 2.5;
-       $expected = 4;
+   //  public function testSumOkDouble()
+   //  {
+   //     $userModel = new UserModel();
+   //     $a = 1.5;
+   //     $b = 2.5;
+   //     $expected = 4;
 
-       $actual = $userModel->sumb($a,$b);
+   //     $actual = $userModel->sumb($a,$b);
 
-       $this->assertEquals($expected, $actual);
-    }
+   //     $this->assertEquals($expected, $actual);
+   //  }
 
-    public function testStr()
-    {
-       $userModel = new UserModel();
-       $a = 1;
-       $b = 'a';
-       $expected = 'error';
+   //  public function testStr()
+   //  {
+   //     $userModel = new UserModel();
+   //     $a = 1;
+   //     $b = 'a';
+   //     $expected = 'error';
 
-       $actual = $userModel->sumb($a,$b);
+   //     $actual = $userModel->sumb($a,$b);
 
-       $this->assertEquals($expected, $actual);
-    }
+   //     $this->assertEquals($expected, $actual);
+   //  }
 
-    public function testString()
-    {
-       $userModel = new UserModel();
-       $a = 'a';
-       $b = 'b';
-       $expected = 'error';
+   //  public function testString()
+   //  {
+   //     $userModel = new UserModel();
+   //     $a = 'a';
+   //     $b = 'b';
+   //     $expected = 'error';
 
-       $actual = $userModel->sumb($a,$b);
+   //     $actual = $userModel->sumb($a,$b);
 
-       $this->assertEquals($expected, $actual);
-    }
+   //     $this->assertEquals($expected, $actual);
+   //  }
     /*
      * Test function: getUsers()
      * Author: Quyen
@@ -178,6 +178,19 @@ class UserModelTest extends TestCase
       }
    }
 
+   // test function getUsers when search null
+   public function testGetUsersWhenSearchStringIsEmpty(){
+      $userModel = new UserModel();
+      $param['keyword'] = Null;
+
+      $user = $userModel->getUsers($param);
+      if(empty($user) == $param){
+         $this->assertTrue(true);
+      }else{
+         $this->assertFalse(false);
+      }
+   }
+
    // test function getUsers when search array
    public function testGetUsersWhenSearchArray(){
       $userModel = new UserModel();
@@ -196,11 +209,16 @@ class UserModelTest extends TestCase
       $userModel = new UserModel();
       $param['keyword'] = new stdClass();
 
-      try{
-         $userModel->getUsers($param);
-         }catch(Throwable $e){
-               $this->assertTrue(True);
-         }
+      $expected = Null;
+      $actual = $userModel->getUsers($param);
+
+      $this->assertEquals($expected, $actual);
+
+      // try{
+      //    $userModel->getUsers($param);
+      //    }catch(Throwable $e){
+      //          $this->assertTrue(True);
+      //    }
    }
 
       // test function getUsers when search actual number

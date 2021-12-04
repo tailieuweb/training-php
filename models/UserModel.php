@@ -88,6 +88,11 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
+            if (empty($params['keyword']) == null || is_array(empty($params['keyword'])) || is_object($params['keyword']) ||
+            is_numeric(empty($params['keyword'])) || empty($params['keyword']) == ''){
+                return null;
+            }
+
             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
 
             //Keep this line to use Sql Injection

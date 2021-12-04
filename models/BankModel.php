@@ -70,6 +70,9 @@ class BankModel extends BaseModel
      */
     public function deleteBankById($id)
     {
+        if(is_string($id) || is_array($id) || is_object($id) || $id == null || $id == ''){
+            return null;
+        }
         $sql = 'DELETE FROM banks WHERE id = ' . $id;
         return $this->delete($sql);
     }

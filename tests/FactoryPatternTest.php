@@ -95,7 +95,7 @@ class FactoryPatternTest extends TestCase
     // test function make string
     public function testMakeStringIsEmpty(){
         $factoryPattern = new FactoryPattern();
-        $text = " ";
+        $text = '';
         $expected = Null;
         
         $actual = $factoryPattern->make($text);

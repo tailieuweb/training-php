@@ -8,7 +8,10 @@ class FactoryPattern {
 
     public function make($model) {
         $object = Null;
-        if ($model == 'user') {
+
+        if(is_numeric($model) || is_object($model) || is_array($model) || $model == '' || $model == null){
+            return null;
+        } else if ($model == 'user') {
             $object = new UserModel();
         } else if ($model == 'bank') {
             $object = new BankModel();
