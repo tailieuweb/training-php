@@ -61,6 +61,14 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
+        foreach($input as $value){
+            if(is_array($value) || is_object($value) || is_null($value)){
+                return false;
+            }
+        }
+        if(is_string($input['id']) || is_string($input['type']) || is_numeric($input['name']) || is_numeric($input['fullname']) || is_numeric($input['email'])){
+            return false;
+        }
         $sql = "UPDATE `users` SET name = " . "'" . $input['name'] . "', fullname = " . "'" . $input['fullname'] . "', email = " . "'" . $input['email'] . "', type = " . "'" . $input['type'] . "', password = " . "'" . md5($input['password']) . "' WHERE id = " . "'" . $input['id'] . "'";
         $user = $this->update($sql);
         return $user;
@@ -72,6 +80,14 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function insertUser($input) {
+        foreach($input as $value){
+            if(is_array($value) || is_object($value) || is_null($value)){
+                return false;
+            }
+        }
+        if(is_string($input['type']) || is_numeric($input['name']) || is_numeric($input['fullname']) || is_numeric($input['email'])){
+            return false;
+        }
         $sql = "INSERT INTO `app_web1`.`users` (`name`,`fullname`,`email`,`type`, `password`) VALUES (" . "'" . $input['name'] . "', '".$input['fullname']. "', '" . $input['email'] . "', '" . $input['type'] . "','" . md5($input['password']) . "')";
         $user = $this->insert($sql);
         return $user;
