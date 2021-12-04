@@ -19,7 +19,7 @@ class DeleteUserByIdTest extends TestCase
     public function testDropUserByIdStr() {
         $userModel = new UserModel();
         $userId = '18';
-        $expected = 'error';
+        $expected = true;
         $actual = $userModel->dropUserById($userId);
         $this->assertEquals($expected, $actual);
     }
@@ -30,9 +30,9 @@ class DeleteUserByIdTest extends TestCase
         // $userName = 'asdf';
         $user = $userModel->dropUserById($userId);
         if(empty($user)){
-            $this->assertTrue(true);
-        }else{
             $this->assertTrue(false);
+        }else{
+            $this->assertTrue(true);
         }
 
     }
@@ -40,7 +40,7 @@ class DeleteUserByIdTest extends TestCase
     public function testDropUserByIdFloat() {
         $userModel = new UserModel();
         $id = 18.1;
-        $expected = 'error';
+        $expected = true;
         $actual = $userModel->dropUserById($id);
         $this->assertEquals($expected, $actual);
         
