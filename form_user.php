@@ -1,21 +1,20 @@
 <?php
-// Start the session
-session_start();
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$_id = NULL;
+$id = NULL;
 
 if (!empty($_GET['id'])) {
-    $_id = $_GET['id'];
-    $user = $userModel->findUserById($_id);//Update existing user
+    $id = $_GET['id'];
+    $user = $userModel->findUserById($id); //Update existing user
+    
 }
 
 
 if (!empty($_POST['submit'])) {
 
-    if (!empty($_id)) {
+    if (!empty($id)) {
         $userModel->updateUser($_POST);
     } else {
         $userModel->insertUser($_POST);
@@ -34,19 +33,35 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
-            <?php if ($user || !isset($_id)) { ?>
+            <?php if ($user || empty($id)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $_id ?>">
+                    <input type="hidden" name="id" value="<?php echo $user[0]['id'] ?>">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
+                        <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="fullname" name="fullname" class="form-control" placeholder="fullname">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                    <label for="type">Type</label>
+                        <select name="type" id="type">
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                            <option value="guest">Guest</option>
+                        </select>                        
                     </div>
 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
