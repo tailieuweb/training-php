@@ -15,7 +15,7 @@ class VoThanhDat_UserRepositoryTest extends TestCase
         $userRepository1 = UserRepository::getInstance();
 
         $expected = true;
-        $actual = is_Array($userRepository) &&
+        $actual = is_object($userRepository) &&
             get_class($userRepository) == 'UserRepository' &&
             $userRepository === $userRepository1;
 
