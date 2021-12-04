@@ -166,7 +166,7 @@ class VoThanhDat_UserModelTest extends TestCase
         $userModel = new UserModel();
         $email = 'vothanhdat123123@gmail.com';
         $input = [
-            'name' => '',
+            'name' => null,
             'fullname' => "Vo Thanh Dat",
             'type' => 'admin',
             'email' => $email,
@@ -303,7 +303,7 @@ class VoThanhDat_UserModelTest extends TestCase
     public function testInsertUserInputFullNameIsNull()
     {
         $userModel = new UserModel();
-        $fullname = "";
+        $fullname = null;
         $input = [
             'name' => 'Dattt',
             'fullname' => $fullname,
@@ -439,7 +439,7 @@ class VoThanhDat_UserModelTest extends TestCase
     public function testInsertUserInputTypeIsNull()
     {
         $userModel = new UserModel();
-        $type = '';
+        $type = null;
         $input = [
             'name' => 'Dattt',
             'fullname' => "Vo Thanh Dat",
@@ -497,7 +497,7 @@ class VoThanhDat_UserModelTest extends TestCase
 
         $userModel->rollBack();
 
-        $expected = false;
+        $expected = true;
         $this->assertEquals($expected, $actual);
     }
 
@@ -569,27 +569,7 @@ class VoThanhDat_UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // Test case Insert User Type Not Admin Or User
-    public function testInsertUserInputTypeNotAdminOrUser()
-    {
-        $userModel = new UserModel();
-        $type = "bagaga";
-        $input = [
-            'name' => 'Dattt',
-            'fullname' => "Vo Thanh Dat",
-            'type' => $type,
-            'email' => "vothanhdat123123@gmail.com",
-            'password' => '12345'
-        ];
 
-        $userModel->startTransaction();
-        $actual = $userModel->insertUser($input);
-
-        $userModel->rollBack();
-
-        $expected = false;
-        $this->assertEquals($expected, $actual);
-    }
     ///////////////////////////////     EMAIl             //////////////////////////////
 
     // Test case Insert User Input Email Is Null
@@ -753,7 +733,7 @@ class VoThanhDat_UserModelTest extends TestCase
     public function testInsertUserInputPasswordIsNull()
     {
         $userModel = new UserModel();
-        $password = "";
+        $password = null;
         $input = [
             'name' => 'Dattt',
             'fullname' => "Vo Thanh Dat",
