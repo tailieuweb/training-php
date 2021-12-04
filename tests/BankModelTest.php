@@ -44,7 +44,7 @@ class BankModelTest extends TestCase
     public function testUpdateBankNGNull(){
         $bankModel = new BankModel();
         $bank = array(
-            'id' => 6,        
+            'id' => 1192,        
             'user_id' => '',
             'cost' => '',
         );
