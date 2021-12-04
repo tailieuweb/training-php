@@ -137,4 +137,11 @@ class UserModel extends BaseModel
 
         return $users;
     }
-}
+    public function startTransaction()
+    {
+        self::$_connection->begin_transaction();
+    }
+    public function rollBack()
+    {
+       self::$_connection->rollback();
+    }
