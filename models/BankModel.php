@@ -50,6 +50,7 @@ class BankModel extends BaseModel implements IBank
     }
 
 
+    // Le Anh Vu chinh sua.
     public function insertUser_bank($input = [])
     {
 
@@ -164,6 +165,7 @@ class BankModel extends BaseModel implements IBank
         return $result;
     } // my magic number: 141211515
 
+    // Le Anh Vu chinh sua.
     public function updateUser_bank($input = [])
     {
 
