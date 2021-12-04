@@ -106,7 +106,7 @@ class UserModelTest extends TestCase
     public function testFindUserValid_OK()
     {
         $userModel = new UserModel();
-        $keyword = 'test1';
+        $keyword = 'test2';
         $actual = $userModel->findUser($keyword);
         // var_dump($actual); die;
         $this->assertEquals($keyword, $actual[0]['name']);
@@ -115,7 +115,7 @@ class UserModelTest extends TestCase
     public function testFindUserValid_NG()
     {
         $userModel = new UserModel();
-        $keyword = 'test1';
+        $keyword = 'test2';
         $actual = $userModel->findUser($keyword);
 
         if ($actual[0]['name'] != $keyword) {
@@ -144,9 +144,9 @@ class UserModelTest extends TestCase
         $actual = $userModel->findUser($keyword);
         // var_dump($actual); die;
         if ($actual[0]['name'] == 'test1' && $actual[1]['name'] == 'test2') {
-            $this->assertTrue(true);
-        } else {
             $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
         }
     }
     //Test find user with null input
@@ -156,7 +156,7 @@ class UserModelTest extends TestCase
         $keyword = null;
         $actual = $userModel->findUser($keyword);
         // var_dump($actual); die;
-        $this->assertEquals($actual[0]['id'], "1");
+        $this->assertEquals($actual[0]['id'], "2");
     }
     //Test find user with keyword is array
     public function testFindUserArray_NG()
@@ -466,7 +466,7 @@ class UserModelTest extends TestCase
 
         $actual = $user->auth($name, $pass);
 
-        if ($actual == true) {
+        if ($actual != true) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
@@ -482,7 +482,7 @@ class UserModelTest extends TestCase
         $pass = "11111";
 
         $actual = $user->auth($name, $pass);
-        $expected = true;
+        $expected = array();
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -494,7 +494,6 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $expected = [
-            "id" => 63,
             "name" => "Trinh",
             "fullname" => "lemytrinh",
             "email" => "lemytrinh021@gmail.com",
@@ -502,9 +501,14 @@ class UserModelTest extends TestCase
             "password" => "b59c67bf196a4758191e42f76670ceba",
         ];
         $name = "Trinh";
-        $password = "1111";
+        $password = md5("1111");
+        $userModel->startTransaction();
+        $userModel->insertUser($expected);
         $actual = $userModel->auth($name, $password);
-        $this->assertEquals($expected, $actual[0]);
+        // var_dump($actual); die;
+        $this->assertEquals($expected['name'], $actual[0]['name']);
+        
+        $userModel->rollback();
     }
     //
     public function testAuthWithFailed()
@@ -889,9 +893,9 @@ class UserModelTest extends TestCase
         $userModel->startTransaction();
         $user = $userModel->deleteUserById($idUser);
         if (empty($user)) {
-            $this->assertTrue(true);
-        } else {
             $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
         }
         $userModel->rollback();
     }
@@ -904,9 +908,9 @@ class UserModelTest extends TestCase
 
         $user = $userModel->deleteUserById($idUser);
         if (empty($user)) {
-            $this->assertTrue(true);
-        } else {
             $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
         }
         $userModel->rollback();
     }
@@ -918,9 +922,9 @@ class UserModelTest extends TestCase
         $idUser = 5.5;
         $user = $userModel->deleteUserById($idUser);
         if (empty($user)) {
-            $this->assertTrue(true);
-        } else {
             $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
         }
         $userModel->rollback();
     }
@@ -981,7 +985,7 @@ class UserModelTest extends TestCase
     public function testGetUsersOk()
     {
         $userModel = new UserModel();
-        $userName = 'test1';
+        $userName = 'test2';
         $user = $userModel->getUsers($userName);
 
         $actual = $user[0]['name'];
