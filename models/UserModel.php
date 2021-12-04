@@ -6,7 +6,7 @@ class UserModel extends BaseModel {
 
     public function findUserById($id) {
         $flag = is_integer($id);
-        if($flag == false) {
+        if($flag == false || $id < 1) {
             return false;
         }
         $sql = 'SELECT * FROM users WHERE id = '.$id;

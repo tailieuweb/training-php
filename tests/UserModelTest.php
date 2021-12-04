@@ -27,6 +27,14 @@ class UserModelTest extends TestCase
        $this->assertEquals($expected, $actual);
     }
     //
+    public function testFindUserByIdWithNegativeNumberId()
+    {
+       $userModel = new UserModel();
+       $expected = false;
+       $actual = $userModel->findUserById(-5);
+       $this->assertEquals($expected, $actual);
+    }
+    //
     public function testFindUserByIdWithNullId()
     {
        $userModel = new UserModel();
@@ -101,6 +109,15 @@ class UserModelTest extends TestCase
         $actual = $userModel->findUserById($key);
         $this->assertEquals($expected, $actual);
     }
+    //
+    public function testFindUserByFloatId()
+    {
+        $userModel = new UserModel();
+        $expected = false;
+        $key = 1.345;
+        $actual = $userModel->findUserById($key);
+        $this->assertEquals($expected, $actual);
+    }
 
     //TEST OF FUNCTION findUser
     public function testFindUserByNameWithOK()
@@ -119,6 +136,15 @@ class UserModelTest extends TestCase
        $this->assertEquals($expected, $actual[0]);
     }
     //
+    public function testFindUserByNameWithNotGood()
+    {
+       $userModel = new UserModel();
+       $expected = [];
+       $keyword = "mp712212121";
+       $actual = $userModel->findUser($keyword);
+       $this->assertEquals($expected, $actual);
+    }
+    //
     public function testFindUserByEmailWithOK()
     {
        $userModel = new UserModel();
@@ -133,6 +159,15 @@ class UserModelTest extends TestCase
        $keyword = "hackworld@gmail.com";
        $actual = $userModel->findUser($keyword);
        $this->assertEquals($expected, $actual[0]);
+    }
+    //
+    public function testFindUserByEmailWithNotGood()
+    {
+       $userModel = new UserModel();
+       $expected = [];
+       $keyword = "hackworld1234442132@gmail.com";
+       $actual = $userModel->findUser($keyword);
+       $this->assertEquals($expected, $actual);
     }
     //
     public function testFindUserWithNullKey()
@@ -206,6 +241,15 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
     //
+    public function testFindUserByFloatKey()
+    {
+        $userModel = new UserModel();
+        $expected = false;
+        $key = 1.12211111;
+        $actual = $userModel->findUser($key);
+        $this->assertEquals($expected, $actual);
+    }
+    //
     public function testFindUserWithEmptyKey()
     {
         $userModel = new UserModel();
@@ -275,6 +319,36 @@ class UserModelTest extends TestCase
        $expected = false;
        $name = 3004;
        $password = 1975;
+       $actual = $userModel->auth($name,$password);
+       $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithNameIsNegativeNumber()
+    {
+       $userModel = new UserModel();
+       $expected = false;
+       $name = -8;
+       $password = "123";
+       $actual = $userModel->auth($name,$password);
+       $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithPasswordIsNegativeNumber()
+    {
+       $userModel = new UserModel();
+       $expected = false;
+       $name = "pp6";
+       $password = -5;
+       $actual = $userModel->auth($name,$password);
+       $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithBothIsNegativeNumber()
+    {
+       $userModel = new UserModel();
+       $expected = false;
+       $name = -1;
+       $password = -2;
        $actual = $userModel->auth($name,$password);
        $this->assertEquals($expected, $actual);
     }
@@ -365,6 +439,66 @@ class UserModelTest extends TestCase
        $expected = false;
        $name = null;
        $password = null;
+       $actual = $userModel->auth($name,$password);
+       $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithNameIsFloat()
+    {
+       $userModel = new UserModel();
+       $expected = false;
+       $name = 1.232;
+       $password = "12345";
+       $actual = $userModel->auth($name,$password);
+       $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithPasswordIsFloat()
+    {
+       $userModel = new UserModel();
+       $expected = false;
+       $name = "pp6";
+       $password = 1.221;
+       $actual = $userModel->auth($name,$password);
+       $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithBothIsFloat()
+    {
+       $userModel = new UserModel();
+       $expected = false;
+       $name = 1.221;
+       $password = 1.221331;
+       $actual = $userModel->auth($name,$password);
+       $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithNameIsDouble()
+    {
+       $userModel = new UserModel();
+       $expected = false;
+       $name = 1.232;
+       $password = "12345";
+       $actual = $userModel->auth($name,$password);
+       $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithPasswordIsDouble()
+    {
+       $userModel = new UserModel();
+       $expected = false;
+       $name = "pp6";
+       $password = 1.221;
+       $actual = $userModel->auth($name,$password);
+       $this->assertEquals($expected, $actual);
+    }
+    //
+    public function testAuthWithBothIsDouble()
+    {
+       $userModel = new UserModel();
+       $expected = false;
+       $name = 1.221;
+       $password = 1.221331;
        $actual = $userModel->auth($name,$password);
        $this->assertEquals($expected, $actual);
     }
