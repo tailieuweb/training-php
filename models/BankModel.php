@@ -332,6 +332,4 @@ class BankModel extends BaseModel
 
         return $user;
     }
-
-
 }
