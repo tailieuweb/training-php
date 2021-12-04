@@ -111,6 +111,9 @@ class UserRepository extends BaseModel
      */
     public function insertUserWithId($input)
     {
+        if (!is_array($input)) {
+            return false;
+        }
         $insertUser = $this->userModel->insertUserWithId(
             $input['id'],
             $input['name'],
