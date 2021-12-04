@@ -56,6 +56,7 @@ class BankModel extends BaseModel
      * @param array $params
      * @return array
      */
+    //Minh Tiến
     public function getBanks($params = [])
     {
         if (isset($params['keyword'])) {
