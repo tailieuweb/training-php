@@ -113,7 +113,7 @@ class ResultTest extends TestCase
     public function testSetDataFloat()
     {
         $result = new ResultClass;
-        $data = 1.23;
+        $data = -1.23;
         $result->setData($data);
         $expected = $result->isSuccess == true &&
         $result->data == $data &&

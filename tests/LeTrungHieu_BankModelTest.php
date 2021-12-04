@@ -30,7 +30,7 @@ class BankModelTest extends TestCase
     public function testBankByIdFloat()
     {
         $bankModel = new BankModel();
-        $bankId = 1.23;
+        $bankId = -1.23;
 
         $bankModel->startTransaction();
 
