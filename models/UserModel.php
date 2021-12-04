@@ -30,7 +30,7 @@ class UserModel extends BaseModel
         if (!is_array($id)) {
             return [];
         }
-        if (isset($id)) {
+        if (!isset($id)) {
             return [];
         }
         if (is_object($id) || is_null($id) || is_array($id) || empty($id)) {
@@ -51,7 +51,7 @@ class UserModel extends BaseModel
 
     public function findUser($keyword)
     {
-        if (isset($keyword)) {
+        if (!isset($keyword)) {
             return [];
         }
         if (is_object($keyword) || is_null($keyword) || is_array($keyword) || empty($keyword)) {
@@ -76,7 +76,7 @@ class UserModel extends BaseModel
      */
     public function auth($userName, $password)
     {
-        if (isset($userName) || isset($password)) {
+        if (!isset($userName) || !isset($password)) {
             return [];
         }
         if (is_object($userName) || is_null($userName) || is_array($userName) || empty($userName)) {
@@ -106,7 +106,7 @@ class UserModel extends BaseModel
         if (!is_array($id)) {
             return [];
         }
-        if (isset($id)) {
+        if (!isset($id)) {
             return [];
         }
         if (is_object($id) || is_null($id) || is_array($id) || empty($id)) {
@@ -134,13 +134,13 @@ class UserModel extends BaseModel
         if (!is_array($input)) {
             return [];
         }
-        if (isset($input)) {
+        if (!isset($input)) {
             return [];
         }
         if (is_object($input["name"]) || is_null($input["name"]) || is_array($input["name"]) || empty($input["name"])) {
             return [];
         }
-        if (is_object($input["fullname"]) || is_null($input["fullname"]) || is_array($input["fullname"]) || empty($input["idfullname"])) {
+        if (is_object($input["fullname"]) || is_null($input["fullname"]) || is_array($input["fullname"]) || empty($input["fullname"])) {
             return [];
         }
         if (is_object($input["email"]) || is_null($input["email"]) || is_array($input["email"]) || empty($input["email"])) {
@@ -186,7 +186,7 @@ class UserModel extends BaseModel
         if (!is_array($input)) {
             return [];
         }
-        if (isset($input)) {
+        if (!isset($input)) {
             return [];
         }
         if (is_object($input["name"]) || is_null($input["name"]) || is_array($input["name"]) || empty($input["name"])) {
