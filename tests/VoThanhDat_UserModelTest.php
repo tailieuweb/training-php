@@ -140,6 +140,24 @@ class VoThanhDat_UserModelTest extends TestCase
         $expected = false;
         $this->assertEquals($expected, $actual);
     }
+
+    // Test case Insert User Input Is Object
+
+    public function testInsertUserInputIsObject()
+    {
+        $userModel = new UserModel();
+
+        $input = new BankModel();
+
+        $userModel->startTransaction();
+        $userModel->insertUser($input);
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
     ///////////////////////////////     NAME             //////////////////////////////
 
     // Test case Insert User Input Name Is Null
@@ -208,8 +226,8 @@ class VoThanhDat_UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // Test case Insert User Input Name Is Object
-    public function testInsertUserInputNameIsObject()
+    // Test case Insert User Input Name Is Array
+    public function testInsertUserInputNameIsArray()
     {
         $userModel = new UserModel();
         $email = 'vothanhdat123123@gmail.com';
@@ -240,7 +258,31 @@ class VoThanhDat_UserModelTest extends TestCase
         $email = 'vothanhdat123123@gmail.com';
 
         $input = [
-            'name' => "18923871",
+            'name' => "&^!%&@%!",
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+
+    // Test case Insert User Input Name Is Object
+    public function testInsertUserInputNameIsObject()
+    {
+        $userModel = new UserModel();
+        $email = 'vothanhdat123123@gmail.com';
+        $name = new BankModel();
+        $input = [
+            'name' => $name,
             'fullname' => "Vo Thanh Dat",
             'type' => 'admin',
             'email' => $email,
@@ -323,8 +365,8 @@ class VoThanhDat_UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // Test case Insert User Full Name Is Object
-    public function testInsertUserInputFullNameIsObject()
+    // Test case Insert User Full Name Is Array
+    public function testInsertUserInputFullNameIsArray()
     {
         $userModel = new UserModel();
         $fullname = [
@@ -352,6 +394,28 @@ class VoThanhDat_UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $fullname = "&^!@#%$!*@&^(";
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => $fullname,
+            'type' => 'admin',
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Full Name Is Object
+    public function testInsertUserInputFullNameIsObject()
+    {
+        $userModel = new UserModel();
+        $fullname = new BankModel();
         $input = [
             'name' => 'Dattt',
             'fullname' => $fullname,
@@ -437,8 +501,8 @@ class VoThanhDat_UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // Test case Insert User Type Is Object
-    public function testInsertUserInputTypeIsObject()
+    // Test case Insert User Type Is Array
+    public function testInsertUserInputTypeIsArray()
     {
         $userModel = new UserModel();
         $type = [
@@ -466,6 +530,28 @@ class VoThanhDat_UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $type = '*!%*&@%*&';
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => $type,
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Type Is Object
+    public function testInsertUserInputTypeIsObject()
+    {
+        $userModel = new UserModel();
+        $type = new BankModel();
         $input = [
             'name' => 'Dattt',
             'fullname' => "Vo Thanh Dat",
@@ -570,8 +656,8 @@ class VoThanhDat_UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // Test case Insert User Email Is Object
-    public function testInsertUserInputEmailIsObject()
+    // Test case Insert User Email Is Array
+    public function testInsertUserInputEmailIsArray()
     {
         $userModel = new UserModel();
         $email = [
@@ -621,6 +707,28 @@ class VoThanhDat_UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $email = 'jjkjhgfbkrggeo.comnm';
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Email Object
+    public function testInsertUserInputEmailObject()
+    {
+        $userModel = new UserModel();
+        $email = new BankModel();
         $input = [
             'name' => 'Dattt',
             'fullname' => "Vo Thanh Dat",
@@ -707,8 +815,8 @@ class VoThanhDat_UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // Test case Insert User Password Is Object
-    public function testInsertUserInputPasswordIsObject()
+    // Test case Insert User Password Is Array
+    public function testInsertUserInputPasswordIsArray()
     {
         $userModel = new UserModel();
         $password = [
@@ -749,6 +857,27 @@ class VoThanhDat_UserModelTest extends TestCase
         $userModel->rollBack();
 
         $expected = true;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User Password Is Object
+    public function testInsertUserInputPasswordIsObject()
+    {
+        $userModel = new UserModel();
+        $password = new BankModel();
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => $password
+        ];
+        $userModel->startTransaction();
+        $actual = $userModel->insertUser($input);
+
+        $userModel->rollBack();
+
+        $expected = false;
         $this->assertEquals($expected, $actual);
     }
     /**
@@ -802,9 +931,9 @@ class VoThanhDat_UserModelTest extends TestCase
         $expected = false;
         $this->assertEquals($expected, $actual);
     }
-    // Test case Check Email Exist is Object
+    // Test case Check Email Exist is Array
 
-    public function testCheckEmailExistIsObject()
+    public function testCheckEmailExistIsArray()
     {
         $userModel = new UserModel();
         $email = [
@@ -857,6 +986,19 @@ class VoThanhDat_UserModelTest extends TestCase
         $expected = false;
         $this->assertEquals($expected, $actual);
     }
+
+    // Test case Check Email Exist is Object
+
+    public function testCheckEmailExistIsObject()
+    {
+        $userModel = new UserModel();
+        $email = new BankModel();
+
+        $actual = $userModel->checkEmailExist($email);
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
     /**
      * Test checkEmailStyle function, 'Dattt' do this 
      * */
@@ -900,9 +1042,9 @@ class VoThanhDat_UserModelTest extends TestCase
         $expected = false;
         $this->assertEquals($expected, $actual);
     }
-    // Test case Check Email Style is Object
+    // Test case Check Email Style is Array
 
-    public function testCheckEmailStyleIsObject()
+    public function testCheckEmailStyleIsArray()
     {
         $userModel = new UserModel();
         $email = [
@@ -949,6 +1091,19 @@ class VoThanhDat_UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $email = "!@@$%^!%$@^";
+
+        $actual = $userModel->checkEmailStyle($email);
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Check Email Style is Object
+
+    public function testCheckEmailStyleIsObject()
+    {
+        $userModel = new UserModel();
+        $email = new BankModel();
 
         $actual = $userModel->checkEmailStyle($email);
 
@@ -1025,8 +1180,8 @@ class VoThanhDat_UserModelTest extends TestCase
         $expected = false;
         $this->assertEquals($expected, $actual);
     }
-    // Test case Find User By Email Is Object
-    public function testFindUserByEmailIsObject()
+    // Test case Find User By Email Is Array
+    public function testFindUserByEmailIsArray()
     {
         $userModel = new UserModel();
         $email = 'vothanhdat123123@gmail.com';
@@ -1037,12 +1192,12 @@ class VoThanhDat_UserModelTest extends TestCase
             'email' => $email,
             'password' => '12345'
         ];
-        $object = [
+        $Array = [
             'email' => "vothanhdat123123@gmail.com",
         ];
         $userModel->startTransaction();
         $userModel->insertUser($input);
-        $actual = $userModel->findUserByEmail($object);
+        $actual = $userModel->findUserByEmail($Array);
         $userModel->rollBack();
 
         $expected = false;
@@ -1095,6 +1250,28 @@ class VoThanhDat_UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $email = 'vothanhdat123123@gmail.com';
+        $input = [
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+
+        $userModel->startTransaction();
+        $userModel->insertUser($input);
+        $actual = $userModel->findUserByEmail("!@^$!@^%");
+        $userModel->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Find User By Email Is Object
+    public function testFindUserByEmailIsObject()
+    {
+        $userModel = new UserModel();
+        $email = new BankModel();
         $input = [
             'name' => 'Dattt',
             'fullname' => "Vo Thanh Dat",

@@ -15,7 +15,7 @@ class VoThanhDat_UserRepositoryTest extends TestCase
         $userRepository1 = UserRepository::getInstance();
 
         $expected = true;
-        $actual = is_object($userRepository) &&
+        $actual = is_Array($userRepository) &&
             get_class($userRepository) == 'UserRepository' &&
             $userRepository === $userRepository1;
 
@@ -118,6 +118,7 @@ class VoThanhDat_UserRepositoryTest extends TestCase
         $expected = false;
         $this->assertEquals($expected, $actual);
     }
+
 
     // Test case Insert User With Id Input Is Bool
 
@@ -242,8 +243,8 @@ class VoThanhDat_UserRepositoryTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // Test case Insert User With Id Input Name Is Object
-    public function testInsertUserWithIdInputNameIsObject()
+    // Test case Insert User With Id Input Name Is Array
+    public function testInsertUserWithIdInputNameIsArray()
     {
         $userRepository = new UserRepository();
         $email = 'vothanhdat123123@gmail.com';
@@ -276,7 +277,30 @@ class VoThanhDat_UserRepositoryTest extends TestCase
 
         $input = [
             'id' => 123,
-            'name' => "18923871",
+            'name' => "*(!&@#^#(",
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+
+        $userRepository->startTransaction();
+        $actual = $userRepository->insertUserWithId($input);
+
+        $userRepository->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+    // Test case Insert User With Id Input Name Is Object
+    public function testInsertUserWithIdInputNameIsObject()
+    {
+        $userRepository = new UserRepository();
+        $email = 'vothanhdat123123@gmail.com';
+        $name = new BankModel();
+        $input = [
+            'id' => 123,
+            'name' => $name,
             'fullname' => "Vo Thanh Dat",
             'type' => 'admin',
             'email' => $email,
@@ -362,8 +386,8 @@ class VoThanhDat_UserRepositoryTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // Test case Insert User With Id Full Name Is Object
-    public function testInsertUserWithIdInputFullNameIsObject()
+    // Test case Insert User With Id Full Name Is Array
+    public function testInsertUserWithIdInputFullNameIsArray()
     {
         $userRepository = new UserRepository();
         $fullname = [
@@ -392,6 +416,29 @@ class VoThanhDat_UserRepositoryTest extends TestCase
     {
         $userRepository = new UserRepository();
         $fullname = "&^!@#%$!*@&^(";
+        $input = [
+            'id' => 123,
+            'name' => 'Dattt',
+            'fullname' => $fullname,
+            'type' => 'admin',
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => '12345'
+        ];
+
+        $userRepository->startTransaction();
+        $actual = $userRepository->insertUserWithId($input);
+
+        $userRepository->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User With Id Full Name Is Object
+    public function testInsertUserWithIdInputFullNameIsObject()
+    {
+        $userRepository = new UserRepository();
+        $fullname = new BankModel();
         $input = [
             'id' => 123,
             'name' => 'Dattt',
@@ -481,8 +528,8 @@ class VoThanhDat_UserRepositoryTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // Test case Insert User With Id Type Is Object
-    public function testInsertUserWithIdInputTypeIsObject()
+    // Test case Insert User With Id Type Is Array
+    public function testInsertUserWithIdInputTypeIsArray()
     {
         $userRepository = new UserRepository();
         $type = [
@@ -511,6 +558,29 @@ class VoThanhDat_UserRepositoryTest extends TestCase
     {
         $userRepository = new UserRepository();
         $type = '*!%*&@%*&';
+        $input = [
+            'id' => 123,
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => $type,
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => '12345'
+        ];
+
+        $userRepository->startTransaction();
+        $actual = $userRepository->insertUserWithId($input);
+
+        $userRepository->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User With Id Type Is Object
+    public function testInsertUserWithIdInputTypeIsObject()
+    {
+        $userRepository = new UserRepository();
+        $type = new BankModel();
         $input = [
             'id' => 123,
             'name' => 'Dattt',
@@ -620,8 +690,8 @@ class VoThanhDat_UserRepositoryTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // Test case Insert User With Id Email Is Object
-    public function testInsertUserWithIdInputEmailIsObject()
+    // Test case Insert User With Id Email Is Array
+    public function testInsertUserWithIdInputEmailIsArray()
     {
         $userRepository = new UserRepository();
         $email = [
@@ -650,6 +720,29 @@ class VoThanhDat_UserRepositoryTest extends TestCase
     {
         $userRepository = new UserRepository();
         $email = '(*^*^&$';
+        $input = [
+            'id' => 123,
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => $email,
+            'password' => '12345'
+        ];
+
+        $userRepository->startTransaction();
+        $actual = $userRepository->insertUserWithId($input);
+
+        $userRepository->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User With Id Email Is Object
+    public function testInsertUserWithIdInputEmailIsObject()
+    {
+        $userRepository = new UserRepository();
+        $email = new BankModel();
         $input = [
             'id' => 123,
             'name' => 'Dattt',
@@ -763,8 +856,8 @@ class VoThanhDat_UserRepositoryTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // Test case Insert User With Id Password Is Object
-    public function testInsertUserWithIdInputPasswordIsObject()
+    // Test case Insert User With Id Password Is Array
+    public function testInsertUserWithIdInputPasswordIsArray()
     {
         $userRepository = new UserRepository();
         $password = [
@@ -807,6 +900,28 @@ class VoThanhDat_UserRepositoryTest extends TestCase
         $userRepository->rollBack();
 
         $expected = true;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User With Id Password Is Object
+    public function testInsertUserWithIdInputPasswordIsobject()
+    {
+        $userRepository = new UserRepository();
+        $password = new BankModel();
+        $input = [
+            'id' => 123,
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => $password
+        ];
+        $userRepository->startTransaction();
+        $actual = $userRepository->insertUserWithId($input);
+
+        $userRepository->rollBack();
+
+        $expected = false;
         $this->assertEquals($expected, $actual);
     }
 
@@ -881,8 +996,8 @@ class VoThanhDat_UserRepositoryTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // Test case Insert User With Id: Id Is Object
-    public function testInsertUserWithIdInputIdIsObject()
+    // Test case Insert User With Id: Id Is Array
+    public function testInsertUserWithIdInputIdIsArray()
     {
         $userRepository = new UserRepository();
         $id = [
@@ -911,6 +1026,28 @@ class VoThanhDat_UserRepositoryTest extends TestCase
     {
         $userRepository = new UserRepository();
         $id = "&I^&*@!*#";
+        $input = [
+            'id' => $id,
+            'name' => 'Dattt',
+            'fullname' => "Vo Thanh Dat",
+            'type' => 'admin',
+            'email' => "vothanhdat123123@gmail.com",
+            'password' => 12345
+        ];
+        $userRepository->startTransaction();
+        $actual = $userRepository->insertUserWithId($input);
+
+        $userRepository->rollBack();
+
+        $expected = false;
+        $this->assertEquals($expected, $actual);
+    }
+
+    // Test case Insert User With Id Password Is Object
+    public function testInsertUserWithIdInputIdIsObject()
+    {
+        $userRepository = new UserRepository();
+        $id = new BankModel();
         $input = [
             'id' => $id,
             'name' => 'Dattt',
