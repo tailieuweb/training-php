@@ -12,42 +12,42 @@ class RepositoryUserTest extends TestCase
     Desc: Test insert user is ok
     Author: Phuong Nguyen.
     */
-    public function testInsertUserOk()
-    {
-        $factory = new FactoryPattern();
-        $userModel = UserModel::getInstance();
-        $userModel->startTransaction();
-        $expectedAfterLength = count($userModel->getAll());
+    // public function testInsertUserOk()
+    // {
+    //     $factory = new FactoryPattern();
+    //     $userModel = UserModel::getInstance();
+    //     $userModel->startTransaction();
+    //     $expectedAfterLength = count($userModel->getAll());
 
-        $input = [];
-        $input["name"] = "test2insert";
-        $input["fullname"] = "test2";
-        $input["email"] = "test2@gmail.com";
-        $input["type"] = "user";
-        $input["password"] = "password";
+    //     $input = [];
+    //     $input["name"] = "test2insert";
+    //     $input["fullname"] = "test2";
+    //     $input["email"] = "test2@gmail.com";
+    //     $input["type"] = "user";
+    //     $input["password"] = "password";
 
-        $actionInsert = $userModel->insertUser($input);
-        $userList = $userModel->getAll();
-        $expectedBeforeLength = count($userList);
+    //     $actionInsert = $userModel->insertUser($input);
+    //     $userList = $userModel->getAll();
+    //     $expectedBeforeLength = count($userList);
 
 
 
-        if ($expectedAfterLength !== $expectedBeforeLength) {
-            $input["password"] = md5($input["password"]);
-            $input["id"] = $userList[count($userList)  - 1]["id"];
-            $this->assertEquals(
-                $input,
-                end($userList),
-                "expected and actual is not equals"
-            ); 
-        } else {
-            $this->assertTrue(
-                false,
-                "expected length before and after insert is not equal"
-            );
-        }
-        $userModel->rollback();
-    }
+    //     if ($expectedAfterLength !== $expectedBeforeLength) {
+    //         $input["password"] = md5($input["password"]);
+    //         $input["id"] = $userList[count($userList)  - 1]["id"];
+    //         $this->assertEquals(
+    //             $input,
+    //             end($userList),
+    //             "expected and actual is not equals"
+    //         ); 
+    //     } else {
+    //         $this->assertTrue(
+    //             false,
+    //             "expected length before and after insert is not equal"
+    //         );
+    //     }
+    //     $userModel->rollback();
+    // }
 
 
     /*
