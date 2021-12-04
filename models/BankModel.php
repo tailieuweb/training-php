@@ -28,7 +28,7 @@ class BankModel extends BaseModel {
         if (!is_array($params)) {
             return [];
         }
-        if (isset($params["user_id"])) {
+        if (!isset($params["user_id"])) {
             return [];
         }
         if (is_object($params["user_id"]) || is_null($params["user_id"]) || is_array($params["user_id"]) || empty($params["user_id"])) {
@@ -56,7 +56,7 @@ class BankModel extends BaseModel {
         if (!is_array($id)) {
             return [];
         }
-        if (isset($id)) {
+        if (!isset($id)) {
             return [];
         }
         if (is_object($id) || is_null($id) || is_array($id) || empty($id)) {
@@ -76,10 +76,7 @@ class BankModel extends BaseModel {
 
     public function findBankInfoById($id)
     {
-        if (!is_array($id)) {
-            return [];
-        }
-        if (isset($id)) {
+        if (!isset($id)) {
             return [];
         }
         if (is_object($id) || is_null($id) || is_array($id) || empty($id)) {
@@ -104,7 +101,7 @@ class BankModel extends BaseModel {
         if (!is_array($user_id)) {
             return [];
         }
-        if (isset($user_id)) {
+        if (!isset($user_id)) {
             return [];
         }
         if (is_object($user_id) || is_null($user_id) || is_array($user_id) || empty($user_id)) {
@@ -119,7 +116,7 @@ class BankModel extends BaseModel {
             return [];
         }
         $sql = 'SELECT * FROM banks WHERE user_id = ' . mysqli_real_escape_string(self::$_connection, $user_id);
-        $items = $this->select($sql);
+        $items = $this->getData_With_Multi_Query($sql);
 
         return $items;
     }
@@ -134,7 +131,7 @@ class BankModel extends BaseModel {
         if (!is_array($input)) {
             return [];
         }
-        if (isset($input)) {
+        if (!isset($input)) {
             return [];
         }
         if (is_object($input["cost"]) || is_null($input["cost"]) || is_array($input["cost"]) || empty($input["cost"])) {
@@ -144,6 +141,9 @@ class BankModel extends BaseModel {
             return [];
         }
         if (is_bool($input["cost"]) || is_bool($input["id"])  ) {
+            return 5;
+        }
+        if (is_string($input["id"]) || is_string($input["cost"])) {
             return [];
         }
         if (!is_int($input["id"])) {
@@ -169,7 +169,7 @@ class BankModel extends BaseModel {
         if (!is_array($input)) {
             return [];
         }
-        if (isset($input)) {
+        if (!isset($input)) {
             return [];
         }
         if (is_object($input["cost"]) || is_null($input["cost"]) || is_array($input["cost"]) || empty($input["cost"])) {
@@ -179,6 +179,9 @@ class BankModel extends BaseModel {
             return [];
         }
         if (is_bool($input["cost"]) || is_bool($input["user_id"])  ) {
+            return [];
+        }
+        if (is_string($input["user_id"]) || is_string($input["cost"])) {
             return [];
         }
         if (!is_int($input["user_id"])) {

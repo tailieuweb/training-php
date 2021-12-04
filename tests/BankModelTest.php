@@ -155,6 +155,44 @@ class BankModelTest extends TestCase
         );
     }
 
+     /*
+    File: BankModel
+    Id: 07
+    Function: findBankInfoById($id).
+    Desc: Test get bank by bank id with input type not integer
+    Author: Phuong Nguyen.
+    */
+    public function testFindBankInfoById_WithInputIs_NotIntegerType()
+    {
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make("bank");
+
+        $actual = $bankModel->find(1.2);
+        $this->assertEmpty(
+            $actual,
+            "actual is empty"
+        );
+    }
+
+      /*
+    File: BankModel
+    Id: 07
+    Function: findBankInfoById($id).
+    Desc: Test get bank by bank id with input is boolean
+    Author: Phuong Nguyen.
+    */
+    public function testFindBankInfoById_WithInputIs_Boolean()
+    {
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make("bank");
+
+        $actual = $bankModel->find(true);
+        $this->assertEmpty(
+            $actual,
+            "actual is empty"
+        );
+    }
+
     /*
     File: BankModel.
     Id: 08
@@ -328,6 +366,44 @@ class BankModelTest extends TestCase
         $bankModel = $factory->make("bank");
 
         $actual = $bankModel->findByUserId(100);
+        $this->assertEmpty(
+            $actual,
+            "actual is empty"
+        );
+    }
+
+       /*
+    File: BankModel
+    Id: 07
+    Function: findBankInfoByUserID($user_id).
+    Desc: Test get bank by user id with input type not integer
+    Author: Phuong Nguyen.
+    */
+    public function testFindBankInfoByUserId_WithInputIs_NotIntegerType()
+    {
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make("bank");
+
+        $actual = $bankModel->findByUserId(1.2);
+        $this->assertEmpty(
+            $actual,
+            "actual is empty"
+        );
+    }
+
+      /*
+    File: BankModel
+    Id: 07
+    Function:findBankInfoByUserID($user_id).
+    Desc: Test get bank by user id with input is boolean
+    Author: Phuong Nguyen.
+    */
+    public function testFindBankInfoByUserId_WithInputIs_Boolean()
+    {
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make("bank");
+
+        $actual = $bankModel->findByUserId(true);
         $this->assertEmpty(
             $actual,
             "actual is empty"
