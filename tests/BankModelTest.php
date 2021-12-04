@@ -5,51 +5,110 @@ use PHPUnit\Framework\TestCase;
 class BankModelTest extends TestCase
 {
     //
-    public function testGetBanksGood()
+    public function testGetBanksOk()
     {
-        $bankModel = new BankModel();
-        $params['keyword']  = 11;
-        $bank = $bankModel->getBanks($params);
-        if (empty($bank[0])) {
-            return $this->assertTrue(true);
-        } else {
-            return $this->assertTrue(false);
-        }
-    }
-    // 
-    public function testGetBankObject()
-    {
-        $bank = new BankModel();
-        $bankId = new stdClass();
-        try {
-            $bank->getBanks($bankId);
-        } catch (Throwable $ex) {
-            $this->assertTrue(True);
-        }
-    }
-    //test kiểm tra gia trị có tồn tại trong mảng hay không
-    public function testGetBanks()
-    {
-        $bankModel = new BankModel();
-        $UserIdInBank = 3;
-        $array = array("id" => 3, "user_id" => 3, "cost" => 1111);
-        //kiểm tra giá trị tồn tại trong mang
-        $expected = in_array(3, $array);
-        $actual = $bankModel->getBanks($expected);
-        //var_dump($actual);die();
+        $BankModel = new BankModel();
 
-        if ($actual == true) {
+        $expected = '3';
+
+        $Bank = $BankModel->getBanks();
+        $this->assertEquals($expected, $Bank[1]['user_id']);
+    }
+    //
+    public function testGetBanksNg()
+    {
+        $BankModel = new BankModel();
+
+        $params['keyword'] = 999999;
+
+        $Bank = $BankModel->getBanks($params);
+
+        if ($Bank == 'error') {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
         }
     }
-    public function testGetBanksByDoubleKey()
+    //
+    public function testGetBanksNgAm()
     {
-        $bankModel = new BankModel();
-        $expected = false;
-        $key = 1.11;
-        $actual = $bankModel->getBanks($key);
+        $BankModel = new BankModel();
+
+        $params['keyword'] = -9;
+
+        $Bank = $BankModel->getBanks($params);
+
+        if ($Bank == 'error') {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    //
+    public function testGetBanksDouble()
+    {
+        $BankModel = new BankModel();
+
+        $params['keyword'] = 1.1;
+
+        $Bank = $BankModel->getBanks($params);
+
+        if ($Bank == 'error') {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    //
+    public function testGetBanksSpecialCharacters()
+    {
+        $BankModel = new BankModel();
+
+        $params['keyword'] = '[/**//#@^%$]';
+
+        $Bank = $BankModel->getBanks($params);
+
+        if ($Bank == 'error') {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    //
+    public function testGetBanksIsArray()
+    {
+        $BankModel = new BankModel();
+
+        $params['keyword'] = [];
+
+        $Bank = $BankModel->getBanks($params);
+
+        if ($Bank == 'error') {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    //
+    public function testGetBanksStr()
+    {
+        $BankModel = new BankModel();
+
+        $params['keyword'] = 'abc';
+
+
+        $expected = 'error';
+        $actual = $BankModel->getBanks($params);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testGetBanksObject()
+    {
+        $BankModel = new BankModel();
+        $params['keyword'] = new stdClass();
+        $expected = 'error';
+        $actual = $BankModel->getBanks($params);
         $this->assertEquals($expected, $actual);
     }
 }

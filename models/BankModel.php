@@ -58,32 +58,21 @@ class BankModel extends BaseModel
      */
     public function getBanks($params = [])
     {
-        //Keyword
-        if (!empty($params['keyword'])) {
-            if (is_object($params['keyword'])) {
-                return false;
+        if (isset($params['keyword'])) {
+            if (is_int($params['keyword']) == true || is_string($params['keyword']) == true) {
+                $sql = 'SELECT * FROM banks WHERE user_id LIKE "%' . $params['keyword'] . '%"';
+                $bank = $this->select($sql);
+                if ($bank != null) {
+                    return $bank;
+                }
+                return $bank = 'error';
             }
-            $params['keyword'] = str_replace(
-                array(
-                    ',', ';', '#', '/', '%', 'select', 'update', 'insert', 'delete', 'truncate',
-                    'union', 'or', '"', "'", 'SELECT', 'UPDATE', 'INSERT', 'DELETE', 'TRUNCATE', 'UNION', 'OR'
-                ),
-                array(''),
-                $params['keyword']
-            );
-
-            $sql = 'SELECT * FROM banks WHERE cost LIKE "%' . $params['keyword'] . '%"';
-
-            //Keep this line to use Sql Injection
-            //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
-            $banks = self::$_connection->multi_query($sql);
+            return $bank = 'error';
         } else {
-            $sql = 'SELECT banks.id as bank_id,users.name,users.fullname,users.email,banks.cost,users.type,users.id,banks.user_id
-            FROM `banks`,`users` 
-            WHERE banks.user_id = users.id';
-            $banks = $this->select($sql);
+            $sql = 'SELECT * FROM banks';
+            $bank = $this->select($sql);
         }
-        return $banks;
+
+        return $bank;
     }
 }
