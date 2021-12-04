@@ -96,8 +96,6 @@ class BankModelTest extends TestCase
         $BankModel = new BankModel();
 
         $params['keyword'] = 'abc';
-
-
         $expected = 'error';
         $actual = $BankModel->getBanks($params);
 
@@ -111,5 +109,31 @@ class BankModelTest extends TestCase
         $expected = 'error';
         $actual = $BankModel->getBanks($params);
         $this->assertEquals($expected, $actual);
+    }
+
+    public function testGetBanksIsNull()
+    {
+        $BankModel = new BankModel();
+
+        $params['keyword'] = null;
+
+        $Bank = $BankModel->getBanks($params);
+
+        if ($Bank == 'error') {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+    public function testGetBanksIsBoolean()
+    {
+        $bankModel = new BankModel();
+        $params['keyword']  = true;
+        $bank = $bankModel->getBanks($params);
+        if ($bank == 'error') {
+            return $this->assertTrue(true);
+        } else {
+            return $this->assertTrue(false);
+        }
     }
 }
