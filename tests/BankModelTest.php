@@ -492,8 +492,8 @@ class BankModelTest extends TestCase
     public function testFindBankByIdOk()
     {
         $bankModel = new BankModel();
-        $bankId = 2;
-        $cost = 1111;
+        $bankId = 9;
+        $cost = 70000;
 
         $bank = $bankModel->findBankById($bankId);
         $actual = $bank[0]['cost'];
