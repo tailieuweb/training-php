@@ -20,7 +20,8 @@
          <file>./Tests/Duyen_BankModelTest.php</file>
          <file>./Tests/Duyen_BaseModelTest.php</file> -->
           <file>./Tests/Liem_BankModel.php</file>
-            <!-- <file>./Tests/Liem_UserModel.php</file>
+		  <file>./Tests/Liem_BankModel_2.php</file>
+            <file>./Tests/Liem_UserModel.php</file>
             <file>./Tests/Liem_UserRepository.php</file>
             <file>./Tests/Liem_BaseModel.php</file> -->
         </testsuite>
