@@ -12,12 +12,12 @@
         <testsuite name="SqlWsContractImport">
             <file>./tests/BankModelTest.php</file>
         </testsuite>
-        <!-- <testsuite name="SqlWsContractImport">
+        <testsuite name="SqlWsContractImport">
             <file>./tests/FactoryPatternTest.php</file>
         </testsuite>
         <testsuite name="SqlWsContractImport">
             <file>./tests/SingletonPatternTest.php</file>
-        </testsuite> -->
+        </testsuite>
     </testsuites>
 
     <filter>				
