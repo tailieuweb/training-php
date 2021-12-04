@@ -73,4 +73,12 @@ class BankModel extends BaseModel
 
         return $user;
     }
+    public function startTransaction()
+    {
+        self::$_connection->begin_transaction();
+    }
+    public function rollBack()
+    {
+       self::$_connection->rollback();
+    }
 }
