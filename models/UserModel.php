@@ -38,9 +38,11 @@ class UserModel extends BaseModel
      */
     public function auth($userName, $password)
     {
+        if (!is_string($userName) || !is_string($password)) {
+            return false;
+        }
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
-
         $user = $this->select($sql);
         return $user;
     }
@@ -114,7 +116,7 @@ class UserModel extends BaseModel
         // SQL
         $sql = "INSERT INTO `users`(`name`, `fullname`, `email`, `type`, `password`) 
         VALUES ('" . $this->BlockSQLInjection($input['name']) . "','" . $this->BlockSQLInjection($input['fullname']) . "','" . $this->BlockSQLInjection($input['email']) . "','" . $this->BlockSQLInjection($input['type']) . "','" . $this->BlockSQLInjection($password) . "')";
-        
+
         $user = $this->insert($sql);
         return $user;
     }
