@@ -25,7 +25,7 @@ class UserModelTest extends TestCase
     //FAILURES!
     public function testGetInstanceString(){
         $userModel = new UserModel();
-        $expected = 'alo';
+        $expected = 'aloa';
         $actual = $userModel->getInstance();
         $this->assertEquals($expected,$actual);
     }
