@@ -241,12 +241,4 @@ class DeleteUserByIdTest extends TestCase
         $this->assertTrue(false);
         }
     }
-    // test case testDeleteUserByIdNull
-     public function testDeleteUserByIdNull() {
-        $userModel = new UserModel();
-        $id = "";
-        $expected = false;
-        $actual = $userModel->deleteUserById($id);
-        $this->assertEquals($expected, $actual);   
-     }
 }
