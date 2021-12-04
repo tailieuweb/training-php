@@ -227,20 +227,6 @@ class DeleteUserByIdTest extends TestCase
         $this->assertTrue(false);
         }
      }
-     //test case testDeleteUserByIdSpecialCharacters
-     public function testDeleteUserByIdSpecialCharacters() {
-        $userModel = new UserModel();
-        
-        $id = '[@$]';
-        
-        $user = $userModel->deleteUserById($id);
-        
-        if ($user==false) {
-        $this->assertTrue(true);
-        } else {
-        $this->assertTrue(false);
-        }
-     }
      //test case testDeleteUserByIdIsArray 
      public function testDeleteUserByIdIsArray() {
         $userModel = new UserModel();
