@@ -410,6 +410,136 @@ class BankModelTest extends TestCase
     //Đặt tên function bắt đầu bằng test nha quý zị
     //Ví dụ: testFindUser()
 
+    //Test insertbank
+
+
+    /**
+     * Test case findUserById String
+     */
+    public function testFindBankByIdStr()
+    {
+        $bankModel = new BankModel();
+
+        $id = 'abc';
+
+
+        $expected = 'error';
+        $actual = $bankModel->findBankById($id);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case findUserById Null
+     */
+    public function testFindBankByIdNull()
+    {
+        $bankModel = new BankModel();
+        $id = '';
+        $expected = 'error';
+        $actual = $bankModel->findBankById($id);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case findUserById Object
+     */
+    public function testFindBankByIdObject()
+    {
+        $bankModel = new BankModel();
+
+        $id = new stdClass();
+        $expected = 'error';
+        $actual = $bankModel->findBankById($id);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case findUserById Array
+     */
+    public function testFindBankByIdArray()
+    {
+        $bankModel = new BankModel();
+
+        $id = array(1, 2, 3);
+        $expected = 'error';
+        $actual = $bankModel->findBankById($id);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case findUserById Characters
+     */
+    public function testFindBankByIdCharacters()
+    {
+        $bankModel = new BankModel();
+
+        $id = '%23!%';
+        $expected = 'error';
+        $actual = $bankModel->findBankById($id);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+
+    /**
+     * Test case findUserById Not good
+     */
+    public function testFindBankByIdNg()
+    {
+        $bankModel = new BankModel();
+        $bankId = 9999;
+        $expected = null;
+
+        $bank = $bankModel->findBankById($bankId);
+
+        if (empty($bank)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertFalse(false);
+        }
+    }
+
+    /**
+     * Test case findUserById Not good Negative Number
+     */
+    public function testFindBankByIdNegativeNumberNg()
+    {
+        $bankModel = new BankModel();
+        $bankId = 9999;
+        $expected = -999;
+
+        $bank = $bankModel->findBankById($bankId);
+
+        if (empty($bank)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertFalse(false);
+        }
+    }
+
+    /**
+     * Test case findUserById Not good Double Number
+     */
+    public function testFindBankByIdDoubleNg()
+    {
+        $bankModel = new BankModel();
+        $bankId = 9999;
+        $expected = 25.5;
+
+        $bank = $bankModel->findBankById($bankId);
+
+        if (empty($bank)) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertFalse(false);
+        }
+    }
+
+
     /**
      * Test function Insertbank()
      * Author: Ho Viet Long
@@ -427,6 +557,8 @@ class BankModelTest extends TestCase
         $bankModel->insertBank($input);
         //Actual
         $actual = $bankModel->findBankById(5);
+        // var_dump($actual);
+        // die;
         $this->assertEquals($actual[0]['cost'], $input['cost']);
     }
     //Test insertbank with valid input true
@@ -454,7 +586,7 @@ class BankModelTest extends TestCase
         //Execute test
         $bankModel->insertBank($input);
         //Actual
-        $actual = $bankModel->findBankById(13);
+        $actual = $bankModel->findBankById(7);
         ($actual[0]['user_id'] == 0) ? $this->assertTrue(true) : $this->assertTrue(false);
     }
     //Test insert bank with user_id is character
@@ -468,7 +600,7 @@ class BankModelTest extends TestCase
         //Execute test
         $bankModel->insertBank($input);
         //Actual
-        $actual = $bankModel->findBankById(14);
+        $actual = $bankModel->findBankById(8);
         ($actual[0]['user_id'] != "long") ? $this->assertTrue(true) : $this->assertTrue(false);
     }
     //Test insert bank with cost = null
@@ -482,7 +614,7 @@ class BankModelTest extends TestCase
         //Execute test
         $bankModel->insertBank($input);
         //Actual
-        $actual = $bankModel->findBankById(15);
+        $actual = $bankModel->findBankById(9);
         ($actual[0]['cost'] == 0) ? $this->assertTrue(true) : $this->assertTrue(false);
     }
     //Test insert bank with cost is character
@@ -496,7 +628,7 @@ class BankModelTest extends TestCase
         //Execute test
         $bankModel->insertBank($input);
         //Actual
-        $actual = $bankModel->findBankById(16);
+        $actual = $bankModel->findBankById(10);
         ($actual[0]['cost'] != "long") ? $this->assertTrue(true) : $this->assertTrue(false);
     }
     //Test insert bank with user_id & cost is character or string
@@ -510,7 +642,7 @@ class BankModelTest extends TestCase
         //Execute test
         $bankModel->insertBank($input);
         //Actual
-        $actual = $bankModel->findBankById(17);
+        $actual = $bankModel->findBankById(11);
         ($actual[0]['cost'] != "long" && $actual[0]['user_id'] != "long") ? $this->assertTrue(true) : $this->assertTrue(false);
     }
     //Test insert bank with user_id is array
@@ -619,144 +751,6 @@ class BankModelTest extends TestCase
             $bankModel->insertBank($input);
         } catch (Throwable $e) {
             $this->assertTrue(true);
-        }
-    }
-
-    /**
-     * Test case findUserById String
-     */
-    public function testFindBankByIdStr()
-    {
-        $bankModel = new BankModel();
-
-        $id = 'abc';
-
-
-        $expected = 'error';
-        $actual = $bankModel->findBankById($id);
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * Test case findUserById Null
-     */
-    public function testFindBankByIdNull()
-    {
-        $bankModel = new BankModel();
-        $id = '';
-        $expected = 'error';
-        $actual = $bankModel->findBankById($id);
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * Test case findUserById Object
-     */
-    public function testFindBankByIdObject()
-    {
-        $bankModel = new BankModel();
-
-        $id = new stdClass();
-        $expected = 'error';
-        $actual = $bankModel->findBankById($id);
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * Test case findUserById Array
-     */
-    public function testFindBankByIdArray()
-    {
-        $bankModel = new BankModel();
-
-        $id = array(1, 2, 3);
-        $expected = 'error';
-        $actual = $bankModel->findBankById($id);
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * Test case findUserById Characters
-     */
-    public function testFindBankByIdCharacters()
-    {
-        $bankModel = new BankModel();
-
-        $id = '%23!%';
-        $expected = 'error';
-        $actual = $bankModel->findBankById($id);
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    public function testFindBankByIdOk()
-    {
-        $bankModel = new BankModel();
-        $bankId = 2;
-        $cost = 11;
-
-        $bank = $bankModel->findBankById($bankId);
-        // var_dump($bank);die;
-        $actual = @$bank[0]['cost'];
-
-        $this->assertEquals($cost, $actual);
-    }
-
-    /**
-     * Test case findUserById Not good
-     */
-    public function testFindBankByIdNg()
-    {
-        $bankModel = new BankModel();
-        $bankId = 9999;
-        $expected = null;
-
-        $bank = $bankModel->findBankById($bankId);
-
-        if (empty($bank)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertFalse(false);
-        }
-    }
-
-    /**
-     * Test case findUserById Not good Negative Number
-     */
-    public function testFindBankByIdNegativeNumberNg()
-    {
-        $bankModel = new BankModel();
-        $bankId = 9999;
-        $expected = -999;
-
-        $bank = $bankModel->findBankById($bankId);
-
-        if (empty($bank)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertFalse(false);
-        }
-    }
-
-    /**
-     * Test case findUserById Not good Double Number
-     */
-    public function testFindBankByIdDoubleNg()
-    {
-        $bankModel = new BankModel();
-        $bankId = 9999;
-        $expected = 25.5;
-
-        $bank = $bankModel->findBankById($bankId);
-
-        if (empty($bank)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertFalse(false);
         }
     }
 }

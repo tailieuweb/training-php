@@ -1,5 +1,7 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
+
 require_once './models/FactoryPattern.php';
 
 class FactoryPatternTest extends TestCase
@@ -12,8 +14,9 @@ class FactoryPatternTest extends TestCase
      * Author: Quyen
      */
 
-     // test function make('user') in FactoryPattern
-    public function testFactoryPatternUser(){
+    // test function make('user') in FactoryPattern
+    public function testFactoryPatternUser()
+    {
         $factoryPattern = new FactoryPattern();
         $userModel = new UserModel();
 
@@ -22,11 +25,12 @@ class FactoryPatternTest extends TestCase
         $expected = $userModel;
         $actual = $factory;
 
-        $this->assertEquals($expected,$actual);
+        $this->assertEquals($expected, $actual);
     }
-    
+
     // test function make('bank') in FactoryPattern
-    public function testFactoryPatternBank(){
+    public function testFactoryPatternBank()
+    {
         $factoryPattern = new FactoryPattern();
         $bankModel = new BankModel();
 
@@ -35,93 +39,100 @@ class FactoryPatternTest extends TestCase
         $expected = $bankModel;
         $actual = $factory;
 
-        $this->assertEquals($expected,$actual);
+        $this->assertEquals($expected, $actual);
     }
 
     // test function make ok
-    public function testMakeOk(){
+    public function testMakeOk()
+    {
         $factoryPattern = new FactoryPattern();
         $userModel = new UserModel();
         $bankModel = new BankModel();
-        
+
         $user = 'user';
         $bank = 'bank';
 
-        if($factoryPattern->make($user) == $userModel && $factoryPattern->make($bank) == $bankModel){
+        if ($factoryPattern->make($user) == $userModel && $factoryPattern->make($bank) == $bankModel) {
             $this->assertTrue(true);
-        }else{
+        } else {
             $this->assertTrue(false);
         }
     }
 
     // test function make not good
-    public function testMakeNg(){
+    public function testMakeNg()
+    {
         $factoryPattern = new FactoryPattern();
         $userModel = new UserModel();
         $bankModel = new BankModel();
-        
+
         $user = 'user';
         $bank = 'bank';
 
-        if($factoryPattern->make($user) != $userModel && $factoryPattern->make($bank) != $bankModel){
+        if ($factoryPattern->make($user) != $userModel && $factoryPattern->make($bank) != $bankModel) {
             $this->assertFalse(false);
-        }else{
+        } else {
             $this->assertTrue(true);
         }
     }
 
     // test function make number
-    public function testMakeNumber(){
+    public function testMakeNumber()
+    {
         $factoryPattern = new FactoryPattern();
         $text = 123;
         $expected = Null;
-        
+
         $actual = $factoryPattern->make($text);
-        
+
         $this->assertEquals($expected, $actual);
     }
 
     // test function make null
-    public function testMakeNull(){
+    public function testMakeNull()
+    {
         $factoryPattern = new FactoryPattern();
         $text = null;
         $expected = null;
-        
+
         $actual = $factoryPattern->make($text);
 
         $this->assertEquals($expected, $actual);
     }
 
     // test function make string
-    public function testMakeStringIsEmpty(){
+    public function testMakeStringIsEmpty()
+    {
         $factoryPattern = new FactoryPattern();
         $text = " ";
         $expected = Null;
-        
+
         $actual = $factoryPattern->make($text);
-        
+
         $this->assertEquals($expected, $actual);
     }
 
     // test function make array
-    public function testMakeArray(){
+    public function testMakeArray()
+    {
         $factoryPattern = new FactoryPattern();
         $text = array();
         $expected = Null;
-        
+
         $actual = $factoryPattern->make($text);
-        
+
         $this->assertEquals($expected, $actual);
     }
 
     // test function make object
-    public function testMakeObject(){
+    public function testMakeObject()
+    {
         $factoryPattern = new FactoryPattern();
         $text = new stdClass();
         $expected = Null;
-        
+
         $actual = $factoryPattern->make($text);
-        
+
         $this->assertEquals($expected, $actual);
     }
 }
