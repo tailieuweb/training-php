@@ -51,6 +51,7 @@ class UserModelTest extends TestCase
     $actual =  $userModel->auth($user, $pass);
     $this->assertEquals($excute, $actual);
   }
+ 
   //Test Auth nhap vào ki tu dac biet
   public function testAuthkitudacbietNG()
   {
