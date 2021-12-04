@@ -9,17 +9,11 @@ abstract class BaseModel {
     private $_csrf_value = '';
     protected static $std = '';
 
-    public function __construct($check = false) {
+    public function __construct() {
 
         if (!isset(self::$_connection)) {
             self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
 
-            if ($check) {
-                // printf("Connect failed");
-                // exit();
-                self::$std = 'failed';
-            }
-//            var_dump($token);
         }
 
     }
@@ -62,7 +56,6 @@ abstract class BaseModel {
             $result = $this->query($sql);
             return $result;
         }
-
     }
 
     /**
