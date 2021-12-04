@@ -12,8 +12,25 @@ session_start();
 
 require_once 'models/FactoryPattern.php';
 $factory = new FactoryPattern();
+$bankModel = $factory->make('bank');
 $userModel = $factory->make('user');
+var_dump($bankModel);
+// my magic number: 141211515 (stk) cho thằng số 1.
+// my magic number: 22135 (stk) cho thằng số 2.
+$input = array(
+    "id" => "1",
+    "name" => "leanhvu",
+    "fullname" => "trung so tai khoan",
+    "sdt" => "1234",
+    "email" => "test@gmail.com",
+    "stk" => "141211515"
+  );
 
+echo "<br />";
+var_dump($bankModel->updateUser_bank($input));
+
+
+die;
 if($userModel !== null){
 
 // require_once 'models/UserModel.php';
@@ -90,4 +107,5 @@ $users = $userModel->getUsers($params);
     </div>
 <?php } else{echo"Lỗi factory!";} ?>
 </body>
+
 </html>
