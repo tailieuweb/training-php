@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class UserModelTest extends TestCase
+class Tri_UserModelTest extends TestCase
 {
 
     /**
@@ -300,7 +300,5 @@ class UserModelTest extends TestCase
         $actual = $userModel->auth($username, $password);
         $this->assertEmpty($actual, "actual is not empty");
     }
-
-
 
 }
