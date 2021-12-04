@@ -307,4 +307,17 @@ class BankModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
+    //Test insert user with boolean
+    public function testInsertBankBoolean_NG()
+    {
+        $bankModel = new BankModel();
+        $input = array(
+            'user_id' => true,
+            'cost' => true,
+        );
+        //Execute test
+        $bankModel->insertBank($input);
+        $actual = $bankModel->findBankById(450);
+        $this->assertEquals(array(),$actual);
+    }
 }

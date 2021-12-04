@@ -199,6 +199,14 @@ class UserModelTest extends TestCase
       $actual = $userModel->findUser($keyword);
       $this->assertEquals([], $actual);
    }
+   //Test find user with keyword is float number
+   public function testFindUserBoolean_NG()
+   {
+      $userModel = new UserModel();
+      $keyword = true;
+      $actual = $userModel->findUser($keyword);
+      $this->assertEquals("1",$actual[0]['id']);
+   }
 
 
    /*
@@ -441,7 +449,7 @@ class UserModelTest extends TestCase
       $userModel->startTransaction();
       $userModel->updateUser($user);
       $actual = $userModel->findUserById($user['id']);
-      $this->assertEquals([],$actual);
+      $this->assertEquals([], $actual);
       $userModel->rollback();
    }
    //Test update user with id is nagetive number
@@ -454,7 +462,7 @@ class UserModelTest extends TestCase
       $userModel->startTransaction();
       $userModel->updateUser($user);
       $actual = $userModel->findUserById($user['id']);
-      $this->assertEquals([],$actual);
+      $this->assertEquals([], $actual);
       $userModel->rollback();
    }
 }
