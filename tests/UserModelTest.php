@@ -279,5 +279,28 @@ class UserModelTest extends TestCase
         $actual = $UserModel->auth($username, $password);
         $this->assertEmpty($actual, "actual is not empty");
     }
+    public function testAuth_WithUsername_IsObj()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make("user");
+        $username = new User("test2", "123");
+        $password = "123";
+
+        $actual = $userModel->auth($username, $password);
+        $this->assertEmpty($actual, "actual is not empty");
+    }
+    
+    public function testAuth_CorrectUsername_PasswordNotExist()
+    {
+        $factory = new FactoryPattern();
+        $userModel = $factory->make("user");
+        $password = "passwordnotexist";
+        $username = "test2";
+
+        $actual = $userModel->auth($username, $password);
+        $this->assertEmpty($actual, "actual is not empty");
+    }
+
+
 
 }
