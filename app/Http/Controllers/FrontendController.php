@@ -326,7 +326,7 @@ class FrontendController extends Controller
     //Post comment of user
     public function postComment($id, Request $request){
         $this->AuthLogin();
-        
+        $id = substr($id, 9);
         $comment = array();
         $comment['user_id'] = Auth::user()->id;
         $comment['hotel_id'] = $id;
