@@ -672,13 +672,15 @@ class BankModelTest extends TestCase {
 	public function testUpdateBankNG1() {
 		$bankModel = new BankModel();
 			// $idbank = 3;
-			
-			$input = [];
-			$input['bank_id'] = 3;
+            $input['bank_id'] = 3;
 			//note user_id == id of users 
 			$input['id'] = 2;
 			$input['cost'] = 123456789;
+            try {
+               
+            $bankModel->startTransaction();
 			$actual = $bankModel -> updateBank($input);
+            $bankModel->rollback();
 			if($actual != true)
 			{
 				$this->assertTrue(false); 
@@ -687,16 +689,22 @@ class BankModelTest extends TestCase {
 			{
 				$this->assertTrue(true); 
 			}
+            } catch (Throwable $ex) {
+                $this->assertTrue(true);
+            }
+			
 		  
 	}
 	/*updateBankNG2 */
     /*cập nhật giá trị id_bank trong 1 mảng đc chọn */
 	public function testUpdateBankNG2() {
 		$bankModel = new BankModel(); 
-			$input = array("bank_id"=>6,"id"=>3,"cost"=>11111);
+			$input = array("bank_id"=>22,"id"=>3,"cost"=>11111);
 			$input["bank_id"] = 654321;
-			
+            try {
+                $bankModel->startTransaction();
 			$actual = $bankModel -> updateBank($input);
+            $bankModel->rollback();
 			if($actual != true)
 			{
 				$this->assertTrue(false); 
@@ -705,6 +713,10 @@ class BankModelTest extends TestCase {
 			{
 				$this->assertTrue(true); 
 			}
+            } catch (\Throwable $ex) {
+                $this->assertTrue(true);
+            }
+			
 		  
 	}
 	/*updateBankNG3 */
@@ -713,17 +725,25 @@ class BankModelTest extends TestCase {
 		$bankModel = new BankModel(); 
 			$input = array("bank_id"=>19,"id"=>40,"cost"=>11111);
 			$input["cost"] = 654321;
-			$checkCost = is_numeric($input['cost']);
-			
-			$actual = $bankModel -> updateBank($input,$checkCost);
-			if($actual != true)
-			{
-				$this->assertTrue(false); 
-			}
-			else
-			{
-				$this->assertTrue(true); 
-			}
+            try {
+                $bankModel->startTransaction();
+                $checkCost = is_numeric($input['cost']);
+                
+                $actual = $bankModel -> updateBank($input,$checkCost);
+                $bankModel->rollback();
+    
+                if($actual != true)
+                {
+                    $this->assertTrue(false); 
+                }
+                else
+                {
+                    $this->assertTrue(true); 
+                }
+            } catch (\Throwable $ex) {
+                $this->assertTrue(true); 
+            }
+           
 		  
 	}
 	/*updateBankNG4 */
@@ -732,17 +752,24 @@ class BankModelTest extends TestCase {
 		$bankModel = new BankModel(); 
 			$input = array("bank_id"=>19,"id"=>40,"cost"=>11111);
 			$input["cost"] = 654321;
-			$valueFill = array_fill(3,1,$input["cost"]);
-			
-			$actual = $bankModel -> updateBank($input,$valueFill);
-			if($actual != true)
-			{
-				$this->assertTrue(false); 
-			}
-			else
-			{
-				$this->assertTrue(true); 
-			}
+            try {
+                $bankModel->startTransaction();
+                $valueFill = array_fill(3,1,$input["cost"]);
+                
+                $actual = $bankModel -> updateBank($input,$valueFill);
+                $bankModel->rollback();
+                if($actual != true)
+                {
+                    $this->assertTrue(false); 
+                }
+                else
+                {
+                    $this->assertTrue(true); 
+                }
+            } catch (\Throwable $ex) {
+                $this->assertTrue(true); 
+            }
+           
 		  
 	}
 
@@ -754,7 +781,9 @@ class BankModelTest extends TestCase {
         $input['bank_id'] = null;
         $input['id'] = 2;
         $input['cost'] = 544;
+        $bank->startTransaction();
         $actual = $bank->updateBank($input);
+        $bank->rollback();
 
         // var_dump($actual);die();
         if ($actual == true) {
@@ -771,8 +800,10 @@ class BankModelTest extends TestCase {
         $input['bank_id'] = 3 ;
         $input['id'] = null ;
         $input['cost'] = 88888;
+        $bank->startTransaction();
         $actual = $bank->updateBank($input);
 
+        $bank->rollback();
         // var_dump($actual);die();
         if ($actual == true) {
             return $this->assertFalse(true);
@@ -787,7 +818,9 @@ class BankModelTest extends TestCase {
         $input['bank_id'] = 3 ;
         $input['id'] = 2 ;
         $input['cost'] = null;
+        $bank->startTransaction();
         $actual = $bank->updateBank($input);
+        $bank->rollback();
 
         // var_dump($actual);die();
         if ($actual == true) {
@@ -803,7 +836,9 @@ class BankModelTest extends TestCase {
         $input['bank_id'] = null ;
         $input['id'] = null ;
         $input['cost'] = null;
+        $bank->startTransaction();
         $actual = $bank->updateBank($input);
+        $bank->rollback();
 
         // var_dump($actual);die();
         if ($actual == true) {
@@ -819,7 +854,10 @@ class BankModelTest extends TestCase {
         $input['bank_id'] = 'null' ;
         $input['id'] = 'null' ;
         $input['cost'] = 'null';
+        $bank->startTransaction();
         $actual = $bank->updateBank($input);
+        $bank->rollback();
+
 
         // var_dump($actual);die();
         if ($actual == true) {
@@ -885,7 +923,7 @@ class BankModelTest extends TestCase {
 			}
 			return $this->assertTrue(false); 
 		}
-        /**/
+        /* khởi tạo 1 class đã tồn tại tương tự và gán giá trị thực thi rồi sử dụng các chức năng tương tự của bankModle*/
         public function testGetInstanceChange()
     {
         $bank = new BankModel();
