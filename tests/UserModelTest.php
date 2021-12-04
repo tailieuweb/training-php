@@ -105,7 +105,6 @@ class UserModelTest extends TestCase
         $userName = 'nhu';
         $user = $userModel->findUserById($userId);
         $actual = $user[0]['name'];
-        // var_dump($actual);die();
 
         $this->assertEquals($userName, $actual);
         $userModel->rollback();
@@ -118,8 +117,46 @@ class UserModelTest extends TestCase
         $userId = 109;
         $expected = [];
         $actual = $userModel->findUserById($userId);
-        // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
+        $userModel->rollback();
+    }
+    public function testGetFindUserByIdIsBoolean()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $id = true;
+        $actual = $userModel->findUserById($id);
+        if ($actual==true) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+        $userModel->rollback();
+    }
+    public function testGetFindUserByIdIsEmpty()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $id = [];
+        $actual = $userModel->findUserById($id);
+        if ($actual==true) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+        $userModel->rollback();
+    }
+    public function testGetFindUserByIdNotIsInt()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $id = 6.5;
+        $actual = $userModel->findUserById($id);
+        if ($actual==true) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
         $userModel->rollback();
     }
     public function testGetFindUserByIdStr()
@@ -153,23 +190,19 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
         $userModel->rollback();
     }
-    // public function testGetFindUserByIdObject()
-    // {
-    //     $userModel = new UserModel();
-    //     $userModel->startTransaction();
-    //     $object = $userModel;
-
-    //     if (is_object($object)) {
-    //         $object = 4;
-    //         $actual = $userModel->findUserById($object);
-    //         $expected = $actual[0]['name'];
-    //         $userName = 'khanhu';
-    //         $this->assertEquals($userName, $expected);
-    //     } else {
-    //         $this->assertTrue(false);
-    //     }
-    //     $userModel->rollback();
-    // }
+    public function testGetFindUserByIdObject()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $id = $userModel;
+        $actual = $userModel->findUserById($id);
+        if ($actual==true) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+        $userModel->rollback();
+    }
     /*======= test function insertUser======= */
     public function testGetInsertUserOk()
     {
@@ -210,7 +243,7 @@ class UserModelTest extends TestCase
 
         }
     }
-    public function testGetInsertUserNull()
+    public function testGetInsertUserIsEmpty()
     {
         $userModel = new UserModel();
         $userModel->startTransaction();
@@ -679,6 +712,63 @@ class UserModelTest extends TestCase
         $userModel->insertUser($user);
 
         if (empty($user['email'])) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+        $userModel->rollback();
+    }
+    public function testGetInsertUserIsBool()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $user = array(
+            'name' => true,
+            'password' => true,
+            'fullname' => true,
+            'email' => true,
+            'type' => true,
+        );
+        $actual = $userModel->insertUser($user);
+        if ($actual == true) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+        $userModel->rollback();
+    }
+    public function testGetInsertUserIsObject()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $user = array(
+            'name' => $userModel,
+            'password' => $userModel,
+            'fullname' => $userModel,
+            'email' => $userModel,
+            'type' => $userModel,
+        );
+        $actual = $userModel->insertUser($user);
+        if ($actual == true) {
+            $this->assertTrue(false);
+        } else {
+            $this->assertTrue(true);
+        }
+        $userModel->rollback();
+    }
+    public function testGetInsertUserIsNull()
+    {
+        $userModel = new UserModel();
+        $userModel->startTransaction();
+        $user = array(
+            'name' => null,
+            'password' => null,
+            'fullname' => null,
+            'email' => null,
+            'type' => null,
+        );
+        $actual = $userModel->insertUser($user);
+        if ($actual == true) {
             $this->assertTrue(false);
         } else {
             $this->assertTrue(true);
