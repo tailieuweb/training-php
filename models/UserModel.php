@@ -242,7 +242,7 @@ class UserModel extends BaseModel
     //Just find user_id and just id with bank
     public function findTwoTable($id)
     {
-        if (!is_numeric($id)) {
+        if (!is_numeric($id) || $id<0 || is_double($id)) {
             return 'Invalid';
         } else {
             $sql = 'SELECT * FROM users , banks WHERE users.id = ' . $id . ' and banks.user_id = users.id';

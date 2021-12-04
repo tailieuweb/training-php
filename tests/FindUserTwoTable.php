@@ -36,6 +36,32 @@ class FindUserTwoTable extends TestCase
         }
     }
     /**
+     * Test case id is double
+     */
+    public function testFindUserTwoTableIdIsDouble()
+    {
+        $userModel = new UserModel();
+        $id = 10.5;
+        $expected = 'Invalid';
+        $userModel->startTransaction();
+        $actual = $userModel->findTwoTable($id);
+        $userModel->rollback();
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test case id is negative number
+     */
+    public function testFindUserTwoTableIdIsNegative()
+    {
+        $userModel = new UserModel();
+        $id = -2;
+        $expected = 'Invalid';
+        $userModel->startTransaction();
+        $actual = $userModel->findTwoTable($id);
+        $userModel->rollback();
+        $this->assertEquals($expected, $actual);
+    }
+    /**
      * Test case id is string
      */
     public function testFindUserTwoTableIsString()
