@@ -15,6 +15,7 @@ class BankModel extends BaseModel
         self::$_instance = new self();
         return self::$_instance;
     }
+    //hau changes substr($id, 4,1) -> $id
     public function findBankById($id)
     {
        // substr($id, 4,1);
