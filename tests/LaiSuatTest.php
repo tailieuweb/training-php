@@ -14,7 +14,7 @@ class LaiSuatTest extends TestCase
         $lx->setBank($bmd);
         $banks = $lx->cost();
         $this->assertIsArray($banks);
-        $this->assertEquals(6, count($banks));
+        $this->assertEquals(2, count($banks));
     }
     public function testCostNGIsString()
     {
@@ -45,8 +45,8 @@ class LaiSuatTest extends TestCase
     public function testCostIsGuestOKValueInArray()
     {
         $bmd   = new BankModel();
-        $excId = 6;
-        $excName = "thien";
+        $excId = 2;
+        $excName = "123";
         $excCost = 0;
         $excLaiXuat = 0;
         $lx = new LaiSuat();
@@ -63,26 +63,14 @@ class LaiSuatTest extends TestCase
     public function testCostIsGuestNGValueInArray()
     {
         $bmd   = new BankModel();
-        $excId = 4;
-        $excName = "thien";
-        $excCost = 0;
-        $excLaiXuat = 0;
+        $excId = 1;
+        $excName = "345";
         $lx = new LaiSuat();
         $lx->setBank($bmd);
         $actBanks = $lx->cost();
         foreach ($actBanks as $act) {
             if ($act['id'] == $excId) {
                 if ($act['name'] != $excName) {
-                    $this->assertTrue(true);
-                } else {
-                    $this->assertTrue(false);
-                }
-                if ($act['SoDu'] != $excCost) {
-                    $this->assertTrue(true);
-                } else {
-                    $this->assertTrue(false);
-                }
-                if ($act['LaiXuat'] != $excLaiXuat) {
                     $this->assertTrue(true);
                 } else {
                     $this->assertTrue(false);
