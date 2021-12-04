@@ -5,17 +5,24 @@ require_once 'BaseModel.php';
 class UserModel extends BaseModel {
 
     public function findUserById($id) {
+        $flag = is_integer($id);
+        if($flag == false || $id < 1) {
+            return false;
+        }
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
-
-        return $user;
+        return $user;  
     }
 
     public function findUser($keyword) {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
-        $user = $this->select($sql);
-
-        return $user;
+        $flag = is_string($keyword);
+        if($flag == false) {
+            return false;
+        } else {
+            $sql = 'SELECT * FROM users WHERE name LIKE "%'. $keyword . '%" OR email LIKE "%'. $keyword . '%"';
+            $user = $this->select($sql);
+            return $user;
+        }   
     }
 
     /**
@@ -25,6 +32,11 @@ class UserModel extends BaseModel {
      * @return array
      */
     public function auth($userName, $password) {
+        $flag1 = is_string($userName);
+        $flag2 = is_string($password);
+        if($flag1 == false || $flag2 == false) {
+            return false;
+        }
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
 
@@ -85,14 +97,5 @@ class UserModel extends BaseModel {
         }
 
         return $users;
-    }
-
-    /**
-     * For testing
-     * @param $a
-     * @param $b
-     */
-    public function sumb($a, $b) {
-        return $a + $b;
     }
 }

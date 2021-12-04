@@ -6,20 +6,11 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $params = [];
-if (!empty($_GET['keyword'])) {
+if (isset($_GET['keyword']) && $_GET['keyword'] != '') {
     $params['keyword'] = $_GET['keyword'];
-}
-
-$users = $userModel->getUsers($params);
-
-if(isset($_GET['Correct'])){
-    echo "<script>alert('!!! Cập nhật thành công !!!')</script>";
-    echo "<script>window.location.href = 'list_users.php'</script>";
-}
-
-if(isset($_GET['error'])){
-    echo "<script>alert('Dữ liệu của bạn đã củ ,vui lòng tải lại để cập nhập!')</script>";
-    echo "<script>window.location.href = 'list_users.php'</script>";
+    $users = $userModel->findUser($params['keyword']);
+} else {
+    $users = $userModel->getUsers($params);
 }
 ?>
 <!DOCTYPE html>
