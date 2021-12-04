@@ -76,7 +76,6 @@ class ComposerStaticInitf0f01a0352d2f84dc87ac522b9e5f650
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DecoratorBank' => __DIR__ . '/../..' . '/models/DecoratorBank.php',
         'FactoryPattern' => __DIR__ . '/../..' . '/models/FactoryPattern.php',
-        'FatoryPattem' => __DIR__ . '/../..' . '/models/FatoryPattem.php',
         'IBank' => __DIR__ . '/../..' . '/models/IBank.php',
         'LaiSuat' => __DIR__ . '/../..' . '/models/LaiSuat.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',

@@ -2,7 +2,7 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Code Coverage for D:\Chuyen-De-Web-1\training-php\models\DecoratorBank.php</title>
+  <title>Code Coverage for F:\github\training-php\models\DecoratorBank.php</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="_css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="_css/octicons.css" rel="stylesheet" type="text/css">
@@ -16,7 +16,7 @@
      <div class="col-md-12">
       <nav aria-label="breadcrumb">
        <ol class="breadcrumb">
-         <li class="breadcrumb-item"><a href="index.html">D:\Chuyen-De-Web-1\training-php\models</a></li>
+         <li class="breadcrumb-item"><a href="index.html">F:\github\training-php\models</a></li>
          <li class="breadcrumb-item active">DecoratorBank.php</li>
 
        </ol>
@@ -67,7 +67,7 @@
        </div>
 </td>
        <td class="danger small"><div align="right">0.00%</div></td>
-       <td class="danger small"><div align="right">0&nbsp;/&nbsp;6</div></td>
+       <td class="danger small"><div align="right">0&nbsp;/&nbsp;3</div></td>
       </tr>
 
       <tr>
@@ -148,9 +148,9 @@
 <table id="code" class="table table-borderless table-condensed">
 <tbody>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="1" href="#1">1</a></td><td class="col-11 codeLine"><span class="default">&lt;?php</span></td></tr>
-    <tr class="danger d-flex"><td  class="col-1 text-right"><a id="2" href="#2">2</a></td><td class="col-11 codeLine"><span class="default">$ds</span><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">=</span><span class="default">&nbsp;</span><span class="default">DIRECTORY_SEPARATOR</span><span class="keyword">;</span></td></tr>
-    <tr class="danger d-flex"><td  class="col-1 text-right"><a id="3" href="#3">3</a></td><td class="col-11 codeLine"><span class="default">$base_dir</span><span class="default">&nbsp;</span><span class="keyword">=</span><span class="default">&nbsp;</span><span class="default">realpath</span><span class="keyword">(</span><span class="default">dirname</span><span class="keyword">(</span><span class="default">__FILE__</span><span class="keyword">)</span><span class="keyword">.</span><span class="default">$ds</span><span class="keyword">.</span><span class="default">'..'</span><span class="keyword">)</span><span class="keyword">.</span><span class="default">$ds</span><span class="keyword">;</span></td></tr>
-    <tr class="danger d-flex"><td  class="col-1 text-right"><a id="4" href="#4">4</a></td><td class="col-11 codeLine"><span class="keyword">require_once</span><span class="keyword">(</span><span class="string">&quot;</span><span class="string">{</span><span class="string">$base_dir</span><span class="keyword">}</span><span class="string">models</span><span class="string">{</span><span class="string">$ds</span><span class="keyword">}</span><span class="string">IBank.php</span><span class="string">&quot;</span><span class="keyword">)</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-right"><a id="2" href="#2">2</a></td><td class="col-11 codeLine"><span class="comment">//$ds&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;DIRECTORY_SEPARATOR;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-right"><a id="3" href="#3">3</a></td><td class="col-11 codeLine"><span class="comment">//$base_dir&nbsp;=&nbsp;realpath(dirname(__FILE__).$ds.'..').$ds;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-right"><a id="4" href="#4">4</a></td><td class="col-11 codeLine"><span class="comment">//require_once(&quot;{$base_dir}models{$ds}IBank.php&quot;);</span></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="5" href="#5">5</a></td><td class="col-11 codeLine"><span class="keyword">abstract</span><span class="default">&nbsp;</span><span class="keyword">class</span><span class="default">&nbsp;</span><span class="default">DecoratorBank</span><span class="default">&nbsp;</span><span class="keyword">implements</span><span class="default">&nbsp;</span><span class="default">IBank</span><span class="default">&nbsp;</span><span class="keyword">{</span></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="6" href="#6">6</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">protected</span><span class="default">&nbsp;</span><span class="default">$bank</span><span class="keyword">;</span></td></tr>
     <tr class=" d-flex"><td  class="col-1 text-right"><a id="7" href="#7">7</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">public</span><span class="default">&nbsp;</span><span class="keyword">function</span><span class="default">&nbsp;</span><span class="default">setBank</span><span class="keyword">(</span><span class="default">IBank</span><span class="default">&nbsp;&nbsp;</span><span class="default">$bank</span><span class="keyword">)</span></td></tr>
@@ -169,7 +169,7 @@
     <h4>Legend</h4>
     <p><span class="success"><strong>Executed</strong></span><span class="danger"><strong>Not Executed</strong></span><span class="warning"><strong>Dead Code</strong></span></p>
     <p>
-     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 9.2.7</a> using <a href="https://secure.php.net/" target="_top">PHP 8.0.12</a> and <a href="https://phpunit.de/">PHPUnit 9.5.10</a> at Sat Dec 4 14:09:42 CET 2021.</small>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 9.2.7</a> using <a href="https://secure.php.net/" target="_top">PHP 8.0.10</a> and <a href="https://phpunit.de/">PHPUnit 9.5.10</a> at Sat Dec 4 22:00:47 CET 2021.</small>
     </p>
     <a title="Back to the top" id="toplink" href="#">
         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16"><path fill-rule="evenodd" d="M12 11L6 5l-6 6h12z"/></svg>
