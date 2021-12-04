@@ -58,7 +58,7 @@ class BankModel extends BaseModel
             FROM users 
             INNER JOIN banks 
             ON banks.user_id = users.id 
-            WHERE users.id LIKE ' . $user_id
+            WHERE users.id = ' . $user_id
             . ' ORDER BY id ASC';
         $banks = $this->select($sql);
         return $banks;
@@ -71,6 +71,18 @@ class BankModel extends BaseModel
      */
     public function deleteBalanceByUserId($id)
     {
+        if (!isset($id)) {
+            return false;
+        }
+        if (!is_numeric($id)) {
+            return false;
+        }
+        if (!is_int($id)) {
+            return false;
+        }
+        if ($id <= 0) {
+            return false;
+        }
         $sql = 'UPDATE `banks` SET `cost`="0" WHERE `user_id` ='  . $id;
         return $this->update($sql);
     }
@@ -82,9 +94,20 @@ class BankModel extends BaseModel
      */
     public function findBankInfoById($id)
     {
+        if (!isset($id)) {
+            return false;
+        }
+        if (!is_numeric($id)) {
+            return false;
+        }
+        if (!is_int($id)) {
+            return false;
+        }
+        if ($id <= 0) {
+            return false;
+        }
         $sql = 'SELECT * FROM banks WHERE id = ' . $id;
         $items = $this->select($sql);
-
         return $items;
     }
 
@@ -95,6 +118,18 @@ class BankModel extends BaseModel
      */
     public function findBankInfoByUserID($user_id)
     {
+        if (!isset($user_id)) {
+            return false;
+        }
+        if (!is_numeric($user_id)) {
+            return false;
+        }
+        if (!is_int($user_id)) {
+            return false;
+        }
+        if ($user_id <= 0) {
+            return false;
+        }
         $sql = 'SELECT * FROM banks WHERE user_id = ' . $user_id;
         $items = $this->select($sql);
 
@@ -108,11 +143,16 @@ class BankModel extends BaseModel
      */
     public function updateBankInfo($input)
     {
+        if (!isset($input['cost']) || !isset($input['id'])) {
+            return  false;
+        }
+        if (!is_numeric($input['cost']) || !is_numeric($input['id'])) {
+            return  false;
+        }
         $sql = 'UPDATE banks SET 
                  cost = "' . $input['cost']  . '"
                 WHERE id = ' . ($input['id']);
         $item = $this->update($sql);
-
         return $item;
     }
 
@@ -136,13 +176,25 @@ class BankModel extends BaseModel
             . ")";
 
         $item = $this->insert($sql);
-
         return $item;
     }
+
+
+    // Code for testing
+    public function startTransaction()
+    {
+        self::$_connection->begin_transaction();
+    }
+
+    public function rollback()
+    {
+        self::$_connection->rollback();
+    }    
 
     // Useful for test
     public function deleteBankByUserId($userId)
     {
+        if(!is_numeric($userId)) return 'Param invalid';
         $sql = 'DELETE FROM banks WHERE user_id = ' . $userId;
         $item = $this->delete($sql);
 

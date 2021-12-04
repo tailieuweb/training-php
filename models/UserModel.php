@@ -1,5 +1,9 @@
 <?php
 
+use Symfony\Component\ErrorHandler\Error\FatalError;
+
+use function PHPSTORM_META\type;
+
 require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
@@ -28,16 +32,31 @@ class UserModel extends BaseModel
     // Get user by id:
     public function findUserById($id)
     {
+        if (!isset($id)) {
+            throw new ArgumentCountError("Too few argument");
+        }
+
+        if ($id instanceof stdClass || is_bool($id) || is_array($id)) {
+            throw new InvalidArgumentException('Invalid argument');
+        }
+
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
-
         return $user;
     }
 
     // Get user by keyword:
     public function findUser($keyword)
     {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %' . $keyword . '%' . ' OR user_email LIKE %' . $keyword . '%';
+        if (!isset($keyword)) {
+            throw new ArgumentCountError("Too few argument");
+        }
+
+        if ($keyword instanceof stdClass || is_bool($keyword) || is_array($keyword)) {
+            throw new InvalidArgumentException('Invalid argument');
+        }
+
+        $sql = 'SELECT * FROM users WHERE users.name LIKE ' . '\'%' . $keyword . '%\'' . ' OR email LIKE ' . '\'%' . $keyword . '%\'';
         $user = $this->select($sql);
 
         return $user;
@@ -51,9 +70,11 @@ class UserModel extends BaseModel
      */
     public function auth($userName, $password)
     {
+        if ($userName == null || $password == null) {
+            return  false;
+        }
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
-
         $user = $this->select($sql);
         return $user;
     }
@@ -65,6 +86,14 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
+        if (!isset($id)) {
+            throw new ArgumentCountError("Too few argument");
+        }
+        
+        if ($id instanceof stdClass || is_bool($id) || is_array($id)) {
+            throw new InvalidArgumentException('Invalid argument');
+        }
+
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
     }
@@ -76,6 +105,17 @@ class UserModel extends BaseModel
      */
     public function updateUser($input)
     {
+        if (
+            is_numeric(($input['ver'])) == false || $input['ver'] == 'e'
+            || is_numeric(($input['id'])) == false || $input['id'] == 'e'
+            || is_string($input['name']) == false || is_string($input['fullname']) == false || is_string($input['email']) == false
+            || is_string($input['type']) == false || is_string($input['password']) == false
+            || strlen($input['name']) == 0 || strlen($input['fullname']) == 0 || strlen($input['email']) == 0
+            || strlen($input['type']) == 0 || strlen($input['password']) == 0
+        ) {
+            return 0;
+        }
+
         // Get time:
         $tz_object = new DateTimeZone('Asia/Ho_Chi_Minh');
         $datetime = new DateTime();
@@ -103,8 +143,19 @@ class UserModel extends BaseModel
      */
     public function insertUser($input)
     {
+        if (
+            is_string($input['name']) == false || is_string($input['fullname']) == false || is_string($input['email']) == false
+            || is_string($input['type']) == false || is_string($input['password']) == false
+            || strlen($input['name']) == 0 || strlen($input['fullname']) == 0 || strlen($input['email']) == 0
+            || strlen($input['type']) == 0 || strlen($input['password']) == 0
+        ) {
+            throw new InvalidArgumentException('Invalid argument exception!');
+        }
+
+        // Specify the id to assign to the new user:
         $id = intval($this->getTheID()) + 1;
 
+        // Get time:
         $tz_object = new DateTimeZone('Asia/Ho_Chi_Minh');
         $datetime = new DateTime();
         $datetime->setTimezone($tz_object);
@@ -131,11 +182,13 @@ class UserModel extends BaseModel
      */
     public function getUsers($params = [])
     {
-        //Keyword  
-        if(!is_string($params['keyword'])) {
-            return "Keyword param invalid";
-        }
+
         if (!empty($params['keyword'])) {
+            // Keyword  
+            if (!is_string($params['keyword'])) {
+                return "Keyword param invalid";
+            }
+
             $sql = 'SELECT * FROM users 
             WHERE name LIKE "%' . mysqli_real_escape_string(self::$_connection, $params['keyword']) . '%"';
             //Keep this line to use Sql Injection
@@ -154,14 +207,31 @@ class UserModel extends BaseModel
     // Get version of data:
     public function getVersionByUserID($user_id)
     {
+        if (!isset($user_id)) {
+            return false;
+        }
+        if (!is_numeric($user_id)) {
+            return false;
+        }
+        if (!is_int($user_id)) {
+            return false;
+        }
+        if ($user_id <= 0) {
+            return false;
+        }
         $sql = 'SELECT version FROM users WHERE id = ' . $user_id;
         $user = $this->select($sql);
-
         return $user[0]["version"];
     }
 
-    public function sumb($a, $b) {
-        return $a + $b;
+    // Code for testing
+    public function startTransaction()
+    {
+        self::$_connection->begin_transaction();
+    }
+
+    public function rollback()
+    {
+        self::$_connection->rollback();
     }
 }
-

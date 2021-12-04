@@ -12,6 +12,7 @@ class Liem_UserRepository extends TestCase
     {
         $factory = new FactoryPattern();
         $userRepo = $factory->make('UserRepository');
+        $userRepo->startTransaction();
 
         // Data user update
         $input['name'] = 'user4';
@@ -28,6 +29,7 @@ class Liem_UserRepository extends TestCase
 
         $actual = $userRepo->update_UserAndBankAccount($input);
         $expected = true;
+        $userRepo->rollback();
 
         $this->assertEquals($expected, $actual);
     }

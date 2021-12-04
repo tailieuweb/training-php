@@ -1,5 +1,6 @@
 <?php
 require_once 'models/UserModel.php';
+require_once 'repositories/UserRepository.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user

@@ -1,10 +1,22 @@
 <?php
+
+use function PHPUnit\Framework\isEmpty;
+
 require_once('./repositories/UserRepository.php');
 
-class FactoryPattern {
+class FactoryPattern
+{
 
     public function make($model)
     {
+        if (!isset($model)) {
+            throw new ArgumentCountError("Too few argument");
+        }
+
+        if ($model instanceof stdClass || is_bool($model) || is_array($model)) {
+            throw new InvalidArgumentException('Invalid argument');
+        }
+
         if ($model == 'user') {
             // Singleton pattern:
             return UserModel::getInstance();
@@ -20,6 +32,8 @@ class FactoryPattern {
         } else if ($model == 'UserRepository') {
             // Singleton pattern:
             return UserRepository::getInstance();
+        } else {
+            return null;
         }
     }
 }

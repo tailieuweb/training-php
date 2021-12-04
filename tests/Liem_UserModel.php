@@ -36,10 +36,10 @@ class Liem_UserModel extends TestCase
         $actual = $userModel->getUsers($params);
 
         if($actual == "Keyword param invalid") {
-            $this->assertTrue(true);
+            $this->assertTrue(false);
         }
         else {
-            $this->assertTrue(false);
+            $this->assertTrue(true);
         }
     }
 
@@ -76,10 +76,10 @@ class Liem_UserModel extends TestCase
         $actual = $userModel->getUsers($params);
 
         if($actual == "Keyword param invalid") {
-            $this->assertTrue(true);
+            $this->assertTrue(false);
         }
         else {
-            $this->assertTrue(false);
+            $this->assertTrue(true);
         }
     }
 
