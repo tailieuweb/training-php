@@ -36,4 +36,5 @@ class UserModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
+    
 }

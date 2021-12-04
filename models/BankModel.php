@@ -28,9 +28,11 @@ class BankModel extends BaseModel {
      * @return mixed
      */
     public function updateBank($input) {
-        $sql = "UPDATE `banks` SET `user_id` = " . "'" . $input['user_id'] . "', cost = " . "'" . $input['cost'] . "' WHERE id = " . "'" . $input['id'] . "'";
-        $bank = $this->update($sql);
-        return $bank;
+        if($input['user_id'] > 0 && $input['cost'] > 0 ){
+            $sql = "UPDATE `banks` SET `user_id` = " . "'" . $input['user_id'] . "', cost = " . "'" . $input['cost'] . "' WHERE id = " . "'" . $input['id'] . "'";
+            $bank = $this->update($sql);
+            return $bank;
+        }
     }
 
     /**
@@ -39,11 +41,11 @@ class BankModel extends BaseModel {
      * @return mixed
      */
     public function insertBank($input) {
+        if($input['user_id'] > 0 && $input['cost'] > 0 ){
         $sql = "INSERT INTO `app_web1`.`banks` (`user_id`,`cost`) VALUES (" . "'" . $input['user_id'] . "', '" . $input['cost'] . "')";
-
         $bank = $this->insert($sql);
-
         return $bank;
+        }
     }
 
     /**
@@ -51,10 +53,23 @@ class BankModel extends BaseModel {
      * @param array $params
      * @return array
      */
-    public function getBanks() {
-        $sql = 'SELECT * FROM banks';
-        $banks = $this->select($sql);
+    public function getBanks($params = [])
+    {
+        if (isset($params['keyword'])) {
+            if (is_integer($params['keyword']) == true || is_string($params['keyword']) == true) {
+                $sql = 'SELECT * FROM banks WHERE user_id  LIKE "%' . $params['keyword'] . '%"';
+                $bank = $this->select($sql);
+                if ($bank != null) {
+                    return $bank;
+                }
+                return $bank = 'error';
+            }
+            return $bank = 'error';
+        } else {
+            $sql = 'SELECT * FROM banks';
+            $bank = $this->select($sql);
+        }
 
-        return $banks;
+        return $bank;
     }
 }
