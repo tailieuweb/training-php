@@ -144,7 +144,7 @@ class UserModelTest extends TestCase
       $keyword = 'test';
       $actual = $userModel->findUser($keyword);
       // var_dump($actual); die;
-      if ($actual[0]['name'] == 'test1' && $actual[1]['name'] == 'test2') {
+      if ($actual[0]['name'] == 'test1' && $actual[1]['name'] == 'test3') {
          $this->assertTrue(true);
       } else {
          $this->assertTrue(false);
@@ -181,6 +181,25 @@ class UserModelTest extends TestCase
          $this->assertTrue(true);
       }
    }
+   //Test find user with keyword is nagetive number
+   public function testFindUserNagetive_NG()
+   {
+      $userModel = new UserModel();
+      $keyword = -10;
+
+      $actual = $userModel->findUser($keyword);
+      $this->assertEquals([], $actual);
+   }
+   //Test find user with keyword is float number
+   public function testFindUserFloat_NG()
+   {
+      $userModel = new UserModel();
+      $keyword = 10.78;
+
+      $actual = $userModel->findUser($keyword);
+      $this->assertEquals([], $actual);
+   }
+
 
    /*
      * Test function: updateUser()
@@ -411,5 +430,31 @@ class UserModelTest extends TestCase
       } catch (Throwable $e) {
          $this->assertTrue(true);
       }
+   }
+   //Test update user with id is float
+   public function testUpdateUserWithIdFloat_NG()
+   {
+      $userModel = new UserModel();
+      $user['name'] = "long";
+      $user['password'] = "kunz";
+      $user['id'] = 10.5;
+      $userModel->startTransaction();
+      $userModel->updateUser($user);
+      $actual = $userModel->findUserById($user['id']);
+      $this->assertEquals([],$actual);
+      $userModel->rollback();
+   }
+   //Test update user with id is nagetive number
+   public function testUpdateUserWithIdNagetive_NG()
+   {
+      $userModel = new UserModel();
+      $user['name'] = "long";
+      $user['password'] = "kunz";
+      $user['id'] = -5;
+      $userModel->startTransaction();
+      $userModel->updateUser($user);
+      $actual = $userModel->findUserById($user['id']);
+      $this->assertEquals([],$actual);
+      $userModel->rollback();
    }
 }
