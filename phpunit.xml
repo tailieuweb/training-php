@@ -6,7 +6,8 @@
          cacheResult ="false"
 >
     <testsuites>
-        <testsuite name="SqlWsContractImport">
+        <testsuite name="NhomJ">
+
             <file>./Tests/NguyenKhacDanh_BankModelTest.php</file>
             <file>./Tests/NguyenKhacDanh_UserModelTest.php</file>
             <file>./Tests/NguyenKhacDanh_UserRepositoryTest.php</file>
@@ -19,6 +20,10 @@
             <file>./Tests/CaoTrungHieu_UserRepositoryTest.php</file>
             <file>./Tests/CaoTrungHieu_BankModelTest.php</file>
             <file>./Tests/CaoTrungHieu_FactoryPatternTest.php</file>
+            <file>./Tests/LeTrungHieu_BankModelTest.php</file>
+            <file>./Tests/LeTrungHieu_UserModelTest.php</file>
+            <file>./Tests/LeTrungHieu_ResultTest.php</file>
+
         </testsuite>
     </testsuites>   
     <filter>
@@ -36,3 +41,4 @@
         <server name="TELESCOPE_ENABLED" value="false"/>
     </php>
 </phpunit>
+
