@@ -292,4 +292,89 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }  
+
+    /**
+     * Test case insertUser Double Id
+     */
+    public function testInsertUserDouble()
+    {
+        $userModel = new UserModel();
+
+        $param = array(
+            "id" => 25.5,
+            "name" => "",
+            "fullname" => "nguyentanle",
+            "email" => "le@mail.com",
+            "type" => "user",
+            "password" => "12345"
+        );
+        $actual = $userModel->insertUser($param);
+        $expected = 'error';
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case insertUser Negative Id
+     */
+    public function testInsertUserNegative()
+    {
+        $userModel = new UserModel();
+
+        $param = array(
+            "id" => -2,
+            "name" => "",
+            "fullname" => "nguyentanle",
+            "email" => "le@mail.com",
+            "type" => "user",
+            "password" => "12345"
+        );
+        $actual = $userModel->insertUser($param);
+        $expected = 'error';
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case insertUser Character Id
+     */
+    public function testInsertUserCharacter()
+    {
+        $userModel = new UserModel();
+
+        $param = array(
+            "id" => '%%%',
+            "name" => "",
+            "fullname" => "nguyentanle",
+            "email" => "le@mail.com",
+            "type" => "user",
+            "password" => "12345"
+        );
+        $actual = $userModel->insertUser($param);
+        $expected = 'error';
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Test case insertUser Array Id
+     */
+    public function testInsertUserArray()
+    {
+        $userModel = new UserModel();
+
+        $param = array(
+            "id" => array(1,2,3),
+            "name" => "",
+            "fullname" => "nguyentanle",
+            "email" => "le@mail.com",
+            "type" => "user",
+            "password" => "12345"
+        );
+        $actual = $userModel->insertUser($param);
+        $expected = 'error';
+
+        $this->assertEquals($expected, $actual);
+    }
+
 }
