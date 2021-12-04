@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class BankModelTest extends TestCase
+class LeTrungHieu_BankModelTest extends TestCase
 {
     /**
      * Test get bank by id Hieu-Le
@@ -11,14 +11,14 @@ class BankModelTest extends TestCase
     public function testBankByIdOk()
     {
         $bankModel = new BankModel();
-        $bankId = -1;
+        $bankId = -56;
 
         $bankModel->startTransaction();
 
         $bankModel->insertBankWithId($bankId, -1, 123);
 
         $findBank = $bankModel->getBankById($bankId);
-        $actual = $findBank != false &&
+        $actual = $findBank == true &&
             $findBank["id"] == $bankId &&
             $findBank["cost"] == 123 &&
             $findBank["user_id"] == -1;
@@ -30,7 +30,33 @@ class BankModelTest extends TestCase
     public function testBankByIdFloat()
     {
         $bankModel = new BankModel();
-        $bankId = -1.23;
+        $bankId = 1.233;
+
+        $bankModel->startTransaction();
+
+        $findBank = $bankModel->getBankById($bankId);
+
+        $bankModel->rollBack();
+        $this->assertTrue($findBank ? false : true);
+    }
+    // Test get bank by id negative
+    public function testBankByIdNegative()
+    {
+        $bankModel = new BankModel();
+        $bankId = -1234;
+
+        $bankModel->startTransaction();
+
+        $findBank = $bankModel->getBankById($bankId);
+
+        $bankModel->rollBack();
+        $this->assertTrue($findBank ? false : true);
+    }
+    // Test get bank by id null Array
+    public function testBankByIdNullArray()
+    {
+        $bankModel = new BankModel();
+        $bankId = [];
 
         $bankModel->startTransaction();
 
@@ -108,7 +134,7 @@ class BankModelTest extends TestCase
      public function testBankByIdArray()
      {
          $bankModel = new BankModel();
-         $bankId = [1,2,3];
+         $bankId = [1,2,3,6,5];
  
          $bankModel->startTransaction();
  

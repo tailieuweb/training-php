@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class ResultTest extends TestCase
+class LeTrungHieu_ResultTest extends TestCase
 {
     /**
      * Test getInstance
@@ -113,7 +113,37 @@ class ResultTest extends TestCase
     public function testSetDataFloat()
     {
         $result = new ResultClass;
-        $data = -1.23;
+        $data = 1.2323;
+        $result->setData($data);
+        $expected = $result->isSuccess == true &&
+        $result->data == $data &&
+        $result->error == null;
+        if ($expected == true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test setData negative
+    public function testSetDataNegative()
+    {
+        $result = new ResultClass;
+        $data = -2332;
+        $result->setData($data);
+        $expected = $result->isSuccess == true &&
+        $result->data == $data &&
+        $result->error == null;
+        if ($expected == true) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test setData null array
+    public function testSetDataNullArray()
+    {
+        $result = new ResultClass;
+        $data = [];
         $result->setData($data);
         $expected = $result->isSuccess == true &&
         $result->data == $data &&
@@ -128,7 +158,7 @@ class ResultTest extends TestCase
     public function testSetDataInt()
     {
         $result = new ResultClass;
-        $data = 123;
+        $data = 1232;
         $result->setData($data);
         $expected = $result->isSuccess == true &&
         $result->data == $data &&
@@ -173,7 +203,7 @@ class ResultTest extends TestCase
     public function testSetDataArray()
     {
         $result = new ResultClass;
-        $data = [1,2,3];
+        $data = [1,2,3,34,4];
         $result->setData($data);
         $expected = $result->isSuccess == true &&
         $result->data == $data &&
@@ -271,7 +301,23 @@ class ResultTest extends TestCase
     public function testSetErrorFloat()
     {
         $actual = new ResultClass;
-        $error = 1.23;
+        $error = 1.233;
+        $actual->setError($error);
+        $expected = $actual->isSuccess == true &&
+        $actual->data == null &&
+        $actual->error == $error;
+
+        if ($expected == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test setError negative
+    public function testSetErrorNegative()
+    {
+        $actual = new ResultClass;
+        $error = -142;
         $actual->setError($error);
         $expected = $actual->isSuccess == true &&
         $actual->data == null &&
@@ -319,7 +365,23 @@ class ResultTest extends TestCase
     public function testSetErrorArray()
     {
         $actual = new ResultClass;
-        $error = [1, 2, 3];
+        $error = [1, 2, 3,4,5,8];
+        $actual->setError($error);
+        $expected = $actual->isSuccess == true &&
+        $actual->data == null &&
+        $actual->error == $error;
+
+        if ($expected == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test setError Array null
+    public function testSetErrorNullArray()
+    {
+        $actual = new ResultClass;
+        $error = [];
         $actual->setError($error);
         $expected = $actual->isSuccess == true &&
         $actual->data == null &&

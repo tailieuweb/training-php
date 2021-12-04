@@ -3,7 +3,7 @@
 use phpDocumentor\Reflection\Types\Null_;
 use PHPUnit\Framework\TestCase;
 
-class UserModelTest extends TestCase
+class LeTrungHieu_UserModelTest extends TestCase
 {
     /**
      * Test findUserById Hieu-Le
@@ -12,7 +12,7 @@ class UserModelTest extends TestCase
     public function testFindUserByIdOk()
     {
         $userModel = new UserModel();
-        $userId = -1;
+        $userId = -4;
 
         $userModel->startTransaction();
 
@@ -33,7 +33,7 @@ class UserModelTest extends TestCase
     public function testFindUserByIdFloat()
     {
         $userModel = new UserModel();
-        $userId = -1.1;
+        $userId = 1.112;
 
         $userModel->startTransaction();
 
@@ -42,6 +42,32 @@ class UserModelTest extends TestCase
         $userModel->rollBack();
         $this->assertTrue($findUser ? false : true);
     }
+      // Test findUserById negative
+      public function testFindUserByIdNegative()
+      {
+          $userModel = new UserModel();
+          $userId = -33;
+  
+          $userModel->startTransaction();
+  
+          $findUser = $userModel->findUserById($userId);
+  
+          $userModel->rollBack();
+          $this->assertTrue($findUser ? false : true);
+      }
+       // Test findUserById null array
+       public function testFindUserByIdNullArray()
+       {
+           $userModel = new UserModel();
+           $userId = [];
+   
+           $userModel->startTransaction();
+   
+           $findUser = $userModel->findUserById($userId);
+   
+           $userModel->rollBack();
+           $this->assertTrue($findUser ? false : true);
+       }
     // Test findUserById String
     public function testFindUserByIdString()
     {
@@ -111,7 +137,7 @@ class UserModelTest extends TestCase
     public function testFindUserByIdArray()
     {
         $userModel = new UserModel();
-        $userId = [1,2,3];
+        $userId = [1,2,3,4,4];
 
         $userModel->startTransaction();
 
