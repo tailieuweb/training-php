@@ -55,12 +55,12 @@ class UserModel extends BaseModel
      * @return mixed
      */
     public function deleteUserById($id)
-    {   
+    {
         $isAuth = $this->getUsers();
         foreach ($isAuth as $item) {
-            if ($item['id'] == $id) {
-                $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
-                return $this->delete($sql);
+            if (md5($item['id']) == $id) {
+                // $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
+                // return $this->delete($sql);
             }
         }
     }

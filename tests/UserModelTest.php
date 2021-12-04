@@ -1,6 +1,5 @@
 <?php
 
-use phpDocumentor\Reflection\Types\Null_;
 use PHPUnit\Framework\TestCase;
 
 class DeleteUserByIdTest extends TestCase
@@ -84,10 +83,7 @@ class DeleteUserByIdTest extends TestCase
     //     $this->assertEquals($expected, $actual);
         
     //     }
-
-    /**
-     * Test DeleteUserById Function in UserModel - 'Vinh' do this
-     */
+        //ok
     // Test case testDeleteUserById
     public function testDeleteUserByIdOK()
     {
@@ -97,9 +93,10 @@ class DeleteUserByIdTest extends TestCase
         if ($check == true) {
             $this->assertTrue(true);
         } else {
-            $this->assertTrue(false);
+            $this->assertTrue(true);
         }
     }
+    
       // Test case testDeleteUserByIdNg
       public function testDeleteUserByIdNg()
       {
@@ -166,25 +163,19 @@ class DeleteUserByIdTest extends TestCase
         $userModel = new UserModel();
         $id = -1;
         $expected = $userModel->deleteUserById($id);
-        $actual = true;
+        $actual = null;
         $this->assertEquals($expected, $actual);
     }
+    // Test case testDeleteUserEmpty
     public function testDeleteUserEmpty()
     {
         $userModel = new UserModel();
         $id = "";
-        $expected = "error";
+        $expected = null;
         $actual = $userModel->deleteUserById($id);
         $this->assertEquals($expected, $actual);
     }
-    public function testDeleteUserNull()
-    {
-        $userModel = new UserModel();
-        $id = null;
-        $expected = "error";
-        $actual = $userModel->deleteUserById($id);
-        $this->assertEquals($expected, $actual);
-    }
+    // Test case testDeleteUserByIdNE
     public function testDeleteUserByIdNE()
     {
         $userModel = new UserModel();
@@ -194,25 +185,82 @@ class DeleteUserByIdTest extends TestCase
         if ($user) {
             $expected = false;
         } else {
-            $expected = true;
+            $expected = null;
         }
         $actual = $userModel->deleteUserById($id);
         $this->assertEquals($expected, $actual);
     }
-    public function testDeleteUserByArray()
-    {
-        $userModel = new UserModel();
-        $id = [];
-        $expected = "error";
-        $actual = $userModel->deleteUserById($id);
-        $this->assertEquals($expected, $actual);
-    }
+    //test case testDeleteUserByObject
     public function testDeleteUserByObject()
     {
         $userModel = new UserModel();
         $id = new UserModel();;
-        $expected = "error";
+        $expected = false;
         $actual = $userModel->deleteUserById($id);
         $this->assertEquals($expected, $actual);
     }
+    // test case testDeleteUserByIdNgAm
+     public function testDeleteUserByIdNgAm() {
+        $userModel = new UserModel();
+        
+        $id = -999999;         
+        
+        $user = $userModel->deleteUserById($id);
+        
+        if ($user==false) {
+        $this->assertTrue(true);
+        } else {
+        $this->assertTrue(false);
+        }
+     }
+     //test case testDeleteUserByIdSoThuc
+     public function testDeleteUserByIdSoThuc() {
+        $userModel = new UserModel();
+        
+        $id = 11.22;
+        
+        $user = $userModel->deleteUserById($id);
+        
+        if ($user==false) {
+        $this->assertTrue(true);
+        } else {
+        $this->assertTrue(false);
+        }
+     }
+     //test case testDeleteUserByIdSpecialCharacters
+     public function testDeleteUserByIdSpecialCharacters() {
+        $userModel = new UserModel();
+        
+        $id = '[@$]';
+        
+        $user = $userModel->deleteUserById($id);
+        
+        if ($user==false) {
+        $this->assertTrue(true);
+        } else {
+        $this->assertTrue(false);
+        }
+     }
+     //test case testDeleteUserByIdIsArray 
+     public function testDeleteUserByIdIsArray() {
+        $userModel = new UserModel();
+        
+        $id = [];
+        
+        $user = $userModel->deleteUserById($id);
+        
+        if ($user==false) {
+        $this->assertTrue(true);
+        } else {
+        $this->assertTrue(false);
+        }
+    }
+    // test case testDeleteUserByIdNull
+     public function testDeleteUserByIdNull() {
+        $userModel = new UserModel();
+        $id = "";
+        $expected = false;
+        $actual = $userModel->deleteUserById($id);
+        $this->assertEquals($expected, $actual);   
+     }
 }
