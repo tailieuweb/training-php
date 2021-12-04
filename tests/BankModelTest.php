@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 class BankModelTest extends TestCase
 {
-    //Test case  Find Bank By Id OK
+    //Test  Find Bank By Id OK
     public function testFindBankByIdOk()
     {
         $bankModel = new BankModel();
@@ -17,7 +17,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($cost, $actual);
     }
 
-    //Test Case Find Bank By Id Not good
+    //Test Find Bank By Id Not good
     public function testFindBankByIdNg()
     {
         $bankModel = new BankModel();
@@ -33,7 +33,7 @@ class BankModelTest extends TestCase
         }
     }
 
-    //Test case find Bank By String Id 
+    //Test Find Bank By String Id 
     public function testFindBankByIdStr()
     {
         $bankModel = new BankModel();
@@ -47,7 +47,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    //Test case findBankById Null
+    //Test Find Bank By Id Null
     public function testFindBankByIdNull()
     {
         $bankModel = new BankModel();
@@ -58,7 +58,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
     
-    //Test case findBankById Object
+    //Test find Bank By Id Object
     public function testFindBankByIdObject()
     {
         $bankModel = new BankModel();
@@ -70,7 +70,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // test deleteBankById ok
+    // test Delete Bank By Id ok
     public function testDeleteBankByIdOK()
     {
         $bankModel = new bankModel();

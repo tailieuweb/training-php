@@ -7,7 +7,7 @@ class UserModelTest extends TestCase
     public function testGetUsersOk(){
         $userModel = new UserModel();
         $userName = 'hackerasfasf';
-        $user = $userModel->getUsers($userName);
+        $user = $userModel->getusers($userName);
         
         $actual = $user[0]['name'];
         $this->assertEquals($userName, $actual);
@@ -17,7 +17,7 @@ class UserModelTest extends TestCase
      public function testGetUsersNg(){
        $userModel = new UserModel();
        $userName = 'c';
-       $user = $userModel->getUsers($userName);
+       $user = $userModel->getusers($userName);
        
        $actual = $user[0]['name'];
        
@@ -27,7 +27,75 @@ class UserModelTest extends TestCase
           $this->assertTrue(true);
        }
     }
-    //Test getUserById Ok   
+    //Test GetUsers Double
+    public function testGetUsersDouble()
+    {
+        $userModel = new UserModel();
+
+        $params['keyword'] = 1.1;
+
+        $User = $userModel->getUsers($params);
+
+        if ($User == 'error') {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    //Test Get Users Special Character
+    public function testGetUsersSpecialCharacters()
+    {
+        $userModel = new UserModel();
+
+        $params['keyword'] = '[/**//#@^%$]';
+
+        $User = $userModel->getUsers($params);
+
+        if ($User == 'error') {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    //Test Get Users Is Array
+    public function testGetUsersIsArray()
+    {
+        $userModel = new UserModel();
+
+        $params['keyword'] = [];
+
+        $User = $userModel->getUsers($params);
+
+        if ($User == 'error') {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    //Test Get Users Is String
+    public function testGetUsersStr()
+    {
+        $userModel = new UserModel();
+
+        $params['keyword'] = 'abc';
+
+
+        $expected = 'error';
+        $actual = $userModel->getusers($params);
+
+        $this->assertEquals($expected, $actual);
+    }
+    //Test Get Users Object
+    public function testGetUsersObject()
+    {
+        $userModel = new UserModel();
+        $params['keyword'] = new stdClass();
+        $expected = 'error';
+        $actual = $userModel->getUsers($params);
+        $this->assertEquals($expected, $actual);
+    }
+
+    //Test get User By Id Ok
     public function testGetFindUserByIdOk()
    {
        $userModel = new UserModel();
@@ -40,7 +108,7 @@ class UserModelTest extends TestCase
        $this->assertEquals($userName, $actual);
     }
 
-    //Test getUserById Not Ok   
+    //Test get User By Id Not Ok   
     public function testGetFindUserByIdNotOk()
     {
         $userModel = new UserModel();
@@ -50,7 +118,7 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    //Test getUserBy String Id
+    //Test get User By String Id
     public function testGetFindUserByIdStr()
     {
         $userModel = new UserModel();
@@ -60,7 +128,7 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    //Test getUserById Null
+    //Test get User By Id Null
     public function testGetFindUserByIdNull()
     {
         $userModel = new UserModel();

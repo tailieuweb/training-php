@@ -66,17 +66,24 @@ class UserModel extends BaseModel {
      * @param array $params
      * @return array
      */
-    public function getUsers($params = []) {
-        //Keyword
-        if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
+    public function getUsers($params = [])
+    {
+        if (isset($params['keyword'])) {
+            if (is_int($params['keyword']) == true || is_string($params['keyword']) == true) {
+                $sql = 'SELECT * FROM users WHERE user_id LIKE "%' . $params['keyword'] . '%"';
+                $user = $this->select($sql);
+                if ($user != null) {
+                    return $user;
+                }
+                return $user = 'error';
+            }
+            return $user = 'error';
         } else {
             $sql = 'SELECT * FROM users';
+            $user = $this->select($sql);
         }
 
-        $users = $this->select($sql);
-
-        return $users;
+        return $user;
     }
 
     /**
