@@ -145,3 +145,4 @@ class UserModel extends BaseModel
     {
        self::$_connection->rollback();
     }
+}
