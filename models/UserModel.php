@@ -27,10 +27,7 @@ class UserModel extends BaseModel
 
     public function findUserById($id)
     {
-        if (!is_array($id)) {
-            return [];
-        }
-        if (isset($id)) {
+        if (!isset($id)) {
             return [];
         }
         if (is_object($id) || is_null($id) || is_array($id) || empty($id)) {
@@ -51,7 +48,7 @@ class UserModel extends BaseModel
 
     public function findUser($keyword)
     {
-        if (isset($keyword)) {
+        if (!isset($keyword)) {
             return [];
         }
         if (is_object($keyword) || is_null($keyword) || is_array($keyword) || empty($keyword)) {
@@ -76,7 +73,7 @@ class UserModel extends BaseModel
      */
     public function auth($userName, $password)
     {
-        if (isset($userName) || isset($password)) {
+        if (!isset($userName) || isset($password)) {
             return [];
         }
         if (is_object($userName) || is_null($userName) || is_array($userName) || empty($userName)) {
@@ -103,10 +100,7 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
-        if (!is_array($id)) {
-            return [];
-        }
-        if (isset($id)) {
+        if (!isset($id)) {
             return [];
         }
         if (is_object($id) || is_null($id) || is_array($id) || empty($id)) {
@@ -134,13 +128,13 @@ class UserModel extends BaseModel
         if (!is_array($input)) {
             return [];
         }
-        if (isset($input)) {
+        if (!isset($input)) {
             return [];
         }
         if (is_object($input["name"]) || is_null($input["name"]) || is_array($input["name"]) || empty($input["name"])) {
             return [];
         }
-        if (is_object($input["fullname"]) || is_null($input["fullname"]) || is_array($input["fullname"]) || empty($input["idfullname"])) {
+        if (is_object($input["fullname"]) || is_null($input["fullname"]) || is_array($input["fullname"]) || empty($input["fullname"])) {
             return [];
         }
         if (is_object($input["email"]) || is_null($input["email"]) || is_array($input["email"]) || empty($input["email"])) {
@@ -186,13 +180,13 @@ class UserModel extends BaseModel
         if (!is_array($input)) {
             return [];
         }
-        if (isset($input)) {
+        if (!isset($input)) {
             return [];
         }
         if (is_object($input["name"]) || is_null($input["name"]) || is_array($input["name"]) || empty($input["name"])) {
             return [];
         }
-        if (is_object($input["fullname"]) || is_null($input["fullname"]) || is_array($input["fullname"]) || empty($input["idfullname"])) {
+        if (is_object($input["fullname"]) || is_null($input["fullname"]) || is_array($input["fullname"]) || empty($input["fullname"])) {
             return [];
         }
         if (is_object($input["email"]) || is_null($input["email"]) || is_array($input["email"]) || empty($input["email"])) {
@@ -204,15 +198,7 @@ class UserModel extends BaseModel
         if (is_object($input["type"]) || is_null($input["type"]) || is_array($input["type"]) || empty($input["type"])) {
             return [];
         }
-        if (is_object($input["id"]) || is_null($input["id"]) || is_array($input["id"]) || empty($input["id"])) {
-            return [];
-        }
         if (is_bool($input["name"]) || is_bool($input["fullname"]) || is_bool($input["email"]) || is_bool($input["password"]) || is_bool($input["type"]) || is_bool($input["id"])) {
-            return [];
-        }
-        if (!is_int($input["id"])) {
-            return [];
-        } else if ($input["id"] < 0){
             return [];
         }
         $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`,`fullname`,`email`,`type`) VALUES (" .
@@ -243,7 +229,6 @@ class UserModel extends BaseModel
         if (is_bool($params["keyword"])) {
             return [];
         }
-        //Keyword
         //Keyword
         if (!empty($params['keyword'])) {
             $sql = 'SELECT * FROM users
