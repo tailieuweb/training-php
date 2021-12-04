@@ -313,6 +313,22 @@ class LeTrungHieu_ResultTest extends TestCase
             $this->assertTrue(false);
         }
     }
+    // Test setError negative
+    public function testSetErrorNegative()
+    {
+        $actual = new ResultClass;
+        $error = -12;
+        $actual->setError($error);
+        $expected = $actual->isSuccess == true &&
+        $actual->data == null &&
+        $actual->error == $error;
+
+        if ($expected == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
     // Test setError Bool true
     public function testSetErrorBoolTrue()
     {
@@ -350,6 +366,22 @@ class LeTrungHieu_ResultTest extends TestCase
     {
         $actual = new ResultClass;
         $error = [1, 2, 3];
+        $actual->setError($error);
+        $expected = $actual->isSuccess == true &&
+        $actual->data == null &&
+        $actual->error == $error;
+
+        if ($expected == false) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+    // Test setError Array null
+    public function testSetErrorNullArray()
+    {
+        $actual = new ResultClass;
+        $error = [];
         $actual->setError($error);
         $expected = $actual->isSuccess == true &&
         $actual->data == null &&
