@@ -6,7 +6,7 @@ colors="true"
 cacheResult ="false"
 >
 <testsuites>
-<testsuite name="a">
+<testsuite name="b">
 <file>./tests/UserModelTest.php</file>
 <file>./tests/BanksModelTest.php</file>
 <file>./tests/FactoryPatternTest.php</file>
