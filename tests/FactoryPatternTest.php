@@ -124,4 +124,28 @@ class FactoryPatternTest extends TestCase
         
         $this->assertEquals($expected, $actual);
     }
+
+    // test function make actual number
+    public function testMakeActualNumber()
+    {
+        $factoryPattern = new FactoryPattern();
+        $text = 3.14;
+        $expected = Null;
+
+        $actual = $factoryPattern->make($text);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    // test function make negative number
+    public function testMakeNegativeNumber()
+    {
+        $factoryPattern = new FactoryPattern();
+        $text = -3;
+        $expected = Null;
+
+        $actual = $factoryPattern->make($text);
+
+        $this->assertEquals($expected, $actual);
+    }
 }

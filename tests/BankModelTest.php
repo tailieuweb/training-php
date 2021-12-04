@@ -93,4 +93,31 @@ class BankModelTest extends TestCase
             $this->assertTrue(True);
         }
     }
+    // test function deleteBankById actual number
+    public function testDeleteBankByIdActualNumber()
+    {
+        $bankModel = new BankModel();
+        $idBank = 3.14;
+        $deleteBankById = $bankModel->deleteBankById($idBank);
+
+        if (empty($deleteBankById)) {
+            $this->assertFalse(false);
+        } else {
+            $this->assertTrue(True);
+        }
+    }
+    
+    // test function deleteBankById negative number
+    public function testDeleteBankByIdNegativeNumber()
+    {
+        $bankModel = new BankModel();
+        $idBank = -3;
+        $deleteBankById = $bankModel->deleteBankById($idBank);
+
+        if (empty($deleteBankById)) {
+            $this->assertFalse(false);
+        } else {
+            $this->assertTrue(True);
+        }
+    }
 }
