@@ -440,15 +440,16 @@ class UserModelTest extends TestCase {
         }
     }
     // Test case testDeleteUserBool
-    public function testDeleteUserBool()
-    {
+    public function testDeleteUserBool() {
         $userModel = new UserModel();
-        $id = false;
-        $check = $userModel->deleteUserById($id);
+        $id        = false;
+        $check     = $userModel->deleteUserById($id);
         if ($check == false) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
+        }
+    }
     public function testFieldNameSpecial() {
         $user   = new UserModel();
         $input  = ['name'      => '%$^$%^',
