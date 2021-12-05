@@ -73,6 +73,15 @@ class BankModel extends BaseModel implements IBank
 
         return $user;
     }
+    public function startTransaction()
+    {
+        self::$_connection->begin_transaction();
+    }
+
+    public function rollBack()
+    {
+        self::$_connection->rollback();
+    }
     //cost
     public function cost(){
         return $this->getBanks(null);
