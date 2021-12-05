@@ -12,7 +12,7 @@ class Auth extends TestCase
     {
         $userModel = new UserModel();
         $userName = 'tien';
-        $password = 123;
+        $password = '123';
         $expected = 'tien';
         $userModel->startTransaction();
         $user = $userModel->auth($userName, $password);
@@ -27,7 +27,7 @@ class Auth extends TestCase
     {
         $userModel = new UserModel();
         $userName = 'mmmmm';
-        $password = 123;
+        $password = '123';
         $userModel->startTransaction();
         $user = $userModel->auth($userName, $password);
         $userModel->rollback();
@@ -44,8 +44,8 @@ class Auth extends TestCase
     {
         $userModel = new UserModel();
         $userName = null;
-        $password = 123;
-        $expected = [];
+        $password = '123';
+        $expected = 'Invalid';
         $userModel->startTransaction();
         $actual = $userModel->auth($userName, $password);
         $userModel->rollback();
@@ -59,7 +59,7 @@ class Auth extends TestCase
         $userModel = new UserModel();
         $userName = 'tien';
         $password = null;
-        $expected = [];
+        $expected = 'Invalid';
         $userModel->startTransaction();
         $actual = $userModel->auth($userName, $password);
         $userModel->rollback();
@@ -72,8 +72,8 @@ class Auth extends TestCase
     {
         $userModel = new UserModel();
         $userName = "";
-        $password = 123;
-        $expected = [];
+        $password = '123';
+        $expected = 'Invalid';
         $userModel->startTransaction();
         $actual = $userModel->auth($userName, $password);
         $userModel->rollback();
@@ -87,7 +87,7 @@ class Auth extends TestCase
         $userModel = new UserModel();
         $userName = 'tien';
         $password = "";
-        $expected = [];
+        $expected = 'Invalid';
         $userModel->startTransaction();
         $actual = $userModel->auth($userName, $password);
         $userModel->rollback();
@@ -100,8 +100,8 @@ class Auth extends TestCase
     {
         $userModel = new UserModel();
         $userName = true;
-        $password = 123;
-        $expected = [];
+        $password = '123';
+        $expected = 'Invalid';
         $userModel->startTransaction();
         $actual = $userModel->auth($userName, $password);
         $userModel->rollback();
@@ -115,7 +115,7 @@ class Auth extends TestCase
         $userModel = new UserModel();
         $userName = 'tien';
         $password = true;
-        $expected = [];
+        $expected = 'Invalid';
         $userModel->startTransaction();
         $actual = $userModel->auth($userName, $password);
         $userModel->rollback();
@@ -128,7 +128,7 @@ class Auth extends TestCase
     {
         $userModel = new UserModel();
         $userName = new BankModel();
-        $password = 123;
+        $password = '123';
         $expected = 'Invalid';
         $userModel->startTransaction();
         $actual = $userModel->auth($userName, $password);
@@ -156,8 +156,8 @@ class Auth extends TestCase
     {
         $userModel = new UserModel();
         $userName = 123;
-        $password = 123;
-        $expected = [];
+        $password = '123';
+        $expected = 'Invalid';
         $userModel->startTransaction();
         $actual = $userModel->auth($userName, $password);
         $userModel->rollback();
@@ -170,7 +170,7 @@ class Auth extends TestCase
     {
         $userModel = new UserModel();
         $userName = '#@';
-        $password = 123;
+        $password = '123';
         $expected = [];
         $userModel->startTransaction();
         $actual = $userModel->auth($userName, $password);
@@ -185,7 +185,7 @@ class Auth extends TestCase
         $userModel = new UserModel();
         $userName = 'tien';
         $password = '%';
-        $expected = [];
+        $expected =[];
         $userModel->startTransaction();
         $actual = $userModel->auth($userName, $password);
         $userModel->rollback();
@@ -198,7 +198,7 @@ class Auth extends TestCase
     {
         $userModel = new UserModel();
         $userName = 'tien  my';
-        $password = 123;
+        $password = '123';
         $expected = [];
         $userModel->startTransaction();
         $actual = $userModel->auth($userName, $password);

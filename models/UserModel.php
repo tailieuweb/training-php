@@ -46,7 +46,10 @@ class UserModel extends BaseModel
 
     public function auth($userName, $password)
     {
-        if(is_object($userName) || is_object($password)){
+        if (empty($userName) || empty($password)) {
+            return 'Invalid';
+        }
+        if (!is_string($userName) || !is_string($password)) {
             return 'Invalid';
         }
         else{
