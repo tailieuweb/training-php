@@ -5,13 +5,12 @@ require_once 'BaseModel.php';
 class UserModel extends BaseModel
 {
     protected static $_instance;
-    public function sumb($a, $b)
-    {
+    public function sumb($a,$b){
         return $a + $b;
     }
     public static function getInstance()
     {
-        if (self::$_instance !== null) {
+        if(self::$_instance !== null){
             return self::$_instance;
         }
         self::$_instance = new self();
@@ -141,8 +140,10 @@ class UserModel extends BaseModel
     {
         self::$_connection->begin_transaction();
     }
+
     public function rollBack()
     {
         self::$_connection->rollback();
     }
+
 }

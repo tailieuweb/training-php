@@ -4,9 +4,11 @@ use PHPUnit\Framework\TestCase;
 
 class TestAuth extends TestCase
 {
+    //test
     //test auth ok
     public function testAuthOk()
     {
+        //test
         $userModel = new UserModel();
         $userName = 'quan';
         $password = 'quan';

@@ -6,6 +6,7 @@ require_once('./models/FactoryPattern.php');
 
 class TestFactoryPattern extends TestCase
 {
+    //test
     //test make user ok
     public function testMakeUserOk()
     {
