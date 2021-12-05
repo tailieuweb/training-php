@@ -72,30 +72,30 @@ class UserModelTest extends TestCase
     Status: OK
     Author: Phuong Nguyen
     */
-    public function testAuthOk()
-    {
-        $factory = new FactoryPattern();
-        $userModel = $factory->make("user");
-        $username = "test2";
-        $password = "123";
+    // public function testAuthOk()
+    // {
+    //     $factory = new FactoryPattern();
+    //     $userModel = $factory->make("user");
+    //     $username = "test2";
+    //     $password = "123";
 
-        $expected = [
-            "id" => "2",
-            "name" => "test2",
-            "fullname" => "",
-            "email" => "",
-            "type" => "",
-            "password" => "202cb962ac59075b964b07152d234b70"
-        ];
+    //     $expected = [
+    //         "id" => "2",
+    //         "name" => "test2",
+    //         "fullname" => "",
+    //         "email" => "",
+    //         "type" => "",
+    //         "password" => "202cb962ac59075b964b07152d234b70"
+    //     ];
 
-        $actual = $userModel->auth($username, $password);
-        $this->assertEquals(
-            $expected,
-            $actual[0],
-            "Expected and actual not equals"
-        );
-        $userModel->rollback();
-    }
+    //     $actual = $userModel->auth($username, $password);
+    //     $this->assertEquals(
+    //         $expected,
+    //         $actual[0],
+    //         "Expected and actual not equals"
+    //     );
+    //     $userModel->rollback();
+    // }
     /* ========Test function getUserById ========*/
     public function testGetFindUserByIdOk()
     {
