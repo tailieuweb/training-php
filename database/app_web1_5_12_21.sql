@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2021 at 05:39 AM
+-- Generation Time: Dec 05, 2021 at 05:02 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -39,7 +39,7 @@ CREATE TABLE `banks` (
 
 INSERT INTO `banks` (`id`, `user_id`, `cost`) VALUES
 (1, 1, 11),
-(2, 2, 0),
+(2, 2, 123),
 (3, 3, 1111),
 (105, 2, 0),
 (110, 0, 0),
@@ -81,7 +81,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`) VALUES
 (198, 'test2insert', 'test2', 'test2@gmail.com', 'user', '5f4dcc3b5aa765d61d8327deb882cf99'),
 (123, 'test2last', 'test2', 'test2@gmail.com', 'user', '202cb962ac59075b964b07152d234b70'),
-(5, 'khanhu', 'khanhu', 'nhu@gmail.com', 'user', 'd41d8cd98f00b204e9800998ecf8427e'),
+(5, 'nhu', 'lenhu', 'khanhu@gmail.com', 'user', '202cb962ac59075b964b07152d234b70'),
 (185, '', '', '058@gmail.com', '', 'd41d8cd98f00b204e9800998ecf8427e'),
 (184, '', '', 'kh?nh?@gmail.com', '', 'd41d8cd98f00b204e9800998ecf8427e'),
 (9, 'nhu', 'khanhu', 'nhu@gmail.com', '', '202cb962ac59075b964b07152d234b70'),
@@ -146,7 +146,8 @@ INSERT INTO `users` (`id`, `name`, `fullname`, `email`, `type`, `password`) VALU
 (217, '', '', 'kh?nh?@gmail.com', '', 'd41d8cd98f00b204e9800998ecf8427e'),
 (210, 'nhu', 'khanhu', 'khanhu@gmail.com', 'admin', 'e10adc3949ba59abbe56e057f20f883e'),
 (221, 'nhu', 'khanhu', 'khanhu@gmail.com', 'admin', 'e10adc3949ba59abbe56e057f20f883e'),
-(220, 'test2insert', 'test2', 'test2@gmail.com', 'user', '5f4dcc3b5aa765d61d8327deb882cf99');
+(220, 'test2insert', 'test2', 'test2@gmail.com', 'user', '5f4dcc3b5aa765d61d8327deb882cf99'),
+(266, 'test2insert', 'test2', 'test2@gmail.com', 'user', '5f4dcc3b5aa765d61d8327deb882cf99');
 
 --
 -- Indexes for dumped tables
@@ -172,13 +173,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `banks`
 --
 ALTER TABLE `banks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=219;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=227;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=267;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
