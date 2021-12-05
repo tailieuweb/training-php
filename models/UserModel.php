@@ -73,7 +73,7 @@ class UserModel extends BaseModel
      */
     public function auth($userName, $password)
     {
-        if (!isset($userName) || isset($password)) {
+        if (!isset($userName) || !isset($password)) {
             return [];
         }
         if (is_object($userName) || is_null($userName) || is_array($userName) || empty($userName)) {

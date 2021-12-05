@@ -1,36 +1,37 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 class BankModelTest extends TestCase
 {
-    /*
-    File: BankModel.
+
+    /*File: BankModel.
     Id: 01
     Function: findBankInfoById($id).
     Desc: Test get bank by bank id is OK
-    Author: Phuong Nguyen.
-    */
-    // public function testFindBankInfoByIdOk()
-    // {
-    //     $factory = new FactoryPattern();
-    //     $bankModel = $factory->make("bank");
-    //     $bankModel->startTransaction();
-    //     $expected = [
-    //         [
-    //             'id' => '1',
-    //             'user_id' => '1',
-    //             'cost' => '1111',
-    //         ]
-    //     ];
+    Author: Phuong Nguyen.*/
 
-    //     $actual = $bankModel->find(1);
-    //     $this->assertEquals(
-    //         $expected,
-    //         $actual,
-    //         "Expected and actual not equals"
-    //     );
-    //     $bankModel->rollback();
-    // }
+    public function testFindBankInfoByIdOk()
+    {
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make("bank");
+        $bankModel->startTransaction();
+        $expected = [
+            [
+                'id' => '1',
+                'user_id' => '1',
+                'cost' => '11',
+            ]
+        ];
+
+        $actual = $bankModel->find(1);
+        $this->assertEquals(
+            $expected,
+            $actual,
+            "Expected and actual not equals"
+        );
+        $bankModel->rollback();
+    }
 
     /*
     File: BankModel.
@@ -158,9 +159,9 @@ class BankModelTest extends TestCase
         $bankModel->rollback();
     }
 
-     /*
+    /*
     File: BankModel
-    Id: 07
+    Id: 08
     Function: findBankInfoById($id).
     Desc: Test get bank by bank id with input type not integer
     Author: Phuong Nguyen.
@@ -177,9 +178,9 @@ class BankModelTest extends TestCase
         );
     }
 
-      /*
+    /*
     File: BankModel
-    Id: 07
+    Id: 09
     Function: findBankInfoById($id).
     Desc: Test get bank by bank id with input is boolean
     Author: Phuong Nguyen.
@@ -198,7 +199,7 @@ class BankModelTest extends TestCase
 
     /*
     File: BankModel.
-    Id: 08
+    Id: 10
     Function: findBankInfoById($id).
     Desc: Test if input is special characters -> unaffected to data of another(user) model 
     Status: OK
@@ -227,7 +228,7 @@ class BankModelTest extends TestCase
 
     /*
     File: BankModel.
-    Id: 09
+    Id: 11
     Function: findBankInfoByUserID($user_id).
     Desc: Test get bank by user id is OK
     Author: Phuong Nguyen.
@@ -256,7 +257,7 @@ class BankModelTest extends TestCase
 
     /*
     File: BankModel.
-    Id: 10
+    Id: 12
     Function: findBankInfoByUserID($user_id).
     Desc: Test get bank by user id with input (user_id) is negative number
     Author: Phuong Nguyen.
@@ -277,7 +278,7 @@ class BankModelTest extends TestCase
 
     /*
     File: BankModel.
-    Id: 11
+    Id: 13
     Function: findBankInfoByUserID($user_id).
     Desc: Test get bank by user id with input (user_id) is string
     Author: Phuong Nguyen.
@@ -294,16 +295,8 @@ class BankModelTest extends TestCase
         );
     }
 
-    //     $actual = $bankModel->findByUserId("1");
-    //     $this->assertEquals(
-    //         $expected,
-    //         $actual,
-    //         "Expected and actual not equals"
-    //     );
-    // }
-    /*
-    File: BankModel.
-    Id: 12
+    /*File: BankModel.
+    Id: 14
     Function: findBankInfoByUserID($user_id).
     Desc: Test get bank by user id with input (user_id) is obj
     Author: Phuong Nguyen.
@@ -324,7 +317,7 @@ class BankModelTest extends TestCase
 
     /*
     File: BankModel.
-    Id: 13
+    Id: 15
     Function: findBankInfoByUserID($user_id).
     Desc: Test get bank by user id with input (user_id) is null
     Author: Phuong Nguyen.
@@ -346,7 +339,7 @@ class BankModelTest extends TestCase
 
     /*
     File: BankModel.
-    Id: 14
+    Id: 16
     Function: findBankInfoByUserID($user_id).
     Desc: Test get bank by user id with input (user_id) is array
     Author: Phuong Nguyen.
@@ -368,7 +361,7 @@ class BankModelTest extends TestCase
 
     /*
     File: BankModel.
-    Id: 13
+    Id: 17
     Function: findBankInfoByUserID($user_id).
     Desc: Test get bank by user id with input (user_id) not exists
     Author: Phuong Nguyen.
@@ -387,9 +380,9 @@ class BankModelTest extends TestCase
         $bankModel->rollback();
     }
 
-       /*
+    /*
     File: BankModel
-    Id: 07
+    Id: 18
     Function: findBankInfoByUserID($user_id).
     Desc: Test get bank by user id with input type not integer
     Author: Phuong Nguyen.
@@ -406,9 +399,9 @@ class BankModelTest extends TestCase
         );
     }
 
-      /*
+    /*
     File: BankModel
-    Id: 07
+    Id: 19
     Function:findBankInfoByUserID($user_id).
     Desc: Test get bank by user id with input is boolean
     Author: Phuong Nguyen.
@@ -427,7 +420,7 @@ class BankModelTest extends TestCase
 
     /*
     File: BankModel.
-    Id: 14
+    Id: 20
     Function: findBankInfoByUserId($id).
     Desc: Test if input is special characters -> unaffected to data of another(user) model 
     Status: OK
@@ -458,24 +451,27 @@ class BankModelTest extends TestCase
     Function:testGetAllBanks()
     Author:Quoc Viet
     */
-   
-    
-    public function testGetAllBanksArrayListOne_Ok() {
+
+
+    public function testGetAllBanksArrayListOne_Ok()
+    {
         $bankModel = new BankModel();
         $bankModel->startTransaction();
         $expected = [
-            ["id" => "1", 
-            "user_id" => "1", 
-            "cost" => "11"],
-        ] ;
+            [
+                "id" => "1",
+                "user_id" => "1",
+                "cost" => "11"
+            ],
+        ];
 
         $actual = $bankModel->getAll();
-        $this->assertEquals( $expected[0], $actual[0]);
+        $this->assertEquals($expected[0], $actual[0]);
         $bankModel->rollback();
     }
-      /**
-    *function testgetBanksAcount_Ok()
-    * Author: Quoc Viet
+    /**
+     *function testgetBanksAcount_Ok()
+     * Author: Quoc Viet
      */
     //get Acount theo so luong
     public function testgetBanksAcount_Ok()
@@ -489,32 +485,35 @@ class BankModelTest extends TestCase
         $this->assertEquals($countAr, count($actual));
         $bankModel->rollback();
     }
-   /**
-    *function testGetAllBanksArrayListEnd_Ok()
-    * Author: Quoc Viet
+    /**
+     *function testGetAllBanksArrayListEnd_Ok()
+     * Author: Quoc Viet
      */
-    public function testGetAllBanksArrayListEnd_Ok() {
+    public function testGetAllBanksArrayListEnd_Ok()
+    {
         $bankModel = new BankModel();
         $bankModel->startTransaction();
         $expected = [
-            ["id" => "105", 
-            "user_id" => "2", 
-            "cost" => "0"],
-        ] ;
+            [
+                "id" => "105",
+                "user_id" => "2",
+                "cost" => "0"
+            ],
+        ];
 
         $actual = $bankModel->getAll();
         // var_dump($actual);die();
-        $this->assertEquals( $expected[0], $actual[3]);
+        $this->assertEquals($expected[0], $actual[3]);
         $bankModel->rollback();
     }
 
- /////////////////////////// Test InsertbanksInfo//////////////////////////
-      /**
-      * function testInsertBankInfo_Invalid_Ok()
+    /////////////////////////// Test InsertbanksInfo//////////////////////////
+    /**
+     * function testInsertBankInfo_Invalid_Ok()
      * Author: Quoc Viet
-      */
+     */
 
-   // Test testInsertBankInfo_Invalid_Ok with valid input
+    // Test testInsertBankInfo_Invalid_Ok with valid input
     public function testInsertBankInfo_Invalid_Ok()
     {
         $bankModel = new BankModel();
@@ -531,10 +530,10 @@ class BankModelTest extends TestCase
         $this->assertEquals($actual[0]['cost'], $input['cost']);
         $bankModel->rollback();
     }
-       /**
+    /**
      *  function testInsertBankInfoByUser_id_Null_Ok()
      * Author: Quoc Viet
-    */
+     */
     //Test insert bank with user_id = null
     public function testInsertBankInfoByUser_id_Null_Ok()
     {
@@ -549,33 +548,33 @@ class BankModelTest extends TestCase
         //Actual
         $actual = $bankModel->findBankInfoById(3);
         // var_dump($actual);
-        ($actual[0]['user_id']!=null ) ? $this->assertTrue(true) : $this->assertTrue(false);
+        ($actual[0]['user_id'] != null) ? $this->assertTrue(true) : $this->assertTrue(false);
         $bankModel->rollback();
     }
     /**
-    *function testInsertBankInfoUer_id_character_Ok()
-   * Author: Quoc Viet
+     *function testInsertBankInfoUer_id_character_Ok()
+     * Author: Quoc Viet
      */
-        //Test insert bank with user_id is character
-        public function testInsertBankInfoUer_id_character_Ok()
-        {
-            $bankModel = new BankModel();
-            $bankModel->startTransaction();
-            $input = array(
-                'user_id' => "Viet",
-                'cost' => "1000",
-            );
-            //Execute test
-            $bankModel->insertBankInfo($input);
-            //Actual
-            // var_dump($actual); die;
-            $actual = $bankModel->findBankInfoById(3);
-            ($actual[0]['user_id'] != "Viet") ? $this->assertTrue(true) : $this->assertTrue(false);
-            $bankModel->rollback();
-        }
-       /**
-    *function testInsertBanksInfoCostNull_Ok()
-   * Author: Quoc Viet
+    //Test insert bank with user_id is character
+    public function testInsertBankInfoUer_id_character_Ok()
+    {
+        $bankModel = new BankModel();
+        $bankModel->startTransaction();
+        $input = array(
+            'user_id' => "Viet",
+            'cost' => "1000",
+        );
+        //Execute test
+        $bankModel->insertBankInfo($input);
+        //Actual
+        // var_dump($actual); die;
+        $actual = $bankModel->findBankInfoById(3);
+        ($actual[0]['user_id'] != "Viet") ? $this->assertTrue(true) : $this->assertTrue(false);
+        $bankModel->rollback();
+    }
+    /**
+     *function testInsertBanksInfoCostNull_Ok()
+     * Author: Quoc Viet
      */
 
     //Test insert bank with cost = null
@@ -589,44 +588,44 @@ class BankModelTest extends TestCase
         );
         //Execute
         $bankModel->insertBankInfo($input);
-      
+
         $actual = $bankModel->findBankInfoById(3);
-          //Actual
+        //Actual
         ($actual[0]['cost'] != null) ? $this->assertTrue(true) : $this->assertTrue(false);
         $bankModel->rollback();
     }
     /**
-    *function testInsertBankInfoCostCharacter_Ok()
-    * Author: Quoc Viet
+     *function testInsertBankInfoCostCharacter_Ok()
+     * Author: Quoc Viet
      */
-        //Test insert bank with cost is character
-        public function testInsertBankInfoCostCharacter_Ok()
-        {
-            $bankModel = new BankModel();
-            $bankModel->startTransaction();
-            $input = array(
-                'user_id' => 1,
-                'cost' => "viet",
-            );
-            //Execute test
-            $bankModel->insertBankInfo($input);
-            //Actual
-            $actual = $bankModel->findBankInfoById(3);
-            ($actual[0]['cost'] != "viet") ? $this->assertTrue(true) : $this->assertTrue(false);
-            $bankModel->rollback();
-        }
-      
+    //Test insert bank with cost is character
+    public function testInsertBankInfoCostCharacter_Ok()
+    {
+        $bankModel = new BankModel();
+        $bankModel->startTransaction();
+        $input = array(
+            'user_id' => 1,
+            'cost' => "viet",
+        );
+        //Execute test
+        $bankModel->insertBankInfo($input);
+        //Actual
+        $actual = $bankModel->findBankInfoById(3);
+        ($actual[0]['cost'] != "viet") ? $this->assertTrue(true) : $this->assertTrue(false);
+        $bankModel->rollback();
+    }
+
     /**
-    *function testInsertBankInfoUser_id_ArrayList_Ok()
-    * Author: Quoc Viet
+     *function testInsertBankInfoUser_id_ArrayList_Ok()
+     * Author: Quoc Viet
      */
-         //Test insert bank with user_id is array
+    //Test insert bank with user_id is array
     public function testInsertBankInfoUser_id_ArrayList_Ok()
     {
         $bankModel = new BankModel();
         $bankModel->startTransaction();
         $input = array(
-            'user_id' => ["viet", "cute","nam"],
+            'user_id' => ["viet", "cute", "nam"],
             'cost' => "meo",
         );
         //Execute test
@@ -638,9 +637,9 @@ class BankModelTest extends TestCase
         }
         $bankModel->rollback();
     }
-     /**
-    *function testInsertBankInfoCost_ArrayList_Ok()
-    * Author: Quoc Viet
+    /**
+     *function testInsertBankInfoCost_ArrayList_Ok()
+     * Author: Quoc Viet
      */
     //test insert banks arrayList cost
     public function testInsertBankInfoCost_ArrayList_Ok()
@@ -656,14 +655,14 @@ class BankModelTest extends TestCase
             $bankModel->insertBankInfo($input);
             $this->assertTrue(true);
         } catch (Throwable $e) {
-           
+
             $this->assertTrue(false);
         }
         $bankModel->rollback();
     }
-     /**
-    *function testInsertBanksInfoUser_idBy_Object_Ok()
-    * Author: Quoc Viet
+    /**
+     *function testInsertBanksInfoUser_idBy_Object_Ok()
+     * Author: Quoc Viet
      */
     //tets insert banks user_id object:
     public function testInsertBanksInfoUser_idBy_Object_Ok()
@@ -679,135 +678,134 @@ class BankModelTest extends TestCase
         try {
             $bankModel->insertBankInfo($input);
             $this->assertTrue(true);
-
         } catch (Throwable $e) {
             $this->assertTrue(false);
         }
         $bankModel->rollback();
     }
     /**
-    *function testInsertBanksInfoUseridBy_Object_Ok()
-    * Author: Quoc Viet
+     *function testInsertBanksInfoUseridBy_Object_Ok()
+     * Author: Quoc Viet
      */
-       //tets insert banks cost object:
-       public function testInsertBanksInfoCostBy_Object_Ok()
-       {
-           $bankModel = new BankModel();
-           $bankModel->startTransaction();
-           $input = array(
-               'user_id' => 1,
-               'cost' => $bankModel,
-           );
-   
-           //Execute test
-           try {
-               $bankModel->insertBankInfo($input);
-               $this->assertTrue(true);
-           } catch (Throwable $e) {
-               $this->assertTrue(false);
-           }
-           $bankModel->rollback();
-       }
+    //tets insert banks cost object:
+    public function testInsertBanksInfoCostBy_Object_Ok()
+    {
+        $bankModel = new BankModel();
+        $bankModel->startTransaction();
+        $input = array(
+            'user_id' => 1,
+            'cost' => $bankModel,
+        );
+
+        //Execute test
+        try {
+            $bankModel->insertBankInfo($input);
+            $this->assertTrue(true);
+        } catch (Throwable $e) {
+            $this->assertTrue(false);
+        }
+        $bankModel->rollback();
+    }
     /**
-    *function testInsertBanksInfoUserid_CostBy_Object_Ok()
-    * Author: Quoc Viet
+     *function testInsertBanksInfoUserid_CostBy_Object_Ok()
+     * Author: Quoc Viet
      */
- //tets insert banks user_id and cost object:
- public function testInsertBanksInfoUserid_CostBy_Object_Ok()
- {
-     $bankModel = new BankModel();
-     $bankModel->startTransaction();
-     $input = array(
-         'user_id' => $bankModel,
-         'cost' => $bankModel,
-     );
+    //tets insert banks user_id and cost object:
+    public function testInsertBanksInfoUserid_CostBy_Object_Ok()
+    {
+        $bankModel = new BankModel();
+        $bankModel->startTransaction();
+        $input = array(
+            'user_id' => $bankModel,
+            'cost' => $bankModel,
+        );
 
-     //Execute test
-     try {
-         $bankModel->insertBankInfo($input);
-         $this->assertTrue(true);
-     } catch (Throwable $e) {
-         $this->assertTrue(false);
-     }
-     $bankModel->rollback();
- }
+        //Execute test
+        try {
+            $bankModel->insertBankInfo($input);
+            $this->assertTrue(true);
+        } catch (Throwable $e) {
+            $this->assertTrue(false);
+        }
+        $bankModel->rollback();
+    }
     /**
-    *function testInsertBanksInfoUserid_CostBy_Object_Ok()
-    * Author: Quoc Viet
+     *function testInsertBanksInfoUserid_CostBy_Object_Ok()
+     * Author: Quoc Viet
      */
- //tets insert banks user_id and cost object:
- public function testInsertBanksInfo_double_Ok()
- {
-     $bankModel = new BankModel();
-     $bankModel->startTransaction();
-     $input = array(
-         'user_id' => 1.3,
-         'cost' => 1.3,
-     );
-     //Execute test
-     try {
-         $bankModel->insertBankInfo($input);
-         $this->assertTrue(true);
-     } catch (Throwable $e) {
-         $this->assertTrue(false);
-     }
-     $bankModel->rollback();
- }
- /**
-    *function testInsertBanksInfo_special_characters_not_Ok()
-    * Author: Quoc Viet
+    //tets insert banks user_id and cost object:
+    public function testInsertBanksInfo_double_Ok()
+    {
+        $bankModel = new BankModel();
+        $bankModel->startTransaction();
+        $input = array(
+            'user_id' => 1.3,
+            'cost' => 1.3,
+        );
+        //Execute test
+        try {
+            $bankModel->insertBankInfo($input);
+            $this->assertTrue(true);
+        } catch (Throwable $e) {
+            $this->assertTrue(false);
+        }
+        $bankModel->rollback();
+    }
+    /**
+     *function testInsertBanksInfo_special_characters_not_Ok()
+     * Author: Quoc Viet
      */
- //tets insert banks user_id and cost object:
- public function testInsertBanksInfo_special_characters_not_Ok()
- {
-     $bankModel = new BankModel();
-     $bankModel->startTransaction();
-     $input = array(
-         'user_id' => 16,
-         'cost' => "$@%@#",
-     );
-     //Execute test
-     try {
-         $bankModel->insertBankInfo($input);
-         $this->assertTrue(true);
-     } catch (Throwable $e) {
-         $this->assertTrue(false);
-     }
-     $bankModel->rollback();
- }
-  /**
-    *function testInsertBanksInfo_special_characters_not_Ok()
-    * Author: Quoc Viet
+    //tets insert banks user_id and cost object:
+    public function testInsertBanksInfo_special_characters_not_Ok()
+    {
+        $bankModel = new BankModel();
+        $bankModel->startTransaction();
+        $input = array(
+            'user_id' => 16,
+            'cost' => "$@%@#",
+        );
+        //Execute test
+        try {
+            $bankModel->insertBankInfo($input);
+            $this->assertTrue(true);
+        } catch (Throwable $e) {
+            $this->assertTrue(false);
+        }
+        $bankModel->rollback();
+    }
+    /**
+     *function testInsertBanksInfo_special_characters_not_Ok()
+     * Author: Quoc Viet
      */
- //tets insert banks user_id and cost object:
- public function testInsertBanksInfo_minus_not_Ok()
- {
-     $bankModel = new BankModel();
-     $bankModel->startTransaction();
-     $input = array(
-         'user_id' => 16,
-         'cost' => -23,
-     );
-     //Execute test
-     try {
-         $bankModel->insertBankInfo($input);
-         $this->assertTrue(true);
-     } catch (Throwable $e) {
-         $this->assertTrue(false);
-     }
-     $bankModel->rollback();
- }
+    //tets insert banks user_id and cost object:
+    public function testInsertBanksInfo_minus_not_Ok()
+    {
+        $bankModel = new BankModel();
+        $bankModel->startTransaction();
+        $input = array(
+            'user_id' => 16,
+            'cost' => -23,
+        );
+        //Execute test
+        try {
+            $bankModel->insertBankInfo($input);
+            $this->assertTrue(true);
+        } catch (Throwable $e) {
+            $this->assertTrue(false);
+        }
+        $bankModel->rollback();
+    }
 
 
-        
+
     /*
      //////////////////////////////////////  getBanks  param ///////////////////////
         
     */
 
     /**
-    *function testgetBaksByKeyWord_count_Ok()
-    * Author: Quoc Viet
+     *function testgetBaksByKeyWord_count_Ok()
+     * Author: Quoc Viet
      */
     //Tets lay dung du lieu va so luong:
     public function testgetBaksByKeyWord_count_Ok()
@@ -815,7 +813,7 @@ class BankModelTest extends TestCase
         $bankModel = new BankModel();
         $bankModel->startTransaction();
         $params = [];
-        $params=['user_id'=>1]; 
+        $params = ['user_id' => 1];
         $countAr = 20;
         $actual = $bankModel->getBanks($params);
         // var_dump($actual);die();
@@ -825,16 +823,16 @@ class BankModelTest extends TestCase
 
 
     /**
-    *function testgetBanksInfoParamNull_Ok()
-    * Author: Quoc Viet
+     *function testgetBanksInfoParamNull_Ok()
+     * Author: Quoc Viet
      */
 
-  
+
     public function testgetBanksInfoParamNull_Ok()
     {
         $bankModel = new BankModel();
         $bankModel->startTransaction();
-        $params=['user_id'=>null]; 
+        $params = ['user_id' => null];
         $actual = $bankModel->getBanks($params);
 
         if ($actual == !null) {
@@ -844,10 +842,10 @@ class BankModelTest extends TestCase
         }
         $bankModel->rollback();
     }
-    
+
     /**
-    *function testgetBanksParam_OK() truyen day du thong tin
-    * Author: Quoc Viet
+     *function testgetBanksParam_OK() truyen day du thong tin
+     * Author: Quoc Viet
      */
     public function testgetBanksParam_OK()
     {
@@ -865,9 +863,9 @@ class BankModelTest extends TestCase
         }
         $bankModel->rollback();
     }
-      /**
-    *function testgetBanksParamInfo_Object_OK() 
-    * Author: Quoc Viet
+    /**
+     *function testgetBanksParamInfo_Object_OK() 
+     * Author: Quoc Viet
      */
     //Test truyen vao object
     public function testgetBanksParamInfo_Object_OK()
@@ -922,11 +920,10 @@ class BankModelTest extends TestCase
         }
         $this->assertTrue(true);
         $bankModel->rollback();
-       
     }
-      /**
-    *function testgetBanksInfoParamDouble_OK() truyen day du thong tin
-    * Author: Quoc Viet
+    /**
+     *function testgetBanksInfoParamDouble_OK() truyen day du thong tin
+     * Author: Quoc Viet
      */
     //Truyen du lieu bang kieu so thuc:
     public function testgetBanksInfoParamDouble_notOK()
@@ -941,9 +938,9 @@ class BankModelTest extends TestCase
         $this->assertEquals($excute, $actual);
         $bankModel->rollback();
     }
-          /**
-    *function testgetBanksInfoParam_special_character_notOK() ki tu dac biet
-    * Author: Quoc Viet
+    /**
+     *function testgetBanksInfoParam_special_character_notOK() ki tu dac biet
+     * Author: Quoc Viet
      */
     //Truyen du lieu bang kieu so thuc:
     public function testgetBanksInfoParam_special_character_notOK()
@@ -958,9 +955,9 @@ class BankModelTest extends TestCase
         $this->assertEquals($excute, $actual);
         $bankModel->rollback();
     }
-              /**
-    *function testgetBanksInfoParam_minus_notOK() so am
-    * Author: Quoc Viet
+    /**
+     *function testgetBanksInfoParam_minus_notOK() so am
+     * Author: Quoc Viet
      */
     //Truyen du lieu bang so am:
     public function testgetBanksInfoParam_minus_notOK()
@@ -975,30 +972,30 @@ class BankModelTest extends TestCase
         $this->assertEquals($excute, $actual);
         $bankModel->rollback();
     }
-// //////////////////////////////////////////////////Update BanksInfo//////////////////////////////////
+    // //////////////////////////////////////////////////Update BanksInfo//////////////////////////////////
 
     /**
-    *function testUpdateBanksInfo_Ok()
-    * Author: Quoc Viet
+     *function testUpdateBanksInfo_Ok()
+     * Author: Quoc Viet
      */
     //test update banks ok
     public function testUpdateBanksInfo_Ok()
     {
         $bankModel = new BankModel();
         $bankModel->startTransaction();
-        $input =[
-            'id'=>2,
+        $input = [
+            'id' => 2,
             'cost' => 0706
         ];
-      
+
         $actual = $bankModel->updateBankInfo($input);
         var_dump($actual);
         $this->assertTrue($actual);
         $bankModel->rollback();
     }
     /**
-    *function testUpdateBanksInfoCostEmpty_notOk()
-    * Author: Quoc Viet
+     *function testUpdateBanksInfoCostEmpty_notOk()
+     * Author: Quoc Viet
      */
     //test upddate  banks  cost empty
     public function testUpdateBanksInfoCostEmpty_notOk()
@@ -1006,21 +1003,21 @@ class BankModelTest extends TestCase
         $bankModel = new BankModel();
         $bankModel->startTransaction();
         $input = [
-            'id'=>2,
+            'id' => 2,
             'cost' => "",
         ];
         $actual = $bankModel->updateBankInfo($input);
-        if($actual==null){
+        if ($actual == null) {
             $this->assertTrue(true);
-        }else{
+        } else {
             $this->assertTrue(false);
         }
         // $this->assertTrue($actual);
         $bankModel->rollback();
     }
-     /**
-    *function testUpdateBanksInfoCost_double_notOk()
-    * Author: Quoc Viet
+    /**
+     *function testUpdateBanksInfoCost_double_notOk()
+     * Author: Quoc Viet
      */
     //test upddate  banks  cost empty
     public function testUpdateBanksInfoCost_double_notOk()
@@ -1028,66 +1025,66 @@ class BankModelTest extends TestCase
         $bankModel = new BankModel();
         $bankModel->startTransaction();
         $input = [
-            'id'=>2,
-            'cost' =>2.5,
+            'id' => 2,
+            'cost' => 2.5,
         ];
         $actual = $bankModel->updateBankInfo($input);
         // var_dump($actual);die();
-        if($actual==null){
+        if ($actual == null) {
             $this->assertTrue(true);
-        }else{
+        } else {
             $this->assertTrue(false);
         }
         // $this->assertTrue($actual);
         $bankModel->rollback();
     }
     /**
-    *function testUpdateBanksInfoCostString_notOk()
-    * Author: Quoc Viet
+     *function testUpdateBanksInfoCostString_notOk()
+     * Author: Quoc Viet
      */
-  //test update banks cost charactor:
-  public function testUpdateBanksInfoCostString_notOk()
+    //test update banks cost charactor:
+    public function testUpdateBanksInfoCostString_notOk()
     {
         $bankModel = new BankModel();
         $bankModel->startTransaction();
         $input = array(
-            'id'=>1,
+            'id' => 1,
             'cost' => "viet",
         );
         $actual = $bankModel->updateBankInfo($input);
-        if($actual==null){
+        if ($actual == null) {
             $this->assertTrue(true);
-        }else{
+        } else {
             $this->assertTrue(false);
         }
-      
+
         $bankModel->rollback();
     }
-      /**
-    *function testUpdateBanksInfoCostNull_notOk()
-    * Author: Quoc Viet
+    /**
+     *function testUpdateBanksInfoCostNull_notOk()
+     * Author: Quoc Viet
      */
-   //test update banks cost null:
+    //test update banks cost null:
     public function testUpdateBanksInfoCostNull_notOk()
     {
         $bankModel = new BankModel();
         $bankModel->startTransaction();
         $input = [
-            'id'=>2,
+            'id' => 2,
             'cost' => null,
         ];
         $actual = $bankModel->updateBankInfo($input);
-        if($actual==null){
+        if ($actual == null) {
             $this->assertTrue(true);
-        }else{
+        } else {
             $this->assertTrue(false);
         }
-      
+
         $bankModel->rollback();
     }
     /**
-    *function testUpdateBanksInfoIdEmpty_notOk()
-    * Author: Quoc Viet
+     *function testUpdateBanksInfoIdEmpty_notOk()
+     * Author: Quoc Viet
      */
     //test upadte banks id array empty:
     public function testUpdateBanksInfoIdEmpty_notOk()
@@ -1097,18 +1094,18 @@ class BankModelTest extends TestCase
         $input = [
             'id' => '',
             'cost' => '5000',
-            ];
+        ];
         $actual = $bankModel->updateBankInfo($input);
-        if($actual==null){
+        if ($actual == null) {
             $this->assertTrue(true);
-        }else{
+        } else {
             $this->assertTrue(false);
         }
         $bankModel->rollback();
     }
-     /**
-    *function testUpdateBanksInfoIdNull_Ok()
-    * Author: Quoc Viet
+    /**
+     *function testUpdateBanksInfoIdNull_Ok()
+     * Author: Quoc Viet
      */
     //test update banks id null
     public function testUpdateBanksInfoIdNull_Ok()
@@ -1118,18 +1115,18 @@ class BankModelTest extends TestCase
         $input = [
             'id' => null,
             'cost' => '5000',
-            ];
+        ];
         $actual = $bankModel->updateBankInfo($input);
-        if($actual==null){
+        if ($actual == null) {
             $this->assertTrue(true);
-        }else{
+        } else {
             $this->assertTrue(false);
         }
         $bankModel->rollback();
     }
     /**
-    *function testUpdateBanksInfoIdCharacter()
-    * Author: Quoc Viet
+     *function testUpdateBanksInfoIdCharacter()
+     * Author: Quoc Viet
      */
     //test update banks id character:
     public function testUpdateBanksInfoIdCharacter()
@@ -1139,18 +1136,18 @@ class BankModelTest extends TestCase
         $input = [
             'id' => 'viet',
             'cost' => '5000',
-            ];
+        ];
         $actual = $bankModel->updateBankInfo($input);
-        if($actual==null){
+        if ($actual == null) {
             $this->assertTrue(true);
-        }else{
+        } else {
             $this->assertTrue(false);
         }
         $bankModel->rollback();
     }
-        /**
-    *function testUpdateBanksInfo_Cost_Object_noOk()
-    * Author: Quoc Viet
+    /**
+     *function testUpdateBanksInfo_Cost_Object_noOk()
+     * Author: Quoc Viet
      */
     //test update banks id character:
     public function testUpdateBanksInfo_Cost_Object_noOk()
@@ -1160,18 +1157,18 @@ class BankModelTest extends TestCase
         $input = [
             'id' => 'viet',
             'cost' => $bankModel,
-            ];
+        ];
         $actual = $bankModel->updateBankInfo($input);
-        if($actual==null){
+        if ($actual == null) {
             $this->assertTrue(true);
-        }else{
+        } else {
             $this->assertTrue(false);
         }
         $bankModel->rollback();
     }
-            /**
-    *function testUpdateBanksInfo_Cost_Object_noOk()
-    * Author: Quoc Viet
+    /**
+     *function testUpdateBanksInfo_Cost_Object_noOk()
+     * Author: Quoc Viet
      */
     //test update banks id character:
     public function testUpdateBanksInfo_Cost_special_character_noOk()
@@ -1180,19 +1177,19 @@ class BankModelTest extends TestCase
         $bankModel->startTransaction();
         $input = [
             'id' => 'viet',
-            'cost' =>"#@$@#",
-            ];
+            'cost' => "#@$@#",
+        ];
         $actual = $bankModel->updateBankInfo($input);
-        if($actual==null){
+        if ($actual == null) {
             $this->assertTrue(true);
-        }else{
+        } else {
             $this->assertTrue(false);
         }
         $bankModel->rollback();
     }
-               /**
-    *function testUpdateBanksInfo_Cost_minus_noOk()
-    * Author: Quoc Viet
+    /**
+     *function testUpdateBanksInfo_Cost_minus_noOk()
+     * Author: Quoc Viet
      */
     //test update banks id character:
     public function testUpdateBanksInfo_Cost_minus_noOk()
@@ -1200,193 +1197,203 @@ class BankModelTest extends TestCase
         $bankModel = new BankModel();
         $bankModel->startTransaction();
         $input = [
-            'id' =>1,
-            'cost' =>-12,
-            ];
+            'id' => 1,
+            'cost' => -12,
+        ];
         $actual = $bankModel->updateBankInfo($input);
-        if($actual==null){
+        if ($actual == null) {
             $this->assertTrue(true);
-        }else{
+        } else {
             $this->assertTrue(false);
         }
         $bankModel->rollback();
     }
-    
-//     //////////////////////////////////////////// Delete BanksInfo//////////////
 
-   /**
-    *function testDeleteBanksInfo_Ok()
-    * Author: Quoc Viet
+    //     //////////////////////////////////////////// Delete BanksInfo//////////////
+
+    /**
+     *function testDeleteBanksInfo_Ok()
+     * Author: Quoc Viet
      */
     //test delete banks ok
     public function testDeleteBanksInfo_Ok()
     {
         $bankModel = new BankModel();
         $bankModel->startTransaction();
-         $id=2;
+        $id = 2;
         $actual = $bankModel->deleteBalanceById($id);
         // var_dump($actual);die();
         $this->assertTrue($actual);
         $bankModel->rollback();
     }
-     /**
-    *function testDeleteBanksInfoIdString_Ok()
-    * Author: Quoc Viet
+    /**
+     *function testDeleteBanksInfoIdString_Ok()
+     * Author: Quoc Viet
      */
     //test delete bank id String
     public function testDeleteBanksInfoIdString_Ok()
     {
         $bankModel = new BankModel();
         $bankModel->startTransaction();
-         $id="viet cute";
+        $id = "viet cute";
         $actual = $bankModel->deleteBalanceById($id);
         // var_dump($actual);die();
-        if($actual==null){
+        if ($actual == null) {
             $this->assertTrue(true);
-        }else{
+        } else {
             $this->assertTrue(false);
         }
         // $this->assertTrue(true,$actual);
         $bankModel->rollback();
     }
-      /**
-    *function testDeleteBanksInfoIdNull_Ok()
-    * Author: Quoc Viet
+    /**
+     *function testDeleteBanksInfoIdNull_Ok()
+     * Author: Quoc Viet
      */
     //test delete banks id =null
     public function testDeleteBanksInfoIdNull_Ok()
     {
         $bankModel = new BankModel();
         $bankModel->startTransaction();
-         $id=null;
+        $id = null;
         $actual = $bankModel->deleteBalanceById($id);
-        if($actual==null){
+        if ($actual == null) {
             $this->assertTrue(true);
-        }else{
+        } else {
             $this->assertTrue(false);
         }
         $bankModel->rollback();
     }
-       /**
-    *function testDeleteBanksInfoCharacterEmpty_Ok()
-    * Author: Quoc Viet
+    /**
+     *function testDeleteBanksInfoCharacterEmpty_Ok()
+     * Author: Quoc Viet
      */
     //test delete banks id character empty
     public function testDeleteBanksInfoCharacterEmpty_Ok()
     {
         $bankModel = new BankModel();
         $bankModel->startTransaction();
-         $id='';
+        $id = '';
         $actual = $bankModel->deleteBalanceById($id);
 
-       if($actual==null){
+        if ($actual == null) {
             $this->assertTrue(true);
-        }else{
+        } else {
             $this->assertTrue(false);
         }
         $bankModel->rollback();
     }
-       /**
-    *function testDeleteBanksInfoObject_Ok()
-    * Author: Quoc Viet
+    /**
+     *function testDeleteBanksInfoObject_Ok()
+     * Author: Quoc Viet
      */
     //test delete banks id character empty
     public function testDeleteBanksInfoObject_Ok()
-    {  $bankModel = new BankModel();
+    {
+        $bankModel = new BankModel();
         $bankModel->startTransaction();
         $id = $bankModel;
         //Execute test
         try {
-            $bankModel->deleteBalanceById($d);
-        } catch (Throwable $e) {
-            $this->assertTrue(true);
-        }
-        $bankModel->rollback();
-    }
-          /**
-    *function testDeleteBanksInfoDouble_notOk()
-    * Author: Quoc Viet
-     */
-    //test delete banks id double
-    public function testDeleteBanksInfoDouble_notOk()
-    {  $bankModel = new BankModel();
-        $bankModel->startTransaction();
-        $id = 1.2;
-        //Execute test
-        try {
-            $bankModel->deleteBalanceById($d);
-        } catch (Throwable $e) {
-            $this->assertTrue(true);
-        }
-        $bankModel->rollback();
-    }
-       /**
-    *function testDeleteBanksInfo_character_Special_Ok()
-    * Author: Quoc Viet
-     */
-    public function testDeleteBanksInfo_character_Special_Ok()
-    { 
-         $bankModel = new BankModel();
-         $bankModel->startTransaction();
-        $id ='#$%^$^"';
-        //Execute test
-        try {
-            $bankModel->deleteBalanceById($d);
-        } catch (Throwable $e) {
-            $this->assertTrue(true);
-        }
-        $bankModel->rollback();
-    }
-              /**
-    *function testDeleteBanksInfoDouble_notOk()
-    * Author: Quoc Viet
-     */
-    //test delete banks id character empty
-    public function testDeleteBanksInfoArrayList_notOk()
-    {  $bankModel = new BankModel();
-        $bankModel->startTransaction();
-        $id = ["viet"];
-        //Execute test
-        try {
-            $bankModel->deleteBalanceById($d);
+            $bankModel->deleteBalanceById($id);
+            $this->assertTrue(false);
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
         $bankModel->rollback();
     }
     /**
-    *function testDeleteBanksInfoDouble_notOk()
-    * Author: Quoc Viet
+     *function testDeleteBanksInfoDouble_notOk()
+     * Author: Quoc Viet
+     */
+    //test delete banks id double
+    public function testDeleteBanksInfoDouble_notOk()
+    {
+        $bankModel = new BankModel();
+        $bankModel->startTransaction();
+        $id = 1.2;
+        //Execute test
+        try {
+            $bankModel->deleteBalanceById($id);
+            $this->assertTrue(false);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        $bankModel->rollback();
+    }
+    /**
+     *function testDeleteBanksInfo_character_Special_Ok()
+     * Author: Quoc Viet
+     */
+    public function testDeleteBanksInfo_character_Special_Ok()
+    {
+        $bankModel = new BankModel();
+        $bankModel->startTransaction();
+        $id = '#$%^$^"';
+        //Execute test
+        try {
+            $bankModel->deleteBalanceById($id);
+            $this->assertTrue(false);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        $bankModel->rollback();
+    }
+    /**
+     *function testDeleteBanksInfoDouble_notOk()
+     * Author: Quoc Viet
+     */
+    //test delete banks id character empty
+    public function testDeleteBanksInfoArrayList_notOk()
+    {
+        $bankModel = new BankModel();
+        $bankModel->startTransaction();
+        $id = ["viet"];
+        //Execute test
+        try {
+            $bankModel->deleteBalanceById($id);
+            $this->assertTrue(false);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        $bankModel->rollback();
+    }
+    /**
+     *function testDeleteBanksInfoDouble_notOk()
+     * Author: Quoc Viet
      */
     //test delete banks id character empty
     public function testDeleteBanksInfoScript_notOk()
-    {  $bankModel = new BankModel();
+    {
+        $bankModel = new BankModel();
         $bankModel->startTransaction();
         $id = "<script>1</script>";
         //Execute test
         try {
-            $bankModel->deleteBalanceById($d);
+            $bankModel->deleteBalanceById($id);
+            $this->assertTrue(false);
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
         $bankModel->rollback();
     }
-     /**
-    *function testDeleteBanksInfo_minus_notOk()
-    * Author: Quoc Viet
+    /**
+     *function testDeleteBanksInfo_minus_notOk()
+     * Author: Quoc Viet
      */
     //test delete banks id character empty
     public function testDeleteBanksInfo_minus_notOk()
-    {  $bankModel = new BankModel();
+    {
+        $bankModel = new BankModel();
         $bankModel->startTransaction();
-        $id =-23;
+        $id = -23;
         //Execute test
         try {
-            $bankModel->deleteBalanceById($d);
+            $bankModel->deleteBalanceById($id);
+            $this->assertTrue(false);
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
         $bankModel->rollback();
     }
-
 }

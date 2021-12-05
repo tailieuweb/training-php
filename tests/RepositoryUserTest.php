@@ -72,7 +72,7 @@ class RepositoryUserTest extends TestCase
 
     /*
     File: RepositoryUser.
-    Id: 02
+    Id: 03
     Function: insert($input).
     Desc: Test insert and hash password is ok
     Author: Phuong Nguyen.
@@ -104,7 +104,7 @@ class RepositoryUserTest extends TestCase
     
     /*
     File: RepositoryUser.
-    Id: 02
+    Id: 04
     Function: insert($input).
     Desc: Test insert with input (name) is array
     Author: Phuong Nguyen.
@@ -133,7 +133,7 @@ class RepositoryUserTest extends TestCase
 
      /*
     File: RepositoryUser.
-    Id: 02
+    Id: 05
     Function: insert($input).
     Desc: Test insert with input (name) is obj
     Author: Phuong Nguyen.
@@ -162,7 +162,7 @@ class RepositoryUserTest extends TestCase
 
      /*
     File: RepositoryUser.
-    Id: 02
+    Id: 06
     Function: insert($input).
     Desc: Test insert with input (name) is null
     Author: Phuong Nguyen.
@@ -191,7 +191,7 @@ class RepositoryUserTest extends TestCase
 
     /*
     File: RepositoryUser.
-    Id: 02
+    Id: 07
     Function: insert($input).
     Desc: Test insert with input (fullname) is array
     Author: Phuong Nguyen.
@@ -220,7 +220,7 @@ class RepositoryUserTest extends TestCase
 
     /*
     File: RepositoryUser.
-    Id: 02
+    Id: 08
     Function: insert($input).
     Desc: Test insert with input (fullname) is obj
     Author: Phuong Nguyen.
@@ -249,7 +249,7 @@ class RepositoryUserTest extends TestCase
 
     /*
     File: RepositoryUser.
-    Id: 02
+    Id: 09
     Function: insert($input).
     Desc: Test insert with input (fullname) is null
     Author: Phuong Nguyen.
@@ -278,7 +278,7 @@ class RepositoryUserTest extends TestCase
 
      /*
     File: RepositoryUser.
-    Id: 02
+    Id: 10
     Function: insert($input).
     Desc: Test insert with input (fullname) is empty
     Author: Phuong Nguyen.
@@ -305,7 +305,7 @@ class RepositoryUserTest extends TestCase
 
       /*
     File: RepositoryUser.
-    Id: 02
+    Id: 11
     Function: insert($input).
     Desc: Test insert with input (fullname) is boolean
     Author: Phuong Nguyen.
@@ -333,7 +333,7 @@ class RepositoryUserTest extends TestCase
 
      /*
     File: RepositoryUser.
-    Id: 02
+    Id: 12
     Function: insert($input).
     Desc: Test insert with input (email) is array
     Author: Phuong Nguyen.
@@ -362,7 +362,7 @@ class RepositoryUserTest extends TestCase
 
      /*
     File: RepositoryUser.
-    Id: 02
+    Id: 13
     Function: insert($input).
     Desc: Test insert with input (email) is obj
     Author: Phuong Nguyen.
@@ -391,7 +391,7 @@ class RepositoryUserTest extends TestCase
 
      /*
     File: RepositoryUser.
-    Id: 02
+    Id: 14
     Function: insert($input).
     Desc: Test insert with input (email) is null
     Author: Phuong Nguyen.
@@ -420,7 +420,7 @@ class RepositoryUserTest extends TestCase
 
      /*
     File: RepositoryUser.
-    Id: 02
+    Id: 15
     Function: insert($input).
     Desc: Test insert with input (email) is empty
     Author: Phuong Nguyen.
@@ -447,7 +447,7 @@ class RepositoryUserTest extends TestCase
 
       /*
     File: RepositoryUser.
-    Id: 02
+    Id: 16
     Function: insert($input).
     Desc: Test insert with input (email) is boolean
     Author: Phuong Nguyen.
@@ -475,7 +475,7 @@ class RepositoryUserTest extends TestCase
 
      /*
     File: RepositoryUser.
-    Id: 02
+    Id: 17
     Function: insert($input).
     Desc: Test insert with input (type) is array
     Author: Phuong Nguyen.
@@ -504,7 +504,7 @@ class RepositoryUserTest extends TestCase
 
       /*
     File: RepositoryUser.
-    Id: 02
+    Id: 18
     Function: insert($input).
     Desc: Test insert with input (type) is obj
     Author: Phuong Nguyen.
@@ -533,7 +533,7 @@ class RepositoryUserTest extends TestCase
 
       /*
     File: RepositoryUser.
-    Id: 02
+    Id: 19
     Function: insert($input).
     Desc: Test insert with input (type) is null
     Author: Phuong Nguyen.
@@ -562,7 +562,7 @@ class RepositoryUserTest extends TestCase
 
         /*
     File: RepositoryUser.
-    Id: 02
+    Id: 20
     Function: insert($input).
     Desc: Test insert with input (type) is empty
     Author: Phuong Nguyen.
@@ -589,7 +589,7 @@ class RepositoryUserTest extends TestCase
 
          /*
     File: RepositoryUser.
-    Id: 02
+    Id: 21
     Function: insert($input).
     Desc: Test insert with input (type) is boolean
     Author: Phuong Nguyen.
@@ -616,7 +616,7 @@ class RepositoryUserTest extends TestCase
 
        /*
     File: RepositoryUser.
-    Id: 02
+    Id: 22
     Function: insert($input).
     Desc: Test insert with input (password) is arr
     Author: Phuong Nguyen.
@@ -645,7 +645,7 @@ class RepositoryUserTest extends TestCase
 
        /*
     File: RepositoryUser.
-    Id: 02
+    Id: 23
     Function: insert($input).
     Desc: Test insert with input (password) is obj
     Author: Phuong Nguyen.
@@ -674,7 +674,7 @@ class RepositoryUserTest extends TestCase
 
        /*
     File: RepositoryUser.
-    Id: 02
+    Id: 24
     Function: insert($input).
     Desc: Test insert with input (password) is null
     Author: Phuong Nguyen.
@@ -703,7 +703,7 @@ class RepositoryUserTest extends TestCase
 
           /*
     File: RepositoryUser.
-    Id: 02
+    Id: 25
     Function: insert($input).
     Desc: Test insert with input (password) is empty
     Author: Phuong Nguyen.
@@ -730,7 +730,7 @@ class RepositoryUserTest extends TestCase
 
            /*
     File: RepositoryUser.
-    Id: 02
+    Id: 26
     Function: insert($input).
     Desc: Test insert with input (password) is boolean
     Author: Phuong Nguyen.
