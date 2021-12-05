@@ -80,7 +80,7 @@ export const actSignUpUser = (user, callback, t) => {
   };
 };
 
-export const actLogoutUser = () => {
+export const actLogoutUser = (t) => {
   return (dispatch) => {
     dispatch(logoutUser());
     toast.success(t("app.toast.signOutSuccess"));
