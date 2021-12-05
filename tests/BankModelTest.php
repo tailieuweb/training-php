@@ -335,6 +335,7 @@ class BankModelTest extends TestCase
         // su dung gettype de kiem tra tra ve tring
         $bank = $banModel->getInstance()->getBanks();
         $actual = gettype($bank);
+        //var_dump($actual);
         $expected = 'array';
         $this->assertEquals($expected, $actual);
     }
@@ -347,10 +348,10 @@ class BankModelTest extends TestCase
         $banModel = new BankModel();
 
         $bank = $banModel->getInstance();
+        //var_dump($bank);die();
         $actual = gettype($bank);
-        // var_dump($actual);die();
+       
         $expected = 'object';
-
         $this->assertEquals($expected, $actual);
     }
 

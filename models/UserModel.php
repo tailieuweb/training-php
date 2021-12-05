@@ -9,16 +9,18 @@ class UserModel extends BaseModel
     // rollback data: 
    
     public function findUserByIdNew($id)
-    {
-        $sql = 'SELECT * FROM users WHERE id = ' . $id;
-        $user = $this->select($sql);
-        return $user;
+    {   
+        if(is_object($id) || is_array($id) || is_string($id) || is_null($id) || is_bool($id)){
+            return "NOT INVAT";
+        } 
+        else {
+            $sql = 'SELECT * FROM users WHERE id = ' . $id;
+            $user = $this->select($sql);
+            return $user;
+        }
     }
 
-    // public function insertUserDecorator($data)
-    // {
-    //     return  $this->insertUser($data);
-    // }
+  
 
     public function lastUserId()
     {
@@ -182,14 +184,6 @@ class UserModel extends BaseModel
         $sql = "INSERT INTO `php_web1`.`users` (`name`,`fullname`, `email`, `type`, `password`) VALUES (" .
             "'" . $input['name'] . "', '" . $input['fullname'] . "' , '" . $input['email'] . "', '" . $input['type'] . "', '" . $password . "')";
         $user = $this->insert($sql);
-
-        // $getLastID = $this->getLastID();
-        // $insertBanks = [
-        //     'user_id' => $getLastID[0]['MAX(id)'],
-        //     'cost' => 500,
-        // ];
-        // $bankModel = new BankModel();
-        // $bankModel->insertBanks($insertBanks);
         return $user;
     }
     public function getLastID()
