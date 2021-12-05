@@ -12,7 +12,8 @@ class LeTrungHieu_ResultTest extends TestCase
     {
         $result = ResultClass::getInstance();
         $newResult = new ResultClass();
-       
+        // var_dump($result);
+        // var_dump($newResult);die();
         $this->assertEquals($result, $newResult);
     }
     // Test case getInstance Good Multiclass Result
@@ -41,7 +42,7 @@ class LeTrungHieu_ResultTest extends TestCase
         $result = new ResultClass;
         $actual = $result->isSuccess == false &&
             $result->data == null &&
-            $result->error == "Don't have Value";
+            $result->error == "Thông tin nhập vào không đúng !!";
         if ($actual == true) {
             $this->assertTrue(true);
         } else {
@@ -53,7 +54,7 @@ class LeTrungHieu_ResultTest extends TestCase
         $result = new ResultClass;
         $actual = $result->isSuccess == true ||
             $result->data != null ||
-            $result->error != "Don't have Value";
+            $result->error != "Thông tin nhập vào không đúng !!";
         if ($actual == false) {
             $this->assertTrue(true);
         } else {
