@@ -26,16 +26,16 @@ class BankModel extends BaseModel {
     public function getBank($params = [])
     {
         if (!is_array($params)) {
-            return 1;
+            return [];
         }
         if (!isset($params["user_id"])) {
-            return 2;
+            return [];
         }
         if (is_object($params["user_id"]) || is_null($params["user_id"]) || is_array($params["user_id"]) || empty($params["user_id"])) {
-            return 3;
+            return [];
         }
         if (is_bool($params["user_id"])) {
-            return 4;
+            return [];
         }
         if (!is_int($params["user_id"])) {
             return [];
@@ -53,9 +53,9 @@ class BankModel extends BaseModel {
      */
     public function deleteBalanceById($id)
     {
-        if (is_string($input["id"])) {
-            return [];
-        }
+        // if (is_string($input["id"])) {
+        //     return [];
+        // }
         if (!isset($id)) {
             return [];
         }
@@ -145,7 +145,7 @@ class BankModel extends BaseModel {
         if (is_bool($input["cost"]) || is_bool($input["id"])  ) {
             return [];
         }
-        if (!is_int($input["id"])) {
+        if (!is_int($input["id"])||!is_int($input["cost"])) {
             return [];
         } else if ($input["id"] < 0 || $input["cost"] < 0){
             return [];
@@ -204,13 +204,13 @@ class BankModel extends BaseModel {
      * @param array $params
      * @return array
      */
-    public function getBanksInfo($params = [])
+    public function getBanks($params = [])
     {
         if (!is_array($params)) {
-            return [];
+            return 1;
         }
         if (is_object($params["user_id"]) || is_null($params["user_id"]) || is_array($params["user_id"]) || empty($params["user_id"])) {
-            return [];
+            return 2;
         }
         if (is_bool($params["user_id"])) {
             return [];
