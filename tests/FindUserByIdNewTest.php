@@ -10,11 +10,13 @@ class FindUserByIdNewTest extends TestCase
     {
        //khai báo model:
        $UserModel = new UserModel();
-       $UserModel->startTransaction();
+      
        //Truyên tham số : 
        $id = 54;
        $expected = "Thái Ngô";
+       $UserModel->startTransaction();
        $actual = $UserModel->findUserByIdNew($id);
+       //var_dump($actual).die();
        $UserModel->rollback();
        //var_dump($actual);
        //assertEquals
@@ -29,12 +31,12 @@ class FindUserByIdNewTest extends TestCase
        $UserModel = new UserModel();
        $UserModel->startTransaction();
        //id khong ton tai
-       $id = 100;
+       $id = "";
        $actual = $UserModel->findUserByIdNew($id);
        $UserModel->rollback();
        //var_dump($actual);
        //Neu ket qua mong doi khong ton tai
-       if(empty($actual)) {
+       if(!empty($actual)) {
            return $this->assertTrue(true);
        }
        return $this->assertTrue(false);
@@ -50,7 +52,7 @@ class FindUserByIdNewTest extends TestCase
        //id la mot chuoi bat ky:
        $id = "chuoi";
 
-       $expected = [];
+       $expected = "NOT INVAT";
        $actual = $UserModel->findUserByIdNew($id);
        $UserModel->rollback();
 
@@ -64,14 +66,13 @@ class FindUserByIdNewTest extends TestCase
     {
        //khai báo model:
        $UserModel = new UserModel();
+       
        //id la mot chuoi bat ky:
        $UserModel->startTransaction();
-       $id = [
-            'name' , 'email' , 'fullname' , 'type'
-       ];
+       $id = [];
 
-       $expected = [];
-       $actual = $UserModel->findUserByIdNew($id[0]);
+       $expected = "NOT INVAT";
+       $actual = $UserModel->findUserByIdNew($id);
         //var_dump($actual);die();
         $UserModel->rollback();
        $this->assertEquals($expected , $actual);
@@ -88,7 +89,7 @@ class FindUserByIdNewTest extends TestCase
        //id la mot chuoi bat ky:
        $id = null;
        //Result da biet:
-       $expected = [];
+       $expected = "NOT INVAT";
        $actual = $UserModel->findUserByIdNew($id);
        $UserModel->rollback();
         //var_dump($actual);die();
@@ -106,8 +107,9 @@ class FindUserByIdNewTest extends TestCase
        $id = BankModel::class;
        //var_dump($id);
        //Result da biet:
-       $expected = [];
+       $expected = "NOT INVAT";
        $actual = $UserModel->findUserByIdNew($id);
+       //print_r($actual);
        $UserModel->rollback();
        //var_dump($actual);die();
        $this->assertEquals($expected , $actual);
@@ -141,16 +143,11 @@ class FindUserByIdNewTest extends TestCase
        
        $id = true;
        //Result da biet:
-       $expected = false;
+       $expected = "NOT INVAT";
        $actual = $UserModel->findUserByIdNew($id);
        //var_dump($actual);die();
        
-       if(empty($actual)) {
-            $this->assertTrue(true);
-       }
-       else  {
-            $this->assertTrue(false);
-       }
+       $this->assertEquals($expected , $actual);
     }
      /**
      * Test case Negative
@@ -180,7 +177,7 @@ class FindUserByIdNewTest extends TestCase
        $UserModel->startTransaction();
        $id = '#';
        //Result da biet:
-       $expected = [];
+       $expected = "NOT INVAT";
        $actual = $UserModel->findUserByIdNew($id);
        $UserModel->rollback();
        //var_dump($actual);die();

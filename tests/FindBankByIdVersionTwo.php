@@ -11,8 +11,8 @@ class FindBankByIdVersionTwo extends TestCase
     public function testFindBankByIdVersionTwoOk()
     {
         $bankModel = new BankModel();
-        $id = 53;
-        $expected = "30000";
+        $id = 54;
+        $expected = "12312";
         $bankModel->startTransaction();
         $bank = $bankModel->findBankByIdVersionTwo($id);
         $actual = $bank[0]['cost'];
