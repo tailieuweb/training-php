@@ -53,7 +53,7 @@ class BankModel extends BaseModel implements IBank
     //         "'" . $input['name'] . "', '".$input['fullname']."','".$input['sdt']."', '".$input['email']."','".$input['stk']."')";
 
 
-    // Le Anh Vu chinh sua.
+    // Le Anh Vu chinh sua hihi.
     public function insertUser_bank($input = [])
     {
 
@@ -168,7 +168,7 @@ class BankModel extends BaseModel implements IBank
         return $result;
     } // my magic number: 141211515
 
-    // Le Anh Vu chinh sua.
+    // Le Anh Vu chinh sua hihi.
     public function updateUser_bank($input = [])
     {
 
@@ -334,6 +334,7 @@ class BankModel extends BaseModel implements IBank
     public function cost(){
         return $this->getBanks(null);
     }
+    
     public function startTransaction()
     {
         self::$_connection->begin_transaction();
