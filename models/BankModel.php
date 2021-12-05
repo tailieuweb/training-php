@@ -53,9 +53,9 @@ class BankModel extends BaseModel {
      */
     public function deleteBalanceById($id)
     {
-        // if (is_string($input["id"])) {
-        //     return [];
-        // }
+        if (is_string($id)) {
+            return [];
+        }
         if (!isset($id)) {
             return [];
         }
@@ -76,7 +76,9 @@ class BankModel extends BaseModel {
 
     public function findBankInfoById($id)
     {
-       
+        if (is_string($id)) {
+            return [];
+        }
         if (!isset($id)) {
             return [];
         }
@@ -99,7 +101,9 @@ class BankModel extends BaseModel {
 
     public function findBankInfoByUserID($user_id)
     {
-       
+        if (is_string($user_id)) {
+            return [];
+        }
         if (!isset($user_id)) {
             return [];
         }

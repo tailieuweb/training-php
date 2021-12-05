@@ -60,27 +60,17 @@ class BankModelTest extends TestCase
     Desc: Test get bank by bank id with input is string
     Author: Phuong Nguyen.
     */
-    // public function testFindBankInfoById_WithInputIs_String()
-    // {
-    //     $factory = new FactoryPattern();
-    //     $bankModel = $factory->make("bank");
-    //     $bankModel->startTransaction();
-    //     $expected = [
-    //         [
-    //             'id' => '1',
-    //             'user_id' => '1',
-    //             'cost' => '1111',
-    //         ]
-    //     ];
-
-    //     $actual = $bankModel->find("1");
-    //     $this->assertEquals(
-    //         $expected,
-    //         $actual,
-    //         "Expected and actual not equals"
-    //     );
-    //     $bankModel->rollback();
-    // }
+    public function testFindBankInfoById_WithInputIs_String()
+    {
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make("bank");
+        $actual = $bankModel->find("1");
+        $this->assertEmpty(
+            $actual,
+            "actual is not empty"
+        );
+        $bankModel->rollback();
+    }
 
     /*
     File: BankModel
@@ -292,25 +282,17 @@ class BankModelTest extends TestCase
     Desc: Test get bank by user id with input (user_id) is string
     Author: Phuong Nguyen.
     */
-    // public function testFindBankInfoByUserId_WithInputIs_String()
-    // {
-    //     $factory = new FactoryPattern();
-    //     $bankModel = $factory->make("bank");
-    //     $expected = [
-    //         [
-    //             'id' => '1',
-    //             'user_id' => '1',
-    //             'cost' => '1111',
-    //         ]
-    //     ];
+    public function testFindBankInfoByUserId_WithInputIs_String()
+    {
+        $factory = new FactoryPattern();
+        $bankModel = $factory->make("bank");
 
-    //     $actual = $bankModel->findByUserId("1");
-    //     $this->assertEquals(
-    //         $expected,
-    //         $actual,
-    //         "Expected and actual not equals"
-    //     );
-    // }
+        $actual = $bankModel->findByUserId("1");
+        $this->assertEmpty(
+            $actual,
+            "actual is not empty"
+        );
+    }
 
     //     $actual = $bankModel->findByUserId("1");
     //     $this->assertEquals(
