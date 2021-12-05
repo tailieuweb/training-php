@@ -1,7 +1,7 @@
 <?php
-//Hoàng Vũ
-use PHPUnit\Framework\TestCase;
 
+use PHPUnit\Framework\TestCase;
+//Hoàng Vũ
 class UserModelTests extends TestCase
 {
     protected static $_instance;
