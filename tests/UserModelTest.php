@@ -1392,6 +1392,42 @@ class UserModelTest extends TestCase
         $this->assertTrue(true);
         $userModel->rollback();
     }
+     /* Kiểm tra trường hợp truyền vào keyword là số thực */
+     public function testgetUsesIsDouble()
+     {
+         $userModel = new UserModel();
+         $userModel->startTransaction();
+         $actual = null;
+ 
+         $keyword = array(
+             'keyword' => 9.8,
+         );
+         try {
+             $actual = $userModel->getUsers($keyword);
+         } catch (Throwable $e) {
+             $this->assertTrue(false);
+         }
+         $this->assertTrue(true);
+         $userModel->rollback();
+     }
+     /* Kiểm tra trường hợp truyền vào keyword là số âm */
+     public function testgetUsesNotIsNumber()
+     {
+         $userModel = new UserModel();
+         $userModel->startTransaction();
+         $actual = null;
+ 
+         $keyword = array(
+             'keyword' => -1,
+         );
+         try {
+             $actual = $userModel->getUsers($keyword);
+         } catch (Throwable $e) {
+             $this->assertTrue(false);
+         }
+         $this->assertTrue(true);
+         $userModel->rollback();
+     }
 }
   
 
