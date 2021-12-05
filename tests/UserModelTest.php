@@ -114,7 +114,7 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $userModel->startTransaction();
-        $userId = 109;
+        $userId = 1000;
         $expected = [];
         $actual = $userModel->findUserById($userId);
         $this->assertEquals($expected, $actual);
