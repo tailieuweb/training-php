@@ -145,7 +145,7 @@ class BankModel extends BaseModel {
         if (is_bool($input["cost"]) || is_bool($input["id"])  ) {
             return [];
         }
-        if (!is_int($input["id"])) {
+        if (!is_int($input["id"])||!is_int($input["cost"])) {
             return [];
         } else if ($input["id"] < 0 || $input["cost"] < 0){
             return [];
