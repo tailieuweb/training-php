@@ -4,9 +4,13 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
+    protected static $_instance;
+    public function sumb($a,$b){
+        return $a + $b;
+    }
     public static function getInstance()
     {
-        if (self::$_instance !== null) {
+        if(self::$_instance !== null){
             return self::$_instance;
         }
         self::$_instance = new self();
@@ -54,8 +58,8 @@ class UserModel extends BaseModel
         $isAuth = $this->getUsers();
         foreach ($isAuth as $item) {
             if (md5($item['id']) == $id) {
-                $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
-                return $this->delete($sql);
+                // $sql = 'DELETE FROM users WHERE id = ' . $item['id'];
+                // return $this->delete($sql);
             }
         }
     }
@@ -113,7 +117,7 @@ class UserModel extends BaseModel
     /**
      * Search users
      * @param array $params
-     * @return array
+     * * @return array
      */
     public function getUsers($params = [])
     {
@@ -124,7 +128,7 @@ class UserModel extends BaseModel
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+            $users = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
@@ -132,9 +136,14 @@ class UserModel extends BaseModel
 
         return $users;
     }
-
-    public function sumb($a, $b)
+    public function startTransaction()
     {
-        return $a + $b;
+        self::$_connection->begin_transaction();
     }
+
+    public function rollBack()
+    {
+        self::$_connection->rollback();
+    }
+
 }

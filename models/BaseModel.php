@@ -1,38 +1,37 @@
 <?php
-$ds       = DIRECTORY_SEPARATOR;
-$base_dir = realpath(dirname(__FILE__).$ds.'..').$ds;
-require("{$base_dir}configs{$ds}database.php");
+require_once 'configs/database.php';
 
 abstract class BaseModel {
     // Database connection
     protected static $_connection;
-    protected static $_instance;
-
+    
     public function __construct() {
+
         if (!isset(self::$_connection)) {
-            try {
+            try{
                 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
                 self::$_connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
-            }catch(mysqli_sql_exception $e)
-                {
-                 // var_dump("loi du lieu");
-                 header('location: errordb.php');
-                 die();
-                }
-                finally{
-                }
+            }
+           catch(mysqli_sql_exception $e){
+            printf("Connect failed");
+            die();
+           }
+           finally{
+
+           }
             if (self::$_connection->connect_errno) {
                 printf("Connect failed");
                 exit();
             }
         }
-       
     }
+
     /**
      * Query in database
      * @param $sql
      */
     protected function query($sql) {
+
         $result = self::$_connection->query($sql);
         return $result;
     }
