@@ -115,7 +115,7 @@ class DeleteUserByIdTest extends TestCase
       public function testDeleteUserByIdNg()
       {
           $userModel = new UserModel();
-          $id = "999a";
+          $id = "980a";
           $userModel->startTransaction();
           $check = $userModel->deleteUserById($id);
           if ($check == false) {
