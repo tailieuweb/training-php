@@ -2,26 +2,24 @@
 
 require_once 'BaseModel.php';
 $ds       = DIRECTORY_SEPARATOR;
-$base_dir = realpath(dirname(__FILE__).$ds.'..').$ds;
+$base_dir = realpath(dirname(__FILE__) . $ds . '..') . $ds;
 require_once("{$base_dir}models{$ds}IBank.php");
 class BankModel extends BaseModel implements IBank
 {
     protected static $_instance;
-    
+
     public static function getInstance()
     {
-        if(self::$_instance !== null){
+        if (self::$_instance !== null) {
             return self::$_instance;
         }
         self::$_instance = new self();
         return self::$_instance;
     }
-    
+
     public function findBankById($id)
     {
-        substr($id, 4,1);
-        
-        $sql = 'SELECT * FROM bank WHERE id = ' . substr($id, 4,1);
+        $sql = 'SELECT * FROM bank WHERE id = ' . $id;
         $banks = $this->select($sql);
         //var_dump($banks);
         return $banks;
@@ -335,10 +333,11 @@ class BankModel extends BaseModel implements IBank
 
     //     return $user;
     // }
-    public function cost(){
+    public function cost()
+    {
         return $this->getBanks(null);
     }
-    
+
     public function startTransaction()
     {
         self::$_connection->begin_transaction();
@@ -346,12 +345,7 @@ class BankModel extends BaseModel implements IBank
 
     public function rollBack()
     {
-       self::$_connection->rollback();
+        self::$_connection->rollback();
     }
-    //cost
-    public function cost(){
-        return $this->getBanks(null);
-    }
-
 
 }
