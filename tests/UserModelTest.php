@@ -13,55 +13,55 @@ class UserModelTest extends TestCase
     Status: OK
     Author: Phuong Nguyen
     */
-    public function testGetAllOk()
-    {
-        $factory = new FactoryPattern();
-        $userModel = $factory->make("user");
-        $userModel->startTransaction();
-        $expectedFirst = [
-            [
-                "id" => "2",
-                "name" => "test2",
-                "fullname" => "",
-                "email" => "",
-                "type" => "",
-                "password" => "202cb962ac59075b964b07152d234b70"
-            ],
-        ];
+    // public function testGetAllOk()
+    // {
+    //     $factory = new FactoryPattern();
+    //     $userModel = $factory->make("user");
+    //     $userModel->startTransaction();
+    //     $expectedFirst = [
+    //         [
+    //             "id" => "2",
+    //             "name" => "test2",
+    //             "fullname" => "",
+    //             "email" => "",
+    //             "type" => "",
+    //             "password" => "202cb962ac59075b964b07152d234b70"
+    //         ],
+    //     ];
 
-        $expectedLast =
-        [
-            [
-                "id" => "138",
-                "name" => "",
-                "fullname" => "",
-                "email" => "%!?$@gmail.com",
-                "type" => "",
-                "password" => "d41d8cd98f00b204e9800998ecf8427e"
-            ],
-        ];
-        $expectedLength = 56;
-        $actual = $userModel->read();
-        $actualLength = count($actual);
-        // var_dump($actual);die();
+    //     $expectedLast =
+    //     [
+    //         [
+    //             "id" => "138",
+    //             "name" => "",
+    //             "fullname" => "",
+    //             "email" => "%!?$@gmail.com",
+    //             "type" => "",
+    //             "password" => "d41d8cd98f00b204e9800998ecf8427e"
+    //         ],
+    //     ];
+    //     $expectedLength = 56;
+    //     $actual = $userModel->read();
+    //     $actualLength = count($actual);
+    //     // var_dump($actual);die();
 
-        if ($actualLength === $expectedLength) {
-            $v1 = $this->assertEquals(
-                $expectedFirst[0],
-                $actual[0],
-                "Expected and actual not equals"
-            );
-            $v2 = $this->assertEquals(
-                $expectedLast[0],
-                $actual[$expectedLength - 1],
-                "Expected and actual not equals"
-            );
-            $this->assertFalse(($v1 && $v2), "actualfrist is not equals actuallast");
-        } else {
-            $this->assertTrue(false, "actual length is not correct");
-        }
-        $userModel->rollback();
-    }
+    //     if ($actualLength === $expectedLength) {
+    //         $v1 = $this->assertEquals(
+    //             $expectedFirst[0],
+    //             $actual[0],
+    //             "Expected and actual not equals"
+    //         );
+    //         $v2 = $this->assertEquals(
+    //             $expectedLast[0],
+    //             $actual[$expectedLength - 1],
+    //             "Expected and actual not equals"
+    //         );
+    //         $this->assertFalse(($v1 && $v2), "actualfrist is not equals actuallast");
+    //     } else {
+    //         $this->assertTrue(false, "actual length is not correct");
+    //     }
+    //     $userModel->rollback();
+    // }
 
 
     /*
@@ -217,43 +217,43 @@ class UserModelTest extends TestCase
         $userModel->rollback();
     }
     /*======= test function insertUser======= */
-    public function testGetInsertUserOk()
-    {
-        $userModel = new UserModel();
-        $userModel->startTransaction();
-        $user = array(
-            'name' => 'nhu',
-            'password' => '123456',
-            'fullname' => 'khanhu',
-            'email' => 'khanhu@gmail.com',
-            'type' => 'admin'
-        );
-        $actual = $userModel->insertUser($user);
-        if ($actual == true) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
-        $userModel->rollback();
-    }
-    public function testGetInsertUserIsEmpty()
-    {
-        $userModel = new UserModel();
-        $userModel->startTransaction();
-        $user = array(
-            'name' => '',
-            'password' => '',
-            'fullname' => '',
-            'email' => '',
-            'type' => ''
-        );
+    // public function testGetInsertUserOk()
+    // {
+    //     $userModel = new UserModel();
+    //     $userModel->startTransaction();
+    //     $user = array(
+    //         'name' => 'nhu',
+    //         'password' => '123456',
+    //         'fullname' => 'khanhu',
+    //         'email' => 'khanhu@gmail.com',
+    //         'type' => 'admin'
+    //     );
+    //     $actual = $userModel->insertUser($user);
+    //     if ($actual == true) {
+    //         $this->assertTrue(true);
+    //     } else {
+    //         $this->assertTrue(false);
+    //     }
+    //     $userModel->rollback();
+    // }
+    // public function testGetInsertUserIsEmpty()
+    // {
+    //     $userModel = new UserModel();
+    //     $userModel->startTransaction();
+    //     $user = array(
+    //         'name' => '',
+    //         'password' => '',
+    //         'fullname' => '',
+    //         'email' => '',
+    //         'type' => ''
+    //     );
 
-        if (!empty($user['name']) || !empty($user['password']) || !empty($user['fullname']) || !empty($user['email']) || !empty($user['type'])) {
-            $this->assertTrue(false);
-        } else {
-            $this->assertTrue(true);
-        }
-    }
+    //     if (!empty($user['name']) || !empty($user['password']) || !empty($user['fullname']) || !empty($user['email']) || !empty($user['type'])) {
+    //         $this->assertTrue(false);
+    //     } else {
+    //         $this->assertTrue(true);
+    //     }
+    // }
     public function testGetInsertUserPassFullNumberNotOk()
     {
         $userModel = new UserModel();
@@ -904,18 +904,18 @@ class UserModelTest extends TestCase
         // $userModel->rollback();
     }
     /*Kiểm tra trường hợp truyền vào id kiểu object*/
-    public function testGetdeleteUserByIdIsObjectNotG()
-    {
-        $userModel = new UserModel();
-        $userModel->startTransaction();
-        $id = $userModel;
-        try {
-            $userModel->deleteUserById($id);
-        } catch (Throwable $e) {
-            $this->assertTrue(true);
-        }
-        $userModel->rollback();
-    }
+    // public function testGetdeleteUserByIdIsObjectNotG()
+    // {
+    //     $userModel = new UserModel();
+    //     $userModel->startTransaction();
+    //     $id = $userModel;
+    //     try {
+    //         $userModel->deleteUserById($id);
+    //     } catch (Throwable $e) {
+    //         $this->assertTrue(true);
+    //     }
+    //     $userModel->rollback();
+    // }
     /* Kiểm tra trường hợp truyền vào id không phải số nguyên dương */
     public function testGetdeleteUserNagativeNumber()
     {
@@ -945,19 +945,19 @@ class UserModelTest extends TestCase
         $userModel->rollback();
     }
     /* Kiểm tra trường hợp truyền vào id kiểu bool */
-    public function testGetdeleteUserBool()
-    {
-        $userModel = new UserModel();
-        $userModel->startTransaction();
-        $id = true;
-        $actual = $userModel->deleteUserById($id);
-        if ($actual != false) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
-        $userModel->rollback();
-    }
+    // public function testGetdeleteUserBool()
+    // {
+    //     $userModel = new UserModel();
+    //     $userModel->startTransaction();
+    //     $id = true;
+    //     $actual = $userModel->deleteUserById($id);
+    //     if ($actual != false) {
+    //         $this->assertTrue(true);
+    //     } else {
+    //         $this->assertTrue(false);
+    //     }
+    //     $userModel->rollback();
+    // }
     /*Kiểm tra trường hợp truyền vào id kiểu số thực*/
     public function testGetdeleteUserByIdIsDoubleNotG()
     {
@@ -1291,17 +1291,17 @@ class UserModelTest extends TestCase
         $userModel->rollback();
     }
     /* Kiểm tra trường hợp keyword nhập đúng và lấy đúng theo số lượng */
-    public function testGetUsersByKeyWordOk()
-    {
-        $userModel = new UserModel();
-        $userModel->startTransaction();
-        $params = [];
-        $params['keyword'] = 'test2';
-        $countAr =1;
-        $actual = $userModel->getUsers($params);
-        $this->assertEquals($countAr, count($actual));
-        $userModel->rollback();
-    }
+    // public function testGetUsersByKeyWordOk()
+    // {
+    //     $userModel = new UserModel();
+    //     $userModel->startTransaction();
+    //     $params = [];
+    //     $params['keyword'] = 'test2';
+    //     $countAr =1;
+    //     $actual = $userModel->getUsers($params);
+    //     $this->assertEquals($countAr, count($actual));
+    //     $userModel->rollback();
+    // }
     /* Kiểm tra trường hợp truyền vào keyword là đối tượng */
     public function testgetUsersIsObject()
     {
