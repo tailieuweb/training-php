@@ -6,27 +6,9 @@ class BankModel extends BaseModel
 {
     protected static $_instance;
 
-    public function getUserID()
-    {
-        return $this->user_id;
-    }
-    public function getCost()
-    {
-        return $this->cost = 1000;
-    }
-    public function insertUserDecorator($data, $banks)
-    {
-        echo "bankModel";
-    }
+    
     // rollback data: 
-    public function startTransaction()
-    {
-        self::$_connection->begin_transaction();
-    }
-    public function rollback()
-    {
-        self::$_connection->rollback();
-    }
+   
     public function findBankById($id)
     {
         $sql1 = 'SELECT id FROM banks';
@@ -46,7 +28,7 @@ class BankModel extends BaseModel
     // Find id banks pass design pattern
     public function findBankByIdVersionTwo($id)
     {
-        if (is_string($id) || !is_numeric($id)) {
+        if (!is_numeric($id) || $id<0 || is_double($id)) {
             return 'Not invalid';
         } else {
             $sql = 'SELECT * FROM banks WHERE id = ' . $id;
@@ -64,9 +46,9 @@ class BankModel extends BaseModel
             return false;
         }
         else{
-        $sql = 'SELECT * FROM banks WHERE user_id = ' . $user_id;
-        $bank = $this->select($sql);
-        return $bank;
+            $sql = 'SELECT * FROM banks WHERE user_id = ' . $user_id;
+            $bank = $this->select($sql);
+            return $bank;
         }
     }
 
@@ -172,10 +154,21 @@ class BankModel extends BaseModel
 
     public function insertBanks($input)
     {
-        $sql = "INSERT INTO `php_web1`.`banks` (`user_id`, `cost` ) VALUES (" .
-            "'" . $input['user_id'] . "','" . $input['cost'] . "')";
-        $bank = $this->insert($sql);
-        return $bank;
+        if (isset($input) && is_array($input)) {
+            if (isset($input['user_id']) && isset($input['cost'])) {
+                if (!is_string($input['user_id']) || !is_string($input['cost'])  || $input['user_id'] < 0 || $input['cost'] < 0) {
+                    return false;
+                }
+                $sql = "INSERT INTO php_web1.`banks` (user_id, cost ) VALUES (" .
+                    "'" . $input['user_id'] . "','" . $input['cost'] . "')";
+                $bank = $this->insert($sql);
+                return $bank;
+            } else {
+                return false;
+            }
+        }
+        return false;
+       
     }
 
     /**
@@ -201,4 +194,5 @@ class BankModel extends BaseModel
         self::$_instance = new self();
         return self::$_instance;
     }
+
 }

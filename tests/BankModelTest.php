@@ -11,8 +11,8 @@ class BankModelTest extends TestCase
     {
         $bankModel = new BankModel();
 
-        $id = md5(78 . "chuyen-de-web-1");
-        $expected  = '123';
+        $id = md5(54 . "chuyen-de-web-1");
+        $expected  = '54';
         $bank = $bankModel->findBankById($id);
         $this->assertEquals($expected, $bank[0]['user_id']);
     }
@@ -63,7 +63,7 @@ class BankModelTest extends TestCase
     public function testFindUserByIdDouble()
     {
         $bankModel = new BankModel();
-        $id = md5(78.000000 . "chuyen-de-web-1");
+        $id = md5(54.000000 . "chuyen-de-web-1");
         $actual = $bankModel->findBankById($id);
         if (!empty($actual)) {
             $this->assertTrue(true);
@@ -82,7 +82,7 @@ class BankModelTest extends TestCase
     public function testFindBankByIdStringValueNumber()
     {
         $bankModel = new BankModel();
-        $id = md5('78' . 'chuyen-de-web-1');
+        $id = md5('54' . 'chuyen-de-web-1');
         $actual = $bankModel->findBankById($id);
         if (!empty($actual)) {
             $this->assertTrue(true);
@@ -114,7 +114,9 @@ class BankModelTest extends TestCase
             'cost' => '30000'
         ];
         $bankModel = new BankModel();
+        $bankModel->startTransaction();
         $actual = $bankModel->insertBanks($data);
+        $bankModel->rollBack();
         $expected = true;
         $this->assertEquals($expected, $actual);
     }

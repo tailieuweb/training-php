@@ -10,9 +10,13 @@ class FindUserByIdTableBankTest extends TestCase
      */
     public function testFindUserByIdTableBankOk() {
         $bankModel = new BankModel();
-        $expected = 43;
-        $bankid = 43;
+        $expected = 54;
+        $bankid = 54;
+        $bankModel->startTransaction();
         $user = $bankModel->findUserByIdTableBank($bankid);
+        // print_r($user);
+        // die();
+        $bankModel->rollback();
         $actual = $user[0]['user_id'];
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
@@ -21,10 +25,12 @@ class FindUserByIdTableBankTest extends TestCase
      * Test case Okie
      */
     public function  testFindUserByIdTableBankString() {
-        $userModel = new BankModel();
+        $bankModel = new BankModel();
         $expected = [];
         $userid = "abc";
-        $user = $userModel->findUserByIdTableBank($userid);
+        $bankModel->startTransaction();
+        $user = $bankModel->findUserByIdTableBank($userid);
+        $bankModel->rollback();
         // $actual = $user['user_id'];
         // var_dump($user);die();
         $this->assertEquals($expected, $user);
@@ -34,11 +40,11 @@ class FindUserByIdTableBankTest extends TestCase
      * Test case Not good
      */
     public function  testFindUserByIdTableBankNg() {
-        $userModel = new BankModel();
+        $bankModel = new BankModel();
         $userId = 999;
-
-        $user = $userModel->findUserByIdTableBank($userId);
-
+        $bankModel->startTransaction();
+        $user = $bankModel->findUserByIdTableBank($userId);
+        $bankModel->rollback();
         if(empty($user)) {
             $this->assertTrue(true);
         } else {
@@ -49,10 +55,12 @@ class FindUserByIdTableBankTest extends TestCase
      * Test case empty
      */
     public function  testFindUserByIdTableBankEmpty() {
-        $userModel = new BankModel();
+        $bankModel = new BankModel();
         $expected = [];
         $userid = 999;
-        $user = $userModel->findUserByIdTableBank($userid);
+        $bankModel->startTransaction();
+        $user = $bankModel->findUserByIdTableBank($userid);
+        $bankModel->rollback();
         $actual = $user;
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
@@ -63,10 +71,12 @@ class FindUserByIdTableBankTest extends TestCase
      * Test case object
      */
     public function  testFindUserByIdTableBankobject() {
-        $userModel = new BankModel();
+        $bankModel = new BankModel();
         $expected = false;
         $userid = new stdClass();
-        $user = $userModel->findUserByIdTableBank($userid);
+        $bankModel->startTransaction();
+        $user = $bankModel->findUserByIdTableBank($userid);
+        $bankModel->rollback();
         $actual = $user;
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
@@ -76,10 +86,12 @@ class FindUserByIdTableBankTest extends TestCase
      * Test case double
      */
     public function  testFindUserByIdTableBankDouble() {
-        $userModel = new BankModel();
+        $bankModel = new BankModel();
         $expected = [];
         $userid = 2.5;
-        $user = $userModel->findUserByIdTableBank($userid);
+        $bankModel->startTransaction();
+        $user = $bankModel->findUserByIdTableBank($userid);
+        $bankModel->rollback();
         $actual = $user;
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
@@ -90,10 +102,12 @@ class FindUserByIdTableBankTest extends TestCase
      * Test case mảng rỗng
      */
     public function  testFindUserByIdTableBankArrayNull() {
-        $userModel = new BankModel();
+        $bankModel = new BankModel();
         $expected = false;
         $userid = [];
-        $user = $userModel->findUserByIdTableBank($userid);
+        $bankModel->startTransaction();
+        $user = $bankModel->findUserByIdTableBank($userid);
+        $bankModel->rollback();
         $actual = $user;
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
@@ -103,10 +117,12 @@ class FindUserByIdTableBankTest extends TestCase
      * Test case mảng rỗng
      */
     public function  testFindUserByIdTableBankNull() {
-        $userModel = new BankModel();
+        $bankModel = new BankModel();
         $expected = [];
         $userid = null;
-        $user = $userModel->findUserByIdTableBank($userid);
+        $bankModel->startTransaction();
+        $user = $bankModel->findUserByIdTableBank($userid);
+        $bankModel->rollback();
         $actual = $user;
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
@@ -117,10 +133,12 @@ class FindUserByIdTableBankTest extends TestCase
      * Test case số âm
      */
     public function  testFindUserByIdTableBankNegative() {
-        $userModel = new BankModel();
+        $bankModel = new BankModel();
         $expected = [];
         $userid = -5;
-        $user = $userModel->findUserByIdTableBank($userid);
+        $bankModel->startTransaction();
+        $user = $bankModel->findUserByIdTableBank($userid);
+        $bankModel->rollback();
         $actual = $user;
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);

@@ -12,8 +12,8 @@ class FindUserByIdNewTest extends TestCase
        $UserModel = new UserModel();
        $UserModel->startTransaction();
        //Truyên tham số : 
-       $id = 1;
-       $expected = "user";
+       $id = 54;
+       $expected = "Thái Ngô";
        $actual = $UserModel->findUserByIdNew($id);
        $UserModel->rollback();
        //var_dump($actual);
@@ -145,7 +145,7 @@ class FindUserByIdNewTest extends TestCase
        $actual = $UserModel->findUserByIdNew($id);
        //var_dump($actual);die();
        
-       if($actual) {
+       if(empty($actual)) {
             $this->assertTrue(true);
        }
        else  {

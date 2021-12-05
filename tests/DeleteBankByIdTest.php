@@ -11,9 +11,10 @@ class DeleteBankByIdTest extends TestCase
     public function testDeleteBankByIdOk() {
         $bankModel = new BankModel();
         $expected = true;
-        $bankid = md5(12 . "chuyen-de-web-1");
+        $bankid = md5(54 . "chuyen-de-web-1");
+        $bankModel->startTransaction();
         $actual = $bankModel->deleteBankById($bankid);
-        
+        $bankModel->rollback();
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
     }
@@ -21,10 +22,12 @@ class DeleteBankByIdTest extends TestCase
      * Test case Okie
      */
     public function  testDeleteBankByIdString() {
-        $userModel = new BankModel();
+        $bankModel = new BankModel();
         $expected = false;
-        $userid = md5("53" . "chuyen-de-web-1");
-        $user = $userModel->deleteBankById($userid);
+        $userid = md5("aaaa" . "chuyen-de-web-1");
+        $bankModel->startTransaction();
+        $user = $bankModel->deleteBankById($userid);
+        $bankModel->rollback();
         $actual = $user;
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
@@ -34,11 +37,11 @@ class DeleteBankByIdTest extends TestCase
      * Test case Not good
      */
     public function  testDeleteBankByIdNg() {
-        $userModel = new BankModel();
+        $bankModel = new BankModel();
         $userId = 999;
-
-        $user = $userModel->deleteBankById($userId);
-
+        $bankModel->startTransaction();
+        $user = $bankModel->deleteBankById($userId);
+        $bankModel->rollback();
         if(empty($user)) {
             $this->assertTrue(true);
         } else {
@@ -49,10 +52,12 @@ class DeleteBankByIdTest extends TestCase
      * Test case empty
      */
     public function  testDeleteBankByIdEmpty() {
-        $userModel = new BankModel();
+        $bankModel = new BankModel();
         $expected = false;
         $userid = md5(999 . "chuyen-de-web-1");
-        $user = $userModel->deleteBankById($userid);
+        $bankModel->startTransaction();
+        $user = $bankModel->deleteBankById($userid);
+        $bankModel->rollback();
         $actual = $user;
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
@@ -63,10 +68,12 @@ class DeleteBankByIdTest extends TestCase
      * Test case object
      */
     public function  testDeleteBankByIdobject() {
-        $userModel = new BankModel();
+        $bankModel = new BankModel();
         $expected = false;
         $userid = new stdClass();
-        $user = $userModel->deleteBankById($userid);
+        $bankModel->startTransaction();
+        $user = $bankModel->deleteBankById($userid);
+        $bankModel->rollback();
         $actual = $user;
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
@@ -76,10 +83,12 @@ class DeleteBankByIdTest extends TestCase
      * Test case double
      */
     public function  testDeleteBankByIdDouble() {
-        $userModel = new BankModel();
+        $bankModel = new BankModel();
         $expected = false;
         $userid = md5(2.5 . "chuyen-de-web-1");
-        $user = $userModel->deleteBankById($userid);
+        $bankModel->startTransaction();
+        $user = $bankModel->deleteBankById($userid);
+        $bankModel->rollback();
         $actual = $user;
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
@@ -90,10 +99,12 @@ class DeleteBankByIdTest extends TestCase
      * Test case mảng rỗng
      */
     public function  testDeleteBankByIdArrayNull() {
-        $userModel = new BankModel();
+        $bankModel = new BankModel();
         $expected = false;
         $userid = [];
-        $user = $userModel->deleteBankById($userid);
+        $bankModel->startTransaction();
+        $user = $bankModel->deleteBankById($userid);
+        $bankModel->rollback();
         $actual = $user;
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
@@ -103,10 +114,12 @@ class DeleteBankByIdTest extends TestCase
      * Test case mảng rỗng
      */
     public function  testDeleteBankByIdNull() {
-        $userModel = new BankModel();
+        $bankModel = new BankModel();
         $expected = false;
         $userid = null;
-        $user = $userModel->deleteBankById($userid);
+        $bankModel->startTransaction();
+        $user = $bankModel->deleteBankById($userid);
+        $bankModel->rollback();
         $actual = $user;
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
@@ -117,10 +130,12 @@ class DeleteBankByIdTest extends TestCase
      * Test case số âm
      */
     public function  testDeleteBankByIdNegative() {
-        $userModel = new BankModel();
+        $bankModel = new BankModel();
         $expected = false;
         $userid = md5(-5 . "chuyen-de-web-1");
-        $user = $userModel->deleteBankById($userid);
+        $bankModel->startTransaction();
+        $user = $bankModel->deleteBankById($userid);
+        $bankModel->rollback();
         $actual = $user;
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);

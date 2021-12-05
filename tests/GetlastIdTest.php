@@ -8,9 +8,10 @@ class GetlastIdTest extends TestCase
      */
     public function testGetLastIdOk() {
         $userModel = new UserModel();
-        $expected = '50';
-
+        $expected = '63';
+        $userModel->startTransaction();
         $user = $userModel->getLastID();
+        $userModel->rollback();
         $actual = $user[0]["MAX(id)"];
         // var_dump($actual);die();
         $this->assertEquals($expected, $actual);
@@ -20,11 +21,14 @@ class GetlastIdTest extends TestCase
      */
     public function  testGetLastIdNullOk() {
         $userModel = new UserModel();
-        $expected = null;
-
+        $userModel->startTransaction();
         $user = $userModel->getLastID();
-        $actual = $user[0]["MAX(id)"];
-        $this->assertEquals($expected, $actual);
+        $userModel->rollback();
+        if(!empty($user[0]["MAX(id)"])) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
        
     }
      /**
@@ -32,10 +36,11 @@ class GetlastIdTest extends TestCase
      */
     public function  testGetLastIdNg() {
         $userModel = new UserModel();
-
+        $userModel->startTransaction();
         $user = $userModel->getLastID();
+        $userModel->rollback();
         // var_dump($user[0]["MAX(id)"]);die();
-        if(isset($user[0]["MAX(id)"])) {
+        if(empty($user[0]["MAX"])) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
@@ -44,33 +49,5 @@ class GetlastIdTest extends TestCase
     /**
      * Test case Okie
      */
-    // public function testSumOk()
-    // {
-    //    $userModel = new UserModel();
-    //    $a = 1;
-    //    $b = 2;
-    //    $expected = 3;
-
-    //    $actual = $userModel->sumb($a,$b);
-
-    //    $this->assertEquals($expected, $actual);
-    // }
-
-    /**
-     * Test case Not good
-     */
-    // public function testSumNg()
-    // {
-    //     $userModel = new UserModel();
-    //     $a = 1;
-    //     $b = 2;
-
-    //     $actual = $userModel->sumb($a,$b);
-
-    //     if ($actual != 3) {
-    //         $this->assertTrue(false);
-    //     } else {
-    //         $this->assertTrue(true);
-    //     }
-    // }
+    
 }
