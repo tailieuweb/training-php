@@ -13,19 +13,20 @@ class RepositoryUserTest extends TestCase
     public function testInsertUserOk()
     {
         $factory = new FactoryPattern();
-        $userModel = UserModel::getInstance();
+        $userModel = $factory->make("user");
         $userModel->startTransaction();
-        $expectedAfterLength = count($userModel->getAll());
+        $expectedAfterLength = count($userModel->read());
 
         $input = [];
+        $input["id"] = "";
         $input["name"] = "test2insert";
         $input["fullname"] = "test2";
         $input["email"] = "test2@gmail.com";
         $input["type"] = "user";
         $input["password"] = "password";
 
-        $actionInsert = $userModel->insertUser($input);
-        $userList = $userModel->getAll();
+        $actionInsert = $userModel->insert($input);
+        $userList = $userModel->read();
         $expectedBeforeLength = count($userList);
 
 
@@ -35,7 +36,7 @@ class RepositoryUserTest extends TestCase
             $input["id"] = $userList[count($userList)  - 1]["id"];
             $this->assertEquals(
                 $input,
-                end($userList),
+                $userList[count($userList)  - 1],
                 "expected and actual is not equals"
             );
         } else {

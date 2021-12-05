@@ -64,20 +64,10 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make("bank");
-        $bankModel->startTransaction();
-        $expected = [
-            [
-                'id' => '1',
-                'user_id' => '1',
-                'cost' => '1111',
-            ]
-        ];
-
         $actual = $bankModel->find("1");
-        $this->assertEquals(
-            $expected,
+        $this->assertEmpty(
             $actual,
-            "Expected and actual not equals"
+            "actual is not empty"
         );
         $bankModel->rollback();
     }
@@ -296,19 +286,11 @@ class BankModelTest extends TestCase
     {
         $factory = new FactoryPattern();
         $bankModel = $factory->make("bank");
-        $expected = [
-            [
-                'id' => '1',
-                'user_id' => '1',
-                'cost' => '1111',
-            ]
-        ];
 
         $actual = $bankModel->findByUserId("1");
-        $this->assertEquals(
-            $expected,
+        $this->assertEmpty(
             $actual,
-            "Expected and actual not equals"
+            "actual is not empty"
         );
     }
 
