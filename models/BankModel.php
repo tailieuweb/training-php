@@ -73,6 +73,7 @@ class BankModel extends BaseModel implements IBank
 
         return $user;
     }
+    //cost
     public function cost()
     {
         return $this->getBanks(null);
