@@ -356,20 +356,20 @@ class UserModelTest extends TestCase
       $this->assertTrue(false);
       }
    }
-   public function testDeleteUserByIdOk() {
+   // public function testDeleteUserByIdOk() {
 
-      $userModel = new UserModel();
+   //    $userModel = new UserModel();
       
-      $id = 70;         
+   //    $id = 70;         
       
-      $del = $userModel->deleteUserById($id);
+   //    $del = $userModel->deleteUserById($id);
       
-      if ($del==true) {
-      $this->assertTrue(true);
-      } else {
-      $this->assertTrue(false);
-      }            
-   }
+   //    if ($del==true) {
+   //    $this->assertTrue(true);
+   //    } else {
+   //    $this->assertTrue(false);
+   //    }            
+   // }
    public function testDeleteUserByIdNg() {
       $userModel = new UserModel();
       

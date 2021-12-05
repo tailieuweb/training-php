@@ -214,20 +214,20 @@ class BankModelTest extends TestCase
       
       $this->assertEquals($mongDoi, $Bank);   
    }
-   public function testDeleteBankByIdOk() {
+   // public function testDeleteBankByIdOk() {
 
-      $BankModel = new BankModel();
+   //    $BankModel = new BankModel();
       
-      $id = 13;         
+   //    $id = 13;         
       
-      $Bank = $BankModel->deleteBankById($id);
+   //    $Bank = $BankModel->deleteBankById($id);
       
-      if ($Bank=='success') {
-      $this->assertTrue(true);
-      } else {
-      $this->assertTrue(false);
-      }            
-   }
+   //    if ($Bank=='success') {
+   //    $this->assertTrue(true);
+   //    } else {
+   //    $this->assertTrue(false);
+   //    }            
+   // }
    public function testDeleteBankByIdNg() {
       $BankModel = new BankModel();
       
