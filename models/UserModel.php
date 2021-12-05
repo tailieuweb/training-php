@@ -49,7 +49,7 @@ class UserModel extends BaseModel
         if (empty($userName) || empty($password)) {
             return 'Invalid';
         }
-        if (!is_string($userName) || !is_string($password)) {
+        if (!is_string($userName) || is_array($password) || is_object($password) ||is_bool($password)) {
             return 'Invalid';
         }
         else{

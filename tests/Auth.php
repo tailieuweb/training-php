@@ -150,7 +150,7 @@ class Auth extends TestCase
         $this->assertEquals($expected, $actual);
     }
     /**
-     * Test password là số
+     * Test username là số
      */
     public function testAuthByUsernameIsNumber()
     {
