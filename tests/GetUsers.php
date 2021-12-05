@@ -34,6 +34,34 @@ class GetUsers extends TestCase{
         }
     }
     /**
+     * Test keyword rỗng
+     */
+    public function testGetUsersByIsEmpty()
+    {
+        $userModel = new UserModel();
+        $params['keyword']  = "";
+        $expected = "Thái Ngô";
+        $userModel->startTransaction();
+        $user = $userModel->getUsers($params);
+        $actual = $user[0]['name'];
+        $userModel->rollback();
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test keyword rỗng
+     */
+    public function testGetUsersByIsNull()
+    {
+        $userModel = new UserModel();
+        $params['keyword']  = null;
+        $expected = "Thái Ngô";
+        $userModel->startTransaction();
+        $user = $userModel->getUsers($params);
+        $actual = $user[0]['name'];
+        $userModel->rollback();
+        $this->assertEquals($expected, $actual);
+    }
+    /**
      * Test keyword là số
      */
     public function testGetUsersByIsNum()
