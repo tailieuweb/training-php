@@ -88,6 +88,19 @@ class FindUserTwoTable extends TestCase
         $this->assertEquals($expected, $actual);
     }
     /**
+     * Test keyword rỗng
+     */
+    public function testFindUserTwoTableIsEmpty()
+    {
+        $userModel = new UserModel();
+        $id = "";
+        $expected = 'Invalid';
+        $userModel->startTransaction();
+        $actual = $userModel->findTwoTable($id);
+        $userModel->rollback();
+        $this->assertEquals($expected, $actual);
+    }
+    /**
      * Test case id is null
      */
     public function testFindUserTwoTableIsNull()

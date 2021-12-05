@@ -40,6 +40,20 @@ class FindBankByIdVersionTwo extends TestCase
     /**
      * Test case id is double
      */
+    public function testFindBankByIdVersionTwoIdIsEmpty()
+    {
+        $bankModel = new BankModel();
+        $id = "";
+        $bankModel->startTransaction();
+        $expected = 'Not invalid';
+        $bankModel->startTransaction();
+        $actual = $bankModel->findBankByIdVersionTwo($id);
+        $bankModel->rollback();
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test case id is double
+     */
     public function testFindBankByIdVersionTwoIdIsDouble()
     {
         $bankModel = new BankModel();

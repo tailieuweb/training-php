@@ -66,6 +66,34 @@ class Auth extends TestCase
         $this->assertEquals($expected, $actual);
     }
     /**
+     * Test username là null
+     */
+    public function testAuthByUsernameIsEmpty()
+    {
+        $userModel = new UserModel();
+        $userName = "";
+        $password = 123;
+        $expected = [];
+        $userModel->startTransaction();
+        $actual = $userModel->auth($userName, $password);
+        $userModel->rollback();
+        $this->assertEquals($expected, $actual);
+    }
+    /**
+     * Test password là null
+     */
+    public function testAuthByPasswordIsEmpty()
+    {
+        $userModel = new UserModel();
+        $userName = 'tien';
+        $password = "";
+        $expected = [];
+        $userModel->startTransaction();
+        $actual = $userModel->auth($userName, $password);
+        $userModel->rollback();
+        $this->assertEquals($expected, $actual);
+    }
+    /**
      * Test username là boolean(true/false)
      */
     public function testAuthByUsernameIsBoolean()
