@@ -43,8 +43,19 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
-        $sql = 'DELETE FROM users WHERE id = ' . $id;
-        return $this->delete($sql);
+        if(is_object($id) || $id<0 || is_double($id) || empty($id)
+        || is_array($id)){
+            return 'Not invalid';
+        }
+        if (is_numeric($id) || is_string($id)) {
+            $sql = 'SELECT * FROM users WHERE id = ' . $id;
+            // var_dump($sql);
+            // die();
+            $user = $this->select($sql);
+            return $user;
+        } else {
+            return false;
+        }
     }
 
     /**
