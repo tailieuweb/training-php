@@ -7,7 +7,7 @@ class ResultClass
     {
         $this->isSuccess = false;
         $this->data = null;
-        $this->error = "Don't have Value";
+        $this->error = "Thông tin nhập vào không đúng !!";
     }
     // Set Data
     public function setData($data)

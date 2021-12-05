@@ -15,7 +15,7 @@ class VoThanhDat_UserRepositoryTest extends TestCase
         $userRepository1 = UserRepository::getInstance();
 
         $expected = true;
-        $actual = is_Array($userRepository) &&
+        $actual = is_object($userRepository) &&
             get_class($userRepository) == 'UserRepository' &&
             $userRepository === $userRepository1;
 
@@ -181,7 +181,7 @@ class VoThanhDat_UserRepositoryTest extends TestCase
         $email = 'vothanhdat123123@gmail.com';
         $input = [
             'id' => 123,
-            'name' => '',
+            'name' => null,
             'fullname' => "Vo Thanh Dat",
             'type' => 'admin',
             'email' => $email,
@@ -321,7 +321,7 @@ class VoThanhDat_UserRepositoryTest extends TestCase
     public function testInsertUserWithIdInputFullNameIsNull()
     {
         $userRepository = new UserRepository();
-        $fullname = "";
+        $fullname = null;
         $input = [
             'id' => 123,
             'name' => 'Dattt',
@@ -382,7 +382,7 @@ class VoThanhDat_UserRepositoryTest extends TestCase
 
         $userRepository->rollBack();
 
-        $expected = false;
+        $expected = true;
         $this->assertEquals($expected, $actual);
     }
 
@@ -463,7 +463,7 @@ class VoThanhDat_UserRepositoryTest extends TestCase
     public function testInsertUserWithIdInputTypeIsNull()
     {
         $userRepository = new UserRepository();
-        $type = '';
+        $type = null;
         $input = [
             'id' => 123,
             'name' => 'Dattt',
@@ -524,7 +524,7 @@ class VoThanhDat_UserRepositoryTest extends TestCase
 
         $userRepository->rollBack();
 
-        $expected = false;
+        $expected = true;
         $this->assertEquals($expected, $actual);
     }
 
@@ -599,28 +599,7 @@ class VoThanhDat_UserRepositoryTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    // Test case Insert User With Id Type Not Admin Or User
-    public function testInsertUserWithIdInputTypeNotAdminOrUser()
-    {
-        $userRepository = new UserRepository();
-        $type = "bagaga";
-        $input = [
-            'id' => 123,
-            'name' => 'Dattt',
-            'fullname' => "Vo Thanh Dat",
-            'type' => $type,
-            'email' => "vothanhdat123123@gmail.com",
-            'password' => '12345'
-        ];
 
-        $userRepository->startTransaction();
-        $actual = $userRepository->insertUserWithId($input);
-
-        $userRepository->rollBack();
-
-        $expected = false;
-        $this->assertEquals($expected, $actual);
-    }
     ///////////////////////////////     EMAIl             //////////////////////////////
 
     // Test case Insert User With Id Input Email Is Null
@@ -791,7 +770,7 @@ class VoThanhDat_UserRepositoryTest extends TestCase
     public function testInsertUserWithIdInputPasswordIsNull()
     {
         $userRepository = new UserRepository();
-        $password = "";
+        $password = null;
         $input = [
             'id' => 123,
             'name' => 'Dattt',

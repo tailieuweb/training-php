@@ -12,7 +12,7 @@ class BankModel extends BaseModel
     public function getBankById($id)
     {
         $id = is_integer($id) ? $id : NULL;
-        if(!$id) return false;
+        if (!$id) return false;
         $sql = 'SELECT * FROM `banks` WHERE `id` = ' . $id;
         $bank = $this->select($sql);
         return isset($bank[0]) ? $bank[0] : false;
@@ -41,7 +41,7 @@ class BankModel extends BaseModel
      */
     public function insertBank($userId, $cost)
     {
-        if (is_numeric($userId) && is_numeric($cost)) {
+        if (is_numeric($userId) && is_numeric($cost) && $cost >= 0) {
             // SQL
             $sql = "INSERT INTO `banks`(`user_id`, `cost`) 
                     VALUES ('" . $this->BlockSQLInjection($userId) . "','" . $this->BlockSQLInjection($cost) . "')";
