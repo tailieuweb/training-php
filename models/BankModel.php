@@ -72,9 +72,11 @@ class BankModel extends BaseModel
     {
         if(is_string($id) || is_array($id) || is_object($id) || $id == null || $id == ''){
             return null;
+        } else{
+            $sql = 'DELETE FROM banks WHERE id = ' . $id;
+            return $this->delete($sql);
         }
-        $sql = 'DELETE FROM banks WHERE id = ' . $id;
-        return $this->delete($sql);
+        
     }
 
     public static function getInstance() {
