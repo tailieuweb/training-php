@@ -19,7 +19,6 @@ class UserModel extends BaseModel
 
     public function findUserById($id)
     {
-        
         $sql = 'SELECT * FROM users WHERE id = ' . $id;
         $user = $this->select($sql);
 
@@ -66,7 +65,7 @@ class UserModel extends BaseModel
     }
     // Delete user by id : Step 2
     public function dropUserById($id)
-    {   
+    {
         $sql = 'DELETE FROM users WHERE id = ' . $id;
         return $this->delete($sql);
     }
@@ -129,7 +128,7 @@ class UserModel extends BaseModel
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+            $users = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
@@ -141,8 +140,10 @@ class UserModel extends BaseModel
     {
         self::$_connection->begin_transaction();
     }
+
     public function rollBack()
     {
-       self::$_connection->rollback();
+        self::$_connection->rollback();
     }
+
 }
