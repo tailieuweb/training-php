@@ -555,7 +555,7 @@ class BankModelTest extends TestCase
     public function testInsertBankUserNgObjectValues()
     {
         $bankModel = new BankModel();
-        $obj = new DtClass();
+        $obj = new stdClass();
 
         $param = array(
             "user_id" => $obj,
@@ -644,7 +644,7 @@ class BankModelTest extends TestCase
     public function testUpdateBankNgObjectValues()
     {
         $bankModel = new BankModel();
-        $obj = new DtClass();
+        $obj = new stdClass();
         $param = array(
             "id"  => $obj ,
             "user_id" => $obj,

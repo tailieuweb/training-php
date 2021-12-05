@@ -466,7 +466,7 @@ class UserModelTest extends TestCase
    public function testGetUsersOk() {
       $userModel = new UserModel();
       
-      $mongDoiUsername = 'user1';
+      $mongDoiUsername = '1';
       
       $user = $userModel->getUsers();        
       $this->assertEquals($mongDoiUsername, $user[0]['name']);    
@@ -550,7 +550,7 @@ class UserModelTest extends TestCase
    public function testGetUsersNull() {
       $userModel = new UserModel();
       $params['keyword'] = null;
-      $expected = 'user1';
+      $expected = '1';
       
       $user = $userModel->getUsers($params);        
       $this->assertEquals($expected, $user[0]['name']);   
@@ -660,7 +660,7 @@ class UserModelTest extends TestCase
     public function testInsertUserNgDt()
     {
         $userModel = new UserModel();
-        $obj = new DtClass();
+        $obj = new stdClass();
 
         $param = array(
             "id" => $obj,
@@ -845,7 +845,7 @@ class UserModelTest extends TestCase
     public function testUpdateUserNgObjectValues()
     {
         $userModel = new UserModel();
-        $obj = new DtClass();
+        $obj = new stdClass();
 
         $param = array(
             "id" => $obj,
