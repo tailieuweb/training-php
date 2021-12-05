@@ -3,19 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="fca2aa6e-54aa-4226-b8f8-032cc5b95d0a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/delete_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/delete_user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/edit.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/form_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/form_user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/list_users.php" beforeDir="false" afterPath="$PROJECT_DIR$/list_users.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/BaseModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/BaseModel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/UserModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/UserModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/139.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/nofile.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/register.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/meta.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/meta.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +30,7 @@
   <component name="PhpServers">
     <servers>
       <server host="localhost" id="1762c1b2-3483-41ef-b80f-e8c9a2e7d6c8" name="localhost" />
+      <server host="php.local" id="09e311b9-b3b9-44fa-8b78-602004ac564e" name="php.local" />
     </servers>
   </component>
   <component name="PhpWebServerValidation" path_to_validation_script="D:\1-github-workspace\1-tailieuweb\11-training-php" selected_validation_type="LOCAL" web_path_to_validation_script="http://localhost:80" />
@@ -54,29 +45,30 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php\public\js" />
       <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php" />
+      <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php\public\js" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="localhost" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="localhost" start_url="http://localhost/php_training/form_user.php">
+    <configuration name="localhost" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="localhost" start_url="http://php.local/login.php">
       <method v="2" />
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="fca2aa6e-54aa-4226-b8f8-032cc5b95d0a" name="Default Changelist" comment="" />
+      <changelist id="4621108c-d5a8-4bd2-a6a3-127138bfce2c" name="Default Changelist" comment="" />
       <created>1632046412024</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1632046412024</updated>
       <workItem from="1632046414701" duration="13384000" />
+      <workItem from="1632547559440" duration="9835000" />
     </task>
     <servers />
   </component>
@@ -93,5 +85,14 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="PhpWebAppRunConfigurationType">
+        <watch expression="$userModel-&gt;auth($users['username'], $users['password'])" language="PHP" />
+        <watch expression="$_POST" language="PHP" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
