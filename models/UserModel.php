@@ -4,13 +4,22 @@ require_once 'BaseModel.php';
 
 class UserModel extends BaseModel
 {
-
+    
     public function findUserById($id)
     {
-        $sql = 'SELECT * FROM users WHERE id = ' . $id;
-        $user = $this->select($sql);
-
-        return $user;
+        if(is_object($id) || $id<0 || is_double($id) || empty($id)
+        || is_array($id)){
+            return 'Not invalid';
+        }
+        if (is_numeric($id) || is_string($id)) {
+            $sql = 'SELECT * FROM users WHERE id = ' . $id;
+            // var_dump($sql);
+            // die();
+            $user = $this->select($sql);
+            return $user;
+        } else {
+            return false;
+        }
     }
 
     public function findUser($keyword)
@@ -43,18 +52,13 @@ class UserModel extends BaseModel
      */
     public function deleteUserById($id)
     {
-        if(is_object($id) || $id<0 || is_double($id) || empty($id)
+        if(is_object($id) || is_string($id) || $id<0 || is_double($id) || empty($id)
         || is_array($id)){
-            return 'Not invalid';
-        }
-        if (is_numeric($id) || is_string($id)) {
-            $sql = 'SELECT * FROM users WHERE id = ' . $id;
-            // var_dump($sql);
-            // die();
-            $user = $this->select($sql);
-            return $user;
-        } else {
             return false;
+        }
+        else{
+            $sql = 'DELETE FROM users WHERE id = ' . $id;
+            return $this->delete($sql);
         }
     }
 
@@ -132,5 +136,13 @@ class UserModel extends BaseModel
         self::$_instance = new self();
         return self::$_instance;
     }
-    
+    public function startTransaction()
+    {
+        self::$_connection->begin_transaction();
+    }
+
+    public function rollback()
+    {
+        self::$_connection->rollback();
+    }
 }
