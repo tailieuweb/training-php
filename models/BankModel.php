@@ -7,8 +7,8 @@ class BankModel extends BaseModel
     public function getBanks($params = [])
     {
         if (!empty($params['keyword'])) {
-            $key = str_replace('"','',$params['keyword']);
-            $sql = 'SELECT * FROM banks WHERE cost LIKE "%' . $key .'%"';
+            $key = str_replace('"', '', $params['keyword']);
+            $sql = 'SELECT * FROM banks WHERE cost LIKE "%' . $key . '%"';
 
             //Keep this line to use Sql Injection
             //Don't change
@@ -18,16 +18,15 @@ class BankModel extends BaseModel
 
             $sql = 'SELECT * FROM banks join users on users.id = banks.user_id';
             $banks = $this->select($sql);
-
         }
 
         return $banks;
     }
-    
+
     public function findBankById($id)
     {
-        if(!is_numeric($id)) return 'error';
-        
+        if (!is_numeric($id)) return 'error';
+
         $sql = 'SELECT * FROM banks WHERE id = ' . $id;
         $bank = $this->select($sql);
 
@@ -57,8 +56,19 @@ class BankModel extends BaseModel
      */
     public function insertBank($input)
     {
-        $sql = "INSERT INTO `app_web1`.`banks` (`user_id`, `cost`) VALUES (" .
-            "'" . $input['user_id'] . "', '" . $input['cost'] . "')";
+        if (
+            $input['id'] == null || !is_numeric($input['id']) || empty($input['id']) || is_object($input['id'])
+            || is_array($input['id']) || is_bool($input['id']) || $input['id'] == '' || $input['id'] <= 0
+            || empty($input) || $input['user_id'] == null || is_array($input['user_id'])||!is_numeric($input['user_id'])
+            || is_object($input['user_id']) || is_double($input['user_id']) || $input['user_id'] <= 0
+            || empty($input['user_id']) || $input['user_id'] == 0 || $input['user_id'] == '' || is_bool($input['user_id'])
+            || $input['cost'] == null || is_array($input['cost']) || is_object($input['cost'])
+            || $input['cost'] == '' || empty($input['cost']) || is_bool($input['cost'])||!is_numeric($input['cost'])
+
+        ) {
+            return "error";
+        }
+        $sql = "INSERT INTO `banks`(`id`, `user_id`, `cost`) VALUES ('" . $input['id'] . "','" . $input['user_id'] . "','" . $input['cost'] . "')";
 
         $bank = $this->insert($sql);
 
@@ -76,8 +86,9 @@ class BankModel extends BaseModel
         return $this->delete($sql);
     }
 
-    public static function getInstance() {
-        if (self::$_instance !== null){
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
             return self::$_instance;
         }
         self::$_instance = new self();
