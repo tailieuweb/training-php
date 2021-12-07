@@ -88,10 +88,12 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
-            if ($params['keyword'] == null || is_array($params['keyword']) || is_object($params['keyword']) ||
-            is_numeric($params['keyword']) || $params['keyword'] == ''){
+            if (
+                $params['keyword'] == null || is_array($params['keyword']) || is_object($params['keyword']) ||
+                is_numeric($params['keyword']) || $params['keyword'] == '' || is_bool($params['keyword'])
+            ) {
                 return null;
-            } else{
+            } else {
                 $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
 
                 //Keep this line to use Sql Injection
@@ -111,15 +113,17 @@ class UserModel extends BaseModel
      * @param $a
      * @param $b
      */
-    public function sumb($a, $b) {
-        if(!is_numeric($a)) return 'error';
-        if(!is_numeric($b)) return 'error';
+    public function sumb($a, $b)
+    {
+        if (!is_numeric($a)) return 'error';
+        if (!is_numeric($b)) return 'error';
 
         return $a + $b;
     }
 
-    public static function getInstance() {
-        if (self::$_instance !== null){
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
             return self::$_instance;
         }
         self::$_instance = new self();

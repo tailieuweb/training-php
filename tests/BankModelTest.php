@@ -143,4 +143,26 @@ class BankModelTest extends TestCase
             $this->assertTrue(True);
         }
     }
+
+    // test function deleteBankById is bool
+    public function testDeleteBankByIsBoolTrue()
+   {
+    $bankModel = new BankModel();
+    $idBank = true;
+    $actual = $bankModel->deleteBankById($idBank);
+    $expected = null;
+
+    $this->assertEquals($expected, $actual);
+   }
+
+   // test function deleteBankById is bool
+   public function testDeleteBankByIsBoolFalse()
+   {
+    $bankModel = new BankModel();
+    $idBank = false;
+    $actual = $bankModel->deleteBankById($idBank);
+    $expected = null;
+
+    $this->assertEquals($expected, $actual);
+   }
 }

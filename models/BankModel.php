@@ -21,11 +21,11 @@ class BankModel extends BaseModel
 
         return $users;
     }
-    
+
     public function findBankById($id)
     {
-        if(!is_numeric($id)) return 'error';
-        
+        if (!is_numeric($id)) return 'error';
+
         $sql = 'SELECT * FROM banks WHERE id = ' . $id;
         $bank = $this->select($sql);
 
@@ -70,17 +70,17 @@ class BankModel extends BaseModel
      */
     public function deleteBankById($id)
     {
-        if(is_string($id) || is_array($id) || is_object($id) || $id == null || $id == ''){
+        if (is_string($id) || is_array($id) || is_object($id) || $id == null || $id == '' || is_bool($id)) {
             return null;
-        } else{
+        } else {
             $sql = 'DELETE FROM banks WHERE id = ' . $id;
             return $this->delete($sql);
         }
-        
     }
 
-    public static function getInstance() {
-        if (self::$_instance !== null){
+    public static function getInstance()
+    {
+        if (self::$_instance !== null) {
             return self::$_instance;
         }
         self::$_instance = new self();
