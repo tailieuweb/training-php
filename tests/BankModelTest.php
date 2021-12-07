@@ -48,7 +48,7 @@ class BankModelTest extends TestCase
         $bankModel->rollback();
     }
     //Test insert bank with user_id = null
-    public function testInsertBankWithNullUserId_NG()
+    public function testInsertBankWithNullUserId_OK()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -62,7 +62,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($actual,"error");
     }
     //Test insert bank with user_id is character
-    public function testInsertBankWithUserIdIsCharacter_NG()
+    public function testInsertBankWithUserIdIsCharacter_OK()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -76,7 +76,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($actual,"error");
     }
     //Test insert bank with cost = null
-    public function testInsertBankWithNullCost_NG()
+    public function testInsertBankWithNullCost_OK()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -90,7 +90,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($actual,"error");
     }
     //Test insert bank with cost is character
-    public function testInsertBankWithCostIsCharacter_NG()
+    public function testInsertBankWithCostIsCharacter_OK()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -104,7 +104,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($actual,"error");
     }
     //Test insert bank with user_id & cost is character or string
-    public function testInsertBankWithCharacterNg_NG()
+    public function testInsertBankWithCharacterNg_OK()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -118,7 +118,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($actual,"error");
     }
     //Test insert bank with user_id is array
-    public function testInsertBankWithArrayUserId_NG()
+    public function testInsertBankWithArrayUserId_OK()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -132,7 +132,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($actual,"error");
     }
     //Test insert bank with cost is array
-    public function testInsertBankWithArrayCost_NG()
+    public function testInsertBankWithArrayCost_OK()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -146,7 +146,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($actual,"error");
     }
     //Test insert bank with user_id & cost is array
-    public function testInsertBankWithArray_NG()
+    public function testInsertBankWithArray_OK()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -161,7 +161,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($actual,"error");
     }
     //Test insert user with user_id is object
-    public function testInsertBankUserIdObj_NG()
+    public function testInsertBankUserIdObj_OK()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -176,7 +176,7 @@ class BankModelTest extends TestCase
        $this->assertEquals($actual,"error");
     }
     //Test insert user with cost is object
-    public function testInsertBankCostObj_NG()
+    public function testInsertBankCostObj_OK()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -191,7 +191,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($actual,"error");
     }
     //Test insert user with user_id & cost is object
-    public function testInsertBankObj_NG()
+    public function testInsertBankObj_OK()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -205,7 +205,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($actual,"error");
     }
     //Test insert user with user_id is array & cost is object
-    public function testInsertBankInput_NG()
+    public function testInsertBankInput_OK()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -219,7 +219,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($actual,"error");
     }
     //Test insert user with boolean
-    public function testInsertBankBoolean_NG()
+    public function testInsertBankBoolean_OK()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -233,7 +233,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($actual,"error");
     }
     //Test insert user with user_id is float & cost valid
-    public function testInsertBankUserFloatCostValid_NG()
+    public function testInsertBankUserFloatCostValid_OK()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -248,7 +248,7 @@ class BankModelTest extends TestCase
     }
 
     //Test insert user with user_id is float & cost is object
-    public function testInsertBankUserValidCostFloat_NG()
+    public function testInsertBankUserValidCostFloat_OK()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -267,7 +267,7 @@ class BankModelTest extends TestCase
 
     //MARK
     //Test insert user with user_id  & cost is float
-    public function testInsertBankFloat_NG()
+    public function testInsertBankFloat_OK()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -280,7 +280,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($actual, "error");
     }
     //Test insert bank with negative number user id & cost
-    public function testInsertBankNegative_NG()
+    public function testInsertBankNegative_OK()
     {
         $bankModel = new BankModel();
         $input = array(
@@ -293,7 +293,7 @@ class BankModelTest extends TestCase
         $this->assertEquals($actual, "error");
     }
     //Test insert user with user_id is float & cost is object
-    public function testInsertBankUserFloat_NG()
+    public function testInsertBankUserFloat_OK()
     {
         $bankModel = new BankModel();
         $input = array(
