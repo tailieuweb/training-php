@@ -410,30 +410,25 @@ class BankModelTest extends TestCase
     }
 
     // test function deleteBankById array
-    public function testDeleteBankByIdArray()
-    {
+    public function testDeleteByIdArray(){
         $bankModel = new BankModel();
-        $idBank = array(1, 2, 3);
+        $idBank = array();
 
-        try {
-            $bankModel->deleteBankById($idBank);
-        } catch (Throwable $e) {
-            $this->assertTrue(True);
-        }
+        $expected = Null;
+        $actual = $bankModel->deleteBankById($idBank);
+
+        $this->assertEquals($expected, $actual);
     }
 
     // test function deleteBankById Object
-    public function testDeleteBankByIdObject()
-    {
+    public function testDeleteByIdObject(){
         $bankModel = new BankModel();
         $idBank = new stdClass();
+        
+        $expected = Null;
+        $actual = $bankModel->deleteBankById($idBank);
 
-
-        try {
-            $bankModel->deleteBankById($idBank);
-        } catch (Throwable $e) {
-            $this->assertTrue(True);
-        }
+        $this->assertEquals($expected, $actual);
     }
 
     // test function deleteBankById is bool

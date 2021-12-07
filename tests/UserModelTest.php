@@ -998,11 +998,10 @@ class UserModelTest extends TestCase
       $userModel = new UserModel();
       $param['keyword'] = new stdClass();
 
-      try {
-         $userModel->getUsers($param);
-      } catch (Throwable $e) {
-         $this->assertTrue(True);
-      }
+      $expected = Null;
+      $actual = $userModel->getUsers($param);
+
+      $this->assertEquals($expected, $actual);
    }
 
    // test function getUsers when search true
