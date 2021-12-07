@@ -9,7 +9,7 @@ class UserModel extends BaseModel
     {
         if(is_object($id) || $id<0 || is_double($id) || empty($id)
         || is_array($id)){
-            return 'Not invalid';
+            return 'error';
         }
         if (is_numeric($id) || is_string($id)) {
             $sql = 'SELECT * FROM users WHERE id = ' . $id;

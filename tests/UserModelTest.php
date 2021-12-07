@@ -346,7 +346,7 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $userId = -10;
-        $expected = 'Not invalid';
+        $expected = 'error';
         $actual = $userModel->findUserById($userId);
         $this->assertEquals($expected, $actual);
     }
@@ -355,7 +355,7 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $userId = 2.5;
-        $expected = 'Not invalid';
+        $expected = 'error';
         $actual = $userModel->findUserById($userId);
         $this->assertEquals($expected, $actual);
     }
@@ -364,7 +364,7 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $userId = null;
-        $expected = 'Not invalid';
+        $expected = 'error';
         $actual = $userModel->findUserById($userId);
         $this->assertEquals($expected, $actual);
     }
@@ -385,7 +385,7 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $userId = null;
-        $expected = 'Not invalid';
+        $expected = 'error';
         $actual = $userModel->findUserById($userId);
         $this->assertEquals($expected, $actual);
     }
@@ -394,7 +394,7 @@ class UserModelTest extends TestCase
     {
         $userModel = new UserModel();
         $userId = new BankModel();
-        $expected = 'Not invalid';
+        $expected = 'error';
         $actual = $userModel->findUserById($userId);
         $this->assertEquals($expected, $actual);
     }
