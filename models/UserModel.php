@@ -118,17 +118,23 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
+            if (
+                $params['keyword'] == null || is_array($params['keyword']) || is_object($params['keyword']) ||
+                is_numeric($params['keyword']) || $params['keyword'] == '' || is_bool($params['keyword'])
+            ) {
+                return null;
+            } else {
+                $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
 
-            //Keep this line to use Sql Injection
-            //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+                //Keep this line to use Sql Injection
+                //Don't change
+                //Example keyword: abcef%";TRUNCATE banks;##
+                $users = self::$_connection->multi_query($sql);
+            }
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
-
         return $users;
     }
 

@@ -59,7 +59,7 @@ class BankModelTest extends TestCase
         //Execute test
         $actual = $bankModel->insertBank($input);
         //Actual
-        $this->assertEquals($actual,"error");
+        $this->assertEquals($actual, "error");
     }
     //Test insert bank with user_id is character
     public function testInsertBankWithUserIdIsCharacter_OK()
@@ -73,7 +73,7 @@ class BankModelTest extends TestCase
         //Execute test
         $actual = $bankModel->insertBank($input);
         //Actual
-        $this->assertEquals($actual,"error");
+        $this->assertEquals($actual, "error");
     }
     //Test insert bank with cost = null
     public function testInsertBankWithNullCost_OK()
@@ -87,7 +87,7 @@ class BankModelTest extends TestCase
         //Execute test
         $actual = $bankModel->insertBank($input);
         //Actual
-        $this->assertEquals($actual,"error");
+        $this->assertEquals($actual, "error");
     }
     //Test insert bank with cost is character
     public function testInsertBankWithCostIsCharacter_OK()
@@ -101,7 +101,7 @@ class BankModelTest extends TestCase
         //Execute test
         $actual = $bankModel->insertBank($input);
         //Actual
-        $this->assertEquals($actual,"error");
+        $this->assertEquals($actual, "error");
     }
     //Test insert bank with user_id & cost is character or string
     public function testInsertBankWithCharacterNg_OK()
@@ -115,7 +115,7 @@ class BankModelTest extends TestCase
         //Execute test
         $actual = $bankModel->insertBank($input);
         //Actual
-        $this->assertEquals($actual,"error");
+        $this->assertEquals($actual, "error");
     }
     //Test insert bank with user_id is array
     public function testInsertBankWithArrayUserId_OK()
@@ -129,7 +129,7 @@ class BankModelTest extends TestCase
         //Execute test
         $actual = $bankModel->insertBank($input);
         //Actual
-        $this->assertEquals($actual,"error");
+        $this->assertEquals($actual, "error");
     }
     //Test insert bank with cost is array
     public function testInsertBankWithArrayCost_OK()
@@ -143,7 +143,7 @@ class BankModelTest extends TestCase
         //Execute test
         $actual = $bankModel->insertBank($input);
         //Actual
-        $this->assertEquals($actual,"error");
+        $this->assertEquals($actual, "error");
     }
     //Test insert bank with user_id & cost is array
     public function testInsertBankWithArray_OK()
@@ -158,7 +158,7 @@ class BankModelTest extends TestCase
         //Execute test
         $actual = $bankModel->insertBank($input);
         //Actual
-        $this->assertEquals($actual,"error");
+        $this->assertEquals($actual, "error");
     }
     //Test insert user with user_id is object
     public function testInsertBankUserIdObj_OK()
@@ -170,10 +170,10 @@ class BankModelTest extends TestCase
             'cost' => 1000,
         );
 
-       //Execute test
-       $actual = $bankModel->insertBank($input);
-       //Actual
-       $this->assertEquals($actual,"error");
+        //Execute test
+        $actual = $bankModel->insertBank($input);
+        //Actual
+        $this->assertEquals($actual, "error");
     }
     //Test insert user with cost is object
     public function testInsertBankCostObj_OK()
@@ -188,7 +188,7 @@ class BankModelTest extends TestCase
         //Execute test
         $actual = $bankModel->insertBank($input);
         //Actual
-        $this->assertEquals($actual,"error");
+        $this->assertEquals($actual, "error");
     }
     //Test insert user with user_id & cost is object
     public function testInsertBankObj_OK()
@@ -202,7 +202,7 @@ class BankModelTest extends TestCase
         //Execute test
         $actual = $bankModel->insertBank($input);
         //Actual
-        $this->assertEquals($actual,"error");
+        $this->assertEquals($actual, "error");
     }
     //Test insert user with user_id is array & cost is object
     public function testInsertBankInput_OK()
@@ -216,7 +216,7 @@ class BankModelTest extends TestCase
         //Execute test
         $actual = $bankModel->insertBank($input);
         //Actual
-        $this->assertEquals($actual,"error");
+        $this->assertEquals($actual, "error");
     }
     //Test insert user with boolean
     public function testInsertBankBoolean_OK()
@@ -230,7 +230,7 @@ class BankModelTest extends TestCase
         //Execute test
         $actual = $bankModel->insertBank($input);
         //Actual
-        $this->assertEquals($actual,"error");
+        $this->assertEquals($actual, "error");
     }
     //Test insert user with user_id is float & cost valid
     public function testInsertBankUserFloatCostValid_OK()
@@ -244,7 +244,7 @@ class BankModelTest extends TestCase
         //Execute test
         $actual = $bankModel->insertBank($input);
         //Actual
-        $this->assertEquals($actual,"error");
+        $this->assertEquals($actual, "error");
     }
 
     //Test insert user with user_id is float & cost is object
@@ -261,7 +261,7 @@ class BankModelTest extends TestCase
         $bankModel->insertBank($input);
         //Actual
         $actual = $bankModel->findBankById(27);
-        $this->assertEquals($actual,array());
+        $this->assertEquals($actual, array());
         $bankModel->rollback();
     }
 
@@ -434,6 +434,28 @@ class BankModelTest extends TestCase
         } catch (Throwable $e) {
             $this->assertTrue(True);
         }
+    }
+
+    // test function deleteBankById is bool
+    public function testDeleteBankByIsBoolTrue()
+    {
+        $bankModel = new BankModel();
+        $idBank = true;
+        $actual = $bankModel->deleteBankById($idBank);
+        $expected = null;
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    // test function deleteBankById is bool
+    public function testDeleteBankByIsBoolFalse()
+    {
+        $bankModel = new BankModel();
+        $idBank = false;
+        $actual = $bankModel->deleteBankById($idBank);
+        $expected = null;
+
+        $this->assertEquals($expected, $actual);
     }
     /******************************************************************************************** */
 

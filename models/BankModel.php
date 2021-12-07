@@ -59,11 +59,11 @@ class BankModel extends BaseModel
         if (
             $input['id'] == null || !is_numeric($input['id']) || empty($input['id']) || is_object($input['id'])
             || is_array($input['id']) || is_bool($input['id']) || $input['id'] == '' || $input['id'] <= 0
-            || empty($input) || $input['user_id'] == null || is_array($input['user_id'])||!is_numeric($input['user_id'])
+            || empty($input) || $input['user_id'] == null || is_array($input['user_id']) || !is_numeric($input['user_id'])
             || is_object($input['user_id']) || is_double($input['user_id']) || $input['user_id'] <= 0
             || empty($input['user_id']) || $input['user_id'] == 0 || $input['user_id'] == '' || is_bool($input['user_id'])
             || $input['cost'] == null || is_array($input['cost']) || is_object($input['cost'])
-            || $input['cost'] == '' || empty($input['cost']) || is_bool($input['cost'])||!is_numeric($input['cost'])
+            || $input['cost'] == '' || empty($input['cost']) || is_bool($input['cost']) || !is_numeric($input['cost'])
 
         ) {
             return "error";
@@ -82,8 +82,12 @@ class BankModel extends BaseModel
      */
     public function deleteBankById($id)
     {
-        $sql = 'DELETE FROM banks WHERE id = ' . $id;
-        return $this->delete($sql);
+        if (is_string($id) || is_array($id) || is_object($id) || $id == null || $id == '' || is_bool($id)) {
+            return null;
+        } else {
+            $sql = 'DELETE FROM banks WHERE id = ' . $id;
+            return $this->delete($sql);
+        }
     }
 
     public static function getInstance()

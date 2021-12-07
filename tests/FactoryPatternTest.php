@@ -159,4 +159,26 @@ class FactoryPatternTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
+
+    // test function make is bool true
+    public function testMakeIsBoolTrue()
+    {
+        $factoryPattern = new FactoryPattern();
+        $text = true;
+        $expected = null;
+        $actual = $factoryPattern->make($text);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    // test function make is bool false
+    public function testMakeIsBoolFalse()
+    {
+        $factoryPattern = new FactoryPattern();
+        $text = false;
+        $expected = null;
+        $actual = $factoryPattern->make($text);
+
+        $this->assertEquals($expected, $actual);
+    }
 }
