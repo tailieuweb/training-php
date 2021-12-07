@@ -88,8 +88,8 @@ class UserModel extends BaseModel
     {
         //Keyword
         if (!empty($params['keyword'])) {
-            if (empty($params['keyword']) == null || is_array(empty($params['keyword'])) || is_object($params['keyword']) ||
-            is_numeric(empty($params['keyword'])) || empty($params['keyword']) == ''){
+            if ($params['keyword'] == null || is_array($params['keyword']) || is_object($params['keyword']) ||
+            is_numeric($params['keyword']) || $params['keyword'] == ''){
                 return null;
             } else{
                 $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] . '%"';
