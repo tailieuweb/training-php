@@ -753,4 +753,98 @@ class BankModelTest extends TestCase
             $this->assertTrue(true);
         }
     }
+    //Test insert user with boolean
+    public function testInsertBankBoolean_NG()
+    {
+        $bankModel = new BankModel();
+        $input = array(
+            'user_id' => true,
+            'cost' => true,
+        );
+        //Execute test
+        $bankModel->insertBank($input);
+        $actual = $bankModel->findBankById(450);
+        $this->assertEquals(array(), $actual);
+    }
+    //Test insert user with user_id is float & cost valid
+    public function testInsertBankUserFloatCostValid_NG()
+    {
+        $bankModel = new BankModel();
+        $input = array(
+            'user_id' => 3.14,
+            'cost' => 123,
+        );
+        //Execute test
+
+        $bankModel->insertBank($input);
+
+        //Actual
+        $actual = $bankModel->findBankById(12);
+        $this->assertEquals(3, $actual[0]['user_id']);
+    }
+
+    //Test insert user with user_id is float & cost is object
+    public function testInsertBankUserValidCostFloat_NG()
+    {
+        $bankModel = new BankModel();
+        $input = array(
+            'user_id' => 3,
+            'cost' => 123.5,
+        );
+        //Execute test
+
+        $bankModel->insertBank($input);
+
+        //Actual
+        $actual = $bankModel->findBankById(13);
+        $this->assertEquals(123.5, $actual[0]['cost']);
+    }
+    //Test insert user with user_id  & cost is float
+    public function testInsertBankFloat_NG()
+    {
+        $bankModel = new BankModel();
+        $input = array(
+            'user_id' => 3.8,
+            'cost' => 123.5,
+        );
+        //Execute test
+
+        $bankModel->insertBank($input);
+
+        //Actual
+        $actual = $bankModel->findBankById(14);
+        $this->assertEquals(123.5, $actual[0]['cost']);
+    }
+    //Test insert bank with negative number user id & cost
+    public function testInsertBankNegative_NG()
+    {
+        $bankModel = new BankModel();
+        $input = array(
+            'user_id' => -5,
+            'cost' => -100,
+        );
+        //Execute test
+
+        $bankModel->insertBank($input);
+
+        //Actual
+        $actual = $bankModel->findBankById(15);
+        $this->assertEquals(-100, $actual[0]['cost']);
+    }
+    //Test insert user with user_id is float & cost is object
+    public function testInsertBankUserFloat_NG()
+    {
+        $bankModel = new BankModel();
+        $input = array(
+            'user_id' => 3.14,
+            'cost' => $bankModel,
+        );
+        //Execute test
+        try {
+            $bankModel->insertBank($input);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+    }
+    
 }
