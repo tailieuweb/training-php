@@ -56,6 +56,7 @@ class FrontendController extends Controller
     {
         //tìm và lấy ra giá trị thuộc user_id tương ứng trong bảng Profile_User
         $userProfile = Profile_User::whereRaw('user_id = ?',Auth::user()->id)->first();
+        //var_dump($userProfile);die();
         //neu gia tri do khong ton tai thì sẽ đặt một giá trị null tương ứng
         if($userProfile == null){
             $profile = new Profile_User();
@@ -63,11 +64,14 @@ class FrontendController extends Controller
             $profile->save();
         }
         //tìm và hiện thị giá trị users_web tương ứng -> và hiện thị
-        //$users_web = User::find(Auth::user()->id);
+        
         $users_web = DB::table("users_web")
          ->join('profile_users', 'profile_users.user_id', '=', 'users_web.id')
+         ->where('user_id', Auth::user()->id)
         // ->join('manufactures', 'manufactures.id', '=', 'products.manu_id')
          ->first();
+        //  $users_web = User::find(Auth::user()->id)->get();
+    //    $users_web = DB::table('profile_user')->where('user_id', Auth::user()->id)->get();
         //users_web trả về biến $users_web để thực thi trên trang profile
         return view('frontend.layout.AccountUser.profile',['users_web'=>$users_web])->layout('partial.header');
     }
