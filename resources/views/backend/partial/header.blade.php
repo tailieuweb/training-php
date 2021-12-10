@@ -93,6 +93,14 @@
                   </li>
 
 
+                  <li><a><i class="fa fa-edit"></i> Comment <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li><a href="{{asset('admin/comment')}}">Danh sách comment</a></li>
+                    <li><a href="{{asset('admin/comment/add')}}">Thêm comment</a></li>
+                    </ul>
+                  </li>
+
+
                 <li><a><i class="fa fa-sitemap"></i> Quản lí người dùng <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                   <li><a href="{{asset('users')}}">Danh sách người dùng</a></li>
