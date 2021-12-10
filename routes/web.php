@@ -127,7 +127,12 @@ Route::group(['module' => 'dashboard', 'middleware' => 'web', 'namespace' => "Ap
     Route::post("/detail/{id}", ["as" => "frontend.dashboard.index.comment", "uses" => "FrontendController@postComment"]);
 
     Route::post("/details", ["as" => "frontend.dashboard.index.person", "uses" => "FrontendController@rentalHotelOption"]);
+    //profile user display index
     Route::get("/profile", ["as" => "frontend.dashboard.index.profile", "uses" => "FrontendController@getProfile"]);
+    //Get update Profile user
+    Route::get("/editProfile/{id}", ["as" => "frontend.dashboard.index.editProfile", "uses" => "FrontendController@editProfile"]);
+    //update profile
+    Route::get("/updateProfile/{id}", ["as" => "frontend.dashboard.index.editProfile", "uses" => "FrontendController@updateProfile"]);
 
     //Payment hotel
     Route::post("/payment/{id}", ["as" => "frontend.dashboard.index.payment", "uses" => "FrontendController@paymentHotelById"]);

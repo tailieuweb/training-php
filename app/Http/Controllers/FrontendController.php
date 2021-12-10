@@ -10,8 +10,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 use App\Models\Users_web;
-
+use App\Models\User;
+use App\Models\Profile_User;
 use Illuminate\Support\Facades\Redirect;
 use phpDocumentor\Reflection\DocBlock\Tags\See;
 
@@ -48,12 +51,63 @@ class FrontendController extends Controller
         };
         return View('Frontend.layout.login.login');
     }
+    //get profile frontend displayindex
     public function getProfile()
     {
-
-
-        return View('Frontend.layout.Account.profile');
+        //tìm và lấy ra giá trị thuộc user_id tương ứng trong bảng Profile_User
+        $userProfile = Profile_User::whereRaw('user_id = ?',Auth::user()->id)->first();
+        //var_dump($userProfile);die();
+        //neu gia tri do khong ton tai thì sẽ đặt một giá trị null tương ứng
+        if($userProfile == null){
+            $profile = new Profile_User();
+            $profile->user_id = Auth::user()->id;
+            $profile->save();
+        }
+        //tìm và hiện thị giá trị users_web tương ứng -> và hiện thị
+        
+        $users_web = DB::table("users_web")
+         ->join('profile_users', 'profile_users.user_id', '=', 'users_web.id')
+         ->where('user_id', Auth::user()->id)
+        // ->join('manufactures', 'manufactures.id', '=', 'products.manu_id')
+         ->first();
+        //  $users_web = User::find(Auth::user()->id)->get();
+    //    $users_web = DB::table('profile_user')->where('user_id', Auth::user()->id)->get();
+        //users_web trả về biến $users_web để thực thi trên trang profile
+        return view('frontend.layout.AccountUser.profile',['users_web'=>$users_web])->layout('partial.header');
     }
+    //edit profile user
+    public function editProfile($id){
+       // $id = substr($id,9);
+       //kiem tra id ton tai
+        $validator = Validator::make(['id' => $id], [
+            'id' => 'required|numeric'
+        ]);
+        //neu co thay doi --> bao loi
+        if ($validator->fails()) {
+            abort(404);
+        }else{
+            $editProfile = DB::table('profile_users')->select('profile_users.*')->whereRaw('id = ?',$id)->get();
+            $users_web = User::find(Auth::user()->id);
+        }
+        return view('frontend.layout.AccountUser.editProfile',['users_web' => $users_web,'editProfile'=>$editProfile])->layout('partial.header');
+       
+    }
+    //update Profile User
+    public function updateProfile(Request $request,$id){
+
+        $data = array();        
+        $data['fullName'] = $request->fullname;
+        $data['phone'] = $request->phone;
+        $data['Date'] = $request->Date;
+        $data['address'] = $request->address;
+        DB::table('profile_users')->where('user_id', $id)->update($data);
+        $data2 = array();
+        $data2['username'] = $request->name;
+        DB::table('users_web')->where('id', $id)->update($data2);
+        session()->flash('message', 'Cap nhat thanh cong');
+        return redirect()->route("frontend.dashboard.index.profile");
+    }
+
     public function postLogin(Request $request)
     {
         $arr = [
@@ -80,6 +134,7 @@ class FrontendController extends Controller
             }
         } else {
             return Redirect::route('frontend.login.index');
+            //return "ERROR!!";
         }
     }
     public function logout()
@@ -254,6 +309,7 @@ class FrontendController extends Controller
             $data = DB::table('hotel')
                 ->where('name', 'LIKE', "%{$query}%")->orWhere('hotel_info', 'LIKE', "%{$query}%")
                 ->get();
+                
             // $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
             foreach ($data as $row) {
                 $output = '
