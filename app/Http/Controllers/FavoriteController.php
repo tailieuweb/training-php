@@ -35,9 +35,11 @@ class FavoriteController extends Controller
     }
     //Insert the hotel in table favorite for user
     public function insertFavorite(Request $request){
+        
         $data = array();
         $data['hotel_id'] = $request->hotel_id;
         $data['user_id'] = $request->user_id;
+        $data['favorite_version'] = 0;
         $data['date_created'] = date("Y-m-d");
         DB::table('favorite')->insert($data);
         return Redirect::to('/admin/favorite');
