@@ -12,20 +12,27 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin"
-                                class="rounded-circle p-1 bg-primary" width="110">
-                            <div class="mt-3">
-                                <!-- <h4>Van Anh</h4>
-									<p class="text-secondary mb-1">0987654321</p>
-									<p class="text-muted font-size-sm">Quan 9, Thanh pho Ho Chi Minh</p> -->
-                                <br>
-                                <marquee style="color:#FF9999; font-size:25px;font-weight: bold;">Felicity Hotel - Best
-                                    Service, Right Time, Right People</marquee>
-                                <hr>
-                                <button class="btn btn-outline-primary" style="background-color:#FF9900; color: #fff;">
-                                    <a href="{{asset('/')}}" style="text-decoration: none; color:#fff;">Home</a>
-                                </button>
-                            </div>
+                           
+                                <!-- <form action="{{url('')}}" method="POST"> -->
+                                <!-- {{asset('')}}frontend/images/profiles/ -->
+                                <img src="{{url('')}}/frontend/images/profiles/{{$users_web['image_profile'] == '' ? 'user1.jpg' : $users_web['image_profile']}}"
+                                    alt="Admin" class="user-image rounded-circle p-1 bg-primary user_picture"
+                                    width="50%">
+                                <div class="mt-3">
+                                    <!-- <form action="{{asset('')}}updateProfile/{{$users_web->id}}"> -->
+                                        <!-- change image -->
+                                        <input type="file" name="user_image" id="user_image"
+                                            style="opacity:0; hight:1px; display:none;">
+                                        <a href="javascript:void(0)" 
+                                        class="btn btn-primary btn-block" id="change_picture_btn"><b>ChangeImage</b></a>
+                                    <hr>
+                                    <!-- end -->
+                                        <marquee style="color:#FF9999; font-size:20px;font-weight: bold;">Felicity Hotel -
+                                        Best
+                                        Service, Right Time, Right People</marquee>
+                                    <!-- </form> -->
+                                </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -199,15 +206,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center mt-4">
-                    <a class="btn btn-outline-secondary mx-1 prev" href="javascript:void(0)" title="Previous">
+                    <!-- <a class="btn btn-outline-secondary mx-1 prev" href="javascript:void(0)" title="Previous">
                         <i class="fa fa-lg fa-chevron-left"></i>
                     </a>
                     <a class="btn btn-outline-secondary mx-1 next" href="javascript:void(0)" title="Next">
                         <i class="fa fa-lg fa-chevron-right"></i>
-                    </a>
+                    </a> -->
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection

@@ -125,7 +125,10 @@ Route::group(['module' => 'dashboard', 'middleware' => 'web', 'namespace' => "Ap
     Route::get("/editProfile/{id}", ["as" => "frontend.dashboard.index.editProfile", "uses" => "FrontendController@editProfile"]);
     //update profile
     Route::get("/updateProfile/{id}", ["as" => "frontend.dashboard.index.editProfile", "uses" => "FrontendController@updateProfile"]);
-
+    //update profile avatar
+    // Route::post("/updateProfile/{id}", ["as" => "frontend.dashboard.index.editProfile", "uses" => "FrontendController@updateImage"]);
+    // Route::post('updateImage',[FrontendController::class, 'updateImage'])->name('updateImage');
+    Route::get('/editProfile/{id}"', ["as" => "updateImage", "uses" => "FrontendController@updateImage"]);
     //Payment hotel
     Route::post("/payment/{id}", ["as" => "frontend.dashboard.index.payment", "uses" => "FrontendController@paymentHotelById"]);
     Route::post("/receip/{id}", ["as" => "frontend.dashboard.index.receip", "uses" => "FrontendController@addReceipForUser"]);

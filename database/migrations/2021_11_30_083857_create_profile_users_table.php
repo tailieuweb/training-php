@@ -20,6 +20,7 @@ class CreateProfileUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->dateTime('Date')->nullable();
             $table->string('address')->nullable();
+            $table->string('image_profile')->nullable();
             $table->timestamps();
             //lieen ket khoa ngoai voi bang users
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -33,6 +34,6 @@ class CreateProfileUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profile__users');
+        Schema::dropIfExists('profile_users');
     }
 }

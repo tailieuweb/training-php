@@ -22,5 +22,14 @@ class Profile_User extends Model
         'phone',
         'Date',
         'address',
+        'image_profile'
     ];
+
+    public function getPictureAttribute($value){
+        if($value){
+            return asset('frontend/images/profiles/'.$value);
+        }else{
+            return asset('frontend/images/profiles/user1.jpg');
+        }
+    }
 }

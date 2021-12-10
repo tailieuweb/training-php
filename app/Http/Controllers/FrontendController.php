@@ -56,7 +56,6 @@ class FrontendController extends Controller
     {
         //tìm và lấy ra giá trị thuộc user_id tương ứng trong bảng Profile_User
         $userProfile = Profile_User::whereRaw('user_id = ?',Auth::user()->id)->first();
-        //var_dump($userProfile);die();
         //neu gia tri do khong ton tai thì sẽ đặt một giá trị null tương ứng
         if($userProfile == null){
             $profile = new Profile_User();
@@ -93,13 +92,13 @@ class FrontendController extends Controller
        
     }
     //update Profile User
-    public function updateProfile(Request $request,$id){
-
+    public function updateProfile(Request $request,$id){ 
         $data = array();        
         $data['fullName'] = $request->fullname;
         $data['phone'] = $request->phone;
         $data['Date'] = $request->Date;
         $data['address'] = $request->address;
+        $data['image_profile'] = $request->file('user_image');
         DB::table('profile_users')->where('user_id', $id)->update($data);
         $data2 = array();
         $data2['username'] = $request->name;
@@ -107,7 +106,53 @@ class FrontendController extends Controller
         session()->flash('message', 'Cap nhat thanh cong');
         return redirect()->route("frontend.dashboard.index.profile");
     }
+    //upload image
+    public function updateImage(Request $request){
+        $path ='frontend/images/profiles/'; //tao duong dan khi nao user muon bat dau
+        $file = $request->file('user_image');
+        $new_image_name = 'UIMG'.date('Ymd').uniqid().'.jpg';
+        //upload file
+        $upload = $data->move(public_path($path), $new_image_name);
+        //var_dump($upload);die();
+        if(!$upload){
+            return response()->json(['status'=>0, 'msg'=>'Something went wrong, try again later']);
+        }else{
+              //xoa anh cu neu ton tai
+              $users_web = DB::table("users_web")
+              ->join('profile_users', 'profile_users.user_id', '=', 'users_web.id')
+              ->where('user_id', Auth::user()->id)
+             // ->join('manufactures', 'manufactures.id', '=', 'products.manu_id')
+              ->first();
+              $userPicture = $users_web->image_profile;
+              if($userPicture != ''){
+                  unlink($path.$userPicture);
+              }
+              //update image datebase
+              $profile = new Profile_User();
+                $profile->user_id = Auth::user()->id;
+                $profile->update(['image_profile'=>$new_image_name]);
+            //   DB::table('profile_users')->select('profile_users.*')->whereRaw('id = ?',$id)->update(['image_profile'=>$new_image_name]);
+              return response()->json(['status'=>1,'msg'=>'Image has been cropped successfully.','name'=>$new_image_name]);
 
+        //      //Get Old picture
+        //      $oldPicture = Profile_User::whereRaw('user_id = ?',Auth::user()->id)->getAttributes()['image_profile'];
+
+        //      if( $oldPicture != '' ){
+        //          if( \File::exists(public_path($path.$oldPicture))){
+        //              \File::delete(public_path($path.$oldPicture));
+        //          }
+        //      }
+
+        //      //Update DB
+        //      $update = Profile_User::whereRaw('user_id = ?',Auth::user()->id)->update(['image_profile'=>$new_name]);
+
+        //      if( !$upload ){
+        //          return response()->json(['status'=>0,'msg'=>'Something went wrong, updating picture in db failed.']);
+        //      }else{
+        //          return response()->json(['status'=>1,'msg'=>'Your profile picture has been updated successfully']);
+        //      }
+      }
+    }
     public function postLogin(Request $request)
     {
         $arr = [
@@ -363,6 +408,22 @@ class FrontendController extends Controller
         session()->flash('message', 'You are payment hotel successfully!!');
         return view('frontend.layout.payment')->with('hotel', $hotel);
     }
+    //Add object in table user_rental
+    public function addReceipForUser($id, Request $request){
+        $this->AuthLogin();
+        
+        $rental = array();
+        $rental['user_id'] = Auth::user()->id;
+        $rental['hotel_id'] = $id;
+        $rental['time_pick'] = $request->date_pick;
+        $rental['time_drop'] = $request->date_drop;
+        $date = date('Y/m/d', time());
+        $rental['time_receip'] = $date;
+        $rental['total_money'] = $request->total_money;
+        DB::table('user_rental')->insert($rental);
+
+        return View('Frontend.layout.receip', compact('rental'));
+    }
     //Check user rental this hotel?
     public function checkRentalHotel($hotel_id, $user_id)
     {
@@ -426,22 +487,7 @@ class FrontendController extends Controller
         ->where('hotel_id', $id)->get();
         return count($comment);
     }
-    //Add object in table user_rental
-    public function addReceipForUser($id, Request $request){
-        $this->AuthLogin();
-        
-        $rental = array();
-        $rental['user_id'] = Auth::user()->id;
-        $rental['hotel_id'] = $id;
-        $rental['time_pick'] = $request->date_pick;
-        $rental['time_drop'] = $request->date_drop;
-        $date = date('Y/m/d', time());
-        $rental['time_receip'] = $date;
-        $rental['total_money'] = $request->total_money;
-        DB::table('user_rental')->insert($rental);
-
-        return View('Frontend.layout.receip', compact('rental'));
-    }
+    
     //Get hotel in the favorite of user
     public function getAllHotelFavorite(){
         $favorite = DB::table('hotel')

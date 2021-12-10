@@ -15,7 +15,11 @@
                         <div class="d-flex flex-column align-items-center text-center">
                         
                             <!-- image user -->
-                            <img src="{{asset('frontend/images/profiles/user1.jpg')}}" alt="Admin" class="rounded-circle" width="50%">
+                            @if($users_web->image_profile??null)
+                                <img src="{{asset('frontend/images/profiles/')}}/{{$users_web->image_profile}}" alt="Admin" class="rounded-circle" width="50%">
+                            @else
+                                <img src="{{asset('frontend/images/profiles/user1.jpg')}}" alt="Admin" class="rounded-circle" width="50%">
+                            @endif
                             <div class="mt-3">
                                 <!-- gán giá trị biên vừa tạo bên controller -> dẫn tới cột tương ứng của user_web -->
                                 <h4>{{$users_web->username}}</h4>
