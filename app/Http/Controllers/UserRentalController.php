@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class UserRentalController extends Controller
 {
@@ -63,11 +64,19 @@ class UserRentalController extends Controller
     //Get update user_rental (get lấy ra khách hàng đã đặt phòng)
     public function getUpdateUserRental($id){
         $id = substr($id,9);
+        $validator = Validator::make(['id_rental' => $id], [
+            'id_rental' => 'required|numeric'
+        ]);
+        //neu co thay doi --> bao loi
+        if ($validator->fails()) {
+            abort(404);
+        }else{
         $userRental = DB::table('user_rental')->select('user_rental.*')->whereRaw('id_rental = ?',$id)->get();
         $hotel = DB::table('hotel')
                 ->select('hotel.*')->get();
         $user = DB::table('users_web')
                 ->select('users_web.*')->get();
+        }
                 //dat ten xac dinh theo bien tranh trung db
         return view('backend.layouts.User_rental.UpdateUserRental', ['user' => $user, 'hotel' => $hotel, 'userRental' => $userRental]);
     }
