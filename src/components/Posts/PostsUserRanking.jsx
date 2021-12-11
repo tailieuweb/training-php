@@ -21,7 +21,7 @@ export default function PostsUserRanking() {
           ></i>{" "}
           <span>Trọng Hiếu</span>
         </div>
-        <span class="badge badge-danger">156</span>
+        <span className="badge badge-danger">156</span>
       </div>
       <div className="d-flex justify-content-between border-bottom py-2">
         <div>
@@ -32,7 +32,7 @@ export default function PostsUserRanking() {
           ></i>{" "}
           <span>Trọng Hiếu</span>
         </div>
-        <span class="badge badge-success">156</span>
+        <span className="badge badge-success">156</span>
       </div>
       <div className="d-flex justify-content-between border-bottom py-2">
         <div>
@@ -43,7 +43,7 @@ export default function PostsUserRanking() {
           ></i>{" "}
           <span>Trọng Hiếu</span>
         </div>
-        <span class="badge badge-primary">156</span>
+        <span className="badge badge-primary">156</span>
       </div>
       <div className="d-flex justify-content-between border-bottom py-2">
         <div>
@@ -54,7 +54,7 @@ export default function PostsUserRanking() {
           ></i>{" "}
           <span>Trọng Hiếu</span>
         </div>
-        <span class="badge badge-dark">156</span>
+        <span className="badge badge-dark">156</span>
       </div>
       <div className="d-flex justify-content-between border-bottom py-2">
         <div>
@@ -65,7 +65,7 @@ export default function PostsUserRanking() {
           ></i>{" "}
           <span>Trọng Hiếu</span>
         </div>
-        <span class="badge badge-dark">156</span>
+        <span className="badge badge-dark">156</span>
       </div>
     </div>
   );

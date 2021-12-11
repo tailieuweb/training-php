@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import Footer from "../../src/components/Footer";
 import Header from "../../src/components/Header";
 import Posts from "../../src/components/Posts";
+import PostsFilter from "../../src/components/Posts/PostsFilter";
 
 export default function PostsPage() {
   const { t } = useTranslation("common");
@@ -14,6 +15,7 @@ export default function PostsPage() {
         <title>{t("app.common.posts")}</title>
       </Head>
       <Header />
+      <PostsFilter />
       <div className="container">
         <Posts />
       </div>

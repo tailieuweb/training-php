@@ -17,7 +17,7 @@ export default function HeaderAuth(props) {
             className="btn btn-primary btn-sm dropdown-toggle text-white"
             data-toggle="dropdown"
             id="navbarDropdownMenuLink2"
-            style={{ padding: "5px 10px" }}
+            style={{padding: "5px 10px"}}
           >
             <i className="fa fa-user mr-1" aria-hidden="true"></i> {user.name}
           </a>
@@ -52,11 +52,10 @@ export default function HeaderAuth(props) {
       )}
       {!user && (
         <button
-          className="btn btn-primary btn-sm ml-2"
+          className="btn btn-primary btn-sm"
           type="button"
           data-toggle="modal"
           data-target="#authModal"
-          style={{ padding: "5px 10px" }}
         >
           <i className="fa fa-sign-in" /> {t("app.auth.buttonSignIn")}
         </button>
