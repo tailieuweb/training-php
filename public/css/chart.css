@@ -1,0 +1,14 @@
+.animsition {
+    opacity: 1;
+}
+
+.highcharts-credits {
+    opacity: 0;
+}
+
+g.highcharts-legend.highcharts-no-tooltip {
+    opacity: 0;
+}
+.chart-users {
+    padding-top: 20px;
+}

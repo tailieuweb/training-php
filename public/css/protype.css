@@ -1,0 +1,62 @@
+.animsition, .animsition-overlay{
+    opacity: 1;
+}
+.tr-shadow .edit-delete{
+    width: 10%;
+}
+.table {
+    counter-reset: number;
+}
+.table .stt::before{
+    counter-increment: number;
+    content: counter(number) ;
+}
+/* Comment */
+.comment_list .name{
+    color: #000;
+    font-weight: bold;
+}
+.comment_list .tl_btn{
+    border: none;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0;
+    background: transparent;
+    color: #f195b2;
+}
+#content{
+    height: 100px;
+    width: 80%;
+}
+.comment_icon{
+    display: flex;
+}
+.comment_icon_replide{
+    display: flex;
+    margin-left: 50px;
+}
+.comment_form{
+    margin-left: 10px;
+}
+.comment_replide {
+    margin-left: 10px;
+}
+.tl_btn{
+    margin-left: 26px;
+}
+.tl_btn:focus{
+    outline: none;
+}
+.date_name{
+    display: flex;
+}
+.date{
+    margin-left: 30px;
+}
+.fa-check{
+    color: cadetblue;
+    margin-top: 4px;
+}
+.btn_pink{
+    border: 1px dashed;
+}
