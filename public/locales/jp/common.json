@@ -85,4 +85,8 @@
     "app.post.filterNew": "新しい投稿",
     "app.post.filterRandom": "ランダム",
     "app.post.filterRandomPosts": "ランダム投稿"
+
+    "app.ranking.title": "トップアクティビティ",
+    "app.ranking.member": "メンバー名",
+    "app.ranking.numberPosts": "投稿数"
 }

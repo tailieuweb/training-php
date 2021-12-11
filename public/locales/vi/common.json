@@ -85,4 +85,8 @@
     "app.post.filterNew": "Mới Nhất",
     "app.post.filterRandom": "Ngẫu Nhiên",
     "app.post.filterRandomPosts": "Bài Viết Ngẫu Nhiên"
+
+    "app.ranking.title": "Top Hoạt Động",
+    "app.ranking.member": "Thành viên",
+    "app.ranking.numberPosts": "Số Bài Viết"
 }

@@ -19,7 +19,7 @@ export default function HeaderAuth(props) {
             id="navbarDropdownMenuLink2"
             style={{padding: "5px 10px"}}
           >
-            <i className="fa fa-user mr-1" aria-hidden="true"></i> {user.name}
+            <i className="fa fa-user mr-1" aria-hidden="true"></i> {user.name} ({user.id})
           </a>
           <ul
             className="dropdown-menu"
