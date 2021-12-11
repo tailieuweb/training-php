@@ -81,5 +81,8 @@
     "app.post.deleteDescription": "Không thể khôi phục hành động này bằng bất cứ thứ gì. Bạn có muốn xóa confession này không?",
     "app.post.deleteButton": "Xóa",
     "app.post.deleteButtonClose": "Đóng",
-    "app.post.deleteButtonSubmit": "Xóa Bài Viết"
+    "app.post.deleteButtonSubmit": "Xóa Bài Viết",
+    "app.post.filterNew": "Mới Nhất",
+    "app.post.filterRandom": "Ngẫu Nhiên",
+    "app.post.filterRandomPosts": "Bài Viết Ngẫu Nhiên"
 }

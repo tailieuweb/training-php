@@ -3,6 +3,7 @@ import Head from "next/head";
 import Footer from "../src/components/Footer";
 import Header from "../src/components/Header";
 import Posts from "../src/components/Posts";
+import PostsFilter from "../src/components/Posts/PostsFilter";
 
 export default function HomePage() {
   return (
@@ -11,19 +12,7 @@ export default function HomePage() {
         <title>React Confessions</title>
       </Head>
       <Header />
-      <div className="bg-white">
-        <div className="container pb-3">
-          <button type="button" class="btn btn-primary btn-sm">
-            <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Mới Nhất
-          </button>
-          <button type="button" class="btn btn-warning btn-sm">
-            <i class="fa fa-random" aria-hidden="true"></i> Ngẫu Nhiên
-          </button>
-          <button type="button" class="btn btn-danger btn-sm">
-            <i class="fa fa-random" aria-hidden="true"></i> Bài Viết Ngẫu Nhiên
-          </button>
-        </div>
-      </div>
+      <PostsFilter />
       <div className="container">
         <Posts />
       </div>
