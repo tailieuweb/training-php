@@ -137,7 +137,7 @@ export default function Posts() {
         <PostsAddItem user={user} />
       </div>
       <div className={`col-md-7 ${!showPageItem && "d-none"} mb-5`}>
-        <PostsUserRanking />
+        <PostsUserRanking posts={postsBase} />
       </div>
       {[...Array(6).keys()].map((item) => (
         <div key={item} className={`col-md-6 ${isLoading ? "" : "d-none"}`}>
