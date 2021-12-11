@@ -1,0 +1,2 @@
+### /:userId duc2
+GET http://localhost:5500/users/get_dashboard_user_id/617de325229e7f9bd95ac8b1

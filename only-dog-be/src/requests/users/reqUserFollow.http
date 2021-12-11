@@ -1,0 +1,10 @@
+
+### Get all user / suggestion
+GET http://localhost:5500/users/find_one?user_id=6173802f4c158a6d5e427f37
+
+### get all user 
+GET http://localhost:5500/users
+
+### follow user teo 3
+### current user is tai (body -> userId)
+PUT http://localhost:5500/users/follow?user_id_follow=617380732e2ea75bcff892b0

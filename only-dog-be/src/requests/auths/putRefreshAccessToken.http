@@ -1,0 +1,4 @@
+### Bearer refreshToken
+PUT http://localhost:5500/auth/refresh_access_token
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTc5NmE0MmE0N2EyZjBjYmEzNGE3ZjIiLCJpYXQiOjE2MzU0Mjk3NTF9.ocbXg81oM1xz87tEJlXpNyLQ1umo9CnjhTRg_5yKpd8

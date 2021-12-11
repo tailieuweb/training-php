@@ -1,0 +1,2 @@
+### /:userName
+GET http://localhost:5500/users/find_by_name/duc1

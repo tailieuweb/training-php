@@ -1,0 +1,10 @@
+### duc2 followwwwwwwwwwwwwwwww duc3
+### Bearer accessToken
+PUT http://localhost:5500/users/follow_and_unfollow
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTdjMmMxMmQ2YjJjODZhOGU1OGFiYmUiLCJpYXQiOjE2MzU1OTIxMzh9._57o7Am6-08kIt_BYUo8cZCF6BsIASNOweHjf2qkBVI
+
+{
+  "userIdFollow":"617c2c12d6b2c86a8e58abbe",
+  "userIdBeFollow":"617d17ae3cce5286c914aa47"
+}

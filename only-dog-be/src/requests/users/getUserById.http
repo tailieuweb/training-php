@@ -1,0 +1,2 @@
+### /:userId
+GET http://localhost:5500/users/find_by_id/617b4a158a43067384932e33

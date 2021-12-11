@@ -1,0 +1,54 @@
+###
+POST http://localhost:5500/auth/register
+Content-Type: application/json
+
+{
+  "userName": "ducd",
+  "email":"ducd@mail.com",
+  "password": "duc622"
+}
+###
+POST http://localhost:5500/auth/register
+Content-Type: application/json
+
+{
+  "userName": "duc1",
+  "email":"duc1@mail.com",
+  "password": "duc111"
+}
+###
+POST http://localhost:5500/auth/register
+Content-Type: application/json
+
+{
+  "userName": "duc2",
+  "email":"duc2@mail.com",
+  "password": "duc222"
+}
+###
+POST http://localhost:5500/auth/register
+Content-Type: application/json
+
+{
+  "userName": "duc3",
+  "email":"duc3@mail.com",
+  "password": "duc333"
+}
+###
+POST http://localhost:5500/auth/register
+Content-Type: application/json
+
+{
+  "userName": "duc4",
+  "email":"duc4@mail.com",
+  "password": "duc444"
+}
+###
+POST http://localhost:5500/auth/register
+Content-Type: application/json
+
+{
+  "userName": "duc5",
+  "email":"duc5@mail.com",
+  "password": "duc555"
+}

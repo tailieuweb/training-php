@@ -1,0 +1,9 @@
+### Bearer accessToken
+PUT http://localhost:5500/posts/dislike
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTdjMmMwYWQ2YjJjODZhOGU1OGFiYmIiLCJpYXQiOjE2MzU2NzI1NzR9.cSuFjTd9DDTxEZpucubaKgGFgMbeUJDqvkhsnc8ZYfU
+
+{
+  "userId":"617c2c0ad6b2c86a8e58abbb",
+  "postId":"617c2c39d6b2c86a8e58abc4"
+}
