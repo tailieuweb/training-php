@@ -154,7 +154,7 @@ export default function Posts() {
         </div>
       ))}
       <div className="col-md-12">
-        {posts.length > 0 && (
+        {(posts.length > 0 && filter !== "random") && (
           <Pagination
             baseUrl="/posts"
             maxSize={postsTotal}
