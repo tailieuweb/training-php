@@ -1,61 +1,134 @@
-<?php
-// Start the session
-session_start();
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
-
-$user = NULL; //Add new user
-$_id = NULL;
-
-if (!empty($_GET['id'])) {
-    $_id = $_GET['id'];
-    $user = $userModel->findUserById($_id);//Update existing user
-}
-
-
-if (!empty($_POST['submit'])) {
-
-    if (!empty($_id)) {
-        $userModel->updateUser($_POST);
-    } else {
-        $userModel->insertUser($_POST);
-    }
-    header('location: list_users.php');
-}
+<?php ob_start();
+include 'inc/header.php';
 
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>User form</title>
-    <?php include 'views/meta.php' ?>
-</head>
+
+<?php
+$check = Session::get('customer_login');
+if (!isset($check)) {
+  header('Location:login.php');
+}
+?>
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
+  $loginCus = $user->Login_Customer($_POST);
+}
+?>
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  form {
+    border: 3px solid #f1f1f1;
+  }
+
+  input[type=text],
+  input[type=password] {
+    width: 450px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+
+  }
+
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 15px 120px;
+    border: none;
+    cursor: pointer;
+    width: 455px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-103%);
+  }
+
+  button:hover {
+    opacity: 0.8;
+  }
+
+  .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44337;
+  }
+
+  .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+  }
+
+  img.avatar {
+    width: 40%;
+    border-radius: 50%;
+  }
+
+  .container {
+    padding: 16px;
+    text-align: center;
+    font-size: 15px;
+  }
+
+  span.psw {
+    float: right;
+    padding-top: 16px;
+  }
+
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    span.psw {
+      display: block;
+      float: none;
+    }
+
+    .cancelbtn {
+      width: 100%;
+    }
+  }
+</style>
+
 <body>
-    <?php include 'views/header.php'?>
+
+
+
+  <form action="" method="post">
+    <center>
+      <h2>Đăng nhập</h2>
+    </center>
+
     <div class="container">
-
-            <?php if ($user || !isset($_id)) { ?>
-                <div class="alert alert-warning" role="alert">
-                    User form
-                </div>
-                <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $_id ?>">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                    </div>
-
-                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
-                </form>
-            <?php } else { ?>
-                <div class="alert alert-success" role="alert">
-                    User not found!
-                </div>
-            <?php } ?>
+      <label for="uname"><b>Tài khoản</b></label>
+      <input class="userc" type="text" placeholder="Enter Username" name="username" required">
+      <br>
+      <label for="psw"><b>Mật khẩu </b></label>
+      <input class="pswc" type="password" placeholder="Enter Password" name="password" required>
+      <?php
+      if (isset($loginCus)) {
+        echo $loginCus;
+      }
+      ?>
+      <br>
+      <button type="submit" name="login">Login</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Lưu tài khoản
+      </label>
     </div>
+
+    <!-- <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <span class="psw">Forgot <a href="#">password?</a></span>
+  </div> -->
+  </form>
+
 </body>
-</html>
+
+<?php
+
+include 'inc/footer.php';
+ob_end_flush();
+?>
