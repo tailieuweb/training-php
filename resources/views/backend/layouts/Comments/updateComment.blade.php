@@ -127,6 +127,9 @@
                                         <input class="form-control" value="{{$comment[0]->content}}" name="content" required="required" />
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <input type="number" name="version" value="{{$comment[0]->comment_version}}" hidden>
+                                </div>
                                 <div class="ln_solid">
                                     <div class="form-group">
                                         <div class="col-md-6 offset-md-3">
