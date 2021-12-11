@@ -1,4 +1,4 @@
-import Loading from "../components/Base/Loading";
+import Loading from "./Base/Loading";
 import { useSelector } from "react-redux";
 
 export default function Footer() {

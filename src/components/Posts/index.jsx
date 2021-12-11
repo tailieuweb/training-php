@@ -9,6 +9,7 @@ import {
   actEditPost,
   actLoadPosts,
 } from "../../redux/actions/postsActions";
+import { shuffleArr } from "../../utils/commonFunctions";
 import Pagination from "../Base/Pagination";
 import PostsAdd from "./PostsAdd";
 import PostsAddItem from "./PostsAddItem";
@@ -26,7 +27,7 @@ export default function Posts() {
 
   // Next
   const router = useRouter();
-  const { page = 1, q = "" } = router.query;
+  const { page = 1, q = "", filter } = router.query;
 
   // Redux
   const dispatch = useDispatch();
@@ -55,8 +56,11 @@ export default function Posts() {
     );
     setPostsTotal(postsData.length);
     postsData = postsData.splice((page - 1) * ITEM_PER_PAGE, ITEM_PER_PAGE);
+    if (filter === "random") {
+      postsData = shuffleArr(postsData);
+    }
     setPosts(postsData);
-  }, [page, q, postsBase]);
+  }, [page, q, postsBase, filter]);
 
   // Functions
   const onChange = (e) => {

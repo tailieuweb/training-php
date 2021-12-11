@@ -82,6 +82,9 @@
     "app.post.deleteButton": "消去",
     "app.post.deleteButtonClose": "選ぶ",
     "app.post.deleteButtonSubmit": "あなたの告白を削除します",
+    "app.post.filterNew": "新しい投稿",
+    "app.post.filterRandom": "ランダム",
+    "app.post.filterRandomPosts": "ランダム投稿"
 
     "app.ranking.title": "トップアクティビティ",
     "app.ranking.member": "メンバー名",

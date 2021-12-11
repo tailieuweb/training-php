@@ -82,6 +82,9 @@
     "app.post.deleteButton": "Xóa",
     "app.post.deleteButtonClose": "Đóng",
     "app.post.deleteButtonSubmit": "Xóa Bài Viết",
+    "app.post.filterNew": "Mới Nhất",
+    "app.post.filterRandom": "Ngẫu Nhiên",
+    "app.post.filterRandomPosts": "Bài Viết Ngẫu Nhiên"
 
     "app.ranking.title": "Top Hoạt Động",
     "app.ranking.member": "Thành viên",
