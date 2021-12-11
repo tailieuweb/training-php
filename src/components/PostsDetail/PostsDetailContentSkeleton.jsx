@@ -13,13 +13,13 @@ export default function PostsDetailContentSkeleton() {
               />
             </Skeleton>
             <div className="ml-3">
-              <Skeleton width={200}></Skeleton>
-              <Skeleton width={200}></Skeleton>
+              <Skeleton width={100}></Skeleton>
+              <Skeleton width={100}></Skeleton>
             </div>
           </div>
         </div>
         <Skeleton className="text-primary my-4"></Skeleton>
-        <Skeleton height={400} className="card-text"></Skeleton>
+        <Skeleton height={200} className="card-text"></Skeleton>
       </div>
     </div>
   );

@@ -48,17 +48,17 @@ export default function PostsDetail() {
   }, []);
 
   useEffect(() => {
-    const postsData = shuffleArr(postsBase).splice(0, 5);
+    const postsData = shuffleArr(postsBase).splice(0, 6);
     setPosts(postsData);
   }, [postsBase]);
 
   return (
     <div className="row mt-4">
-      <div className="col-12 col-md-8">
+      <div className="col-12">
         {post && <PostsDetailContent post={post} />}
         {!post && <PostsDetailContentSkeleton />}
       </div>
-      <div className="col-12 col-md-4">
+      <div className="col-12">
         <PostsDetailRelate posts={posts} />
         {isLoading && <PostsDetailRelateSkeleton />}
       </div>

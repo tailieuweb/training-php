@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import Footer from "../../src/components/Footer";
 import Header from "../../src/components/Header";
 import PostsDetail from "../../src/components/PostsDetail";
-import apiCaller from "../../src/utils/apiCaller";
 
 export default function PostsDetailPage() {
   const { t } = useTranslation("common");
@@ -25,16 +24,16 @@ export default function PostsDetailPage() {
 
 // This function gets called at build time
 export const getStaticPaths = async () => {
-  const pathsEn = Array.from({ length: 1000 }, (_, index) => ({
-    params: { id: `${index}` },
+  const pathsEn = Array.from({ length: 200 }, (_, index) => ({
+    params: { id: `${index * 5}` },
     locale: "en",
   }));
-  const pathsJp = Array.from({ length: 1000 }, (_, index) => ({
-    params: { id: `${index}` },
+  const pathsJp = Array.from({ length: 200 }, (_, index) => ({
+    params: { id: `${index * 5}` },
     locale: "jp",
   }));
-  const pathsVi = Array.from({ length: 1000 }, (_, index) => ({
-    params: { id: `${index}` },
+  const pathsVi = Array.from({ length: 200 }, (_, index) => ({
+    params: { id: `${index * 5}` },
     locale: "vi",
   }));
 

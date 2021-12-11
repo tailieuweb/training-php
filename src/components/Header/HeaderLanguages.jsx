@@ -21,7 +21,7 @@ export default function HeaderLanguages() {
     <div className="dropdown ml-2">
       <a
         href="#"
-        className="btn btn-dark btn-sm dropdown-toggle d-flex align-items-center"
+        className="btn btn-dark btn-sm dropdown-toggle d-flex align-items-center mr-0"
         data-toggle="dropdown"
         id="navbarDropdownMenuLink2"
       >

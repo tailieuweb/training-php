@@ -45,7 +45,7 @@ export default function Header() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-secondary shadow">
       <div className="container">
         <Link href="/">
           <a className="navbar-brand">React Confessions</a>
@@ -62,7 +62,7 @@ export default function Header() {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="w-75 navbar-nav ml-auto align-items-center d-flex justify-content-end flex-row mt-3 mt-lg-0">
+          <ul className="w-100 navbar-nav ml-auto align-items-center d-flex justify-content-end flex-row mt-3 mt-lg-0">
             <HeaderSearch
               onSearch={onSearch}
               inputSearch={inputSearch}
