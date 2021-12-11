@@ -1,7 +1,7 @@
 {
     "autoload": {
         "classmap": [
-            "models/"
+            "classes/"
         ]
     },
     "require-dev": {
