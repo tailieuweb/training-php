@@ -388,6 +388,7 @@ class FrontendController extends Controller
         $comment['hotel_id'] = $id;
         $comment['rating'] = $request->rating;
         $comment['content'] = $request->content;
+        $comment['comment_version'] = 0;
         $date = date('Y/m/d', time());
         $comment['time_cmt'] = $date;
         DB::table('user_comment')->insert($comment);
