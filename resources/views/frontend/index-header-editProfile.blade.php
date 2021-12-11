@@ -43,7 +43,7 @@
           buttonsText:['CROP','QUIT'],
           buttonsColor:['#30bf7d','#ee5155', -15],
             // đường dẫn chỉ vào để lấy ra giá trị của user_id
-          processUrl: '{{ route("updateImage") }}',
+          processUrl: '{{route("frontend.dashboard.index.profile")}}',
           withCSRF:['_token','{{ csrf_token() }}'],
           onSuccess:function(message, element, status){
              alert(message);
