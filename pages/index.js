@@ -19,7 +19,7 @@ export default function HomePage() {
           <button type="button" class="btn btn-warning btn-sm">
             <i class="fa fa-random" aria-hidden="true"></i> Ngẫu Nhiên
           </button>
-          <button type="button" class="btn btn-danger btn-sm">
+          <button type="button" class="btn btn-danger btn-sm mt-2 mt-md-0">
             <i class="fa fa-random" aria-hidden="true"></i> Bài Viết Ngẫu Nhiên
           </button>
         </div>

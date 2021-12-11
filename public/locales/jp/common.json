@@ -81,5 +81,9 @@
     "app.post.deleteDescription": "このアクションは、何によっても復元できません。 この自白を削除しますか？",
     "app.post.deleteButton": "消去",
     "app.post.deleteButtonClose": "選ぶ",
-    "app.post.deleteButtonSubmit": "あなたの告白を削除します"
+    "app.post.deleteButtonSubmit": "あなたの告白を削除します",
+
+    "app.ranking.title": "トップアクティビティ",
+    "app.ranking.member": "メンバー名",
+    "app.ranking.numberPosts": "投稿数"
 }

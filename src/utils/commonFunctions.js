@@ -98,3 +98,9 @@ export const shuffleArr = (arr) => {
 
   return arr;
 };
+
+export const countAndSort = (arr) => {
+  return Object.entries(
+    arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {})
+  ).sort((a, b) => b[1] - a[1]);
+};
