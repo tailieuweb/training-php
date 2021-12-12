@@ -62,23 +62,23 @@ class ProductModelTest extends TestCase
         $expected = true;
         $this->assertEquals($expected, $delete);
     }
-    public function testInsertProductOk(){
-        $product = new product();
-        $product = array(
-            'productId' => '155',
-            'productName' => 'ULTRABOOST 20 BLACK',
-            'catId' => '26',
-            'brandId' => '5',
-            'size' => '40',
-            'price' => '2220',
-            'quantity' => '99',
-            'image' => '585a64a700.jpg',
-            'type' => '1',
-            'typdescriptione' => 'CONTROL ON THE EARTH, COMFORTABLE IN EVERY STEP OF RUNNING. Every new day. Every new run. Make the most of it. This high-performance shoe features a foot-hugging knit upper. The seams in the booster are precisely positioned to create support in the right places. Soft elastane heel for a more comfortable grip. Elastic cushioning returns energy to every stride, making it feel like running forever.'
+    // public function testInsertProductOk(){
+    //     $product = new product();
+    //     $product = array(
+    //         'productId' => '155',
+    //         'productName' => 'ULTRABOOST 20 BLACK',
+    //         'catId' => '26',
+    //         'brandId' => '5',
+    //         'size' => '40',
+    //         'price' => '2220',
+    //         'quantity' => '99',
+    //         'image' => '585a64a700.jpg',
+    //         'type' => '1',
+    //         'typdescriptione' => 'CONTROL ON THE EARTH, COMFORTABLE IN EVERY STEP OF RUNNING. Every new day. Every new run. Make the most of it. This high-performance shoe features a foot-hugging knit upper. The seams in the booster are precisely positioned to create support in the right places. Soft elastane heel for a more comfortable grip. Elastic cushioning returns energy to every stride, making it feel like running forever.'
             
-        );
-        $expected = true; 
-        $actual = $product->insert_product($product);
-        $this->assertEquals($actual,$expected);   
-    }
+    //     );
+    //     $expected = true; 
+    //     $actual = $product->insert_product($product);
+    //     $this->assertEquals($actual,$expected);   
+    // }
 }
