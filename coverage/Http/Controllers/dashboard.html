@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for C:\xampp\htdocs\Project_CDW1_NhomB\app\Http\Controllers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../_css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../../_css/nv.d3.min.css" rel="stylesheet" type="text/css">
+  <link href="../../_css/style.css" rel="stylesheet" type="text/css">
+  <link href="../../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../../index.html">C:\xampp\htdocs\Project_CDW1_NhomB\app</a></li>
+         <li class="breadcrumb-item"><a href="../index.html">Http</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Controllers</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AccountController.php.html#13">App\Http\Controllers\AccountController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminController.php.html#13">App\Http\Controllers\AdminController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CartController.php.html#19">App\Http\Controllers\CartController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CheckoutController.php.html#20">App\Http\Controllers\CheckoutController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CustomerController.php.html#17">App\Http\Controllers\CustomerController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="HomeController.php.html#7">App\Http\Controllers\HomeController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ManufactureController.php.html#15">App\Http\Controllers\ManufactureController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OrderController.php.html#15">App\Http\Controllers\OrderController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageController.php.html#11">App\Http\Controllers\PageController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductController.php.html#20">App\Http\Controllers\ProductController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProtypeController.php.html#15">App\Http\Controllers\ProtypeController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlideController.php.html#15">App\Http\Controllers\SlideController</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="ProductController.php.html#20">App\Http\Controllers\ProductController</a></td><td class="text-right">1056</td></tr>
+       <tr><td><a href="CartController.php.html#19">App\Http\Controllers\CartController</a></td><td class="text-right">756</td></tr>
+       <tr><td><a href="AdminController.php.html#13">App\Http\Controllers\AdminController</a></td><td class="text-right">702</td></tr>
+       <tr><td><a href="CustomerController.php.html#17">App\Http\Controllers\CustomerController</a></td><td class="text-right">650</td></tr>
+       <tr><td><a href="CheckoutController.php.html#20">App\Http\Controllers\CheckoutController</a></td><td class="text-right">342</td></tr>
+       <tr><td><a href="ProtypeController.php.html#15">App\Http\Controllers\ProtypeController</a></td><td class="text-right">306</td></tr>
+       <tr><td><a href="OrderController.php.html#15">App\Http\Controllers\OrderController</a></td><td class="text-right">272</td></tr>
+       <tr><td><a href="ManufactureController.php.html#15">App\Http\Controllers\ManufactureController</a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="SlideController.php.html#15">App\Http\Controllers\SlideController</a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="AccountController.php.html#13">App\Http\Controllers\AccountController</a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="PageController.php.html#11">App\Http\Controllers\PageController</a></td><td class="text-right">110</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AccountController.php.html#16"><abbr title="App\Http\Controllers\AccountController::getLoginCustomer">getLoginCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AccountController.php.html#19"><abbr title="App\Http\Controllers\AccountController::postLoginCustomer">postLoginCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AccountController.php.html#55"><abbr title="App\Http\Controllers\AccountController::logoutCustomer">logoutCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AccountController.php.html#62"><abbr title="App\Http\Controllers\AccountController::getLoginAdmin">getLoginAdmin</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AccountController.php.html#65"><abbr title="App\Http\Controllers\AccountController::postLoginAdmin">postLoginAdmin</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AccountController.php.html#89"><abbr title="App\Http\Controllers\AccountController::logoutAdmin">logoutAdmin</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminController.php.html#17"><abbr title="App\Http\Controllers\AdminController::getAdminProfilePage">getAdminProfilePage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminController.php.html#25"><abbr title="App\Http\Controllers\AdminController::getEdit">getEdit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminController.php.html#33"><abbr title="App\Http\Controllers\AdminController::postEdit">postEdit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminController.php.html#82"><abbr title="App\Http\Controllers\AdminController::getEditAccount">getEditAccount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminController.php.html#89"><abbr title="App\Http\Controllers\AdminController::postEditAccount">postEditAccount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminController.php.html#126"><abbr title="App\Http\Controllers\AdminController::getList">getList</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminController.php.html#134"><abbr title="App\Http\Controllers\AdminController::postChange">postChange</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminController.php.html#153"><abbr title="App\Http\Controllers\AdminController::getAdd">getAdd</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminController.php.html#157"><abbr title="App\Http\Controllers\AdminController::postAdd">postAdd</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AdminController.php.html#204"><abbr title="App\Http\Controllers\AdminController::getDelete">getDelete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CartController.php.html#22"><abbr title="App\Http\Controllers\CartController::addCart">addCart</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CartController.php.html#86"><abbr title="App\Http\Controllers\CartController::updateCart">updateCart</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CartController.php.html#123"><abbr title="App\Http\Controllers\CartController::deleteCart">deleteCart</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CartController.php.html#162"><abbr title="App\Http\Controllers\CartController::deleteAllCart">deleteAllCart</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CheckoutController.php.html#23"><abbr title="App\Http\Controllers\CheckoutController::getCheckout">getCheckout</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CheckoutController.php.html#42"><abbr title="App\Http\Controllers\CheckoutController::postCheckout">postCheckout</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CheckoutController.php.html#92"><abbr title="App\Http\Controllers\CheckoutController::sendConfirmOrderMail">sendConfirmOrderMail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CustomerController.php.html#20"><abbr title="App\Http\Controllers\CustomerController::getRegisterCustomer">getRegisterCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CustomerController.php.html#23"><abbr title="App\Http\Controllers\CustomerController::postRegisterCustomer">postRegisterCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CustomerController.php.html#74"><abbr title="App\Http\Controllers\CustomerController::activeAccountCustomer">activeAccountCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CustomerController.php.html#90"><abbr title="App\Http\Controllers\CustomerController::getMyAccount">getMyAccount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CustomerController.php.html#100"><abbr title="App\Http\Controllers\CustomerController::getEdit">getEdit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CustomerController.php.html#109"><abbr title="App\Http\Controllers\CustomerController::postEdit">postEdit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CustomerController.php.html#154"><abbr title="App\Http\Controllers\CustomerController::getEditPassword">getEditPassword</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CustomerController.php.html#158"><abbr title="App\Http\Controllers\CustomerController::postEditPassword">postEditPassword</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CustomerController.php.html#212"><abbr title="App\Http\Controllers\CustomerController::sendConfirmMail">sendConfirmMail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CustomerController.php.html#220"><abbr title="App\Http\Controllers\CustomerController::sendVerifyMail">sendVerifyMail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CustomerController.php.html#230"><abbr title="App\Http\Controllers\CustomerController::getList">getList</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CustomerController.php.html#237"><abbr title="App\Http\Controllers\CustomerController::postChange">postChange</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="HomeController.php.html#14"><abbr title="App\Http\Controllers\HomeController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="HomeController.php.html#24"><abbr title="App\Http\Controllers\HomeController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ManufactureController.php.html#18"><abbr title="App\Http\Controllers\ManufactureController::getList">getList</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ManufactureController.php.html#23"><abbr title="App\Http\Controllers\ManufactureController::getAdd">getAdd</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ManufactureController.php.html#27"><abbr title="App\Http\Controllers\ManufactureController::postAdd">postAdd</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ManufactureController.php.html#43"><abbr title="App\Http\Controllers\ManufactureController::getEdit">getEdit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ManufactureController.php.html#51"><abbr title="App\Http\Controllers\ManufactureController::postEdit">postEdit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ManufactureController.php.html#84"><abbr title="App\Http\Controllers\ManufactureController::getDelete">getDelete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OrderController.php.html#18"><abbr title="App\Http\Controllers\OrderController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OrderController.php.html#23"><abbr title="App\Http\Controllers\OrderController::getOrderDetail">getOrderDetail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OrderController.php.html#38"><abbr title="App\Http\Controllers\OrderController::getCancelOrder">getCancelOrder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OrderController.php.html#48"><abbr title="App\Http\Controllers\OrderController::getList">getList</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OrderController.php.html#55"><abbr title="App\Http\Controllers\OrderController::getDetail">getDetail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OrderController.php.html#69"><abbr title="App\Http\Controllers\OrderController::postStatus">postStatus</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageController.php.html#15"><abbr title="App\Http\Controllers\PageController::getIndex">getIndex</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageController.php.html#24"><abbr title="App\Http\Controllers\PageController::getAbout">getAbout</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageController.php.html#28"><abbr title="App\Http\Controllers\PageController::getCart">getCart</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageController.php.html#38"><abbr title="App\Http\Controllers\PageController::getWishList">getWishList</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageController.php.html#42"><abbr title="App\Http\Controllers\PageController::getService">getService</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageController.php.html#46"><abbr title="App\Http\Controllers\PageController::getContact">getContact</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageController.php.html#50"><abbr title="App\Http\Controllers\PageController::getAdminPage">getAdminPage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageController.php.html#54"><abbr title="App\Http\Controllers\PageController::getErrorAdmin">getErrorAdmin</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PageController.php.html#58"><abbr title="App\Http\Controllers\PageController::getErrorCustomer">getErrorCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductController.php.html#23"><abbr title="App\Http\Controllers\ProductController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductController.php.html#33"><abbr title="App\Http\Controllers\ProductController::getListProduct">getListProduct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductController.php.html#70"><abbr title="App\Http\Controllers\ProductController::getDetail">getDetail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductController.php.html#84"><abbr title="App\Http\Controllers\ProductController::getList">getList</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductController.php.html#89"><abbr title="App\Http\Controllers\ProductController::getAdd">getAdd</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductController.php.html#94"><abbr title="App\Http\Controllers\ProductController::postAdd">postAdd</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductController.php.html#153"><abbr title="App\Http\Controllers\ProductController::getEdit">getEdit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductController.php.html#162"><abbr title="App\Http\Controllers\ProductController::postEdit">postEdit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductController.php.html#243"><abbr title="App\Http\Controllers\ProductController::getDelete">getDelete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProductController.php.html#258"><abbr title="App\Http\Controllers\ProductController::postComment">postComment</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProtypeController.php.html#18"><abbr title="App\Http\Controllers\ProtypeController::getList">getList</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProtypeController.php.html#24"><abbr title="App\Http\Controllers\ProtypeController::getAdd">getAdd</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProtypeController.php.html#29"><abbr title="App\Http\Controllers\ProtypeController::postAdd">postAdd</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProtypeController.php.html#62"><abbr title="App\Http\Controllers\ProtypeController::getEdit">getEdit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProtypeController.php.html#71"><abbr title="App\Http\Controllers\ProtypeController::postEdit">postEdit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProtypeController.php.html#126"><abbr title="App\Http\Controllers\ProtypeController::getDelete">getDelete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlideController.php.html#18"><abbr title="App\Http\Controllers\SlideController::getList">getList</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlideController.php.html#23"><abbr title="App\Http\Controllers\SlideController::getAdd">getAdd</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlideController.php.html#27"><abbr title="App\Http\Controllers\SlideController::postAdd">postAdd</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlideController.php.html#49"><abbr title="App\Http\Controllers\SlideController::getEdit">getEdit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlideController.php.html#54"><abbr title="App\Http\Controllers\SlideController::postEdit">postEdit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlideController.php.html#84"><abbr title="App\Http\Controllers\SlideController::getDelete">getDelete</abbr></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="CheckoutController.php.html#42"><abbr title="App\Http\Controllers\CheckoutController::postCheckout">postCheckout</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="CartController.php.html#22"><abbr title="App\Http\Controllers\CartController::addCart">addCart</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="CartController.php.html#86"><abbr title="App\Http\Controllers\CartController::updateCart">updateCart</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="CartController.php.html#123"><abbr title="App\Http\Controllers\CartController::deleteCart">deleteCart</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="ProductController.php.html#33"><abbr title="App\Http\Controllers\ProductController::getListProduct">getListProduct</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="ProductController.php.html#162"><abbr title="App\Http\Controllers\ProductController::postEdit">postEdit</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="AdminController.php.html#33"><abbr title="App\Http\Controllers\AdminController::postEdit">postEdit</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="ProtypeController.php.html#71"><abbr title="App\Http\Controllers\ProtypeController::postEdit">postEdit</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="CheckoutController.php.html#23"><abbr title="App\Http\Controllers\CheckoutController::getCheckout">getCheckout</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="CustomerController.php.html#109"><abbr title="App\Http\Controllers\CustomerController::postEdit">postEdit</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ManufactureController.php.html#51"><abbr title="App\Http\Controllers\ManufactureController::postEdit">postEdit</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="OrderController.php.html#69"><abbr title="App\Http\Controllers\OrderController::postStatus">postStatus</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="AccountController.php.html#19"><abbr title="App\Http\Controllers\AccountController::postLoginCustomer">postLoginCustomer</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="AdminController.php.html#134"><abbr title="App\Http\Controllers\AdminController::postChange">postChange</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ProductController.php.html#94"><abbr title="App\Http\Controllers\ProductController::postAdd">postAdd</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="SlideController.php.html#54"><abbr title="App\Http\Controllers\SlideController::postEdit">postEdit</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="CustomerController.php.html#74"><abbr title="App\Http\Controllers\CustomerController::activeAccountCustomer">activeAccountCustomer</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="CustomerController.php.html#158"><abbr title="App\Http\Controllers\CustomerController::postEditPassword">postEditPassword</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ManufactureController.php.html#84"><abbr title="App\Http\Controllers\ManufactureController::getDelete">getDelete</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="OrderController.php.html#23"><abbr title="App\Http\Controllers\OrderController::getOrderDetail">getOrderDetail</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="OrderController.php.html#55"><abbr title="App\Http\Controllers\OrderController::getDetail">getDetail</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProductController.php.html#258"><abbr title="App\Http\Controllers\ProductController::postComment">postComment</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProtypeController.php.html#29"><abbr title="App\Http\Controllers\ProtypeController::postAdd">postAdd</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="ProtypeController.php.html#126"><abbr title="App\Http\Controllers\ProtypeController::getDelete">getDelete</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="SlideController.php.html#27"><abbr title="App\Http\Controllers\SlideController::postAdd">postAdd</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="AccountController.php.html#65"><abbr title="App\Http\Controllers\AccountController::postLoginAdmin">postLoginAdmin</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AdminController.php.html#17"><abbr title="App\Http\Controllers\AdminController::getAdminProfilePage">getAdminProfilePage</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AdminController.php.html#25"><abbr title="App\Http\Controllers\AdminController::getEdit">getEdit</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AdminController.php.html#82"><abbr title="App\Http\Controllers\AdminController::getEditAccount">getEditAccount</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AdminController.php.html#89"><abbr title="App\Http\Controllers\AdminController::postEditAccount">postEditAccount</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AdminController.php.html#126"><abbr title="App\Http\Controllers\AdminController::getList">getList</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AdminController.php.html#157"><abbr title="App\Http\Controllers\AdminController::postAdd">postAdd</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AdminController.php.html#204"><abbr title="App\Http\Controllers\AdminController::getDelete">getDelete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CustomerController.php.html#23"><abbr title="App\Http\Controllers\CustomerController::postRegisterCustomer">postRegisterCustomer</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CustomerController.php.html#90"><abbr title="App\Http\Controllers\CustomerController::getMyAccount">getMyAccount</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CustomerController.php.html#100"><abbr title="App\Http\Controllers\CustomerController::getEdit">getEdit</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CustomerController.php.html#237"><abbr title="App\Http\Controllers\CustomerController::postChange">postChange</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ManufactureController.php.html#43"><abbr title="App\Http\Controllers\ManufactureController::getEdit">getEdit</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="OrderController.php.html#38"><abbr title="App\Http\Controllers\OrderController::getCancelOrder">getCancelOrder</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="OrderController.php.html#48"><abbr title="App\Http\Controllers\OrderController::getList">getList</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="PageController.php.html#28"><abbr title="App\Http\Controllers\PageController::getCart">getCart</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProductController.php.html#70"><abbr title="App\Http\Controllers\ProductController::getDetail">getDetail</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProductController.php.html#153"><abbr title="App\Http\Controllers\ProductController::getEdit">getEdit</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProductController.php.html#243"><abbr title="App\Http\Controllers\ProductController::getDelete">getDelete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ProtypeController.php.html#62"><abbr title="App\Http\Controllers\ProtypeController::getEdit">getEdit</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="SlideController.php.html#84"><abbr title="App\Http\Controllers\SlideController::getDelete">getDelete</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 9.2.7</a> using <a href="https://secure.php.net/" target="_top">PHP 8.0.12</a> and <a href="https://phpunit.de/">PHPUnit 9.5.10</a> at Sat Dec 11 14:34:06 CET 2021.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../../_js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../_js/d3.min.js" type="text/javascript"></script>
+  <script src="../../_js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([12,0,0,0,0,0,0,0,0,0,0,1], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([80,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,10,"<a href=\"AccountController.php.html#13\">App\\Http\\Controllers\\AccountController<\/a>"],[0,26,"<a href=\"AdminController.php.html#13\">App\\Http\\Controllers\\AdminController<\/a>"],[0,27,"<a href=\"CartController.php.html#19\">App\\Http\\Controllers\\CartController<\/a>"],[0,18,"<a href=\"CheckoutController.php.html#20\">App\\Http\\Controllers\\CheckoutController<\/a>"],[100,0,"<a href=\"Controller.php.html#10\">App\\Http\\Controllers\\Controller<\/a>"],[0,25,"<a href=\"CustomerController.php.html#17\">App\\Http\\Controllers\\CustomerController<\/a>"],[0,2,"<a href=\"HomeController.php.html#7\">App\\Http\\Controllers\\HomeController<\/a>"],[0,13,"<a href=\"ManufactureController.php.html#15\">App\\Http\\Controllers\\ManufactureController<\/a>"],[0,16,"<a href=\"OrderController.php.html#15\">App\\Http\\Controllers\\OrderController<\/a>"],[0,10,"<a href=\"PageController.php.html#11\">App\\Http\\Controllers\\PageController<\/a>"],[0,32,"<a href=\"ProductController.php.html#20\">App\\Http\\Controllers\\ProductController<\/a>"],[0,17,"<a href=\"ProtypeController.php.html#15\">App\\Http\\Controllers\\ProtypeController<\/a>"],[0,12,"<a href=\"SlideController.php.html#15\">App\\Http\\Controllers\\SlideController<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"AccountController.php.html#16\">App\\Http\\Controllers\\AccountController::getLoginCustomer<\/a>"],[0,4,"<a href=\"AccountController.php.html#19\">App\\Http\\Controllers\\AccountController::postLoginCustomer<\/a>"],[0,1,"<a href=\"AccountController.php.html#55\">App\\Http\\Controllers\\AccountController::logoutCustomer<\/a>"],[0,1,"<a href=\"AccountController.php.html#62\">App\\Http\\Controllers\\AccountController::getLoginAdmin<\/a>"],[0,2,"<a href=\"AccountController.php.html#65\">App\\Http\\Controllers\\AccountController::postLoginAdmin<\/a>"],[0,1,"<a href=\"AccountController.php.html#89\">App\\Http\\Controllers\\AccountController::logoutAdmin<\/a>"],[0,2,"<a href=\"AdminController.php.html#17\">App\\Http\\Controllers\\AdminController::getAdminProfilePage<\/a>"],[0,2,"<a href=\"AdminController.php.html#25\">App\\Http\\Controllers\\AdminController::getEdit<\/a>"],[0,7,"<a href=\"AdminController.php.html#33\">App\\Http\\Controllers\\AdminController::postEdit<\/a>"],[0,2,"<a href=\"AdminController.php.html#82\">App\\Http\\Controllers\\AdminController::getEditAccount<\/a>"],[0,2,"<a href=\"AdminController.php.html#89\">App\\Http\\Controllers\\AdminController::postEditAccount<\/a>"],[0,2,"<a href=\"AdminController.php.html#126\">App\\Http\\Controllers\\AdminController::getList<\/a>"],[0,4,"<a href=\"AdminController.php.html#134\">App\\Http\\Controllers\\AdminController::postChange<\/a>"],[0,1,"<a href=\"AdminController.php.html#153\">App\\Http\\Controllers\\AdminController::getAdd<\/a>"],[0,2,"<a href=\"AdminController.php.html#157\">App\\Http\\Controllers\\AdminController::postAdd<\/a>"],[0,2,"<a href=\"AdminController.php.html#204\">App\\Http\\Controllers\\AdminController::getDelete<\/a>"],[0,10,"<a href=\"CartController.php.html#22\">App\\Http\\Controllers\\CartController::addCart<\/a>"],[0,8,"<a href=\"CartController.php.html#86\">App\\Http\\Controllers\\CartController::updateCart<\/a>"],[0,8,"<a href=\"CartController.php.html#123\">App\\Http\\Controllers\\CartController::deleteCart<\/a>"],[0,1,"<a href=\"CartController.php.html#162\">App\\Http\\Controllers\\CartController::deleteAllCart<\/a>"],[0,6,"<a href=\"CheckoutController.php.html#23\">App\\Http\\Controllers\\CheckoutController::getCheckout<\/a>"],[0,11,"<a href=\"CheckoutController.php.html#42\">App\\Http\\Controllers\\CheckoutController::postCheckout<\/a>"],[0,1,"<a href=\"CheckoutController.php.html#92\">App\\Http\\Controllers\\CheckoutController::sendConfirmOrderMail<\/a>"],[0,1,"<a href=\"CustomerController.php.html#20\">App\\Http\\Controllers\\CustomerController::getRegisterCustomer<\/a>"],[0,2,"<a href=\"CustomerController.php.html#23\">App\\Http\\Controllers\\CustomerController::postRegisterCustomer<\/a>"],[0,3,"<a href=\"CustomerController.php.html#74\">App\\Http\\Controllers\\CustomerController::activeAccountCustomer<\/a>"],[0,2,"<a href=\"CustomerController.php.html#90\">App\\Http\\Controllers\\CustomerController::getMyAccount<\/a>"],[0,2,"<a href=\"CustomerController.php.html#100\">App\\Http\\Controllers\\CustomerController::getEdit<\/a>"],[0,6,"<a href=\"CustomerController.php.html#109\">App\\Http\\Controllers\\CustomerController::postEdit<\/a>"],[0,1,"<a href=\"CustomerController.php.html#154\">App\\Http\\Controllers\\CustomerController::getEditPassword<\/a>"],[0,3,"<a href=\"CustomerController.php.html#158\">App\\Http\\Controllers\\CustomerController::postEditPassword<\/a>"],[0,1,"<a href=\"CustomerController.php.html#212\">App\\Http\\Controllers\\CustomerController::sendConfirmMail<\/a>"],[0,1,"<a href=\"CustomerController.php.html#220\">App\\Http\\Controllers\\CustomerController::sendVerifyMail<\/a>"],[0,1,"<a href=\"CustomerController.php.html#230\">App\\Http\\Controllers\\CustomerController::getList<\/a>"],[0,2,"<a href=\"CustomerController.php.html#237\">App\\Http\\Controllers\\CustomerController::postChange<\/a>"],[0,1,"<a href=\"HomeController.php.html#14\">App\\Http\\Controllers\\HomeController::__construct<\/a>"],[0,1,"<a href=\"HomeController.php.html#24\">App\\Http\\Controllers\\HomeController::index<\/a>"],[0,1,"<a href=\"ManufactureController.php.html#18\">App\\Http\\Controllers\\ManufactureController::getList<\/a>"],[0,1,"<a href=\"ManufactureController.php.html#23\">App\\Http\\Controllers\\ManufactureController::getAdd<\/a>"],[0,1,"<a href=\"ManufactureController.php.html#27\">App\\Http\\Controllers\\ManufactureController::postAdd<\/a>"],[0,2,"<a href=\"ManufactureController.php.html#43\">App\\Http\\Controllers\\ManufactureController::getEdit<\/a>"],[0,5,"<a href=\"ManufactureController.php.html#51\">App\\Http\\Controllers\\ManufactureController::postEdit<\/a>"],[0,3,"<a href=\"ManufactureController.php.html#84\">App\\Http\\Controllers\\ManufactureController::getDelete<\/a>"],[0,1,"<a href=\"OrderController.php.html#18\">App\\Http\\Controllers\\OrderController::__construct<\/a>"],[0,3,"<a href=\"OrderController.php.html#23\">App\\Http\\Controllers\\OrderController::getOrderDetail<\/a>"],[0,2,"<a href=\"OrderController.php.html#38\">App\\Http\\Controllers\\OrderController::getCancelOrder<\/a>"],[0,2,"<a href=\"OrderController.php.html#48\">App\\Http\\Controllers\\OrderController::getList<\/a>"],[0,3,"<a href=\"OrderController.php.html#55\">App\\Http\\Controllers\\OrderController::getDetail<\/a>"],[0,5,"<a href=\"OrderController.php.html#69\">App\\Http\\Controllers\\OrderController::postStatus<\/a>"],[0,1,"<a href=\"PageController.php.html#15\">App\\Http\\Controllers\\PageController::getIndex<\/a>"],[0,1,"<a href=\"PageController.php.html#24\">App\\Http\\Controllers\\PageController::getAbout<\/a>"],[0,2,"<a href=\"PageController.php.html#28\">App\\Http\\Controllers\\PageController::getCart<\/a>"],[0,1,"<a href=\"PageController.php.html#38\">App\\Http\\Controllers\\PageController::getWishList<\/a>"],[0,1,"<a href=\"PageController.php.html#42\">App\\Http\\Controllers\\PageController::getService<\/a>"],[0,1,"<a href=\"PageController.php.html#46\">App\\Http\\Controllers\\PageController::getContact<\/a>"],[0,1,"<a href=\"PageController.php.html#50\">App\\Http\\Controllers\\PageController::getAdminPage<\/a>"],[0,1,"<a href=\"PageController.php.html#54\">App\\Http\\Controllers\\PageController::getErrorAdmin<\/a>"],[0,1,"<a href=\"PageController.php.html#58\">App\\Http\\Controllers\\PageController::getErrorCustomer<\/a>"],[0,1,"<a href=\"ProductController.php.html#23\">App\\Http\\Controllers\\ProductController::__construct<\/a>"],[0,8,"<a href=\"ProductController.php.html#33\">App\\Http\\Controllers\\ProductController::getListProduct<\/a>"],[0,2,"<a href=\"ProductController.php.html#70\">App\\Http\\Controllers\\ProductController::getDetail<\/a>"],[0,1,"<a href=\"ProductController.php.html#84\">App\\Http\\Controllers\\ProductController::getList<\/a>"],[0,1,"<a href=\"ProductController.php.html#89\">App\\Http\\Controllers\\ProductController::getAdd<\/a>"],[0,4,"<a href=\"ProductController.php.html#94\">App\\Http\\Controllers\\ProductController::postAdd<\/a>"],[0,2,"<a href=\"ProductController.php.html#153\">App\\Http\\Controllers\\ProductController::getEdit<\/a>"],[0,8,"<a href=\"ProductController.php.html#162\">App\\Http\\Controllers\\ProductController::postEdit<\/a>"],[0,2,"<a href=\"ProductController.php.html#243\">App\\Http\\Controllers\\ProductController::getDelete<\/a>"],[0,3,"<a href=\"ProductController.php.html#258\">App\\Http\\Controllers\\ProductController::postComment<\/a>"],[0,1,"<a href=\"ProtypeController.php.html#18\">App\\Http\\Controllers\\ProtypeController::getList<\/a>"],[0,1,"<a href=\"ProtypeController.php.html#24\">App\\Http\\Controllers\\ProtypeController::getAdd<\/a>"],[0,3,"<a href=\"ProtypeController.php.html#29\">App\\Http\\Controllers\\ProtypeController::postAdd<\/a>"],[0,2,"<a href=\"ProtypeController.php.html#62\">App\\Http\\Controllers\\ProtypeController::getEdit<\/a>"],[0,7,"<a href=\"ProtypeController.php.html#71\">App\\Http\\Controllers\\ProtypeController::postEdit<\/a>"],[0,3,"<a href=\"ProtypeController.php.html#126\">App\\Http\\Controllers\\ProtypeController::getDelete<\/a>"],[0,1,"<a href=\"SlideController.php.html#18\">App\\Http\\Controllers\\SlideController::getList<\/a>"],[0,1,"<a href=\"SlideController.php.html#23\">App\\Http\\Controllers\\SlideController::getAdd<\/a>"],[0,3,"<a href=\"SlideController.php.html#27\">App\\Http\\Controllers\\SlideController::postAdd<\/a>"],[0,1,"<a href=\"SlideController.php.html#49\">App\\Http\\Controllers\\SlideController::getEdit<\/a>"],[0,4,"<a href=\"SlideController.php.html#54\">App\\Http\\Controllers\\SlideController::postEdit<\/a>"],[0,2,"<a href=\"SlideController.php.html#84\">App\\Http\\Controllers\\SlideController::getDelete<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>
