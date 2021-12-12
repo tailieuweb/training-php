@@ -3,12 +3,11 @@
     <testsuites>
         <testsuite name="SqlWsContractImport">
             <file>./Tests/CartModelTest.php</file>
-            <file>./Tests/BillModelTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./classes</directory>
+            <directory suffix=".php">./models</directory>
         </whitelist>
     </filter>
     <php>

@@ -4,7 +4,6 @@ use PHPUnit\Framework\TestCase;
 
 class CartModelTest extends TestCase
 {
-    // Test delete cart
     // test deleteCartById truyền vào đúng id
     public function testDeleteCartByIdOK()
     {
@@ -57,45 +56,27 @@ class CartModelTest extends TestCase
     public function testDeleteCartByIdIsArray()
     {
         $cart = new cart();
-        $cartid = ["100"];
+        $id = ["100"];
         $excute = false;
-        $actual = $cart->delete_cart($cartid);
+        $actual = $cart->delete_cart($id);
         $this->assertEquals($excute, $actual);
     }
     //test deleteCartById id là kiểu object
     public function testDeleteUserByIdIsObject()
     {
         $cart = new cart();
-        $cartid = $cart;
+        $id = $cart;
         $excute = false;
-        $actual = $cart->delete_cart($cartid);
+        $actual = $cart->delete_cart($id);
         $this->assertEquals($excute, $actual);
     }
     //test deleteCartById id là kiểu boolean
     public function testDeleteCartByIdIsBoolean()
     {
         $cart = new cart();
-        $cartid = true;
+        $id = true;
         $excute = false;
-        $actual = $cart->delete_cart($cartid);
-        $this->assertEquals($excute, $actual);
-    }
-    //test deleteCartById id là kiểu số thực
-    public function testDeleteCartByIdIsFloat()
-    {
-        $cart = new cart();
-        $cartid = 1.5;
-        $excute = false;
-        $actual = $cart->delete_cart($cartid);
-        $this->assertEquals($excute, $actual);
-    }
-    //test deleteCartById id là kiểu kí tự đặc biệt
-    public function testDeleteCartByIdIsCharacters()
-    {
-        $cart = new cart();
-        $cartid = '@!$%#';
-        $excute = false;
-        $actual = $cart->delete_cart($cartid);
+        $actual = $cart->delete_cart($id);
         $this->assertEquals($excute, $actual);
     }
 }

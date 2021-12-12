@@ -632,6 +632,7 @@ return array(
     'TheSeer\\Tokenizer\\TokenCollectionException' => $vendorDir . '/theseer/tokenizer/src/TokenCollectionException.php',
     'TheSeer\\Tokenizer\\Tokenizer' => $vendorDir . '/theseer/tokenizer/src/Tokenizer.php',
     'TheSeer\\Tokenizer\\XMLSerializer' => $vendorDir . '/theseer/tokenizer/src/XMLSerializer.php',
+<<<<<<< HEAD
     'User' => $baseDir . '/models/user.php',
     'admin' => $baseDir . '/models/admin.php',
     'adminlogin' => $baseDir . '/models/adminlogin.php',
@@ -641,4 +642,15 @@ return array(
     'category' => $baseDir . '/models/category.php',
     'city' => $baseDir . '/models/city.php',
     'product' => $baseDir . '/models/product.php',
+=======
+    'User' => $baseDir . '/classes/user.php',
+    'admin' => $baseDir . '/classes/admin.php',
+    'adminlogin' => $baseDir . '/classes/adminlogin.php',
+    'bill' => $baseDir . '/classes/bill.php',
+    'brand' => $baseDir . '/classes/brand.php',
+    'cart' => $baseDir . '/classes/cart.php',
+    'category' => $baseDir . '/classes/category.php',
+    'city' => $baseDir . '/classes/city.php',
+    'product' => $baseDir . '/classes/product.php',
+>>>>>>> 1-php-202109/2-groups/11-K/2-56-Tien-project-phpunit
 );

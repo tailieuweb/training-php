@@ -3,7 +3,6 @@
     <testsuites>
         <testsuite name="SqlWsContractImport">
             <file>./Tests/CartModelTest.php</file>
-            <file>./Tests/BillModelTest.php</file>
         </testsuite>
     </testsuites>
     <filter>

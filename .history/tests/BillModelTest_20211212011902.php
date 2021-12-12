@@ -2,73 +2,72 @@
 
 use PHPUnit\Framework\TestCase;
 
-class CartModelTest extends TestCase
+class BillModelTest extends TestCase
 {
-    // Test delete cart
-    // test deleteCartById truyền vào đúng id
-    public function testDeleteCartByIdOK()
+    // // test deleteBillById truyền vào đúng id
+    // public function deleteBillByIdOK()
+    // {
+    //     $bill = new bill();
+    //     $oder_id = 87;
+    //     $excute = true;
+    //     $actual = $bill->delete_Order($oder_id);
+    //     $this->assertEquals($excute, $actual);
+    // }
+    // // test deleteCartById truyền vào sai id
+    // public function testDeleteBillByIdNotOK()
+    // {
+    //     $bill = new bill();
+    //     $oder_id = 12312;
+    //     $excute = false;
+    //     $actual = $bill->delete_Order($oder_id);
+    //     $this->assertEquals($excute, $actual);
+    // }
+    //test deleteBillById id bằng null
+    public function testDeleteBillByIdNull()
     {
-        $cart = new cart();
-        $cartid = 191;
-        $excute = null;
-        $actual = $cart->delete_cart($cartid);
-        $this->assertEquals($excute, $actual);
-    }
-    // test deleteCartById truyền vào sai id
-    public function testDeleteCartByIdNotOK()
-    {
-        $cart = new cart();
-        $cartid = 475;
-        $excute = false;
-        $actual = $cart->delete_cart($cartid);
-        $this->assertEquals($excute, $actual);
-    }
-    //test deleteUserById id bằng null
-    public function testDeleteCartByIdNull()
-    {
-        $cart = new cart();
-        $cartid = null;
-        $actual = $cart->delete_cart($cartid);
+        $bill = new bill();
+        $oder_id = null;
+        $actual = $bill->delete_Order($bill);
         if ($actual == false) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
         }
     }
-    //test deleteCartbyId id không tồn tại trong database
-    public function testDeleteCartByIdDoseNotExist()
-    {
-        $cart = new cart();
-        $cartid = 2312;
-        $excute = false;
-        $actual = $cart->delete_cart($cartid);
-        $this->assertEquals($excute, $actual);
-    }
+    // //test deleteCartbyId id không tồn tại trong database
+    // public function testDeleteCartByIdDoseNotExist()
+    // {
+    //     $bill = new bill();
+    //     $oder_id = 534534;
+    //     $excute = false;
+    //     $actual = $bill->delete_Order($oder_id);
+    //     $this->assertEquals($excute, $actual);
+    // }
     //test deleteCartById id là kiểu chuỗi
-    public function testDeleteCartByIdIsString()
+    public function testDeleteBillByIdIsString()
     {
-        $cart = new cart();
-        $cartid = "123abc";
+        $bill = new bill();
+        $oder_id = "sdfsd";
         $excute = false;
-        $actual = $cart->delete_cart($cartid);
+        $actual = $bill->delete_Order($oder_id);
         $this->assertEquals($excute, $actual);
     }
     //test deleteCartById id là kiểu mảng
     public function testDeleteCartByIdIsArray()
     {
-        $cart = new cart();
-        $cartid = ["100"];
+        $bill = new bill();
+        $oder_id = ["132"];
         $excute = false;
-        $actual = $cart->delete_cart($cartid);
+        $actual = $bill->delete_Order($oder_id);
         $this->assertEquals($excute, $actual);
     }
     //test deleteCartById id là kiểu object
     public function testDeleteUserByIdIsObject()
     {
-        $cart = new cart();
-        $cartid = $cart;
+        $bill = new bill();
+        $oder_id = $bill;
         $excute = false;
-        $actual = $cart->delete_cart($cartid);
+        $actual = $bill->delete_Order($oder_id);
         $this->assertEquals($excute, $actual);
     }
     //test deleteCartById id là kiểu boolean

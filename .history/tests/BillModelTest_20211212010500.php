@@ -2,16 +2,15 @@
 
 use PHPUnit\Framework\TestCase;
 
-class CartModelTest extends TestCase
+class BillModelTest extends TestCase
 {
-    // Test delete cart
-    // test deleteCartById truyền vào đúng id
-    public function testDeleteCartByIdOK()
+    // test deleteBillById truyền vào đúng id
+    public function deleteBillByIdOK()
     {
-        $cart = new cart();
-        $cartid = 191;
-        $excute = null;
-        $actual = $cart->delete_cart($cartid);
+        $bill = new bill();
+        $oder_id = 86;
+        $excute = true;
+        $actual = $bill->delete_Order($oder_id);
         $this->assertEquals($excute, $actual);
     }
     // test deleteCartById truyền vào sai id

@@ -4,7 +4,6 @@ use PHPUnit\Framework\TestCase;
 
 class CartModelTest extends TestCase
 {
-    // Test delete cart
     // test deleteCartById truyền vào đúng id
     public function testDeleteCartByIdOK()
     {

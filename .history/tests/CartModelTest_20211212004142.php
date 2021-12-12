@@ -4,7 +4,6 @@ use PHPUnit\Framework\TestCase;
 
 class CartModelTest extends TestCase
 {
-    // Test delete cart
     // test deleteCartById truyền vào đúng id
     public function testDeleteCartByIdOK()
     {
@@ -81,19 +80,10 @@ class CartModelTest extends TestCase
         $this->assertEquals($excute, $actual);
     }
     //test deleteCartById id là kiểu số thực
-    public function testDeleteCartByIdIsFloat()
+    public function testDeleteUserByIdIsFloat()
     {
         $cart = new cart();
         $cartid = 1.5;
-        $excute = false;
-        $actual = $cart->delete_cart($cartid);
-        $this->assertEquals($excute, $actual);
-    }
-    //test deleteCartById id là kiểu kí tự đặc biệt
-    public function testDeleteCartByIdIsCharacters()
-    {
-        $cart = new cart();
-        $cartid = '@!$%#';
         $excute = false;
         $actual = $cart->delete_cart($cartid);
         $this->assertEquals($excute, $actual);
