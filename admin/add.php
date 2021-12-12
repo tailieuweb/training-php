@@ -32,7 +32,14 @@
         echo "<script>alert('Thêm thành công');window.location.href='manufactures.php'</script>";
     } if (isset($_POST['addProtype'])) {
 
-        $type_name = $_POST['name'];
+        $type_name = $_POST['typename'];
         $protype->addNewProtype($type_name);
         echo "<script>alert('Thêm thành công');window.location.href='protypes.php'</script>";
+    }if (isset($_POST['addUser'])) {
+
+        $name = $_POST['name'];
+        $password = $_POST['password'];
+        $role = $_POST['role'];
+        $user->addUser($name,$password,$role);
+        echo "<script>alert('Thêm thành công');window.location.href='users.php'</script>";
     }

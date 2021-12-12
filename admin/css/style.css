@@ -1604,3 +1604,43 @@ div.dataTables_wrapper .ui-widget-header {
 .btn-mini{
 	background: #000;
 }
+
+/* Button add delete edit */
+.btn_addPro{
+	height: 25px;
+	width:60px;
+	font-size: 15px;
+	margin: 15px 5px 0 25px;
+}
+
+.btn_delPro{
+	height: 25px;
+	width:60px;
+	font-size: 15px;
+	margin: 10px 5px 10px 25px;
+}
+
+.btn_editPro{
+	height: 25px; width:60px;
+	font-size: 15px;
+	margin: 0px 5px 0 25px
+}
+
+/* Filter */
+.filter_products{
+    border-bottom: 3px solid #eee;
+}
+.filter_manu{
+    margin-top: 30px;
+    /* //border: 1px solid #000; */
+}
+
+.btn-filter{
+    font-weight: 500;
+    font-size: 17px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 9px;
+    margin-left: 10px;
+    padding: 5px 25px;
+}

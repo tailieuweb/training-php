@@ -77,26 +77,28 @@ if (isset($_GET['id']) || isset($_SESSION['last_id'])) {
                         </tbody>
                     </table>
                     <h3>
-                        <p style=text-align:center;background-color:#7b7977;padding:10px;color:white>Tổng Cộng: VND</p>
+                        <p style=text-align:center;background-color:#7b7977;padding:10px;color:white>Tổng Cộng: <?php echo number_format($total) ?> VND</p>
                     </h3>
-                    <form id="main-contact-form" class="contact-form row" name="contact-form" method="post" action="processOrder.php">
+                    <form id="main-contact-form" class="contact-form row" name="contact-form" method="post" action="thanhtoan.php">
                         <div class="form-group col-md-6">
-                            <input type="text" name="name" class="form-control" placeholder="Họ tên" required>
+                            <input type="text" name="name" id="inputname" class="form-control" placeholder="Họ tên" required>
                         </div>
                         <div class="form-group col-md-6">
-                            <input type="email" name="email" class="form-control" placeholder="Email" required>
+                            <input type="email" name="email" id="inputemail" class="form-control" placeholder="Email" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <input type="text" name="address" class="form-control" placeholder="Địa chỉ" required>
+                            <input type="text" name="address" id="inputaddress" class="form-control" placeholder="Địa chỉ" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <input type="number" name="phone" class="form-control" placeholder="Số điện thoại" required>
+                            <input type="number" name="phone" id="inputphone" class="form-control" placeholder="Số điện thoại" required>
                         </div>
                         <div class="form-group col-md-12">
                             <a class="btn btn-default update" href="index.php" style="background: #4b5051;">Tiếp tục mua hàng</a>
                             <a class="btn btn-default check_out" href="change.php?control=4" style="background: #a53535;">Xóa tất cả</a>
                             <input type="submit" name="submitOrder" class="btn btn-primary pull-right" value="Đặt hàng" style="background: #4b5051;">
+                            
                         </div>
+                        
                     </form>
                 </div>
             </div>

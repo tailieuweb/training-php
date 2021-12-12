@@ -21,18 +21,18 @@ if (isset($_GET['value'])) {
             <div id="content-header">
                 <div id="breadcrumb" style="padding: 1px;background: #cbcbcb;"> <a href="#" title="Go to Home" class="tip-bottom current" style="font-size: 17px;"><i class="icon-home"></i>
                         Home</a></div>
-                <h1>Thêm sản phẩm mới</h1>
+                <h1>Thêm mới</h1>
             </div>
             <div class="container-fluid">
                 <hr>
                 <div class="row-fluid">
                     <div class="span12">
                         <div class="widget-box">
-                            <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-                                <h5>Sản Phẩm</h5>
-                            </div>
                             <div class="widget-content nopadding">
                                 <?php if ($value == "product") { ?>
+                                    <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                                        <h5>Sản Phẩm</h5>
+                                    </div>
                                     <!-- BEGIN USER FORM -->
                                     <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
                                     <!-- Tên sp -->
@@ -101,6 +101,9 @@ if (isset($_GET['value'])) {
                                     </form>
                                     <!-- END USER FORM -->
                                 <?php } else if ($value == "manufacture") { ?>
+                                    <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                                        <h5>Hãng</h5>
+                                    </div>
                                     <!-- BEGIN USER FORM -->
                                     <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
                                         <div class="control-group">
@@ -116,15 +119,42 @@ if (isset($_GET['value'])) {
                                     <!-- END USER FORM -->
                                 <?php } else if ($value == "protype") { ?>
                                     <!-- BEGIN USER FORM -->
+                                    <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                                        <h5>Loại sản phẩm</h5>
+                                    </div>
                                     <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
                                         <div class="control-group">
                                             <label class="control-label">Tên loại sản phẩm :</label>
                                             <div class="controls">
-                                                <input type="text" class="span11" placeholder="Tên loại sản phẩm" name="name" required /> *
+                                                <input type="text" class="span11" placeholder="Tên loại sản phẩm" name="typename" required /> *
                                             </div>
                                         </div>
                                         <div class="form-actions">
                                             <button type="submit" name="addProtype" class="btn btn-success">Thêm</button>
+                                        </div>
+                                    </form>
+                                <?php } else if ($value == "user") { ?>
+                                    <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                                        <h5>Users</h5>
+                                    </div>
+                                    <!-- BEGIN USER FORM -->
+                                    <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
+                                        <div class="control-group">
+                                            <label class="control-label">Username:</label>
+                                            <div class="controls">
+                                                <input type="text" class="span11" placeholder="Username" name="name" required /> *
+                                            </div>
+                                            <label class="control-label">Password:</label>
+                                            <div class="controls">
+                                                <input type="password" class="span11" placeholder="password" name="password" required /> *
+                                            </div>
+                                            <label class="control-label">Role:</label>
+                                            <div class="controls">
+                                                <input type="text" class="span11" placeholder="role" name="role" required /> *
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <button type="submit" name="addUser" class="btn btn-success">Thêm</button>
                                         </div>
                                     </form>
                                     <!-- END USER FORM -->

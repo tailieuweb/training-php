@@ -46,7 +46,11 @@ $total = count($product->getAllProducts()); 	// Tổng số dòng
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> 
-                            <span class="icon"> <i class="icon-align-justify"></i> </span>
+                            <span class="icon"> 
+                                <a href="form.php?value=product"> 
+                                    <i class="icon-plus"></i>
+                                </a>
+                            </span>
                             <h5> Sản Phẩm</h5>
                         </div>
                         <div class="widget-content nopadding">
@@ -78,16 +82,15 @@ $total = count($product->getAllProducts()); 	// Tổng số dòng
                                         <td><?php echo $value['feature']?></td>
                                         <td><?php echo $value['created_at']?></td>
                                         <td>
-                                            <a href="form.php?value=product" class="btn btn-primary" style="height: 25px; width:60px; font-size: 15px; margin: 15px 5px 0 25px">Thêm <i class="fas fa-plus-square"></i></a>
-                                            <button type="button" style="height: 35px; width:86px; font-size: 15px; margin: 15px 5px 15px 25px" 
-                                            class="btn btn-danger" onclick="deleteID(<?= $value['ID'] ?>)"
-                                            data-toggle="modal" data-target="#delete">
-                                                Xóa <i class="fas fa-trash-alt"></i>
-                                            </button>
-                                            <a href="edit.php?idProduct=<?= $value['ID']?>&edit=product"
-                                                class="btn btn-success"
-                                                style="height: 25px; width:60px; font-size: 15px; margin: 0px 5px 0 25px">Sửa
-                                                <i class="far fa-edit"></i></a>
+                                            <!-- <a href="form.php?value=product" class="btn btn-primary btn_addPro">
+                                                Thêm <i class="fas fa-plus-square"></i>
+                                            </a> -->
+                                            <a href="delete.php?iddel=<?= $value['ID']?>" class="btn btn-danger btn_delPro">
+                                                Xóa <i class="far fa-edit"></i>
+                                            </a>
+                                            <a href="edit.php?idProduct=<?= $value['ID']?>&edit=product" class="btn btn-success btn_editPro" >
+                                                Sửa<i class="far fa-edit"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                     <?php }?>

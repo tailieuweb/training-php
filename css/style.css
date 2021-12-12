@@ -225,6 +225,11 @@ a#scrollUp i {
     background-color: #0098DB;
     padding-top: 30px;
     padding-bottom: 30px;
+    width: 100%;
+}
+
+.logo{
+    margin-left: -170px;
 }
 
 .logo_name{
@@ -237,7 +242,9 @@ a#scrollUp i {
     padding-top: 20px;
     padding-left: 0;
 }
-
+.mainmenu{
+    margin-right: -160px;
+}
 .mainmenu ul li {
     padding-right: 15px;
     padding-left: 15px;
@@ -271,12 +278,12 @@ a#scrollUp i {
     border-radius: 10px;
     color: #B2B2B2;
     font-family: 'roboto';
-    font-size: 12px;
+    font-size: 18px;
     font-weight: 300;
-    height: 35px;
+    height: 40px;
     outline: medium none;
     padding-left: 10px;
-    width: 155px;
+    width: 170px;
     background-image: url(../images/home/searchicon.png);
     background-repeat: no-repeat;
     background-position: 130px;
@@ -2507,3 +2514,40 @@ td.cart_total{
 .contact-info .social-networks ul li a:hover {
     color: #FE980F;
 }
+
+/* Slideshow */
+#slideshow {
+   overflow: hidden;
+   height: 250px;
+   width: 860px;
+   margin: 0 auto;
+ }
+.slide-wrapper {
+    width: 2670px;
+   -webkit-animation: slide 14s ease infinite;
+ }
+.slide {
+   float: left;
+   height: 250px;
+   width: 860px;
+   position: relative;
+ }
+ .img-slide{
+     height: 100%;
+     width: 100%;
+ }
+ @-webkit-keyframes slide {
+   0% {margin-left: 0px;}
+   10% {margin-left: 0px;}
+   20% {margin-left: -860px;}
+   30% {margin-left: -860px;}
+   40% {margin-left: -1730px;}
+   50% {margin-left: -1730px;}
+   60% {margin-left: -860px;}
+   70% {margin-left: -860px;}
+   80% {margin-left: 0px;}
+   90% {margin-left: 0px;}
+   100% {margin-left: 0px;}
+   
+ }
+ 

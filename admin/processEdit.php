@@ -61,4 +61,14 @@
             echo "<script>alert('Đã sửa');window.location.href='protypes.php'</script>";
         }
     }
+
+    if(isset($_POST['editUser'])){
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $password = $_POST['password'];
+        $role = $_POST['role'];
+        if($user->updateUser($id,$name,$password,$role)){
+            echo "<script>alert('Sửa thành công');window.location.href='users.php'</script>";
+        }
+    }
 ?>

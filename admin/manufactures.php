@@ -44,7 +44,11 @@ $total = count($manufacture->getAllManufactures());     // Tính tổng số dò
             <div class="row-fluid">
                 <div class="span12">
                     <div class="widget-box">
-                        <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <div class="widget-title">
+                            <span class="icon"> 
+                                <a href="form.php?value=manufacture"> <i class="icon-plus"></i>
+                                </a>
+                            </span>
                             <h5>Hãng</h5>
                         </div>
                         <div class="widget-content nopadding">
@@ -57,12 +61,14 @@ $total = count($manufacture->getAllManufactures());     // Tính tổng số dò
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php foreach ($manufacture->getAllManufactureByPage($page, $perPage) as $value) { ?>
                                         <tr class="">
-                                            <td></td>
-                                            <td></td>
+                                            <td><?php echo $value['manu_id'] ?></td>
+                                            <td><?php echo $value['manu_name'] ?></td>
                                             <td>
-                                                <a href="#" class="btn btn-primary" style="margin: 0px 0px 0 100px">Thêm <i class="fas fa-plus-square"></i></a>
+                                                <!-- <a href="form.php?value=manufacture" class="btn btn-primary" style="margin: 0px 0px 0 100px">Thêm <i class="fas fa-plus-square"></i></a> -->
                                                 <button type="button" class="btn btn-danger" 
+                                                onclick="deleteID(<?= $value['manu_id'] ?>)" 
                                                 data-toggle="modal" data-target="#delete"
                                                 style="margin: 0 20px 0 20px">
                                                     Xóa <i class="fas fa-trash-alt"></i>
@@ -71,8 +77,16 @@ $total = count($manufacture->getAllManufactures());     // Tính tổng số dò
                                                 <a href="edit.php?idManu=<?= $value['manu_id'] ?>&editManu" class="btn btn-success">Sửa <i class="far fa-edit"></i></a>
                                             </td>
                                         </tr>
+                                        <?php } ?>
                                 </tbody>
                             </table>
+                             <div class="row" style="margin-left: 18px;">
+                                <ul class="pagination">
+                                    <div class="active">
+                                    <?php echo $db->paginate($url, $total, $page, $perPage) ?>
+                                    </div>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
