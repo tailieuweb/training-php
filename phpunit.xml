@@ -4,6 +4,7 @@
         <testsuite name="SqlWsContractImport">
             <file>./Tests/CartModelTest.php</file>
             <file>./Tests/BillModelTest.php</file>
+                <file>./Tests/ProductModelTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
