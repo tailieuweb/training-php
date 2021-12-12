@@ -82,6 +82,23 @@ Route::group(['module' => 'dashboard', 'middleware' => 'web', 'namespace' => "Ap
             Route::get("update/{id}", ["as" => "admin.favorite.edit", "uses" => "FavoriteController@getUpdateFavorite"]);
             Route::post("update/{id}", ["as" => "admin.favorite.eidt", "uses" => "FavoriteController@postUpdateFavorite"]);
         });
+        //user rental (Hien thi nguoi dung dat phongf)
+        Route::group(["prefix" => "userRental"], function () {
+            Route::get("/", ["as" => "admin.userRental", "uses" => "UserRentalController@getAllUserRental"]);
+            Route::get("/add", ["as" => "admin.userRental.add", "uses" => "UserRentalController@createUserRental"]);
+            Route::post("/add", ["as" => "admin.userRental.save", "uses" => "UserRentalController@insertUserRental"]);
+            Route::get("delete/{id}", ["as" => "admin.userRental.delete", "uses" => "UserRentalController@deleteUserRental"]);
+            Route::get("update/{id}", ["as" => "admin.userRental.edit", "uses" => "UserRentalController@getUpdateUserRental"]);
+            Route::post("update/{id}", ["as" => "admin.userRental.eidt", "uses" => "UserRentalController@postUpdateUserRental"]);
+        });
+        Route::group(["prefix" => "admin/comment"], function () {
+            Route::get("/", ["as" => "admin.comment", "uses" => "CommentController@getAllComment"]);
+            Route::get("/add", ["as" => "admin.comment.add", "uses" => "CommentController@createComment"]);
+            Route::post("/add", ["as" => "admin.comment.save", "uses" => "CommentController@insertComment"]);
+            Route::get("delete/{id}", ["as" => "admin.comment.delete", "uses" => "CommentController@deleteComment"]);
+            Route::get("update/{id}", ["as" => "admin.comment.edit", "uses" => "CommentController@getUpdateComment"]);
+            Route::post("update/{id}", ["as" => "admin.comment.eidt", "uses" => "CommentController@postUpdateComment"]);
+        });
         Route::group(["prefix" => "users"], function () {
             Route::get("/", ["as" => "admin.users", "uses" => "UsersController@getAllUser"]);
             Route::get("add", ["as" => "admin.users.add", "uses" => "UsersController@AddUser"]);
