@@ -1,87 +1,134 @@
-<?php
-// Start the session
-session_start();
-
-require_once 'models/UserModel.php';
-$userModel = new UserModel();
-
-
-if (!empty($_POST['submit'])) {
-    $users = [
-        'username' => $_POST['username'],
-        'password' => $_POST['password']
-    ];
-    $user = NULL;
-    if ($user = $userModel->auth($users['username'], $users['password'])) {
-        //Login successful
-        $_SESSION['id'] = $user[0]['id'];
-
-        $_SESSION['message'] = 'Login successful';
-        header('location: list_users.php');
-    }else {
-        //Login failed
-        $_SESSION['message'] = 'Login failed';
-    }
-
-}
+<?php ob_start();
+include 'inc/header.php';
 
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>User form</title>
-    <?php include 'views/meta.php' ?>
-</head>
+
+<?php
+$check = Session::get('customer_login');
+if (!isset($check)) {
+  header('Location:login.php');
+}
+?>
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
+  $loginCus = $user->Login_Customer($_POST);
+}
+?>
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  form {
+    border: 3px solid #f1f1f1;
+  }
+
+  input[type=text],
+  input[type=password] {
+    width: 450px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+
+  }
+
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 15px 120px;
+    border: none;
+    cursor: pointer;
+    width: 455px;
+    position: relative;
+    left: 26%;
+    transform: translateX(-50%);
+  }
+
+  button:hover {
+    opacity: 0.8;
+  }
+
+  .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44337;
+  }
+
+  .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+  }
+
+  img.avatar {
+    width: 40%;
+    border-radius: 50%;
+  }
+
+  .container {
+    padding: 16px;
+    text-align: center;
+    font-size: 15px;
+  }
+
+  span.psw {
+    float: right;
+    padding-top: 16px;
+  }
+
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    span.psw {
+      display: block;
+      float: none;
+    }
+
+    .cancelbtn {
+      width: 100%;
+    }
+  }
+</style>
 <body>
-<?php include 'views/header.php'?>
+
+
+
+
+  <form action="" method="post">
+    <center>
+      <h2>Đăng nhập</h2>
+    </center>
 
     <div class="container">
-        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-            <div class="panel panel-info" >
-                <div class="panel-heading">
-                    <div class="panel-title">Login</div>
-                    <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
-                </div>
-
-                <div style="padding-top:30px" class="panel-body" >
-                    <form method="post" class="form-horizontal" role="form">
-
-                        <div class="margin-bottom-25 input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">
-                        </div>
-
-                        <div class="margin-bottom-25 input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
-                        </div>
-
-                        <div class="margin-bottom-25">
-                            <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
-                            <label for="remember"> Remember Me</label>
-                        </div>
-
-                        <div class="margin-bottom-25 input-group">
-                            <!-- Button -->
-                            <div class="col-sm-12 controls">
-                                <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
-                                <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-12 control">
-                                    Don't have an account!
-                                    <a href="form_user.php">
-                                        Sign Up Here
-                                    </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+      <label for="uname"><b>Tài khoản</b></label>
+      <input class="userc" type="text" placeholder="Enter Username" name="username" required">
+      <br>
+      <label for="psw"><b>Mật khẩu </b></label>
+      <input class="pswc" type="password" placeholder="Enter Password" name="password" required>
+      <?php
+      if (isset($loginCus)) {
+        echo $loginCus;
+      }
+      ?>
+      <br>
+      <button type="submit" name="login">Login</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Lưu tài khoản
+      </label>
     </div>
 
+    <!-- <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <span class="psw">Forgot <a href="#">password?</a></span>
+  </div> -->
+  </form>
+
 </body>
-</html>
+
+<?php
+
+include 'inc/footer.php';
+ob_end_flush();
+?>
