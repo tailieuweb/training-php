@@ -22,7 +22,7 @@ export default function PostsFilter() {
       <div className="container pb-3">
         <Link
           href={{
-            pathname: "posts",
+            pathname: "/posts",
             query: { filter: "new" },
           }}
         >
@@ -33,7 +33,7 @@ export default function PostsFilter() {
         </Link>
         <Link
           href={{
-            pathname: "posts",
+            pathname: "/posts",
             query: { filter: "random" },
           }}
         >
