@@ -37,6 +37,7 @@ class CommentController extends Controller
         $data['rating'] = $request->rating;
         $data['content'] = $request->content;
         $data['time_cmt'] = date("Y-m-d");
+        $data['comment_version'] =  0;
         DB::table('user_comment')->insert($data);
         return Redirect::to('/admin/comment');
     }
