@@ -1,17 +1,23 @@
 import React from "react";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    useLocation,
-    Link,
-} from "react-router-dom";
-import { Col, Nav, NavItem, NavLink, Row } from "reactstrap";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Col, Nav, NavItem, Row, Button } from "reactstrap";
 import "../../../css/Admin_Menu.css";
 import UserManager from "./UserManager/UserManager";
 import Categories from "./CategoriesManager/CategoriesManager";
 import ProductManager from "./ProductManager/ProductManager";
-export default function Admin_Menu() {
+import NoMatch from "../NoMatch/NoMatch";
+export default function Admin_Menu({ setRoleChange }) {
+    //Handle change state to go Admin page 1
+    const handleAdminChange = (e) => {
+        let txtNumUrl = window.location.href.indexOf("/", 10);   
+        let currentUrl = window.location.href;
+        let txtUrl = currentUrl.substring(0, txtNumUrl);
+        window.location.href = txtUrl;
+        setTimeout(() => {
+            setRoleChange({ role: "user" });
+        }, 400);    
+    };
+
     return (
         <div className="admin-menu">
             <Router>
@@ -24,6 +30,15 @@ export default function Admin_Menu() {
                                 className="img-fluid logo--custom"
                             />
                             <Nav vertical pills>
+                                <NavItem>
+                                    <Button
+                                        color="outline-primary"
+                                        className="btn-md btn-block"
+                                        onClick={handleAdminChange}
+                                    >
+                                        Go To Home
+                                    </Button>
+                                </NavItem>
                                 <NavItem>
                                     <Link
                                         to="/create-expense"
@@ -70,18 +85,6 @@ export default function Admin_Menu() {
                     </Col>
                 </Row>
             </Router>
-        </div>
-    );
-}
-
-function NoMatch() {
-    let location = useLocation();
-
-    return (
-        <div>
-            <h3>
-                No match for <code>{location.pathname}</code>
-            </h3>
         </div>
     );
 }

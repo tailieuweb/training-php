@@ -62,4 +62,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\oauth_token');
     }
 
+    public function product_cart(){
+        return $this->hasMany('App\Models\user_cart');
+    }
+
 }

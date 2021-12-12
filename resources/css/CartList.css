@@ -1,0 +1,47 @@
+.page-width{
+    margin-top: 100px;
+   
+}
+.page-width h2{
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 1.2;
+}
+.total_tittle{
+    text-align: right;
+}
+.quantity_tittle{
+    text-align: right;
+}
+.product_tittle{
+    padding-left: 160px;
+}
+.quantity_cart{
+    padding-left: 50%;
+}
+.cart_total{
+    padding-left: 85%;
+}
+.view_cart{
+    max-width: 1920px;
+}
+/* responsive nho hon 750px */
+@media(max-width: 1290px){
+.Container{
+    width: 410px;
+}
+.cart_total{
+    padding-left: 20%;
+}
+.quantity_cart{
+    padding-left: 10%;
+}
+.product_tittle{
+    padding-left: 10%;
+}
+.Checlout_cart{
+    padding-left: 80%;
+}
+}
+
+

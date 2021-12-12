@@ -28,4 +28,5 @@ Route::get('/password',function (){
 
 Route::resource('/product', 'App\Http\Controllers\ProductController');
 Route::get('/searchProduct',[ProductController::class,'getSearch'])->name('product.search');
+Route::get('/verify/verify',[UserController::class,'UserVerifyEmail']);
 

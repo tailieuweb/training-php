@@ -32,3 +32,12 @@
   background: #eb7127;
   text-decoration: none;
 }
+
+@media only screen and (max-width: 400px) {
+  .slide-show-category-title {
+    display: none;
+  }
+  .slide-show-category-link {
+    padding: 1.5vh;
+  }
+}

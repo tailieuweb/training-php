@@ -1,58 +1,77 @@
-import React, { Component } from 'react'
-import '../../../css/RelatedContent.css';
-export default class RelatedContent extends Component {
-    render() {
-        return (
-            <div>
-                <div className="container">
-                    <div className="row mt-5">
-                        {/*Sản phẩm liên quan cùng categories*/}
-                        <div className="related-product">
-                            <div className="title-related">
-                                <h3>Related Products</h3>
-                            </div>
-                            <div className="row my-5">
-                                <div className="col-md-3">
-                                    <img src="https://product.hstatic.net/200000065946/product/pro_nau_ghe_bang_dai_vline_601_noi_that_moho_7_22b003008324475dbebfca89386cf72e_grande.png" width="100%" height="75%"></img>
-                                    <div className="related-content">
-                                        <p>Ghế Băng Dài Gỗ Cao Su Tự nhiên MOHO VLINE 602</p>
-                                        <div className="related-price">
-                                            <p>799,000₫</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-3">
-                                    <img src="https://product.hstatic.net/200000065946/product/pro_mau_tu_nhien_noi_that_moho_ghe_an_odessa_2e9569c22c6d45749107e0a44f6c4d9c_master.png" width="100%" height="75%"></img>
-                                    <div className="related-content">
-                                        <p>Ghế Ăn Gỗ Cao Su Tự Nhiên MOHO ODESSA</p>
-                                        <div className="related-price">
-                                            <p>899,000₫</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-3">
-                                    <img src="https://product.hstatic.net/200000065946/product/pro_mau_tu_nhien_ghe_an_go_torino_11092c6f4b2d40c9a4587b48f49268b7_master.png" width="100%" height="75%"></img>
-                                    <div className="related-content">
-                                        <p>Ghế Ăn Gỗ Cao Su Tự Nhiên MOHO MILAN 601 Màu Đen</p>
-                                        <div className="related-price">
-                                            <p>799,000₫</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-3">
-                                    <img src="https://product.hstatic.net/200000065946/product/pro_den_noi_that_moho_ghe_an_milan_02_8220c68bac384a06b54a4a4b28d4ca0c_grande.png" width="100%" height="75%"></img>
-                                    <div className="related-content">
-                                        <p>Ghế Ăn Gỗ Cao Su Tự Nhiên MOHO OSLO 601</p>
-                                        <div className="related-price">
-                                            <p>899,000₫</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+import React, { useState } from "react";
+import { Col, Row } from 'reactstrap';
+import { Link } from "react-router-dom";
+import "../../../css/RelatedContent.css";
+import { Button, Container } from "react-bootstrap";
+const related_product = [
+    {
+        id: 0,
+        name: "Afteroom Barstool",
+        category: 0,
+        price: "$150.40",
+        img: "https://cdn.shopify.com/s/files/1/0076/1708/5530/products/8-2_360x.jpg?v=1609296589",
+    },
+    {
+        id: 1,
+        name: "Chipperfield w102",
+        category: 0,
+        price: "$126.06",
+        img: "https://cdn.shopify.com/s/files/1/0076/1708/5530/products/8-4_320x.jpg?v=1609296610",
+    },
+    {
+        id: 2,
+        name: "Miro Dining Table",
+        category: 0,
+        price: "$113.70",
+        img: "https://cdn.shopify.com/s/files/1/0076/1708/5530/products/7-5_360x.jpg?v=1609296608",
+    },
+    {
+        id: 3,
+        name: "UNA chair",
+        category: 0,
+        price: "$102.84",
+        img: "https://cdn.shopify.com/s/files/1/0076/1708/5530/products/8-6_360x.jpg?v=1609296626",
+    },
+]
+export default function RelatedContent() {
+    const [active, setActive] = useState(0);
+
+    const handleClick = (index) => {
+        setActive(index);
+    };
+    return (
+        <Container>
+            <div className="related">
+                <p>Related Product</p>
             </div>
-        )
-    }
+            <div className="related-detail">
+                {<div className="related-content">
+                    <Row>
+                        {related_product.map((e, index) => (
+                            <Col key={index} md="3">
+                                <div className="related-image">
+                                    <img src={e.img} />
+                                   {/*  <div class="btn-add-cart">
+                                        <Button outline className="btn-block">
+                                            Add Cart
+                                        </Button>
+                                    </div> */}
+                                    {/* <Link className="btn-cart" to="">
+                                        Add Cart &nbsp; <i class="far fa-image"></i>
+                                    </Link> */}
+                                </div>
+                                <div className="related-title">
+                                    <p>{e.name}</p>
+                                </div>
+                                <div className="related-price">
+                                    <p>{e.price}</p>
+                                </div>
+                            </Col>
+                        ))}
+                    </Row>
+                </div>}
+            </div>
+        </Container>
+    )
 }
+

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\categories;
 
+//Duyen Controller
+// Controller này ko chạy
 class CategoryController extends Controller
 {
     /**
@@ -61,11 +63,11 @@ class CategoryController extends Controller
                 'message' => 'category updated!',
                 'category' => $category
             ]);
-        } 
+        }
         return response()->json([
             'message' => ' category not found !!!'
         ]);
-      
+
         // $product->update($request->all());
         // return $product;
     }
@@ -84,10 +86,10 @@ class CategoryController extends Controller
             return response()->json([
                 'message' => 'category deleted'
             ]);
-        } 
+        }
         return response()->json([
             'message' => 'category not found !!!'
         ]);
-     
+
     }
 }

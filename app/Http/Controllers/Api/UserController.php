@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\order;
+use App\Models\review;
 use Illuminate\Http\Request;
 use App\Models\users;
+use App\Models\user_cart;
 
+//Duyen Controller
 class UserController  extends Controller
 {
     public function index()
     {
         return users::all();
     }
-      /**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -25,7 +29,6 @@ class UserController  extends Controller
             'message' => 'user created',
             'user' => $user
         ]);
-       // return products::create($request->all());
     }
 
     /**
@@ -55,13 +58,10 @@ class UserController  extends Controller
                 'message' => 'user updated!',
                 'user' => $user
             ]);
-        } 
+        }
         return response()->json([
             'message' => 'user not found !!!'
         ]);
-      
-        // $product->update($request->all());
-        // return $product;
     }
 
     /**
@@ -72,16 +72,42 @@ class UserController  extends Controller
      */
     public function destroy($id)
     {
+
+        $pattern_id = '/^\d{1,}$/';
+        // Chỉ được nhập số nhập chữ báo lỗi ngay số âm con khỉ gì đi bụi hết
+        if (!preg_match($pattern_id,$id)){
+            return  response()->json(['message'=>'Please type id is a number']);
+        }
+        $flag = true;
         $user = users::find($id);
-        if ($user) {
+        if (!$user) {
+            return response()->json([
+                'message' => 'user not found !!!'
+            ]);
+        }
+
+        $userCartListTemp = user_cart::where("user_id", "=", $id)->get();
+        $ordersListTemp = order::where("user_id", "=", $id)->get();
+        $reviewsListTemp = review::where("user_id", "=", $id)->get();
+
+        if (count($userCartListTemp) !== 0) {
+            $flag = false;
+        }
+        if (count($ordersListTemp) !== 0) {
+            $flag = false;
+        }
+        if (count($reviewsListTemp) !== 0) {
+            $flag = false;
+        }
+
+        if ($flag) {
             $user->delete();
             return response()->json([
                 'message' => 'deleted user'
             ]);
-        } 
+        }
         return response()->json([
-            'message' => 'user not found !!!'
+            'message' => "can't delete user because have related ingredients."
         ]);
-     //  return $product->delete();
     }
 }

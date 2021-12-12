@@ -1,30 +1,24 @@
+.related-image img{
+width: 100%;
+height: 100%;
+}
 .related-content{
-    text-align: left;
-    padding: 10% 0%;
-  }
-  .related-content>p:hover{
-    color: rgb(3, 110, 60);
-  }
-  .related-price{
-    padding-bottom: 5%;
-    color: #545557;
-  }
-  .title-related>h3{
+    font-size: 1.2rem;
+}
+.related-title{
     text-align: center;
-    text-transform: uppercase;
-    margin: 10px 0 50px;
-    padding: 0 0 15px;
-    position: relative;
-  }
-  .title-related>h3::before{
-    position: absolute;
-    content: "";
-    display: block;
-    width: 55px;
-    height: 1px;
-    bottom: 0px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    background: #6e6b68;
-  }
+    padding-top:3%;
+}
+.related-title:hover{
+    color: #eb7025;
+}
+.related-price{
+    text-align: center;
+    padding-bottom: 3%;
+}
+.related{
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 5% 0%;
+}

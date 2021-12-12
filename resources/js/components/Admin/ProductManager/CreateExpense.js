@@ -4,7 +4,6 @@ import axios from "axios";
 import ExpensesList from "./ExpensesListing";
 import Swal from "sweetalert2";
 import { AvForm, AvField } from "availity-reactstrap-validation";
-import { error } from "jquery";
 
 export default function CreateExpense(props) {
     const [expense, setExpense] = useState({
@@ -21,16 +20,18 @@ export default function CreateExpense(props) {
     //Get categories list
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get("http://localhost:8000/api/category/");
+            const result = await axios.get(
+                "http://localhost:8000/api/category/"
+            );
             const { data } = await result;
             setCategoryList(data);
-        } 
+        };
         fetchData();
     }, []);
 
     //Create Categories Select options
     const categoriesSelect = categoryList.map((value, index) => {
-        return <option value={value.id}>{value.name}</option> 
+        return <option value={value.id}>{value.name}</option>;
     });
 
     const handleChange = (e) => {
@@ -48,10 +49,13 @@ export default function CreateExpense(props) {
         axios
             .post("http://localhost:8000/api/product/", expenseObject)
             .then((res) => {
-                Swal.fire("Good job!", "Expense Added Successfully", "success")
-                .then(() => {
-                    window.location.reload(false);
-                });   
+                Swal.fire(
+                    "Good job!",
+                    "Expense Added Successfully",
+                    "success"
+                ).then(() => {
+                    props.history.push(`/expenses-listing`);
+                });
             })
             .catch((error) => {
                 Swal.fire({
@@ -61,7 +65,6 @@ export default function CreateExpense(props) {
                     confirmButtonText: "Cool",
                 });
             });
-        
     };
 
     const handleOnInvalid = (event, error) => {

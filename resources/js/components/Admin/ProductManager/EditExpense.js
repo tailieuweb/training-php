@@ -7,7 +7,17 @@ import { Link } from "react-router-dom";
 import "../../../../css/EditExpense.css";
 
 export default function EditExpense(props) {
+    const [oldExpense, setOldExpense] = useState({
+        product_name: "",
+        description: "",
+        quantity: "",
+        price: "",
+        category_id: "",
+        product_image: "",
+    });
+
     const [expense, setExpense] = useState({
+        id: 0,
         product_name: "",
         description: "",
         quantity: "",
@@ -21,16 +31,18 @@ export default function EditExpense(props) {
     //Get categories list
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get("http://localhost:8000/api/category/");
+            const result = await axios.get(
+                "http://localhost:8000/api/category/"
+            );
             const { data } = await result;
             setCategoryList(data);
-        } 
+        };
         fetchData();
     }, []);
 
     //Create Categories Select options
     const categoriesSelect = categoryList.map((value, index) => {
-        return <option value={value.id}>{value.name}</option> 
+        return <option value={value.id}>{value.name}</option>;
     });
 
     useEffect(() => {
@@ -40,6 +52,7 @@ export default function EditExpense(props) {
             );
             const { data } = await result;
             setExpense(data);
+            setOldExpense(data);
         };
         fetchData();
     }, []);
@@ -52,42 +65,92 @@ export default function EditExpense(props) {
         }));
     };
 
+    const checkOldExpense = (expense, oldExpense) => {
+        let flag = true;
+        if (
+            expense.product_name === oldExpense.product_name &&
+            expense.description === oldExpense.description &&
+            expense.quantity === oldExpense.quantity &&
+            expense.price === oldExpense.price &&
+            expense.category_id === oldExpense.category_id &&
+            expense.product_image === oldExpense.product_image
+        ) {
+            flag = false;
+        }
+        return flag;
+    };
+
     const handleOnValid = (event, value) => {
-        const expenseObject = {
-            ...expense,
+        const fetchData = async () => {
+            const result = await axios.get(
+                `http://localhost:8000/api/product/${expense.id}}`
+            );
+            const { data } = await result;
+            return data;
         };
 
-        Swal.fire({
-            title: "Do you want to save the changes?",
-            showDenyButton: true,
-            showCancelButton: true,
-            confirmButtonText: "Save",
-            denyButtonText: `Don't save`,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axios
-                    .patch(
-                        "http://localhost:8000/api/product/" +
-                            props.match.params.id,
-                        expenseObject
-                    )
-                    .catch((error) => {
+        fetchData()
+            .then((res) => {
+                if (!res.message) {
+                    const expenseObject = {
+                        ...expense,
+                    };
+
+                    if (checkOldExpense(expense, oldExpense)) {
                         Swal.fire({
-                            title: "Error!",
+                            title: "Do you want to save the changes?",
+                            showDenyButton: true,
+                            showCancelButton: true,
+                            confirmButtonText: "Save",
+                            denyButtonText: `Don't save`,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                axios
+                                    .patch(
+                                        "http://localhost:8000/api/product/" +
+                                            props.match.params.id,
+                                        expenseObject
+                                    )
+                                    .catch((error) => {
+                                        Swal.fire({
+                                            title: "Error!",
+                                            text: "Do you want to continue ?",
+                                            icon: "error",
+                                            confirmButtonText: "Cool",
+                                        });
+                                    });
+    
+                                Swal.fire("Saved!", "", "success").then(() => {
+                                    props.history.push(
+                                        `/edit-expense/${props.match.params.id}`
+                                    );
+                                });
+                            } else if (result.isDenied) {
+                                Swal.fire("Changes are not saved", "", "info");
+                            }
+                        }); 
+                    } else {
+                        Swal.fire({
+                            title: "Pls type anything you want to update!",
                             text: "Do you want to continue ?",
                             icon: "error",
                             confirmButtonText: "Cool",
                         });
+                    }
+                } else {
+                    Swal.fire({
+                        title: "This product not exist !!",
+                        text: "Do you want to continue ?",
+                        icon: "error",
+                        confirmButtonText: "Cool",
+                    }).then(() => {
+                        props.history.push(`/expenses-listing`);
                     });
-
-                Swal.fire("Saved!", "", "success")
-                .then(() => {
-                    props.history.push(`/edit-expense/${props.match.params.id}`);
-                });
-            } else if (result.isDenied) {
-                Swal.fire("Changes are not saved", "", "info")
-            }
-        });
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
     const handleOnInvalid = (event, error, value) => {
@@ -110,7 +173,7 @@ export default function EditExpense(props) {
                         <AvField
                             name="product_name"
                             label="Name"
-                            type="text" 
+                            type="text"
                             value={expense.product_name}
                             onChange={handleChange}
                             validate={{
@@ -179,7 +242,7 @@ export default function EditExpense(props) {
                     label="Description"
                     type="textarea"
                     className="text-area-custom"
-                    value={expense.description}
+                    value={expense.id}
                     onChange={handleChange}
                 />
                 <Button
@@ -189,7 +252,7 @@ export default function EditExpense(props) {
                 >
                     UPDATE
                 </Button>
-                <Link  to ="/expenses-listing">
+                <Link to="/expenses-listing">
                     <Button
                         color="danger"
                         outline
