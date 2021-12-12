@@ -136,7 +136,7 @@ export default function Posts() {
       <div className={`${showPageItem ? "col-md-5" : "col-md-12"}`}>
         <PostsAddItem user={user} />
       </div>
-      <div className={`col-md-7 ${!showPageItem && "d-none"} mb-5`}>
+      <div className={`col-md-7 ${!showPageItem && "d-none"} mb-4 mb-md-5`}>
         <PostsUserRanking posts={postsBase} />
       </div>
       {[...Array(6).keys()].map((item) => (

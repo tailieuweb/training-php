@@ -26,7 +26,7 @@ export default function PostsFilter() {
             query: { filter: "new" },
           }}
         >
-          <a className="btn btn-primary btn-sm">
+          <a className="btn btn-primary btn-sm mb-2 mb-md-0">
             <i className="fa fa-sort-amount-asc" aria-hidden="true"></i>{" "}
             {t("app.post.filterNew")}
           </a>
@@ -37,14 +37,14 @@ export default function PostsFilter() {
             query: { filter: "random" },
           }}
         >
-          <a className="btn btn-warning btn-sm">
+          <a className="btn btn-warning btn-sm mb-2 mb-md-0">
             <i className="fa fa-random" aria-hidden="true"></i>{" "}
             {t("app.post.filterRandom")}
           </a>
         </Link>
         <button
           type="button"
-          className="btn btn-danger btn-sm"
+          className="btn btn-danger btn-sm mb-2 mb-md-0"
           onClick={onPostRandom}
         >
           <i className="fa fa-random" aria-hidden="true"></i>{" "}
