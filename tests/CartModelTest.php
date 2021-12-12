@@ -98,7 +98,7 @@ class CartModelTest extends TestCase
         $actual = $cart->delete_cart($cartid);
         $this->assertEquals($excute, $actual);
     }
-    //Xóa mã giảm giá tại vị trí đúng id
+    //Lương
     public function testDeleteDiscountByIdOK()
     {
         $cart = new cart();
@@ -108,7 +108,7 @@ class CartModelTest extends TestCase
         $actual = $cart->delete_Discount($discountid);
         $this->assertEquals($excute, $actual,$alert);
     }
-
+    //Lương
     public function testInsertDiscountOk(){
         $cart = new cart();
         $discount = array(
