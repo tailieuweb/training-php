@@ -1,0 +1,71 @@
+{
+    "sub_group" : [
+        {
+            "id" : 1,
+            "name" : "Sedans"
+        },
+        {
+            "id" : 2,
+            "name" : "Xe địa hình / SUV"
+        },
+        {
+            "id" : 3,
+            "name" : "Xe Coupé"
+        }
+    ],
+   "cars" : [
+       {
+           "id" : 1,
+           "name" : "GLE Coupé",
+           "sub_id" : 3,
+           "price_description" : "Giá từ 5.349.000.000đ",
+           "img_front" :"https://assets.oneweb.mercedes-benz.com/iris/iris.jpg?COSY-EU-100-1713d0VXqrEFqtyO67PobzIr3eWsrrCsdRRzwQZg9pZbMw3SGtGyItsd2HVcUfpO6XGEubYJ0l36xOB2sr%25bApUAbI5uGQMQC3aM1kzNHTnm7j8hohKVi%25E%25vqmUjyLRhnmYaxU0drH1Gm%25n8w7OcoiZKiEM4FvSlTg9Lte6PDarsSeWHthtsd8B3cUfD%25kXGE5YrJbXSqxVKnn8wPbIoTnlR4M6oeIlTg9vx96PDK1RSeWgeRtsdPvQcUfeFfXGE1zrJ0lBYrOB2A85bAp5tlI5uCQ2QCPFi2J%25xVZkFPsgGvx3MkNulKKqD%25WjcNWmtdDZGZMuMapgeLlHp7RKWONW&amp;imgt=P27&amp;bkgnd=9&amp;pov=BE040&amp;im=Crop,rect=(360,250,1280,580);Resize,width=300",
+           "img_back" : "https://assets.oneweb.mercedes-benz.com/iris/iris.jpg?COSY-EU-100-1713d0VXqrEFqtyO67PobzIr3eWsrrCsdRRzwQZg9pZbMw3SGtGyItsd2HVcUfpO6XGEubYJ0l36xOB2sr%25bApUAbI5uGQMQC3aM1kzNHTnm7j8hohKVi%25E%25vqmUjyLRhnmYaxU0drH1Gm%25n8w7OcoiZKiEM4FvSlTg9Lte6PDarsSeWHthtsd8B3cUfD%25kXGE5YrJbXSqxVKnn8wPbIoTnlR4M6oeIlTg9vx96PDK1RSeWgeRtsdPvQcUfeFfXGE1zrJ0lBYrOB2A85bAp5tlI5uCQ2QCPFi2J%25xVZkFPsgGvx3MkNulKKqD%25WjcNWmtdDZGZMuMapgeLlHp7RKWONW&amp;imgt=P27&amp;bkgnd=9&amp;pov=BE140&amp;im=Crop,rect=(290,250,1280,580);Resize,width=300"
+       },
+       {
+        "id" : 2,
+        "name" : "Mercedes-AMG GT Coupé",
+        "sub_id" : 3,
+        "price_description" : "11.590.000.000",
+        "img_front" :"https://assets.oneweb.mercedes-benz.com/iris/iris.jpg?COSY-EU-100-1713d0VXqN8FqtyO67PobzIr3eWsrrCsdRRzwQZvVIZbMw3SGtGyItsd2JdcUfpAyXGEjymJ0leIAOB2sSnbApvPyI5uOo2QC3bsOkzNGTnm7j07ZhKVBYF%25vq8cXyr%25kWfDPJJ0lCrnOIJRdAbQOznRI5ue4YQC3PExkzN5%256m7jCtEhKVfj9%25vqLU9yLRaGfYaxHoWrH18jOn8wioxoiZ4egM4zuA1YtEWpTuz6ULquFIT9ZxeedNtjD%259j6hVNpLpIZIGwC7Ux0wPfejr9j&amp;imgt=P27&amp;bkgnd=9&amp;pov=BE040&amp;im=Crop,rect=(360,250,1280,580);Resize,width=300",
+        "img_back" : "https://assets.oneweb.mercedes-benz.com/iris/iris.jpg?COSY-EU-100-1713d0VXqN8FqtyO67PobzIr3eWsrrCsdRRzwQZvVIZbMw3SGtGyItsd2JdcUfpAyXGEjymJ0leIAOB2sSnbApvPyI5uOo2QC3bsOkzNGTnm7j07ZhKVBYF%25vq8cXyr%25kWfDPJJ0lCrnOIJRdAbQOznRI5ue4YQC3PExkzN5%256m7jCtEhKVfj9%25vqLU9yLRaGfYaxHoWrH18jOn8wioxoiZ4egM4zuA1YtEWpTuz6ULquFIT9ZxeedNtjD%259j6hVNpLpIZIGwC7Ux0wPfejr9j&amp;imgt=P27&amp;bkgnd=9&amp;pov=BE140&amp;im=Crop,rect=(290,250,1280,580);Resize,width=300"
+    },
+    {
+        "id" : 3,
+        "name" : "AMG GT 4-door Coupé",
+        "sub_id" : 3,
+        "price_description" : "6.590.000.000",
+        "img_front" :"https://assets.oneweb.mercedes-benz.com/iris/iris.jpg?COSY-EU-100-1713d0VXqrWFqtyO67PobzIr3eWsrrCsdRRzwQZg9pZbMw3SGtieWtsd4ZtcUfgFfXGEzymJ0lgYhOB2PBqbAp7nCI5uKMTQmIJwF1H66PDGmhSc63ZstXS0h3cUf886XGEH9ZJ0lUHhOB2ZsbbA4wHEcmqN1IwCQKE7qpnIu2fzzjFm93Su9Q6DF1s1n2nvligKfLlCVz9Xu9&amp;imgt=P27&amp;bkgnd=9&amp;pov=BE040&amp;im=Crop,rect=(360,250,1280,580);Resize,width=300",
+        "img_back" : "https://assets.oneweb.mercedes-benz.com/iris/iris.jpg?COSY-EU-100-1713d0VXqrWFqtyO67PobzIr3eWsrrCsdRRzwQZg9pZbMw3SGtieWtsd4ZtcUfgFfXGEzymJ0lgYhOB2PBqbAp7nCI5uKMTQmIJwF1H66PDGmhSc63ZstXS0h3cUf886XGEH9ZJ0lUHhOB2ZsbbA4wHEcmqN1IwCQKE7qpnIu2fzzjFm93Su9Q6DF1s1n2nvligKfLlCVz9Xu9&amp;imgt=P27&amp;bkgnd=9&amp;pov=BE140&amp;im=Crop,rect=(290,250,1280,580);Resize,width=300"
+    }
+   ],
+   "category-post" : [
+       {
+           "id" : 1,
+           "category-post-name" : "New",
+           "enabled" : 1,
+           "menu-main-id" : 4,
+           "feature-description" : "Các sự đổi mới của mercedes-benz cars",
+           "icon" : "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 95 70' width='1.3571428571428572rem' height='1rem' class='brandhub-icon'><path d='M61 10.9H34.7v26.3H61V10.9zm22.9 0H66.6v4.3H84v-4.3zm0 10.6H66.6v4.3H84v-4.3zm0 10.5H66.6v4.3H84V32zm0 10.6H34.7v4.3h49.2v-4.3zm-56.2 0H11.4v4.3h16.4v-4.3zm0-11H11.4v4.3h16.4v-4.3z' fill='currentColor'></path><path d='M23.8.2v20.9H.5v35.6C.5 63.2 6.3 70 14 70h68.7c7.1 0 12.2-6.8 12.2-13.2V.2H23.8zm-18 56.5V26.3l18-.1v30.5c0 3.4-2.6 7.8-9.6 7.8-4.3.1-8.4-3.7-8.4-7.8zm76.9 7.8H25.8c.5-.1 3.3-2.4 3.3-7.8V5.8h60v51c0 4.7-2.8 7.7-6.4 7.7z' fill='currentColor'></path></svg>"
+       },
+       {
+        "id" : 2,
+        "category-post-name" : "Popular",
+        "enabled" : 1,
+        "menu-main-id" : 4,
+        "feature-description" : "Các chủ đề phổ biến cho danh mục innovation của mercedes-benz cars",
+        "icon" : "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60.264 57.368' width='1rem' height='1rem' class='brandhub-icon'><path d='M30.188 46.117L14.704 57.368 9.58 53.692l5.904-18.157L0 24.395l2.005-6.015h19.049L26.957 0h6.35l5.903 18.38h19.049l2.005 6.015-15.484 11.14 5.904 18.045-5.124 3.788z' fill='currentColor'></path></svg>"
+       }
+   ],
+   "section-article-post" : [
+       {
+           "id" : 1,
+           "category-post-id" : 1,
+           "menu-main-header-id" : 4,
+           "image-article" : "/images/assets/articles-post-innovation/test1.webp",
+           "title-article" : "Charge your Mercedes-Benz anytime and anywhere.",
+           "subtitle-article" : "With the new Mercedes-Benz Flexible Charging System, you can charge your hybrid or electric vehicle anytime..."
+
+       }
+   ],
+}
