@@ -5,7 +5,7 @@ export default function PostsAddItem({ user }) {
   const { t } = useTranslation("common");
   
   return (
-    <div className="card">
+    <div className="card mb-4">
       <div className="card-body">
         <div className="d-flex align-items-center">
           <div className="w-100">
