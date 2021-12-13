@@ -1,0 +1,56 @@
+.line-group-container .line-group .remove-rule-line {
+    right: auto;
+    left: 0;
+}
+
+.line-group-container .line-group .rule-a, .line-group-container .line-group .rule-type, .line-group-container .line-group .rules-b-group {
+    margin-left: 0 !important;
+    margin-right: 5px !important;
+}
+
+.add-new-field:before {
+    border-left: none;
+    border-right: 1px solid #aaaaaa;
+}
+
+.field-table-header .list-group-item:not(:first-child) {
+    border-left: 1px solid #aaaaaa;
+    border-right: none;
+}
+
+.field-table-header {
+    padding-left: 0;
+    padding-right: 50px;
+}
+
+.field-group-items > li:after {
+    left: auto;
+    right: 0;
+    border-right: none;
+    border-left: 1px solid #aaaaaa;
+}
+
+.field-group-items li {
+    padding: 0 50px 0 0;
+}
+
+.field-group-items > li:before {
+    left: auto;
+    right: 10px;
+}
+
+.field-group-items {
+    padding-right: 0;
+}
+
+.field-group-items > li > .field-column > .show-item-details {
+    right: auto;
+    left: 0;
+    border-left: none;
+    border-right: 1px solid #aaaaaa;
+}
+
+.line-group-container .line-group .location-add-rule-and {
+    margin-left: 0;
+    margin-right: 5px;
+}

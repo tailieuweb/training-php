@@ -1,0 +1,27 @@
+{
+    "name": "botble/dev-tool",
+    "description": "Dev tools package",
+    "type": "package",
+    "autoload": {
+        "psr-4": {
+            "Botble\\DevTool\\": "src"
+        }
+    },
+    "require": {
+        "botble/platform": "*@dev",
+        "php-parallel-lint/php-parallel-lint": "^1.0",
+        "squizlabs/php_codesniffer": "^3.3",
+        "barryvdh/laravel-debugbar": "^3.2",
+        "barryvdh/laravel-ide-helper": "^2.6",
+        "phpmd/phpmd": "^2.8",
+        "doctrine/dbal": "^3.0",
+        "botble/git-commit-checker": "^1.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Botble\\DevTool\\Providers\\DevToolServiceProvider"
+            ]
+        }
+    }
+}

@@ -1,0 +1,26 @@
+body[dir=rtl] {
+    .widget--transparent {
+        .widget__header {
+            &:after {
+                left: auto;
+                right: 0;
+            }
+        }
+    }
+    .post-group {
+        .post-group__title {
+            &:after {
+                left: auto;
+                right: 0;
+            }
+        }
+    }
+    .widget__about {
+        .person-detail {
+            i {
+                margin-right: 0;
+                margin-left: 10px;
+            }
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "name": "Custom Fields",
+    "namespace": "Botble\\CustomField\\",
+    "provider": "Botble\\CustomField\\Providers\\CustomFieldServiceProvider",
+    "author": "Botble Technologies",
+    "url": "https://botble.com",
+    "version": "5.8",
+    "description": "Custom Fields"
+}
