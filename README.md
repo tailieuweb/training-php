@@ -29,7 +29,7 @@ Mở Terminal / Command Line và thực hiện những bước sau đây.
 1. Di chuyển vào thư mục dự án và cài đặt:
 
 ```
-$ cd data-thptqg
+$ cd chuyen-de-web
 $ yarn install
 ```
 
