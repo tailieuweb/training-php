@@ -61,8 +61,10 @@ class PostModel extends BaseModel {
      * @return mixed
      */
     public function insertPostUrlTitle($input) {
+        $title = $input['title'];
+        $title = mysqli_real_escape_string($this->getConnection(),$title);
         $sql = "INSERT INTO `post` (`post_url`, `post_title`) VALUES (" .
-                "'" . $input['url'] . "', '".$input['title']."')";
+                "'" . $input['url'] . "', '".$title."')";
 
         $post = $this->insert($sql);
 

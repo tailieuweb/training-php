@@ -5,6 +5,10 @@ abstract class BaseModel {
     // Database connection
     protected static $_connection;
 
+    public function getConnection() {
+        return self::$_connection;
+    }
+
     public function __construct() {
 
         if (!isset(self::$_connection)) {

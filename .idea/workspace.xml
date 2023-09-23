@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="fca2aa6e-54aa-4226-b8f8-032cc5b95d0a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Crawler.php" beforeDir="false" afterPath="$PROJECT_DIR$/Crawler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/form_crawler.php" beforeDir="false" afterPath="$PROJECT_DIR$/form_crawler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/BaseModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/BaseModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/PostModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/PostModel.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,11 +83,12 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="F:/5-lampart/6-internship" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/sites" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php\sites" />
       <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php\models" />
       <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php" />
       <recent name="D:\1-github-workspace\1-tailieuweb\11-training-php\public\js" />
@@ -131,11 +132,24 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <watches-manager>
-      <configuration name="PhpWebAppRunConfigurationType">
-        <watch expression="$userModel-&gt;auth($users['username'], $users['password'])" language="PHP" />
-        <watch expression="$_POST" language="PHP" />
-      </configuration>
-    </watches-manager>
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/Crawler.php</url>
+          <line>6</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/models/PostModel.php</url>
+          <line>68</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/models/PostModel.php</url>
+          <line>63</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
