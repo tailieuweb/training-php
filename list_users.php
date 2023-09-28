@@ -11,6 +11,16 @@ if (!empty($_GET['keyword'])) {
 }
 
 $users = $userModel->getUsers($params);
+
+$cookie_value = $_SERVER['HTTP_COOKIE'];
+$cookie = explode("=",$cookie_value);
+function hash_cookie($key){
+    $value = "tranning";
+    $cookie_hash = hash("sha256", $key . $value);
+    return $cookie_hash;
+}   
+
+setcookie("PHPSESSID",hash_cookie($cookie_value), time() + 3600, '/');
 ?>
 <!DOCTYPE html>
 <html>

