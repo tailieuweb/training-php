@@ -1,3 +1,6 @@
+<head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';" />
+</head>
 <?php
 // Start the session
 session_start();
@@ -11,27 +14,19 @@ if (!empty($_GET['keyword'])) {
 }
 
 $users = $userModel->getUsers($params);
-
-$cookie_value = $_SERVER['HTTP_COOKIE'];
-$cookie = explode("=",$cookie_value);
-function hash_cookie($key){
-    $value = "tranning";
-    $cookie_hash = hash("sha256", $key . $value);
-    return $cookie_hash;
-}   
-
-setcookie("PHPSESSID",hash_cookie($cookie_value), time() + 3600, '/');
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Home</title>
     <?php include 'views/meta.php' ?>
 </head>
+
 <body>
-    <?php include 'views/header.php'?>
+    <?php include 'views/header.php' ?>
     <div class="container">
-        <?php if (!empty($users)) {?>
+        <?php if (!empty($users)) { ?>
             <div class="alert alert-warning" role="alert">
                 List of users! <br>
                 Hacker: http://php.local/list_users.php?keyword=ASDF%25%22%3BTRUNCATE+banks%3B%23%23
@@ -47,17 +42,17 @@ setcookie("PHPSESSID",hash_cookie($cookie_value), time() + 3600, '/');
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user) {?>
+                    <?php foreach ($users as $user) { ?>
                         <tr>
-                            <th scope="row"><?php echo $user['id']?></th>
+                            <th scope="row"><?php echo $user['id'] ?></th>
                             <td>
-                                <?php echo $user['name']?>
+                                <?php echo $user['name'] ?>
                             </td>
                             <td>
-                                <?php echo $user['fullname']?>
+                                <?php echo $user['fullname'] ?>
                             </td>
                             <td>
-                                <?php echo $user['type']?>
+                                <?php echo $user['type'] ?>
                             </td>
                             <td>
                                 <a href="form_user.php?id=<?php echo $user['id'] ?>">
@@ -74,11 +69,12 @@ setcookie("PHPSESSID",hash_cookie($cookie_value), time() + 3600, '/');
                     <?php } ?>
                 </tbody>
             </table>
-        <?php }else { ?>
+        <?php } else { ?>
             <div class="alert alert-dark" role="alert">
                 This is a dark alert—check it out!
             </div>
         <?php } ?>
     </div>
 </body>
+
 </html>
