@@ -1,6 +1,3 @@
-<head>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';" />
-</head>
 <?php
 // Start the session
 session_start();

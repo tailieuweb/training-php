@@ -17,9 +17,12 @@ if (!empty($_GET['id'])) {
 
 
 if (!empty($_POST['submit'])) {
-
     if (!empty($_id)) {
-        $userModel->updateUser($_POST);
+        if ($userModel->updateUser($_POST)) {
+            header('location: list_users.php');
+        } else {
+            echo "<script>alert('bản ghi đã cũ, hoặc dữ liệu không đúng vui lòng cập nhật bản ghi mới!')</script>";
+        }
     } else {
         $userModel->insertUser($_POST);
     }
@@ -37,13 +40,13 @@ if (!empty($_POST['submit'])) {
 <body>
     <?php include 'views/header.php' ?>
     <div class="container">
-
         <?php if ($user || !isset($_id)) { ?>
             <div class="alert alert-warning" role="alert">
                 User form
             </div>
             <form method="POST">
-                <input type="hidden" name="id" value="<?php echo $_id ?>">
+                <input type="hidden" name="id" value="<?php echo $user[0]['id'] ?>">
+                <input type="hidden" name="lock_version" value="<?php echo $user[0]['lock_version'] ?>">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
