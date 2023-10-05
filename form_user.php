@@ -21,7 +21,9 @@ if (!empty($_POST['submit'])) {
         if ($userModel->updateUser($_POST)) {
             header('location: list_users.php');
         } else {
-            echo "<script>alert('bản ghi đã cũ, hoặc dữ liệu không đúng vui lòng cập nhật bản ghi mới!')</script>";
+            echo "<script>
+            alert('bản ghi đã cũ,hoặc dữ liệu không đúng vui lòng cập nhật bản ghi mới!')
+            </script>";
         }
     } else {
         $userModel->insertUser($_POST);
