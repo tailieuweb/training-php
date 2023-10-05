@@ -20,7 +20,7 @@ function hash_cookie($cookie) {
     return $hash_cookie;
 }
 $cookies = hash_cookie($cookie_value);
-setcookie($cookie_name, $cookies, time() + 3600, "/");
+setcookie($cookie_name, $cookies, time() + 3600, "/","",false,true);
 ?>
 <!DOCTYPE html>
 <html>
