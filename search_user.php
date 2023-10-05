@@ -5,10 +5,10 @@ session_start();
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
-$params = [];
-if (!empty($_GET['keyword'])) {
-    $params['keyword'] = $_GET['keyword'];
-}
+// $params = [];
+// if (!empty($_GET['keyword'])) {
+//     $params['keyword'] = $_GET['keyword'];
+// }
 
 // $users = $userModel->getUsers($params);
 ?>

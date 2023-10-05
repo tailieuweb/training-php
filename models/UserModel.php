@@ -6,15 +6,18 @@ class UserModel extends BaseModel {
 
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
+        echo $sql;
         $user = $this->select($sql);
-
         return $user;
     }
 
-    public function findUser($keyword) {
-        $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
-        $user = $this->select($sql);
+    
 
+    public function findUser($keyword) {
+        $sql = 'SELECT * FROM users WHERE name LIKE \'%'.$keyword.'%\''. ' OR email LIKE \'%'.$keyword.'%\'';
+        // echo $keyword;
+        // die($sql);
+        $user = $this->select($sql);
         return $user;
     }
 
@@ -32,6 +35,15 @@ class UserModel extends BaseModel {
         return $user;
     }
 
+    public function insertUser($input) {
+        $currentTime = date('Y-m-d H:i:s');
+        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`, `updated_date`) VALUES (" .
+                "'" . $input['name'] . "', '".md5($input['password'])."', '".$currentTime."')";
+    
+        $user = $this->insert($sql);
+    
+        return $user;
+    }
     /**
      * Delete user by id
      * @param $id
@@ -48,28 +60,37 @@ class UserModel extends BaseModel {
      * @param $input
      * @return mixed
      */
-    public function updateUser($input) {
-        $sql = 'UPDATE users SET 
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 password="'. md5($input['password']) .'"
-                WHERE id = ' . $input['id'];
-
-        $user = $this->update($sql);
-
-        return $user;
+    public function getUpdatedAt($userId) {
+        // Truy vấn để lấy thời gian "updated_at" của bản ghi từ cơ sở dữ liệu
+        $sql = 'SELECT updated_date FROM users WHERE id = ' . (int)$userId;
+        $result = $this->query($sql);
+    
+        if ($result && $row = mysqli_fetch_assoc($result)) {
+            return $row['updated_date'];
+        }
+        return null; // Trả về null nếu không tìm thấy dữ liệu
     }
 
-    /**
-     * Insert user
-     * @param $input
-     * @return mixed
-     */
-    public function insertUser($input) {
-        $sql = "INSERT INTO `app_web1`.`users` (`name`, `password`) VALUES (" .
-                "'" . $input['name'] . "', '".md5($input['password'])."')";
+    public function updateUser($input) {
+        $currentTime = date('Y-m-d H:i:s');
 
-        $user = $this->insert($sql);
-
+        // Lấy thời gian "updated_at" hiện tại của bản ghi từ cơ sở dữ liệu dựa trên id người dùng
+        $currentUpdatedAt = $this->getUpdatedAt($input['id']);
+    
+        // So sánh thời gian
+        if ($currentUpdatedAt !== $currentTime) {
+            // Xung đột xảy ra, dữ liệu đã được cập nhật bởi người khác
+            return false;
+        }
+    
+        // Tiến hành cập nhật dữ liệu
+        $sql = 'UPDATE users SET 
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
+                 password="'. md5($input['password']) .'",
+                 updated_date = "' . $currentTime . '"
+                WHERE id = ' . $input['id'];
+    
+        $user = $this->update($sql);
         return $user;
     }
 
@@ -87,7 +108,6 @@ class UserModel extends BaseModel {
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
             $users = self::$_connection->multi_query($sql);
-
             //Get data
             $users = $this->query($sql);
         } else {

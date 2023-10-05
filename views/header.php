@@ -1,4 +1,17 @@
 <?php
+require_once 'models/UserModel.php';
+
+function  custom_htmlspecialchars($string) {
+   
+    $string = str_replace("&", "&amp", $string);
+    $string = str_replace("<", "&l", $string);
+    $string = str_replace(">", "&g", $string);
+    $string = str_replace('"', "&qu", $string);
+    $string = str_replace("'", "&#", $string);
+    return $string;
+}
+$userModel = new UserModel();
+
 $id = '';
 if(!empty($_SESSION['id'])) {
     $id = $_SESSION['id'];
@@ -6,8 +19,28 @@ if(!empty($_SESSION['id'])) {
 
 $keyword = '';
 if(!empty($_GET['keyword'])) {
+
     $keyword = $_GET['keyword'];
+    var_dump($keyword);
+    $users = $userModel->findUser($keyword);
+if(empty($users)){
+
+    $_SESSION['message'] =  "Không Tìm Thấy User : " . custom_htmlspecialchars($keyword);
+
 }
+ 
+}
+else{
+    $keyword = null;
+    $users = $userModel->findUser($keyword);
+if(empty($users)){
+    $_SESSION['message'] =  "Không Tìm Thấy User : " . custom_htmlspecialchars($keyword);
+
+}
+
+}
+
+
 ?>
 <div class="container">
     <nav class="navbar navbar-icon-top navbar-default">
@@ -28,11 +61,11 @@ if(!empty($_GET['keyword'])) {
                     <li><a href="form_user.php">Add new user</a></li>
 
                 </ul>
-                <form class="navbar-form navbar-left">
+                <form class="navbar-form navbar-left" >
                     <div class="form-group">
-                        <input type="text" name="keyword" class="form-control" placeholder="Search users"
-                               value="<?php echo $keyword ?>"
-                        >
+                        <input type="text" name="keyword" class="form-control" placeholder="Search users" value="<?php echo $keyword ?>">
+                               
+                        
                     </div>
                     <button type="submit" class="btn btn-default">Search</button>
                 </form>

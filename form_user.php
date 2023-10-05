@@ -20,7 +20,7 @@ if (!empty($_POST['submit'])) {
     } else {
         $userModel->insertUser($_POST);
     }
-    header('location: list_users.php');
+    // header('location: list_users.php');
 }
 
 ?>

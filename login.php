@@ -20,7 +20,7 @@ if (!empty($_POST['submit'])) {
         header('location: list_users.php');
     }else {
         //Login failed
-        $_SESSION['message'] = 'Login failed';
+        $_SESSION['message'] = $users['username'] . ' Khong ton tai ';
     }
 
 }
