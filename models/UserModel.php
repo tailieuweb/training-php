@@ -50,9 +50,12 @@ class UserModel extends BaseModel {
      */
     public function updateUser($input) {
         $sql = 'UPDATE users SET 
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
-                 password="'. md5($input['password']) .'"
-                WHERE id = ' . $input['id'];
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name'])  . '", 
+                 updated_at = "' . $datetime->format('Y\-m\-d\ h:i:sa') . '",
+                 version = ' . ($input['ver'] + 1) . ',
+                 password="' . (md5($input['password'])) . '"
+
+                WHERE id = ' . ($input['id']);
 
         $user = $this->update($sql);
 

@@ -42,11 +42,11 @@ if (!empty($_POST['submit'])) {
                     <input type="hidden" name="id" value="<?php echo $_id ?>">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
+                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>' pattern="[A-Za-z0-9]{1,}" title="Chỉ được nhập số và chữ">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Password">
+                        <input type="password" name="password" class="form-control" placeholder="Password" pattern="[A-Za-z0-9]{1,}" title="Chỉ được nhập số và chữ">
                     </div>
 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
