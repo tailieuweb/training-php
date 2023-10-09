@@ -11,8 +11,10 @@ if(!empty($_SESSION['id'])){
         $id = $_GET['id'];
         $user = $userModel->findUserById($id);//Update existing user
     }else{
-        echo "<script>alert('không được xem!')</script>";
+        echo "<script>alert('Không được xem !')</script>";
     }
+} else {
+    header('location: login.php');
 }
 
 
