@@ -54,7 +54,7 @@ $users = $userModel->getUsers($params);
                             <td>
                                 <?php
                                 // Khởi tạo một khóa bí mật (key) - bạn có thể tạo ngẫu nhiên hoặc sử dụng một khóa tự định nghĩa
-                                $encryption_key = 'bimatcuaphat';
+                                $encryption_key = 'bimatcuocdoi';
 
                                 // Mã hóa ID bằng OpenSSL sử dụng AES-ECB
                                 $encrypted_id = openssl_encrypt($user['id'], 'aes-256-ecb', $encryption_key);
