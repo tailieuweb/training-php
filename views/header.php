@@ -43,7 +43,14 @@ if(!empty($_GET['keyword'])) {
                             Account <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="view_user.php?id=<?php echo $id ?>">Profile</a></li>
+                            <?php                                
+                                // Khởi tạo một khóa bí mật (key) - bạn có thể tạo ngẫu nhiên hoặc sử dụng một khóa tự định nghĩa
+                                $encryption_key = 'bimatcuocdoi';
+
+                                // Mã hóa ID bằng OpenSSL sử dụng AES-ECB
+                                $encrypted_id = openssl_encrypt($id, 'aes-256-ecb', $encryption_key);
+                            ?>
+                            <li><a href="view_user.php?id=<?php echo  urlencode($encrypted_id); ?>">Profile</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="login.php">Login</a></li>
                             <li><a href="logout.php">Logout</a></li>
