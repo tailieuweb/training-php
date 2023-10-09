@@ -1,13 +1,17 @@
 <?php
+// Start the session
+session_start();
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
 $id = NULL;
 
-if (!empty($_GET['id'])) {
+if (!empty($_GET['id'])&&($_SESSION['id']==$_GET['id'])) {
     $id = $_GET['id'];
     $user = $userModel->findUserById($id);//Update existing user
+}else{
+    echo "<script>alert('không được xem!')</script>";
 }
 
 
