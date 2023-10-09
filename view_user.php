@@ -7,11 +7,9 @@ $userModel = new UserModel();
 $user = NULL; //Add new user
 $id = NULL;
 if(!empty($_SESSION['id'])){
-    if (!empty($_GET['id'])&&($_SESSION['id']==$_GET['id'])) {
-        $id = $_GET['id'];
+    if (empty($id)) {
+        $id = $_SESSION['id'];//Get ID from session
         $user = $userModel->findUserById($id);//Update existing user
-    }else{
-        echo "<script>alert('Không được xem !')</script>";
     }
 } else {
     header('location: login.php');
