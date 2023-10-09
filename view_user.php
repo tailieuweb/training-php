@@ -4,15 +4,15 @@ session_start();
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
-$user = NULL; //Add new user
+$user = NULL;
 $id = NULL;
-if(!empty($_SESSION['id'])){
-    if (empty($id)) {
-        $id = $_SESSION['id'];//Get ID from session
-        $user = $userModel->findUserById($id);//Update existing user
+if (!empty($_SESSION['id'])) { //Kiểm tra người dùng đã đăng nhập và có id trong session
+    if (empty($id)) { //Kiểm tra nếu id rỗng
+        $id = $_SESSION['id']; //Lấy id từ session
+        $user = $userModel->findUserById($id); //Cập nhật user hiện tại
     }
 } else {
-    header('location: login.php');
+    header('location: login.php'); //Chuyển hướng về trang login
 }
 
 
@@ -30,38 +30,41 @@ if (!empty($_POST['submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>User form</title>
     <?php include 'views/meta.php' ?>
 </head>
-<body>
-<?php include 'views/header.php'?>
-<div class="container">
 
-    <?php if ($user || empty($id)) { ?>
-        <div class="alert alert-warning" role="alert">
-            User profile
-        </div>
-        <form method="POST">
-            <input type="hidden" name="id" value="<?php echo $id ?>">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
+<body>
+    <?php include 'views/header.php' ?>
+    <div class="container">
+
+        <?php if ($user || empty($id)) { ?>
+            <div class="alert alert-warning" role="alert">
+                User profile
             </div>
-            <div class="form-group">
-                <label for="password">Fullname</label>
-                <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
+            <form method="POST">
+                <input type="hidden" name="id" value="<?php echo $id ?>">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Fullname</label>
+                    <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Email</label>
+                    <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
+                </div>
+            </form>
+        <?php } else { ?>
+            <div class="alert alert-success" role="alert">
+                User not found!
             </div>
-            <div class="form-group">
-                <label for="password">Email</label>
-                <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
-            </div>
-        </form>
-    <?php } else { ?>
-        <div class="alert alert-success" role="alert">
-            User not found!
-        </div>
-    <?php } ?>
-</div>
+        <?php } ?>
+    </div>
 </body>
+
 </html>
