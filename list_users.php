@@ -41,7 +41,11 @@ $users = $userModel->getUsers($params);
                 <tbody>
                     <?php foreach ($users as $user) { ?>
                         <tr>
-                            <th scope="row"><?php echo $user['id'] ?></th>
+                            <th scope="row">
+                                <span style="display: block; width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                                    <?php echo urlencode(base64_encode($encrypted_id)); ?>
+                                </span>
+                            </th>
                             <td>
                                 <?php echo $user['name'] ?>
                             </td>

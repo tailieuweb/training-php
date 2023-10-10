@@ -19,7 +19,7 @@ if (!empty($_GET['id'])) {
     if ($id !== false) {
         $user = $userModel->findUserById($id); //Cập nhật user hiện tại
     } else {
-        echo "không thể giải mã";
+        echo "<script>alert('Không được xem !')</script>";
     }
 }
 
