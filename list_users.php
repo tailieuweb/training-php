@@ -43,7 +43,7 @@ $users = $userModel->getUsers($params);
                         <tr>
                             <th scope="row">
                                 <span style="display: block; width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-                                    <?php echo urlencode(base64_encode($encrypted_id)); ?>
+                                    <?php echo $user['id']; ?>
                                 </span>
                             </th>
                             <td>
@@ -61,15 +61,15 @@ $users = $userModel->getUsers($params);
                                 $encryption_key = 'bimatcuocdoi';
 
                                 // Mã hóa ID bằng OpenSSL sử dụng AES-ECB
-                                $encrypted_id = openssl_encrypt($user['id'], 'aes-256-ecb', $encryption_key);
+                                    $encrypted_id = urlencode(openssl_encrypt($user['id'], 'aes-256-ecb', $encryption_key));                                 
                                 ?>
-                                <a href="form_user.php?id=<?php echo urlencode(base64_encode($encrypted_id)); ?>">
+                                <a href="form_user.php?id=<?php echo $encrypted_id; ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo urlencode(base64_encode($encrypted_id)); ?>">
+                                <a href="view_user.php?id=<?php echo $encrypted_id; ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo urlencode(base64_encode($encrypted_id)); ?>">
+                                <a href="delete_user.php?id=<?php echo $encrypted_id; ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
