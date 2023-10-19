@@ -8,16 +8,20 @@ if (!empty($_GET['keyword'])) {
     header('location: list_users.php?keyword=' . $_GET['keyword']);
 }
 $user = NULL; //Add new user
-$_id = NULL;
+$id = NULL;
 
 if (!empty($_GET['id'])) {
-    $_id = $_GET['id'];
-    $user = $userModel->findUserById($_id); //Update existing user
+    $encrypted_id = $_GET['id']; // Lấy giá trị id đã được mã hóa từ URL và tự decode
+
+   
+    // Sử dụng khóa bí mật cùng với AES-ECB để giải mã ID
+    $id = $userModel->giaiMaID($encrypted_id);
+    $user = $userModel->findUserById($id); //Update existing user
 }
 
 
 if (!empty($_POST['submit'])) {
-    if (!empty($_id)) {
+    if (!empty($id)) {
         if ($userModel->updateUser($_POST)) {
             header('location: list_users.php');
         } else {
@@ -45,7 +49,7 @@ if (!empty($_POST['submit'])) {
                 User form
             </div>
             <form method="POST">
-                <input type="hidden" name="id" value="<?php echo $user[0]['id'] ?>">
+                <input type="hidden" name="id" value="<?php echo $encrypted_id ?>">
                 <input type="hidden" name="lock_version" value="<?php echo $user[0]['lock_version'] ?>">
                 <div class="form-group">
                     <label for="name">Name</label>

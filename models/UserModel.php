@@ -7,7 +7,7 @@ class UserModel extends BaseModel
 
     public function findUserById($id)
     {
-        $sql = 'SELECT * FROM users WHERE id = ' . $id;
+        $sql = 'SELECT * FROM users WHERE id = ' . (int)$id;
         $user = $this->select($sql);
 
         return $user;
@@ -73,7 +73,7 @@ class UserModel extends BaseModel
         //Ngăn chặn các từ khóa gây gại và kiểm tra version
 
         //Lấy thông tin hiện tại của user trong database
-        $user = $this->findUserById($input['id']);
+        $user = $this->findUserById($this->giaiMaID($input['id']));
         //Nếu version đầu vào cùng version với cơ sỡ dữ liệu tiến hành việc cập nhật dữ liệu
         if ($user[0]['lock_version'] == $input['lock_version']) {
             //Validate Script
@@ -84,7 +84,7 @@ class UserModel extends BaseModel
                     name = "' . mysqli_real_escape_string(self::$_connection,  $input['name']) . '", 
                     password="' . md5($input['password']) . '", 
                     lock_version="' . ($user[0]['lock_version'] + 1) . '"
-                    WHERE id = ' . $input['id'];
+                    WHERE id = ' . $this->giaiMaID($input['id']);
                 return $user = $this->update($sql);
             }
         } else {
@@ -156,5 +156,21 @@ class UserModel extends BaseModel
         }
 
         return $users;
+    }
+    public function maHoaID($id)
+    {
+        // Khởi tạo một khóa bí mật (key) tự định nghĩa
+        $encryption_key = 'bimatcuocdoi';
+
+        // Mã hóa ID bằng OpenSSL sử dụng AES-ECB
+            $encrypted_id = urlencode(openssl_encrypt($id, 'aes-256-ecb', $encryption_key));
+            return $encrypted_id;
+    }
+    public function giaiMaID($encrypted_id)
+    {
+        $encryption_key = 'bimatcuocdoi'; //Khóa bí mật tự đặt
+        // Sử dụng khóa bí mật cùng với AES-ECB để giải mã ID
+        $id = openssl_decrypt($encrypted_id, 'aes-256-ecb', $encryption_key);
+        return $id;
     }
 }

@@ -8,11 +8,16 @@ $id = NULL;
 if (!empty($_GET['id'])) {
     $encrypted_id = $_GET['id']; // Lấy giá trị id đã được mã hóa từ URL và tự decode
 
-    $encryption_key = 'bimatcuocdoi'; //Khóa bí mật tự đặt
+    
     // Sử dụng khóa bí mật cùng với AES-ECB để giải mã ID
-    $id = openssl_decrypt($encrypted_id, 'aes-256-ecb', $encryption_key);
+    $id = $userModel->giaiMaID($encrypted_id);
     //Tim user
-    $user = $userModel->findUserById($id);
+    if($userModel->findUserById($id)){
+        $user = $userModel->findUserById($id);
+    }else{
+        header('location: 404.php');
+    }
+    
 }
 
 

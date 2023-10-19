@@ -57,11 +57,9 @@ $users = $userModel->getUsers($params);
                             </td>
                             <td>
                                 <?php
-                                // Khởi tạo một khóa bí mật (key) tự định nghĩa
-                                $encryption_key = 'bimatcuocdoi';
-
+                                
                                 // Mã hóa ID bằng OpenSSL sử dụng AES-ECB
-                                    $encrypted_id = urlencode(openssl_encrypt($user['id'], 'aes-256-ecb', $encryption_key));                                 
+                                    $encrypted_id = $userModel->maHoaID($user['id']);                                 
                                 ?>
                                 <a href="form_user.php?id=<?php echo $encrypted_id; ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
