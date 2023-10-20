@@ -62,34 +62,34 @@ class UserModel extends BaseModel
     {
         // Code mẫu của giáo viên
 
-        // $sql = 'UPDATE users SET 
-        //          name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '", 
-        //          password="' . md5($input['password']) . '"
-        //         WHERE id = ' . $input['id'];
-        // $user = $this->update($sql);
-        // return $user;
+        $sql = 'UPDATE users SET 
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '", 
+                 password="' . md5($input['password']) . '"
+                WHERE id = ' . $input['id'];
+        $user = $this->update($sql);
+        return $user;
 
 
         // Ngăn chặn các từ khóa gây gại và kiểm tra version
 
         // Lấy thông tin hiện tại của user trong database
-        $user = $this->findUserById($input['id']);
-        //Nếu version đầu vào cùng version với cơ sỡ dữ liệu tiến hành việc cập nhật dữ liệu
-        if ($user[0]['lock_version'] == $input['lock_version']) {
-            //Validate Script
-            $pattern = '/<(?:\w+)\W+?[\w]/';
-            // //Nều dữ liệu đầu vào không chứa cá kí tự cấm thì thực hiện cập nhật dữ liệu
-            if (!preg_match($pattern, $input['name'])) {
-                $sql = 'UPDATE users SET 
-                    name = "' . mysqli_real_escape_string(self::$_connection,  $input['name']) . '", 
-                    password="' . md5($input['password']) . '", 
-                    lock_version="' . ($user[0]['lock_version'] + 1) . '"
-                    WHERE id = ' . $input['id'];
-                return $user = $this->update($sql);
-            }
-        } else {
-            return false;
-        }
+        // $user = $this->findUserById($input['id']);
+        // //Nếu version đầu vào cùng version với cơ sỡ dữ liệu tiến hành việc cập nhật dữ liệu
+        // if ($user[0]['lock_version'] == $input['lock_version']) {
+        //     //Validate Script
+        //     $pattern = '/<(?:\w+)\W+?[\w]/';
+        //     // //Nều dữ liệu đầu vào không chứa cá kí tự cấm thì thực hiện cập nhật dữ liệu
+        //     if (!preg_match($pattern, $input['name'])) {
+        //         $sql = 'UPDATE users SET 
+        //             name = "' . mysqli_real_escape_string(self::$_connection,  $input['name']) . '", 
+        //             password="' . md5($input['password']) . '", 
+        //             lock_version="' . ($user[0]['lock_version'] + 1) . '"
+        //             WHERE id = ' . $input['id'];
+        //         return $user = $this->update($sql);
+        //     }
+        // } else {
+        //     return false;
+        // }
 
 
         //Ngăn chặn các từ khóa gây gại
@@ -148,8 +148,8 @@ class UserModel extends BaseModel
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            // self::$_connection->multi_query($sql);
-            $users = $this->select($sql);
+            self::$_connection->multi_query($sql);
+            // $users = $this->select($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);

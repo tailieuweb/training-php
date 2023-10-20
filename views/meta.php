@@ -1,4 +1,4 @@
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';" />
+<!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';" /> -->
 
 <link rel="stylesheet" type="text/css" href="public/css/styles.css">
 <link rel="stylesheet" type="text/css" href="public/css/bootstrap.min-3.3.7.css">
