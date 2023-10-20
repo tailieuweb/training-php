@@ -140,21 +140,54 @@ class UserModel extends BaseModel
      */
     public function getUsers($params = [])
     {
-        //Keyword
-        if (!empty($params['keyword'])) {
-            // SELECT * FROM users WHERE name LIKE '%'"test"'%'
-            $sql = "SELECT * FROM users WHERE name LIKE '%" . $params['keyword'] . "%'";
+        // //Keyword
+        // if (!empty($params['keyword'])) {
+        //     // SELECT * FROM users WHERE name LIKE '%'"test"'%'
+        //     $sql = "SELECT * FROM users WHERE name LIKE '%" . $params['keyword'] . "%'";
 
-            //Keep this line to use Sql Injection
-            //Don't change
-            //Example keyword: abcef%";TRUNCATE banks;##
-            // self::$_connection->multi_query($sql);
-            $users = $this->select($sql);
-        } else {
-            $sql = 'SELECT * FROM users';
-            $users = $this->select($sql);
-        }
+        //     //Keep this line to use Sql Injection
+        //     //Don't change
+        //     //Example keyword: abcef%";TRUNCATE banks;##
+        //     // self::$_connection->multi_query($sql);
+        //     $users = $this->select($sql);
+        // } else {
+        //     $sql = 'SELECT * FROM users';
+        //     $users = $this->select($sql);
+        // }
 
-        return $users;
+        // return $users;
+
+
+
+
+    // Chuẩn bị lệnh SQL
+    $sql = "SELECT * FROM users";
+    
+    // Nếu có keyword, tiến hành thêm điều kiện WHERE
+    if (!empty($params['keyword'])) {
+        $sql .= " WHERE name LIKE ?";
+        $keyword = '%' . $params['keyword'] . '%';
+    }
+
+    // Sử dụng hàm prepare  để phòng chống lỗi SQL Injection
+    $stmt = self::$_connection->prepare($sql);
+    if ($stmt === false) {
+        die("Xảy ra lỗi " . self::$_connection->error);
+    }
+    // Nếu có keyword, đặt giá trị tham số
+    if (!empty($params['keyword'])) {
+        $stmt->bind_param("s", $keyword);
+    }
+    // Thực thi truy vấn và lấy, sau đó xử lý kết quả
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $users = [];
+    while ($row = $result->fetch_assoc()) {
+        $users[] = $row;
+    }
+    // Đóng Prepared
+    $stmt->close();
+    return $users;
+
     }
 }
