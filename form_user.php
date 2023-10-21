@@ -12,10 +12,12 @@ if (!empty($_GET['id'])) {
     $newid = substr($id,23);
     $user = $userModel->findUserById($newid);//Update existing user
 }
+$_id = $id;
 
 if (!empty($_POST['submit'])) {
-
     if (!empty($id)) {
+        $id = base64_decode($_GET['id']);
+        $newid = substr($id,23);
         $userModel->updateUser($_POST);
     } else {
         $userModel->insertUser($_POST); 
@@ -39,7 +41,7 @@ if (!empty($_POST['submit'])) {
                     User form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php if(!empty($newid)){echo $newid;}else{echo $id;}?>">
+                    <input type="hidden" name="id" value="<?php if(!empty($newid)){echo $_GET['id'];}else{echo $id;}?>">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">

@@ -49,10 +49,12 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
+        $id = base64_decode($_GET['id']);
+        $newid = substr($id,23);
         $sql = 'UPDATE users SET 
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
                  password="'. md5($input['password']) .'"
-                WHERE id = '.$input['id'];
+                WHERE id = '.$newid;
 
                 // Lấy khóa phiên bản của dữ liệu
                 // $version = $this->getVersion($_GET['version']);
