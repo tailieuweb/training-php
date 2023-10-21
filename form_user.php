@@ -5,22 +5,22 @@ require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
 $user = NULL; //Add new user
-$_id = NULL;
+$keyCode = "aomU87239dadasdasd";
 
 if (!empty($_GET['id'])) {
-    $_id = $_GET['id'];
-    $user = $userModel->findUserById($_id);//Update existing user
+    $id = base64_decode($_GET['id']);
+    $newid = substr($id,23);
+    $user = $userModel->findUserById($newid);//Update existing user
 }
-
 
 if (!empty($_POST['submit'])) {
 
-    if (!empty($_id)) {
+    if (!empty($id)) {
         $userModel->updateUser($_POST);
     } else {
-        $userModel->insertUser($_POST);
-    }
-    header('location: list_users.php');
+        $userModel->insertUser($_POST); 
+    }   
+    header('location: list_users.php');  
 }
 
 ?>
@@ -34,15 +34,15 @@ if (!empty($_POST['submit'])) {
     <?php include 'views/header.php'?>
     <div class="container">
 
-            <?php if ($user || !isset($_id)) { ?>
+    <?php if ($user || !isset($_id)) { ?>
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $_id ?>">
+                    <input type="hidden" name="id" value="<?php if(!empty($newid)){echo $newid;}else{echo $id;}?>">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>
+                        <input class="form-control" name="name" placeholder="Name" value="<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
@@ -56,6 +56,7 @@ if (!empty($_POST['submit'])) {
                     User not found!
                 </div>
             <?php } ?>
+    </div>
     </div>
 </body>
 </html>

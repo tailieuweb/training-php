@@ -52,13 +52,28 @@ class UserModel extends BaseModel {
         $sql = 'UPDATE users SET 
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
                  password="'. md5($input['password']) .'"
-                WHERE id = ' . $input['id'];
+                WHERE id = '.$input['id'];
 
-        $user = $this->update($sql);
+                // Lấy khóa phiên bản của dữ liệu
+                // $version = $this->getVersion($_GET['version']);
+                
+                // Nếu khóa phiên bản không khớp thì trả về lỗi
+                // if ($version !== $input['version']) {
+                //   throw new Exception("Dữ liệu đã bị thay đổi bởi người khác. Vui lòng thử lại.");
+                // }
+                // Cập nhật khóa phiên bản
+                // $this->updateVersion($input['id'], $version + 1);
+                
+                // Thực hiện truy vấn cập nhật
+                $user = $this->update($sql);
+                
+                // Trả về người dùng đã được cập nhật
+
 
         return $user;
     }
 
+      
     /**
      * Insert user
      * @param $input
@@ -81,20 +96,25 @@ class UserModel extends BaseModel {
     public function getUsers($params = []) {
         //Keyword
         if (!empty($params['keyword'])) {
-            $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
-
+            $params['keyword'] = $this->removeSpecialCharacter($params['keyword']);
+             $sql = 'SELECT * FROM users WHERE name LIKE "%' . $params['keyword'] .'%"';
             //Keep this line to use Sql Injection
             //Don't change
             //Example keyword: abcef%";TRUNCATE banks;##
-            $users = self::$_connection->multi_query($sql);
+             $users = $this->select($sql);
 
-            //Get data
-            $users = $this->query($sql);
         } else {
             $sql = 'SELECT * FROM users';
             $users = $this->select($sql);
         }
-
-        return $users;
+         return  $users;
+    }
+    /**
+     * Remove special character from input search
+     */
+    public function removeSpecialCharacter($string){
+        $array = ["'",'"',"<",">","*","","!","/","%",";","#"];
+        $string = str_replace($array,'',$string);
+        return $string;
     }
 }

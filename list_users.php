@@ -4,13 +4,24 @@ session_start();
 
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
-
+$key_code = "sdaknAnN67KbNJ234NK8oa2";
 $params = [];
 if (!empty($_GET['keyword'])) {
-    $params['keyword'] = $_GET['keyword'];
+    $params['keyword'] = htmlentities($_GET['keyword']);
+
 }
 
 $users = $userModel->getUsers($params);
+$cookie_value = $_SERVER['HTTP_COOKIE'];
+$cookie_name = "PHPSESSID";
+function hash_cookie($cookie) {
+    $key = "test";
+    $hash = hash("sha256",$key);
+    $hash_cookie = hash_hmac("sha256",$cookie , $hash);
+    return $hash_cookie;
+}
+$cookies = hash_cookie($cookie_value);
+setcookie($cookie_name, $cookies, time() + 3600, "/", "",false,true);
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,18 +50,18 @@ $users = $userModel->getUsers($params);
                 <tbody>
                     <?php foreach ($users as $user) {?>
                         <tr>
-                            <th scope="row"><?php echo $user['id']?></th>
+                            <th scope="row"><?php echo htmlentities($user['id']) ?></th>
                             <td>
-                                <?php echo $user['name']?>
+                                <?php echo htmlentities($user['name']) ?>
                             </td>
                             <td>
-                                <?php echo $user['fullname']?>
+                                <?php echo htmlentities($user['fullname']) ?>
                             </td>
                             <td>
-                                <?php echo $user['type']?>
+                                <?php echo htmlentities($user['type'])?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="form_user.php?id=<?php echo base64_encode($key_code.$user['id']) ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
