@@ -6,8 +6,9 @@ $user = NULL; //Add new user
 $id = NULL;
 
 if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-    $user = $userModel->findUserById($id);//Update existing user
+    $id = base64_decode($_GET['id']);
+    $newid = substr($id,23);
+    $user = $userModel->findUserById($newid);//Update existing user
 }
 
 
@@ -37,7 +38,7 @@ if (!empty($_POST['submit'])) {
             User profile
         </div>
         <form method="POST">
-            <input type="hidden" name="id" value="<?php echo $id ?>">
+            <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
             <div class="form-group">
                 <label for="name">Name</label>
                 <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
