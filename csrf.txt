@@ -1,0 +1,1 @@
+<a href=http://localhost:90/training-php/delete_user.php?id=4"> Xóa user3</a>
