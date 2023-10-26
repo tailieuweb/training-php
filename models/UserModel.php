@@ -62,12 +62,12 @@ class UserModel extends BaseModel
     {
         // Code mẫu của giáo viên
 
-        $sql = 'UPDATE users SET 
-                 name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '", 
-                 password="' . md5($input['password']) . '"
-                WHERE id = ' . $input['id'];
-        $user = $this->update($sql);
-        return $user;
+        // $sql = 'UPDATE users SET 
+        //          name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) . '", 
+        //          password="' . md5($input['password']) . '"
+        //         WHERE id = ' . $input['id'];
+        // $user = $this->update($sql);
+        // return $user;
 
 
         //Ngăn chặn các từ khóa gây gại và kiểm tra version
@@ -110,12 +110,12 @@ class UserModel extends BaseModel
 
         //Chuyển các từ khóa gây hại thành entity HTML
 
-        // $sql = 'UPDATE users SET 
-        //     name = "' . htmlspecialchars($input['name'])  . '", 
-        //     password="' . md5($input['password']) . '"
-        //     WHERE id = ' . $input['id'];
-        // $user = $this->update($sql);
-        // return $user;
+        $sql = 'UPDATE users SET 
+            name = "' . htmlspecialchars($input['name'])  . '", 
+            password="' . md5($input['password']) . '"
+            WHERE id = ' . $input['id'];
+        $user = $this->update($sql);
+        return $user;
     }
 
     /**
@@ -160,34 +160,33 @@ class UserModel extends BaseModel
 
 
 
-    // Chuẩn bị lệnh SQL
-    $sql = "SELECT * FROM users";
-    
-    // Nếu có keyword, tiến hành thêm điều kiện WHERE
-    if (!empty($params['keyword'])) {
-        $sql .= " WHERE name LIKE ?";
-        $keyword = '%' . $params['keyword'] . '%';
-    }
+        // Chuẩn bị lệnh SQL
+        $sql = "SELECT * FROM users";
 
-    // Sử dụng hàm prepare  để phòng chống lỗi SQL Injection
-    $stmt = self::$_connection->prepare($sql);
-    if ($stmt === false) {
-        die("Xảy ra lỗi " . self::$_connection->error);
-    }
-    // Nếu có keyword, đặt giá trị tham số
-    if (!empty($params['keyword'])) {
-        $stmt->bind_param("s", $keyword);
-    }
-    // Thực thi truy vấn và lấy, sau đó xử lý kết quả
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $users = [];
-    while ($row = $result->fetch_assoc()) {
-        $users[] = $row;
-    }
-    // Đóng Prepared
-    $stmt->close();
-    return $users;
+        // Nếu có keyword, tiến hành thêm điều kiện WHERE
+        if (!empty($params['keyword'])) {
+            $sql .= " WHERE name LIKE ?";
+            $keyword = '%' . $params['keyword'] . '%';
+        }
 
+        // Sử dụng hàm prepare  để phòng chống lỗi SQL Injection
+        $stmt = self::$_connection->prepare($sql);
+        if ($stmt === false) {
+            die("Xảy ra lỗi " . self::$_connection->error);
+        }
+        // Nếu có keyword, đặt giá trị tham số
+        if (!empty($params['keyword'])) {
+            $stmt->bind_param("s", $keyword);
+        }
+        // Thực thi truy vấn và lấy, sau đó xử lý kết quả
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $users = [];
+        while ($row = $result->fetch_assoc()) {
+            $users[] = $row;
+        }
+        // Đóng Prepared
+        $stmt->close();
+        return $users;
     }
 }
