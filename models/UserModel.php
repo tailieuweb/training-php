@@ -33,8 +33,12 @@ class UserModel extends BaseModel
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
         $user = $this->select($sql);
-        $user[0]['token'] = $this->maHoaID($user[0]['id']);
-        return $user;
+        if (isset($user[0])) {
+            $user[0]['token'] = $this->maHoaID($user[0]['id']);
+            return $user;
+        }
+
+
 
         // $sql = parent::$_connection->prepare('SELECT * FROM users WHERE name = ? AND password = ?');
         // $sql->bind_param("ss", $userName, $md5Password);
@@ -165,7 +169,7 @@ class UserModel extends BaseModel
         $encryption_key = 'bimatcuocdoi';
 
         // Mã hóa ID bằng OpenSSL sử dụng AES-ECB
-        $encrypted_id = urlencode(openssl_encrypt($id, 'aes-256-ecb', $encryption_key));
+        $encrypted_id = openssl_encrypt($id, 'aes-256-ecb', $encryption_key);
         return $encrypted_id;
     }
     public function giaiMaID($encrypted_id)
