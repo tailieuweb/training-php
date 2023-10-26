@@ -57,17 +57,17 @@ $users = $userModel->getUsers($params);
                                 </a>
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
-                                </a>
+                                    <!-- </a>
                                 <a href="delete_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
-                                </a>
-
-                                <!-- <a>
-                                    <form action="delete_user.php" style="display: inline-block;" method="delete">
-                                        <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
-                                        <button type="submit" style="all: unset;"><i class="fa fa-eraser" aria-hidden="true" title="Delete"></i></button>
-                                    </form>
                                 </a> -->
+
+                                    <a>
+                                        <form action="delete_user.php" style="display: inline-block;" method="post">
+                                            <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
+                                            <button type="submit" style="all: unset;"><i class="fa fa-eraser" aria-hidden="true" title="Delete"></i></button>
+                                        </form>
+                                    </a>
 
                             </td>
                         </tr>
