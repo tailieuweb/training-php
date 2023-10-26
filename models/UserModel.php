@@ -33,6 +33,7 @@ class UserModel extends BaseModel
         $md5Password = md5($password);
         $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "' . $md5Password . '"';
         $user = $this->select($sql);
+        $user[0]['token'] = $this->maHoaID($user[0]['id']);
         return $user;
 
         // $sql = parent::$_connection->prepare('SELECT * FROM users WHERE name = ? AND password = ?');
@@ -156,5 +157,22 @@ class UserModel extends BaseModel
         }
 
         return $users;
+    }
+
+    public function maHoaID($id)
+    {
+        // Khởi tạo một khóa bí mật (key) tự định nghĩa
+        $encryption_key = 'bimatcuocdoi';
+
+        // Mã hóa ID bằng OpenSSL sử dụng AES-ECB
+        $encrypted_id = urlencode(openssl_encrypt($id, 'aes-256-ecb', $encryption_key));
+        return $encrypted_id;
+    }
+    public function giaiMaID($encrypted_id)
+    {
+        $encryption_key = 'bimatcuocdoi'; //Khóa bí mật tự đặt
+        // Sử dụng khóa bí mật cùng với AES-ECB để giải mã ID
+        $id = openssl_decrypt($encrypted_id, 'aes-256-ecb', $encryption_key);
+        return $id;
     }
 }

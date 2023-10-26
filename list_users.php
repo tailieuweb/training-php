@@ -1,6 +1,7 @@
 <?php
 // Start the session
 session_start();
+echo $_SESSION['token'];
 
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
@@ -64,6 +65,7 @@ $users = $userModel->getUsers($params);
 
                                     <a>
                                         <form action="delete_user.php" style="display: inline-block;" method="post">
+                                            <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?>">
                                             <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
                                             <button type="submit" style="all: unset;"><i class="fa fa-eraser" aria-hidden="true" title="Delete"></i></button>
                                         </form>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
@@ -10,9 +11,13 @@ $id = NULL;
 //     $userModel->deleteUserById($id); //Delete existing user
 // }
 
-if (!empty($_POST['id'])) {
+if (!empty($_POST['id']) && !empty($_POST['token'])) {
     $id = $_POST['id'];
-    $userModel->deleteUserById($id); //Delete existing user
+    $token = $_POST['token'];
+    var_dump($token);
+    if ($token == $_SESSION['token']) {
+        $userModel->deleteUserById($id); //Delete existing user
+        header('location: list_users.php');
+    }
 }
-
 header('location: list_users.php');
