@@ -9,3 +9,14 @@ hello
 
 hello
 hello
+
+hi
+xin chào
+hola
+hello
+
+function main() {
+  return null;
+}
+
+conso.log(main());
