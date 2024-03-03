@@ -31,32 +31,32 @@ $users = $userModel->getUsers($params);
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
-                        <th scope="col">Fullname</th>
-                        <th scope="col">Type</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Password</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($users as $user) {?>
                         <tr>
-                            <th scope="row"><?php echo $user['id']?></th>
+                            <th scope="row"><?php echo $user['user_id']?></th>
                             <td>
-                                <?php echo $user['name']?>
+                                <?php echo $user['user_name']?>
                             </td>
                             <td>
-                                <?php echo $user['fullname']?>
+                                <?php echo $user['user_email']?>
                             </td>
                             <td>
-                                <?php echo $user['type']?>
+                                <?php echo $user['user_pass']?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="form_user.php?id=<?php echo $user['user_id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="view_user.php?id=<?php echo $user['user_id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="delete_user.php?id=<?php echo $user['user_id'] ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>

@@ -40,15 +40,15 @@ if (!empty($_POST['submit'])) {
             <input type="hidden" name="id" value="<?php echo $id ?>">
             <div class="form-group">
                 <label for="name">Name</label>
-                <span><?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?></span>
-            </div>
-            <div class="form-group">
-                <label for="password">Fullname</label>
-                <span><?php if (!empty($user[0]['name'])) echo $user[0]['fullname'] ?></span>
+                <span><?php if (!empty($user[0]['user_name'])) echo $user[0]['user_name'] ?></span>
             </div>
             <div class="form-group">
                 <label for="password">Email</label>
-                <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
+                <span><?php if (!empty($user[0]['user_email'])) echo $user[0]['user_email'] ?></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <span><?php if (!empty($user[0]['user_pass'])) echo $user[0]['user_pass'] ?></span>
             </div>
         </form>
     <?php } else { ?>
